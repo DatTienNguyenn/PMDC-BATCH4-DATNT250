@@ -17,7 +17,14 @@
 
 ---
 
-## 2. SƠ ĐỒ USE CASE TỔNG THỂ (MERMAID USE CASE DIAGRAM)
+## 2. SƠ ĐỒ USE CASE TỔNG THỂ (USE CASE DIAGRAM)
+
+### 2.1. Sơ đồ Chuẩn UML (UCD)
+![Sơ đồ UML Use Case Tổng quan](UCD.png)
+
+*Sơ đồ thể hiện 3 tác nhân chính (`Workspace Admin`, `Member`, `System Admin`), quan hệ kế thừa (Generalization) giữa Workspace Admin và Member, cùng quan hệ phụ thuộc `<<include>>` trong việc quét và xác nhận dữ liệu AI.*
+
+### 2.2. Sơ đồ Phân rã theo 4 Luồng Hoạt động (Mermaid)
 
 ```mermaid
 flowchart LR
