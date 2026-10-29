@@ -9,6 +9,11 @@
 
 ## 🗺️ 1. SƠ ĐỒ CÂY KIẾN TRÚC THÔNG TIN (SITEMAP / IA TREE)
 
+### 1.1. Sơ đồ Thiết kế Cây Giao diện (Sitemap Wireframe)
+![Sơ đồ Cây Kiến trúc Thông tin Sitemap](sitemap.png)
+
+### 1.2. Sơ đồ Cấu trúc Phân cấp (Mermaid Diagram)
+
 ```mermaid
 graph TD
     Root["Hệ thống Carbon Ledger"] --> Auth["1. Khối Xác thực & Onboarding"]

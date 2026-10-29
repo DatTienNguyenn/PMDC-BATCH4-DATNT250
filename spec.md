@@ -144,7 +144,7 @@ Hệ thống giải quyết 4 trụ cột nghiệp vụ:
 
 ### 5.1. Sơ đồ Use Case Tổng quan (Use Case Diagram)
 
-![Sơ đồ UML Use Case Tổng quan](docs/UCD.png)
+![Sơ đồ UML Use Case Tổng quan](docs/usecase/UCD.png)
 
 ```mermaid
 flowchart LR
@@ -223,8 +223,9 @@ flowchart LR
 
 ## 6. Phạm vi Nền tảng Kỹ thuật (Technical Scope)
 
-- **Nền tảng:** Web Application Mobile-First Responsive (PWA) để dễ dàng thao tác trên smartphone (chụp ảnh hóa đơn, duyệt nhanh request, nhận Web Push / In-App Notification).
-- **Cơ sở dữ liệu:** PostgreSQL đảm bảo tính toàn vẹn giao dịch của bảng `emission_logs` và phân quyền RBAC.
-- **Tác vụ định kỳ (Cronjob):** Background Worker / Cron Scheduler kích hoạt module AI Report vào cuối tuần hoặc cuối tháng.
+- **Frontend:** **React với Vite**, TailwindCSS (Web Application Mobile-First Responsive PWA để dễ dàng thao tác trên smartphone, chụp ảnh hóa đơn, duyệt nhanh request, nhận In-App / Web Notification).
+- **Backend:** **Java Spring Boot (3.x)** (Xây dựng hệ thống RESTful API chuẩn mực, Spring Security + JWT cho xác thực và RBAC, Spring Data JPA quản lý dữ liệu sổ cái).
+- **Cơ sở dữ liệu:** **PostgreSQL** đảm bảo tính toàn vẹn giao dịch (ACID) của bảng `emission_logs` và phân quyền đa người thuê (Multi-tenant Workspace).
+- **Tác vụ định kỳ (Cronjob):** Spring Scheduler (`@Scheduled`) kích hoạt module AI Report chạy nền vào cuối tuần hoặc cuối tháng.
 - **Tích hợp AI:** Sử dụng Commercial Multimodal/LLM APIs (Google Gemini 1.5 Flash/Pro hoặc Anthropic Claude).
-- **Xử lý tệp tin:** Hỗ trợ thư viện phân tích bảng tính (Excel/Sheet parser) và module kết xuất tài liệu PDF (PDF Generator).
+- **Xử lý tệp tin:** Apache POI phân tích và kiểm tra file mẫu Excel hàng loạt; OpenPDF / iText kết xuất tài liệu PDF chuẩn in ấn.

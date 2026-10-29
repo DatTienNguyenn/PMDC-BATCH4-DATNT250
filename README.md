@@ -1,4 +1,5 @@
 # Hệ thống Quản trị & Phân tích Dấu chân Carbon cho Gia đình/Văn phòng nhỏ
+
 ## (Personal & Micro-Office Carbon Ledger)
 
 [![Batch](https://img.shields.io/badge/Batch-PMDC%20Batch%204-green.svg)](https://github.com/DatTienNguyenn/PMDC-BATCH4-DATNT250)
@@ -10,11 +11,12 @@
 
 ## 📌 1. Giới thiệu Dự án
 
-**Personal & Micro-Office Carbon Ledger** là nền tảng số hóa hỗ trợ **Hộ gia đình** và **Văn phòng nhỏ** ghi nhận, kiểm soát hạn ngạch, phân tích và chủ động cắt giảm dấu chân carbon (tính theo chuẩn $\text{kg CO}_2\text{e}$). 
+**Personal & Micro-Office Carbon Ledger** là nền tảng số hóa hỗ trợ **Hộ gia đình** và **Văn phòng nhỏ** ghi nhận, kiểm soát hạn ngạch, phân tích và chủ động cắt giảm dấu chân carbon (tính theo chuẩn $\text{kg CO}_2\text{e}$).
 
 Hệ thống giải quyết bài toán biến đổi khí hậu từ cấp độ vi mô thông qua sự kết hợp giữa **Quy trình kiểm duyệt sổ cái chặt chẽ (Approval Workflow)**, **Đa kênh nạp dữ liệu thông minh (Thủ công, Quét ảnh bằng AI Vision, Import Excel)** và **Kế hoạch cắt giảm định lượng mang tính cá nhân hóa (AI Insight & Actionable Advice)**.
 
 ### Mục tiêu cốt lõi:
+
 - **Số hóa nhanh chóng:** Loại bỏ rào cản ghi chép thủ công nhờ công nghệ Multimodal AI bóc tách trực tiếp hóa đơn tiền điện (EVN), hóa đơn nước và mặt số công tơ.
 - **Minh bạch & Phê duyệt:** Tách bạch vai trò Thành viên (Editor - nạp dữ liệu ở trạng thái Draft) và Trưởng nhóm (Reviewer - kiểm duyệt chính thức trước khi ghi sổ).
 - **Kiểm soát ngân sách & Cảnh báo sớm:** Thiết lập trần phát thải (Target Quota) theo tháng và tự động bắn Notification cảnh báo tới toàn bộ thành viên khi chạm ngưỡng $85\%$ và vượt trần $100\%$.
@@ -77,21 +79,45 @@ mindmap
 
 ---
 
-## 👥 3. Sơ đồ Use Case Tổng quan & Ma trận Phân quyền (Use Case Diagram & RBAC)
+## 🗺️ 3. Kiến trúc Thông tin & Sơ đồ Trang (Information Architecture & Sitemap)
 
-### 3.1. Sơ đồ UML Use Case Tổng quan (UCD)
+Cấu trúc luồng màn hình của hệ thống được tổ chức phân cấp mạch lạc, kết nối từ trang giới thiệu (Landing Page), xác thực tài khoản, không gian làm việc cho tới cổng quản trị hệ thống:
+
+![Sơ đồ Kiến trúc Thông tin & Sitemap](docs/information-architecture/sitemap.png)
+
+### Tóm tắt các khối màn hình chính:
+- **Trang chủ & Xác thực (Home & Auth):** Landing page giới thiệu giải pháp, Đăng nhập / Đăng ký (Google SSO, Email/Pass), Quên & Đặt lại mật khẩu.
+- **Quản lý Workspace (Workspaces & Onboarding):** Danh sách Workspace (Switcher), Modal tạo mới (nhập tên, loại hình, diện tích $m^2$, số người) và Màn hình nhập mã mời gia nhập (Join Workspace with code).
+- **Ứng dụng Không gian làm việc cốt lõi (Workspace App):**
+  - **Dashboard:** Thẻ 4 chỉ số KPI, chỉ số chuẩn hóa quy mô ($\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$), biểu đồ xu hướng Line/Donut, thanh tiến độ và Banner cảnh báo $85\%$.
+  - **Sổ cái (Emission Ledger):** Bảng dữ liệu Grid lọc đa tiêu chí, nguồn nạp (Nhập tay, AI Vision, Excel) và nút Xuất Excel.
+  - **Modal Thêm Phát thải (3 Tabs):** Quét hóa đơn/công tơ AI (kèm popup xác nhận), Nhập thủ công sinh hoạt lẻ, và Import file mẫu Excel có bảng xem trước đối chiếu.
+  - **Hàng đợi Phê duyệt (Approval Queue):** Dành riêng cho Reviewer duyệt (`Accept`) hoặc từ chối (`Reject` kèm lý do) các request nạp dữ liệu từ Editor.
+  - **Báo cáo AI & Kế hoạch Cắt giảm (AI Insights & Reduction Plan):** Nhận định xu hướng, Actionable Advice định lượng cá nhân hóa và nút Xuất PDF.
+  - **Cài đặt Workspace (Settings):** Cấu hình thông số nền, Hạn ngạch ngân sách tháng và Quản lý phân quyền thành viên.
+- **Hồ sơ Cá nhân (User Profile):** Thông tin tài khoản, thống kê tỷ lệ phát thải đóng góp cá nhân và tùy chọn nhận thông báo (Notification Preferences).
+- **Cổng Quản trị Hệ thống (System Admin Backoffice):** Dashboard toàn hệ thống (KPIs, chi phí API AI), Quản lý Hệ số chuẩn Master Data (EVN), Quản lý Tenants và Cấu hình AI / Audit Logs.
+
+👉 **Xem đặc tả giao diện và ma trận quyền chi tiết tại:** [docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/information-architecture/information-architecture.md)
+
+---
+
+## 👥 4. Sơ đồ Use Case Tổng quan & Ma trận Phân quyền (Use Case Diagram & RBAC)
+
+### 4.1. Sơ đồ UML Use Case Tổng quan (UCD)
 
 Hệ thống được mô hình hóa theo chuẩn UML với 3 tác nhân chính (`Workspace Admin`, `Member`, `System Admin`), quan hệ kế thừa (Generalization) giữa Workspace Admin và Member, cùng quan hệ phụ thuộc `<<include>>` trong luồng xử lý AI:
 
-![Sơ đồ UML Use Case Tổng quan](docs/UCD.png)
+![Sơ đồ UML Use Case Tổng quan](docs/usecase/UCD.png)
 
-*Ghi chú quan hệ trên sơ đồ:*
+_Ghi chú quan hệ trên sơ đồ:_
+
 - **Quan hệ Kế thừa (Generalization):** `Workspace Admin` kế thừa toàn bộ các Use Case của `Member` (có thể khai báo phát thải, xem dashboard, xem báo cáo, quản lý hồ sơ cá nhân).
 - **Quan hệ Phụ thuộc (`<<include>>`):** Use Case `Quét hóa đơn bằng AI (Import)` bắt buộc bao gồm bước `Xác nhận & Chỉnh sửa số liệu AI` qua Popup xem trước trước khi ghi dữ liệu.
 
 ---
 
-### 3.2. Danh sách Vai trò & Ma trận Phân quyền (RBAC Matrix)
+### 4.2. Danh sách Vai trò & Ma trận Phân quyền (RBAC Matrix)
 
 Hệ thống phân định 3 vai trò rõ ràng, kết hợp mô hình Multi-tenant cho từng Workspace:
 
@@ -107,24 +133,24 @@ Hệ thống phân định 3 vai trò rõ ràng, kết hợp mô hình Multi-ten
 
 #### Bảng Ma trận Phân quyền (RBAC Matrix)
 
-| Chức năng / Thao tác | System Admin | Trưởng nhóm (Reviewer) | Thành viên (Editor) |
-|---|:---:|:---:|:---:|
-| Khởi tạo & Cấu hình Workspace | ❌ | ✅ | ❌ |
-| Khai báo thông số nền (thành viên, diện tích $m^2$) | ❌ | ✅ | ❌ |
-| Mời thành viên vào Workspace | ❌ | ✅ | ❌ |
-| Xem Dashboard & chỉ số chuẩn hóa ($\text{CO}_2\text{e}/\text{người}$, $/m^2$) | ❌ | ✅ (Toàn diện) | ✅ (Xem chung) |
-| Khai báo phát thải thủ công (Manual Entry) | ❌ | ✅ (Tự duyệt) | ✅ (Trạng thái Draft) |
-| Quét hóa đơn / công tơ bằng AI Vision | ❌ | ✅ (Tự duyệt) | ✅ (Trạng thái Draft) |
-| Nạp dữ liệu qua File mẫu Excel | ❌ | ✅ (Tự duyệt) | ✅ (Trạng thái Draft) |
-| Phê duyệt / Từ chối Request phát thải | ❌ | ✅ | ❌ |
-| Thiết lập Ngân sách tháng & Ngưỡng 85% | ❌ | ✅ | ❌ |
-| Nhận Notification cảnh báo ngưỡng 85% & 100% | ❌ | ✅ | ✅ |
-| Xem & Xuất Kế hoạch cắt giảm ra file PDF | ❌ | ✅ | ❌ |
-| Quản lý Bảng Hệ số phát thải chuẩn quốc gia | ✅ | ❌ | ❌ |
+| Chức năng / Thao tác                                                          | System Admin | Trưởng nhóm (Reviewer) |  Thành viên (Editor)  |
+| ----------------------------------------------------------------------------- | :----------: | :--------------------: | :-------------------: |
+| Khởi tạo & Cấu hình Workspace                                                 |      ❌      |           ✅           |          ❌           |
+| Khai báo thông số nền (thành viên, diện tích $m^2$)                           |      ❌      |           ✅           |          ❌           |
+| Mời thành viên vào Workspace                                                  |      ❌      |           ✅           |          ❌           |
+| Xem Dashboard & chỉ số chuẩn hóa ($\text{CO}_2\text{e}/\text{người}$, $/m^2$) |      ❌      |     ✅ (Toàn diện)     |    ✅ (Xem chung)     |
+| Khai báo phát thải thủ công (Manual Entry)                                    |      ❌      |     ✅ (Tự duyệt)      | ✅ (Trạng thái Draft) |
+| Quét hóa đơn / công tơ bằng AI Vision                                         |      ❌      |     ✅ (Tự duyệt)      | ✅ (Trạng thái Draft) |
+| Nạp dữ liệu qua File mẫu Excel                                                |      ❌      |     ✅ (Tự duyệt)      | ✅ (Trạng thái Draft) |
+| Phê duyệt / Từ chối Request phát thải                                         |      ❌      |           ✅           |          ❌           |
+| Thiết lập Ngân sách tháng & Ngưỡng 85%                                        |      ❌      |           ✅           |          ❌           |
+| Nhận Notification cảnh báo ngưỡng 85% & 100%                                  |      ❌      |           ✅           |          ✅           |
+| Xem & Xuất Kế hoạch cắt giảm ra file PDF                                      |      ❌      |           ✅           |          ❌           |
+| Quản lý Bảng Hệ số phát thải chuẩn quốc gia                                   |      ✅      |           ❌           |          ❌           |
 
 ---
 
-## ⚡ 4. Bốn Luồng Hoạt động Cốt lõi (Core Workflows)
+## ⚡ 5. Bốn Luồng Hoạt động Cốt lõi (Core Workflows)
 
 ```mermaid
 flowchart TD
@@ -171,103 +197,82 @@ flowchart TD
 
 ---
 
-## 📂 5. Cấu trúc Tài liệu Dự án
+## 📂 6. Cấu trúc Tài liệu Dự án
 
 Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện trong thư mục gốc và thư mục `/docs`:
 
 ```
 .
-├── README.md                      # Tài liệu tổng quan dự án (File này)
-├── spec.md                        # Đặc tả phạm vi bài toán, 3 Roles, 4 Luồng & 12 Use Cases
+├── README.md                          # Tài liệu tổng quan dự án (File này)
+├── spec.md                            # Đặc tả phạm vi bài toán, 3 Roles, 4 Luồng & 12 Use Cases
 └── docs/
-    ├── UCD.png                    # Sơ đồ UML Use Case Diagram tổng quan hệ thống
-    ├── cau_truc_san_pham_xmind.png# Sơ đồ Mindmap cấu trúc sản phẩm 9 phân hệ
-    ├── information-architecture.md# Tài liệu Kiến trúc Thông tin & Đặc tả giao diện (IA)
-    ├── use-cases.md               # Đặc tả chi tiết 12 Use Cases (Actors, Flows, Alternatives)
-    └── user-stories.md            # Bộ 15 User Stories chuẩn INVEST & Gherkin ACs (Given-When-Then)
+    ├── MVP.md                         # Kế hoạch triển khai & phát hành MVP 6 tuần (3 Sprints x 2 tuần)
+    ├── cau_truc_san_pham_xmind.png    # Sơ đồ Mindmap cấu trúc sản phẩm 9 phân hệ
+    ├── information-architecture/
+    │   ├── information-architecture.md# Tài liệu Kiến trúc Thông tin & Đặc tả giao diện (IA)
+    │   └── sitemap.png                # Sơ đồ kiến trúc thông tin & cây màn hình (Sitemap)
+    ├── usecase/
+    │   ├── UCD.png                    # Sơ đồ UML Use Case Diagram tổng quan hệ thống
+    │   └── use-cases.md               # Đặc tả chi tiết 12 Use Cases (Actors, Flows, Alternatives)
+    └── user-stories.md                # Bộ 15 User Stories chuẩn INVEST & Gherkin ACs (Given-When-Then)
 ```
 
 ### Chi tiết các tài liệu liên kết:
+
+- **[docs/MVP.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/MVP.md):** Kế hoạch chi tiết triển khai và phát hành MVP trong 6 tuần (3 Sprints), định nghĩa DoR/DoD và quản trị rủi ro kỹ thuật.
 - **[spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md):** Định nghĩa chi tiết phạm vi In-Scope / Out-of-Scope, ma trận RBAC, 4 luồng hoạt động cốt lõi và danh mục 12 Use Cases.
-- **[docs/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/information-architecture.md):** Thiết kế sơ đồ cây kiến trúc thông tin (Sitemap), ma trận phân quyền View và đặc tả UI chi tiết cho toàn bộ các màn hình.
-- **[docs/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/use-cases.md):** Đặc tả chi tiết từng Use Case từ UC01 đến UC12 (Tiền điều kiện, Hậu điều kiện, Luồng chính, Luồng ngoại lệ).
+- **[docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/information-architecture/information-architecture.md):** Thiết kế sơ đồ cây kiến trúc thông tin (Sitemap), ma trận phân quyền View và đặc tả UI chi tiết cho toàn bộ các màn hình.
+- **[docs/usecase/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/usecase/use-cases.md):** Đặc tả chi tiết từng Use Case từ UC01 đến UC12 (Tiền điều kiện, Hậu điều kiện, Luồng chính, Luồng ngoại lệ).
 - **[docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/user-stories.md):** Danh mục 15 User Stories được chuẩn hóa theo chuẩn **INVEST** và tiêu chí nghiệm thu **Gherkin Syntax (Given-When-Then)** theo phương pháp luận của BA Zone & Digital School (Phúc NT).
 
 ---
 
-## 📋 6. Danh mục 15 User Stories (Backlog Overview)
+## 📋 7. Danh mục 15 User Stories (Backlog Overview)
 
-| Mã US | Tên User Story | Phân hệ / Luồng | Persona chính | MoSCoW | Est. (SP) |
-|---|---|---|---|:---:|:---:|
-| **US-WS-001** | Khởi tạo Không gian làm việc (Workspace) | Luồng 1: Onboarding | Trưởng nhóm (Reviewer) | Must | 2 |
-| **US-WS-002** | Khai báo thông số nền ($m^2$, số người) | Luồng 1: Onboarding | Trưởng nhóm (Reviewer) | Must | 3 |
-| **US-WS-003** | Mời thành viên gia nhập với vai trò Editor | Luồng 1: Onboarding | Trưởng nhóm (Reviewer) / Editor | Must | 3 |
-| **US-SA-001** | Quản lý & cập nhật Hệ số phát thải quy chuẩn | Quản trị Hệ thống | System Admin | Should | 3 |
-| **US-CL-001** | Khai báo phát thải thủ công ở trạng thái Draft | Luồng 2: Nạp dữ liệu | Thành viên (Editor) | Must | 3 |
-| **US-CL-002** | Tự động quy đổi mức tiêu thụ ra chỉ số kg CO2e | Luồng 3: Xử lý Sổ cái | Editor / Reviewer | Must | 2 |
-| **US-CL-003** | Quét hóa đơn / công tơ bằng AI Vision (Popup xác nhận) | Luồng 2: Nạp dữ liệu | Editor / Reviewer | Should | 5 |
-| **US-CL-004** | Nạp dữ liệu phát thải qua file mẫu Excel (Preview & Import) | Luồng 2: Nạp dữ liệu | Editor / Reviewer | Should | 4 |
-| **US-CL-005** | Kiểm duyệt & phê duyệt (Accept / Reject) request phát thải | Luồng 2: Phê duyệt | Trưởng nhóm (Reviewer) | Must | 3 |
-| **US-CL-006** | Tra cứu lịch sử sổ cái và trạng thái phê duyệt | Luồng 2: Lịch sử | Editor / Reviewer | Must | 3 |
-| **US-BG-001** | Thiết lập Ngân sách tháng & Ngưỡng cảnh báo sớm 85% | Luồng 1: Budgeting | Trưởng nhóm (Reviewer) | Must | 2 |
-| **US-BG-002** | Theo dõi tiến độ tiêu thụ & chỉ số chuẩn hóa trên Dashboard | Luồng 3: Giám sát | Editor / Reviewer | Must | 3 |
-| **US-BG-003** | Bắn Notification cảnh báo ngưỡng 85% đến TOÀN BỘ thành viên | Luồng 3: Cảnh báo | Editor / Reviewer | Must | 3 |
-| **US-AI-001** | AI Insight định kỳ (Cronjob) & Kế hoạch cắt giảm cá nhân hóa | Luồng 4: AI Reporting | Trưởng nhóm (Reviewer) | Could | 5 |
-| **US-AI-002** | Xuất Báo cáo Phân tích & Kế hoạch cắt giảm ra file PDF | Luồng 4: AI Reporting | Trưởng nhóm (Reviewer) | Could | 3 |
-
----
-
-## 🚀 7. Kế hoạch Phát hành 6 Tuần (Release Plan)
-
-Dự án được chia thành **3 Sprints (mỗi Sprint 2 tuần)** với tổng nỗ lực ước lượng là **44 Story Points**:
-
-```mermaid
-flowchart LR
-    subgraph Sprint1["Sprint 1: Onboarding, Hệ chuẩn & Nạp thủ công (Tuần 1 - 2 | 16 SP)"]
-        direction TB
-        S1_1["US-WS-001: Khởi tạo Workspace (2 SP)"]
-        S1_2["US-WS-002: Khai báo Thông số nền (3 SP)"]
-        S1_3["US-WS-003: Mời Editor vào Workspace (3 SP)"]
-        S1_4["US-SA-001: Quản lý Hệ số Quy chuẩn (3 SP)"]
-        S1_5["US-CL-001: Khai báo Thủ công Draft (3 SP)"]
-        S1_6["US-CL-002: Tự động Quy đổi kg CO2e (2 SP)"]
-    end
-
-    subgraph Sprint2["Sprint 2: Excel Import, Phê duyệt & Cảnh báo 85% (Tuần 3 - 4 | 18 SP)"]
-        direction TB
-        S2_1["US-CL-004: Import File mẫu Excel (4 SP)"]
-        S2_2["US-CL-005: Phê duyệt Request (Reviewer) (3 SP)"]
-        S2_3["US-CL-006: Lịch sử Sổ cái & Trạng thái (3 SP)"]
-        S2_4["US-BG-001: Cài đặt Ngân sách & Ngưỡng 85% (2 SP)"]
-        S2_5["US-BG-002: Dashboard & Chỉ số Chuẩn hóa (3 SP)"]
-        S2_6["US-BG-003: Bắn Notification Cảnh báo 85% (3 SP)"]
-    end
-
-    subgraph Sprint3["Sprint 3: AI Vision Quét Hóa đơn & Báo cáo PDF (Tuần 5 - 6 | 13 SP)"]
-        direction TB
-        S3_1["US-CL-003: AI Vision Quét Hóa đơn/Công tơ (5 SP)"]
-        S3_2["US-AI-001: Cronjob AI Insight Cá nhân hóa (5 SP)"]
-        S3_3["US-AI-002: Xuất Báo cáo Kế hoạch ra PDF (3 SP)"]
-    end
-
-    Sprint1 --> Sprint2 --> Sprint3
-```
+| Mã US         | Tên User Story                                               | Phân hệ / Luồng       | Persona chính                   | MoSCoW | Est. (SP) |
+| ------------- | ------------------------------------------------------------ | --------------------- | ------------------------------- | :----: | :-------: |
+| **US-WS-001** | Khởi tạo Không gian làm việc (Workspace)                     | Luồng 1: Onboarding   | Trưởng nhóm (Reviewer)          |  Must  |     2     |
+| **US-WS-002** | Khai báo thông số nền ($m^2$, số người)                      | Luồng 1: Onboarding   | Trưởng nhóm (Reviewer)          |  Must  |     3     |
+| **US-WS-003** | Mời thành viên gia nhập với vai trò Editor                   | Luồng 1: Onboarding   | Trưởng nhóm (Reviewer) / Editor |  Must  |     3     |
+| **US-SA-001** | Quản lý & cập nhật Hệ số phát thải quy chuẩn                 | Quản trị Hệ thống     | System Admin                    | Should |     3     |
+| **US-CL-001** | Khai báo phát thải thủ công ở trạng thái Draft               | Luồng 2: Nạp dữ liệu  | Thành viên (Editor)             |  Must  |     3     |
+| **US-CL-002** | Tự động quy đổi mức tiêu thụ ra chỉ số kg CO2e               | Luồng 3: Xử lý Sổ cái | Editor / Reviewer               |  Must  |     2     |
+| **US-CL-003** | Quét hóa đơn / công tơ bằng AI Vision (Popup xác nhận)       | Luồng 2: Nạp dữ liệu  | Editor / Reviewer               | Should |     5     |
+| **US-CL-004** | Nạp dữ liệu phát thải qua file mẫu Excel (Preview & Import)  | Luồng 2: Nạp dữ liệu  | Editor / Reviewer               | Should |     4     |
+| **US-CL-005** | Kiểm duyệt & phê duyệt (Accept / Reject) request phát thải   | Luồng 2: Phê duyệt    | Trưởng nhóm (Reviewer)          |  Must  |     3     |
+| **US-CL-006** | Tra cứu lịch sử sổ cái và trạng thái phê duyệt               | Luồng 2: Lịch sử      | Editor / Reviewer               |  Must  |     3     |
+| **US-BG-001** | Thiết lập Ngân sách tháng & Ngưỡng cảnh báo sớm 85%          | Luồng 1: Budgeting    | Trưởng nhóm (Reviewer)          |  Must  |     2     |
+| **US-BG-002** | Theo dõi tiến độ tiêu thụ & chỉ số chuẩn hóa trên Dashboard  | Luồng 3: Giám sát     | Editor / Reviewer               |  Must  |     3     |
+| **US-BG-003** | Bắn Notification cảnh báo ngưỡng 85% đến TOÀN BỘ thành viên  | Luồng 3: Cảnh báo     | Editor / Reviewer               |  Must  |     3     |
+| **US-AI-001** | AI Insight định kỳ (Cronjob) & Kế hoạch cắt giảm cá nhân hóa | Luồng 4: AI Reporting | Trưởng nhóm (Reviewer)          | Could  |     5     |
+| **US-AI-002** | Xuất Báo cáo Phân tích & Kế hoạch cắt giảm ra file PDF       | Luồng 4: AI Reporting | Trưởng nhóm (Reviewer)          | Could  |     3     |
 
 ---
 
-## 🛠️ 8. Nền tảng Kỹ thuật & Công nghệ (Tech Stack)
+## 🚀 8. Kế hoạch Triển khai & Phát hành MVP
+
+Chi tiết kế hoạch phát hành MVP trong **6 tuần (3 Sprints x 2 tuần)**, bảng phân bổ Story Points, định nghĩa Definition of Ready (DoR), Definition of Done (DoD) và quản trị rủi ro kỹ thuật đã được tách riêng vào tài liệu:
+
+👉 **Xem chi tiết tại:** [docs/MVP.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/MVP.md)
+
+- **Sprint 1 (Tuần 1 - 2 | 16 SP):** Onboarding, Thiết lập Thông số nền $m^2$/số người, Quản lý Hệ số chuẩn (System Admin), Form nạp phát thải thủ công (Draft) & Engine tính toán quy đổi $\text{kg CO}_2\text{e}$.
+- **Sprint 2 (Tuần 3 - 4 | 18 SP):** Nạp dữ liệu qua file mẫu Excel (Bulk Import with Preview), Hàng đợi duyệt Reviewer (Approval Queue), Lịch sử sổ cái, Ngân sách tháng, Dashboard chỉ số chuẩn hóa và Bắn Notification cảnh báo $85\%$.
+- **Sprint 3 (Tuần 5 - 6 | 13 SP):** AI Vision bóc tách hóa đơn điện/nước/công tơ, Cronjob AI Insight phân tích bất thường sinh kế hoạch cắt giảm định lượng cá nhân hóa và Xuất Báo cáo PDF chuẩn in ấn.
+
+---
+
+## 🛠️ 9. Nền tảng Kỹ thuật & Công nghệ (Tech Stack)
 
 | Thành phần | Công nghệ lựa chọn | Mục đích sử dụng |
 |---|---|---|
-| **Frontend** | React / Next.js, TailwindCSS | Giao diện Mobile-First Responsive PWA, tối ưu thao tác chụp ảnh và duyệt nhanh trên điện thoại. |
-| **Backend** | Node.js / NestJS hoặc Python FastAPI | Xử lý nghiệp vụ sổ cái, tính toán số học quy đổi, kiểm tra ngưỡng và cấp quyền RBAC. |
-| **Database** | PostgreSQL | Cơ sở dữ liệu quan hệ đảm bảo toàn vẹn giao dịch (ACID) của bảng `emission_logs`. |
-| **Multimodal AI** | Google Gemini 1.5 Flash / Claude 3.5 Sonnet | Vision Parser bóc tách dữ liệu có cấu trúc (JSON) từ ảnh hóa đơn EVN, hóa đơn nước và mặt số công tơ. |
-| **Generative LLM** | Google Gemini 1.5 Pro / Claude 3.5 Sonnet | Insight Generator phân tích nguyên nhân bất thường và sinh Kế hoạch cắt giảm định lượng cá nhân hóa. |
-| **Background Jobs** | Node-cron / BullMQ | Lịch trình Cronjob tự động chạy phân tích dữ liệu vào 23:59 ngày cuối tuần hoặc cuối tháng. |
-| **File Processing** | SheetJS (xlsx), Puppeteer / jsPDF | Đọc và ánh xạ file template Excel hàng loạt; kết xuất báo cáo đồ họa ra file PDF chuẩn in ấn. |
+| **Frontend** | **React + Vite**, TailwindCSS | Xây dựng Web App SPA / PWA Mobile-First Responsive với tốc độ bundling cực nhanh từ Vite, tối ưu thao tác chụp ảnh và duyệt nhanh trên điện thoại. |
+| **Backend** | **Java Spring Boot (3.x)** | Xây dựng RESTful API chuẩn mực; Spring Security + JWT cho xác thực và RBAC; Spring Data JPA quản lý dữ liệu sổ cái `emission_logs`. |
+| **Database** | **PostgreSQL** | Cơ sở dữ liệu quan hệ đảm bảo toàn vẹn giao dịch (ACID) cho sổ cái phát thải và mô hình Multi-tenant Workspace. |
+| **Multimodal AI** | **Google Gemini 1.5 Flash / Claude 3.5 Sonnet** | Vision Parser bóc tách dữ liệu có cấu trúc (JSON) từ ảnh hóa đơn EVN, hóa đơn nước và mặt số công tơ. |
+| **Generative LLM** | **Google Gemini 1.5 Pro / Claude 3.5 Sonnet** | Insight Generator phân tích nguyên nhân bất thường và sinh Kế hoạch cắt giảm định lượng cá nhân hóa. |
+| **Background Jobs** | **Spring Scheduler (`@Scheduled`)** | Thiết lập Cronjob tự động chạy phân tích dữ liệu vào 23:59 ngày cuối tuần hoặc cuối tháng. |
+| **File Processing** | **Apache POI & OpenPDF / iText** | Xử lý đọc, validate và ánh xạ file mẫu Excel trên Java Backend; kết xuất tài liệu báo cáo đồ họa chuẩn PDF. |
 
 ---
 
-*Tài liệu được phát triển và chuẩn hóa theo tiêu chuẩn **BA Zone & Digital School** — Biên soạn bởi **Phúc NT**.*  
-*Dự án: Personal & Micro-Office Carbon Ledger (Batch 4 - 2026).*
+_Dự án: Personal & Micro-Office Carbon Ledger (Batch 4 - 2026)._
