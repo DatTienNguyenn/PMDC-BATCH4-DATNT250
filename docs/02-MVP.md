@@ -1,7 +1,7 @@
 # KẾ HOẠCH TRIỂN KHAI & PHÁT HÀNH MVP (6 TUẦN)
 ## Dự án: Hệ thống Quản trị & Phân tích Dấu chân Carbon cho Gia đình/Văn phòng nhỏ (Personal & Micro-Office Carbon Ledger)
 
-> **Căn cứ tài liệu:** [spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md), [docs/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/use-cases.md), [docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/user-stories.md)  
+> **Căn cứ tài liệu:** [spec.md](../spec.md), [docs/03-use-cases.md](03-use-cases.md), [docs/04-user-stories.md](04-user-stories.md)  
 > **Thời gian:** 6 tuần (3 Sprints x 2 tuần)  
 > **Nền tảng công nghệ:** **Backend:** Java Spring Boot | **Frontend:** React + Vite | **Database:** PostgreSQL  
 > **Tổng nỗ lực ước tính:** 44 Story Points (SP)  
@@ -146,4 +146,4 @@ Một User Story chỉ được tính là hoàn thành khi:
 
 ---
 
-*Tài liệu Kế hoạch Triển khai MVP được đồng bộ hóa với [README.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/README.md), [spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md) và [docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/user-stories.md).*
+*Tài liệu Kế hoạch Triển khai MVP được đồng bộ hóa với [README.md](../README.md), [spec.md](../spec.md) và [docs/04-user-stories.md](04-user-stories.md).*

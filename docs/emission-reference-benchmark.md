@@ -11,10 +11,10 @@ Ngày cập nhật: 30/10/2026
 ```
 
 > **Căn cứ tài liệu kỹ thuật & nghiệp vụ liên quan:**
-> - [spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md): Mục 3.1 - Luồng Khởi tạo & Lập kế hoạch, Mục 4 - Mô hình Dữ liệu và Công thức Tính toán
-> - [docs/activity-supported.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/activity-supported.md): Danh mục Hoạt động Phát thải & Hệ số Phát thải Quy chuẩn (Scope 1, 2, 3)
-> - [docs/usecase/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/usecase/use-cases.md): `UC02` (Thông số nền), `UC09` (Thiết lập Ngân sách tháng), `UC11` (AI Insight)
-> - [docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/user-stories.md): `US-WS-002` (Khai báo thông số nền), `US-BG-001` (Gợi ý hạn ngạch ngân sách)
+> - [spec.md](../spec.md): Mục 3.1 - Luồng Khởi tạo & Lập kế hoạch, Mục 4 - Mô hình Dữ liệu và Công thức Tính toán
+> - [docs/activity-supported.md](activity-supported.md): Danh mục Hoạt động Phát thải & Hệ số Phát thải Quy chuẩn (Scope 1, 2, 3)
+> - [docs/03-use-cases.md](03-use-cases.md): `UC02` (Thông số nền), `UC09` (Thiết lập Ngân sách tháng), `UC11` (AI Insight)
+> - [docs/04-user-stories.md](04-user-stories.md): `US-WS-002` (Khai báo thông số nền), `US-BG-001` (Gợi ý hạn ngạch ngân sách)
 >
 > **Nguồn trích dẫn dữ liệu quốc tế & quy chuẩn pháp lý:**
 > - **Our World in Data (OWID):** Vietnam: CO2 and Greenhouse Gas Emissions Country Profile ([ourworldindata.org/profile/co2/vietnam](https://ourworldindata.org/profile/co2/vietnam))
@@ -31,7 +31,7 @@ Trong bài toán kiểm soát dấu chân carbon vi mô tại **Hộ gia đình 
 > [!NOTE]
 > **Phạm vi trọng tâm của tài liệu này:**  
 > Tài liệu này **chỉ tập trung giải thích và định nghĩa nguồn gốc, cơ sở dữ liệu khoa học và phương pháp luận tính toán** các con số reference trong hệ thống.  
-> Các cơ chế cảnh báo nghiệp vụ (như ngưỡng cảnh báo sớm 85%, báo động vượt trần 100%, hay quy tắc bắn notification) thuộc phạm vi đặc tả của [spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md), [docs/usecase/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/usecase/use-cases.md) (`UC10`) và [docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/user-stories.md) (`US-BG-003`), không nằm trong tài liệu này.
+> Các cơ chế cảnh báo nghiệp vụ (như ngưỡng cảnh báo sớm 85%, báo động vượt trần 100%, hay quy tắc bắn notification) thuộc phạm vi đặc tả của [spec.md](../spec.md), [docs/03-use-cases.md](03-use-cases.md) (`UC10`) và [docs/04-user-stories.md](04-user-stories.md) (`US-BG-003`), không nằm trong tài liệu này.
 
 ### Mục tiêu cốt lõi:
 
