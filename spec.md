@@ -137,7 +137,7 @@ Hệ thống phân định rõ ràng giữa **Luồng nạp chính** và **Luồ
      + Nếu tổng phát thải vượt $\ge 100\%$ ngân sách, hệ thống bắn notification báo động vượt trần và chuyển trạng thái Dashboard sang mức Đỏ.
    - **Cơ chế 2 - Cảnh báo Dị biệt Tham chiếu Quốc gia (National Reference Anomaly Alert):**
      + Hệ thống đối sánh phát thải bình quân đầu người thực tế với Mức tham chiếu quốc gia ($141.93\text{ kg/người}$ cho Household hoặc $305.83\text{ kg/người}$ cho Workplace).
-     + Nếu phát thải thực tế hoặc dự báo Run-rate cuối tháng vượt mức chuẩn tham chiếu, hệ thống kích hoạt huy hiệu cảnh báo dị biệt (Anomaly Warning) trên Dashboard để người dùng kịp thời điều chỉnh hành vi tiêu thụ. *(Xem chi tiết tại [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md)).*
+     + Nếu phát thải thực tế hoặc dự báo Run-rate cuối tháng vượt mức chuẩn tham chiếu, hệ thống kích hoạt huy hiệu cảnh báo dị biệt (Anomaly Warning) trên Dashboard để người dùng kịp thời điều chỉnh hành vi tiêu thụ. *(Mức phát thải tham chiếu chuẩn được quy định tại [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md)).*
 
 ### 3.4. Luồng 4: Phân tích & Gợi ý hành động (AI Insight & Reporting)
 1. **Cơ chế sinh báo cáo linh hoạt (Lịch tự động hoặc Bằng tay):** Reviewer có thể cấu hình lịch tự động chạy nền (Background Task) theo chu kỳ tuần/tháng vào thời điểm tùy chọn trong Workspace Settings, hoặc tắt tự động và kích hoạt thủ công on-demand (nút "Sinh báo cáo ngay") bất cứ khi nào cần xem báo cáo tức thì.
