@@ -613,51 +613,104 @@ export enum BudgetThresholdState {
 }
 ```
 
-#### 4.2. `GET /api/v1/workspaces/{id}/dashboard/charts`: Dữ liệu Biểu đồ Xu hướng & Phân rã Cơ cấu (UC10)
+#### 4.2. `GET /api/v1/workspaces/{id}/dashboard/charts/trend`: Dữ liệu Chuỗi Thời Gian Phát Thải Tích Lũy (Trend Line Chart - UC10)
 - **Screen ID:** `SCR-DASH-01` | **Phân quyền:** Reviewer / Editor
-- **Query Params:** `period=2026-10`
+- **Mục đích:** Cung cấp dữ liệu chuỗi thời gian (Time-series) phát thải tích lũy so sánh trực quan với đường Hạn ngạch mục tiêu (Target line) và Mốc cảnh báo sớm 85% của tháng để vẽ biểu đồ đường xu hướng.
+- **Query Params:**
+  - `period`: Tháng cần xem (`YYYY-MM`, mặc định: tháng hiện tại).
+  - `interval`: Chu kỳ gom nhóm (`DAILY` hoặc `WEEKLY`, mặc định: `DAILY`).
 - **Response 200 OK:**
 ```json
 {
   "status": "SUCCESS",
   "code": 200,
-  "message": "Lấy dữ liệu biểu đồ thành công",
+  "message": "Lấy dữ liệu biểu đồ xu hướng thành công",
   "data": {
     "period": "2026-10",
-    "time_series": [
-      { "date": "2026-10-05", "daily_co2e_kg": 45.2, "cumulative_co2e_kg": 45.2, "target_co2e_kg": 400.0 },
-      { "date": "2026-10-12", "daily_co2e_kg": 82.1, "cumulative_co2e_kg": 127.3, "target_co2e_kg": 400.0 },
-      { "date": "2026-10-19", "daily_co2e_kg": 110.5, "cumulative_co2e_kg": 237.8, "target_co2e_kg": 400.0 },
-      { "date": "2026-10-26", "daily_co2e_kg": 110.7, "cumulative_co2e_kg": 348.5, "target_co2e_kg": 400.0 }
-    ],
-    "breakdown_by_category": [
+    "interval": "DAILY",
+    "target_co2e_kg": 400.00,
+    "warning_threshold_co2e_kg": 340.00,
+    "current_cumulative_co2e_kg": 348.50,
+    "data_points": [
+      {
+        "date": "2026-10-05",
+        "daily_co2e_kg": 45.20,
+        "cumulative_co2e_kg": 45.20,
+        "target_line_kg": 400.00,
+        "is_warning_reached": false
+      },
+      {
+        "date": "2026-10-12",
+        "daily_co2e_kg": 82.10,
+        "cumulative_co2e_kg": 127.30,
+        "target_line_kg": 400.00,
+        "is_warning_reached": false
+      },
+      {
+        "date": "2026-10-19",
+        "daily_co2e_kg": 110.50,
+        "cumulative_co2e_kg": 237.80,
+        "target_line_kg": 400.00,
+        "is_warning_reached": false
+      },
+      {
+        "date": "2026-10-26",
+        "daily_co2e_kg": 110.70,
+        "cumulative_co2e_kg": 348.50,
+        "target_line_kg": 400.00,
+        "is_warning_reached": true
+      }
+    ]
+  }
+}
+```
+
+#### 4.3. `GET /api/v1/workspaces/{id}/dashboard/charts/breakdown`: Dữ liệu Phân Rã Cơ Cấu Phát Thải Theo Danh Mục (Category Breakdown Donut Chart - UC10)
+- **Screen ID:** `SCR-DASH-01` | **Phân quyền:** Reviewer / Editor
+- **Mục đích:** Cung cấp tỷ trọng đóng góp phát thải phân rã theo 4 nhóm/danh mục chính (Điện, Nước, Di chuyển, Nấu nướng/Gas LPG, Rác thải...) phục vụ vẽ biểu đồ Donut / Pie Chart.
+- **Query Params:**
+  - `period`: Tháng cần xem (`YYYY-MM`, mặc định: tháng hiện tại).
+- **Response 200 OK:**
+```json
+{
+  "status": "SUCCESS",
+  "code": 200,
+  "message": "Lấy dữ liệu cơ cấu phát thải thành công",
+  "data": {
+    "period": "2026-10",
+    "total_co2e_kg": 348.50,
+    "categories": [
       {
         "category_code": "ELEC_GRID",
-        "category_name": "Điện sinh hoạt",
+        "category_name": "Điện sinh hoạt EVN",
         "scope_type": "SCOPE_2",
         "co2e_kg": 180.53,
-        "percentage": 51.80
+        "percentage": 51.80,
+        "activity_count": 2
       },
       {
         "category_code": "MOBILITY",
-        "category_name": "Di chuyển (Xe máy/Ô tô)",
+        "category_name": "Di chuyển cá nhân (Xe máy/Ô tô)",
         "scope_type": "SCOPE_1",
         "co2e_kg": 112.40,
-        "percentage": 32.25
+        "percentage": 32.25,
+        "activity_count": 24
       },
       {
         "category_code": "FUEL_LPG",
         "category_name": "Nấu ăn Gas LPG",
         "scope_type": "SCOPE_1",
         "co2e_kg": 40.50,
-        "percentage": 11.62
+        "percentage": 11.62,
+        "activity_count": 1
       },
       {
         "category_code": "WATER_SUPPLY_TREAT",
         "category_name": "Nước sạch",
         "scope_type": "SCOPE_3",
         "co2e_kg": 15.07,
-        "percentage": 4.33
+        "percentage": 4.33,
+        "activity_count": 1
       }
     ]
   }
@@ -846,7 +899,33 @@ export enum BudgetThresholdState {
 
 #### 5.7. `POST /api/v1/workspaces/{id}/logs/excel-import`: Xác nhận Nạp File Hàng loạt (US-EM-003, UC06)
 - **Screen ID:** `SCR-EXCEL-PREVIEW-01` | **Phân quyền:** Reviewer / Editor
-- **Mục đích:** Thực hiện nạp hàng loạt (Batch Insert) danh sách các dòng hợp lệ vào bảng `emission_logs`.
+- **Mục đích:** Thực hiện nạp hàng loạt (Batch Insert) toàn bộ các dòng dữ liệu hợp lệ vào bảng `emission_logs`.
+- **Cam kết Toàn vẹn Dữ liệu (Full-Field Persistence Guarantee):**
+  Hệ thống cam kết **mọi bản ghi được nạp từ Excel đều được lưu trữ đầy đủ 100% tất cả các trường dữ liệu** vào bảng `emission_logs` với quy chuẩn tính toán và bảo toàn bất biến giống hệt như luồng nhập tay (`POST /logs/manual`):
+  
+  | Trường CSDL (`emission_logs`) | Nguồn Dữ Liệu & Quy Tắc Xử Lý Khi Nạp Excel |
+  |---|---|
+  | `id` | Backend tự động sinh UUID (`gen_random_uuid()`). |
+  | `workspace_id` | Lấy từ Path Parameter `{id}` của Không gian làm việc hiện tại. |
+  | `user_id` | Lấy từ JWT Authentication Token của người dùng đang thực hiện import. |
+  | `factor_id` | UUID của hệ số phát thải quy chuẩn tương ứng với dòng dữ liệu. |
+  | `category_code` | Backend tự động tra cứu từ `standard_emission_factors` (ví dụ `MOBILITY`, `ELEC_GRID`). |
+  | `activity_name` | Tên cụ thể của hoạt động tra cứu từ `standard_emission_factors` (ví dụ `Xe máy xăng 110cc`). |
+  | `consumption_quantity` | Sản lượng tiêu thụ từ cột số lượng của dòng Excel (`NUMERIC(12, 3)`). |
+  | `input_unit` | Đơn vị tính chuẩn tra cứu từ hệ số (`km`, `kWh`, `kg`...). |
+  | `factor_applied` | **Lưu cứng (Snapshot)** giá trị `default_emission_factor` tại thời điểm nạp (`NUMERIC(12, 6)`), bảo đảm sổ cái bất biến kể cả khi hệ số thay đổi sau này. |
+  | `total_co2e_kg` | Quy đổi chuẩn mực: `consumption_quantity` $\times$ `factor_applied` (`NUMERIC(12, 4)` qua `BigDecimal`). |
+  | `activity_date` | Ngày phát sinh ghi trên file Excel (`DATE`, $\le \text{CURRENT\_DATE}$). |
+  | `billing_period` | Tự động trích xuất chuỗi `YYYY-MM` từ `activity_date` (ví dụ: `2026-10`). |
+  | `ingestion_source` | Gán giá trị hằng số `'EXCEL_IMPORT'`. |
+  | `receipt_image_url` | Mặc định `NULL`. |
+  | `status` | - **Nếu Editor nạp:** Gán `PENDING_REVIEW` (đẩy vào hàng đợi kiểm duyệt `SCR-APPROVE-01`).<br>- **Nếu Reviewer nạp:** Gán `APPROVED` trực tiếp và tự động cộng dồn vào tổng phát thải tháng. |
+  | `reviewer_id` | `NULL` nếu là Editor; gán `:currentUserId` nếu là Reviewer nạp. |
+  | `reviewed_at` | `NULL` nếu là Editor; gán `CURRENT_TIMESTAMP` nếu là Reviewer nạp. |
+  | `rejection_reason` | Mặc định `NULL`. |
+  | `note` | Nội dung ghi chú từ cột Ghi chú của file Excel (nếu để trống, hệ thống tự điền `Import từ file Excel dd/MM/yyyy`). |
+  | `created_at` / `updated_at` | `CURRENT_TIMESTAMP`. |
+
 - **Request Body (`application/json`):**
 ```json
 {
@@ -856,7 +935,13 @@ export enum BudgetThresholdState {
       "factor_id": "22222222-3333-4444-5555-666666666666",
       "consumption_quantity": 30.0,
       "activity_date": "2026-10-15",
-      "note": "Đi công tác"
+      "note": "Đi công tác nội thành"
+    },
+    {
+      "factor_id": "11111111-2222-3333-4444-555555555555",
+      "consumption_quantity": 250.0,
+      "activity_date": "2026-10-20",
+      "note": "Tiền điện sinh hoạt gia đình"
     }
   ]
 }
@@ -866,11 +951,26 @@ export enum BudgetThresholdState {
 {
   "status": "SUCCESS",
   "code": 201,
-  "message": "Đã nạp thành công 11 bản ghi vào hệ thống",
+  "message": "Đã nạp thành công 11 bản ghi vào hệ thống với đầy đủ thông số phát thải chuẩn hóa",
   "data": {
     "imported_count": 11,
     "status": "PENDING_REVIEW",
-    "total_co2e_kg": 245.80
+    "total_co2e_kg": 245.80,
+    "ingestion_source": "EXCEL_IMPORT",
+    "records_sample": [
+      {
+        "log_id": "8a7b6c5d-4e3f-2109-8765-43210fedcba9",
+        "category_code": "MOBILITY",
+        "activity_name": "Xe máy xăng 110cc",
+        "consumption_quantity": 30.0,
+        "input_unit": "km",
+        "factor_applied": 0.046300,
+        "total_co2e_kg": 1.3890,
+        "activity_date": "2026-10-15",
+        "billing_period": "2026-10",
+        "status": "PENDING_REVIEW"
+      }
+    ]
   }
 }
 ```
@@ -1427,7 +1527,7 @@ Phần này thực hiện kiểm tra đối soát chéo (Cross-verification) to�
 | **UC07** | Phê duyệt Yêu cầu Phát thải (Accept/Reject) | Reviewer | `GET /api/v1/workspaces/{id}/approvals/pending`<br>`POST /api/v1/workspaces/{id}/approvals/{id}/accept`<br>`POST /api/v1/workspaces/{id}/approvals/bulk-accept`<br>`POST /api/v1/workspaces/{id}/approvals/{id}/reject` | **100% ĐẠT** ✅ |
 | **UC08** | Tra cứu Lịch sử Sổ cái & Xuất Excel | Editor, Reviewer | `GET /api/v1/workspaces/{id}/logs`<br>`GET /api/v1/workspaces/{id}/logs/{id}`<br>`PUT /api/v1/workspaces/{id}/logs/{id}`<br>`DELETE /api/v1/workspaces/{id}/logs/{id}`<br>`GET /api/v1/workspaces/{id}/logs/export-excel` | **100% ĐẠT** ✅ |
 | **UC09** | Thiết lập Target Ngân sách Tháng & Ngưỡng 85% | Reviewer | `GET /api/v1/workspaces/{id}/budgets/recommendation`<br>`PUT /api/v1/workspaces/{id}/budgets`<br>`GET /api/v1/workspaces/{id}/budgets/history` | **100% ĐẠT** ✅ |
-| **UC10** | Giám sát Dashboard & Bắn Cảnh báo | Editor, Reviewer | `GET /api/v1/workspaces/{id}/dashboard/summary`<br>`GET /api/v1/workspaces/{id}/dashboard/charts`<br>`GET /api/v1/workspaces/{id}/notifications`<br>`POST /api/v1/workspaces/{id}/notifications/mark-all-read`<br>`GET /api/v1/users/me/contributions` | **100% ĐẠT** ✅ |
+| **UC10** | Giám sát Dashboard & Bắn Cảnh báo | Editor, Reviewer | `GET /api/v1/workspaces/{id}/dashboard/summary`<br>`GET /api/v1/workspaces/{id}/dashboard/charts/trend`<br>`GET /api/v1/workspaces/{id}/dashboard/charts/breakdown`<br>`GET /api/v1/workspaces/{id}/notifications`<br>`POST /api/v1/workspaces/{id}/notifications/mark-all-read`<br>`GET /api/v1/users/me/contributions` | **100% ĐẠT** ✅ |
 | **UC11** | AI Insight (Lịch tự động / On-demand) & Xuất PDF | Reviewer | `GET /api/v1/workspaces/{id}/ai-reports/current`<br>`POST /api/v1/workspaces/{id}/ai-reports/generate-manual`<br>`GET /api/v1/workspaces/{id}/ai-reports/{id}/export-pdf`<br>`PUT /api/v1/workspaces/{id}/ai-schedule` | **100% ĐẠT** ✅ |
 | **UC12** | Quản lý Hệ số Phát thải Quy chuẩn (Backoffice) | SysAdmin | `GET /api/v1/admin/emission-factors`<br>`PUT /api/v1/admin/emission-factors/{id}`<br>`GET /api/v1/admin/dashboard/kpis`<br>`GET /api/v1/admin/dashboard/ai-usage`<br>`GET /api/v1/admin/workspaces`<br>`PATCH /api/v1/admin/workspaces/{id}/status`<br>`GET & PUT /api/v1/admin/ai-config`<br>`GET /api/v1/admin/audit-logs` | **100% ĐẠT** ✅ |
 

@@ -354,9 +354,33 @@ paths:
               schema:
                 $ref: '#/components/schemas/DashboardSummaryResponse'
 
-  /workspaces/{id}/dashboard/charts:
+  /workspaces/{id}/dashboard/charts/trend:
     get:
-      summary: Dữ liệu chuỗi thời gian tích lũy và cơ cấu danh mục (SCR-DASH-01, UC10)
+      summary: Dữ liệu chuỗi thời gian phát thải tích lũy (Trend Line Chart - SCR-DASH-01, UC10)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: period
+          in: query
+          schema:
+            type: string
+            example: "2026-10"
+        - name: interval
+          in: query
+          schema:
+            type: string
+            enum: [DAILY, WEEKLY]
+            default: DAILY
+      responses:
+        '200':
+          description: Dữ liệu chuỗi thời gian vẽ biểu đồ xu hướng
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrendChartResponse'
+
+  /workspaces/{id}/dashboard/charts/breakdown:
+    get:
+      summary: Dữ liệu phân rã tỷ trọng cơ cấu phát thải theo danh mục (Category Breakdown Donut Chart - SCR-DASH-01, UC10)
       parameters:
         - $ref: '#/components/parameters/WorkspaceId'
         - name: period
@@ -366,7 +390,11 @@ paths:
             example: "2026-10"
       responses:
         '200':
-          description: Dữ liệu đồ thị Dashboard
+          description: Dữ liệu cơ cấu phát thải vẽ biểu đồ tròn/donut
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BreakdownChartResponse'
 
   # ================= EMISSION FACTORS =================
   /emission-factors/categories:
@@ -464,6 +492,11 @@ paths:
   /workspaces/{id}/logs/excel-import:
     post:
       summary: Xác nhận nạp hàng loạt dữ liệu hợp lệ từ Excel (SCR-EXCEL-PREVIEW-01, UC06)
+      description: >
+        Thực hiện Batch Insert các dòng hợp lệ vào bảng emission_logs.
+        Cam kết bảo toàn đầy đủ 100% tất cả các trường dữ liệu (category_code, activity_name,
+        input_unit, factor_applied lưu cứng, total_co2e_kg, billing_period, user_id, status, audit trail)
+        tương đương với luồng nạp thủ công từng bản ghi.
       parameters:
         - $ref: '#/components/parameters/WorkspaceId'
       requestBody:
@@ -1090,6 +1123,52 @@ components:
                 national_reference_benchmark_kg: { type: number }
                 benchmark_intensity_ratio_r: { type: number }
                 benchmark_tier: { type: string, enum: [GREEN_PIONEER, STANDARD, ABOVE_BENCHMARK] }
+
+    TrendChartResponse:
+      type: object
+      properties:
+        status: { type: string, example: "SUCCESS" }
+        code: { type: integer, example: 200 }
+        data:
+          type: object
+          properties:
+            period: { type: string, example: "2026-10" }
+            interval: { type: string, enum: [DAILY, WEEKLY] }
+            target_co2e_kg: { type: number, example: 400.0 }
+            warning_threshold_co2e_kg: { type: number, example: 340.0 }
+            current_cumulative_co2e_kg: { type: number, example: 348.5 }
+            data_points:
+              type: array
+              items:
+                type: object
+                properties:
+                  date: { type: string, format: date }
+                  daily_co2e_kg: { type: number }
+                  cumulative_co2e_kg: { type: number }
+                  target_line_kg: { type: number }
+                  is_warning_reached: { type: boolean }
+
+    BreakdownChartResponse:
+      type: object
+      properties:
+        status: { type: string, example: "SUCCESS" }
+        code: { type: integer, example: 200 }
+        data:
+          type: object
+          properties:
+            period: { type: string, example: "2026-10" }
+            total_co2e_kg: { type: number, example: 348.5 }
+            categories:
+              type: array
+              items:
+                type: object
+                properties:
+                  category_code: { type: string, example: "ELEC_GRID" }
+                  category_name: { type: string, example: "Điện sinh hoạt EVN" }
+                  scope_type: { type: string, enum: [SCOPE_1, SCOPE_2, SCOPE_3] }
+                  co2e_kg: { type: number }
+                  percentage: { type: number }
+                  activity_count: { type: integer }
 
     ApiResponseUser:
       type: object
