@@ -482,12 +482,12 @@ flowchart TD
 ## 7. TÀI LIỆU LIÊN KẾT & ĐỐI SOÁT
 
 Tài liệu Thiết kế Kiến trúc C4 này được xây dựng và chuẩn hóa trên cơ sở đối soát 100% với toàn bộ hệ thống tài liệu đặc tả của dự án:
-- **Tài liệu Yêu cầu Sản phẩm:** [docs/PRD.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/PRD.md)
-- **Tài liệu Kiến trúc Thông tin:** [docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/information-architecture/information-architecture.md)
-- **Tài liệu Đặc tả API RESTful:** [docs/api-schema/api-schema.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/api-schema/api-schema.md)
-- **Tài liệu Mức Phát Thải Tham Chiếu:** [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/emission-reference-benchmark.md)
-- **Danh mục Hoạt động & Hệ số Quy chuẩn:** [docs/activity-supported.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/activity-supported.md)
-- **Danh mục 12 Use Cases:** [docs/usecase/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/usecase/use-cases.md)
-- **Danh mục 15 User Stories:** [docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/user-stories.md)
-- **Kế hoạch Triển khai MVP 6 Tuần:** [docs/MVP.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/MVP.md)
-- **File Bảng Kiểm Chuẩn Kiến Trúc C4:** [docs/c4-documentation/c4-verification-checklist.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/c4-documentation/c4-verification-checklist.md)
+- **Tài liệu Yêu cầu Sản phẩm:** [docs/01-PRD.md](../01-PRD.md)
+- **Tài liệu Kiến trúc Thông tin:** [docs/09-information-architecture.md](../09-information-architecture.md)
+- **Tài liệu Đặc tả API RESTful:** [docs/api-schema/api-schema.md](../api-schema/api-schema.md)
+- **Tài liệu Mức Phát Thải Tham Chiếu:** [docs/emission-reference-benchmark.md](../emission-reference-benchmark.md)
+- **Danh mục Hoạt động & Hệ số Quy chuẩn:** [docs/activity-supported.md](../activity-supported.md)
+- **Danh mục 12 Use Cases:** [docs/03-use-cases.md](../03-use-cases.md)
+- **Danh mục 15 User Stories:** [docs/04-user-stories.md](../04-user-stories.md)
+- **Kế hoạch Triển khai MVP 6 Tuần:** [docs/02-MVP.md](../02-MVP.md)
+- **File Bảng Kiểm Chuẩn Kiến Trúc C4:** [docs/c4-documentation/c4-verification-checklist.md](c4-verification-checklist.md)

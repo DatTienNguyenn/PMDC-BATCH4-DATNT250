@@ -6,9 +6,9 @@
 > **Mã tài liệu:** `PRD-POL-2026-V1.2`  
 > **Phiên bản:** `1.2.0 (Official Approved PRD)`  
 > **Trạng thái:** `Đã Phê Duyệt (Approved by Reviewer)`  
-> **Nhánh phát triển (Git Worktree):** [`docs/prd`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd)  
+> **Nhánh phát triển:** `main`  
 > **Thời gian triển khai:** 6 tuần (3 Sprints $\times$ 2 tuần) | Tổng Story Points: 44 SP  
-> **Tài liệu căn cứ:** [spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/spec.md), [docs/MVP.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/MVP.md), [docs/activity-supported.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/activity-supported.md), [docs/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/usecase/use-cases.md), [docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md), [docs/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/information-architecture/information-architecture.md)
+> **Tài liệu căn cứ:** [spec.md](../spec.md), [docs/02-MVP.md](02-MVP.md), [docs/activity-supported.md](activity-supported.md), [docs/03-use-cases.md](03-use-cases.md), [docs/04-user-stories.md](04-user-stories.md), [docs/09-information-architecture.md](09-information-architecture.md)
 
 ---
 
@@ -20,7 +20,7 @@
 4. [Các Luồng Hoạt động Cốt lõi & Quy trình Nghiệp vụ (Core Workflows)](#4-các-luồng-hoạt-động-cốt-lõi--quy-trình-nghiệp-vụ-core-workflows)
 5. [Đặc tả Yêu cầu Tính năng Chi tiết (Functional Requirements)](#5-đặc-tả-yêu-cầu-tính-năng-chi-tiết-functional-requirements)
 6. [Thiết kế Kiến trúc Hệ thống Tổng thể (High-Level Architecture)](#6-thiết-kế-kiến-trúc-hệ-thống-tổng-thể-high-level-architecture)
-7. [Thiết kế Cơ sở Dữ liệu Chi tiết (Database System Design)](#7-thiết-kế-cơ-sở-dữ-liệu-chi-tiết-database-system-design)
+7. [Thiết kế Cơ sở Dữ liệu Tổng quan (Database Design Overview)](#7-thiết-kế-cơ-sở-dữ-liệu-tổng-quan-database-design-overview)
 8. [Yêu cầu Phi chức năng & Tiêu chuẩn Kỹ thuật (Non-Functional Requirements)](#8-yêu-cầu-phi-chức-năng--tiêu-chuẩn-kỹ-thuật-non-functional-requirements)
 9. [Lộ trình Phát triển 3 Sprints (MVP Release Plan & Backlog Mapping)](#9-lộ-trình-phát-triển-3-sprints-mvp-release-plan--backlog-mapping)
 10. [Quản trị Rủi ro & Chiến lược Giảm thiểu (Risk Management)](#10-quản-trị-rủi-ro--chiến-lược-giảm-thiểu-risk-management)
@@ -203,7 +203,7 @@ flowchart TD
 ## 5. ĐẶC TẢ YÊU CẦU TÍNH NĂNG CHI TIẾT (FUNCTIONAL REQUIREMENTS)
 
 ### 5.1. Phân hệ 1: Quản trị Workspace & Thông số nền (Onboarding)
-- **Mã User Stories:** [`US-WS-001`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-WS-001), [`US-WS-002`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-WS-002), [`US-WS-003`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-WS-003) | **Use Cases:** `UC01`, `UC02`, `UC03`
+- **Mã User Stories:** [`US-WS-001`](04-user-stories.md#US-WS-001), [`US-WS-002`](04-user-stories.md#US-WS-002), [`US-WS-003`](04-user-stories.md#US-WS-003) | **Use Cases:** `UC01`, `UC02`, `UC03`
 - **Chức năng nghiệp vụ:**
   - Khởi tạo Workspace mới với tên đại diện (3–50 ký tự), loại hình (`HOME`: Hộ gia đình hoặc `OFFICE`: Văn phòng nhỏ).
   - Khai báo thông số nền mặt sàn ($m^2 > 0$) và số lượng nhân khẩu/nhân viên ($\text{occupants} \ge 1$).
@@ -219,7 +219,7 @@ flowchart TD
   - Cho phép Quản trị viên Hệ thống (`System Admin`) khởi tạo và quản lý toàn bộ các Workspace trên hệ thống.
 
 ### 5.2. Phân hệ 2: Danh mục Hoạt động & Hệ số Quy chuẩn (Master Data)
-- **Mã User Stories:** [`US-SA-001`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-SA-001), [`US-CL-002`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-CL-002) | **Use Cases:** `UC12`
+- **Mã User Stories:** [`US-SA-001`](04-user-stories.md#US-SA-001), [`US-CL-002`](04-user-stories.md#US-CL-002) | **Use Cases:** `UC12`
 - **Quy chuẩn hỗ trợ 8 hoạt động cốt lõi:**
   1. `ELEC_GRID`: Điện lưới sinh hoạt/văn phòng (**kWh**), Scope 2, Hệ số **`0.6187`** $\text{kg CO}_2\text{e}/\text{kWh}$ (Công văn 1232/BNNMT-BĐKH).
   2. `FUEL_LPG`: Đốt gas LPG nấu ăn (**kg**), Scope 1, Hệ số **`2.9394`** $\text{kg CO}_2\text{e}/\text{kg}$ (UK DEFRA 2026 / IPCC).
@@ -231,7 +231,7 @@ flowchart TD
   8. `TRAVEL_FLIGHT`: Du lịch & Đi lại bằng máy bay (**p.km**), Scope 3, Economy: **`0.10916`**, Business: **`0.31656`** (DEFRA 2026 / ICAO).
 
 ### 5.3. Phân hệ 3: Nhập liệu Hoạt động có Cấu trúc (Activity Ingestion)
-- **Mã User Stories:** [`US-CL-001`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-CL-001), [`US-CL-004`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-CL-004), [`US-CL-003`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-CL-003) | **Use Cases:** `UC04`, `UC06`, `UC05`
+- **Mã User Stories:** [`US-CL-001`](04-user-stories.md#US-CL-001), [`US-CL-004`](04-user-stories.md#US-CL-004), [`US-CL-003`](04-user-stories.md#US-CL-003) | **Use Cases:** `UC04`, `UC06`, `UC05`
 
 #### A. [LUỒNG CHÍNH] Kênh 1: Khai báo Thủ công (Manual Entry)
 - Form nhập nhanh gọn, có cấu trúc: Chọn danh mục hoạt động qua Dropdown, nhập sản lượng tiêu thụ, chọn đơn vị đo lường.
@@ -251,7 +251,7 @@ flowchart TD
 - Multimodal AI bóc tách JSON và hiển thị Popup Preview 2 cột để đối chiếu với ảnh chụp trước khi bấm lưu.
 
 ### 5.4. Phân hệ 4: Hàng đợi Kiểm duyệt Sổ cái (Approval Queue)
-- **Mã User Stories:** [`US-CL-005`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-CL-005), [`US-CL-006`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-CL-006) | **Use Cases:** `UC07`, `UC08`
+- **Mã User Stories:** [`US-CL-005`](04-user-stories.md#US-CL-005), [`US-CL-006`](04-user-stories.md#US-CL-006) | **Use Cases:** `UC07`, `UC08`
 - **Cơ chế phân luồng trạng thái:**
   - `DRAFT / PENDING_REVIEW`: Tạo bởi Thành viên (Editor). Bản ghi **chưa được tính** vào tổng phát thải Workspace và chưa làm giảm ngân sách tháng.
   - `APPROVED`: Tạo trực tiếp bởi Reviewer hoặc được Reviewer phê duyệt từ hàng đợi. Chính thức ghi nhận vào sổ cái và kích hoạt kiểm tra ngân sách.
@@ -259,7 +259,7 @@ flowchart TD
 - **Tính năng Hàng đợi duyệt:** Reviewer có thể lọc theo người gửi, lọc theo loại hoạt động, duyệt đơn lẻ hoặc duyệt hàng loạt (Bulk Accept).
 
 ### 5.5. Phân hệ 5: Quản trị Ngân sách, Dashboard & Hệ thống Cảnh báo
-- **Mã User Stories:** [`US-BG-001`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-BG-001), [`US-BG-002`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-BG-002), [`US-BG-003`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-BG-003) | **Use Cases:** `UC09`, `UC10`
+- **Mã User Stories:** [`US-BG-001`](04-user-stories.md#US-BG-001), [`US-BG-002`](04-user-stories.md#US-BG-002), [`US-BG-003`](04-user-stories.md#US-BG-003) | **Use Cases:** `UC09`, `UC10`
 - **Thiết lập Target:** Reviewer đặt hạn ngạch phát thải tối đa cho tháng (ví dụ: $350\text{ kg CO}_2\text{e}$).
 - **Dashboard Trung tâm:**
   - 4 Thẻ KPI: Tổng phát thải tháng hiện tại, % Đã tiêu thụ so với ngân sách, Chỉ số $\text{CO}_2\text{e}/\text{người}$, Chỉ số $\text{CO}_2\text{e}/m^2$.
@@ -271,7 +271,7 @@ flowchart TD
   - Khi vượt trần $\ge 100\%$, hệ thống sinh thông báo báo động màu đỏ và treo Banner cảnh báo nổi bật trên Dashboard.
 
 ### 5.6. Phân hệ 6: AI Insight, Đề xuất Phương án Cắt giảm Cá nhân hóa & Báo cáo PDF
-- **Mã User Stories:** [`US-AI-001`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-AI-001), [`US-AI-002`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-AI-002) | **Use Cases:** `UC11`
+- **Mã User Stories:** [`US-AI-001`](04-user-stories.md#US-AI-001), [`US-AI-002`](04-user-stories.md#US-AI-002) | **Use Cases:** `UC11`
 - **Cơ chế Sinh Báo cáo Linh hoạt (Lịch Tự động hoặc Kích hoạt Bằng tay):**
   - **Tùy biến Cấu hình Lịch Tự động (Scheduled Cronjob):**
     - Reviewer có thể thiết lập lịch chạy tự động trong phần Cài đặt Workspace (`Workspace Settings`):
@@ -447,11 +447,13 @@ sequenceDiagram
 
 ---
 
-## 7. THIẾT KẾ CƠ SỞ DỮ LIỆU CHI TIẾT (DATABASE SYSTEM DESIGN)
+## 7. THIẾT KẾ CƠ SỞ DỮ LIỆU TỔNG QUAN (DATABASE DESIGN OVERVIEW)
 
-Lược đồ cơ sở dữ liệu quan hệ (PostgreSQL) dưới đây được thiết kế chuẩn hóa 3NF, phục vụ trọn vẹn việc tính toán tự động dựa trên hoạt động người dùng nạp vào và đảm bảo tính bất biến của sổ cái carbon.
+Lược đồ cơ sở dữ liệu quan hệ (PostgreSQL 16) được thiết kế chuẩn hóa 3NF kết hợp denormalization có kiểm soát (`factor_applied`) để bảo toàn tính bất biến của sổ cái carbon và hỗ trợ đầy đủ mô hình đa người thuê (Multi-tenancy Workspace).
 
-### 7.1. Sơ đồ Thực thể Quan hệ (Entity Relationship Diagram - ERD)
+👉 **Xem đặc tả chi tiết 13 bảng CSDL, từ điển dữ liệu, chiến lược Index và các quyết định thiết kế tại:** [docs/05-data-model.md](05-data-model.md)
+
+### 7.1. Sơ đồ Thực thể Quan hệ Tổng quan (Entity Relationship Diagram - ERD)
 
 ```mermaid
 erDiagram
@@ -472,312 +474,29 @@ erDiagram
     
     standard_emission_factors ||--o{ emission_logs : "applies factor"
     users ||--o{ standard_emission_factors : "updated by (System Admin)"
-
-    users {
-        uuid id PK
-        varchar email UK
-        varchar password_hash
-        varchar full_name
-        varchar avatar_url
-        varchar global_role
-        boolean is_active
-        jsonb notification_preferences
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    workspaces {
-        uuid id PK
-        varchar name
-        varchar type
-        varchar invite_code UK
-        timestamp invite_code_expires_at
-        varchar status
-        varchar ai_report_frequency
-        int ai_report_day_of_week
-        int ai_report_day_of_month
-        time ai_report_time
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    workspace_members {
-        uuid id PK
-        uuid workspace_id FK
-        uuid user_id FK
-        varchar role
-        timestamp last_read_notifications_at
-        timestamp joined_at
-    }
-
-    workspace_join_requests {
-        uuid id PK
-        uuid workspace_id FK
-        uuid user_id FK
-        varchar invite_code_used
-        varchar status
-        uuid reviewed_by FK
-        timestamp reviewed_at
-        text rejection_reason
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    workspace_baselines {
-        uuid id PK
-        uuid workspace_id FK
-        decimal floor_area_m2
-        int occupants
-        varchar period_valid_from
-        timestamp created_at
-    }
-
-    standard_emission_factors {
-        uuid id PK
-        varchar category_code UK
-        varchar activity_name
-        varchar scope_type
-        varchar input_unit
-        decimal default_emission_factor
-        varchar factor_unit
-        varchar official_citation
-        boolean is_active
-        uuid updated_by_admin_id FK
-        timestamp updated_at
-    }
-
-    carbon_budgets {
-        uuid id PK
-        uuid workspace_id FK
-        varchar period
-        decimal target_co2e_kg
-        decimal alert_threshold_ratio
-        varchar status
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    emission_logs {
-        uuid id PK
-        uuid workspace_id FK
-        uuid user_id FK
-        uuid factor_id FK
-        varchar category_code
-        varchar activity_name
-        decimal consumption_quantity
-        varchar input_unit
-        decimal factor_applied
-        decimal total_co2e_kg
-        date activity_date
-        varchar billing_period
-        varchar ingestion_source
-        varchar receipt_image_url
-        varchar status
-        uuid reviewer_id FK
-        timestamp reviewed_at
-        text rejection_reason
-        text note
-        timestamp created_at
-        timestamp updated_at
-    }
-
-    ai_reports {
-        uuid id PK
-        uuid workspace_id FK
-        varchar report_type
-        varchar period
-        decimal total_emissions_kg
-        decimal variance_vs_last_period
-        jsonb breakdown_by_category
-        text actionable_advice_markdown
-        varchar pdf_file_url
-        timestamp generated_at
-    }
 ```
 
-### 7.2. Đặc tả Chi tiết Các Bảng Dữ liệu (Table Specifications)
+### 7.2. Danh mục 13 Bảng Dữ liệu Chuẩn hóa (Database Entities Catalog)
 
-#### 1. Bảng `users` (Tài khoản người dùng toàn hệ thống)
-- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
-- `email`: `VARCHAR(255) NOT NULL UNIQUE` (được đánh index B-Tree)
-- `password_hash`: `VARCHAR(255) NULL` (mã hóa chuẩn BCrypt/Argon2; cho phép null nếu đăng nhập Google OAuth)
-- `full_name`: `VARCHAR(100) NOT NULL`
-- `avatar_url`: `VARCHAR(500) NULL`
-- `global_role`: `VARCHAR(20) NOT NULL DEFAULT 'USER'` (`SYSTEM_ADMIN`, `USER`)
-- `is_active`: `BOOLEAN NOT NULL DEFAULT true`
-- `notification_preferences`: `JSONB NOT NULL DEFAULT '{"notify_budget_warning": true, "notify_approval_result": true}'::jsonb`
-- `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-- `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
+| STT | Tên Bảng | Phân Hệ / Module | Mục Đích Nghiệp Vụ | Khóa Ngoại Chính |
+|:---:|:---|:---|:---|:---|
+| 1 | `users` | Xác thực & Người dùng | Lưu trữ tài khoản người dùng, email, mật khẩu hash, global role. | - |
+| 2 | `workspaces` | Workspace / Tenant | Đại diện Hộ gia đình hoặc Văn phòng nhỏ, mã mời, lịch chạy AI. | - |
+| 3 | `workspace_members` | Phân quyền Workspace | Liên kết người dùng với Workspace và vai trò (`REVIEWER`, `EDITOR`). | `workspace_id`, `user_id` |
+| 4 | `workspace_join_requests` | Kiểm duyệt Gia nhập | Hàng đợi xin gia nhập Workspace qua Invite Code chờ Reviewer duyệt. | `workspace_id`, `user_id`, `reviewed_by` |
+| 5 | `workspace_baselines` | Thông số Nền tảng | Lưu diện tích ($m^2$) và số nhân khẩu phục vụ tính KPI chuẩn hóa. | `workspace_id` |
+| 6 | `standard_emission_factors`| Danh mục Hệ số Chuẩn | Master data 8 nhóm hệ số phát thải quy chuẩn quốc gia. | `updated_by_admin_id` |
+| 7 | `carbon_budgets` | Quản trị Ngân sách | Hạn ngạch phát thải tháng và ngưỡng cảnh báo sớm ($85\%$). | `workspace_id` |
+| 8 | `emission_logs` | Sổ cái Phát thải Core | Nhật ký phát thải bất biến, lưu cứng `factor_applied` và vết duyệt. | `workspace_id`, `user_id`, `factor_id`, `reviewer_id` |
+| 9 | `ai_reports` | AI Insight & Báo cáo | Báo cáo phân tích định kỳ/on-demand từ AI kèm lời khuyên hành động. | `workspace_id` |
+| 10 | `system_configurations` | Cấu hình Hệ thống | Tham số cấu hình toàn cục và các AI Prompt templates động. | `updated_by` |
+| 11 | `system_audit_logs` | Kiểm toán Hệ thống | Nhật ký kiểm toán thao tác nhạy cảm của System Admin. | `admin_id` |
+| 12 | `ai_usage_logs` | Giám sát Chi phí AI | Nhật ký theo dõi token usage và chi phí ước tính từng lượt gọi AI. | `workspace_id` |
+| 13 | `emission_reduction_plans` | Kế hoạch Lộ trình Cắt giảm | Mục tiêu dài hạn và lộ trình phân rã từng tháng do AI đề xuất. | `workspace_id`, `created_by_user_id` |
 
-#### 2. Bảng `workspaces` (Không gian làm việc / Tenants)
-- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
-- `name`: `VARCHAR(100) NOT NULL`
-- `type`: `VARCHAR(20) NOT NULL` (`HOME`, `OFFICE`)
-- `invite_code`: `VARCHAR(10) NULL UNIQUE`
-- `invite_code_expires_at`: `TIMESTAMPTZ NULL`
-- `status`: `VARCHAR(20) NOT NULL DEFAULT 'ACTIVE'` (`ACTIVE`, `ARCHIVED`, `SUSPENDED`)
-- `ai_report_frequency`: `VARCHAR(20) NOT NULL DEFAULT 'MONTHLY'` (`DISABLED`, `WEEKLY`, `MONTHLY`)
-- `ai_report_day_of_week`: `INT NULL CHECK (ai_report_day_of_week BETWEEN 1 AND 7)` (1 = Thứ Hai, 7 = Chủ Nhật; áp dụng khi frequency là `WEEKLY`)
-- `ai_report_day_of_month`: `INT NULL CHECK (ai_report_day_of_month BETWEEN -1 AND 31)` (-1: ngày cuối cùng của tháng, 1..31: ngày cụ thể; áp dụng khi frequency là `MONTHLY`)
-- `ai_report_time`: `TIME NOT NULL DEFAULT '23:59:00'` (Thời điểm trong ngày tác vụ nền chạy)
-- `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-- `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-
-#### 3. Bảng `workspace_members` (Thành viên tham gia Workspace & Vai trò)
-- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
-- `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
-- `user_id`: `UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE`
-- `role`: `VARCHAR(20) NOT NULL` (`REVIEWER`, `EDITOR`)
-- `last_read_notifications_at`: `TIMESTAMPTZ NULL` (Thời điểm người dùng mở xem Drawer thông báo gần nhất)
-- `joined_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-- **Ràng buộc:** `UNIQUE (workspace_id, user_id)`
-
-#### 4. Bảng `workspace_join_requests` (Yêu cầu Tham gia Workspace Chờ duyệt)
-Quản lý luồng kiểm duyệt gia nhập 2 bước, bảo vệ an toàn cho Workspace tránh việc người lạ tùy tiện vào khi có mã code.
-- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
-- `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
-- `user_id`: `UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE` (Người dùng xin gia nhập)
-- `invite_code_used`: `VARCHAR(10) NOT NULL` (Mã mời đã nhập)
-- `status`: `VARCHAR(20) NOT NULL DEFAULT 'PENDING'` (`PENDING`, `APPROVED`, `REJECTED`)
-- `reviewed_by`: `UUID NULL REFERENCES users(id)` (Reviewer thực hiện duyệt/từ chối)
-- `reviewed_at`: `TIMESTAMPTZ NULL`
-- `rejection_reason`: `TEXT NULL`
-- `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-- `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-- **Ràng buộc:** Unique Partial Index `(workspace_id, user_id)` WHERE `status = 'PENDING'` (Mỗi người dùng chỉ được có tối đa 1 yêu cầu chờ duyệt tại một Workspace).
-
-#### 5. Bảng `workspace_baselines` (Thông số nền diện tích & nhân khẩu)
-- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
-- `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
-- `floor_area_m2`: `NUMERIC(10, 2) NOT NULL CHECK (floor_area_m2 > 0)`
-- `occupants`: `INT NOT NULL CHECK (occupants >= 1)`
-- `period_valid_from`: `VARCHAR(7) NOT NULL` (Định dạng `YYYY-MM`)
-- `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-
-#### 6. Bảng `standard_emission_factors` (Master Data Hệ số Quy chuẩn Quốc gia)
-- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
-- `category_code`: `VARCHAR(50) NOT NULL UNIQUE` (`ELEC_GRID`, `FUEL_LPG`, `FUEL_DIESEL`, `MOBILITY`, `WASTE_LANDFILL`, `WATER_SUPPLY_TREAT`, `OFFICE_PAPER`, `TRAVEL_FLIGHT`)
-- `activity_name`: `VARCHAR(100) NOT NULL`
-- `scope_type`: `VARCHAR(10) NOT NULL` (`SCOPE_1`, `SCOPE_2`, `SCOPE_3`)
-- `input_unit`: `VARCHAR(20) NOT NULL`
-- `default_emission_factor`: `NUMERIC(12, 6) NOT NULL CHECK (default_emission_factor >= 0)`
-- `factor_unit`: `VARCHAR(50) NOT NULL DEFAULT 'kg CO2e/unit'`
-- `official_citation`: `TEXT NOT NULL`
-- `is_active`: `BOOLEAN NOT NULL DEFAULT true`
-- `updated_by_admin_id`: `UUID NULL REFERENCES users(id)`
-- `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-
-#### 7. Bảng `carbon_budgets` (Hạn ngạch Ngân sách Phát thải Tháng)
-- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
-- `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
-- `period`: `VARCHAR(7) NOT NULL` (Định dạng `YYYY-MM`, ví dụ: `2026-10`)
-- `target_co2e_kg`: `NUMERIC(12, 2) NOT NULL CHECK (target_co2e_kg > 0)`
-- `alert_threshold_ratio`: `NUMERIC(3, 2) NOT NULL DEFAULT 0.85`
-- `status`: `VARCHAR(20) NOT NULL DEFAULT 'ACTIVE'`
-- `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-- `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-- **Ràng buộc:** `UNIQUE (workspace_id, period)`
-
-#### 8. Bảng `emission_logs` (Sổ cái Ghi nhận Phát thải & Trạng thái Phê duyệt)
-- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
-- `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
-- `user_id`: `UUID NOT NULL REFERENCES users(id)` (Người tạo bản ghi)
-- `factor_id`: `UUID NOT NULL REFERENCES standard_emission_factors(id)`
-- `category_code`: `VARCHAR(50) NOT NULL`
-- `activity_name`: `VARCHAR(100) NOT NULL`
-- `consumption_quantity`: `NUMERIC(12, 3) NOT NULL CHECK (consumption_quantity >= 0)`
-- `input_unit`: `VARCHAR(20) NOT NULL`
-- `factor_applied`: `NUMERIC(12, 6) NOT NULL` (Lưu cứng hệ số tại thời điểm ghi nhận để đảm bảo tính bất biến của sổ cái)
-- `total_co2e_kg`: `NUMERIC(12, 4) NOT NULL` (Giá trị quy đổi: `consumption_quantity` $\times$ `factor_applied`)
-- `activity_date`: `DATE NOT NULL`
-- `billing_period`: `VARCHAR(7) NOT NULL` (Định dạng `YYYY-MM`)
-- `ingestion_source`: `VARCHAR(20) NOT NULL` (`MANUAL`, `EXCEL_IMPORT`, `AI_VISION`)
-- `receipt_image_url`: `VARCHAR(500) NULL`
-- `status`: `VARCHAR(20) NOT NULL DEFAULT 'PENDING_REVIEW'` (`DRAFT`, `PENDING_REVIEW`, `APPROVED`, `REJECTED`)
-- `reviewer_id`: `UUID NULL REFERENCES users(id)`
-- `reviewed_at`: `TIMESTAMPTZ NULL`
-- `rejection_reason`: `TEXT NULL`
-- `note`: `TEXT NULL`
-- `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-- `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-
-#### 9. Bảng `ai_reports` (Báo cáo Phân tích AI & Đề xuất Cắt giảm Định kỳ)
-- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
-- `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
-- `report_type`: `VARCHAR(20) NOT NULL` (`WEEKLY`, `MONTHLY`)
-- `period`: `VARCHAR(10) NOT NULL` (Ví dụ `2026-W44` hoặc `2026-10`)
-- `total_emissions_kg`: `NUMERIC(12, 2) NOT NULL`
-- `variance_vs_last_period`: `NUMERIC(5, 2) NULL`
-- `breakdown_by_category`: `JSONB NOT NULL`
-- `actionable_advice_markdown`: `TEXT NOT NULL`
-- `pdf_file_url`: `VARCHAR(500) NULL`
-- `generated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-
-#### 10. Bảng `system_configurations` (Cấu hình Tham số Toàn hệ thống & Prompts AI)
-- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
-- `config_key`: `VARCHAR(100) NOT NULL UNIQUE` (ví dụ: `AI_MODEL_NAME`, `PROMPT_VISION_PARSER`, `PROMPT_INSIGHT_REPORT`)
-- `config_value`: `JSONB NOT NULL`
-- `description`: `VARCHAR(255) NULL`
-- `updated_by`: `UUID NULL REFERENCES users(id)`
-- `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-
-#### 11. Bảng `system_audit_logs` (Nhật ký Kiểm toán Thao tác Quản trị Hệ thống)
-- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
-- `admin_id`: `UUID NOT NULL REFERENCES users(id)`
-- `action`: `VARCHAR(100) NOT NULL` (`UPDATE_EMISSION_FACTOR`, `SUSPEND_WORKSPACE`, `ACTIVATE_WORKSPACE`, `UPDATE_AI_CONFIG`)
-- `resource_type`: `VARCHAR(50) NOT NULL` (`STANDARD_FACTOR`, `WORKSPACE`, `SYSTEM_CONFIG`)
-- `resource_id`: `VARCHAR(100) NULL`
-- `details`: `JSONB NULL`
-- `ip_address`: `VARCHAR(45) NULL`
-- `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-
-#### 12. Bảng `ai_usage_logs` (Giám sát Lượt gọi API & Chi phí AI)
-- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
-- `workspace_id`: `UUID NULL REFERENCES workspaces(id) ON DELETE SET NULL`
-- `service_type`: `VARCHAR(50) NOT NULL` (`VISION_PARSER`, `INSIGHT_GENERATOR`, `REDUCTION_PLANNER`)
-- `prompt_tokens`: `INT NOT NULL DEFAULT 0`
-- `completion_tokens`: `INT NOT NULL DEFAULT 0`
-- `estimated_cost_usd`: `NUMERIC(10, 6) NOT NULL DEFAULT 0`
-- `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-
-#### 13. Bảng `emission_reduction_plans` (Kế hoạch Lộ trình Cắt giảm Phát thải Cá nhân hóa từ AI)
-Lưu trữ mục tiêu cắt giảm dài hạn, tầm nhìn thời gian và lộ trình phân rã chi tiết theo từng tháng do AI đề xuất riêng cho Workspace.
-- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
-- `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
-- `created_by_user_id`: `UUID NOT NULL REFERENCES users(id)`
-- `baseline_period`: `VARCHAR(7) NOT NULL` (Kỳ làm mốc đo lường, ví dụ `2026-10`)
-- `baseline_emissions_kg`: `NUMERIC(12, 2) NOT NULL` (Tổng phát thải tại kỳ cơ sở, ví dụ `348.50`)
-- `target_reduction_percentage`: `NUMERIC(5, 2) NOT NULL CHECK (target_reduction_percentage > 0 AND target_reduction_percentage <= 100)` (Tỷ lệ cắt giảm mục tiêu, ví dụ `15.00`%)
-- `target_emissions_kg`: `NUMERIC(12, 2) NOT NULL` (Mức phát thải mục tiêu cuối lộ trình, ví dụ `296.23`)
-- `time_horizon_months`: `INT NOT NULL CHECK (time_horizon_months BETWEEN 1 AND 36)` (Tầm nhìn thời gian, ví dụ `3`, `6`, `12` tháng)
-- `monthly_roadmap`: `JSONB NOT NULL` (Cấu trúc mảng chứa các mốc tháng: mục tiêu kg CO2e, % giảm lũy kế và danh sách các hành động định lượng khả thi)
-- `status`: `VARCHAR(20) NOT NULL DEFAULT 'ACTIVE'` (`ACTIVE`, `COMPLETED`, `ARCHIVED`)
-- `pdf_file_url`: `VARCHAR(500) NULL` (Đường dẫn tải tài liệu PDF lộ trình)
-- `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-- `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-
-> [!TIP]
-> **Quyết định Tinh gọn Database Schema (Theo Review):**  
-> Bảng `notifications` được **loại bỏ hoàn toàn khỏi thiết kế CSDL**.  
-> **Lý do:** Frontend hoàn toàn tự động tính toán được các trạng thái và loại thông báo (`notification_type`) theo thời gian thực (Real-time Dynamic Derivation) dựa trực tiếp trên trạng thái dữ liệu có sẵn từ Dashboard API:
-> - *Cảnh báo ngưỡng 85% / 100%:* Tính theo tỷ lệ `current_emissions / budget_target` từ `carbon_budgets` & `emission_logs`.
-> - *Yêu cầu chờ duyệt:* Đếm số lượng bản ghi `status = 'PENDING_REVIEW'` trong `emission_logs` của Workspace.
-> - *Kết quả duyệt của cá nhân:* Lọc các bản ghi `user_id = :currentUser` có `status IN ('APPROVED', 'REJECTED')` mới nhất.
-> - *Báo cáo AI mới:* Kiểm tra sự tồn tại của bản ghi trong `ai_reports` cho kỳ gần nhất.  
-> 
-> Giải pháp này giúp loại bỏ hoàn toàn việc lưu trữ các bản ghi thông báo trùng lặp/dư thừa, tránh rủi ro lệch đồng bộ (out-of-sync) và tối ưu hóa hiệu năng cơ sở dữ liệu.
-
-### 7.3. Chiến lược Đánh Index (Database Indexing Strategy)
-1. `idx_emission_logs_ws_period_status`: `(workspace_id, billing_period, status)` -> Tối ưu hóa tính tổng phát thải tháng và kiểm tra ngưỡng 85%.
-2. `idx_emission_logs_ws_created`: `(workspace_id, created_at DESC)` -> Tối ưu hóa hiển thị Sổ cái phân trang.
-3. `idx_emission_logs_approval`: `(workspace_id, status)` WHERE `status = 'PENDING_REVIEW'` -> Partial Index cho Hàng đợi duyệt tức thời.
-4. `idx_ws_join_requests_pending`: `(workspace_id, status)` WHERE `status = 'PENDING'` -> Partial Index giúp Reviewer tải danh sách Yêu cầu gia nhập Workspace tức thời (< 50ms).
-
-### 7.4. Các Quyết định Thiết kế CSDL Đã Được Phê duyệt (Approved Database Design Decisions)
-1. **Loại bỏ Bảng `notifications`:** Chuyển sang mô hình Frontend tự động tính toán trạng thái cảnh báo theo thời gian thực (Real-time Dynamic Derivation) từ dữ liệu Dashboard/Sổ cái, tránh dư thừa lưu trữ và lệch pha đồng bộ.
-2. **Bổ sung Bảng `workspace_join_requests`:** Thiết lập quy trình kiểm duyệt gia nhập 2 bước chặt chẽ: Khi người dùng nhập Invite Code, hệ thống tạo bản ghi `PENDING` và yêu cầu Reviewer duyệt (`Accept`/`Reject`) trước khi thêm vào `workspace_members`, ngăn chặn triệt để nguy cơ người ngoài chủ đích hoặc dò mã gia nhập trái phép.
-3. **Tích hợp Cấu hình Lịch Báo cáo AI vào Bảng `workspaces`:** Lưu trữ `ai_report_frequency`, `ai_report_day_of_week`, `ai_report_day_of_month`, `ai_report_time` trực tiếp tại bảng `workspaces`, hỗ trợ Reviewer chủ động chọn chu kỳ chạy tự động hoặc tắt đi, kết hợp API kích hoạt thủ công on-demand.
-4. **Bảo toàn Tính Bất biến của Sổ cái:** Lưu cứng `factor_applied` tại `emission_logs` tại thời điểm ghi nhận, ngăn chặn việc cập nhật hệ số trong tương lai làm sai lệch số liệu lịch sử của sổ cái phát thải.
+> [!NOTE]
+> **Quyết định Tinh gọn Schema:** Bảng `notifications` được loại bỏ hoàn toàn; Frontend tự động tính toán trạng thái cảnh báo thời gian thực (*Real-time Dynamic Derivation*) từ dữ liệu Dashboard và Sổ cái, tối ưu hóa hiệu năng và tránh rủi ro lệch đồng bộ.
+> Chi tiết toàn diện về kiểu dữ liệu, ràng buộc CHECK/DEFAULT, Partial Indexes và các quyết định kiến trúc được quy định tại [docs/05-data-model.md](05-data-model.md).
 
 ---
 

@@ -25,18 +25,18 @@
 ### 1.1. Mục Đích
 Tài liệu này đóng vai trò là **Bộ Tiêu Chuẩn Kiểm Chuẩn & Đánh Giá Chất Lượng Kiến Trúc (Quality Gate & Compliance Benchmark)** dành riêng cho tài liệu Thiết kế Kiến trúc C4 (`docs/c4-documentation/c4-documentation.md`) thuộc dự án **Personal & Micro-Office Carbon Ledger**. Tài liệu nhằm bảo đảm rằng:
 1. Mô hình C4 được xây dựng chuẩn mực theo đúng lý thuyết kiến trúc của **Simon Brown**, có phân cấp đầy đủ và chặt chẽ từ Tổng quan (Context) đến Thành phần chi tiết (Component) và Triển khai (Deployment).
-2. Thiết kế kiến trúc phản ánh chính xác $100\%$ các yêu cầu nghiệp vụ, ma trận phân quyền, phạm vi bài toán đã cam kết trong [docs/PRD.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/PRD.md) và [spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/spec.md).
-3. Không tồn tại bất kỳ độ lệch (gap/mismatch) nào giữa kiến trúc logic với 26 màn hình trong [docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/information-architecture/information-architecture.md), hệ thống API trong [docs/api-schema/api-schema.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/api-schema/api-schema.md) và 11 bảng cơ sở dữ liệu PostgreSQL.
+2. Thiết kế kiến trúc phản ánh chính xác $100\%$ các yêu cầu nghiệp vụ, ma trận phân quyền, phạm vi bài toán đã cam kết trong [docs/01-PRD.md](../01-PRD.md) và [spec.md](../../spec.md).
+3. Không tồn tại bất kỳ độ lệch (gap/mismatch) nào giữa kiến trúc logic với 26 màn hình trong [docs/09-information-architecture.md](../09-information-architecture.md), hệ thống API trong [docs/api-schema/api-schema.md](../api-schema/api-schema.md) và 11 bảng cơ sở dữ liệu PostgreSQL.
 
 ### 1.2. Hồ Sơ Tài Liệu Dự Án Làm Căn Cứ Đối Soát
-- **PRD & DB Schema:** [docs/PRD.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/PRD.md) (Phiên bản đã phê duyệt).
-- **Kiến trúc Thông tin & Sitemap:** [docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/information-architecture/information-architecture.md).
-- **Đặc tả RESTful API Schema:** [docs/api-schema/api-schema.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/api-schema/api-schema.md) & [docs/api-schema/openapi.yaml](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/api-schema/openapi.yaml).
-- **Đặc tả Phạm vi & Use Cases:** [spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/spec.md) & [docs/usecase/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/usecase/use-cases.md).
-- **Danh mục User Stories Chuẩn INVEST & Gherkin:** [docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/user-stories.md).
-- **Phương pháp luận Phát thải Tham chiếu Quốc gia:** [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/emission-reference-benchmark.md).
-- **Danh mục Hoạt động & Hệ số Quy chuẩn:** [docs/activity-supported.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/activity-supported.md).
-- **Kế hoạch Phát hành MVP 6 Tuần:** [docs/MVP.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-c4-documentation/docs/MVP.md).
+- **PRD & DB Schema:** [docs/01-PRD.md](../01-PRD.md) (Phiên bản đã phê duyệt).
+- **Kiến trúc Thông tin & Sitemap:** [docs/09-information-architecture.md](../09-information-architecture.md).
+- **Đặc tả RESTful API Schema:** [docs/api-schema/api-schema.md](../api-schema/api-schema.md) & [docs/api-schema/openapi.yaml](../api-schema/openapi.yaml).
+- **Đặc tả Phạm vi & Use Cases:** [spec.md](../../spec.md) & [docs/03-use-cases.md](../03-use-cases.md).
+- **Danh mục User Stories Chuẩn INVEST & Gherkin:** [docs/04-user-stories.md](../04-user-stories.md).
+- **Phương pháp luận Phát thải Tham chiếu Quốc gia:** [docs/emission-reference-benchmark.md](../emission-reference-benchmark.md).
+- **Danh mục Hoạt động & Hệ số Quy chuẩn:** [docs/activity-supported.md](../activity-supported.md).
+- **Kế hoạch Phát hành MVP 6 Tuần:** [docs/02-MVP.md](../02-MVP.md).
 
 ---
 
@@ -82,7 +82,7 @@ Tài liệu này đóng vai trò là **Bộ Tiêu Chuẩn Kiểm Chuẩn & Đán
 | Mã TC | Tiêu Chí Kiểm Chuẩn Chi Tiết | Yêu Cầu Cụ Thể | Trọng Số | Đánh Giá | Minh Chứng Trong Tài Liệu C4 |
 |:---:|---|---|:---:|:---:|---|
 | **BUS-01** | **Bao phủ Đầy đủ 12 Use Cases (UC01 - UC12)** | - Mọi Use Case từ UC01 đến UC12 đều có Controller, Service Engine và luồng dữ liệu tương ứng đảm nhiệm xử lý.<br>- Không bỏ sót bất kỳ Use Case nào trong kiến trúc C4. | 4 điểm | **ĐẠT (4/4)** ✅ | Bảng đối soát Ma trận Truy vết (Mục 4) chứng minh độ phủ $12/12$ Use Cases ($100\%$). |
-| **BUS-02** | **Bao phủ Đầy đủ 15 User Stories (US-*)** | - Các thành phần kiến trúc đáp ứng đầy đủ tiêu chí chấp nhận Gherkin (ACs) của 15 User Stories trong `user-stories.md`.<br>- Hỗ trợ đầy đủ các tính năng Must-have, Should-have và Could-have. | 3 điểm | **ĐẠT (3/3)** ✅ | Ánh xạ 1:1 đầy đủ từ `US-WS-001` đến `US-AI-002` trong Component Catalog và Ma trận truy vết. |
+| **BUS-02** | **Bao phủ Đầy đủ 15 User Stories (US-*)** | - Các thành phần kiến trúc đáp ứng đầy đủ tiêu chí chấp nhận Gherkin (ACs) của 15 User Stories trong `04-user-stories.md`.<br>- Hỗ trợ đầy đủ các tính năng Must-have, Should-have và Could-have. | 3 điểm | **ĐẠT (3/3)** ✅ | Ánh xạ 1:1 đầy đủ từ `US-WS-001` đến `US-AI-002` trong Component Catalog và Ma trận truy vết. |
 | **BUS-03** | **Kiểm chuẩn Ma Trận Phân Quyền (RBAC Alignment)** | - Thể hiện rõ 3 vai trò: System Admin, Workspace Admin (Reviewer), Workspace Member (Editor).<br>- Phân định rõ quyền tự duyệt của Reviewer và trạng thái Draft của Editor khi nạp phát thải.<br>- System Admin quản lý Master Data Hệ số chuẩn và Tenants, không can thiệp vào sổ cái riêng tư của Workspace. | 3 điểm | **ĐẠT (3/3)** ✅ | Thể hiện qua `TenantContextFilter`, `AuthService`, `ApprovalWorkflowEngine` và phân quyền Controller. |
 | **BUS-04** | **Bao phủ 4 Luồng Hoạt Động Cốt Lõi (4 Core Workflows)** | - Luồng 1: Onboarding, thiết lập thông số nền ($m^2$, số người) và Ngân sách tháng.<br>- Luồng 2: Nạp dữ liệu có cấu trúc (Nhập tay, Excel, AI Vision) & Duyệt.<br>- Luồng 3: Quy đổi kg CO2e, cộng dồn sổ cái và cảnh báo ngưỡng 85%/100%.<br>- Luồng 4: AI Insight định kỳ qua Cronjob hoặc On-demand & Xuất PDF. | 4 điểm | **ĐẠT (4/4)** ✅ | Các Service Engine (`CalcEngine`, `ExcelProcessor`, `ApprovalEngine`, `BudgetAlertEngine`, `AIInsightService`, `PDFGenerator`) bao trọn 4 luồng. |
 | **BUS-05** | **Đúng Đắn Mức Tham Chiếu Quốc Gia (National Benchmark)** | - Thể hiện công thức và cơ chế đối soát Mức phát thải tham chiếu quốc gia ($3.67\text{ tấn/người/năm}$).<br>- Áp dụng chính xác tỷ lệ $46.4\%$ ($141.91\text{ kg CO}_2\text{e}/\text{người/tháng}$) cho Hộ gia đình và $100\%$ ($305.83\text{ kg CO}_2\text{e}/\text{người/tháng}$) cho Nơi làm việc. | 3 điểm | **ĐẠT (3/3)** ✅ | Đặc tả chi tiết trong `BudgetAndAlertEngine` (Mục 4.2.2 của tài liệu C4), khớp 100% với tài liệu tham chiếu. |

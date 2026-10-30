@@ -168,7 +168,7 @@ Hệ thống giải quyết 4 trụ cột nghiệp vụ:
 
 ### 5.1. Sơ đồ Use Case Tổng quan (Use Case Diagram)
 
-![Sơ đồ UML Use Case Tổng quan](docs/usecase/UCD.png)
+![Sơ đồ UML Use Case Tổng quan](docs/image/UCD.png)
 
 ```mermaid
 flowchart LR

@@ -1,8 +1,8 @@
 # KIẾN TRÚC THÔNG TIN & THIẾT KẾ VIEW TOÀN DIỆN (INFORMATION ARCHITECTURE - IA)
 ## Dự án: Hệ thống Quản trị & Phân tích Dấu chân Carbon cho Gia đình/Văn phòng nhỏ (Personal & Micro-Office Carbon Ledger)
 
-> **Căn cứ tài liệu:** [spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md), [docs/PRD.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/PRD.md), [docs/usecase/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/usecase/use-cases.md), [docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/user-stories.md)  
-> **Tham chiếu đồ họa:** [docs/information-architecture/sitemap.png](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/information-architecture/sitemap.png)  
+> **Căn cứ tài liệu:** [spec.md](../spec.md), [docs/01-PRD.md](01-PRD.md), [docs/03-use-cases.md](03-use-cases.md), [docs/04-user-stories.md](04-user-stories.md)  
+> **Tham chiếu đồ họa:** [image/sitemap.png](image/sitemap.png)  
 > **Phiên bản:** 3.1 (Chuẩn hóa toàn diện Danh mục Screen ID, Route, Screen Hierarchy, UI/UX State Contract và Screen-to-API Mapping Matrix)  
 > **Nhánh phát triển:** `docs/information-architecture` (Git Worktree)
 
@@ -579,4 +579,4 @@ Bảng tổng hợp quyền hạn truy cập đối với toàn bộ 26 Màn hì
 
 ---
 
-*Tài liệu Kiến trúc Thông tin & Đặc tả View này đồng bộ 100% với [spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md), [docs/PRD.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/PRD.md), [docs/usecase/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/usecase/use-cases.md) và [docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/user-stories.md).*
+*Tài liệu Kiến trúc Thông tin & Đặc tả View này đồng bộ 100% với [spec.md](../spec.md), [docs/01-PRD.md](01-PRD.md), [docs/03-use-cases.md](03-use-cases.md) và [docs/04-user-stories.md](04-user-stories.md).*
