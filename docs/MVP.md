@@ -12,10 +12,10 @@
 
 Phiên bản khả dụng tối thiểu (MVP - Minimum Viable Product) được thiết kế nhằm đạt được 4 mục tiêu cốt lõi trong khung thời gian 6 tuần:
 
-1. **Số hóa sổ cái phát thải đa kênh:** Người dùng có thể ghi nhận hoạt động phát sinh carbon dễ dàng qua 3 phương thức: nhập thủ công sinh hoạt lẻ, quét hóa đơn/công tơ bằng AI Vision và nạp hàng loạt bằng file mẫu Excel.
+1. **Tự động hóa tính toán phát thải trên hoạt động người dùng nhập liệu có cấu trúc:** Giải quyết nỗi đau người dùng phải tự tra cứu danh mục, hệ số và tính toán bằng tay. Cung cấp cơ chế nhập liệu có kiến trúc và dễ dàng theo dõi. Hai phương thức nạp chính là **Khai báo thủ công** (sinh hoạt lẻ thường nhật, $\le 20-30\text{s}$/activity) và **Nạp file mẫu Excel chuẩn** (nạp hàng loạt định kỳ, xử lý 100 activities $\le 5\text{s}$). Phương thức **Quét ảnh bằng AI Vision** được định vị là tiện ích phụ và là **ưu tiên sau cùng**, chỉ triển khai khi việc nạp bằng tay và Excel đã hoàn thành và hoạt động ổn định.
 2. **Quy trình kiểm duyệt minh bạch:** Tách bạch vai trò Thành viên (Editor nạp dữ liệu ở trạng thái Draft) và Trưởng nhóm (Reviewer phê duyệt Accept/Reject kèm lý do) trước khi chính thức ghi sổ.
 3. **Kiểm soát ngân sách & Cảnh báo tức thì:** Hỗ trợ cài đặt trần hạn ngạch tháng, tính toán các chỉ số chuẩn hóa quy mô ($\text{kg CO}_2\text{e}/\text{người}$, $\text{kg CO}_2\text{e}/m^2$) và tự động bắn Notification cảnh báo tới toàn bộ thành viên khi chạm ngưỡng $85\%$ hoặc vượt trần $100\%$.
-4. **Hỗ trợ đề xuất phương án cắt giảm cá nhân hóa từ AI:** Chạy tác vụ Cronjob định kỳ phân tích dữ liệu tiêu thụ, đề xuất phương án cắt giảm (Reduction Plan) cá nhân hóa từ AI (hỗ trợ gợi ý giải pháp định lượng khả thi chứ không trực tiếp can thiệp cắt giảm emission), và hỗ trợ xuất báo cáo ra file PDF chuẩn in ấn.
+4. **Hỗ trợ đề xuất phương án cắt giảm cá nhân hóa từ AI & Phản hồi nhanh:** Chạy tác vụ Cronjob định kỳ phân tích dữ liệu tiêu thụ, đề xuất phương án cắt giảm (Reduction Plan) cá nhân hóa từ AI (hỗ trợ gợi ý giải pháp định lượng khả thi chứ không trực tiếp can thiệp cắt giảm emission), và hỗ trợ xuất báo cáo ra file PDF chuẩn in ấn phản hồi nhanh trong $\le 3-5\text{ giây}$.
 
 ---
 
@@ -34,21 +34,26 @@ Phiên bản khả dụng tối thiểu (MVP - Minimum Viable Product) được 
 
 ## 🚀 3. SƠ ĐỒ KẾ HOẠCH PHÁT HÀNH 3 SPRINTS (6 TUẦN)
 
+> [!IMPORTANT]
+> **ƯU TIÊN PHÁT HÀNH (RELEASE PRIORITIES):**
+> - **Sprint 1 & Sprint 2:** Ưu tiên số một là xây dựng nền tảng và hoàn thiện 2 luồng nạp chính là **Khai báo thủ công (Manual)** và **Nạp hàng loạt bằng file mẫu Excel (Excel Template Import)** cùng cơ chế kiểm duyệt sổ cái và cảnh báo ngưỡng 85%.
+> - **Sprint 3:** Tập trung vào AI Insight đề xuất phương án cắt giảm cá nhân hóa và xuất file PDF (phản hồi $\le 3-5\text{s}$). Tính năng Quét hóa đơn/công tơ AI Vision (`US-CL-003`) là **luồng phụ và là ưu tiên sau cùng**, chỉ triển khai khi hai luồng nạp chính đã hoàn thành và hoạt động ổn định.
+
 ```mermaid
 flowchart LR
-    subgraph Sprint1["Sprint 1: Onboarding, Hệ chuẩn & Nạp thủ công (Tuần 1 - 2 | 16 SP)"]
+    subgraph Sprint1["Sprint 1: Onboarding, Hệ chuẩn & Nạp thủ công [CHÍNH] (Tuần 1 - 2 | 16 SP)"]
         direction TB
         S1_1["US-WS-001: Khởi tạo Workspace (2 SP)"]
         S1_2["US-WS-002: Khai báo Thông số nền m², người (3 SP)"]
         S1_3["US-WS-003: Mời Editor vào Workspace (3 SP)"]
         S1_4["US-SA-001: Quản lý Hệ số Quy chuẩn (System Admin) (3 SP)"]
-        S1_5["US-CL-001: Khai báo Thủ công Draft (Editor) (3 SP)"]
+        S1_5["US-CL-001: Khai báo Thủ công Draft [Luồng chính] (3 SP)"]
         S1_6["US-CL-002: Tự động Quy đổi kg CO2e (2 SP)"]
     end
 
-    subgraph Sprint2["Sprint 2: Excel Import, Phê duyệt & Cảnh báo 85% (Tuần 3 - 4 | 18 SP)"]
+    subgraph Sprint2["Sprint 2: Excel Import [CHÍNH], Phê duyệt & Cảnh báo 85% (Tuần 3 - 4 | 18 SP)"]
         direction TB
-        S2_1["US-CL-004: Import File mẫu Excel với Preview (4 SP)"]
+        S2_1["US-CL-004: Import File mẫu Excel với Preview [Luồng chính] (4 SP)"]
         S2_2["US-CL-005: Phê duyệt Request (Reviewer Accept/Reject) (3 SP)"]
         S2_3["US-CL-006: Lịch sử Sổ cái & Trạng thái duyệt (3 SP)"]
         S2_4["US-BG-001: Cài đặt Ngân sách & Ngưỡng 85% (2 SP)"]
@@ -56,11 +61,11 @@ flowchart LR
         S2_6["US-BG-003: Bắn Notification Cảnh báo 85% (3 SP)"]
     end
 
-    subgraph Sprint3["Sprint 3: AI Vision Quét Hóa đơn & Báo cáo PDF (Tuần 5 - 6 | 13 SP)"]
+    subgraph Sprint3["Sprint 3: AI Insight, Báo cáo PDF & Quét AI Vision [ƯU TIÊN SAU CÙNG] (Tuần 5 - 6 | 13 SP)"]
         direction TB
-        S3_1["US-CL-003: AI Vision Quét Hóa đơn/Công tơ (5 SP)"]
-        S3_2["US-AI-001: Cronjob AI Insight Cá nhân hóa (5 SP)"]
-        S3_3["US-AI-002: Xuất Báo cáo Kế hoạch ra PDF (3 SP)"]
+        S3_1["US-AI-001: Cronjob AI Insight Cá nhân hóa (5 SP)"]
+        S3_2["US-AI-002: Xuất Báo cáo Kế hoạch ra PDF <= 3-5s (3 SP)"]
+        S3_3["US-CL-003: AI Vision Quét Hóa đơn [Ưu tiên sau cùng] (5 SP)"]
     end
 
     Sprint1 --> Sprint2 --> Sprint3
@@ -70,28 +75,28 @@ flowchart LR
 
 ## 📅 4. CHI TIẾT TỪNG SPRINT (SPRINT BREAKDOWN)
 
-### SPRINT 1: NỀN TẢNG, HỆ THỐNG QUY CHUẨN & NẠP THỦ CÔNG (TUẦN 1 - TUẦN 2)
-- **Mục tiêu Sprint (Sprint Goal):** Khởi tạo khung dự án Spring Boot + React Vite, hoàn thiện phân hệ xác thực, quản lý Workspace, thiết lập hệ số phát thải chuẩn quốc gia và cho phép thành viên nạp hoạt động thủ công ở trạng thái Draft.
+### SPRINT 1: NỀN TẢNG, HỆ THỐNG QUY CHUẨN & NẠP THỦ CÔNG [LUỒNG CHÍNH] (TUẦN 1 - TUẦN 2)
+- **Mục tiêu Sprint (Sprint Goal):** Khởi tạo khung dự án Spring Boot + React Vite, hoàn thiện phân hệ xác thực, quản lý Workspace, thiết lập hệ số phát thải chuẩn quốc gia và cho phép thành viên nạp hoạt động thủ công ở trạng thái Draft với thời gian nạp trung bình $\le 20-30\text{s}$ / activity.
 - **Nỗ lực cam kết:** 16 Story Points.
 
 | Mã US | Tên User Story | Vai trò | SP | Sản phẩm bàn giao (Deliverables) |
 |:---:|---|---|:---:|---|
 | **US-WS-001** | Khởi tạo & Cấu hình Workspace | Reviewer / System Admin | 2 | API CRUD & Cấu hình Workspace; Màn hình tạo Workspace (React Vite). |
 | **US-WS-002** | Khai báo thông số nền ($m^2$, số người) | Reviewer | 3 | Bảng `workspace_baselines`; Form nhập số người và diện tích. |
-| **US-WS-003** | Mời thành viên vào Workspace qua mã mời | Reviewer / Editor | 3 | API sinh mã mời 6 ký tự; Màn hình nhập mã gia nhập role Editor. |
+| **US-WS-003** | Mời thành viên & Phê duyệt yêu cầu gia nhập | Reviewer / Editor | 3 | API sinh mã mời 6 ký tự; Bảng `workspace_join_requests`; Gửi Join Request & Màn hình duyệt thành viên (Accept/Reject) của Reviewer. |
 | **US-SA-001** | Quản lý & Cập nhật Hệ số chuẩn quốc gia | System Admin | 3 | Bảng `standard_emission_factors`; Cổng cập nhật hệ số của System Admin. |
-| **US-CL-001** | Khai báo phát thải thủ công (Draft) | Editor | 3 | Form nạp thủ công sinh hoạt lẻ (xe máy, gas...); lưu `pending_review`. |
+| **US-CL-001** | Khai báo phát thải thủ công (Draft) [Chính] | Editor | 3 | Form nạp thủ công sinh hoạt lẻ (xe máy, gas...); tự tính toán preview kg CO2e; lưu `pending_review`. |
 | **US-CL-002** | Tự động quy đổi mức tiêu thụ ra kg CO2e | Editor / Reviewer | 2 | Engine tính toán quy đổi $\text{kg CO}_2\text{e} = \text{Sản lượng} \times \text{Hệ số}$ (Spring Boot + React). |
 
 ---
 
-### SPRINT 2: EXCEL IMPORT, HÀNG ĐỢI DUYỆT & CẢNH BÁO 85% (TUẦN 3 - TUẦN 4)
-- **Mục tiêu Sprint (Sprint Goal):** Hoàn thiện quy trình kiểm duyệt (Approval Queue), hỗ trợ nạp dữ liệu hàng loạt bằng file mẫu Excel, xây dựng Dashboard hiển thị chỉ số chuẩn hóa và cơ chế bắn Notification cảnh báo tự động khi chạm ngưỡng $85\%$.
+### SPRINT 2: EXCEL IMPORT [LUỒNG CHÍNH], HÀNG ĐỢI DUYỆT & CẢNH BÁO 85% (TUẦN 3 - TUẦN 4)
+- **Mục tiêu Sprint (Sprint Goal):** Hoàn thiện quy trình kiểm duyệt (Approval Queue), hỗ trợ nạp dữ liệu hàng loạt bằng file mẫu Excel với thời gian xử lý file 100 dòng $\le 5\text{s}$, xây dựng Dashboard hiển thị chỉ số chuẩn hóa và cơ chế bắn Notification cảnh báo tự động khi chạm ngưỡng $85\%$.
 - **Nỗ lực cam kết:** 18 Story Points.
 
 | Mã US | Tên User Story | Vai trò | SP | Sản phẩm bàn giao (Deliverables) |
 |:---:|---|---|:---:|---|
-| **US-CL-004** | Nạp dữ liệu qua file mẫu Excel (Bulk Import) | Editor / Reviewer | 4 | Tải template Excel; Backend Apache POI parse dữ liệu; Màn hình Preview đối chiếu trước khi lưu. |
+| **US-CL-004** | Nạp dữ liệu qua file mẫu Excel [Chính] | Editor / Reviewer | 4 | Tải template Excel; Backend Apache POI parse dữ liệu $\le 5\text{s}$ cho 100 dòng; Màn hình Preview đối chiếu trước khi lưu. |
 | **US-CL-005** | Kiểm duyệt & Phê duyệt request phát thải | Reviewer | 3 | Màn hình Hàng đợi duyệt (Approval Queue); chức năng Phê duyệt (Accept) hoặc Từ chối (Reject kèm lý do). |
 | **US-CL-006** | Tra cứu lịch sử sổ cái và trạng thái duyệt | Editor / Reviewer | 3 | Bảng Sổ cái Data Grid; bộ lọc trạng thái `Chờ duyệt / Đã duyệt / Từ chối`; Nút xuất Excel. |
 | **US-BG-001** | Thiết lập Ngân sách tháng & Ngưỡng 85% | Reviewer | 2 | API cấu hình `carbon_budgets`; Form cài đặt trần hạn ngạch tháng. |
@@ -100,15 +105,15 @@ flowchart LR
 
 ---
 
-### SPRINT 3: AI VISION QUÉT HÓA ĐƠN, AI INSIGHT & XUẤT BÁO CÁO PDF (TUẦN 5 - TUẦN 6)
-- **Mục tiêu Sprint (Sprint Goal):** Tích hợp Multimodal AI Vision bóc tách hóa đơn điện/nước và công tơ, thiết lập Cronjob AI Insight phân tích bất thường sinh kế hoạch cắt giảm định lượng cá nhân hóa, kết xuất báo cáo PDF chuẩn in ấn và kiểm thử tích hợp toàn diện.
+### SPRINT 3: AI INSIGHT, BÁO CÁO PDF & QUÉT AI VISION [ƯU TIÊN SAU CÙNG] (TUẦN 5 - TUẦN 6)
+- **Mục tiêu Sprint (Sprint Goal):** Thiết lập AI Insight linh hoạt (chạy tự động theo lịch cấu hình hoặc kích hoạt bằng tay on-demand) phân tích bất thường sinh kế hoạch cắt giảm định lượng cá nhân hóa, kết xuất báo cáo PDF chuẩn in ấn phản hồi nhanh trong $\le 3-5\text{s}$, tích hợp AI Vision quét hóa đơn/công tơ (tiện ích phụ - ưu tiên sau cùng) và kiểm thử tích hợp toàn diện.
 - **Nỗ lực cam kết:** 13 Story Points.
 
 | Mã US | Tên User Story | Vai trò | SP | Sản phẩm bàn giao (Deliverables) |
 |:---:|---|---|:---:|---|
-| **US-CL-003** | Quét hóa đơn / công tơ bằng AI Vision | Editor / Reviewer | 5 | Tích hợp Multimodal API (Gemini/Claude); Popup Preview xem trước và chỉnh sửa số liệu trước khi lưu. |
-| **US-AI-001** | AI Insight định kỳ (Cronjob) & Kế hoạch cắt giảm | Reviewer | 5 | Spring `@Scheduled` chạy cuối tuần/tháng; Gom nhóm dữ liệu; Prompt LLM sinh gợi ý cá nhân hóa định lượng. |
-| **US-AI-002** | Xuất Báo cáo Phân tích & Kế hoạch ra PDF | Reviewer | 3 | Module OpenPDF / iText tạo file PDF đồ họa sắc nét; Tải xuống trực tiếp từ Dashboard. |
+| **US-AI-001** | AI Insight linh hoạt (Lịch tự động hoặc Bằng tay) & Kế hoạch cắt giảm | Reviewer | 5 | Cấu hình lịch tự động (tuần/tháng/tắt) hoặc kích hoạt bằng tay On-demand; Gom nhóm dữ liệu; Prompt LLM sinh gợi ý cá nhân hóa định lượng. |
+| **US-AI-002** | Xuất Báo cáo Phân tích & Kế hoạch ra PDF | Reviewer | 3 | Module OpenPDF / iText tạo file PDF đồ họa sắc nét; phản hồi tải xuống $\le 3-5\text{s}$ từ Dashboard. |
+| **US-CL-003** | Quét hóa đơn / công tơ bằng AI Vision [Ưu tiên sau cùng] | Editor / Reviewer | 5 | Tiện ích phụ: Tích hợp Multimodal API (Gemini); Popup Preview xem trước và chỉnh sửa số liệu trước khi lưu; chỉ triển khai khi Sprint 1 và Sprint 2 đã hoàn tất ổn định. |
 
 ---
 

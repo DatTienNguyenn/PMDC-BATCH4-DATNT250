@@ -11,19 +11,17 @@
 
 ## 📌 1. Giới thiệu Dự án
 
-**Personal & Micro-Office Carbon Ledger** là nền tảng số hóa hỗ trợ **Hộ gia đình** và **Văn phòng nhỏ** ghi nhận, kiểm soát hạn ngạch, phân tích và **hỗ trợ đề xuất phương án cắt giảm cá nhân hóa từ AI** (tính theo chuẩn $\text{kg CO}_2\text{e}$). 
+**Personal & Micro-Office Carbon Ledger** là nền tảng số hóa hỗ trợ **Hộ gia đình** và **Văn phòng nhỏ** ghi nhận hoạt động, kiểm soát hạn ngạch, theo dõi dấu chân carbon và **hỗ trợ đề xuất phương án cắt giảm cá nhân hóa từ AI** (tính theo chuẩn $\text{kg CO}_2\text{e}$).
 
 > [!NOTE]
-> Hệ thống đóng vai trò là công cụ số hóa, theo dõi và cố vấn dữ liệu thông minh hỗ trợ người dùng đưa ra quyết định phù hợp; ứng dụng hỗ trợ đề xuất các phương án cắt giảm cá nhân hóa từ AI chứ **không trực tiếp can thiệp hay tự cắt giảm phát thải (emission)**.
+> Hệ thống **không hướng tới việc tự động nạp hóa dữ liệu** mà tập trung vào **tự động hóa tính toán dựa theo những hoạt động mà người dùng nhập liệu vào hệ thống một cách có kiến trúc và dễ dàng theo dõi**. Hệ thống đóng vai trò số hóa và cố vấn dữ liệu thông minh hỗ trợ người dùng đưa ra quyết định, hỗ trợ đề xuất các phương án cắt giảm cá nhân hóa từ AI chứ **không trực tiếp can thiệp hay tự cắt giảm phát thải (emission) vật lý**.
 
-Hệ thống tiếp cận bài toán quản trị dấu chân carbon từ cấp độ vi mô thông qua sự kết hợp giữa **Quy trình kiểm duyệt sổ cái chặt chẽ (Approval Workflow)**, **Đa kênh nạp dữ liệu thông minh (Thủ công, Quét ảnh bằng AI Vision, Import Excel)** và **Đề xuất phương án cắt giảm cá nhân hóa từ AI (AI Insight & Actionable Advice)**.
-
-### Mục tiêu cốt lõi:
-
-- **Số hóa nhanh chóng:** Loại bỏ rào cản ghi chép thủ công nhờ công nghệ Multimodal AI bóc tách trực tiếp hóa đơn tiền điện (EVN), hóa đơn nước và mặt số công tơ.
-- **Minh bạch & Phê duyệt:** Tách bạch vai trò Thành viên (Editor - nạp dữ liệu ở trạng thái Draft) và Trưởng nhóm (Reviewer - kiểm duyệt chính thức trước khi ghi sổ).
+Hệ thống giải quyết nỗi đau lớn nhất của người dùng là **phải tự tra cứu danh mục, hệ số phát thải tương ứng và tự tính toán/tổng hợp bằng tay** gây nản lòng và mất nhiều thời gian, thông qua sự kết hợp giữa:
+- **Tự động quy đổi chuẩn mực:** Tự động áp dụng hệ số phát thải quy chuẩn để tính toán chính xác kg CO2e theo từng hoạt động người dùng nhập vào.
+- **Luồng nạp dữ liệu có kiến trúc:** Hai luồng nạp chính là **Khai báo thủ công** (nhập nhanh sinh hoạt lẻ $\le 20-30\text{s}$/activity) và **Nạp hàng loạt bằng file mẫu Excel** (xử lý 100 activities $\le 5\text{s}$). Quét ảnh hóa đơn bằng AI Vision là **tiện ích phụ và là ưu tiên sau cùng**, chỉ triển khai khi luồng nạp tay và Excel đã ổn định.
+- **Quy trình kiểm duyệt sổ cái chặt chẽ (Approval Workflow):** Tách bạch vai trò Thành viên (Editor - nạp dữ liệu ở trạng thái Draft) và Trưởng nhóm (Reviewer - kiểm duyệt chính thức trước khi ghi sổ).
 - **Kiểm soát ngân sách & Cảnh báo sớm:** Thiết lập trần phát thải (Target Quota) theo tháng và tự động bắn Notification cảnh báo tới toàn bộ thành viên khi chạm ngưỡng $85\%$ và vượt trần $100\%$.
-- **Đề xuất cá nhân hóa từ AI:** AI phân tích dữ liệu bất thường cuối kỳ và hỗ trợ đề xuất phương án cắt giảm cá nhân hóa cụ thể, khả thi (chứ không trực tiếp cắt giảm emission), kèm báo cáo PDF chuẩn in ấn để người dùng chủ động tham khảo và áp dụng thực tế.
+- **Đề xuất cá nhân hóa từ AI & Phản hồi nhanh (Tự động hoặc Kích hoạt bằng tay):** Cho phép Reviewer tùy biến lịch tự động (tuần/tháng/tắt) hoặc kích hoạt on-demand tức thời, AI phân tích dữ liệu và đề xuất phương án cắt giảm cá nhân hóa khả thi (chứ không trực tiếp cắt giảm emission), hỗ trợ xuất báo cáo PDF chuẩn in ấn phản hồi nhanh trong $\le 3-5\text{ giây}$.
 
 ---
 
@@ -148,9 +146,9 @@ flowchart TD
 ```
 
 1. **Luồng 1 - Khởi tạo & Lập kế hoạch (Onboarding & Budgeting):** Tạo Workspace -> Khai báo diện tích $m^2$ và số nhân khẩu (phục vụ tính toán $\text{CO}_2\text{e}/\text{người}$ và $\text{CO}_2\text{e}/m^2$) -> Đặt hạn ngạch trần phát thải tháng kèm mốc cảnh báo sớm $85\%$.
-2. **Luồng 2 - Nạp dữ liệu đa phương thức & Phê duyệt (Data Ingestion & Approval):** Hỗ trợ 3 kênh nạp (Thủ công sinh hoạt lẻ, AI Vision bóc tách hóa đơn/công tơ, Upload file Excel mẫu). Dữ liệu của Thành viên được chuyển vào hàng đợi `Draft / Pending Review` để Trưởng nhóm (Reviewer) xem xét duyệt.
-3. **Luồng 3 - Xử lý Sổ cái & Cảnh báo (Ledger Processing & Alert):** Sau khi duyệt, Backend quy đổi theo Hệ số chuẩn ($\text{kg CO}_2\text{e} = \text{Sản lượng} \times \text{Hệ số}$), cộng dồn vào bảng `emission_logs`. Nếu chạm ngưỡng $\ge 85\%$, hệ thống tự động bắn Notification cảnh báo tới toàn bộ thành viên.
-4. **Luồng 4 - Phân tích & Gợi ý hành động (AI Insight & PDF Export):** Cronjob tự động chạy cuối tuần/tháng, gom nhóm dữ liệu, gọi LLM phân tích bất thường và hỗ trợ đề xuất phương án cắt giảm định lượng cá nhân hóa từ AI (ví dụ: chuyển sang đi tàu điện Cát Linh - Hà Đông 3 ngày/tuần giúp giảm 18 kg CO2e; hệ thống hỗ trợ đề xuất giải pháp chứ không trực tiếp cắt giảm emission); Reviewer có thể xuất báo cáo ra file PDF.
+2. **Luồng 2 - Nạp dữ liệu có cấu trúc & Phê duyệt (Data Ingestion & Approval):** Luồng chính là Khai báo thủ công sinh hoạt lẻ và Upload file Excel mẫu hàng loạt. Quét ảnh hóa đơn AI là luồng phụ (ưu tiên sau cùng). Dữ liệu của Thành viên được chuyển vào hàng đợi `Draft / Pending Review` để Trưởng nhóm (Reviewer) xem xét duyệt.
+3. **Luồng 3 - Xử lý Sổ cái & Cảnh báo (Ledger Processing & Alert):** Sau khi duyệt, Backend tự động quy đổi theo Hệ số chuẩn ($\text{kg CO}_2\text{e} = \text{Sản lượng} \times \text{Hệ số}$), cộng dồn vào bảng `emission_logs`. Nếu chạm ngưỡng $\ge 85\%$, hệ thống tự động bắn Notification cảnh báo tới toàn bộ thành viên.
+4. **Luồng 4 - Phân tích & Gợi ý hành động (AI Insight & PDF Export):** Cronjob tự động chạy cuối tuần/tháng hoặc kích hoạt bằng tay On-demand, gom nhóm dữ liệu, gọi LLM phân tích bất thường và hỗ trợ đề xuất phương án cắt giảm định lượng cá nhân hóa từ AI (hỗ trợ đề xuất giải pháp chứ không trực tiếp cắt giảm emission); Reviewer có thể xuất báo cáo ra file PDF với thời gian phản hồi nhanh $\le 3-5\text{ giây}$.
 
 ---
 
@@ -163,6 +161,7 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
 ├── README.md                          # Tài liệu tổng quan dự án (File này)
 ├── spec.md                            # Đặc tả phạm vi bài toán, 3 Roles, 4 Luồng & 12 Use Cases
 └── docs/
+    ├── PRD.md                         # Tài liệu Yêu cầu Sản phẩm (Product Requirements Document)
     ├── MVP.md                         # Kế hoạch triển khai & phát hành MVP 6 tuần (3 Sprints x 2 tuần)
     ├── activity-supported.md          # Danh mục hoạt động phát thải & Hệ số phát thải quy chuẩn (Scope 1, 2, 3)
     ├── cau_truc_san_pham_xmind.png    # Sơ đồ Mindmap cấu trúc sản phẩm 9 phân hệ

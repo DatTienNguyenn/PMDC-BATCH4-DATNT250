@@ -126,20 +126,24 @@ flowchart LR
 
 ---
 
-### UC03: Mời & Quản lý Thành viên
+### UC03: Mời & Phê duyệt Thành viên Gia nhập (Member Invitation & Join Approval)
 - **Mã Use Case:** UC03
 - **Tác nhân chính:** Trưởng nhóm (Reviewer)
-- **Tác nhân phụ:** Thành viên (Editor)
-- **Mô tả vắn tắt:** Reviewer sinh mã mời 6 ký tự để các thành viên trong gia đình hoặc nhân viên tham gia vào Workspace với vai trò Editor.
-- **Tiền điều kiện:** Workspace đã được khởi tạo.
-- **Hậu điều kiện:** Thành viên được liên kết vào Workspace với vai trò `Editor`.
+- **Tác nhân phụ:** Người dùng xin gia nhập (Editor)
+- **Mô tả vắn tắt:** Reviewer sinh mã mời 6 ký tự; người dùng nhập mã mời để gửi Yêu cầu gia nhập (Join Request) ở trạng thái chờ duyệt (PENDING); Reviewer xem xét phê duyệt (Accept) để thêm vào Workspace hoặc từ chối (Reject), đảm bảo an toàn tuyệt đối cho dữ liệu gia đình/văn phòng.
+- **Tiền điều kiện:** Workspace đã được khởi tạo; người dùng xin gia nhập đã có tài khoản trên hệ thống.
+- **Hậu điều kiện:** Người dùng được thêm vào bảng `workspace_members` với vai trò `Editor` chỉ khi Reviewer chấp thuận.
 - **Luồng sự kiện chính:**
-  1. Reviewer vào mục "Thành viên" và nhấn "Tạo mã mời".
-  2. Hệ thống sinh mã ngẫu nhiên 6 ký tự (ví dụ: `CARB26`) hiệu lực 7 ngày.
-  3. Thành viên đăng nhập tài khoản của mình, vào mục "Tham gia Workspace", nhập mã mời và xác nhận.
-  4. Hệ thống xác thực mã, gán thành viên vào Workspace với vai trò `Editor` và thông báo thành công.
+  1. Reviewer vào mục "Quản lý Thành viên" và nhấn "Tạo mã mời".
+  2. Hệ thống sinh mã ngẫu nhiên 6 ký tự (ví dụ: `CARB26`) hiệu lực 7 ngày và lưu vào `workspaces.invite_code`.
+  3. Người dùng đăng nhập tài khoản của mình, vào màn hình "Tham gia Workspace", nhập mã mời và nhấn "Gửi yêu cầu".
+  4. Hệ thống kiểm tra mã mời hợp lệ, tạo bản ghi trong bảng `workspace_join_requests` với trạng thái `PENDING` và hiển thị thông báo chờ phê duyệt.
+  5. Reviewer vào danh sách "Yêu cầu chờ duyệt", xem thông tin người xin gia nhập (Tên, Email) và nhấn "Chấp thuận (Accept)".
+  6. Hệ thống cập nhật yêu cầu sang `APPROVED`, tự động liên kết người dùng vào Workspace với vai trò `Editor` và gửi thông báo thành công.
 - **Luồng rẽ nhánh / Ngoại lệ:**
-  - *3a. Mã mời hết hạn hoặc không tồn tại:* Hệ thống thông báo lỗi tương ứng.
+  - *3a. Mã mời hết hạn hoặc không tồn tại:* Hệ thống thông báo lỗi: "Mã mời không tồn tại hoặc đã hết hạn".
+  - *3b. Người dùng đã gửi yêu cầu PENDING hoặc đã là thành viên:* Hệ thống chặn gửi trùng lặp.
+  - *5a. Reviewer nhấn Từ chối (Reject):* Hệ thống cập nhật yêu cầu sang `REJECTED` (kèm lý do), người dùng không được cấp quyền vào Workspace.
 
 ---
 
@@ -191,8 +195,8 @@ flowchart LR
 - **Luồng sự kiện chính:**
   1. Người dùng nhấn nút "Nạp file Excel" và có thể bấm "Tải file mẫu" nếu chưa có.
   2. Người dùng tải lên file Excel đã điền dữ liệu.
-  3. Hệ thống đọc file, kiểm tra tính hợp lệ và tự động ánh xạ các cột: Ngày phát sinh, Danh mục, Phân loại, Sản lượng, Đơn vị, Ghi chú.
-  4. Hệ thống hiển thị bảng Xem trước (Import Preview Table) chỉ rõ:
+  3. Hệ thống đọc file qua Apache POI, kiểm tra tính hợp lệ và tự động ánh xạ các cột: Ngày phát sinh, Danh mục, Phân loại, Sản lượng, Đơn vị, Ghi chú.
+  4. Hệ thống hiển thị bảng Xem trước (Import Preview Table) trong vòng không quá 5 giây (với file 100 dòng) chỉ rõ:
      - Số dòng hợp lệ sẵn sàng nạp.
      - Số dòng bị lỗi định dạng (nếu có, highlight màu đỏ kèm lý do).
      - Tổng lượng phát thải quy đổi ước tính của file.
@@ -274,20 +278,23 @@ flowchart LR
 
 ---
 
-### UC11: Chạy Cronjob AI Insight & Xuất Báo cáo PDF
+### UC11: Sinh Báo cáo AI Insight (Lịch Tự động hoặc Kích hoạt Bằng tay) & Xuất PDF
 - **Mã Use Case:** UC11
-- **Tác nhân chính:** Trưởng nhóm (Reviewer), Hệ thống (Background Cronjob)
-- **Mô tả vắn tắt:** Vào ngày cuối tuần hoặc cuối tháng, hệ thống tự động kích hoạt Cronjob gom nhóm dữ liệu tiêu thụ, đẩy context vào LLM để sinh báo cáo tối ưu mang tính cá nhân hóa có số liệu định lượng; Reviewer xem báo cáo trên Dashboard và có quyền xuất ra file PDF.
+- **Tác nhân chính:** Trưởng nhóm (Reviewer), Hệ thống (Background Cronjob / API On-demand)
+- **Mô tả vắn tắt:** Reviewer có thể thiết lập lịch chạy tự động (Hàng tuần, Hàng tháng hoặc Tắt/Disabled) vào khung giờ mong muốn, hoặc chủ động bấm nút "Sinh báo cáo ngay" bất cứ lúc nào để hệ thống gom nhóm dữ liệu tiêu thụ, đẩy context vào LLM để sinh báo cáo Kế hoạch cắt giảm định lượng cá nhân hóa; Reviewer xem báo cáo trên Dashboard và có quyền xuất ra file PDF trong vòng 3-5 giây.
 - **Tiền điều kiện:** Workspace có dữ liệu giao dịch phát thải trong kỳ.
 - **Hậu điều kiện:** Báo cáo AI được lưu trữ trong Workspace và tệp PDF được tải về máy của Reviewer.
 - **Luồng sự kiện chính:**
-  1. *Lịch trình tự động (Cronjob):* Vào 23:59 ngày cuối tuần hoặc cuối tháng, Cronjob tự động tổng hợp tỷ trọng tiêu thụ (Điện %, Xăng xe %, so sánh kỳ trước) và gọi LLM (Gemini/Claude).
-  2. AI phân tích lý do phát thải tăng/giảm và sinh Kế hoạch cắt giảm định lượng (ví dụ: khuyến nghị đi tàu điện Cát Linh - Hà Đông 3 ngày/tuần giúp giảm 18 kg CO2e).
-  3. Báo cáo được lưu trữ và hiển thị trực quan trên Dashboard của Trưởng nhóm (Reviewer).
-  4. Reviewer xem báo cáo và nhấn nút **"Xuất Báo cáo PDF"**.
-  5. Hệ thống kết xuất tài liệu PDF chuẩn định dạng in ấn (gồm logo, biểu đồ tỷ trọng, bảng số liệu, các chỉ số $\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$ và các khuyến nghị hành động của AI) và tải về máy trong vòng 3 giây.
+  1. *Lựa chọn phương thức kích hoạt:*
+     - **Cách 1 (Lịch trình tự động):** Nếu cấu hình `ai_report_frequency` là `WEEKLY` hoặc `MONTHLY`, tác vụ Cronjob tự động chạy vào ngày và giờ đã thiết lập (mặc định 23:59).
+     - **Cách 2 (Kích hoạt bằng tay on-demand):** Nếu cấu hình là `DISABLED` hoặc Reviewer muốn xem đánh giá tức thì, Reviewer bấm nút **"Sinh báo cáo ngay"** trên giao diện Báo cáo AI.
+  2. Hệ thống tổng hợp tỷ trọng tiêu thụ (Điện %, Xăng xe %, Nước %, so sánh kỳ trước) và gọi LLM (Gemini).
+  3. AI phân tích lý do phát thải tăng/giảm và sinh Kế hoạch cắt giảm định lượng (ví dụ: khuyến nghị đi tàu điện Cát Linh - Hà Đông 3 ngày/tuần giúp giảm 18 kg CO2e).
+  4. Báo cáo được lưu trữ vào bảng `ai_reports` và hiển thị trực quan trên Dashboard của Trưởng nhóm (Reviewer).
+  5. Reviewer xem báo cáo và nhấn nút **"Xuất Báo cáo PDF"**.
+  6. Hệ thống kết xuất tài liệu PDF chuẩn định dạng in ấn (gồm biểu đồ tỷ trọng, bảng số liệu, các chỉ số $\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$ và các khuyến nghị hành động của AI) và tải về máy trong vòng 3-5 giây.
 - **Luồng rẽ nhánh / Ngoại lệ:**
-  - *Chưa đến lịch Cronjob nhưng Reviewer muốn tạo ngay:* Reviewer có thể bấm nút "Phân tích ngay" trên giao diện để kích hoạt thủ công.
+  - *Cấu hình lịch:* Reviewer có thể vào Cài đặt Workspace để thay đổi tần suất (Weekly/Monthly/Disabled), thứ trong tuần, ngày trong tháng hoặc giờ chạy bất kỳ lúc nào.
 
 ---
 

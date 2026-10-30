@@ -15,11 +15,11 @@
 |---|---|---|---|:---:|:---:|:---:|
 | **US-WS-001** | Khởi tạo & Cấu hình Không gian làm việc (Workspace) | Luồng 1: Onboarding | Reviewer / System Admin | Must | 2 | Sprint 1 |
 | **US-WS-002** | Khai báo thông số nền ($m^2$, số người) | Luồng 1: Onboarding | Trưởng nhóm (Reviewer) | Must | 3 | Sprint 1 |
-| **US-WS-003** | Mời thành viên gia nhập với vai trò Editor | Luồng 1: Onboarding | Trưởng nhóm (Reviewer) / Editor | Must | 3 | Sprint 1 |
+| **US-WS-003** | Mời thành viên & Phê duyệt yêu cầu gia nhập Workspace | Luồng 1: Onboarding | Trưởng nhóm (Reviewer) / Editor | Must | 3 | Sprint 1 |
 | **US-SA-001** | Quản lý & cập nhật Hệ số phát thải quy chuẩn | Quản trị Hệ thống | System Admin | Should | 3 | Sprint 1 |
 | **US-CL-001** | Khai báo phát thải thủ công ở trạng thái Draft | Luồng 2: Nạp dữ liệu | Thành viên (Editor) | Must | 3 | Sprint 1 |
 | **US-CL-002** | Tự động quy đổi mức tiêu thụ ra chỉ số kg CO2e | Luồng 3: Xử lý Sổ cái | Editor / Reviewer | Must | 2 | Sprint 1 |
-| **US-CL-003** | Quét hóa đơn / công tơ bằng AI Vision (Popup xác nhận) | Luồng 2: Nạp dữ liệu | Editor / Reviewer | Should | 5 | Sprint 3 |
+| **US-CL-003** | Quét hóa đơn / công tơ bằng AI Vision (Tiện ích phụ) | Luồng 2: Nạp dữ liệu | Editor / Reviewer | Could (Sau cùng) | 5 | Sprint 3 |
 | **US-CL-004** | Nạp dữ liệu phát thải qua file mẫu Excel (Preview & Import) | Luồng 2: Nạp dữ liệu | Editor / Reviewer | Should | 4 | Sprint 2 |
 | **US-CL-005** | Kiểm duyệt & phê duyệt (Accept / Reject) request phát thải | Luồng 2: Phê duyệt | Trưởng nhóm (Reviewer) | Must | 3 | Sprint 2 |
 | **US-CL-006** | Tra cứu lịch sử sổ cái và trạng thái phê duyệt | Luồng 2: Lịch sử | Editor / Reviewer | Must | 3 | Sprint 2 |
@@ -152,14 +152,14 @@
 
 ---
 
-### US-WS-003: Mời thành viên gia nhập với vai trò Editor
+### US-WS-003: Mời thành viên & Phê duyệt yêu cầu gia nhập Workspace (Join Approval Flow)
 
-**As a** Trưởng nhóm (Reviewer) của một Workspace  
-**I want to** sinh mã mời (Invite Code) để gửi cho các thành viên trong gia đình hoặc nhân viên trong văn phòng  
-**So that** họ có thể tham gia vào Workspace với vai trò Thành viên (Editor) và chủ động tạo các yêu cầu khai báo phát thải  
+**As a** Trưởng nhóm (Reviewer) của một Workspace và Người dùng muốn tham gia (User)  
+**I want to** hệ thống cung cấp mã mời (Invite Code) để người dùng gửi Yêu cầu gia nhập (Join Request) và Reviewer xem xét phê duyệt (Accept/Reject)  
+**So that** việc thêm thành viên vào Workspace được kiểm soát an toàn, ngăn chặn việc người lạ tùy tiện hoặc chủ đích truy cập trái phép vào sổ cái của gia đình/văn phòng  
 
 #### Metadata
-- **Epic/Feature**: Luồng 1 - Khởi tạo & Lập kế hoạch (Member Invitation)
+- **Epic/Feature**: Luồng 1 - Khởi tạo & Lập kế hoạch (Member Invitation & Join Approval)
 - **Priority**: Must Have (MoSCoW)
 - **Estimate**: 3 Story Points
 - **Dependencies**: US-WS-001 (Workspace đã tồn tại)
@@ -170,36 +170,49 @@
 | Tiêu chí | ✅/⚠️ | Ghi chú đánh giá |
 |:---|:---:|:---|
 | **I**ndependent | ✅ | Độc lập với luồng nhập dữ liệu bằng test user có sẵn. |
-| **N**egotiable | ✅ | Định dạng mã mời 6 ký tự hoặc deep link chia sẻ có thể linh hoạt. |
-| **V**aluable | ✅ | Phân định vai trò Editor (người nạp dữ liệu ở trạng thái Draft) cho các thành viên. |
-| **E**stimable | ✅ | Cơ chế tạo mã token 6 ký tự và gán role, ước lượng ~2 ngày dev. |
-| **S**mall | ✅ | Chỉ bao gồm việc tạo mã mời và xử lý gia nhập vai trò Editor. |
-| **T**estable | ✅ | Kiểm thử rõ ràng qua các kịch bản: mã hợp lệ, mã hết hạn, mã sai. |
+| **N**egotiable | ✅ | Giao diện danh sách yêu cầu chờ duyệt có thể nằm trong Cài đặt Workspace hoặc Approval Queue. |
+| **V**aluable | ✅ | Ngăn chặn triệt để nguy cơ người ngoài xâm nhập trái phép vào không gian dữ liệu riêng của gia đình/văn phòng. |
+| **E**stimable | ✅ | Cơ chế tạo mã token 6 ký tự, bảng join request và API duyệt, ước lượng ~2-3 ngày dev. |
+| **S**mall | ✅ | Chỉ bao gồm việc tạo mã mời, gửi request và hành động Accept/Reject thành viên. |
+| **T**estable | ✅ | Kiểm thử rõ ràng qua các kịch bản: gửi request PENDING, Reviewer Accept, Reviewer Reject, mã hết hạn. |
 
 #### Acceptance Criteria
 
-**AC1: Thành viên tham gia Workspace bằng mã mời hợp lệ - Happy path**
+**AC1: Người dùng gửi Yêu cầu gia nhập bằng mã mời hợp lệ - Happy path**
 - **Given** Trưởng nhóm đã tạo mã mời hợp lệ gồm 6 ký tự (ví dụ: `CARB26`) có thời hạn 7 ngày
 - **And** người dùng B đã đăng nhập tài khoản và chưa thuộc Workspace này
-- **When** người dùng B nhập mã `CARB26` tại màn hình "Tham gia Workspace" và ấn xác nhận
-- **Then** hệ thống ghi nhận người dùng B vào danh sách thành viên của Workspace với vai trò `Editor (Member)`
-- **And** hiển thị thông báo: "Bạn đã tham gia thành công vào Workspace [Tên Workspace] với vai trò Thành viên"
-- **And** người dùng B có thể truy cập ngay vào Dashboard và tính năng khai báo phát thải của Workspace.
+- **When** người dùng B nhập mã `CARB26` tại màn hình "Tham gia Workspace" và bấm "Gửi yêu cầu tham gia"
+- **Then** hệ thống tạo một bản ghi trong bảng `workspace_join_requests` ở trạng thái `PENDING`
+- **And** hiển thị thông báo: "Yêu cầu tham gia Workspace [Tên Workspace] đã được gửi thành công. Vui lòng chờ Trưởng nhóm phê duyệt"
+- **And** người dùng B chưa thể truy cập vào Dashboard và dữ liệu của Workspace này.
 
-**AC2: Mã mời đã quá hạn hiệu lực - Edge case**
-- **Given** mã mời đã được tạo quá 7 ngày trước đó
+**AC2: Trưởng nhóm (Reviewer) Phê duyệt (Accept) yêu cầu gia nhập - Happy path**
+- **Given** Trưởng nhóm mở mục "Quản lý Thành viên / Yêu cầu gia nhập" và thấy yêu cầu của người dùng B đang ở trạng thái `PENDING`
+- **When** Trưởng nhóm nhấn nút "Chấp thuận (Accept)"
+- **Then** hệ thống cập nhật trạng thái yêu cầu sang `APPROVED`
+- **And** tự động thêm người dùng B vào bảng `workspace_members` với vai trò `EDITOR`
+- **And** người dùng B có thể truy cập vào Workspace và bắt đầu nạp hoạt động phát thải ở trạng thái Draft.
+
+**AC3: Trưởng nhóm (Reviewer) Từ chối (Reject) yêu cầu gia nhập - Happy path**
+- **Given** Trưởng nhóm phát hiện yêu cầu gia nhập từ một tài khoản không rõ danh tính
+- **When** Trưởng nhóm nhấn nút "Từ chối (Reject)" kèm lý do
+- **Then** hệ thống cập nhật trạng thái yêu cầu sang `REJECTED`
+- **And** không thêm người dùng này vào bảng `workspace_members`
+- **And** người dùng này hoàn toàn bị từ chối truy cập vào Workspace.
+
+**AC4: Mã mời đã quá hạn hiệu lực hoặc không tồn tại - Negative path**
+- **Given** mã mời đã được tạo quá 7 ngày trước đó hoặc nhập mã không tồn tại (ví dụ: `INVALID`)
 - **When** người dùng nhập mã để tham gia
-- **Then** hệ thống từ chối quyền tham gia
-- **And** hiển thị thông báo: "Mã mời đã hết hạn sử dụng. Vui lòng liên hệ Trưởng nhóm để nhận mã mới"
-- **And** không làm thay đổi danh sách thành viên hiện tại của Workspace.
+- **Then** hệ thống từ chối tạo yêu cầu gia nhập
+- **And** hiển thị thông báo lỗi: "Mã mời không tồn tại hoặc đã hết hạn sử dụng. Vui lòng kiểm tra lại".
 
-**AC3: Nhập mã mời không tồn tại - Negative path**
-- **Given** người dùng đang ở giao diện nhập mã mời
-- **When** người dùng nhập một mã không tồn tại trên hệ thống (ví dụ: `INVALID`) và bấm xác nhận
-- **Then** hệ thống từ chối và hiển thị thông báo lỗi: "Mã mời không tồn tại hoặc không chính xác. Vui lòng kiểm tra lại".
+**AC5: Người dùng đã có yêu cầu PENDING hoặc đã là thành viên - Edge case**
+- **Given** người dùng B đã gửi yêu cầu gia nhập đang ở trạng thái `PENDING` (hoặc đã là thành viên)
+- **When** người dùng B cố tình nhập lại mã mời để gửi yêu cầu một lần nữa
+- **Then** hệ thống chặn hành động và hiển thị cảnh báo: "Bạn đã có một yêu cầu tham gia đang chờ duyệt (hoặc đã là thành viên) tại Không gian làm việc này".
 
 #### Notes
-- **Dependencies**: Bảng `workspace_invitations`, bảng `workspace_members`.
+- **Dependencies**: Bảng `workspace_join_requests`, bảng `workspace_members`, bảng `workspaces`.
 - **Assumptions**: Tối đa 20 thành viên cho mỗi Workspace trong phạm vi Micro-Office.
 - **Open Questions**: Không có.
 
@@ -372,10 +385,10 @@
 **So that** tôi chỉ cần kiểm tra lại và nhấn "Xác nhận", loại bỏ hoàn toàn thao tác gõ tay phức tạp và tránh nhầm lẫn chỉ số  
 
 #### Metadata
-- **Epic/Feature**: Luồng 2 - Nạp dữ liệu (Phương thức 2: AI Vision Ingestion)
-- **Priority**: Should Have (MoSCoW)
+- **Epic/Feature**: Luồng 2 - Nạp dữ liệu (Phương thức 3: AI Vision Ingestion - Luồng phụ)
+- **Priority**: Could Have / Nice-to-have (Ưu tiên sau cùng, chỉ triển khai khi US-CL-001 Nạp thủ công và US-CL-004 Import Excel đã hoàn thành và hoạt động ổn định)
 - **Estimate**: 5 Story Points
-- **Dependencies**: Tích hợp Commercial Multimodal AI API (Google Gemini 1.5 Flash hoặc Anthropic Claude)
+- **Dependencies**: Tích hợp Commercial Multimodal AI API (Google Gemini 1.5 Flash hoặc Anthropic Claude); US-CL-001 & US-CL-004 đã hoàn thành.
 - **Assumptions**: Ảnh chụp hóa đơn điện EVN, hóa đơn nước hoặc mặt công tơ có độ rõ nét đủ để nhận dạng chữ số.
 
 #### INVEST Self-check
@@ -449,11 +462,11 @@
 
 **AC1: Nạp thành công file Excel mẫu hợp lệ qua màn hình Preview - Happy path**
 - **Given** người dùng tải về file mẫu Excel `carbon_ledger_template.xlsx` gồm các cột chuẩn: `Ngày phát sinh`, `Danh mục`, `Phân loại cụ thể`, `Sản lượng tiêu thụ`, `Đơn vị`, `Ghi chú`
-- **And** người dùng đã điền 10 dòng hoạt động phát thải hợp lệ
+- **And** người dùng đã điền 100 dòng hoạt động phát thải hợp lệ
 - **When** người dùng upload file lên hệ thống
-- **Then** hệ thống đọc file, tự động ánh xạ các cột và hiển thị Bảng Xem trước (Import Preview Table) trong vòng dưới 2 giây
-- **And** hiển thị thông tin tóm tắt: "10/10 dòng hợp lệ sẵn sàng nạp. Tổng phát thải ước tính: 145.20 kg CO2e"
-- **And** khi người dùng nhấn nút "Xác nhận Lưu", hệ thống lưu hàng loạt 10 bản ghi vào hệ thống (Editor -> Draft; Reviewer -> Approved).
+- **Then** hệ thống đọc file, tự động ánh xạ các cột và hiển thị Bảng Xem trước (Import Preview Table) trong vòng không quá 5 giây
+- **And** hiển thị thông tin tóm tắt: "100/100 dòng hợp lệ sẵn sàng nạp. Tổng phát thải ước tính: 1,450.20 kg CO2e"
+- **And** khi người dùng nhấn nút "Xác nhận Lưu", hệ thống lưu hàng loạt các bản ghi vào hệ thống (Editor -> Draft; Reviewer -> Approved).
 
 **AC2: File Excel chứa một số dòng bị sai định dạng - Edge case**
 - **Given** file Excel có 8 dòng hợp lệ và 2 dòng bị sai (1 dòng sản lượng âm `-10`, 1 dòng để trống ngày)
@@ -688,8 +701,8 @@
 - **And** chỉ bắn notification mới khi chạm ngưỡng kế tiếp (ngưỡng 100%).
 
 #### Notes
-- **Dependencies**: Bảng `notifications`, cột `has_alerted_85_percent` và `has_alerted_100_percent` trong bảng `carbon_budgets`.
-- **Assumptions**: Người dùng có thể xem lại danh sách các thông báo tại biểu tượng Quả chuông trên thanh menu.
+- **Dependencies**: Tỷ lệ `total_co2e_kg / target_co2e_kg` từ API Dashboard (`carbon_budgets` & `emission_logs`). Không phụ thuộc bảng lưu trữ `notifications` vì frontend tự động tính toán real-time để hiển thị.
+- **Assumptions**: Người dùng có thể xem cảnh báo trực tiếp trên Banner Dashboard và Popup Drawer thông báo tính toán động.
 - **Open Questions**: Không có.
 
 ---
@@ -698,11 +711,11 @@
 
 ---
 
-### US-AI-001: AI Insight định kỳ (Cronjob) & Kế hoạch cắt giảm cá nhân hóa
+### US-AI-001: AI Insight linh hoạt (Cấu hình lịch tự động hoặc kích hoạt bằng tay) & Kế hoạch cắt giảm cá nhân hóa
 
 **As a** Trưởng nhóm gia đình hoặc Quản lý văn phòng (Reviewer)  
-**I want to** hệ thống tự động chạy tác vụ định kỳ (Cronjob) vào ngày cuối tuần/tháng để gom nhóm dữ liệu tiêu thụ và gọi LLM phân tích, trả về Kế hoạch cắt giảm mang tính cá nhân hóa có số liệu định lượng  
-**So that** tôi và các thành viên biết chính xác nhóm phát thải đột biến và có giải pháp thực tế cụ thể (ví dụ: đi tàu điện Cát Linh - Hà Đông) để cắt giảm kg CO2e trong kỳ tới  
+**I want to** có quyền tự cấu hình lịch chạy tác vụ tự động (hàng tuần, hàng tháng hoặc tắt) vào thời điểm tùy chọn, đồng thời có thể bấm nút "Sinh báo cáo ngay" bất kỳ lúc nào để AI gom nhóm dữ liệu tiêu thụ và đề xuất Kế hoạch cắt giảm cá nhân hóa có số liệu định lượng  
+**So that** tôi chủ động kiểm soát thời điểm nhận báo cáo, biết chính xác nhóm phát thải đột biến và có giải pháp thực tế cụ thể (ví dụ: đi tàu điện Cát Linh - Hà Đông) để cắt giảm kg CO2e trong kỳ tới  
 
 #### Metadata
 - **Epic/Feature**: Luồng 4 - Phân tích & Báo cáo AI (AI Reasoning & Actionable Advice)
@@ -716,32 +729,41 @@
 | Tiêu chí | ✅/⚠️ | Ghi chú đánh giá |
 |:---|:---:|:---|
 | **I**ndependent | ✅ | Hoạt động như một module tư vấn chạy nền, không ảnh hưởng đến tính toàn vẹn của sổ cái. |
-| **N**egotiable | ✅ | System Prompt cho LLM có thể tinh chỉnh để đưa ra gợi ý phù hợp văn hóa gia đình hoặc môi trường văn phòng. |
+| **N**egotiable | ✅ | Reviewer tự do chọn tần suất chạy (Weekly/Monthly/Disabled), chọn ngày/giờ chạy hoặc kích hoạt bằng tay on-demand. |
 | **V**aluable | ✅ | Đáp ứng trực tiếp yêu cầu đề tài: AI Reasoning đưa ra ví dụ cắt giảm định lượng cá nhân hóa thực tế. |
-| **E**stimable | ✅ | Tác vụ Cronjob tổng hợp dữ liệu JSON + Prompt Engineering, ước lượng 3-4 ngày dev. |
+| **E**stimable | ✅ | Tác vụ Cronjob tổng hợp dữ liệu JSON + Prompt Engineering + On-demand API, ước lượng 3-4 ngày dev. |
 | **S**mall | ✅ | Giới hạn ở việc phân tích dữ liệu tổng hợp của Workspace và sinh báo cáo văn bản có cấu trúc. |
-| **T**estable | ✅ | Kiểm thử kích hoạt Cronjob và kiểm tra tính đầy đủ của các trường trong báo cáo AI trả về. |
+| **T**estable | ✅ | Kiểm thử kích hoạt theo lịch cấu hình, kiểm thử nút bấm on-demand và kiểm tra tính đầy đủ của báo cáo AI. |
 
 #### Acceptance Criteria
 
-**AC1: Cronjob tự động phân tích và sinh Kế hoạch cắt giảm định lượng cá nhân hóa - Happy path**
-- **Given** hôm nay là ngày cuối cùng của tháng 10/2026, Workspace có dữ liệu tiêu thụ với tổng phát thải 320 kg CO2e (trong đó Xe máy xăng tăng 40% so với tháng trước)
-- **When** tác vụ Cronjob được kích hoạt tự động vào lúc 23:59
+**AC1: Cronjob tự động phân tích và sinh Kế hoạch cắt giảm định lượng theo lịch cấu hình - Happy path**
+- **Given** Reviewer đã cấu hình lịch báo cáo tự động là `MONTHLY` vào ngày cuối tháng lúc 23:59, Workspace có dữ liệu tiêu thụ với tổng phát thải 320 kg CO2e (trong đó Xe máy xăng tăng 40% so với tháng trước)
+- **When** tác vụ Cronjob được kích hoạt tự động theo đúng lịch đã cấu hình
 - **Then** hệ thống gom nhóm dữ liệu (Điện chiếm bao nhiêu %, Xăng xe chiếm bao nhiêu %, Nước chiếm bao nhiêu %) và đẩy vào LLM Prompt
 - **And** LLM phân tích và trả về báo cáo Kế hoạch cắt giảm mang tính cá nhân hóa trong vòng dưới 15 giây với nội dung định lượng cụ thể:
   - *Phát hiện bất thường:* "Tháng này lượng phát thải từ việc sử dụng xe máy cá nhân tăng đột biến 40% (chiếm 45% tổng phát thải)."
   - *Khuyến nghị hành động cá nhân hóa:* "Nếu 2 thành viên chuyển sang dùng tàu điện trên cao Cát Linh - Hà Đông 3 ngày/tuần, gia đình có thể cắt giảm 18 kg CO2e vào tháng sau."
 - **And** báo cáo được lưu vào bảng `ai_reports` và hiển thị trên Dashboard chính của Reviewer.
 
-**AC2: Reviewer chủ động bấm nút "Phân tích ngay" trước lịch Cronjob - Edge case**
-- **Given** chưa đến ngày cuối tháng nhưng Reviewer muốn xem đánh giá sơ bộ giữa kỳ
-- **When** Reviewer bấm nút "Kích hoạt Phân tích AI ngay" trên giao diện
-- **Then** hệ thống thực thi tác vụ phân tích theo số liệu tích lũy đến hiện tại
-- **And** hiển thị báo cáo sơ bộ mà không cần chờ đến lịch Cronjob tự động cuối tháng.
+**AC2: Reviewer chủ động bấm nút "Sinh báo cáo ngay" (On-demand) bất kỳ lúc nào - Alternative path**
+- **Given** Reviewer đã tắt tự động (`DISABLED`) hoặc chưa đến lịch hẹn nhưng muốn xem ngay phân tích số liệu tích lũy đến hiện tại
+- **When** Reviewer bấm nút "Sinh báo cáo ngay" trên giao diện Báo cáo AI
+- **Then** hệ thống thực thi tác vụ phân tích tức thời theo số liệu lũy kế đến hiện tại
+- **And** hiển thị báo cáo AI hoàn chỉnh trên màn hình mà không cần chờ đến lịch cronjob tự động.
 
-**AC3: Lỗi gián đoạn kết nối hoặc timeout API AI (> 15 giây) - Negative path**
+**AC3: Reviewer cấu hình lịch tự động sinh báo cáo trong Workspace Settings - Setup path**
+- **Given** Reviewer truy cập trang Cài đặt Workspace (Workspace Settings) -> mục Cấu hình Báo cáo AI
+- **When** Reviewer tùy chọn:
+  - Tần suất: `DISABLED` (Tắt) / `WEEKLY` (Hàng tuần) / `MONTHLY` (Hàng tháng)
+  - Chọn thứ trong tuần (1-7) nếu chọn Weekly, hoặc chọn ngày trong tháng (1-31 hoặc Cuối tháng) nếu chọn Monthly
+  - Chọn giờ chạy trong ngày (mặc định 23:59:00)
+  - Nhấn "Lưu cấu hình"
+- **Then** hệ thống cập nhật các trường `ai_report_frequency`, `ai_report_day_of_week`, `ai_report_day_of_month`, `ai_report_time` trong bảng `workspaces` và lên lịch chạy chính xác theo cấu hình mới.
+
+**AC4: Lỗi gián đoạn kết nối hoặc timeout API AI (> 15 giây) - Negative path**
 - **Given** dịch vụ API LLM bên ngoài bị quá tải hoặc mất mạng
-- **When** tác vụ AI đang thực thi
+- **When** tác vụ AI đang thực thi (tự động hoặc kích hoạt bằng tay)
 - **Then** hệ thống hủy yêu cầu an toàn (graceful timeout)
 - **And** ghi nhận nhật ký lỗi và hiển thị thông báo thân thiện: "Dịch vụ AI đang bận hoặc gián đoạn kết nối. Hệ thống sẽ tự động thử lại vào chu kỳ tiếp theo"
 - **And** không làm gián đoạn các tính năng khác trên hệ thống.
@@ -878,7 +900,7 @@ Bảng đối chiếu đảm bảo 100% các thành phần trong 4 Luồng hoạ
 |---|---|:---:|:---:|---|
 | **1. Onboarding & Budgeting** | Tạo & Cấu hình Workspace | UC01 | **US-WS-001** | Tạo không gian dữ liệu riêng, gán Reviewer hoặc System Admin. |
 | **1. Onboarding & Budgeting** | Khai báo thông số nền ($m^2$, số người) | UC02 | **US-WS-002** | Cơ sở tính $\text{CO}_2\text{e}/\text{người}$ và $\text{CO}_2\text{e}/m^2$. |
-| **1. Onboarding & Budgeting** | Mời thành viên vào Workspace | UC03 | **US-WS-003** | Sinh mã mời tham gia vai trò Editor. |
+| **1. Onboarding & Budgeting** | Mời thành viên & Phê duyệt yêu cầu gia nhập | UC03 | **US-WS-003** | Sinh mã mời, gửi Join Request, Reviewer Accept/Reject. |
 | **1. Onboarding & Budgeting** | Thiết lập Ngân sách & Ngưỡng 85% | UC09 | **US-BG-001** | Trần phát thải tối đa và mốc cảnh báo sớm. |
 | **2. Nạp dữ liệu & Phê duyệt** | Luồng nạp thủ công (Manual Entry) | UC04 | **US-CL-001** | Sinh hoạt lẻ (xe máy 110cc, gas...) lưu Draft. |
 | **2. Nạp dữ liệu & Phê duyệt** | Luồng AI quét hóa đơn/công tơ (Popup) | UC05 | **US-CL-003** | Multimodal AI bóc tách JSON, Popup preview xác nhận. |
