@@ -74,16 +74,16 @@ flowchart TD
 
 Bảng tổng hợp dưới đây đặc tả đầy đủ 8 hoạt động hỗ trợ trong hệ thống, bao gồm mã định danh hệ thống, đơn vị đo, phân loại Scope, nguồn trích dẫn và hệ số quy đổi mặc định:
 
-| STT | Nhóm hoạt động | Hoạt động chi tiết | Mã danh mục (Category Code) | Đơn vị tính (Input Unit) | Phân loại Scope | Nguồn hệ số phát thải (EF) khuyến nghị | Hệ số phát thải mặc định (Default EF) | Khí nhà kính quy đổi |
-|:---:|---|---|:---:|:---:|:---:|---|:---:|:---:|
-| **1** | **Điện năng** | Sử dụng điện lưới | `ELEC_GRID` | **kWh** | **Scope 2** | **Công văn 1232/BNNMT-BĐKH (BCT chủ trì)** / **EPA** / **IEA** | **`0.6187`** kg CO₂e/kWh *(Lưới điện 2024)* | CO₂, CH₄, N₂O |
-| **2** | **Nhiên liệu** | Đốt gas (LPG) nấu ăn | `FUEL_LPG` | **kg** hoặc **Tấn** | **Scope 1** | **UK DEFRA 2026** / **IPCC Guidelines** | **`2939.36095`** kg CO₂e/tấn<br>*(tương đương **`2.9394`** kg CO₂e/kg)* | CO₂, CH₄, N₂O |
-| **3** | **Nhiên liệu** | Dầu Diesel chạy máy phát | `FUEL_DIESEL` | **Lít** | **Scope 1** | **IPCC Guidelines** / **UK DEFRA** | **`2.6870`** kg CO₂e/Lít | CO₂, CH₄, N₂O |
-| **4** | **Di chuyển** | Xe máy / Ô tô cá nhân | `MOBILITY` | **km** | **Scope 1 & 3** | **UK DEFRA 2026** (Theo Size & Nhiên liệu) | **`[ Định nghĩa mục 4.4]`**<br>*(Đơn vị: kg CO₂e/km - Để trống để nhập tay)* | CO₂, CH₄, N₂O |
-| **5** | **Rác thải** | Rác sinh hoạt chôn lấp | `WASTE_LANDFILL` | **kg** hoặc **Tấn** | **Scope 3** | **UK DEFRA 2026** / **US EPA WARM** | **`4.465358`** kg CO₂e/tấn<br>*(tương đương **`0.004465`** kg CO₂e/kg)* | CH₄, CO₂ |
-| **6** | **Nước** | Tiêu thụ và xử lý nước | `WATER_SUPPLY_TREAT` | **m³** hoặc **Triệu Lít** | **Scope 3** | **UK DEFRA 2026** / **US EPA** | **`0.19130`** kg CO₂e/m³<br>*(tương đương **`191.30156`** kg/triệu Lít)* | CO₂, CH₄ |
-| **7** | **Vật tư** | Tiêu thụ giấy in | `OFFICE_PAPER` | **kg** hoặc **Tấn** | **Scope 3** | **UK DEFRA 2026** / **US EPA** | **`1343.59114`** kg CO₂e/tấn<br>*(tương đương **`1.3436`** kg CO₂e/kg)* | CO₂ |
-| **8** | **Du lịch & Đi lại** | Di chuyển bằng máy bay | `TRAVEL_FLIGHT` | **p.km** hoặc **Chặng bay** | **Scope 3 (Cat 6)** & Cá nhân | **UK DEFRA 2026** / **ICAO** / **US EPA** | Theo hạng ghế (DEFRA 2026):<br>• Economy: **`0.10916`** kg CO₂e/p.km<br>• Premium Economy: **`0.17465`** kg CO₂e/p.km<br>• Business: **`0.31656`** kg CO₂e/p.km<br>• First: **`0.43663`** kg CO₂e/p.km | CO₂, CH₄, N₂O + RF |
+|  STT  | Nhóm hoạt động       | Hoạt động chi tiết       | Mã danh mục (Category Code) |  Đơn vị tính (Input Unit)   |        Phân loại Scope        | Nguồn hệ số phát thải (EF) khuyến nghị                         |                                                                                 Hệ số phát thải mặc định (Default EF)                                                                                  | Khí nhà kính quy đổi |
+| :---: | -------------------- | ------------------------ | :-------------------------: | :-------------------------: | :---------------------------: | -------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------: |
+| **1** | **Điện năng**        | Sử dụng điện lưới        |         `ELEC_GRID`         |           **kWh**           |          **Scope 2**          | **Công văn 1232/BNNMT-BĐKH (BCT chủ trì)** / **EPA** / **IEA** |                                                                              **`0.6187`** kg CO₂e/kWh _(Lưới điện 2024)_                                                                               |    CO₂, CH₄, N₂O     |
+| **2** | **Nhiên liệu**       | Đốt gas (LPG) nấu ăn     |         `FUEL_LPG`          |     **kg** hoặc **Tấn**     |          **Scope 1**          | **UK DEFRA 2026** / **IPCC Guidelines**                        |                                                                **`2939.36095`** kg CO₂e/tấn<br>_(tương đương **`2.9394`** kg CO₂e/kg)_                                                                 |    CO₂, CH₄, N₂O     |
+| **3** | **Nhiên liệu**       | Dầu Diesel chạy máy phát |        `FUEL_DIESEL`        |           **Lít**           |          **Scope 1**          | **IPCC Guidelines** / **UK DEFRA**                             |                                                                                       **`2.75541`** kg CO₂e/Lít                                                                                        |    CO₂, CH₄, N₂O     |
+| **4** | **Di chuyển**        | Xe máy / Ô tô cá nhân    |         `MOBILITY`          |           **km**            |        **Scope 1 & 3**        | **UK DEFRA 2026** (Theo Size & Nhiên liệu)                     |                                                              **`[ Định nghĩa mục 4.4]`**<br>_(Đơn vị: kg CO₂e/km - Để trống để nhập tay)_                                                              |    CO₂, CH₄, N₂O     |
+| **5** | **Rác thải**         | Rác sinh hoạt chôn lấp   |      `WASTE_LANDFILL`       |     **kg** hoặc **Tấn**     |          **Scope 3**          | **UK DEFRA 2026** / **US EPA WARM**                            |                                                                **`4.465358`** kg CO₂e/tấn<br>_(tương đương **`0.004465`** kg CO₂e/kg)_                                                                 |       CH₄, CO₂       |
+| **6** | **Nước**             | Tiêu thụ và xử lý nước   |    `WATER_SUPPLY_TREAT`     |  **m³** hoặc **Triệu Lít**  |          **Scope 3**          | **UK DEFRA 2026** / **US EPA**                                 |                                                                **`0.19130`** kg CO₂e/m³<br>_(tương đương **`191.30156`** kg/triệu Lít)_                                                                |       CO₂, CH₄       |
+| **7** | **Vật tư**           | Tiêu thụ giấy in         |       `OFFICE_PAPER`        |     **kg** hoặc **Tấn**     |          **Scope 3**          | **UK DEFRA 2026** / **US EPA**                                 |                                                                **`1343.59114`** kg CO₂e/tấn<br>_(tương đương **`1.3436`** kg CO₂e/kg)_                                                                 |         CO₂          |
+| **8** | **Du lịch & Đi lại** | Di chuyển bằng máy bay   |       `TRAVEL_FLIGHT`       | **p.km** hoặc **Chặng bay** | **Scope 3 (Cat 6)** & Cá nhân | **UK DEFRA 2026** / **ICAO** / **US EPA**                      | Theo hạng ghế (DEFRA 2026):<br>• Economy: **`0.10916`** kg CO₂e/p.km<br>• Premium Economy: **`0.17465`** kg CO₂e/p.km<br>• Business: **`0.31656`** kg CO₂e/p.km<br>• First: **`0.43663`** kg CO₂e/p.km |       CO₂ + RF       |
 
 ---
 
@@ -166,22 +166,22 @@ Bảng tổng hợp dưới đây đặc tả đầy đủ 8 hoạt động hỗ
   - Riêng đối với **Ô tô (Passenger Cars)**, hệ số được tách bạch thành 2 nhánh động cơ chính: **Nhiên liệu Xăng (Petrol)** và **Nhiên liệu Dầu (Diesel)**.
 - **Bảng khung danh mục cấu hình hệ số (Để trống để người dùng/System Admin tự nhập tay):**
 
-| STT | Loại phương tiện | Phân hạng Kích cỡ (Size) | Loại Nhiên liệu | Đơn vị tính | Hệ số phát thải DEFRA 2026 (kg CO₂e/km) | Trạng thái cấu hình |
-|:---:|---|:---:|:---:|:---:|:---:|---|
-| **1** | **Xe máy (Motorbike)** | **Small** (<125cc) | Xăng (Petrol) | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
-| **2** | **Xe máy (Motorbike)** | **Medium** (125 - 500cc) | Xăng (Petrol) | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
-| **3** | **Xe máy (Motorbike)** | **Large** (>500cc) | Xăng (Petrol) | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
-| **4** | **Xe máy (Motorbike)** | **Average** (Trung bình chung) | Xăng (Petrol) | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
-| **5** | **Ô tô con (Car)** | **Small** (Cỡ nhỏ) | **Petrol (Xăng)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
-| **6** | **Ô tô con (Car)** | **Medium** (Cỡ trung) | **Petrol (Xăng)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
-| **7** | **Ô tô con (Car)** | **Large** (Cỡ lớn / SUV) | **Petrol (Xăng)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
-| **8** | **Ô tô con (Car)** | **Average** (Trung bình chung) | **Petrol (Xăng)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
-| **9** | **Ô tô con (Car)** | **Small** (Cỡ nhỏ) | **Diesel (Dầu)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
-| **10** | **Ô tô con (Car)** | **Medium** (Cỡ trung) | **Diesel (Dầu)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
-| **11** | **Ô tô con (Car)** | **Large** (Cỡ lớn / SUV) | **Diesel (Dầu)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
-| **12** | **Ô tô con (Car)** | **Average** (Trung bình chung) | **Diesel (Dầu)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
+|  STT   | Loại phương tiện       |    Phân hạng Kích cỡ (Size)    |  Loại Nhiên liệu  | Đơn vị tính | Hệ số phát thải DEFRA 2026 (kg CO₂e/km) | Trạng thái cấu hình                 |
+| :----: | ---------------------- | :----------------------------: | :---------------: | :---------: | :-------------------------------------: | ----------------------------------- |
+| **1**  | **Xe máy (Motorbike)** |       **Small** (<125cc)       |   Xăng (Petrol)   |   **km**    |         `[ ________________ ]`          | _Để trống - Người dùng tự nhập tay_ |
+| **2**  | **Xe máy (Motorbike)** |    **Medium** (125 - 500cc)    |   Xăng (Petrol)   |   **km**    |         `[ ________________ ]`          | _Để trống - Người dùng tự nhập tay_ |
+| **3**  | **Xe máy (Motorbike)** |       **Large** (>500cc)       |   Xăng (Petrol)   |   **km**    |         `[ ________________ ]`          | _Để trống - Người dùng tự nhập tay_ |
+| **4**  | **Xe máy (Motorbike)** | **Average** (Trung bình chung) |   Xăng (Petrol)   |   **km**    |         `[ ________________ ]`          | _Để trống - Người dùng tự nhập tay_ |
+| **5**  | **Ô tô con (Car)**     |       **Small** (Cỡ nhỏ)       | **Petrol (Xăng)** |   **km**    |         `[ ________________ ]`          | _Để trống - Người dùng tự nhập tay_ |
+| **6**  | **Ô tô con (Car)**     |     **Medium** (Cỡ trung)      | **Petrol (Xăng)** |   **km**    |         `[ ________________ ]`          | _Để trống - Người dùng tự nhập tay_ |
+| **7**  | **Ô tô con (Car)**     |    **Large** (Cỡ lớn / SUV)    | **Petrol (Xăng)** |   **km**    |         `[ ________________ ]`          | _Để trống - Người dùng tự nhập tay_ |
+| **8**  | **Ô tô con (Car)**     | **Average** (Trung bình chung) | **Petrol (Xăng)** |   **km**    |         `[ ________________ ]`          | _Để trống - Người dùng tự nhập tay_ |
+| **9**  | **Ô tô con (Car)**     |       **Small** (Cỡ nhỏ)       | **Diesel (Dầu)**  |   **km**    |         `[ ________________ ]`          | _Để trống - Người dùng tự nhập tay_ |
+| **10** | **Ô tô con (Car)**     |     **Medium** (Cỡ trung)      | **Diesel (Dầu)**  |   **km**    |         `[ ________________ ]`          | _Để trống - Người dùng tự nhập tay_ |
+| **11** | **Ô tô con (Car)**     |    **Large** (Cỡ lớn / SUV)    | **Diesel (Dầu)**  |   **km**    |         `[ ________________ ]`          | _Để trống - Người dùng tự nhập tay_ |
+| **12** | **Ô tô con (Car)**     | **Average** (Trung bình chung) | **Diesel (Dầu)**  |   **km**    |         `[ ________________ ]`          | _Để trống - Người dùng tự nhập tay_ |
 
-> *Ghi chú vận hành:* Khung 12 tham số trên đã được khởi tạo sẵn trong cấu trúc bảng `standard_emission_factors`. System Admin có toàn quyền nhập tay giá trị kg CO₂e/km tương ứng qua giao diện Quản lý Hệ số Quy chuẩn (`US-SA-001`).
+> _Ghi chú vận hành:_ Khung 12 tham số trên đã được khởi tạo sẵn trong cấu trúc bảng `standard_emission_factors`. System Admin có toàn quyền nhập tay giá trị kg CO₂e/km tương ứng qua giao diện Quản lý Hệ số Quy chuẩn (`US-SA-001`).
 
 - **Công thức tính toán:**
   $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Quãng đường (km)} \times EF_{\text{loại xe & size}} (\text{kg CO}_2\text{e/km})$$
@@ -290,13 +290,13 @@ Bảng tổng hợp dưới đây đặc tả đầy đủ 8 hoạt động hỗ
 
 - **Bảng tra cứu quy đổi nhanh các chặng du lịch phổ biến tại Việt Nam (Route Lookup Matrix theo DEFRA 2026):**
 
-| Tuyến bay (Origin ⇄ Destination) | Khoảng cách 1 chiều | Cự ly khứ hồi | Phát thải Khứ hồi / Khách (Hạng Phổ thông: `0.10916`) | Phát thải Khứ hồi / Khách (Hạng Thương gia: `0.31656`) | Tương đương điện lưới 2024 (`0.6187`) |
-|---|:---:|:---:|:---:|:---:|:---:|
-| **Hà Nội (HAN) ⇄ TP. Hồ Chí Minh (SGN)** | ≈ 1,160 km | 2,320 km | 2,320 × 0.10916 = **253.25 kg CO₂e** | 2,320 × 0.31656 = **734.42 kg CO₂e** | ≈ 409 kWh điện |
-| **Hà Nội (HAN) ⇄ Đà Nẵng (DAD)** | ≈ 630 km | 1,260 km | 1,260 × 0.10916 = **137.54 kg CO₂e** | 1,260 × 0.31656 = **398.87 kg CO₂e** | ≈ 222 kWh điện |
-| **TP. Hồ Chí Minh (SGN) ⇄ Phú Quốc (PQC)** | ≈ 300 km | 600 km | 600 × 0.10916 = **65.50 kg CO₂e** | 600 × 0.31656 = **189.94 kg CO₂e** | ≈ 106 kWh điện |
-| **Hà Nội / TP.HCM ⇄ Bangkok (BKK)** | ≈ 1,300 km | 2,600 km | 2,600 × 0.10916 = **283.82 kg CO₂e** | 2,600 × 0.31656 = **823.06 kg CO₂e** | ≈ 459 kWh điện |
-| **Hà Nội / TP.HCM ⇄ Tokyo / Seoul** | ≈ 3,600 km | 7,200 km | 7,200 × 0.10916 = **785.95 kg CO₂e** | 7,200 × 0.31656 = **2,279.23 kg CO₂e** | ≈ 1.27 MWh điện |
+| Tuyến bay (Origin ⇄ Destination)           | Khoảng cách 1 chiều | Cự ly khứ hồi | Phát thải Khứ hồi / Khách (Hạng Phổ thông: `0.10916`) | Phát thải Khứ hồi / Khách (Hạng Thương gia: `0.31656`) | Tương đương điện lưới 2024 (`0.6187`) |
+| ------------------------------------------ | :-----------------: | :-----------: | :---------------------------------------------------: | :----------------------------------------------------: | :-----------------------------------: |
+| **Hà Nội (HAN) ⇄ TP. Hồ Chí Minh (SGN)**   |     ≈ 1,160 km      |   2,320 km    |         2,320 × 0.10916 = **253.25 kg CO₂e**          |          2,320 × 0.31656 = **734.42 kg CO₂e**          |            ≈ 409 kWh điện             |
+| **Hà Nội (HAN) ⇄ Đà Nẵng (DAD)**           |      ≈ 630 km       |   1,260 km    |         1,260 × 0.10916 = **137.54 kg CO₂e**          |          1,260 × 0.31656 = **398.87 kg CO₂e**          |            ≈ 222 kWh điện             |
+| **TP. Hồ Chí Minh (SGN) ⇄ Phú Quốc (PQC)** |      ≈ 300 km       |    600 km     |           600 × 0.10916 = **65.50 kg CO₂e**           |           600 × 0.31656 = **189.94 kg CO₂e**           |            ≈ 106 kWh điện             |
+| **Hà Nội / TP.HCM ⇄ Bangkok (BKK)**        |     ≈ 1,300 km      |   2,600 km    |         2,600 × 0.10916 = **283.82 kg CO₂e**          |          2,600 × 0.31656 = **823.06 kg CO₂e**          |            ≈ 459 kWh điện             |
+| **Hà Nội / TP.HCM ⇄ Tokyo / Seoul**        |     ≈ 3,600 km      |   7,200 km    |         7,200 × 0.10916 = **785.95 kg CO₂e**          |         7,200 × 0.31656 = **2,279.23 kg CO₂e**         |            ≈ 1.27 MWh điện            |
 
 - **Công thức tính toán:**
   $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Số hành khách} \times \text{Khoảng cách (km)} \times EF_{\text{hạng vé (DEFRA 2026)}} (\text{kg CO}_2\text{e/p.km})$$
