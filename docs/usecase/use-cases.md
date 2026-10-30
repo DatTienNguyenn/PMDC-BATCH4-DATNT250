@@ -126,20 +126,24 @@ flowchart LR
 
 ---
 
-### UC03: Mời & Quản lý Thành viên
+### UC03: Mời & Phê duyệt Thành viên Gia nhập (Member Invitation & Join Approval)
 - **Mã Use Case:** UC03
 - **Tác nhân chính:** Trưởng nhóm (Reviewer)
-- **Tác nhân phụ:** Thành viên (Editor)
-- **Mô tả vắn tắt:** Reviewer sinh mã mời 6 ký tự để các thành viên trong gia đình hoặc nhân viên tham gia vào Workspace với vai trò Editor.
-- **Tiền điều kiện:** Workspace đã được khởi tạo.
-- **Hậu điều kiện:** Thành viên được liên kết vào Workspace với vai trò `Editor`.
+- **Tác nhân phụ:** Người dùng xin gia nhập (Editor)
+- **Mô tả vắn tắt:** Reviewer sinh mã mời 6 ký tự; người dùng nhập mã mời để gửi Yêu cầu gia nhập (Join Request) ở trạng thái chờ duyệt (PENDING); Reviewer xem xét phê duyệt (Accept) để thêm vào Workspace hoặc từ chối (Reject), đảm bảo an toàn tuyệt đối cho dữ liệu gia đình/văn phòng.
+- **Tiền điều kiện:** Workspace đã được khởi tạo; người dùng xin gia nhập đã có tài khoản trên hệ thống.
+- **Hậu điều kiện:** Người dùng được thêm vào bảng `workspace_members` với vai trò `Editor` chỉ khi Reviewer chấp thuận.
 - **Luồng sự kiện chính:**
-  1. Reviewer vào mục "Thành viên" và nhấn "Tạo mã mời".
-  2. Hệ thống sinh mã ngẫu nhiên 6 ký tự (ví dụ: `CARB26`) hiệu lực 7 ngày.
-  3. Thành viên đăng nhập tài khoản của mình, vào mục "Tham gia Workspace", nhập mã mời và xác nhận.
-  4. Hệ thống xác thực mã, gán thành viên vào Workspace với vai trò `Editor` và thông báo thành công.
+  1. Reviewer vào mục "Quản lý Thành viên" và nhấn "Tạo mã mời".
+  2. Hệ thống sinh mã ngẫu nhiên 6 ký tự (ví dụ: `CARB26`) hiệu lực 7 ngày và lưu vào `workspaces.invite_code`.
+  3. Người dùng đăng nhập tài khoản của mình, vào màn hình "Tham gia Workspace", nhập mã mời và nhấn "Gửi yêu cầu".
+  4. Hệ thống kiểm tra mã mời hợp lệ, tạo bản ghi trong bảng `workspace_join_requests` với trạng thái `PENDING` và hiển thị thông báo chờ phê duyệt.
+  5. Reviewer vào danh sách "Yêu cầu chờ duyệt", xem thông tin người xin gia nhập (Tên, Email) và nhấn "Chấp thuận (Accept)".
+  6. Hệ thống cập nhật yêu cầu sang `APPROVED`, tự động liên kết người dùng vào Workspace với vai trò `Editor` và gửi thông báo thành công.
 - **Luồng rẽ nhánh / Ngoại lệ:**
-  - *3a. Mã mời hết hạn hoặc không tồn tại:* Hệ thống thông báo lỗi tương ứng.
+  - *3a. Mã mời hết hạn hoặc không tồn tại:* Hệ thống thông báo lỗi: "Mã mời không tồn tại hoặc đã hết hạn".
+  - *3b. Người dùng đã gửi yêu cầu PENDING hoặc đã là thành viên:* Hệ thống chặn gửi trùng lặp.
+  - *5a. Reviewer nhấn Từ chối (Reject):* Hệ thống cập nhật yêu cầu sang `REJECTED` (kèm lý do), người dùng không được cấp quyền vào Workspace.
 
 ---
 

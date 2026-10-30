@@ -39,7 +39,9 @@ Hệ thống phân định 3 vai trò rõ ràng, kết hợp mô hình Multi-ten
 |---|:---:|:---:|:---:|
 | Khởi tạo & Cấu hình Workspace | ✅ | ✅ | ❌ |
 | Khai báo thông số nền (thành viên, diện tích $m^2$) | ❌ | ✅ | ❌ |
-| Mời thành viên vào Workspace | ❌ | ✅ | ❌ |
+| Sinh mã mời (Invite Code) | ❌ | ✅ | ❌ |
+| Gửi Yêu cầu gia nhập bằng mã mời (Join Request) | ❌ | ❌ | ✅ |
+| Phê duyệt / Từ chối Yêu cầu gia nhập (Accept/Reject Join Request) | ❌ | ✅ | ❌ |
 | Xem Dashboard & chỉ số chuẩn hóa ($\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$) | ❌ | ✅ (Toàn diện) | ✅ (Xem chung) |
 | Khai báo phát thải thủ công (Manual Entry) [Luồng chính] | ❌ | ✅ (Tự duyệt) | ✅ (Trạng thái Draft) |
 | Nạp dữ liệu bằng Excel Template [Luồng chính] | ❌ | ✅ (Tự duyệt) | ✅ (Trạng thái Draft) |
@@ -102,6 +104,7 @@ flowchart TD
    $$\text{Chỉ số theo nhân khẩu} = \frac{\text{Tổng kg CO}_2\text{e}}{\text{Số thành viên}} \quad (\text{kg CO}_2\text{e}/\text{người})$$
    $$\text{Chỉ số theo diện tích} = \frac{\text{Tổng kg CO}_2\text{e}}{\text{Diện tích mặt sàn}} \quad (\text{kg CO}_2\text{e}/m^2)$$
 3. **Thiết lập Ngân sách (Budgeting):** Vào đầu tháng, Admin đặt ra ngưỡng phát thải tối đa (ví dụ: $300\text{ kg CO}_2\text{e}$ cho tháng 10) và hệ thống kích hoạt cơ chế theo dõi cùng ngưỡng cảnh báo sớm ở mức $85\%$.
+4. **Mời & Phê duyệt Thành viên Gia nhập (Join Approval Flow):** Reviewer sinh mã mời 6 ký tự. Người dùng nhập mã để gửi Yêu cầu gia nhập (`PENDING`). Reviewer xem xét và chấp thuận (`Accept`) để thêm vào `workspace_members` với vai trò Editor hoặc từ chối (`Reject`), đảm bảo an toàn ngăn chặn truy cập trái phép.
 
 ### 3.2. Luồng 2: Nạp dữ liệu Activity có Cấu trúc (Data Ingestion Workflow)
 Hệ thống phân định rõ ràng giữa **Luồng nạp chính** và **Luồng nạp phụ**:
@@ -222,7 +225,7 @@ flowchart LR
 |---|---|---|---|
 | **UC01** | Khởi tạo & Cấu hình Workspace | Trưởng nhóm (Reviewer), System Admin | Tạo và cấu hình không gian dữ liệu riêng biệt cho gia đình/văn phòng. |
 | **UC02** | Khai báo Thông số nền | Trưởng nhóm (Reviewer) | Nhập số người, diện tích $m^2$ để tính chỉ số $\text{CO}_2\text{e}/\text{người}$, $/m^2$. |
-| **UC03** | Mời thành viên gia nhập | Trưởng nhóm (Reviewer) | Sinh mã mời tham gia Workspace với vai trò Editor. |
+| **UC03** | Mời & Phê duyệt Thành viên gia nhập | Trưởng nhóm (Reviewer) | Sinh mã mời, kiểm duyệt Yêu cầu gia nhập (Accept/Reject) trước khi cấp quyền Editor. |
 | **UC04** | Khai báo phát thải thủ công | Thành viên (Editor), Reviewer | Nhập sinh hoạt lẻ (xe máy, gas, điện) tạo Draft / Approved. |
 | **UC05** | Quét hóa đơn / công tơ bằng AI | Thành viên (Editor), Reviewer | Dùng Multimodal AI bóc tách ảnh hóa đơn/công tơ điền form. |
 | **UC06** | Nạp dữ liệu qua File mẫu Excel | Thành viên (Editor), Reviewer | Upload Excel template, preview ánh xạ dữ liệu và lưu hàng loạt. |

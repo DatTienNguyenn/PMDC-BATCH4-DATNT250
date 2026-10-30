@@ -134,8 +134,10 @@ flowchart TD
 |---|---|:---:|:---:|:---:|
 | **Quản lý Workspace** | Khởi tạo Workspace mới | ✅ | ✅ | ❌ |
 | | Cấu hình thông số nền ($m^2$, số người) | ❌ | ✅ | ❌ |
-| | Sinh mã mời & Quản lý danh sách thành viên | ❌ | ✅ | ❌ |
-| | Tham gia Workspace bằng mã mời | ❌ | ❌ | ✅ |
+| | Sinh mã mời (Invite Code) | ❌ | ✅ | ❌ |
+| | Gửi Yêu cầu gia nhập bằng mã mời (Join Request) | ❌ | ❌ | ✅ |
+| | Phê duyệt / Từ chối Yêu cầu gia nhập (Accept/Reject Join Request) | ❌ | ✅ | ❌ |
+| | Quản lý danh sách thành viên (Xóa, Đổi vai trò) | ❌ | ✅ | ❌ |
 | **Nạp dữ liệu Sổ cái** | **Khai báo thủ công (Manual Entry) [Luồng chính]** | ❌ | ✅ (Ghi sổ trực tiếp) | ✅ (Trạng thái Draft) |
 | | **Nạp dữ liệu qua File mẫu Excel [Luồng chính]** | ❌ | ✅ (Ghi sổ trực tiếp) | ✅ (Trạng thái Draft) |
 | | Quét hóa đơn/công tơ bằng AI Vision [Luồng phụ] | ❌ | ✅ (Ghi sổ trực tiếp) | ✅ (Trạng thái Draft) |
@@ -157,11 +159,20 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    subgraph Flow1["Luồng 1: Khởi tạo & Lập kế hoạch (Onboarding & Budgeting)"]
+    subgraph Flow1["Luồng 1: Khởi tạo, Lập kế hoạch & Mời thành viên có phê duyệt (Onboarding & Budgeting)"]
+        direction TB
         A1["Đăng ký / Đăng nhập"] --> A2["Tạo Workspace (Gia đình / Văn phòng)"]
         A2 --> A3["Khai báo Thông số nền: m², Số nhân khẩu"]
         A3 --> A4["Thiết lập Ngân sách tháng & Ngưỡng cảnh báo 85%"]
-        A4 --> A5["Sinh mã mời mời Thành viên (Editor) gia nhập"]
+        A4 --> A5["Reviewer sinh mã mời 6 ký tự (Invite Code)"]
+        
+        subgraph JoinApprovalFlow["Cơ chế Kiểm duyệt Gia nhập 2 bước"]
+            JA1["User nhập Invite Code trên màn hình Tham gia"] --> JA2["Hệ thống tạo Yêu cầu gia nhập (Join Request) ở trạng thái PENDING"]
+            JA2 --> JA3["Reviewer kiểm tra danh sách Yêu cầu gia nhập"]
+            JA3 -->|Accept| JA4["Thêm User vào workspace_members (Role: EDITOR)"]
+            JA3 -->|Reject| JA5["Chuyển REJECTED kèm lý do (User không được vào)"]
+        end
+        A5 --> JA1
     end
 
     subgraph Flow2["Luồng 2: Nạp dữ liệu Activity có cấu trúc & Phê duyệt"]
@@ -212,7 +223,12 @@ flowchart TD
   - Tự động tính toán các chỉ số cường độ phát thải chuẩn hóa:
     $$\text{Chỉ số theo nhân khẩu} = \frac{\text{Tổng kg CO}_2\text{e}}{\text{Số người}} \quad (\text{kg CO}_2\text{e}/\text{người})$$
     $$\text{Chỉ số theo diện tích} = \frac{\text{Tổng kg CO}_2\text{e}}{\text{Diện tích mặt sàn}} \quad (\text{kg CO}_2\text{e}/m^2)$$
-  - Cơ chế sinh mã mời ngẫu nhiên 6 ký tự viết hoa/số (`alphanumeric`), có thời hạn hiệu lực (mặc định 7 ngày).
+  - **Cơ chế Mời & Gia nhập có Phê duyệt 2 lớp (Two-step Join Approval Flow):**
+    - **Bước 1 (Sinh mã):** Reviewer sinh mã mời ngẫu nhiên 6 ký tự (`alphanumeric`, ví dụ `CARB26`, hiệu lực 7 ngày).
+    - **Bước 2 (Gửi yêu cầu gia nhập):** Thành viên nhập mã mời tại màn hình tham gia. Hệ thống kiểm tra tính hợp lệ và **tạo bản ghi Yêu cầu gia nhập (`workspace_join_requests`) ở trạng thái `PENDING`**, KHÔNG cho phép thành viên truy cập ngay vào Workspace để ngăn chặn việc người ngoài chủ đích hoặc dò mã gia nhập trái phép.
+    - **Bước 3 (Kiểm duyệt gia nhập):** Reviewer nhận danh sách yêu cầu chờ duyệt tại mục Quản lý Thành viên, xem thông tin người xin vào (Họ tên, Email) và tiến hành **Chấp thuận (Accept)** hoặc **Từ chối (Reject)**:
+      - *Khi Chấp thuận:* Hệ thống chính thức thêm người dùng vào bảng `workspace_members` với vai trò `EDITOR`.
+      - *Khi Từ chối:* Đánh dấu `REJECTED` (kèm lý do), người dùng không thể xem hay tương tác với dữ liệu của Workspace.
   - Cho phép Quản trị viên Hệ thống (`System Admin`) khởi tạo và quản lý toàn bộ các Workspace trên hệ thống.
 
 ### 5.2. Phân hệ 2: Danh mục Hoạt động & Hệ số Quy chuẩn (Master Data)
@@ -438,11 +454,14 @@ sequenceDiagram
 erDiagram
     users ||--o{ workspace_members : "belongs to"
     workspaces ||--|{ workspace_members : "has"
+    workspaces ||--o{ workspace_join_requests : "receives"
     workspaces ||--o{ workspace_baselines : "configured with"
     workspaces ||--o{ carbon_budgets : "sets"
     workspaces ||--o{ emission_logs : "records"
     workspaces ||--o{ ai_reports : "generates"
     
+    users ||--o{ workspace_join_requests : "submits"
+    users ||--o{ workspace_join_requests : "reviewed by (Reviewer)"
     users ||--o{ emission_logs : "created by"
     users ||--o{ emission_logs : "reviewed by"
     
@@ -478,6 +497,19 @@ erDiagram
         uuid user_id FK
         varchar role
         timestamp joined_at
+    }
+
+    workspace_join_requests {
+        uuid id PK
+        uuid workspace_id FK
+        uuid user_id FK
+        varchar invite_code_used
+        varchar status
+        uuid reviewed_by FK
+        timestamp reviewed_at
+        text rejection_reason
+        timestamp created_at
+        timestamp updated_at
     }
 
     workspace_baselines {
@@ -583,7 +615,21 @@ erDiagram
 - `joined_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 - **Ràng buộc:** `UNIQUE (workspace_id, user_id)`
 
-#### 4. Bảng `workspace_baselines` (Thông số nền diện tích & nhân khẩu)
+#### 4. Bảng `workspace_join_requests` (Yêu cầu Tham gia Workspace Chờ duyệt)
+Quản lý luồng kiểm duyệt gia nhập 2 bước, bảo vệ an toàn cho Workspace tránh việc người lạ tùy tiện vào khi có mã code.
+- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
+- `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
+- `user_id`: `UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE` (Người dùng xin gia nhập)
+- `invite_code_used`: `VARCHAR(10) NOT NULL` (Mã mời đã nhập)
+- `status`: `VARCHAR(20) NOT NULL DEFAULT 'PENDING'` (`PENDING`, `APPROVED`, `REJECTED`)
+- `reviewed_by`: `UUID NULL REFERENCES users(id)` (Reviewer thực hiện duyệt/từ chối)
+- `reviewed_at`: `TIMESTAMPTZ NULL`
+- `rejection_reason`: `TEXT NULL`
+- `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
+- `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
+- **Ràng buộc:** Unique Partial Index `(workspace_id, user_id)` WHERE `status = 'PENDING'` (Mỗi người dùng chỉ được có tối đa 1 yêu cầu chờ duyệt tại một Workspace).
+
+#### 5. Bảng `workspace_baselines` (Thông số nền diện tích & nhân khẩu)
 - `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
 - `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
 - `floor_area_m2`: `NUMERIC(10, 2) NOT NULL CHECK (floor_area_m2 > 0)`
@@ -591,7 +637,7 @@ erDiagram
 - `period_valid_from`: `VARCHAR(7) NOT NULL` (Định dạng `YYYY-MM`)
 - `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 
-#### 5. Bảng `standard_emission_factors` (Master Data Hệ số Quy chuẩn Quốc gia)
+#### 6. Bảng `standard_emission_factors` (Master Data Hệ số Quy chuẩn Quốc gia)
 - `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
 - `category_code`: `VARCHAR(50) NOT NULL UNIQUE` (`ELEC_GRID`, `FUEL_LPG`, `FUEL_DIESEL`, `MOBILITY`, `WASTE_LANDFILL`, `WATER_SUPPLY_TREAT`, `OFFICE_PAPER`, `TRAVEL_FLIGHT`)
 - `activity_name`: `VARCHAR(100) NOT NULL`
@@ -604,7 +650,7 @@ erDiagram
 - `updated_by_admin_id`: `UUID NULL REFERENCES users(id)`
 - `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 
-#### 6. Bảng `carbon_budgets` (Hạn ngạch Ngân sách Phát thải Tháng)
+#### 7. Bảng `carbon_budgets` (Hạn ngạch Ngân sách Phát thải Tháng)
 - `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
 - `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
 - `period`: `VARCHAR(7) NOT NULL` (Định dạng `YYYY-MM`, ví dụ: `2026-10`)
@@ -615,7 +661,7 @@ erDiagram
 - `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 - **Ràng buộc:** `UNIQUE (workspace_id, period)`
 
-#### 7. Bảng `emission_logs` (Sổ cái Ghi nhận Phát thải & Trạng thái Phê duyệt)
+#### 8. Bảng `emission_logs` (Sổ cái Ghi nhận Phát thải & Trạng thái Phê duyệt)
 - `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
 - `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
 - `user_id`: `UUID NOT NULL REFERENCES users(id)` (Người tạo bản ghi)
@@ -638,7 +684,7 @@ erDiagram
 - `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 - `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 
-#### 8. Bảng `ai_reports` (Báo cáo Phân tích AI & Đề xuất Cắt giảm Định kỳ)
+#### 9. Bảng `ai_reports` (Báo cáo Phân tích AI & Đề xuất Cắt giảm Định kỳ)
 - `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
 - `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
 - `report_type`: `VARCHAR(20) NOT NULL` (`WEEKLY`, `MONTHLY`)
@@ -665,6 +711,7 @@ erDiagram
 1. `idx_emission_logs_ws_period_status`: `(workspace_id, billing_period, status)` -> Tối ưu hóa tính tổng phát thải tháng và kiểm tra ngưỡng 85%.
 2. `idx_emission_logs_ws_created`: `(workspace_id, created_at DESC)` -> Tối ưu hóa hiển thị Sổ cái phân trang.
 3. `idx_emission_logs_approval`: `(workspace_id, status)` WHERE `status = 'PENDING_REVIEW'` -> Partial Index cho Hàng đợi duyệt tức thời.
+4. `idx_ws_join_requests_pending`: `(workspace_id, status)` WHERE `status = 'PENDING'` -> Partial Index giúp Reviewer tải danh sách Yêu cầu gia nhập Workspace tức thời (< 50ms).
 
 ---
 
@@ -757,7 +804,8 @@ Kính mời bạn (Reviewer) xem xét các điểm thiết kế kỹ thuật tr�
    - Bổ sung chỉ số thời gian nạp trung bình 1 activity ($\le 20-30\text{s}$ cho nhập tay, $< 2\text{s}$ cho file 100 activities Excel) và thời gian phản hồi kế hoạch cắt giảm / xuất báo cáo ($\le 3-5\text{s}$). Bạn có muốn điều chỉnh con số ngưỡng này không?
 3. **Về Kiến trúc Multi-tenancy & Database (Mục 6 & Mục 7):**  
    - Xác nhận giải pháp **Shared Database, Shared Schema with Discriminator Column (`workspace_id`)** và lưu cứng `factor_applied` tại `emission_logs` để đảm bảo tính bất biến của sổ cái kế toán.
-   - **Đã tiếp thu và loại bỏ bảng `notifications`:** Chuyển sang mô hình Frontend tính toán cảnh báo thời gian thực (Real-time Dynamic Derivation) từ dữ liệu Dashboard/Sổ cái, giúp database tinh gọn còn 8 bảng.
+   - **Đã tiếp thu và loại bỏ bảng `notifications`:** Chuyển sang mô hình Frontend tính toán cảnh báo thời gian thực (Real-time Dynamic Derivation) từ dữ liệu Dashboard/Sổ cái.
+   - **Đã tiếp thu và bổ sung bảng `workspace_join_requests`:** Thiết lập cơ chế kiểm duyệt gia nhập 2 bước (Two-step Join Approval Flow). Khi user nhập đúng Invite Code, hệ thống tạo Join Request ở trạng thái PENDING để Reviewer phê duyệt (Accept/Reject) trước khi chính thức thêm vào `workspace_members`, ngăn chặn triệt để nguy cơ người ngoài chủ đích hoặc dò mã gia nhập trái phép.
 
 ---
 *Tài liệu PRD Phiên bản 1.1 đã cập nhật đầy đủ các điểm review trên nhánh worktree [`docs/prd`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd).*

@@ -83,7 +83,7 @@ flowchart LR
 |:---:|---|---|:---:|---|
 | **US-WS-001** | Khởi tạo & Cấu hình Workspace | Reviewer / System Admin | 2 | API CRUD & Cấu hình Workspace; Màn hình tạo Workspace (React Vite). |
 | **US-WS-002** | Khai báo thông số nền ($m^2$, số người) | Reviewer | 3 | Bảng `workspace_baselines`; Form nhập số người và diện tích. |
-| **US-WS-003** | Mời thành viên vào Workspace qua mã mời | Reviewer / Editor | 3 | API sinh mã mời 6 ký tự; Màn hình nhập mã gia nhập role Editor. |
+| **US-WS-003** | Mời thành viên & Phê duyệt yêu cầu gia nhập | Reviewer / Editor | 3 | API sinh mã mời 6 ký tự; Bảng `workspace_join_requests`; Gửi Join Request & Màn hình duyệt thành viên (Accept/Reject) của Reviewer. |
 | **US-SA-001** | Quản lý & Cập nhật Hệ số chuẩn quốc gia | System Admin | 3 | Bảng `standard_emission_factors`; Cổng cập nhật hệ số của System Admin. |
 | **US-CL-001** | Khai báo phát thải thủ công (Draft) [Chính] | Editor | 3 | Form nạp thủ công sinh hoạt lẻ (xe máy, gas...); tự tính toán preview kg CO2e; lưu `pending_review`. |
 | **US-CL-002** | Tự động quy đổi mức tiêu thụ ra kg CO2e | Editor / Reviewer | 2 | Engine tính toán quy đổi $\text{kg CO}_2\text{e} = \text{Sản lượng} \times \text{Hệ số}$ (Spring Boot + React). |

@@ -15,7 +15,7 @@
 |---|---|---|---|:---:|:---:|:---:|
 | **US-WS-001** | Khởi tạo & Cấu hình Không gian làm việc (Workspace) | Luồng 1: Onboarding | Reviewer / System Admin | Must | 2 | Sprint 1 |
 | **US-WS-002** | Khai báo thông số nền ($m^2$, số người) | Luồng 1: Onboarding | Trưởng nhóm (Reviewer) | Must | 3 | Sprint 1 |
-| **US-WS-003** | Mời thành viên gia nhập với vai trò Editor | Luồng 1: Onboarding | Trưởng nhóm (Reviewer) / Editor | Must | 3 | Sprint 1 |
+| **US-WS-003** | Mời thành viên & Phê duyệt yêu cầu gia nhập Workspace | Luồng 1: Onboarding | Trưởng nhóm (Reviewer) / Editor | Must | 3 | Sprint 1 |
 | **US-SA-001** | Quản lý & cập nhật Hệ số phát thải quy chuẩn | Quản trị Hệ thống | System Admin | Should | 3 | Sprint 1 |
 | **US-CL-001** | Khai báo phát thải thủ công ở trạng thái Draft | Luồng 2: Nạp dữ liệu | Thành viên (Editor) | Must | 3 | Sprint 1 |
 | **US-CL-002** | Tự động quy đổi mức tiêu thụ ra chỉ số kg CO2e | Luồng 3: Xử lý Sổ cái | Editor / Reviewer | Must | 2 | Sprint 1 |
@@ -152,14 +152,14 @@
 
 ---
 
-### US-WS-003: Mời thành viên gia nhập với vai trò Editor
+### US-WS-003: Mời thành viên & Phê duyệt yêu cầu gia nhập Workspace (Join Approval Flow)
 
-**As a** Trưởng nhóm (Reviewer) của một Workspace  
-**I want to** sinh mã mời (Invite Code) để gửi cho các thành viên trong gia đình hoặc nhân viên trong văn phòng  
-**So that** họ có thể tham gia vào Workspace với vai trò Thành viên (Editor) và chủ động tạo các yêu cầu khai báo phát thải  
+**As a** Trưởng nhóm (Reviewer) của một Workspace và Người dùng muốn tham gia (User)  
+**I want to** hệ thống cung cấp mã mời (Invite Code) để người dùng gửi Yêu cầu gia nhập (Join Request) và Reviewer xem xét phê duyệt (Accept/Reject)  
+**So that** việc thêm thành viên vào Workspace được kiểm soát an toàn, ngăn chặn việc người lạ tùy tiện hoặc chủ đích truy cập trái phép vào sổ cái của gia đình/văn phòng  
 
 #### Metadata
-- **Epic/Feature**: Luồng 1 - Khởi tạo & Lập kế hoạch (Member Invitation)
+- **Epic/Feature**: Luồng 1 - Khởi tạo & Lập kế hoạch (Member Invitation & Join Approval)
 - **Priority**: Must Have (MoSCoW)
 - **Estimate**: 3 Story Points
 - **Dependencies**: US-WS-001 (Workspace đã tồn tại)
@@ -170,36 +170,49 @@
 | Tiêu chí | ✅/⚠️ | Ghi chú đánh giá |
 |:---|:---:|:---|
 | **I**ndependent | ✅ | Độc lập với luồng nhập dữ liệu bằng test user có sẵn. |
-| **N**egotiable | ✅ | Định dạng mã mời 6 ký tự hoặc deep link chia sẻ có thể linh hoạt. |
-| **V**aluable | ✅ | Phân định vai trò Editor (người nạp dữ liệu ở trạng thái Draft) cho các thành viên. |
-| **E**stimable | ✅ | Cơ chế tạo mã token 6 ký tự và gán role, ước lượng ~2 ngày dev. |
-| **S**mall | ✅ | Chỉ bao gồm việc tạo mã mời và xử lý gia nhập vai trò Editor. |
-| **T**estable | ✅ | Kiểm thử rõ ràng qua các kịch bản: mã hợp lệ, mã hết hạn, mã sai. |
+| **N**egotiable | ✅ | Giao diện danh sách yêu cầu chờ duyệt có thể nằm trong Cài đặt Workspace hoặc Approval Queue. |
+| **V**aluable | ✅ | Ngăn chặn triệt để nguy cơ người ngoài xâm nhập trái phép vào không gian dữ liệu riêng của gia đình/văn phòng. |
+| **E**stimable | ✅ | Cơ chế tạo mã token 6 ký tự, bảng join request và API duyệt, ước lượng ~2-3 ngày dev. |
+| **S**mall | ✅ | Chỉ bao gồm việc tạo mã mời, gửi request và hành động Accept/Reject thành viên. |
+| **T**estable | ✅ | Kiểm thử rõ ràng qua các kịch bản: gửi request PENDING, Reviewer Accept, Reviewer Reject, mã hết hạn. |
 
 #### Acceptance Criteria
 
-**AC1: Thành viên tham gia Workspace bằng mã mời hợp lệ - Happy path**
+**AC1: Người dùng gửi Yêu cầu gia nhập bằng mã mời hợp lệ - Happy path**
 - **Given** Trưởng nhóm đã tạo mã mời hợp lệ gồm 6 ký tự (ví dụ: `CARB26`) có thời hạn 7 ngày
 - **And** người dùng B đã đăng nhập tài khoản và chưa thuộc Workspace này
-- **When** người dùng B nhập mã `CARB26` tại màn hình "Tham gia Workspace" và ấn xác nhận
-- **Then** hệ thống ghi nhận người dùng B vào danh sách thành viên của Workspace với vai trò `Editor (Member)`
-- **And** hiển thị thông báo: "Bạn đã tham gia thành công vào Workspace [Tên Workspace] với vai trò Thành viên"
-- **And** người dùng B có thể truy cập ngay vào Dashboard và tính năng khai báo phát thải của Workspace.
+- **When** người dùng B nhập mã `CARB26` tại màn hình "Tham gia Workspace" và bấm "Gửi yêu cầu tham gia"
+- **Then** hệ thống tạo một bản ghi trong bảng `workspace_join_requests` ở trạng thái `PENDING`
+- **And** hiển thị thông báo: "Yêu cầu tham gia Workspace [Tên Workspace] đã được gửi thành công. Vui lòng chờ Trưởng nhóm phê duyệt"
+- **And** người dùng B chưa thể truy cập vào Dashboard và dữ liệu của Workspace này.
 
-**AC2: Mã mời đã quá hạn hiệu lực - Edge case**
-- **Given** mã mời đã được tạo quá 7 ngày trước đó
+**AC2: Trưởng nhóm (Reviewer) Phê duyệt (Accept) yêu cầu gia nhập - Happy path**
+- **Given** Trưởng nhóm mở mục "Quản lý Thành viên / Yêu cầu gia nhập" và thấy yêu cầu của người dùng B đang ở trạng thái `PENDING`
+- **When** Trưởng nhóm nhấn nút "Chấp thuận (Accept)"
+- **Then** hệ thống cập nhật trạng thái yêu cầu sang `APPROVED`
+- **And** tự động thêm người dùng B vào bảng `workspace_members` với vai trò `EDITOR`
+- **And** người dùng B có thể truy cập vào Workspace và bắt đầu nạp hoạt động phát thải ở trạng thái Draft.
+
+**AC3: Trưởng nhóm (Reviewer) Từ chối (Reject) yêu cầu gia nhập - Happy path**
+- **Given** Trưởng nhóm phát hiện yêu cầu gia nhập từ một tài khoản không rõ danh tính
+- **When** Trưởng nhóm nhấn nút "Từ chối (Reject)" kèm lý do
+- **Then** hệ thống cập nhật trạng thái yêu cầu sang `REJECTED`
+- **And** không thêm người dùng này vào bảng `workspace_members`
+- **And** người dùng này hoàn toàn bị từ chối truy cập vào Workspace.
+
+**AC4: Mã mời đã quá hạn hiệu lực hoặc không tồn tại - Negative path**
+- **Given** mã mời đã được tạo quá 7 ngày trước đó hoặc nhập mã không tồn tại (ví dụ: `INVALID`)
 - **When** người dùng nhập mã để tham gia
-- **Then** hệ thống từ chối quyền tham gia
-- **And** hiển thị thông báo: "Mã mời đã hết hạn sử dụng. Vui lòng liên hệ Trưởng nhóm để nhận mã mới"
-- **And** không làm thay đổi danh sách thành viên hiện tại của Workspace.
+- **Then** hệ thống từ chối tạo yêu cầu gia nhập
+- **And** hiển thị thông báo lỗi: "Mã mời không tồn tại hoặc đã hết hạn sử dụng. Vui lòng kiểm tra lại".
 
-**AC3: Nhập mã mời không tồn tại - Negative path**
-- **Given** người dùng đang ở giao diện nhập mã mời
-- **When** người dùng nhập một mã không tồn tại trên hệ thống (ví dụ: `INVALID`) và bấm xác nhận
-- **Then** hệ thống từ chối và hiển thị thông báo lỗi: "Mã mời không tồn tại hoặc không chính xác. Vui lòng kiểm tra lại".
+**AC5: Người dùng đã có yêu cầu PENDING hoặc đã là thành viên - Edge case**
+- **Given** người dùng B đã gửi yêu cầu gia nhập đang ở trạng thái `PENDING` (hoặc đã là thành viên)
+- **When** người dùng B cố tình nhập lại mã mời để gửi yêu cầu một lần nữa
+- **Then** hệ thống chặn hành động và hiển thị cảnh báo: "Bạn đã có một yêu cầu tham gia đang chờ duyệt (hoặc đã là thành viên) tại Không gian làm việc này".
 
 #### Notes
-- **Dependencies**: Bảng `workspace_invitations`, bảng `workspace_members`.
+- **Dependencies**: Bảng `workspace_join_requests`, bảng `workspace_members`, bảng `workspaces`.
 - **Assumptions**: Tối đa 20 thành viên cho mỗi Workspace trong phạm vi Micro-Office.
 - **Open Questions**: Không có.
 
@@ -878,7 +891,7 @@ Bảng đối chiếu đảm bảo 100% các thành phần trong 4 Luồng hoạ
 |---|---|:---:|:---:|---|
 | **1. Onboarding & Budgeting** | Tạo & Cấu hình Workspace | UC01 | **US-WS-001** | Tạo không gian dữ liệu riêng, gán Reviewer hoặc System Admin. |
 | **1. Onboarding & Budgeting** | Khai báo thông số nền ($m^2$, số người) | UC02 | **US-WS-002** | Cơ sở tính $\text{CO}_2\text{e}/\text{người}$ và $\text{CO}_2\text{e}/m^2$. |
-| **1. Onboarding & Budgeting** | Mời thành viên vào Workspace | UC03 | **US-WS-003** | Sinh mã mời tham gia vai trò Editor. |
+| **1. Onboarding & Budgeting** | Mời thành viên & Phê duyệt yêu cầu gia nhập | UC03 | **US-WS-003** | Sinh mã mời, gửi Join Request, Reviewer Accept/Reject. |
 | **1. Onboarding & Budgeting** | Thiết lập Ngân sách & Ngưỡng 85% | UC09 | **US-BG-001** | Trần phát thải tối đa và mốc cảnh báo sớm. |
 | **2. Nạp dữ liệu & Phê duyệt** | Luồng nạp thủ công (Manual Entry) | UC04 | **US-CL-001** | Sinh hoạt lẻ (xe máy 110cc, gas...) lưu Draft. |
 | **2. Nạp dữ liệu & Phê duyệt** | Luồng AI quét hóa đơn/công tơ (Popup) | UC05 | **US-CL-003** | Multimodal AI bóc tách JSON, Popup preview xác nhận. |

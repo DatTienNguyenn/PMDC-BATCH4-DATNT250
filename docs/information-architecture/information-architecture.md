@@ -108,13 +108,17 @@ graph TD
   - Nút bấm: "Hủy bỏ" và **"Tạo Workspace"**.
 - **Hậu điều kiện:** Khởi tạo thành công, tự động gán quyền `Reviewer` cho người tạo (hoặc liên kết quyền quản trị trực tiếp cho System Admin) và mở Dashboard Workspace vừa tạo.
 
-#### 1.5. Màn hình Tham gia Workspace bằng mã mời (Join Workspace with Invite Code)
+#### 1.5. Màn hình Gửi Yêu cầu Tham gia Workspace bằng mã mời (Join Workspace Request)
 - **Đường dẫn (URL):** `/workspaces/join`
 - **Thành phần giao diện:**
   - Ô nhập mã mời: 6 ký tự chữ/số (ví dụ: `CARB26`).
-  - Nút bấm: "Xác nhận tham gia".
-  - Hộp thông tin xem trước Workspace (nếu mã hợp lệ): Tên Workspace, Tên Trưởng nhóm, Xác nhận vai trò được cấp là `Editor`.
-- **Phản hồi:** Thông báo lỗi nếu mã quá hạn 7 ngày hoặc mã không tồn tại.
+  - Hộp thông tin xem trước Workspace (khi nhập mã hợp lệ): Tên Workspace, Loại hình (Gia đình/Văn phòng), Tên Trưởng nhóm (Reviewer).
+  - Nút bấm nổi bật: **"Gửi yêu cầu tham gia"**.
+- **Phản hồi & Trạng thái bảo mật:**
+  - Tạo bản ghi Yêu cầu gia nhập (`PENDING`) trong bảng `workspace_join_requests`.
+  - Hiển thị thông báo: *"Yêu cầu tham gia Không gian làm việc đã được gửi thành công. Vui lòng chờ Trưởng nhóm (Reviewer) xem xét và phê duyệt."*
+  - **Quy tắc an toàn:** Người dùng **hoàn toàn chưa được truy cập** vào Workspace cho đến khi Reviewer thực hiện thao tác Phê duyệt (Accept).
+  - Thông báo lỗi nếu mã quá hạn 7 ngày, mã không tồn tại hoặc người dùng đã có yêu cầu đang chờ duyệt.
 
 ---
 
@@ -259,9 +263,12 @@ graph TD
     - Ô nhập hạn ngạch trần phát thải mục tiêu (Target $\text{kg CO}_2\text{e}$).
     - Thanh trượt hiển thị ngưỡng cảnh báo sớm (cố định ở mức $85\%$).
     - Lịch sử hạn ngạch các tháng trước.
-  - **Tab 3: Quản lý Thành viên (Member Management):**
-    - Danh sách thành viên hiện tại: Tên, Email, Vai trò (`Reviewer` / `Editor`), Ngày tham gia.
-    - Khu vực Mã mời: Nút "Tạo mã mời mới" -> Hiển thị mã 6 ký tự (hạn 7 ngày) kèm nút "Sao chép link mời".
+  - **Tab 3: Quản lý Thành viên & Yêu cầu gia nhập (Member & Join Request Management):**
+    - **Danh sách Yêu cầu gia nhập chờ duyệt (Pending Requests):**
+      - Thẻ thông tin người xin gia nhập: Họ tên, Email, Thời gian gửi yêu cầu, Mã mời đã dùng.
+      - Nút hành động: **"Chấp thuận (Accept)"** (thêm ngay vào `workspace_members` với role `Editor`) hoặc **"Từ chối (Reject)"** (kèm popup lý do từ chối).
+    - **Danh sách Thành viên hiện tại:** Tên, Email, Vai trò (`Reviewer` / `Editor`), Ngày tham gia.
+    - **Khu vực Mã mời:** Nút "Tạo mã mời mới" -> Hiển thị mã 6 ký tự (hạn 7 ngày) kèm nút "Sao chép mã".
     - Hành động: Thay đổi vai trò hoặc Gỡ thành viên (Kick member).
 
 ---
