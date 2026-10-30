@@ -35,46 +35,46 @@ Hệ thống được cấu trúc thành **9 phân hệ chức năng hoàn chỉ
 ```mermaid
 mindmap
   root((Hệ thống Quản trị & Phân tích Dấu chân Carbon))
-    1. Đăng nhập & Phân quyền IAM
-      Đăng nhập / Đăng ký (Email, Password, Google SSO)
-      Quên & Đặt lại mật khẩu
-      Quản lý phiên đăng nhập
-      Kiểm soát truy cập RBAC (System Admin, Reviewer, Editor)
-    2. Quản lý Tenant Workspace
-      Cấu hình tên, loại hình (Gia đình / Văn phòng)
-      Thông số nền (Số thành viên, Diện tích m²)
-      Mời thành viên (Invite Link / Mã mời)
-      Phân quyền & Quản lý danh sách thành viên
-    3. Dashboard Trung tâm
-      Thẻ KPI (Tổng phát thải tháng, Số dư ngân sách)
-      Chỉ số chuẩn hóa (CO2e/người, CO2e/m²)
-      Đồ thị Donut phân bổ danh mục & Line/Bar theo thời gian
-      Thanh tiến độ Budget Progress Bar & 5 hoạt động gần nhất
-    4. Quản lý Hoạt động Phát thải
-      Sổ cái Data Grid (Bộ lọc thời gian, danh mục, thành viên)
-      CRUD hoạt động phát thải & đính kèm minh chứng
-      Quy đổi tự động (Sản lượng x Hệ số = kg CO2e)
-    5. Import Dữ liệu Đa kênh
-      AI Vision Ingestion (Quét hóa đơn EVN/nước/công tơ)
-      Trích xuất JSON & Popup xem trước đối chiếu
-      Bulk Upload file mẫu Excel/CSV & Export dữ liệu
-    6. Phân tích Target & Ngân sách
-      Cài đặt Hạn ngạch tháng & Ngưỡng cảnh báo 85%
-      Dự báo cạn kiệt ngân sách theo tốc độ tiêu thụ
-      Cảnh báo thời gian thực vi phạm ngân sách
-    7. Báo cáo Insight AI Analytics
-      Tổng hợp định kỳ cuối tuần / tháng / quý
-      So sánh kỳ trước Period-over-Period
-      AI Reasoning phát hiện bất thường & Đề xuất Actionable Advice
-      Xuất bản & Tải xuống Báo cáo file PDF
-    8. Hồ sơ Cá nhân User Profile
-      Thông tin cá nhân (Tên, Avatar)
-      Thống kê tỷ lệ đóng góp phát thải vào Workspace
-      Tùy chỉnh nhận thông báo (Notification In-app)
-    9. Quản trị Hệ thống System Admin
-      CRUD Bảng Hệ số phát thải chuẩn (EVN, GHG Protocol)
-      Quản lý danh sách Workspace toàn hệ thống
-      Cấu hình tham số AI (API Keys, Prompt) & Audit Logs
+    ["1. Đăng nhập & Phân quyền IAM"]
+      ["Đăng nhập / Đăng ký (Email, Password, Google SSO)"]
+      ["Quên & Đặt lại mật khẩu"]
+      ["Quản lý phiên đăng nhập"]
+      ["Kiểm soát truy cập RBAC (System Admin, Reviewer, Editor)"]
+    ["2. Quản lý Tenant Workspace"]
+      ["Cấu hình tên, loại hình (Gia đình / Văn phòng)"]
+      ["Thông số nền (Số thành viên, Diện tích m²)"]
+      ["Mời thành viên (Invite Link / Mã mời)"]
+      ["Phân quyền & Quản lý danh sách thành viên"]
+    ["3. Dashboard Trung tâm"]
+      ["Thẻ KPI (Tổng phát thải tháng, Số dư ngân sách)"]
+      ["Chỉ số chuẩn hóa (CO2e/người, CO2e/m²)"]
+      ["Đồ thị Donut phân bổ danh mục & Line/Bar theo thời gian"]
+      ["Thanh tiến độ Budget Progress Bar & 5 hoạt động gần nhất"]
+    ["4. Quản lý Hoạt động Phát thải"]
+      ["Sổ cái Data Grid (Bộ lọc thời gian, danh mục, thành viên)"]
+      ["CRUD hoạt động phát thải & đính kèm minh chứng"]
+      ["Quy đổi tự động (Sản lượng x Hệ số = kg CO2e)"]
+    ["5. Import Dữ liệu Đa kênh"]
+      ["AI Vision Ingestion (Quét hóa đơn EVN/nước/công tơ)"]
+      ["Trích xuất JSON & Popup xem trước đối chiếu"]
+      ["Bulk Upload file mẫu Excel/CSV & Export dữ liệu"]
+    ["6. Phân tích Target & Ngân sách"]
+      ["Cài đặt Hạn ngạch tháng & Ngưỡng cảnh báo 85%"]
+      ["Dự báo cạn kiệt ngân sách theo tốc độ tiêu thụ"]
+      ["Cảnh báo thời gian thực vi phạm ngân sách"]
+    ["7. Báo cáo Insight AI Analytics"]
+      ["Tổng hợp định kỳ cuối tuần / tháng / quý"]
+      ["So sánh kỳ trước Period-over-Period"]
+      ["AI Reasoning phát hiện bất thường & Đề xuất Actionable Advice"]
+      ["Xuất bản & Tải xuống Báo cáo file PDF"]
+    ["8. Hồ sơ Cá nhân User Profile"]
+      ["Thông tin cá nhân (Tên, Avatar)"]
+      ["Thống kê tỷ lệ đóng góp phát thải vào Workspace"]
+      ["Tùy chỉnh nhận thông báo (Notification In-app)"]
+    ["9. Quản trị Hệ thống System Admin"]
+      ["CRUD Bảng Hệ số phát thải chuẩn (EVN, GHG Protocol)"]
+      ["Quản lý danh sách Workspace toàn hệ thống"]
+      ["Cấu hình tham số AI (API Keys, Prompt) & Audit Logs"]
 ```
 
 ---
