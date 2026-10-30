@@ -246,6 +246,9 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
     ├── activity-supported.md          # Danh mục hoạt động phát thải & Hệ số phát thải quy chuẩn (Scope 1, 2, 3)
     ├── cau_truc_san_pham_xmind.png    # Sơ đồ Mindmap cấu trúc sản phẩm 9 phân hệ
     ├── emission-reference-benchmark.md# Quy định & phương pháp luận mức phát thải tham chiếu (Household 46.4% vs Workplace 100%)
+    ├── api-schema/
+    │   ├── api-schema.md              # Đặc tả chi tiết RESTful API Schema, Data Contracts & Kiểm tra Use Cases
+    │   └── openapi.yaml               # Đặc tả chuẩn máy OpenAPI 3.1 (Swagger)
     ├── information-architecture/
     │   ├── information-architecture.md# Tài liệu Kiến trúc Thông tin & Đặc tả giao diện (IA)
     │   └── sitemap.png                # Sơ đồ kiến trúc thông tin & cây màn hình (Sitemap)
@@ -262,6 +265,7 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
 - **[docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md):** Quy định và giải thích nguồn gốc dữ liệu, phương pháp luận xác định mức phát thải tham chiếu quốc gia dựa trên Our World in Data ($3.67\text{ tấn/người/năm}$), phân bổ tỷ lệ $46,4\%$ cho Hộ gia đình (3 nhóm sinh hoạt cốt lõi: Điện, Giao thông đường bộ, Rác thải) và $100\%$ cho Nơi làm việc, đặc tả công thức toán học và cấu trúc dữ liệu tham chiếu.
 - **[spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md):** Định nghĩa chi tiết phạm vi In-Scope / Out-of-Scope, ma trận RBAC, 4 luồng hoạt động cốt lõi và danh mục 12 Use Cases.
 - **[docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/information-architecture/information-architecture.md):** Danh mục 26 màn hình chuẩn hóa (Screen ID, Routes), sơ đồ phân cấp Screen Hierarchy 5 tầng, Hợp đồng 5 Cung bậc Trạng thái UI (State Contract), Screen-to-API Mapping Matrix và Ma trận phân quyền RBAC chi tiết.
+- **[docs/api-schema/api-schema.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/api-schema/api-schema.md):** Đặc tả toàn diện hệ thống RESTful API Schema, Data Contracts (Request/Response Envelopes, Validation Rules), kiểm tra đối soát quy trình nghiệp vụ và bao phủ 100% danh mục 12 Use Cases (kèm file OpenAPI 3.1 [`docs/api-schema/openapi.yaml`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/api-schema/openapi.yaml)).
 - **[docs/usecase/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/usecase/use-cases.md):** Đặc tả chi tiết từng Use Case từ UC01 đến UC12 (Tiền điều kiện, Hậu điều kiện, Luồng chính, Luồng ngoại lệ).
 - **[docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/user-stories.md):** Danh mục 15 User Stories được chuẩn hóa theo chuẩn **INVEST** và tiêu chí nghiệm thu **Gherkin Syntax (Given-When-Then)** theo phương pháp luận của BA Zone & Digital School (Phúc NT).
 

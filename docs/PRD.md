@@ -462,11 +462,13 @@ erDiagram
     workspaces ||--o{ carbon_budgets : "sets"
     workspaces ||--o{ emission_logs : "records"
     workspaces ||--o{ ai_reports : "generates"
+    workspaces ||--o{ emission_reduction_plans : "has roadmap"
     
     users ||--o{ workspace_join_requests : "submits"
     users ||--o{ workspace_join_requests : "reviewed by (Reviewer)"
     users ||--o{ emission_logs : "created by"
     users ||--o{ emission_logs : "reviewed by"
+    users ||--o{ emission_reduction_plans : "created by (Reviewer)"
     
     standard_emission_factors ||--o{ emission_logs : "applies factor"
     users ||--o{ standard_emission_factors : "updated by (System Admin)"
@@ -479,6 +481,7 @@ erDiagram
         varchar avatar_url
         varchar global_role
         boolean is_active
+        jsonb notification_preferences
         timestamp created_at
         timestamp updated_at
     }
@@ -503,6 +506,7 @@ erDiagram
         uuid workspace_id FK
         uuid user_id FK
         varchar role
+        timestamp last_read_notifications_at
         timestamp joined_at
     }
 
@@ -601,6 +605,7 @@ erDiagram
 - `avatar_url`: `VARCHAR(500) NULL`
 - `global_role`: `VARCHAR(20) NOT NULL DEFAULT 'USER'` (`SYSTEM_ADMIN`, `USER`)
 - `is_active`: `BOOLEAN NOT NULL DEFAULT true`
+- `notification_preferences`: `JSONB NOT NULL DEFAULT '{"notify_budget_warning": true, "notify_approval_result": true}'::jsonb`
 - `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 - `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 
@@ -610,7 +615,7 @@ erDiagram
 - `type`: `VARCHAR(20) NOT NULL` (`HOME`, `OFFICE`)
 - `invite_code`: `VARCHAR(10) NULL UNIQUE`
 - `invite_code_expires_at`: `TIMESTAMPTZ NULL`
-- `status`: `VARCHAR(20) NOT NULL DEFAULT 'ACTIVE'` (`ACTIVE`, `ARCHIVED`)
+- `status`: `VARCHAR(20) NOT NULL DEFAULT 'ACTIVE'` (`ACTIVE`, `ARCHIVED`, `SUSPENDED`)
 - `ai_report_frequency`: `VARCHAR(20) NOT NULL DEFAULT 'MONTHLY'` (`DISABLED`, `WEEKLY`, `MONTHLY`)
 - `ai_report_day_of_week`: `INT NULL CHECK (ai_report_day_of_week BETWEEN 1 AND 7)` (1 = Thứ Hai, 7 = Chủ Nhật; áp dụng khi frequency là `WEEKLY`)
 - `ai_report_day_of_month`: `INT NULL CHECK (ai_report_day_of_month BETWEEN -1 AND 31)` (-1: ngày cuối cùng của tháng, 1..31: ngày cụ thể; áp dụng khi frequency là `MONTHLY`)
@@ -623,6 +628,7 @@ erDiagram
 - `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
 - `user_id`: `UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE`
 - `role`: `VARCHAR(20) NOT NULL` (`REVIEWER`, `EDITOR`)
+- `last_read_notifications_at`: `TIMESTAMPTZ NULL` (Thời điểm người dùng mở xem Drawer thông báo gần nhất)
 - `joined_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 - **Ràng buộc:** `UNIQUE (workspace_id, user_id)`
 
@@ -706,6 +712,49 @@ Quản lý luồng kiểm duyệt gia nhập 2 bước, bảo vệ an toàn cho 
 - `actionable_advice_markdown`: `TEXT NOT NULL`
 - `pdf_file_url`: `VARCHAR(500) NULL`
 - `generated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
+
+#### 10. Bảng `system_configurations` (Cấu hình Tham số Toàn hệ thống & Prompts AI)
+- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
+- `config_key`: `VARCHAR(100) NOT NULL UNIQUE` (ví dụ: `AI_MODEL_NAME`, `PROMPT_VISION_PARSER`, `PROMPT_INSIGHT_REPORT`)
+- `config_value`: `JSONB NOT NULL`
+- `description`: `VARCHAR(255) NULL`
+- `updated_by`: `UUID NULL REFERENCES users(id)`
+- `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
+
+#### 11. Bảng `system_audit_logs` (Nhật ký Kiểm toán Thao tác Quản trị Hệ thống)
+- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
+- `admin_id`: `UUID NOT NULL REFERENCES users(id)`
+- `action`: `VARCHAR(100) NOT NULL` (`UPDATE_EMISSION_FACTOR`, `SUSPEND_WORKSPACE`, `ACTIVATE_WORKSPACE`, `UPDATE_AI_CONFIG`)
+- `resource_type`: `VARCHAR(50) NOT NULL` (`STANDARD_FACTOR`, `WORKSPACE`, `SYSTEM_CONFIG`)
+- `resource_id`: `VARCHAR(100) NULL`
+- `details`: `JSONB NULL`
+- `ip_address`: `VARCHAR(45) NULL`
+- `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
+
+#### 12. Bảng `ai_usage_logs` (Giám sát Lượt gọi API & Chi phí AI)
+- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
+- `workspace_id`: `UUID NULL REFERENCES workspaces(id) ON DELETE SET NULL`
+- `service_type`: `VARCHAR(50) NOT NULL` (`VISION_PARSER`, `INSIGHT_GENERATOR`, `REDUCTION_PLANNER`)
+- `prompt_tokens`: `INT NOT NULL DEFAULT 0`
+- `completion_tokens`: `INT NOT NULL DEFAULT 0`
+- `estimated_cost_usd`: `NUMERIC(10, 6) NOT NULL DEFAULT 0`
+- `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
+
+#### 13. Bảng `emission_reduction_plans` (Kế hoạch Lộ trình Cắt giảm Phát thải Cá nhân hóa từ AI)
+Lưu trữ mục tiêu cắt giảm dài hạn, tầm nhìn thời gian và lộ trình phân rã chi tiết theo từng tháng do AI đề xuất riêng cho Workspace.
+- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
+- `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
+- `created_by_user_id`: `UUID NOT NULL REFERENCES users(id)`
+- `baseline_period`: `VARCHAR(7) NOT NULL` (Kỳ làm mốc đo lường, ví dụ `2026-10`)
+- `baseline_emissions_kg`: `NUMERIC(12, 2) NOT NULL` (Tổng phát thải tại kỳ cơ sở, ví dụ `348.50`)
+- `target_reduction_percentage`: `NUMERIC(5, 2) NOT NULL CHECK (target_reduction_percentage > 0 AND target_reduction_percentage <= 100)` (Tỷ lệ cắt giảm mục tiêu, ví dụ `15.00`%)
+- `target_emissions_kg`: `NUMERIC(12, 2) NOT NULL` (Mức phát thải mục tiêu cuối lộ trình, ví dụ `296.23`)
+- `time_horizon_months`: `INT NOT NULL CHECK (time_horizon_months BETWEEN 1 AND 36)` (Tầm nhìn thời gian, ví dụ `3`, `6`, `12` tháng)
+- `monthly_roadmap`: `JSONB NOT NULL` (Cấu trúc mảng chứa các mốc tháng: mục tiêu kg CO2e, % giảm lũy kế và danh sách các hành động định lượng khả thi)
+- `status`: `VARCHAR(20) NOT NULL DEFAULT 'ACTIVE'` (`ACTIVE`, `COMPLETED`, `ARCHIVED`)
+- `pdf_file_url`: `VARCHAR(500) NULL` (Đường dẫn tải tài liệu PDF lộ trình)
+- `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
+- `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 
 > [!TIP]
 > **Quyết định Tinh gọn Database Schema (Theo Review):**  

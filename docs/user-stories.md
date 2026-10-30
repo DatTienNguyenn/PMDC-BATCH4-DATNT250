@@ -781,6 +781,16 @@
 - **And** ghi nhận nhật ký lỗi và hiển thị thông báo thân thiện: "Dịch vụ AI đang bận hoặc gián đoạn kết nối. Hệ thống sẽ tự động thử lại vào chu kỳ tiếp theo"
 - **And** không làm gián đoạn các tính năng khác trên hệ thống.
 
+**AC5: Reviewer thiết lập mục tiêu cắt giảm dài hạn và nhận Lộ trình Cắt giảm Theo Từng Tháng từ AI - Reduction Roadmap path**
+- **Given** Reviewer đang ở màn hình Báo cáo AI & Kế hoạch Cắt giảm (`SCR-INSIGHT-01`), Workspace có dữ liệu cơ sở tháng gần nhất phát thải 348.50 kg CO2e
+- **When** Reviewer nhập mục tiêu muốn giảm `15%` trong tầm nhìn `3 tháng` và bấm "AI Sinh Lộ trình Cắt giảm"
+- **Then** hệ thống gọi LLM phân tích cơ cấu tiêu thụ và trả về Lộ trình Cắt giảm Theo Từng Tháng (Month-by-Month Reduction Roadmap) trong vòng dưới 10 giây
+- **And** lộ trình phân bổ mốc giảm cụ thể qua từng tháng:
+  - *Tháng 1 (Mục tiêu 331.08 kg - Giảm 5%):* Hành động chuyển 2 ngày đi xe máy sang tàu điện Cát Linh - Hà Đông (-12.00 kg CO2e), tắt bình nóng lạnh khi không dùng (-5.42 kg CO2e)
+  - *Tháng 2 (Mục tiêu 313.65 kg - Giảm lũy kế 10%):* Hành động đặt điều hòa 26°C kết hợp quạt thay vì 22°C (-13.50 kg CO2e), đi bộ quãng đường ngắn (-4.00 kg CO2e)
+  - *Tháng 3 (Mục tiêu 296.23 kg - Giảm lũy kế 15%):* Hành động tối ưu hóa nấu ăn bếp từ/áp suất (-10.50 kg CO2e), phân loại rác tái chế (-6.85 kg CO2e)
+- **And** kế hoạch được lưu vào bảng `emission_reduction_plans` và hiển thị trực quan dạng Timeline trên giao diện để theo dõi đối chiếu thực tế.
+
 #### Notes
 - **Dependencies**: Bảng `ai_reports`, cron task scheduler (node-cron hoặc PostgreSQL pg_cron).
 - **Assumptions**: Lưu lại kết quả để Reviewer có thể xem lại bất kỳ lúc nào mà không cần gọi API AI tốn kém chi phí.
