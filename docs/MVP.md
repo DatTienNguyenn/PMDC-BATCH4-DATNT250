@@ -15,7 +15,7 @@ Phiên bản khả dụng tối thiểu (MVP - Minimum Viable Product) được 
 1. **Số hóa sổ cái phát thải đa kênh:** Người dùng có thể ghi nhận hoạt động phát sinh carbon dễ dàng qua 3 phương thức: nhập thủ công sinh hoạt lẻ, quét hóa đơn/công tơ bằng AI Vision và nạp hàng loạt bằng file mẫu Excel.
 2. **Quy trình kiểm duyệt minh bạch:** Tách bạch vai trò Thành viên (Editor nạp dữ liệu ở trạng thái Draft) và Trưởng nhóm (Reviewer phê duyệt Accept/Reject kèm lý do) trước khi chính thức ghi sổ.
 3. **Kiểm soát ngân sách & Cảnh báo tức thì:** Hỗ trợ cài đặt trần hạn ngạch tháng, tính toán các chỉ số chuẩn hóa quy mô ($\text{kg CO}_2\text{e}/\text{người}$, $\text{kg CO}_2\text{e}/m^2$) và tự động bắn Notification cảnh báo tới toàn bộ thành viên khi chạm ngưỡng $85\%$ hoặc vượt trần $100\%$.
-4. **Hành động cắt giảm thông minh:** Chạy tác vụ Cronjob định kỳ phân tích dữ liệu tiêu thụ, sinh Kế hoạch cắt giảm (Reduction Plan) cá nhân hóa từ AI và hỗ trợ xuất báo cáo ra file PDF chuẩn in ấn.
+4. **Hỗ trợ đề xuất phương án cắt giảm cá nhân hóa từ AI:** Chạy tác vụ Cronjob định kỳ phân tích dữ liệu tiêu thụ, đề xuất phương án cắt giảm (Reduction Plan) cá nhân hóa từ AI (hỗ trợ gợi ý giải pháp định lượng khả thi chứ không trực tiếp can thiệp cắt giảm emission), và hỗ trợ xuất báo cáo ra file PDF chuẩn in ấn.
 
 ---
 
