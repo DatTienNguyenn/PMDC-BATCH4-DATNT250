@@ -3,47 +3,25 @@
 
 > **Căn cứ tài liệu:** [spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md), [docs/PRD.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/PRD.md), [docs/usecase/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/usecase/use-cases.md), [docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/user-stories.md)  
 > **Tham chiếu đồ họa:** [docs/information-architecture/sitemap.png](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/information-architecture/sitemap.png)  
-> **Phiên bản:** 3.0 (Chuẩn hóa toàn diện Danh mục Screen ID, Route, Screen Hierarchy, UI/UX State Contract và Screen-to-API Mapping Matrix)  
+> **Phiên bản:** 3.1 (Chuẩn hóa toàn diện Danh mục Screen ID, Route, Screen Hierarchy, UI/UX State Contract và Screen-to-API Mapping Matrix)  
 > **Nhánh phát triển:** `docs/information-architecture` (Git Worktree)
 
 ---
 
 ## 📋 MỤC LỤC TỔNG QUAN
 
-1. [Kiểm tra Tính Đầy đủ của Các View & Chuẩn hóa Route](#-1-kiểm-tra-tính-đầy-đủ-của-các-view--chuẩn-hóa-route)
-2. [Master Screen Catalog (Danh mục Toàn bộ Màn hình Chuẩn hóa)](#-2-master-screen-catalog-danh-mục-màn-hình-chuẩn-hóa)
-3. [Screen Hierarchy (Cấu trúc Phân cấp Màn hình)](#-3-screen-hierarchy-cấu-trúc-phân-cấp-màn-hình)
-4. [UI/UX State Contract & Interaction Rules](#-4-uiux-state-contract--interaction-rules)
-5. [Screen-to-API Mapping Matrix (Ánh xạ Giao diện - API Operations)](#-5-screen-to-api-mapping-matrix)
-6. [Đặc tả Chi tiết Giao diện & Thành phần Tương tác (View Specifications)](#-6-đặc-tả-chi-tiết-giao-diện--thành-phần-tương-tác)
-7. [Ma trận Phân quyền Truy cập Màn hình (RBAC Matrix)](#-7-ma-trận-phân-quyền-truy-cập-màn-hình-rbac-matrix)
+1. [Master Screen Catalog (Danh mục Toàn bộ Màn hình Chuẩn hóa)](#-1-master-screen-catalog-danh-mục-màn-hình-chuẩn-hóa)
+2. [Screen Hierarchy (Cấu trúc Phân cấp Màn hình)](#-2-screen-hierarchy-cấu-trúc-phân-cấp-màn-hình)
+3. [UI/UX State Contract & Interaction Rules](#-3-uiux-state-contract--interaction-rules)
+4. [Screen-to-API Mapping Matrix (Ánh xạ Giao diện - API Operations)](#-4-screen-to-api-mapping-matrix)
+5. [Đặc tả Chi tiết Giao diện & Thành phần Tương tác (View Specifications)](#-5-đặc-tả-chi-tiết-giao-diện--thành-phần-tương-tác)
+6. [Ma trận Phân quyền Truy cập Màn hình (RBAC Matrix)](#-6-ma-trận-phân-quyền-truy-cập-màn-hình-rbac-matrix)
 
 ---
 
-## 🔍 1. KIỂM TRA TÍNH ĐẦY ĐỦ CỦA CÁC VIEW & CHUẨN HÓA ROUTE
+## 🗂️ 1. MASTER SCREEN CATALOG (DANH MỤC MÀN HÌNH CHUẨN HÓA)
 
-### 1.1. Đánh giá hiện trạng phiên bản trước (Gap Audit)
-Qua rà soát đối chiếu tài liệu Kiến trúc Thông tin ban đầu với [PRD.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/PRD.md), [use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/usecase/use-cases.md) và [user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/user-stories.md), hệ thống đã định hình được khung sườn chính gồm 3 khối lớn. Tuy nhiên, vẫn còn các **khoảng trống giao diện (UI Gaps)** và **thiếu sót về cấu trúc định tuyến (Route Gaps)**:
-
-1. **Thiếu định danh chuẩn hóa (Screen ID):** Các màn hình trước đây chỉ được đánh số tạm (`V1.1`, `V2.1`,...), gây khó khăn cho việc truy vết giữa User Stories, Test Cases, Figma wireframes và API Endpoints.
-2. **Thiếu các View/Modal nghiệp vụ then chốt:**
-   - **Human-in-the-loop AI Vision Preview Modal:** Chưa tách biệt thành sub-view có trạng thái kiểm chứng và chỉnh sửa trực tiếp dữ liệu bóc tách từ hóa đơn.
-   - **Excel Batch Import Preview Modal:** Bảng xác thực dữ liệu trước khi import (phân tách dòng hợp lệ và dòng lỗi) cần một view modal kiểm soát riêng.
-   - **Rejection Reason Modals:** Cả quy trình từ chối yêu cầu nạp phát thải (`US-CL-005`) và từ chối duyệt thành viên gia nhập (`US-WS-003`) đều bắt buộc nhập lý do từ chối nhưng chưa có modal đặc tả.
-   - **Emission Detail & Audit Modal:** Chưa có view chi tiết để kiểm tra lịch sử vết duyệt, hệ số quy chuẩn áp dụng tại thời điểm ghi nhận và hình ảnh hóa đơn minh chứng.
-   - **Invite Code Generation & Management Modal:** Thiếu modal thao tác tạo mã mời 6 ký tự, sao chép link và quản lý hạn 7 ngày.
-   - **Admin Sub-modals:** Thiếu modal thêm/sửa Master Data hệ số phát thải, modal khóa/mở khóa Tenant và modal xem chi tiết System Audit Log.
-   - **Trang lỗi hệ thống (System Error Pages):** Chưa có Route và View cho `403 Forbidden` (khi Editor cố vào Approval Queue hoặc vào trái phép workspace khác), `404 Not Found` và `500 Internal Error`.
-3. **Chuẩn hóa URL Route:**
-   - Nhiều Modal trước đây chưa có quy định Route/Query Param, dẫn đến việc khó deep-link hoặc khôi phục trạng thái khi người dùng refresh trình duyệt.
-   - Chuẩn hóa: Toàn bộ URL đều dùng cấu trúc RESTful trực quan với tham số `[workspaceId]` và query parameter cho các modal/drawer trạng thái.
-
-### 1.2. Kết luận đánh giá
-Toàn bộ hệ thống được chuẩn hóa thành **26 Màn hình & Giao diện tương tác** (bao gồm Full Pages, Modals, Drawers và Error Views). 100% các view đều được cấp phát **Screen ID duy nhất**, **Route định danh rõ ràng**, **hình thức hiển thị (Presentation)**, **User Story ánh xạ trực tiếp** và **trạng thái triển khai**.
-
----
-
-## 🗂️ 2. MASTER SCREEN CATALOG (DANH MỤC MÀN HÌNH CHUẨN HÓA)
+Hệ thống được chuẩn hóa toàn diện thành **26 Màn hình & Giao diện tương tác** (bao gồm Full Pages, Modals, Drawers và Error Views). 100% các view đều được cấp phát **Screen ID duy nhất**, **Route định danh rõ ràng**, **hình thức hiển thị (Presentation)**, **User Story ánh xạ trực tiếp** và **trạng thái triển khai**.
 
 | Screen ID | Tên Màn hình / Modal | Hình thức (Presentation) | Đường dẫn Route (URL Path) | Stories Relate | Trạng thái (Scope) |
 |:---|:---|:---:|:---|:---|:---:|
@@ -76,9 +54,9 @@ Toàn bộ hệ thống được chuẩn hóa thành **26 Màn hình & Giao di�
 
 ---
 
-## 🌳 3. SCREEN HIERARCHY (CẤU TRÚC PHÂN CẤP MÀN HÌNH)
+## 🌳 2. SCREEN HIERARCHY (CẤU TRÚC PHÂN CẤP MÀN HÌNH)
 
-### 3.1. Sơ đồ Phân cấp Cây Giao diện (Mermaid Screen Hierarchy)
+### 2.1. Sơ đồ Phân cấp Cây Giao diện (Mermaid Screen Hierarchy)
 
 ```mermaid
 graph TD
@@ -91,7 +69,7 @@ graph TD
     L1_Auth --> SCR_AUTH_01["SCR-AUTH-01: Đăng nhập / Đăng ký (/auth/login, /auth/register)"]
     L1_Auth --> SCR_AUTH_02["SCR-AUTH-02: Quên / Đặt lại Mật khẩu (/auth/forgot-password)"]
     L1_Auth --> SCR_WS_01["SCR-WS-01: Chọn Workspace (/workspaces)"]
-    SCR_WS_01 -.->|Kích hoạt Modal| SCR_WS_MODAL_01["SCR-WS-MODAL-01: Khởi tạo & Cấu hình Workspace Modal"]
+    SCR_WS_01 -.->|"Kích hoạt Modal"| SCR_WS_MODAL_01["SCR-WS-MODAL-01: Khởi tạo & Cấu hình Workspace Modal"]
     SCR_WS_01 --> SCR_WS_JOIN_01["SCR-WS-JOIN-01: Màn hình Gửi Yêu cầu Gia nhập (/workspaces/join)"]
 
     %% Khối 2: Workspace App
@@ -101,25 +79,25 @@ graph TD
     L1_Core --> SCR_INSIGHT_01["SCR-INSIGHT-01: Báo cáo AI & Kế hoạch (/workspace/:id/insights)"]
     L1_Core --> SCR_SETTING_01["SCR-SETTING-01: Cài đặt Workspace (/workspace/:id/settings)"]
     L1_Core --> SCR_PROFILE_01["SCR-PROFILE-01: Hồ sơ Cá nhân (/profile)"]
-    L1_Core -.->|Kích hoạt Drawer| SCR_NOTIF_01["SCR-NOTIF-01: Trung tâm Thông báo (Notification Drawer)"]
+    L1_Core -.->|"Kích hoạt Drawer"| SCR_NOTIF_01["SCR-NOTIF-01: Trung tâm Thông báo (Notification Drawer)"]
 
     %% Sub-views & Modals của Sổ cái
-    SCR_LEDGER_01 -.->|Click dòng dữ liệu| SCR_LEDGER_DETAIL_01["SCR-LEDGER-DETAIL-01: Modal Chi tiết & Vết duyệt"]
-    SCR_LEDGER_01 -.->|Nút Thêm / FAB| SCR_EMISSION_ADD_01["SCR-EMISSION-ADD-01: Modal Thêm Phát thải 3 Tabs"]
+    SCR_LEDGER_01 -.->|"Click dòng dữ liệu"| SCR_LEDGER_DETAIL_01["SCR-LEDGER-DETAIL-01: Modal Chi tiết & Vết duyệt"]
+    SCR_LEDGER_01 -.->|"Nút Thêm / FAB"| SCR_EMISSION_ADD_01["SCR-EMISSION-ADD-01: Modal Thêm Phát thải 3 Tabs"]
     SCR_EMISSION_ADD_01 --> SCR_AI_PREVIEW_01["SCR-AI-PREVIEW-01: Modal Kiểm chứng AI Vision"]
     SCR_EMISSION_ADD_01 --> SCR_EXCEL_PREVIEW_01["SCR-EXCEL-PREVIEW-01: Modal Xem trước Import Excel"]
 
     %% Modals của Duyệt & Cài đặt
-    SCR_APPROVE_01 -.->|Click Từ chối| SCR_APPROVE_REJECT_01["SCR-APPROVE-REJECT-01: Modal Nhập Lý do Từ chối"]
-    SCR_SETTING_01 -.->|Nút Tạo mã mời| SCR_INVITE_MODAL_01["SCR-INVITE-MODAL-01: Modal Quản lý Mã mời"]
-    SCR_SETTING_01 -.->|Nút Từ chối đơn| SCR_JOIN_REJECT_01["SCR-JOIN-REJECT-01: Modal Từ chối Gia nhập"]
+    SCR_APPROVE_01 -.->|"Click Từ chối"| SCR_APPROVE_REJECT_01["SCR-APPROVE-REJECT-01: Modal Nhập Lý do Từ chối"]
+    SCR_SETTING_01 -.->|"Nút Tạo mã mời"| SCR_INVITE_MODAL_01["SCR-INVITE-MODAL-01: Modal Quản lý Mã mời"]
+    SCR_SETTING_01 -.->|"Nút Từ chối đơn"| SCR_JOIN_REJECT_01["SCR-JOIN-REJECT-01: Modal Từ chối Gia nhập"]
 
     %% Khối 3: Admin Backoffice
     L1_Admin --> SCR_ADM_DASH_01["SCR-ADM-DASH-01: Dashboard Quản trị Hệ thống (/admin/dashboard)"]
     L1_Admin --> SCR_ADM_FACTOR_01["SCR-ADM-FACTOR-01: Quản lý Hệ số Quy chuẩn (/admin/emission-factors)"]
-    SCR_ADM_FACTOR_01 -.->|Nút Thêm/Sửa| SCR_ADM_FACTOR_MODAL_01["SCR-ADM-FACTOR-MODAL-01: Modal Thêm/Sửa Hệ số"]
+    SCR_ADM_FACTOR_01 -.->|"Nút Thêm/Sửa"| SCR_ADM_FACTOR_MODAL_01["SCR-ADM-FACTOR-MODAL-01: Modal Thêm/Sửa Hệ số"]
     L1_Admin --> SCR_ADM_TENANT_01["SCR-ADM-TENANT-01: Quản lý Workspace Tenants (/admin/workspaces)"]
-    SCR_ADM_TENANT_01 -.->|Tạo Tenant| SCR_WS_MODAL_01
+    SCR_ADM_TENANT_01 -.->|"Tạo Tenant"| SCR_WS_MODAL_01
     L1_Admin --> SCR_ADM_AUDIT_01["SCR-ADM-AUDIT-01: Cấu hình AI & Nhật ký Kiểm toán (/admin/settings)"]
 
     %% Khối 4: Error Pages
@@ -127,7 +105,7 @@ graph TD
     L1_Error --> SCR_ERR_404["SCR-ERR-404: 404 Not Found (/404)"]
 ```
 
-### 3.2. Bảng Phân cấp Theo Cấp độ Giao diện (Level Hierarchy Table)
+### 2.2. Bảng Phân cấp Theo Cấp độ Giao diện (Level Hierarchy Table)
 
 | Cấp độ (Level) | Khái niệm & Trách nhiệm | Danh sách Màn hình / Thành phần | Quy tắc Hiển thị & Điều hướng |
 |:---:|---|---|---|
@@ -137,7 +115,7 @@ graph TD
 | **Level 3** | **Phân đoạn / Tabs lồng nhau (Sub-Views)** | - Tabs trong `SCR-EMISSION-ADD-01`: Quét AI, Nhập tay, Nạp Excel.<br>- Tabs trong `SCR-SETTING-01`: Cấu hình nền, Ngân sách tháng, Quản lý thành viên.<br>- Tabs trong `SCR-ADM-AUDIT-01`: Cấu hình Model AI, Nhật ký thao tác. | Duy trì trạng thái chuyển tab trên URL thông qua query parameters (ví dụ: `?tab=budget`). |
 | **Level 4** | **Lớp phủ / Modals / Drawers (Overlay Dialogs)** | `SCR-WS-MODAL-01`, `SCR-LEDGER-DETAIL-01`, `SCR-EMISSION-ADD-01`, `SCR-AI-PREVIEW-01`, `SCR-EXCEL-PREVIEW-01`, `SCR-APPROVE-REJECT-01`, `SCR-INVITE-MODAL-01`, `SCR-JOIN-REJECT-01`, `SCR-NOTIF-01`, `SCR-ADM-FACTOR-MODAL-01`. | Lớp phủ làm mờ nền (backdrop blur); khóa cuộn trang nền (`overflow: hidden`); hỗ trợ phím `Esc` và nút đóng `X`. |
 
-### 3.3. Quy tắc Điều hướng & Phân cấp Breadcrumbs
+### 2.3. Quy tắc Điều hướng & Phân cấp Breadcrumbs
 - **Cấu trúc Breadcrumbs chuẩn:**
   - `Trang chủ Workspace`: `[Tên Workspace] > Dashboard`
   - `Sổ cái`: `[Tên Workspace] > Sổ cái phát thải`
@@ -150,22 +128,22 @@ graph TD
 
 ---
 
-## 🎨 4. UI/UX STATE CONTRACT & INTERACTION RULES
+## 🎨 3. UI/UX STATE CONTRACT & INTERACTION RULES
 
 Nhằm đảm bảo trải nghiệm người dùng nhất quán, giảm thiểu sai sót nạp liệu và duy trì tính ổn định của hệ thống, mọi màn hình bắt buộc phải tuân thủ nghiêm ngặt **Hợp đồng 5 Cung bậc Trạng thái (5 Core UI States Contract)** và **6 Quy tắc Tương tác Cốt lõi (Core UX Rules)**.
 
-### 4.1. Hợp đồng 5 Cung bậc Trạng thái UI (The 5 Core UI States Contract)
+### 3.1. Hợp đồng 5 Cung bậc Trạng thái UI (The 5 Core UI States Contract)
 
 ```mermaid
-stateDiagram-v2
-    [*] --> Loading: Khởi tạo View / Gửi Request
-    Loading --> Empty: Dữ liệu trả về rỗng (Data length = 0)
-    Loading --> Success: Dữ liệu hợp lệ (Data length > 0)
-    Loading --> Error: Lỗi mạng / Lỗi máy chủ / Không có quyền
-    Success --> Partial: Một thành phần phụ timeout (AI/Export)
-    Partial --> Success: Thử lại thành công (Retry)
-    Empty --> Loading: Người dùng thực hiện thao tác nạp dữ liệu
-    Error --> Loading: Nhấn nút "Thử lại" (Retry Action)
+flowchart TD
+    Init(["Khởi tạo View"]) --> Loading["1. Loading State: Đang tải dữ liệu, Skeleton, Spinner"]
+    Loading -->|"Dữ liệu rỗng (0 bản ghi)"| Empty["2. Empty State: Chưa có dữ liệu, Nút CTA định hướng"]
+    Loading -->|"Tải thành công (Có dữ liệu)"| Success["3. Success State: Dữ liệu đầy đủ, KPIs, Sổ cái"]
+    Loading -->|"Lỗi gọi API hoặc Chặn quyền"| Error["5. Error State: Báo lỗi inline, Toast, Trang 403/404"]
+    Success -->|"Dịch vụ AI timeout hoặc quá tải"| Partial["4. Partial / Degraded: AI bận, Fallback nhập tay"]
+    Partial -->|"Thử lại thành công"| Success
+    Empty -->|"Người dùng thêm bản ghi mới"| Loading
+    Error -->|"Nhấn Thử lại (Retry)"| Loading
 ```
 
 | Cung bậc Trạng thái | Tiêu chuẩn Kỹ thuật UI | Thành phần Giao diện Bắt buộc | Hành vi Trải nghiệm (UX Behavior) |
@@ -176,7 +154,7 @@ stateDiagram-v2
 | **4. Partial / Degraded State** (Suy giảm một phần) | - Xử lý suy giảm êm dịu (Graceful Degradation) khi dịch vụ phụ trợ gặp sự cố. | - Banner cảnh báo màu vàng nhạt đầu trang.<br>- Hiển thị nút chuyển đổi dự phòng (Fallback Option): *"Dịch vụ AI đang bận. Bạn vui lòng sử dụng biểu mẫu Nhập tay hoặc tải file Excel"*. | Không làm gián đoạn toàn bộ ứng dụng khi AI Vision hoặc LLM bị chạm hạn mức hoặc timeout. |
 | **5. Error / Failure State** (Gặp sự cố lỗi) | - Thông báo lỗi chuẩn xác theo ngữ cảnh, không hiện mã stack-trace kỹ thuật. | - **Inline Field Errors:** Dòng chữ đỏ ngay dưới ô nhập liệu cho lỗi Validation (422).<br>- **Toast Alert:** Góc phải trên cho lỗi máy chủ (500) kèm Request ID.<br>- **Error View (403/404):** Minh họa thân thiện kèm nút "Quay lại trang chủ". | Giúp người dùng hiểu rõ nguyên nhân bị lỗi và cung cấp ngay lối thoát (Recovery Path) để xử lý. |
 
-### 4.2. Bộ Quy tắc Tương tác & Trải nghiệm Người dùng (Interaction Rules & Guardrails)
+### 3.2. Bộ Quy tắc Tương tác & Trải nghiệm Người dùng (Interaction Rules & Guardrails)
 
 #### Quy tắc 1: Xem trước Quy đổi Tức thì (Immediate Conversion Preview)
 - **Áp dụng tại:** Tab 2 Khai báo Thủ công (`SCR-EMISSION-ADD-01`).
@@ -215,7 +193,7 @@ stateDiagram-v2
 
 ---
 
-## 🔗 5. SCREEN-TO-API MAPPING MATRIX
+## 🔗 4. SCREEN-TO-API MAPPING MATRIX
 
 Bảng dưới đây ánh xạ chi tiết từng Màn hình / Modal với các API RESTful Operations tương ứng, xác định rõ HTTP Method, Endpoint, Trigger nghiệp vụ và phân quyền truy cập.
 
@@ -279,7 +257,7 @@ Bảng dưới đây ánh xạ chi tiết từng Màn hình / Modal với các A
 
 ---
 
-## 📱 6. ĐẶC TẢ CHI TIẾT GIAO DIỆN & THÀNH PHẦN TƯƠNG TÁC
+## 📱 5. ĐẶC TẢ CHI TIẾT GIAO DIỆN & THÀNH PHẦN TƯƠNG TÁC
 
 ---
 
@@ -554,7 +532,7 @@ Bảng dưới đây ánh xạ chi tiết từng Màn hình / Modal với các A
 
 ---
 
-## 🔐 7. MA TRẬN PHÂN QUYỀN TRUY CẬP MÀN HÌNH (RBAC MATRIX)
+## 🔐 6. MA TRẬN PHÂN QUYỀN TRUY CẬP MÀN HÌNH (RBAC MATRIX)
 
 Bảng tổng hợp quyền hạn truy cập đối với toàn bộ 26 Màn hình & Modal trong hệ thống:
 
