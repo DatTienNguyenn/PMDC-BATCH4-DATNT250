@@ -131,6 +131,7 @@
 - **When** Trưởng nhóm nhập số lượng thành viên là `4` người, diện tích mặt sàn là `85.5` $m^2$ và nhấn "Lưu thông số"
 - **Then** hệ thống lưu các thông số này vào cấu hình Workspace trong vòng 1 giây
 - **And** hiển thị thông báo: "Cập nhật thông số nền thành công"
+- **And** tự động tính toán Mức phát thải Tham chiếu chuẩn quốc gia ($4 \times 145.27 = 581.08\text{ kg CO}_2\text{e/tháng}$ cho Hộ gia đình - $47,5\%$ cơ cấu phát thải, hoặc $4 \times 305.83 = 1,223.32\text{ kg CO}_2\text{e/tháng}$ cho Văn phòng - $100\%$ theo [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md))
 - **And** tự động kích hoạt công thức tính chỉ số chuẩn hóa trên Dashboard.
 
 **AC2: Cập nhật thông số nền khi có sự thay đổi quy mô - Edge case**
@@ -262,6 +263,12 @@
 - **When** Reviewer nhập giá trị `-100` hoặc `0` và bấm Lưu
 - **Then** hệ thống không lưu dữ liệu
 - **And** hiển thị thông báo lỗi: "Ngân sách phát thải phải là số nguyên dương lớn hơn 0".
+
+**AC4: Gợi ý hạn ngạch ngân sách thông minh dựa trên Mức tham chiếu Quốc gia - Happy path**
+- **Given** Workspace loại Hộ gia đình có 4 thành viên (Mức tham chiếu quốc gia: $4 \times 145.27 = 581.08\text{ kg CO}_2\text{e/tháng}$ theo [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md))
+- **When** Reviewer mở form "Cài đặt Ngân sách Carbon" cho tháng mới
+- **Then** hệ thống hiển thị gợi ý thông minh 3 mức định lượng: Mục tiêu Xanh (523 kg CO2e ~ giảm 10%), Mục tiêu Chuẩn (581 kg CO2e), Mục tiêu Linh hoạt (639 kg CO2e)
+- **And** cho phép Reviewer bấm chọn nhanh mức gợi ý hoặc tự điều chỉnh số thủ công.
 
 #### Notes
 - **Dependencies**: Bảng `carbon_budgets`.
@@ -699,6 +706,12 @@
 - **When** có thêm một giao dịch nhỏ phát sinh đưa tổng phát thải lên 260 kg CO2e (vẫn nằm trong khoảng từ 85% đến dưới 100%)
 - **Then** hệ thống không bắn lại notification cảnh báo 85% lần thứ hai để tránh gây phiền hà (spam notification)
 - **And** chỉ bắn notification mới khi chạm ngưỡng kế tiếp (ngưỡng 100%).
+
+**AC4: Kích hoạt cảnh báo dị biệt Mức tham chiếu Quốc gia (National Benchmark Anomaly Alert) - Happy path**
+- **Given** Workspace loại Hộ gia đình có mức tham chiếu là $145.27\text{ kg CO}_2\text{e/người/tháng}$ ($47,5\%$ ranh giới phát thải theo [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md))
+- **When** lượng phát thải bình quân đầu người thực tế tích lũy vượt mức $145.27\text{ kg CO}_2\text{e}$ (hoặc Run-rate dự báo giữa tháng vượt quá $120\%$ mức tham chiếu)
+- **Then** hệ thống tự động hiển thị huy hiệu Cảnh báo Dị biệt (Anomaly Warning Badge) trên Dashboard
+- **And** gửi Notification khuyến cáo các thành viên rà soát các danh mục phát thải trọng yếu (Điện sinh hoạt, Phương tiện cá nhân) để kịp thời tiết giảm trước khi hết tháng.
 
 #### Notes
 - **Dependencies**: Tỷ lệ `total_co2e_kg / target_co2e_kg` từ API Dashboard (`carbon_budgets` & `emission_logs`). Không phụ thuộc bảng lưu trữ `notifications` vì frontend tự động tính toán real-time để hiển thị.
