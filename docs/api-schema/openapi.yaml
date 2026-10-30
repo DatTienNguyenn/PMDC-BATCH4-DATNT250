@@ -752,6 +752,56 @@ paths:
         '200':
           description: Cập nhật lịch trình thành công
 
+  /workspaces/{id}/reduction-plans/generate:
+    post:
+      summary: Thiết lập mục tiêu và sinh Lộ trình Cắt giảm Phát thải Cá nhân hóa từ AI (SCR-INSIGHT-01, UC11, US-AI-001)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/GenerateReductionPlanRequest'
+      responses:
+        '201':
+          description: Kế hoạch Lộ trình Cắt giảm Cá nhân hóa được tạo thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReductionPlanResponse'
+
+  /workspaces/{id}/reduction-plans/current:
+    get:
+      summary: Lấy Kế hoạch Lộ trình Cắt giảm Đang Hoạt động kèm tiến độ thực tế (SCR-INSIGHT-01, UC11)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: Lộ trình cắt giảm đang hoạt động
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReductionPlanResponse'
+
+  /workspaces/{id}/reduction-plans/{planId}/export-pdf:
+    get:
+      summary: Xuất File PDF Kế hoạch Lộ trình Cắt giảm (SCR-INSIGHT-01, UC11, US-AI-002)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: planId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: File PDF kế hoạch lộ trình cắt giảm
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+
   # ================= PROFILE & CONTRIBUTIONS =================
   /users/me:
     get:
@@ -1098,6 +1148,146 @@ components:
         ai_report_day_of_month: { type: integer, minimum: -1, maximum: 31 }
         ai_report_day_of_week: { type: integer, minimum: 1, maximum: 7 }
         ai_report_time: { type: string, example: "23:59:00" }
+
+    GenerateReductionPlanRequest:
+      type: object
+      required: [target_reduction_percentage, time_horizon_months]
+      properties:
+        target_reduction_percentage:
+          type: number
+          format: float
+          minimum: 1.0
+          maximum: 50.0
+          example: 15.0
+          description: Mục tiêu phần trăm muốn cắt giảm (1% - 50%)
+        time_horizon_months:
+          type: integer
+          minimum: 1
+          maximum: 36
+          example: 3
+          description: Tầm nhìn thời gian thực hiện kế hoạch (1 - 36 tháng)
+        baseline_period:
+          type: string
+          example: "2026-10"
+          description: Tháng cơ sở đối sánh (YYYY-MM)
+        focus_categories:
+          type: array
+          items:
+            type: string
+          example: ["MOBILITY", "ELEC_GRID"]
+          description: Danh mục phát thải ưu tiên hành động
+
+    ReductionActionItem:
+      type: object
+      properties:
+        id:
+          type: string
+          example: "act-01"
+        title:
+          type: string
+          example: "Chuyển đổi phương tiện công cộng 2 ngày/tuần"
+        category_code:
+          type: string
+          example: "MOBILITY"
+        description:
+          type: string
+          example: "Hai thành viên chuyển sang đi tàu điện trên cao 2 ngày/tuần thay cho xe máy xăng."
+        estimated_co2e_saving_kg:
+          type: number
+          format: float
+          example: 12.00
+        priority:
+          type: string
+          enum: [HIGH, MEDIUM, LOW]
+          example: "HIGH"
+
+    MonthlyRoadmapMilestone:
+      type: object
+      properties:
+        month_index:
+          type: integer
+          example: 1
+        target_period:
+          type: string
+          example: "2026-11"
+        phase_name:
+          type: string
+          example: "Giai đoạn 1: Khởi động & Tiết giảm Nhanh (Quick Wins)"
+        target_emissions_kg:
+          type: number
+          format: float
+          example: 331.08
+        cumulative_reduction_pct:
+          type: number
+          format: float
+          example: 5.00
+        actual_emissions_kg:
+          type: number
+          format: float
+          nullable: true
+          example: null
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReductionActionItem'
+
+    ReductionPlanResponse:
+      type: object
+      properties:
+        status:
+          type: string
+          example: "SUCCESS"
+        code:
+          type: integer
+          example: 201
+        message:
+          type: string
+          example: "Đã tạo thành công Kế hoạch Lộ trình Cắt giảm Phát thải cá nhân hóa từ AI"
+        data:
+          type: object
+          properties:
+            plan_id:
+              type: string
+              format: uuid
+            workspace_id:
+              type: string
+              format: uuid
+            baseline_period:
+              type: string
+              example: "2026-10"
+            baseline_emissions_kg:
+              type: number
+              format: float
+              example: 348.50
+            target_reduction_percentage:
+              type: number
+              format: float
+              example: 15.00
+            target_emissions_kg:
+              type: number
+              format: float
+              example: 296.23
+            total_reduction_potential_kg:
+              type: number
+              format: float
+              example: 52.27
+            time_horizon_months:
+              type: integer
+              example: 3
+            status:
+              type: string
+              enum: [ACTIVE, COMPLETED, ARCHIVED]
+              example: "ACTIVE"
+            created_at:
+              type: string
+              format: date-time
+            monthly_roadmap:
+              type: array
+              items:
+                $ref: '#/components/schemas/MonthlyRoadmapMilestone'
+            pdf_export_url:
+              type: string
+              example: "/api/v1/workspaces/a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d/reduction-plans/b3c4d5e6-f7a8-9012-3456-789abcdef012/export-pdf"
 
     DashboardSummaryResponse:
       type: object

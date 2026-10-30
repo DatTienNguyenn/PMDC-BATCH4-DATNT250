@@ -915,7 +915,7 @@ export enum BudgetThresholdState {
   | `input_unit` | Đơn vị tính chuẩn tra cứu từ hệ số (`km`, `kWh`, `kg`...). |
   | `factor_applied` | **Lưu cứng (Snapshot)** giá trị `default_emission_factor` tại thời điểm nạp (`NUMERIC(12, 6)`), bảo đảm sổ cái bất biến kể cả khi hệ số thay đổi sau này. |
   | `total_co2e_kg` | Quy đổi chuẩn mực: `consumption_quantity` $\times$ `factor_applied` (`NUMERIC(12, 4)` qua `BigDecimal`). |
-  | `activity_date` | Ngày phát sinh ghi trên file Excel (`DATE`, $\le \text{CURRENT\_DATE}$). |
+  | `activity_date` | Ngày phát sinh ghi trên file Excel (`DATE`, `<= CURRENT_DATE`). |
   | `billing_period` | Tự động trích xuất chuỗi `YYYY-MM` từ `activity_date` (ví dụ: `2026-10`). |
   | `ingestion_source` | Gán giá trị hằng số `'EXCEL_IMPORT'`. |
   | `receipt_image_url` | Mặc định `NULL`. |
@@ -1350,6 +1350,139 @@ export enum BudgetThresholdState {
   - `ai_report_day_of_month`: Từ 1 đến 31 hoặc -1 (ngày cuối cùng của tháng).
   - `ai_report_day_of_week`: Từ 1 (Thứ Hai) đến 7 (Chủ Nhật).
 
+#### 8.5. `POST /api/v1/workspaces/{id}/reduction-plans/generate`: Thiết lập Mục tiêu & Sinh Lộ trình Cắt giảm Cá nhân hóa từ AI (UC11, US-AI-001)
+- **Screen ID:** `SCR-INSIGHT-01` | **Phân quyền:** Reviewer Only
+- **Mục đích:** Reviewer thiết lập **Mục tiêu cắt giảm (% giảm) và tầm nhìn thời gian (số tháng)**; AI phân tích dữ liệu lịch sử của Workspace, đối sánh với Mức tham chiếu quốc gia để sinh một **Kế hoạch Lộ trình Cắt giảm Phát thải Cá nhân hóa Theo Từng Tháng (Month-by-Month Reduction Roadmap)**.
+- **Request Body (`application/json`):**
+```json
+{
+  "target_reduction_percentage": 15.0,
+  "time_horizon_months": 3,
+  "baseline_period": "2026-10",
+  "focus_categories": ["MOBILITY", "ELEC_GRID"]
+}
+```
+- **Validation Rules:**
+  - `target_reduction_percentage`: Bắt buộc, số thực trong khoảng `1.0` đến `50.0` (%).
+  - `time_horizon_months`: Bắt buộc, số nguyên từ `1` đến `36` (tháng).
+  - `baseline_period`: Tùy chọn, định dạng `YYYY-MM` (mặc định lấy tháng có dữ liệu gần nhất).
+  - `focus_categories`: Tùy chọn, danh sách mảng các mã danh mục ưu tiên (`ELEC_GRID`, `MOBILITY`, `FUEL_LPG`, `WATER_SUPPLY_TREAT`...).
+- **Cơ chế Phân tích AI & Lưu trữ:**
+  1. Backend tổng hợp cơ cấu tiêu thụ kỳ cơ sở ($348.50\text{ kg CO}_2\text{e}$), chỉ số per capita ($87.13\text{ kg}$), diện tích sàn ($85.5\text{ }m^2$) và khoảng cách tới Mức tham chiếu quốc gia ($141.93\text{ kg}$).
+  2. Tính mức phát thải đích cuối kỳ:
+     $$\text{Target Final} = 348.50 \times (1 - 0.15) = 296.225\text{ kg CO}_2\text{e} \quad (\text{Giảm } -52.275\text{ kg})$$
+  3. LLM (Gemini 1.5 Pro) lập kế hoạch phân bổ chỉ tiêu giảm qua 3 tháng, gắn liền với các hành động định lượng khả thi được cá nhân hóa riêng cho thành viên trong Workspace.
+  4. Lưu toàn bộ kết quả vào bảng `emission_reduction_plans` với `status = 'ACTIVE'`.
+- **Response 201 Created:**
+```json
+{
+  "status": "SUCCESS",
+  "code": 201,
+  "message": "Đã tạo thành công Kế hoạch Lộ trình Cắt giảm Phát thải cá nhân hóa từ AI",
+  "data": {
+    "plan_id": "b3c4d5e6-f7a8-9012-3456-789abcdef012",
+    "workspace_id": "a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d",
+    "baseline_period": "2026-10",
+    "baseline_emissions_kg": 348.50,
+    "target_reduction_percentage": 15.00,
+    "target_emissions_kg": 296.23,
+    "total_reduction_potential_kg": 52.27,
+    "time_horizon_months": 3,
+    "status": "ACTIVE",
+    "created_at": "2026-10-30T10:00:00Z",
+    "monthly_roadmap": [
+      {
+        "month_index": 1,
+        "target_period": "2026-11",
+        "phase_name": "Giai đoạn 1: Khởi động & Tiết giảm Nhanh (Quick Wins)",
+        "target_emissions_kg": 331.08,
+        "cumulative_reduction_pct": 5.00,
+        "actions": [
+          {
+            "id": "act-01",
+            "title": "Chuyển đổi phương tiện công cộng 2 ngày/tuần",
+            "category_code": "MOBILITY",
+            "description": "Hai thành viên chuyển sang đi tàu điện trên cao Cát Linh - Hà Đông 2 ngày/tuần thay cho xe máy xăng.",
+            "estimated_co2e_saving_kg": 12.00,
+            "priority": "HIGH"
+          },
+          {
+            "id": "act-02",
+            "title": "Tắt hẳn công tắc nguồn bình nóng lạnh khi không dùng",
+            "category_code": "ELEC_GRID",
+            "description": "Chỉ bật bình nóng lạnh 20 phút trước khi tắm, ngắt hoàn toàn chế độ chờ qua đêm.",
+            "estimated_co2e_saving_kg": 5.42,
+            "priority": "MEDIUM"
+          }
+        ]
+      },
+      {
+        "month_index": 2,
+        "target_period": "2026-12",
+        "phase_name": "Giai đoạn 2: Tăng tốc & Định hình Thói quen Xanh",
+        "target_emissions_kg": 313.65,
+        "cumulative_reduction_pct": 10.00,
+        "actions": [
+          {
+            "id": "act-03",
+            "title": "Tối ưu hóa nhiệt độ điều hòa không khí",
+            "category_code": "ELEC_GRID",
+            "description": "Cài đặt điều hòa ổn định ở mức 26°C kết hợp bật quạt gió trần thay vì bật 22°C.",
+            "estimated_co2e_saving_kg": 13.50,
+            "priority": "HIGH"
+          },
+          {
+            "id": "act-04",
+            "title": "Đi bộ hoặc xe đạp cho các quãng đường ngắn",
+            "category_code": "MOBILITY",
+            "description": "Đi bộ khi đi chợ hoặc mua đồ tạp hóa trong bán kính dưới 1.5 km.",
+            "estimated_co2e_saving_kg": 4.00,
+            "priority": "LOW"
+          }
+        ]
+      },
+      {
+        "month_index": 3,
+        "target_period": "2027-01",
+        "phase_name": "Giai đoạn 3: Về đích & Duy trì Bền vững",
+        "target_emissions_kg": 296.23,
+        "cumulative_reduction_pct": 15.00,
+        "actions": [
+          {
+            "id": "act-05",
+            "title": "Tối ưu hóa nấu nướng gia đình với nồi áp suất và bếp từ",
+            "category_code": "FUEL_LPG",
+            "description": "Chuyển các món hầm/ninh sang nồi áp suất điện, giảm 35% thời gian đun nấu bằng bếp gas LPG.",
+            "estimated_co2e_saving_kg": 10.50,
+            "priority": "MEDIUM"
+          },
+          {
+            "id": "act-06",
+            "title": "Phân loại rác thải sinh hoạt và tái chế tại nguồn",
+            "category_code": "WASTE_LANDFILL",
+            "description": "Tách riêng vỏ hộp kim loại, giấy carton tái chế thay vì thải bỏ trực tiếp ra bãi rác chôn lấp.",
+            "estimated_co2e_saving_kg": 6.85,
+            "priority": "LOW"
+          }
+        ]
+      }
+    ],
+    "pdf_export_url": "/api/v1/workspaces/a1b2c3d4-e5f6-7a8b-9c0d-1e2f3a4b5c6d/reduction-plans/b3c4d5e6-f7a8-9012-3456-789abcdef012/export-pdf"
+  }
+}
+```
+
+#### 8.6. `GET /api/v1/workspaces/{id}/reduction-plans/current`: Lấy Lộ trình Cắt giảm Đang Hoạt động (UC11)
+- **Screen ID:** `SCR-INSIGHT-01` | **Phân quyền:** Reviewer / Editor
+- **Mục đích:** Tải kế hoạch lộ trình cắt giảm đang hoạt động (`status = 'ACTIVE'`) kèm đối chiếu tiến độ thực tế của Workspace qua từng tháng đã đi qua.
+- **Response 200 OK:** Cấu trúc tương tự API `8.5` kèm thêm trường `actual_emissions_kg` và `progress_percentage` cho các tháng đã phát sinh dữ liệu.
+
+#### 8.7. `GET /api/v1/workspaces/{id}/reduction-plans/{planId}/export-pdf`: Xuất File PDF Kế hoạch Lộ trình Cắt giảm (UC11, US-AI-002)
+- **Screen ID:** `SCR-INSIGHT-01` | **Phân quyền:** Reviewer Only
+- **Mục đích:** Kết xuất toàn bộ Lộ trình cắt giảm theo từng tháng và các hành động định lượng thành file tài liệu PDF vector chuyên biệt chuẩn in ấn.
+- **Response 200 OK:** Stream file binary `application/pdf` kèm header:
+  `Content-Disposition: attachment; filename="Ke_Hoach_Lo_Trinh_Giam_Phat_Thai.pdf"`
+
 ---
 
 ### NHÓM 9: HỒ SƠ NGƯỜI DÙNG & ĐÓNG GÓP CÁ NHÂN (USER PROFILE)
@@ -1528,7 +1661,7 @@ Phần này thực hiện kiểm tra đối soát chéo (Cross-verification) to�
 | **UC08** | Tra cứu Lịch sử Sổ cái & Xuất Excel | Editor, Reviewer | `GET /api/v1/workspaces/{id}/logs`<br>`GET /api/v1/workspaces/{id}/logs/{id}`<br>`PUT /api/v1/workspaces/{id}/logs/{id}`<br>`DELETE /api/v1/workspaces/{id}/logs/{id}`<br>`GET /api/v1/workspaces/{id}/logs/export-excel` | **100% ĐẠT** ✅ |
 | **UC09** | Thiết lập Target Ngân sách Tháng & Ngưỡng 85% | Reviewer | `GET /api/v1/workspaces/{id}/budgets/recommendation`<br>`PUT /api/v1/workspaces/{id}/budgets`<br>`GET /api/v1/workspaces/{id}/budgets/history` | **100% ĐẠT** ✅ |
 | **UC10** | Giám sát Dashboard & Bắn Cảnh báo | Editor, Reviewer | `GET /api/v1/workspaces/{id}/dashboard/summary`<br>`GET /api/v1/workspaces/{id}/dashboard/charts/trend`<br>`GET /api/v1/workspaces/{id}/dashboard/charts/breakdown`<br>`GET /api/v1/workspaces/{id}/notifications`<br>`POST /api/v1/workspaces/{id}/notifications/mark-all-read`<br>`GET /api/v1/users/me/contributions` | **100% ĐẠT** ✅ |
-| **UC11** | AI Insight (Lịch tự động / On-demand) & Xuất PDF | Reviewer | `GET /api/v1/workspaces/{id}/ai-reports/current`<br>`POST /api/v1/workspaces/{id}/ai-reports/generate-manual`<br>`GET /api/v1/workspaces/{id}/ai-reports/{id}/export-pdf`<br>`PUT /api/v1/workspaces/{id}/ai-schedule` | **100% ĐẠT** ✅ |
+| **UC11** | AI Insight & Lộ trình Cắt giảm Theo Mục tiêu & Xuất PDF | Reviewer | `GET /api/v1/workspaces/{id}/ai-reports/current`<br>`POST /api/v1/workspaces/{id}/ai-reports/generate-manual`<br>`GET /api/v1/workspaces/{id}/ai-reports/{id}/export-pdf`<br>`PUT /api/v1/workspaces/{id}/ai-schedule`<br>`POST /api/v1/workspaces/{id}/reduction-plans/generate`<br>`GET /api/v1/workspaces/{id}/reduction-plans/current`<br>`GET /api/v1/workspaces/{id}/reduction-plans/{id}/export-pdf` | **100% ĐẠT** ✅ |
 | **UC12** | Quản lý Hệ số Phát thải Quy chuẩn (Backoffice) | SysAdmin | `GET /api/v1/admin/emission-factors`<br>`PUT /api/v1/admin/emission-factors/{id}`<br>`GET /api/v1/admin/dashboard/kpis`<br>`GET /api/v1/admin/dashboard/ai-usage`<br>`GET /api/v1/admin/workspaces`<br>`PATCH /api/v1/admin/workspaces/{id}/status`<br>`GET & PUT /api/v1/admin/ai-config`<br>`GET /api/v1/admin/audit-logs` | **100% ĐẠT** ✅ |
 
 ---
@@ -1633,6 +1766,7 @@ Nhằm đảm bảo hệ thống khi triển khai mã nguồn (Java Spring Boot 
 | **`carbon_budgets`** | `id`, `workspace_id`, `period`, `target_co2e_kg`, `alert_threshold_ratio`, `status`, `created_at`, `updated_at` | `GET /workspaces/{id}/budgets`<br>`PUT /workspaces/{id}/budgets`<br>`GET /workspaces/{id}/budgets/history`<br>`GET /workspaces/{id}/dashboard/summary` | - Ràng buộc `UNIQUE (workspace_id, period)` bảo đảm mỗi tháng chỉ có 1 ngân sách duy nhất, giúp thao tác `PUT` hoạt động theo cơ chế Upsert an toàn.<br>- `alert_threshold_ratio`: Mặc định 0.85, phục vụ logic kích hoạt cảnh báo ngưỡng 85%. | **100% Khớp** ✅ |
 | **`emission_logs`** | `id`, `workspace_id`, `user_id`, `factor_id`, `category_code`, `activity_name`, `consumption_quantity`, `input_unit`, `factor_applied`, `total_co2e_kg`, `activity_date`, `billing_period`, `ingestion_source`, `receipt_image_url`, `status`, `reviewer_id`, `reviewed_at`, `rejection_reason`, `note`, `created_at`, `updated_at` | `POST /logs/manual`<br>`POST /ai/scan-bill`<br>`POST /logs/ai-confirm`<br>`POST /logs/excel-import`<br>`GET /logs`<br>`GET /logs/{id}`<br>`PUT /logs/{id}`<br>`DELETE /logs/{id}`<br>`GET /approvals/pending`<br>`POST /approvals/{id}/accept`<br>`POST /approvals/{id}/reject`<br>`GET /dashboard/summary` | - **Bảo toàn Tính Bất biến:** Cột `factor_applied` lưu cứng giá trị hệ số tại thời điểm ghi nhận.<br>- `status`: 4 trạng thái `DRAFT`, `PENDING_REVIEW`, `APPROVED`, `REJECTED`.<br>- Hỗ trợ đầy đủ vết kiểm toán (Audit Trail: `created_by`, `reviewer_id`, `reviewed_at`, `rejection_reason`, `receipt_image_url`).<br>- Chứa đủ thông tin phục vụ trọn vẹn 3 luồng nạp (Thủ công, Quét AI, Import Excel). | **100% Khớp** ✅ |
 | **`ai_reports`** | `id`, `workspace_id`, `report_type`, `period`, `total_emissions_kg`, `variance_vs_last_period`, `breakdown_by_category`, `actionable_advice_markdown`, `pdf_file_url`, `generated_at` | `GET /workspaces/{id}/ai-reports/current`<br>`POST /workspaces/{id}/ai-reports/generate-manual`<br>`GET /workspaces/{id}/ai-reports/{id}/export-pdf` | - Cột `breakdown_by_category` kiểu `JSONB` lưu tỷ trọng phát thải chi tiết của từng phân loại phục vụ vẽ biểu đồ và phân tích LLM.<br>- `actionable_advice_markdown`: Chứa văn bản khuyến nghị định lượng để hiển thị trên UI và render trực tiếp ra file PDF. | **100% Khớp** ✅ |
+| **`emission_reduction_plans`** | `id`, `workspace_id`, `baseline_period`, `baseline_emissions_kg`, `target_reduction_percentage`, `target_emissions_kg`, `total_reduction_potential_kg`, `time_horizon_months`, `monthly_roadmap`, `status`, `created_by`, `created_at`, `updated_at` | `POST /workspaces/{id}/reduction-plans/generate`<br>`GET /workspaces/{id}/reduction-plans/current`<br>`GET /workspaces/{id}/reduction-plans/{id}/export-pdf` | - Lưu trữ Lộ trình cắt giảm theo từng tháng và các hành động định lượng do AI đề xuất theo mục tiêu của Reviewer.<br>- Cột `monthly_roadmap` kiểu `JSONB` lưu cấu trúc mốc mục tiêu và danh sách `actions` định lượng chi tiết theo từng tháng.<br>- `status`: `ACTIVE`, `COMPLETED`, `ARCHIVED`. | **100% Khớp** ✅ |
 | **`system_configurations`** | `id`, `config_key`, `config_value`, `description`, `updated_by`, `updated_at` | `GET & PUT /admin/ai-config` | - Lưu trữ Model Name (Gemini 1.5 Flash/Pro), API Keys và Prompt Templates cho Vision Parser và Insight Generator. | **100% Khớp** ✅ |
 | **`system_audit_logs`** | `id`, `admin_id`, `action`, `resource_type`, `resource_id`, `details`, `ip_address`, `created_at` | `GET /admin/audit-logs` | - Ghi nhận lịch sử can thiệp hệ thống của System Admin (sửa hệ số, khóa workspace), bảo vệ tính minh bạch. | **100% Khớp** ✅ |
 | **`ai_usage_logs`** | `id`, `workspace_id`, `service_type`, `prompt_tokens`, `completion_tokens`, `estimated_cost_usd`, `created_at` | `GET /admin/dashboard/ai-usage` | - Giúp System Admin kiểm soát chi phí gọi Multimodal AI và LLM theo ngày/tháng và cảnh báo vượt hạn mức quota. | **100% Khớp** ✅ |
@@ -1643,7 +1777,7 @@ Nhằm đảm bảo hệ thống khi triển khai mã nguồn (Java Spring Boot 
 
 Hệ thống thiết lập các quy tắc toàn vẹn tham chiếu (Referential Integrity) chuẩn mực:
 1. **Xóa Không gian làm việc (`workspaces`):**
-   - Áp dụng `ON DELETE CASCADE` tới tất cả các bảng phụ thuộc: `workspace_members`, `workspace_baselines`, `carbon_budgets`, `emission_logs`, `ai_reports`, `workspace_join_requests`.
+   - Áp dụng `ON DELETE CASCADE` tới tất cả các bảng phụ thuộc: `workspace_members`, `workspace_baselines`, `carbon_budgets`, `emission_logs`, `ai_reports`, `emission_reduction_plans`, `workspace_join_requests`.
    - **Kết quả:** Khi Reviewer hoặc Admin giải tán một Workspace (`DELETE /api/v1/workspaces/{id}`), toàn bộ dữ liệu liên đới được dọn dẹp sạch sẽ trong 1 transaction ACID duy nhất, không để lại mẩu dữ liệu mồ côi (orphan records).
 2. **Xóa Thành viên khỏi Workspace (`workspace_members`):**
    - Xóa dòng trong bảng `workspace_members` thu hồi ngay lập tức token ngữ cảnh và quyền truy cập của người dùng đó.
@@ -1677,7 +1811,7 @@ Mọi API Endpoint trọng yếu đều có chỉ mục (Index) tương ứng tr
    - Toàn bộ các mốc thời gian hệ thống (`created_at`, `updated_at`, `reviewed_at`, `generated_at`, `invite_code_expires_at`) đều dùng kiểu `TIMESTAMPTZ` (UTC) trong PostgreSQL và định dạng chuỗi ISO-8601 `YYYY-MM-DDTHH:mm:ssZ` trên API.
    - Ngày phát sinh hoạt động dùng `DATE` (`YYYY-MM-DD`) và chu kỳ báo cáo dùng `VARCHAR(7)` (`YYYY-MM`), bảo đảm nhất quán tuyệt đối giữa Frontend datepicker và CSDL.
 3. **Cấu trúc Dữ liệu Động (Flexible Dynamic Fields):**
-   - Cột `breakdown_by_category` trong `ai_reports` và `notification_preferences` trong `users` dùng kiểu `JSONB` của PostgreSQL, cho phép truy vấn trực tiếp bằng toán tử JSON (`->>`, `?`) và mở rộng thêm các thuộc tính mới trong tương lai mà không phải chạy migration sửa bảng.
+   - Cột `breakdown_by_category` trong `ai_reports`, `monthly_roadmap` trong `emission_reduction_plans` và `notification_preferences` trong `users` dùng kiểu `JSONB` của PostgreSQL, cho phép truy vấn trực tiếp bằng toán tử JSON (`->>`, `?`) và mở rộng thêm các thuộc tính mới trong tương lai mà không phải chạy migration sửa bảng.
 
 ---
 

@@ -462,11 +462,13 @@ erDiagram
     workspaces ||--o{ carbon_budgets : "sets"
     workspaces ||--o{ emission_logs : "records"
     workspaces ||--o{ ai_reports : "generates"
+    workspaces ||--o{ emission_reduction_plans : "has roadmap"
     
     users ||--o{ workspace_join_requests : "submits"
     users ||--o{ workspace_join_requests : "reviewed by (Reviewer)"
     users ||--o{ emission_logs : "created by"
     users ||--o{ emission_logs : "reviewed by"
+    users ||--o{ emission_reduction_plans : "created by (Reviewer)"
     
     standard_emission_factors ||--o{ emission_logs : "applies factor"
     users ||--o{ standard_emission_factors : "updated by (System Admin)"
@@ -732,11 +734,27 @@ Quản lý luồng kiểm duyệt gia nhập 2 bước, bảo vệ an toàn cho 
 #### 12. Bảng `ai_usage_logs` (Giám sát Lượt gọi API & Chi phí AI)
 - `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
 - `workspace_id`: `UUID NULL REFERENCES workspaces(id) ON DELETE SET NULL`
-- `service_type`: `VARCHAR(50) NOT NULL` (`VISION_PARSER`, `INSIGHT_GENERATOR`)
+- `service_type`: `VARCHAR(50) NOT NULL` (`VISION_PARSER`, `INSIGHT_GENERATOR`, `REDUCTION_PLANNER`)
 - `prompt_tokens`: `INT NOT NULL DEFAULT 0`
 - `completion_tokens`: `INT NOT NULL DEFAULT 0`
 - `estimated_cost_usd`: `NUMERIC(10, 6) NOT NULL DEFAULT 0`
 - `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
+
+#### 13. Bảng `emission_reduction_plans` (Kế hoạch Lộ trình Cắt giảm Phát thải Cá nhân hóa từ AI)
+Lưu trữ mục tiêu cắt giảm dài hạn, tầm nhìn thời gian và lộ trình phân rã chi tiết theo từng tháng do AI đề xuất riêng cho Workspace.
+- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
+- `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
+- `created_by_user_id`: `UUID NOT NULL REFERENCES users(id)`
+- `baseline_period`: `VARCHAR(7) NOT NULL` (Kỳ làm mốc đo lường, ví dụ `2026-10`)
+- `baseline_emissions_kg`: `NUMERIC(12, 2) NOT NULL` (Tổng phát thải tại kỳ cơ sở, ví dụ `348.50`)
+- `target_reduction_percentage`: `NUMERIC(5, 2) NOT NULL CHECK (target_reduction_percentage > 0 AND target_reduction_percentage <= 100)` (Tỷ lệ cắt giảm mục tiêu, ví dụ `15.00`%)
+- `target_emissions_kg`: `NUMERIC(12, 2) NOT NULL` (Mức phát thải mục tiêu cuối lộ trình, ví dụ `296.23`)
+- `time_horizon_months`: `INT NOT NULL CHECK (time_horizon_months BETWEEN 1 AND 36)` (Tầm nhìn thời gian, ví dụ `3`, `6`, `12` tháng)
+- `monthly_roadmap`: `JSONB NOT NULL` (Cấu trúc mảng chứa các mốc tháng: mục tiêu kg CO2e, % giảm lũy kế và danh sách các hành động định lượng khả thi)
+- `status`: `VARCHAR(20) NOT NULL DEFAULT 'ACTIVE'` (`ACTIVE`, `COMPLETED`, `ARCHIVED`)
+- `pdf_file_url`: `VARCHAR(500) NULL` (Đường dẫn tải tài liệu PDF lộ trình)
+- `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
+- `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 
 > [!TIP]
 > **Quyết định Tinh gọn Database Schema (Theo Review):**  

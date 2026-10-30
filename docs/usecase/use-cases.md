@@ -282,23 +282,33 @@ flowchart LR
 
 ---
 
-### UC11: Sinh Báo cáo AI Insight (Lịch Tự động hoặc Kích hoạt Bằng tay) & Xuất PDF
+### UC11: Sinh Báo cáo AI Insight, Đề xuất Lộ trình Cắt giảm Cá nhân hóa (Reduction Plan Roadmap) & Xuất PDF
 - **Mã Use Case:** UC11
 - **Tác nhân chính:** Trưởng nhóm (Reviewer), Hệ thống (Background Cronjob / API On-demand)
-- **Mô tả vắn tắt:** Reviewer có thể thiết lập lịch chạy tự động (Hàng tuần, Hàng tháng hoặc Tắt/Disabled) vào khung giờ mong muốn, hoặc chủ động bấm nút "Sinh báo cáo ngay" bất cứ lúc nào để hệ thống gom nhóm dữ liệu tiêu thụ, đẩy context vào LLM để sinh báo cáo Kế hoạch cắt giảm định lượng cá nhân hóa; Reviewer xem báo cáo trên Dashboard và có quyền xuất ra file PDF trong vòng 3-5 giây.
+- **Mô tả vắn tắt:** Reviewer có thể thiết lập lịch chạy tự động hoặc kích hoạt tức thời để xem nhận định xu hướng phát thải kỳ hiện tại; đồng thời Reviewer có thể **thiết lập mục tiêu cắt giảm dài hạn (giảm bao nhiêu % và tầm nhìn bao nhiêu tháng)** để AI phân tích dữ liệu lịch sử của Workspace và sinh ra một **Kế hoạch Lộ trình Cắt giảm Cá nhân hóa Theo Từng Tháng (Month-by-Month Reduction Roadmap)** với các hành động định lượng cụ thể; Reviewer xem lộ trình trên giao diện và có quyền xuất ra file PDF chuẩn in ấn trong vòng 3-5 giây.
 - **Tiền điều kiện:** Workspace có dữ liệu giao dịch phát thải trong kỳ.
-- **Hậu điều kiện:** Báo cáo AI được lưu trữ trong Workspace và tệp PDF được tải về máy của Reviewer.
+- **Hậu điều kiện:** Báo cáo AI và Kế hoạch Lộ trình Cắt giảm được lưu trữ trong Workspace, hỗ trợ tải file PDF về thiết bị.
 - **Luồng sự kiện chính:**
-  1. *Lựa chọn phương thức kích hoạt:*
-     - **Cách 1 (Lịch trình tự động):** Nếu cấu hình `ai_report_frequency` là `WEEKLY` hoặc `MONTHLY`, tác vụ Cronjob tự động chạy vào ngày và giờ đã thiết lập (mặc định 23:59).
-     - **Cách 2 (Kích hoạt bằng tay on-demand):** Nếu cấu hình là `DISABLED` hoặc Reviewer muốn xem đánh giá tức thì, Reviewer bấm nút **"Sinh báo cáo ngay"** trên giao diện Báo cáo AI.
-  2. Hệ thống tổng hợp tỷ trọng tiêu thụ (Điện %, Xăng xe %, Nước %, so sánh kỳ trước) và gọi LLM (Gemini).
-  3. AI phân tích lý do phát thải tăng/giảm và sinh Kế hoạch cắt giảm định lượng (ví dụ: khuyến nghị đi tàu điện Cát Linh - Hà Đông 3 ngày/tuần giúp giảm 18 kg CO2e).
-  4. Báo cáo được lưu trữ vào bảng `ai_reports` và hiển thị trực quan trên Dashboard của Trưởng nhóm (Reviewer).
-  5. Reviewer xem báo cáo và nhấn nút **"Xuất Báo cáo PDF"**.
-  6. Hệ thống kết xuất tài liệu PDF chuẩn định dạng in ấn (gồm biểu đồ tỷ trọng, bảng số liệu, các chỉ số $\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$ và các khuyến nghị hành động của AI) và tải về máy trong vòng 3-5 giây.
+  - **Nhánh A - Báo cáo Xu hướng Định kỳ & Tức thời (AI Insight Report):**
+    1. Tác vụ Cronjob tự động chạy theo lịch cấu hình (`WEEKLY`, `MONTHLY`) hoặc Reviewer chủ động bấm nút "Sinh báo cáo ngay" (On-demand).
+    2. Hệ thống tổng hợp tỷ trọng tiêu thụ (Điện %, Xăng xe %, Nước %, so sánh kỳ trước) và gọi LLM (Gemini 1.5 Pro).
+    3. AI phân tích nguyên nhân phát thải tăng/giảm và trả về nhận định xu hướng cùng các khuyến nghị khắc phục nhanh.
+    4. Báo cáo được lưu vào bảng `ai_reports` và hiển thị trực quan trên giao diện.
+  - **Nhánh B - Thiết lập Mục tiêu & Sinh Lộ trình Cắt giảm Dài hạn (Personalized Reduction Roadmap):**
+    1. Reviewer mở form "Thiết lập Mục tiêu Cắt giảm":
+       - Nhập tỷ lệ cắt giảm mong muốn (ví dụ: `15%`).
+       - Chọn tầm nhìn thời gian (ví dụ: `3 tháng`, `6 tháng`, `12 tháng`).
+       - Chọn danh mục trọng tâm ưu tiên (Điện, Phương tiện di chuyển, Nấu nướng...).
+    2. Reviewer nhấn "AI Sinh Lộ trình Cắt giảm".
+    3. Backend nạp dữ liệu lịch sử phát thải, thông số nền ($m^2$, số người) và Mức tham chiếu quốc gia vào prompt LLM chuyên biệt.
+    4. AI phân rã mục tiêu thành **Lộ trình từng tháng (Month-by-Month Milestones)**:
+       - Hạn ngạch phát thải mục tiêu của từng tháng giảm dần theo thời gian.
+       - Danh sách các hành động định lượng cụ thể khả thi cho hộ gia đình/văn phòng trong từng tháng (ví dụ: Tháng 1 chuyển 2 ngày đi xe máy sang tàu điện Cát Linh - Hà Đông giảm 12 kg CO2e; Tháng 2 đặt điều hòa 26°C kết hợp quạt giảm 13.5 kg CO2e).
+    5. Kế hoạch được lưu trữ vào bảng `emission_reduction_plans` ở trạng thái `ACTIVE`.
+    6. Reviewer xem bảng lộ trình, đối chiếu tiến độ thực tế và nhấn **"Xuất Kế hoạch Cắt giảm PDF"** để tải file PDF chuẩn in ấn trong $\le 3-5\text{s}$.
 - **Luồng rẽ nhánh / Ngoại lệ:**
-  - *Cấu hình lịch:* Reviewer có thể vào Cài đặt Workspace để thay đổi tần suất (Weekly/Monthly/Disabled), thứ trong tuần, ngày trong tháng hoặc giờ chạy bất kỳ lúc nào.
+  - *1a. Nhập tỷ lệ giảm <= 0% hoặc > 100%, hoặc số tháng < 1:* Hệ thống báo lỗi "Mục tiêu cắt giảm và thời gian thực hiện không hợp lệ".
+  - *4a. Dịch vụ AI timeout hoặc gián đoạn:* Hệ thống báo lỗi thân thiện và giữ nguyên kế hoạch hiện có.
 
 ---
 

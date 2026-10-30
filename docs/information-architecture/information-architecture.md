@@ -230,7 +230,10 @@ Bảng dưới đây ánh xạ chi tiết từng Màn hình / Modal với các A
 | **SCR-APPROVE-REJECT-01**| Nút "Xác nhận Từ chối" | `POST /api/v1/workspaces/{id}/approvals/{logId}/reject` | Chuyển trạng thái sang `rejected`, lưu bắt buộc `rejection_reason` và gửi thông báo. | Reviewer Only |
 | **SCR-INSIGHT-01** | Tải Báo cáo AI hiện tại | `GET /api/v1/workspaces/{id}/ai-reports/current` | Lấy nội dung báo cáo nhận định xu hướng và danh sách hành động cắt giảm tháng này. | Reviewer / Editor |
 | **SCR-INSIGHT-01** | Nút "Phân tích lại ngay" | `POST /api/v1/workspaces/{id}/ai-reports/generate-manual` | Kích hoạt AI sinh báo cáo phân tích mới theo yêu cầu tức thì (ngoài lịch Cronjob). | Reviewer Only |
-| **SCR-INSIGHT-01** | Nút "Xuất file PDF" | `GET /api/v1/workspaces/{id}/ai-reports/{reportId}/export-pdf` | Tạo và tải file PDF báo cáo đồ họa chuyên nghiệp chuẩn in ấn. | Reviewer Only |
+| **SCR-INSIGHT-01** | Nút "Xuất file PDF Báo cáo"| `GET /api/v1/workspaces/{id}/ai-reports/{reportId}/export-pdf` | Tạo và tải file PDF báo cáo đồ họa chuyên nghiệp chuẩn in ấn. | Reviewer Only |
+| **SCR-INSIGHT-01** | Form Thiết lập Mục tiêu Cắt giảm | `POST /api/v1/workspaces/{id}/reduction-plans/generate` | Thiết lập mục tiêu giảm % và tầm nhìn thời gian (số tháng) -> AI sinh Lộ trình Cắt giảm từng tháng. | Reviewer Only |
+| **SCR-INSIGHT-01** | Tải Lộ trình Cắt giảm Hiện tại | `GET /api/v1/workspaces/{id}/reduction-plans/current` | Lấy chi tiết kế hoạch lộ trình cắt giảm theo từng tháng đang áp dụng. | Reviewer / Editor |
+| **SCR-INSIGHT-01** | Nút "Xuất PDF Lộ trình" | `GET /api/v1/workspaces/{id}/reduction-plans/{planId}/export-pdf` | Xuất Kế hoạch Lộ trình Cắt giảm Phát thải (Roadmap) ra file PDF chuẩn in ấn. | Reviewer Only |
 | **SCR-SETTING-01** | Tab 1: Cập nhật thông số nền | `PUT /api/v1/workspaces/{id}/baselines` | Cập nhật lại số người thường trú và diện tích sàn sử dụng. | Reviewer Only |
 | **SCR-SETTING-01** | Tab 1: Đổi tên / Xóa WS | `PATCH /api/v1/workspaces/{id}`<br>`DELETE /api/v1/workspaces/{id}` | Đổi tên Workspace hoặc giải tán/xóa vĩnh viễn không gian làm việc. | Reviewer Only |
 | **SCR-SETTING-01** | Tab 2: Thiết lập Ngân sách | `PUT /api/v1/workspaces/{id}/budgets` | Thiết lập hạn ngạch ngân sách tháng (`target_emission`), hệ thống tự tính mốc 85%. | Reviewer Only |
@@ -423,14 +426,22 @@ Bảng dưới đây ánh xạ chi tiết từng Màn hình / Modal với các A
 #### 2.9. `SCR-INSIGHT-01`: Báo cáo AI Insight & Kế hoạch Cắt giảm Xanh (Xuất PDF)
 - **Đường dẫn (Route):** `/workspace/[id]/insights`
 - **Presentation:** Full Page
-- **Quyền hạn:** Reviewer (Toàn quyền xem & xuất PDF); Editor (Xem tóm tắt).
+- **Quyền hạn:** Reviewer (Toàn quyền xem, thiết lập mục tiêu & xuất PDF); Editor (Xem tóm tắt).
 - **Thành phần giao diện:**
   - Bộ chọn chu kỳ Tháng/Quý.
   - Nút thao tác: "Kích hoạt Phân tích Lại ngay" và **"Xuất Báo cáo PDF"** (tải file PDF chuẩn đồ họa vector).
   - **Phần 1: Nhận định Xu hướng (Executive Summary):** Đoạn văn bản tự nhiên do LLM phân tích sâu sắc các hành vi tiêu dùng tăng đột biến trong kỳ.
-  - **Phần 2: Kế hoạch Hành động Cắt giảm Cá nhân hóa (Green Action Plan):**
-    - Các thẻ khuyến nghị cụ thể (ví dụ: *Chuyển sang đi tàu điện 3 ngày/tuần* $\rightarrow$ Giảm `-18.00 kg CO2e/tháng`*).
-    - Tổng tiềm năng cắt giảm định lượng nếu tuân thủ toàn bộ kế hoạch.
+  - **Phần 2: Khuyến nghị Cắt giảm Nhanh (Quick Wins Action Plan):**
+    - Các thẻ khuyến nghị cụ thể cho kỳ hiện tại (ví dụ: *Chuyển sang đi tàu điện 3 ngày/tuần* $\rightarrow$ Giảm `-18.00 kg CO2e/tháng`).
+    - Tổng tiềm năng cắt giảm định lượng tức thì.
+  - **Phần 3: Thiết lập Mục tiêu & Lộ trình Cắt giảm Cá nhân hóa Dài hạn (Personalized Reduction Roadmap):**
+    - Form thiết lập mục tiêu: Ô nhập tỷ lệ cắt giảm mong muốn (ví dụ: `15%`), Dropdown chọn tầm nhìn thời gian (`3 tháng`, `6 tháng`, `12 tháng`), Hộp kiểm chọn nhóm phát thải trọng tâm ưu tiên.
+    - Nút hành động nổi bật: **"AI Sinh Lộ trình Cắt giảm (Generate Roadmap)"**.
+    - **Bảng/Timeline Lộ trình Từng Tháng (Month-by-Month Roadmap):**
+      - Mốc từng tháng: Tháng 1, Tháng 2, Tháng 3... kèm hạn ngạch mục tiêu ($kg\text{ }CO_2e$) và % giảm lũy kế.
+      - Danh sách hành động định lượng cụ thể của tháng đó (Action Items, tiềm năng giảm $kg\text{ }CO_2e$, mức độ ưu tiên).
+      - Thước đo đối chiếu tiến độ thực tế đạt được so với lộ trình đề ra (Actual vs Target).
+    - Nút thao tác: **"Xuất Kế hoạch Lộ trình ra PDF"** (file tài liệu chuyên biệt phục vụ cam kết xanh).
 
 #### 2.10. `SCR-SETTING-01`: Cài đặt Không gian làm việc (Workspace Settings)
 - **Đường dẫn (Route):** `/workspace/[id]/settings`
