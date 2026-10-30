@@ -111,7 +111,7 @@ flowchart LR
 ### UC02: Khai báo Thông số nền (Baseline Setup)
 - **Mã Use Case:** UC02
 - **Tác nhân chính:** Trưởng nhóm (Reviewer)
-- **Mô tả vắn tắt:** Trưởng nhóm khai báo số lượng thành viên thường trú/làm việc và diện tích mặt sàn ($m^2$) của hộ gia đình hoặc văn phòng để hệ thống chuẩn bị dữ liệu tính toán chỉ số $\text{CO}_2\text{e}/\text{người}$ và $\text{CO}_2\text{e}/m^2$.
+- **Mô tả vắn tắt:** Trưởng nhóm khai báo số lượng thành viên thường trú/làm việc và diện tích mặt sàn ($m^2$) của hộ gia đình hoặc văn phòng để hệ thống chuẩn bị dữ liệu tính toán chỉ số $\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$ và xác định Mức phát thải Tham chiếu Quốc gia (Reference Benchmark).
 - **Tiền điều kiện:** Người dùng là Reviewer của Workspace.
 - **Hậu điều kiện:** Thông số nền được ghi nhận vào cấu hình Workspace.
 - **Luồng sự kiện chính:**
@@ -120,7 +120,7 @@ flowchart LR
      - Số lượng thành viên (ví dụ: `4` người).
      - Diện tích mặt sàn sử dụng (ví dụ: `85.5` $m^2$).
   3. Reviewer nhấn "Lưu thông số".
-  4. Hệ thống kiểm tra tính hợp lệ của số liệu, lưu vào bảng `workspace_baselines` và thông báo hoàn tất cài đặt nền tảng.
+  4. Hệ thống kiểm tra tính hợp lệ của số liệu, lưu vào bảng `workspace_baselines`, tự động xác định Mức phát thải Tham chiếu chuẩn quốc gia ($141.93\text{ kg CO}_2\text{e/người/tháng}$ cho Hộ gia đình - $46,4\%$ ranh giới phát thải, hoặc $305.83\text{ kg CO}_2\text{e/người/tháng}$ cho Nơi làm việc - $100\%$ theo [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md)) và thông báo hoàn tất cài đặt nền tảng.
 - **Luồng rẽ nhánh / Ngoại lệ:**
   - *2a. Nhập số thành viên <= 0 hoặc diện tích <= 0:* Hệ thống báo lỗi: "Số lượng thành viên và diện tích mặt sàn phải là số dương lớn hơn 0".
 
@@ -243,24 +243,25 @@ flowchart LR
 ### UC09: Thiết lập Target Ngân sách Tháng & Ngưỡng 85%
 - **Mã Use Case:** UC09
 - **Tác nhân chính:** Trưởng nhóm (Reviewer)
-- **Mô tả vắn tắt:** Vào đầu tháng, Reviewer thiết lập hạn ngạch phát thải tối đa cho cả Workspace (ví dụ: $300\text{ kg CO}_2\text{e}$) và kích hoạt ngưỡng cảnh báo sớm ở mức $85\%$.
+- **Mô tả vắn tắt:** Vào đầu tháng, Reviewer thiết lập hạn ngạch phát thải tối đa cho cả Workspace (ví dụ: $300\text{ kg CO}_2\text{e}$) và kích hoạt ngưỡng cảnh báo sớm ở mức $85\%$. Hệ thống hỗ trợ gợi ý thông minh dựa trên Mức phát thải Tham chiếu Quốc gia ($46,4\%$ cho Household, $100\%$ cho Workplace).
 - **Tiền điều kiện:** Người dùng là Reviewer của Workspace.
 - **Hậu điều kiện:** Hạn ngạch tháng và ngưỡng 85% được thiết lập cho Workspace.
 - **Luồng sự kiện chính:**
   1. Reviewer vào mục "Ngân sách Carbon".
-  2. Reviewer chọn tháng áp dụng, nhập trần phát thải mục tiêu (ví dụ: `300` kg CO2e).
-  3. Hệ thống tự động tính ngưỡng cảnh báo sớm 85% ($300 \times 0.85 = 255\text{ kg CO}_2\text{e}$).
-  4. Reviewer nhấn "Lưu ngân sách".
-  5. Hệ thống ghi nhận cấu hình ngân sách tháng và áp dụng ngay cho Dashboard.
+  2. Hệ thống tự động hiển thị gợi ý thông minh dựa trên thông số nền và Mức tham chiếu quốc gia (ví dụ: Hộ gia đình 4 người có mức tham chiếu chuẩn là $568\text{ kg CO}_2\text{e/tháng}$; gợi ý mục tiêu Xanh $511\text{ kg}$, mục tiêu Chuẩn $568\text{ kg}$).
+  3. Reviewer chọn tháng áp dụng, chọn mức gợi ý hoặc nhập trần phát thải mục tiêu tùy chỉnh (ví dụ: `300` kg CO2e).
+  4. Hệ thống tự động tính ngưỡng cảnh báo sớm 85% ($300 \times 0.85 = 255\text{ kg CO}_2\text{e}$).
+  5. Reviewer nhấn "Lưu ngân sách".
+  6. Hệ thống ghi nhận cấu hình ngân sách tháng và áp dụng ngay cho Dashboard.
 - **Luồng rẽ nhánh / Ngoại lệ:**
-  - *2a. Nhập giá trị <= 0:* Hệ thống thông báo hạn ngạch phải là số dương lớn hơn 0.
+  - *3a. Nhập giá trị <= 0:* Hệ thống thông báo hạn ngạch phải là số dương lớn hơn 0.
 
 ---
 
 ### UC10: Giám sát Dashboard & Bắn Notification Cảnh báo
 - **Mã Use Case:** UC10
 - **Tác nhân chính:** Thành viên (Editor), Trưởng nhóm (Reviewer)
-- **Mô tả vắn tắt:** Người dùng theo dõi trực quan tiến độ phát thải thực tế so với ngân sách, các chỉ số chuẩn hóa ($\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$) và tự động nhận Notification cảnh báo khi chạm mốc 85% hoặc vượt 100%.
+- **Mô tả vắn tắt:** Người dùng theo dõi trực quan tiến độ phát thải thực tế so với ngân sách, các chỉ số chuẩn hóa ($\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$, đối sánh Mức tham chiếu quốc gia) và tự động nhận Notification cảnh báo khi chạm mốc 85%, vượt 100% hoặc phát hiện dị biệt tiêu thụ.
 - **Tiền điều kiện:** Người dùng đã đăng nhập Workspace.
 - **Hậu điều kiện:** Giao diện Dashboard hiển thị cập nhật thời gian thực; notification được gửi đến thiết bị của toàn bộ thành viên khi chạm ngưỡng.
 - **Luồng sự kiện chính:**
@@ -269,12 +270,15 @@ flowchart LR
      - Tổng kg CO2e đã phát thải và thanh tiến độ % so với Target.
      - Chỉ số chuẩn hóa $\text{kg CO}_2\text{e}/\text{người}$.
      - Chỉ số chuẩn hóa $\text{kg CO}_2\text{e}/m^2$.
+     - Tỷ lệ đối sánh với Mức tham chiếu quốc gia (Benchmark Intensity Ratio $\mathcal{R}$) và Huy hiệu phân hạng Xanh (Green Pioneer, Standard, Above Benchmark).
   3. Khi phát thải tích lũy đạt $\ge 85\%$ ngân sách:
      - Hệ thống tự động bắn **Notification cảnh báo** đến toàn bộ các thành viên trong Workspace.
      - Đổi màu thanh tiến độ sang Vàng cam (Warning) trên giao diện.
   4. Khi phát thải tích lũy đạt $\ge 100\%$ ngân sách:
      - Hệ thống bắn **Notification báo động vượt trần** đến toàn bộ thành viên.
      - Đổi màu thanh tiến độ sang Đỏ (Danger).
+  5. Khi phát thải bình quân đầu người vượt mức tham chiếu quốc gia hoặc Run-rate dự báo cuối tháng vượt chuẩn:
+     - Hệ thống kích hoạt **Cảnh báo Dị biệt Tham chiếu Quốc gia (Anomaly Warning)** trên Dashboard và gửi thông báo khuyến cáo kiểm tra các nhóm phát thải trọng điểm (Điện, Phương tiện di chuyển). *(Mức chuẩn tham chiếu được quy định tại [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md)).*
 
 ---
 

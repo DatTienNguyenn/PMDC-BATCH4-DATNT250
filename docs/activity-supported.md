@@ -7,6 +7,7 @@
 > **Căn cứ tài liệu kỹ thuật & nghiệp vụ:**
 >
 > - [spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md): Mục 4 - Mô hình Dữ liệu và Công thức Tính toán Dấu chân Carbon
+> - [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md): Quy định Nguồn gốc & Phương pháp luận Xác định Mức phát thải Tham chiếu Quốc gia (Household 46.4% vs Workplace 100%)
 > - [docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/user-stories.md): `US-CL-001` (Nạp thủ công), `US-CL-002` (Quy đổi kg CO2e tự động), `US-SA-001` (Quản lý hệ số quy chuẩn của System Admin)
 > - [docs/MVP.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/MVP.md): Danh mục phân bổ Sprint 1 và Cấu trúc cơ sở dữ liệu `standard_emission_factors`
 >

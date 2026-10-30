@@ -103,7 +103,11 @@ flowchart TD
 2. **Khai báo thông số nền (Baseline Setup):** Admin nhập số lượng thành viên và diện tích mặt sàn ($m^2$). Dữ liệu này giúp hệ thống tự động tính toán các chỉ số cường độ phát thải chuẩn hóa:
    $$\text{Chỉ số theo nhân khẩu} = \frac{\text{Tổng kg CO}_2\text{e}}{\text{Số thành viên}} \quad (\text{kg CO}_2\text{e}/\text{người})$$
    $$\text{Chỉ số theo diện tích} = \frac{\text{Tổng kg CO}_2\text{e}}{\text{Diện tích mặt sàn}} \quad (\text{kg CO}_2\text{e}/m^2)$$
-3. **Thiết lập Ngân sách (Budgeting):** Vào đầu tháng, Admin đặt ra ngưỡng phát thải tối đa (ví dụ: $300\text{ kg CO}_2\text{e}$ cho tháng 10) và hệ thống kích hoạt cơ chế theo dõi cùng ngưỡng cảnh báo sớm ở mức $85\%$.
+   Đồng thời, hệ thống tự động xác định **Mức phát thải Tham chiếu Quốc gia (National Reference Benchmark)** theo chuẩn Our World in Data ($3.67\text{ tấn CO}_2\text{e/người/năm}$):
+   - **Hộ gia đình (Household):** Chiếm $46,4\%$ cơ cấu phát thải quốc gia (thuộc 3 nhóm sinh hoạt cốt lõi: Điện & Nhiệt, Giao thông đường bộ, Rác sinh hoạt) $\rightarrow \mathbf{141.93\text{ kg CO}_2\text{e/người/tháng}}$.
+   - **Nơi làm việc / Văn phòng (Workplace):** Đối sánh $100\%$ nền kinh tế lao động $\rightarrow \mathbf{305.83\text{ kg CO}_2\text{e/nhân sự/tháng}}$.
+   *(Chi tiết quy định và phương pháp luận tại [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md)).*
+3. **Thiết lập Ngân sách (Budgeting):** Vào đầu tháng, Admin đặt ra ngưỡng phát thải tối đa (ví dụ: $300\text{ kg CO}_2\text{e}$ cho tháng 10). Hệ thống cung cấp gợi ý ngân sách thông minh dựa trên Mức tham chiếu quốc gia (khuyến nghị mức Xanh giảm 10%, mức Chuẩn 100%, hoặc mức Linh hoạt) và kích hoạt cơ chế theo dõi cùng ngưỡng cảnh báo sớm ở mức $85\%$.
 4. **Mời & Phê duyệt Thành viên Gia nhập (Join Approval Flow):** Reviewer sinh mã mời 6 ký tự. Người dùng nhập mã để gửi Yêu cầu gia nhập (`PENDING`). Reviewer xem xét và chấp thuận (`Accept`) để thêm vào `workspace_members` với vai trò Editor hoặc từ chối (`Reject`), đảm bảo an toàn ngăn chặn truy cập trái phép.
 
 ### 3.2. Luồng 2: Nạp dữ liệu Activity có Cấu trúc (Data Ingestion Workflow)
@@ -127,9 +131,13 @@ Hệ thống phân định rõ ràng giữa **Luồng nạp chính** và **Luồ
 1. **Ghi nhận & Quy đổi giao dịch:** Khi một bản ghi được phê duyệt ghi sổ (ví dụ: $250\text{ kWh}$ điện sinh hoạt), Backend lấy sản lượng tiêu thụ nhân với Hệ số phát thải quy chuẩn tương ứng do System Admin thiết lập (ví dụ: $0.7221\text{ kg CO}_2\text{e}/\text{kWh}$) để quy đổi ra mức phát thải chuẩn:
    $$\text{Lượng phát thải } (\text{kg CO}_2\text{e}) = \text{Sản lượng} \times \text{Hệ số phát thải}$$
 2. **Lưu trữ & Cộng dồn:** Lưu bản ghi vào bảng `emission_logs` (kèm thông tin người ghi nhận, người duyệt, hệ số áp dụng) và tự động cộng dồn vào tổng phát thải của tháng hiện tại.
-3. **Kích hoạt cảnh báo (Threshold Trigger):**
-   - Nếu tổng phát thải đạt ngưỡng $\ge 85\%$ của Carbon Budget tháng, hệ thống tự động kích hoạt notification cảnh báo sớm gửi đến **toàn bộ thành viên** trong Workspace.
-   - Nếu tổng phát thải vượt $\ge 100\%$ ngân sách, hệ thống bắn notification báo động vượt trần và chuyển trạng thái Dashboard sang mức Đỏ.
+3. **Kích hoạt Động cơ Cảnh báo Kép (Dual Alert Engine):**
+   - **Cơ chế 1 - Theo dõi Ngân sách Cam kết (Committed Budget Tracking):**
+     + Nếu tổng phát thải đạt ngưỡng $\ge 85\%$ của Carbon Budget tháng, hệ thống tự động kích hoạt notification cảnh báo sớm gửi đến **toàn bộ thành viên** trong Workspace và đổi màu tiến độ sang Vàng cam.
+     + Nếu tổng phát thải vượt $\ge 100\%$ ngân sách, hệ thống bắn notification báo động vượt trần và chuyển trạng thái Dashboard sang mức Đỏ.
+   - **Cơ chế 2 - Cảnh báo Dị biệt Tham chiếu Quốc gia (National Reference Anomaly Alert):**
+     + Hệ thống đối sánh phát thải bình quân đầu người thực tế với Mức tham chiếu quốc gia ($141.93\text{ kg/người}$ cho Household hoặc $305.83\text{ kg/người}$ cho Workplace).
+     + Nếu phát thải thực tế hoặc dự báo Run-rate cuối tháng vượt mức chuẩn tham chiếu, hệ thống kích hoạt huy hiệu cảnh báo dị biệt (Anomaly Warning) trên Dashboard để người dùng kịp thời điều chỉnh hành vi tiêu thụ. *(Mức phát thải tham chiếu chuẩn được quy định tại [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md)).*
 
 ### 3.4. Luồng 4: Phân tích & Gợi ý hành động (AI Insight & Reporting)
 1. **Cơ chế sinh báo cáo linh hoạt (Lịch tự động hoặc Bằng tay):** Reviewer có thể cấu hình lịch tự động chạy nền (Background Task) theo chu kỳ tuần/tháng vào thời điểm tùy chọn trong Workspace Settings, hoặc tắt tự động và kích hoạt thủ công on-demand (nút "Sinh báo cáo ngay") bất cứ khi nào cần xem báo cáo tức thì.
