@@ -11,16 +11,19 @@
 
 ## 📌 1. Giới thiệu Dự án
 
-**Personal & Micro-Office Carbon Ledger** là nền tảng số hóa hỗ trợ **Hộ gia đình** và **Văn phòng nhỏ** ghi nhận, kiểm soát hạn ngạch, phân tích và chủ động cắt giảm dấu chân carbon (tính theo chuẩn $\text{kg CO}_2\text{e}$).
+**Personal & Micro-Office Carbon Ledger** là nền tảng số hóa hỗ trợ **Hộ gia đình** và **Văn phòng nhỏ** ghi nhận, kiểm soát hạn ngạch, phân tích và **hỗ trợ đề xuất phương án cắt giảm cá nhân hóa từ AI** (tính theo chuẩn $\text{kg CO}_2\text{e}$). 
 
-Hệ thống giải quyết bài toán biến đổi khí hậu từ cấp độ vi mô thông qua sự kết hợp giữa **Quy trình kiểm duyệt sổ cái chặt chẽ (Approval Workflow)**, **Đa kênh nạp dữ liệu thông minh (Thủ công, Quét ảnh bằng AI Vision, Import Excel)** và **Kế hoạch cắt giảm định lượng mang tính cá nhân hóa (AI Insight & Actionable Advice)**.
+> [!NOTE]
+> Hệ thống đóng vai trò là công cụ số hóa, theo dõi và cố vấn dữ liệu thông minh hỗ trợ người dùng đưa ra quyết định phù hợp; ứng dụng hỗ trợ đề xuất các phương án cắt giảm cá nhân hóa từ AI chứ **không trực tiếp can thiệp hay tự cắt giảm phát thải (emission)**.
+
+Hệ thống tiếp cận bài toán quản trị dấu chân carbon từ cấp độ vi mô thông qua sự kết hợp giữa **Quy trình kiểm duyệt sổ cái chặt chẽ (Approval Workflow)**, **Đa kênh nạp dữ liệu thông minh (Thủ công, Quét ảnh bằng AI Vision, Import Excel)** và **Đề xuất phương án cắt giảm cá nhân hóa từ AI (AI Insight & Actionable Advice)**.
 
 ### Mục tiêu cốt lõi:
 
 - **Số hóa nhanh chóng:** Loại bỏ rào cản ghi chép thủ công nhờ công nghệ Multimodal AI bóc tách trực tiếp hóa đơn tiền điện (EVN), hóa đơn nước và mặt số công tơ.
 - **Minh bạch & Phê duyệt:** Tách bạch vai trò Thành viên (Editor - nạp dữ liệu ở trạng thái Draft) và Trưởng nhóm (Reviewer - kiểm duyệt chính thức trước khi ghi sổ).
 - **Kiểm soát ngân sách & Cảnh báo sớm:** Thiết lập trần phát thải (Target Quota) theo tháng và tự động bắn Notification cảnh báo tới toàn bộ thành viên khi chạm ngưỡng $85\%$ và vượt trần $100\%$.
-- **Hành động thiết thực:** AI phân tích bất thường cuối kỳ và đưa ra các khuyến nghị cắt giảm cụ thể, khả thi kèm báo cáo PDF chuẩn in ấn.
+- **Đề xuất cá nhân hóa từ AI:** AI phân tích dữ liệu bất thường cuối kỳ và hỗ trợ đề xuất phương án cắt giảm cá nhân hóa cụ thể, khả thi (chứ không trực tiếp cắt giảm emission), kèm báo cáo PDF chuẩn in ấn để người dùng chủ động tham khảo và áp dụng thực tế.
 
 ---
 
@@ -29,53 +32,6 @@ Hệ thống giải quyết bài toán biến đổi khí hậu từ cấp độ
 Hệ thống được cấu trúc thành **9 phân hệ chức năng hoàn chỉnh** như thể hiện trong sơ đồ Mindmap sản phẩm dưới đây:
 
 ![Cấu trúc sản phẩm Mindmap](docs/cau_truc_san_pham_xmind.png)
-
-### Chi tiết 9 phân hệ chức năng:
-
-```mermaid
-mindmap
-  root((Hệ thống Quản trị & Phân tích Dấu chân Carbon))
-    ["1. Đăng nhập & Phân quyền IAM"]
-      ["Đăng nhập / Đăng ký (Email, Password, Google SSO)"]
-      ["Quên & Đặt lại mật khẩu"]
-      ["Quản lý phiên đăng nhập"]
-      ["Kiểm soát truy cập RBAC (System Admin, Reviewer, Editor)"]
-    ["2. Quản lý Tenant Workspace"]
-      ["Cấu hình tên, loại hình (Gia đình / Văn phòng)"]
-      ["Thông số nền (Số thành viên, Diện tích m²)"]
-      ["Mời thành viên (Invite Link / Mã mời)"]
-      ["Phân quyền & Quản lý danh sách thành viên"]
-    ["3. Dashboard Trung tâm"]
-      ["Thẻ KPI (Tổng phát thải tháng, Số dư ngân sách)"]
-      ["Chỉ số chuẩn hóa (CO2e/người, CO2e/m²)"]
-      ["Đồ thị Donut phân bổ danh mục & Line/Bar theo thời gian"]
-      ["Thanh tiến độ Budget Progress Bar & 5 hoạt động gần nhất"]
-    ["4. Quản lý Hoạt động Phát thải"]
-      ["Sổ cái Data Grid (Bộ lọc thời gian, danh mục, thành viên)"]
-      ["CRUD hoạt động phát thải & đính kèm minh chứng"]
-      ["Quy đổi tự động (Sản lượng x Hệ số = kg CO2e)"]
-    ["5. Import Dữ liệu Đa kênh"]
-      ["AI Vision Ingestion (Quét hóa đơn EVN/nước/công tơ)"]
-      ["Trích xuất JSON & Popup xem trước đối chiếu"]
-      ["Bulk Upload file mẫu Excel/CSV & Export dữ liệu"]
-    ["6. Phân tích Target & Ngân sách"]
-      ["Cài đặt Hạn ngạch tháng & Ngưỡng cảnh báo 85%"]
-      ["Dự báo cạn kiệt ngân sách theo tốc độ tiêu thụ"]
-      ["Cảnh báo thời gian thực vi phạm ngân sách"]
-    ["7. Báo cáo Insight AI Analytics"]
-      ["Tổng hợp định kỳ cuối tuần / tháng / quý"]
-      ["So sánh kỳ trước Period-over-Period"]
-      ["AI Reasoning phát hiện bất thường & Đề xuất Actionable Advice"]
-      ["Xuất bản & Tải xuống Báo cáo file PDF"]
-    ["8. Hồ sơ Cá nhân User Profile"]
-      ["Thông tin cá nhân (Tên, Avatar)"]
-      ["Thống kê tỷ lệ đóng góp phát thải vào Workspace"]
-      ["Tùy chỉnh nhận thông báo (Notification In-app)"]
-    ["9. Quản trị Hệ thống System Admin"]
-      ["CRUD Bảng Hệ số phát thải chuẩn (EVN, GHG Protocol)"]
-      ["Quản lý danh sách Workspace toàn hệ thống"]
-      ["Cấu hình tham số AI (API Keys, Prompt) & Audit Logs"]
-```
 
 ---
 
@@ -194,7 +150,7 @@ flowchart TD
 1. **Luồng 1 - Khởi tạo & Lập kế hoạch (Onboarding & Budgeting):** Tạo Workspace -> Khai báo diện tích $m^2$ và số nhân khẩu (phục vụ tính toán $\text{CO}_2\text{e}/\text{người}$ và $\text{CO}_2\text{e}/m^2$) -> Đặt hạn ngạch trần phát thải tháng kèm mốc cảnh báo sớm $85\%$.
 2. **Luồng 2 - Nạp dữ liệu đa phương thức & Phê duyệt (Data Ingestion & Approval):** Hỗ trợ 3 kênh nạp (Thủ công sinh hoạt lẻ, AI Vision bóc tách hóa đơn/công tơ, Upload file Excel mẫu). Dữ liệu của Thành viên được chuyển vào hàng đợi `Draft / Pending Review` để Trưởng nhóm (Reviewer) xem xét duyệt.
 3. **Luồng 3 - Xử lý Sổ cái & Cảnh báo (Ledger Processing & Alert):** Sau khi duyệt, Backend quy đổi theo Hệ số chuẩn ($\text{kg CO}_2\text{e} = \text{Sản lượng} \times \text{Hệ số}$), cộng dồn vào bảng `emission_logs`. Nếu chạm ngưỡng $\ge 85\%$, hệ thống tự động bắn Notification cảnh báo tới toàn bộ thành viên.
-4. **Luồng 4 - Phân tích & Gợi ý hành động (AI Insight & PDF Export):** Cronjob tự động chạy cuối tuần/tháng, gom nhóm dữ liệu, gọi LLM phân tích bất thường và sinh khuyến nghị định lượng thực tế (ví dụ: chuyển sang đi tàu điện Cát Linh - Hà Đông 3 ngày/tuần giảm 18 kg CO2e); Reviewer có thể xuất báo cáo ra file PDF.
+4. **Luồng 4 - Phân tích & Gợi ý hành động (AI Insight & PDF Export):** Cronjob tự động chạy cuối tuần/tháng, gom nhóm dữ liệu, gọi LLM phân tích bất thường và hỗ trợ đề xuất phương án cắt giảm định lượng cá nhân hóa từ AI (ví dụ: chuyển sang đi tàu điện Cát Linh - Hà Đông 3 ngày/tuần giúp giảm 18 kg CO2e; hệ thống hỗ trợ đề xuất giải pháp chứ không trực tiếp cắt giảm emission); Reviewer có thể xuất báo cáo ra file PDF.
 
 ---
 
