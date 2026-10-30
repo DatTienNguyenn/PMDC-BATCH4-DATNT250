@@ -688,8 +688,8 @@
 - **And** chỉ bắn notification mới khi chạm ngưỡng kế tiếp (ngưỡng 100%).
 
 #### Notes
-- **Dependencies**: Bảng `notifications`, cột `has_alerted_85_percent` và `has_alerted_100_percent` trong bảng `carbon_budgets`.
-- **Assumptions**: Người dùng có thể xem lại danh sách các thông báo tại biểu tượng Quả chuông trên thanh menu.
+- **Dependencies**: Tỷ lệ `total_co2e_kg / target_co2e_kg` từ API Dashboard (`carbon_budgets` & `emission_logs`). Không phụ thuộc bảng lưu trữ `notifications` vì frontend tự động tính toán real-time để hiển thị.
+- **Assumptions**: Người dùng có thể xem cảnh báo trực tiếp trên Banner Dashboard và Popup Drawer thông báo tính toán động.
 - **Open Questions**: Không có.
 
 ---

@@ -319,8 +319,7 @@ flowchart TD
             WorkspaceService["Workspace & Member Service"]
             CalcEngine["Emission Calculation Engine (Tự động quy đổi)"]
             ApprovalService["Approval Workflow Manager"]
-            ThresholdMonitor["Budget & 85% Alert Monitor"]
-            NotificationService["In-App Notification Service"]
+            ThresholdMonitor["Budget & Dynamic Alert Resolver\n(Tính toán cảnh báo real-time)"]
             ExcelProcessor["Apache POI Bulk Parser (Luồng chính)"]
             PDFGenerator["OpenPDF / iText Report Builder"]
             AIInsightService["AI Insight & Recommendation Service"]
@@ -407,7 +406,6 @@ sequenceDiagram
     participant DB as PostgreSQL
     participant LLM as Google Gemini API
     participant PDFService as PDFGenerator
-    participant Notify as NotificationService
 
     Cron->>InsightService: triggerWeeklyMonthlyInsightJob()
     loop Từng Workspace hoạt động
@@ -416,7 +414,7 @@ sequenceDiagram
         InsightService->>LLM: Gửi Prompt Context (Tỷ lệ tiêu thụ, biến động tăng giảm)
         LLM-->>InsightService: Trả về Khuyến nghị đề xuất cắt giảm cá nhân hóa
         InsightService->>DB: Lưu kết quả vào bảng ai_reports
-        InsightService->>Notify: Tạo Notification "Báo cáo Insight kỳ mới đã sẵn sàng"
+        Note over InsightService: Frontend Dashboard tự nhận diện có báo cáo mới qua kỳ period
         Note over PDFService: Khi Reviewer bấm "Xuất PDF", PDFGenerator kết xuất file trong <= 3-5s
     end
 ```
@@ -444,11 +442,9 @@ erDiagram
     workspaces ||--o{ carbon_budgets : "sets"
     workspaces ||--o{ emission_logs : "records"
     workspaces ||--o{ ai_reports : "generates"
-    workspaces ||--o{ notifications : "contains"
     
     users ||--o{ emission_logs : "created by"
     users ||--o{ emission_logs : "reviewed by"
-    users ||--o{ notifications : "receives"
     
     standard_emission_factors ||--o{ emission_logs : "applies factor"
     users ||--o{ standard_emission_factors : "updated by (System Admin)"
@@ -540,17 +536,6 @@ erDiagram
         text note
         timestamp created_at
         timestamp updated_at
-    }
-
-    notifications {
-        uuid id PK
-        uuid workspace_id FK
-        uuid recipient_id FK
-        varchar notification_type
-        varchar title
-        text message
-        boolean is_read
-        timestamp created_at
     }
 
     ai_reports {
@@ -653,17 +638,7 @@ erDiagram
 - `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 - `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 
-#### 8. Bảng `notifications` (Thông báo In-app Cảnh báo & Trạng thái)
-- `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
-- `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
-- `recipient_id`: `UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE`
-- `notification_type`: `VARCHAR(30) NOT NULL` (`THRESHOLD_85_WARNING`, `THRESHOLD_100_EXCEEDED`, `REQUEST_SUBMITTED`, `REQUEST_APPROVED`, `REQUEST_REJECTED`, `AI_REPORT_READY`)
-- `title`: `VARCHAR(200) NOT NULL`
-- `message`: `TEXT NOT NULL`
-- `is_read`: `BOOLEAN NOT NULL DEFAULT false`
-- `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
-
-#### 9. Bảng `ai_reports` (Báo cáo Phân tích AI & Đề xuất Cắt giảm Định kỳ)
+#### 8. Bảng `ai_reports` (Báo cáo Phân tích AI & Đề xuất Cắt giảm Định kỳ)
 - `id`: `UUID PRIMARY KEY DEFAULT gen_random_uuid()`
 - `workspace_id`: `UUID NOT NULL REFERENCES workspaces(id) ON DELETE CASCADE`
 - `report_type`: `VARCHAR(20) NOT NULL` (`WEEKLY`, `MONTHLY`)
@@ -675,11 +650,21 @@ erDiagram
 - `pdf_file_url`: `VARCHAR(500) NULL`
 - `generated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 
+> [!TIP]
+> **Quyết định Tinh gọn Database Schema (Theo Review):**  
+> Bảng `notifications` được **loại bỏ hoàn toàn khỏi thiết kế CSDL**.  
+> **Lý do:** Frontend hoàn toàn tự động tính toán được các trạng thái và loại thông báo (`notification_type`) theo thời gian thực (Real-time Dynamic Derivation) dựa trực tiếp trên trạng thái dữ liệu có sẵn từ Dashboard API:
+> - *Cảnh báo ngưỡng 85% / 100%:* Tính theo tỷ lệ `current_emissions / budget_target` từ `carbon_budgets` & `emission_logs`.
+> - *Yêu cầu chờ duyệt:* Đếm số lượng bản ghi `status = 'PENDING_REVIEW'` trong `emission_logs` của Workspace.
+> - *Kết quả duyệt của cá nhân:* Lọc các bản ghi `user_id = :currentUser` có `status IN ('APPROVED', 'REJECTED')` mới nhất.
+> - *Báo cáo AI mới:* Kiểm tra sự tồn tại của bản ghi trong `ai_reports` cho kỳ gần nhất.  
+> 
+> Giải pháp này giúp loại bỏ hoàn toàn việc lưu trữ các bản ghi thông báo trùng lặp/dư thừa, tránh rủi ro lệch đồng bộ (out-of-sync) và tối ưu hóa hiệu năng cơ sở dữ liệu.
+
 ### 7.3. Chiến lược Đánh Index (Database Indexing Strategy)
 1. `idx_emission_logs_ws_period_status`: `(workspace_id, billing_period, status)` -> Tối ưu hóa tính tổng phát thải tháng và kiểm tra ngưỡng 85%.
 2. `idx_emission_logs_ws_created`: `(workspace_id, created_at DESC)` -> Tối ưu hóa hiển thị Sổ cái phân trang.
 3. `idx_emission_logs_approval`: `(workspace_id, status)` WHERE `status = 'PENDING_REVIEW'` -> Partial Index cho Hàng đợi duyệt tức thời.
-4. `idx_notifications_user_unread`: `(recipient_id, is_read, created_at DESC)` -> Tối ưu hiển thị chuông thông báo đỏ.
 
 ---
 
@@ -772,6 +757,7 @@ Kính mời bạn (Reviewer) xem xét các điểm thiết kế kỹ thuật tr�
    - Bổ sung chỉ số thời gian nạp trung bình 1 activity ($\le 20-30\text{s}$ cho nhập tay, $< 2\text{s}$ cho file 100 activities Excel) và thời gian phản hồi kế hoạch cắt giảm / xuất báo cáo ($\le 3-5\text{s}$). Bạn có muốn điều chỉnh con số ngưỡng này không?
 3. **Về Kiến trúc Multi-tenancy & Database (Mục 6 & Mục 7):**  
    - Xác nhận giải pháp **Shared Database, Shared Schema with Discriminator Column (`workspace_id`)** và lưu cứng `factor_applied` tại `emission_logs` để đảm bảo tính bất biến của sổ cái kế toán.
+   - **Đã tiếp thu và loại bỏ bảng `notifications`:** Chuyển sang mô hình Frontend tính toán cảnh báo thời gian thực (Real-time Dynamic Derivation) từ dữ liệu Dashboard/Sổ cái, giúp database tinh gọn còn 8 bảng.
 
 ---
 *Tài liệu PRD Phiên bản 1.1 đã cập nhật đầy đủ các điểm review trên nhánh worktree [`docs/prd`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd).*
