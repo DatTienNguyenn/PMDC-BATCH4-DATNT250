@@ -207,6 +207,7 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
 ├── spec.md                            # Đặc tả phạm vi bài toán, 3 Roles, 4 Luồng & 12 Use Cases
 └── docs/
     ├── MVP.md                         # Kế hoạch triển khai & phát hành MVP 6 tuần (3 Sprints x 2 tuần)
+    ├── activity-supported.md          # Danh mục hoạt động phát thải & Hệ số phát thải quy chuẩn (Scope 1, 2, 3)
     ├── cau_truc_san_pham_xmind.png    # Sơ đồ Mindmap cấu trúc sản phẩm 9 phân hệ
     ├── information-architecture/
     │   ├── information-architecture.md# Tài liệu Kiến trúc Thông tin & Đặc tả giao diện (IA)
@@ -220,6 +221,7 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
 ### Chi tiết các tài liệu liên kết:
 
 - **[docs/MVP.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/MVP.md):** Kế hoạch chi tiết triển khai và phát hành MVP trong 6 tuần (3 Sprints), định nghĩa DoR/DoD và quản trị rủi ro kỹ thuật.
+- **[docs/activity-supported.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/activity-supported.md):** Danh mục 7 hoạt động phát thải được hỗ trợ, đơn vị tính, phân loại Scope 1, 2, 3 và trích dẫn nguồn hệ số chuẩn (Bộ TN&MT, IPCC, DEFRA, US EPA, IEA).
 - **[spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md):** Định nghĩa chi tiết phạm vi In-Scope / Out-of-Scope, ma trận RBAC, 4 luồng hoạt động cốt lõi và danh mục 12 Use Cases.
 - **[docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/information-architecture/information-architecture.md):** Thiết kế sơ đồ cây kiến trúc thông tin (Sitemap), ma trận phân quyền View và đặc tả UI chi tiết cho toàn bộ các màn hình.
 - **[docs/usecase/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/usecase/use-cases.md):** Đặc tả chi tiết từng Use Case từ UC01 đến UC12 (Tiền điều kiện, Hậu điều kiện, Luồng chính, Luồng ngoại lệ).
