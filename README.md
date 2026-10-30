@@ -249,6 +249,9 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
     ├── api-schema/
     │   ├── api-schema.md              # Đặc tả chi tiết RESTful API Schema, Data Contracts & Kiểm tra Use Cases
     │   └── openapi.yaml               # Đặc tả chuẩn máy OpenAPI 3.1 (Swagger)
+    ├── c4-documentation/
+    │   ├── c4-documentation.md        # Tài liệu Thiết kế Kiến trúc C4 Model (Context, Container, Component, Deployment)
+    │   └── c4-verification-checklist.md # Bảng kiểm chuẩn kiến trúc C4, Ma trận truy vết & Biên bản nghiệm thu
     ├── information-architecture/
     │   ├── information-architecture.md# Tài liệu Kiến trúc Thông tin & Đặc tả giao diện (IA)
     │   └── sitemap.png                # Sơ đồ kiến trúc thông tin & cây màn hình (Sitemap)
@@ -266,6 +269,8 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
 - **[spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md):** Định nghĩa chi tiết phạm vi In-Scope / Out-of-Scope, ma trận RBAC, 4 luồng hoạt động cốt lõi và danh mục 12 Use Cases.
 - **[docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/information-architecture/information-architecture.md):** Danh mục 26 màn hình chuẩn hóa (Screen ID, Routes), sơ đồ phân cấp Screen Hierarchy 5 tầng, Hợp đồng 5 Cung bậc Trạng thái UI (State Contract), Screen-to-API Mapping Matrix và Ma trận phân quyền RBAC chi tiết.
 - **[docs/api-schema/api-schema.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/api-schema/api-schema.md):** Đặc tả toàn diện hệ thống RESTful API Schema, Data Contracts (Request/Response Envelopes, Validation Rules), kiểm tra đối soát quy trình nghiệp vụ và bao phủ 100% danh mục 12 Use Cases (kèm file OpenAPI 3.1 [`docs/api-schema/openapi.yaml`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/api-schema/openapi.yaml)).
+- **[docs/c4-documentation/c4-documentation.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/c4-documentation/c4-documentation.md):** Tài liệu Thiết kế Kiến trúc Hệ thống theo chuẩn C4 Model đầy đủ 4 tầng: Ngữ cảnh (System Context L1), Khối ứng dụng (Container L2), Thành phần nội bộ (Component L3) và Mô hình miền/Triển khai hạ tầng Docker (Code & Deployment L4), tích hợp các quyết định kiến trúc then chốt (ADRs).
+- **[docs/c4-documentation/c4-verification-checklist.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/c4-documentation/c4-verification-checklist.md):** Bảng kiểm chuẩn kiến trúc C4 Documentation với bộ tiêu chuẩn 5 trụ cột (26 tiêu chí, 100 điểm), Ma trận đối soát truy vết đầu - cuối (End-to-End Traceability Matrix 100% Use Cases, User Stories, Màn hình IA, REST APIs, Bảng CSDL và SLAs) cùng Biên bản nghiệm thu kiến trúc chính thức.
 - **[docs/usecase/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/usecase/use-cases.md):** Đặc tả chi tiết từng Use Case từ UC01 đến UC12 (Tiền điều kiện, Hậu điều kiện, Luồng chính, Luồng ngoại lệ).
 - **[docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/user-stories.md):** Danh mục 15 User Stories được chuẩn hóa theo chuẩn **INVEST** và tiêu chí nghiệm thu **Gherkin Syntax (Given-When-Then)** theo phương pháp luận của BA Zone & Digital School (Phúc NT).
 
