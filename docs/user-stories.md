@@ -13,7 +13,7 @@
 
 | Mã US | Tên User Story | Module / Luồng | Persona chính | MoSCoW | Est. (SP) | Sprint |
 |---|---|---|---|:---:|:---:|:---:|
-| **US-WS-001** | Khởi tạo Không gian làm việc (Workspace) | Luồng 1: Onboarding | Trưởng nhóm (Reviewer) | Must | 2 | Sprint 1 |
+| **US-WS-001** | Khởi tạo & Cấu hình Không gian làm việc (Workspace) | Luồng 1: Onboarding | Reviewer / System Admin | Must | 2 | Sprint 1 |
 | **US-WS-002** | Khai báo thông số nền ($m^2$, số người) | Luồng 1: Onboarding | Trưởng nhóm (Reviewer) | Must | 3 | Sprint 1 |
 | **US-WS-003** | Mời thành viên gia nhập với vai trò Editor | Luồng 1: Onboarding | Trưởng nhóm (Reviewer) / Editor | Must | 3 | Sprint 1 |
 | **US-SA-001** | Quản lý & cập nhật Hệ số phát thải quy chuẩn | Quản trị Hệ thống | System Admin | Should | 3 | Sprint 1 |
@@ -41,11 +41,11 @@
 
 ---
 
-### US-WS-001: Khởi tạo Không gian làm việc (Workspace)
+### US-WS-001: Khởi tạo & Cấu hình Không gian làm việc (Workspace)
 
-**As a** Trưởng nhóm gia đình hoặc Quản lý văn phòng nhỏ vừa đăng ký tài khoản  
-**I want to** khởi tạo một Không gian làm việc (Workspace) mới với tên đại diện và loại hình (Hộ gia đình hoặc Văn phòng nhỏ)  
-**So that** tôi có một môi trường dữ liệu độc lập để làm Trưởng nhóm (Reviewer), kiểm soát toàn diện sổ cái và ngân sách phát thải cho tập thể của mình  
+**As a** Trưởng nhóm gia đình, Quản lý văn phòng nhỏ hoặc Quản trị viên Hệ thống (System Admin)  
+**I want to** khởi tạo và cấu hình một Không gian làm việc (Workspace) mới với tên đại diện và loại hình (Hộ gia đình hoặc Văn phòng nhỏ)  
+**So that** tôi có một môi trường dữ liệu độc lập để làm Trưởng nhóm (Reviewer) hoặc phục vụ System Admin quản trị, phân bổ tenant và giám sát sổ cái phát thải  
 
 #### Metadata
 - **Epic/Feature**: Luồng 1 - Khởi tạo & Lập kế hoạch (Onboarding)
@@ -86,6 +86,12 @@
 - **Then** hệ thống ngăn chặn việc tạo dữ liệu
 - **And** hiển thị thông báo lỗi cụ thể tại ô nhập: "Tên Không gian làm việc phải chứa từ 3 đến 50 ký tự"
 - **And** giữ nguyên loại hình người dùng đã chọn trước đó.
+
+**AC4: Quản trị viên Hệ thống (System Admin) khởi tạo & cấu hình Workspace thành công**
+- **Given** người dùng đăng nhập với quyền `System Admin`
+- **When** System Admin chọn chức năng khởi tạo Workspace từ Modal hoặc Cổng Quản trị Hệ thống (`/admin/workspaces`), nhập tên và loại hình hợp lệ và nhấn "Tạo Workspace"
+- **Then** hệ thống tạo Workspace mới thành công trong cơ sở dữ liệu
+- **And** ghi nhận quyền quản trị Workspace cho System Admin và cho phép cấu hình phân bổ người dùng hoặc chỉ định Reviewer.
 
 #### Notes
 - **Dependencies**: Bảng `workspaces`, `workspace_members`.
@@ -870,7 +876,7 @@ Bảng đối chiếu đảm bảo 100% các thành phần trong 4 Luồng hoạ
 
 | Luồng hoạt động | Bước nghiệp vụ trong luồng | Mã Use Case | Mã User Story tương ứng | Ghi chú bao phủ |
 |---|---|:---:|:---:|---|
-| **1. Onboarding & Budgeting** | Tạo Workspace | UC01 | **US-WS-001** | Tạo không gian dữ liệu riêng, gán Reviewer. |
+| **1. Onboarding & Budgeting** | Tạo & Cấu hình Workspace | UC01 | **US-WS-001** | Tạo không gian dữ liệu riêng, gán Reviewer hoặc System Admin. |
 | **1. Onboarding & Budgeting** | Khai báo thông số nền ($m^2$, số người) | UC02 | **US-WS-002** | Cơ sở tính $\text{CO}_2\text{e}/\text{người}$ và $\text{CO}_2\text{e}/m^2$. |
 | **1. Onboarding & Budgeting** | Mời thành viên vào Workspace | UC03 | **US-WS-003** | Sinh mã mời tham gia vai trò Editor. |
 | **1. Onboarding & Budgeting** | Thiết lập Ngân sách & Ngưỡng 85% | UC09 | **US-BG-001** | Trần phát thải tối đa và mốc cảnh báo sớm. |

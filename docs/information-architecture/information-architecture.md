@@ -52,7 +52,7 @@ graph TD
 |:---:|---|:---:|:---:|:---:|
 | **V1.1 - V1.2** | Đăng nhập / Đăng ký / Quên mật khẩu | ✅ | ✅ | ✅ |
 | **V1.3** | Chọn Workspace (Workspace Switcher) | ❌ | ✅ | ✅ |
-| **V1.4** | Modal Khởi tạo Workspace mới | ❌ | ✅ | ❌ |
+| **V1.4** | Modal Khởi tạo & Cấu hình Workspace | ✅ | ✅ | ❌ |
 | **V1.5** | Màn hình Tham gia Workspace (Invite Code) | ❌ | ❌ | ✅ |
 | **V2.1** | Dashboard Tổng quan & Cảnh báo | ❌ | ✅ (Toàn diện) | ✅ (Xem chung) |
 | **V2.2** | Sổ cái Phát thải & Xuất Excel | ❌ | ✅ | ✅ (Xem sổ cái chung & riêng) |
@@ -96,8 +96,9 @@ graph TD
   - Nút phụ: **"Tham gia bằng mã mời"** (chuyển đến V1.5).
 - **Hành vi:** Nhấp vào một thẻ Workspace sẽ kích hoạt Session của Workspace đó và chuyển hướng đến `V2.1 Dashboard`.
 
-#### 1.4. Modal Khởi tạo Workspace mới (Create Workspace Modal)
-- **Kích hoạt từ:** Nút "Tạo Workspace mới" tại `V1.3`.
+#### 1.4. Modal Khởi tạo & Cấu hình Workspace mới (Create & Configure Workspace Modal)
+- **Kích hoạt từ:** Nút "Tạo Workspace mới" tại `V1.3` hoặc Cổng Quản trị Hệ thống `V3.3`.
+- **Quyền truy cập:** Trưởng nhóm (Reviewer) & Quản trị viên Hệ thống (System Admin).
 - **Thành phần giao diện (Form nhập liệu):**
   - Tên Workspace (bắt buộc, 3 - 50 ký tự, ví dụ: "Gia đình Nguyễn An").
   - Loại hình: Radio button hoặc Dropdown chọn `Hộ gia đình` hoặc `Văn phòng nhỏ`.
@@ -105,7 +106,7 @@ graph TD
     - Số lượng thành viên thường trú / nhân viên (số nguyên > 0, ví dụ: 4).
     - Diện tích mặt sàn sử dụng (số thực $> 0\text{ }m^2$, ví dụ: 85.5).
   - Nút bấm: "Hủy bỏ" và **"Tạo Workspace"**.
-- **Hậu điều kiện:** Khởi tạo thành công, tự động gán quyền `Reviewer` cho người tạo và mở Dashboard Workspace vừa tạo.
+- **Hậu điều kiện:** Khởi tạo thành công, tự động gán quyền `Reviewer` cho người tạo (hoặc liên kết quyền quản trị trực tiếp cho System Admin) và mở Dashboard Workspace vừa tạo.
 
 #### 1.5. Màn hình Tham gia Workspace bằng mã mời (Join Workspace with Invite Code)
 - **Đường dẫn (URL):** `/workspaces/join`
@@ -313,7 +314,10 @@ graph TD
 
 #### 3.3. Quản lý Danh sách Không gian làm việc (Tenants Management)
 - **Đường dẫn (URL):** `/admin/workspaces`
-- **Thành phần giao diện:** Bảng danh sách toàn bộ Workspaces, Tên Chủ sở hữu (Owner Email), Loại hình, Số thành viên, Tổng phát thải tích lũy, Trạng thái (Hoạt động / Tạm khóa). Nút hành động: Khóa / Mở khóa Workspace nếu vi phạm chính sách.
+- **Thành phần giao diện:**
+  - Nút hành động nổi bật: **"Khởi tạo & Cấu hình Workspace mới"** (cho phép System Admin chủ động tạo Workspace mới và cấu hình thông số ban đầu).
+  - Bảng danh sách toàn bộ Workspaces, Tên Chủ sở hữu (Owner Email), Loại hình, Số thành viên, Tổng phát thải tích lũy, Trạng thái (Hoạt động / Tạm khóa).
+  - Nút hành động: Cấu hình Workspace, Khóa / Mở khóa Workspace nếu vi phạm chính sách.
 
 #### 3.4. Cấu hình AI & Nhật ký Kiểm toán Hệ thống (AI Config & System Audit Logs)
 - **Đường dẫn (URL):** `/admin/settings`

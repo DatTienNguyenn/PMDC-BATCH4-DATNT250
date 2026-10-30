@@ -129,13 +129,14 @@ Hệ thống phân định 3 vai trò rõ ràng, kết hợp mô hình Multi-ten
    - Khai báo hoạt động phát thải qua 3 phương thức (Thủ công, Quét AI, File Excel); mọi bản ghi lưu ở trạng thái **`Draft / Chờ duyệt (Pending Review)`**.
    - Xem Dashboard tiến độ chung, nhận notification cảnh báo ngưỡng 85% và theo dõi trạng thái duyệt các yêu cầu cá nhân.
 3. **Quản trị viên Hệ thống (System Admin):**
-   - Độc lập với dữ liệu các Workspace. Chịu trách nhiệm quản lý và cập nhật các **Hệ số phát thải quy chuẩn (Standard Emission Factors)** theo quy định của Nhà nước (EVN, Bộ TN&MT, GHG Protocol).
+   - Quản lý và cập nhật các **Hệ số phát thải quy chuẩn (Standard Emission Factors)** theo quy định của Nhà nước (EVN, Bộ TN&MT, GHG Protocol).
+   - **Có toàn quyền khởi tạo, cấu hình và quản trị các Không gian làm việc (Workspace)** trên hệ thống phục vụ công tác thiết lập tenant, cấu hình thông số ban đầu và hỗ trợ người dùng.
 
 #### Bảng Ma trận Phân quyền (RBAC Matrix)
 
 | Chức năng / Thao tác                                                          | System Admin | Trưởng nhóm (Reviewer) |  Thành viên (Editor)  |
 | ----------------------------------------------------------------------------- | :----------: | :--------------------: | :-------------------: |
-| Khởi tạo & Cấu hình Workspace                                                 |      ❌      |           ✅           |          ❌           |
+| Khởi tạo & Cấu hình Workspace                                                 |      ✅      |           ✅           |          ❌           |
 | Khai báo thông số nền (thành viên, diện tích $m^2$)                           |      ❌      |           ✅           |          ❌           |
 | Mời thành viên vào Workspace                                                  |      ❌      |           ✅           |          ❌           |
 | Xem Dashboard & chỉ số chuẩn hóa ($\text{CO}_2\text{e}/\text{người}$, $/m^2$) |      ❌      |     ✅ (Toàn diện)     |    ✅ (Xem chung)     |
@@ -233,7 +234,7 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
 
 | Mã US         | Tên User Story                                               | Phân hệ / Luồng       | Persona chính                   | MoSCoW | Est. (SP) |
 | ------------- | ------------------------------------------------------------ | --------------------- | ------------------------------- | :----: | :-------: |
-| **US-WS-001** | Khởi tạo Không gian làm việc (Workspace)                     | Luồng 1: Onboarding   | Trưởng nhóm (Reviewer)          |  Must  |     2     |
+| **US-WS-001** | Khởi tạo & Cấu hình Không gian làm việc (Workspace)          | Luồng 1: Onboarding   | Reviewer / System Admin         |  Must  |     2     |
 | **US-WS-002** | Khai báo thông số nền ($m^2$, số người)                      | Luồng 1: Onboarding   | Trưởng nhóm (Reviewer)          |  Must  |     3     |
 | **US-WS-003** | Mời thành viên gia nhập với vai trò Editor                   | Luồng 1: Onboarding   | Trưởng nhóm (Reviewer) / Editor |  Must  |     3     |
 | **US-SA-001** | Quản lý & cập nhật Hệ số phát thải quy chuẩn                 | Quản trị Hệ thống     | System Admin                    | Should |     3     |

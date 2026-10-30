@@ -24,14 +24,14 @@ Hệ thống phân định 3 vai trò rõ ràng, kết hợp mô hình Multi-ten
    - **Quyền Giám sát:** Xem Dashboard tiến độ phát thải chung của Workspace, nhận thông báo cảnh báo ngưỡng 85% và theo dõi lịch sử trạng thái duyệt các hoạt động do mình khai báo.
 
 3. **Quản trị viên Hệ thống (System Admin):**
-   - Đứng ngoài phạm vi dữ liệu sinh hoạt của từng Workspace cụ thể.
    - Quản trị danh mục và cấu hình/chỉnh sửa các **Hệ số phát thải chuẩn (Standard Emission Factors)** theo quy chuẩn mới nhất của Nhà nước (EVN, Bộ TN&MT, GHG Protocol) khi có thay đổi.
+   - **Có toàn quyền khởi tạo, cấu hình và quản trị các Không gian làm việc (Workspace)** trên toàn hệ thống phục vụ công tác thiết lập tenant, cấu hình thông số ban đầu và hỗ trợ người dùng.
 
 ### 2.2. Ma trận Phân quyền (RBAC Matrix)
 
 | Chức năng / Quyền hạn | System Admin | Trưởng nhóm (Reviewer) | Thành viên (Editor) |
 |---|:---:|:---:|:---:|
-| Khởi tạo & Cấu hình Workspace | ❌ | ✅ | ❌ |
+| Khởi tạo & Cấu hình Workspace | ✅ | ✅ | ❌ |
 | Khai báo thông số nền (thành viên, diện tích $m^2$) | ❌ | ✅ | ❌ |
 | Mời thành viên vào Workspace | ❌ | ✅ | ❌ |
 | Xem Dashboard & chỉ số chuẩn hóa ($\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$) | ❌ | ✅ (Toàn diện) | ✅ (Xem chung) |
@@ -199,6 +199,7 @@ flowchart LR
     Editor --> UC10
 
     %% System Admin
+    SysAdmin --> UC01
     SysAdmin --> UC12
 ```
 
@@ -206,7 +207,7 @@ flowchart LR
 
 | Mã UC | Tên Use Case | Actor chính | Mục tiêu nghiệp vụ |
 |---|---|---|---|
-| **UC01** | Khởi tạo Workspace | Trưởng nhóm (Reviewer) | Tạo không gian dữ liệu riêng biệt cho gia đình/văn phòng. |
+| **UC01** | Khởi tạo & Cấu hình Workspace | Trưởng nhóm (Reviewer), System Admin | Tạo và cấu hình không gian dữ liệu riêng biệt cho gia đình/văn phòng. |
 | **UC02** | Khai báo Thông số nền | Trưởng nhóm (Reviewer) | Nhập số người, diện tích $m^2$ để tính chỉ số $\text{CO}_2\text{e}/\text{người}$, $/m^2$. |
 | **UC03** | Mời thành viên gia nhập | Trưởng nhóm (Reviewer) | Sinh mã mời tham gia Workspace với vai trò Editor. |
 | **UC04** | Khai báo phát thải thủ công | Thành viên (Editor), Reviewer | Nhập sinh hoạt lẻ (xe máy, gas, điện) tạo Draft / Approved. |
