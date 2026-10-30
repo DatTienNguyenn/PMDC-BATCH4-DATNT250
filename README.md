@@ -33,26 +33,106 @@ Hệ thống được cấu trúc thành **9 phân hệ chức năng hoàn chỉ
 
 ---
 
-## 🗺️ 3. Kiến trúc Thông tin & Sơ đồ Trang (Information Architecture & Sitemap)
+## 🗺️ 3. Kiến trúc Thông tin & Phân cấp Màn hình (Information Architecture & Screen Hierarchy)
 
-Cấu trúc luồng màn hình của hệ thống được tổ chức phân cấp mạch lạc, kết nối từ trang giới thiệu (Landing Page), xác thực tài khoản, không gian làm việc cho tới cổng quản trị hệ thống:
+Hệ thống được thiết kế và chuẩn hóa toàn diện thành **26 Màn hình & Giao diện tương tác** (Full Pages, Modals, Drawers và Error Views), được tổ chức phân cấp mạch lạc từ khâu xác thực, quản lý không gian làm việc cho tới cổng quản trị hệ thống:
 
 ![Sơ đồ Kiến trúc Thông tin & Sitemap](docs/information-architecture/sitemap.png)
 
-### Tóm tắt các khối màn hình chính:
-- **Trang chủ & Xác thực (Home & Auth):** Landing page giới thiệu giải pháp, Đăng nhập / Đăng ký (Google SSO, Email/Pass), Quên & Đặt lại mật khẩu.
-- **Quản lý Workspace (Workspaces & Onboarding):** Danh sách Workspace (Switcher), Modal tạo mới (nhập tên, loại hình, diện tích $m^2$, số người) và Màn hình nhập mã mời gia nhập (Join Workspace with code).
-- **Ứng dụng Không gian làm việc cốt lõi (Workspace App):**
-  - **Dashboard:** Thẻ 4 chỉ số KPI, chỉ số chuẩn hóa quy mô ($\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$), biểu đồ xu hướng Line/Donut, thanh tiến độ và Banner cảnh báo $85\%$.
-  - **Sổ cái (Emission Ledger):** Bảng dữ liệu Grid lọc đa tiêu chí, nguồn nạp (Nhập tay, AI Vision, Excel) và nút Xuất Excel.
-  - **Modal Thêm Phát thải (3 Tabs):** Quét hóa đơn/công tơ AI (kèm popup xác nhận), Nhập thủ công sinh hoạt lẻ, và Import file mẫu Excel có bảng xem trước đối chiếu.
-  - **Hàng đợi Phê duyệt (Approval Queue):** Dành riêng cho Reviewer duyệt (`Accept`) hoặc từ chối (`Reject` kèm lý do) các request nạp dữ liệu từ Editor.
-  - **Báo cáo AI & Kế hoạch Cắt giảm (AI Insights & Reduction Plan):** Nhận định xu hướng, Actionable Advice định lượng cá nhân hóa và nút Xuất PDF.
-  - **Cài đặt Workspace (Settings):** Cấu hình thông số nền, Hạn ngạch ngân sách tháng và Quản lý phân quyền thành viên.
-- **Hồ sơ Cá nhân (User Profile):** Thông tin tài khoản, thống kê tỷ lệ phát thải đóng góp cá nhân và tùy chọn nhận thông báo (Notification Preferences).
-- **Cổng Quản trị Hệ thống (System Admin Backoffice):** Dashboard toàn hệ thống (KPIs, chi phí API AI), Quản lý Hệ số chuẩn Master Data (EVN), Quản lý Tenants và Cấu hình AI / Audit Logs.
+### 3.1. Sơ đồ Phân cấp Màn hình Toàn hệ thống (Mermaid Screen Hierarchy)
 
-👉 **Xem đặc tả giao diện và ma trận quyền chi tiết tại:** [docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/information-architecture/information-architecture.md)
+```mermaid
+graph TD
+    Root["Root Application (Session & Context Provider)"] --> L1_Auth["1. Khối Xác thực & Tenant Onboarding"]
+    Root --> L1_Core["2. Khối Ứng dụng Không gian làm việc (Workspace App)"]
+    Root --> L1_Admin["3. Khối Cổng Quản trị Hệ thống (System Admin Backoffice)"]
+    Root --> L1_Error["4. Khối Xử lý Sự cố & Điều hướng (System Error Shell)"]
+
+    %% Khối 1: Auth & Onboarding
+    L1_Auth --> SCR_AUTH_01["SCR-AUTH-01: Đăng nhập / Đăng ký (/auth/login, /auth/register)"]
+    L1_Auth --> SCR_AUTH_02["SCR-AUTH-02: Quên / Đặt lại Mật khẩu (/auth/forgot-password)"]
+    L1_Auth --> SCR_WS_01["SCR-WS-01: Chọn Workspace (/workspaces)"]
+    SCR_WS_01 -.->|"Kích hoạt Modal"| SCR_WS_MODAL_01["SCR-WS-MODAL-01: Khởi tạo & Cấu hình Workspace Modal"]
+    SCR_WS_01 --> SCR_WS_JOIN_01["SCR-WS-JOIN-01: Màn hình Gửi Yêu cầu Gia nhập (/workspaces/join)"]
+
+    %% Khối 2: Workspace App
+    L1_Core --> SCR_DASH_01["SCR-DASH-01: Dashboard Trung tâm (/workspace/:id/dashboard)"]
+    L1_Core --> SCR_LEDGER_01["SCR-LEDGER-01: Sổ cái Phát thải (/workspace/:id/ledger)"]
+    L1_Core --> SCR_APPROVE_01["SCR-APPROVE-01: Hàng đợi Kiểm duyệt (/workspace/:id/approvals)"]
+    L1_Core --> SCR_INSIGHT_01["SCR-INSIGHT-01: Báo cáo AI & Kế hoạch (/workspace/:id/insights)"]
+    L1_Core --> SCR_SETTING_01["SCR-SETTING-01: Cài đặt Workspace (/workspace/:id/settings)"]
+    L1_Core --> SCR_PROFILE_01["SCR-PROFILE-01: Hồ sơ Cá nhân (/profile)"]
+    L1_Core -.->|"Kích hoạt Drawer"| SCR_NOTIF_01["SCR-NOTIF-01: Trung tâm Thông báo (Notification Drawer)"]
+
+    %% Sub-views & Modals của Sổ cái
+    SCR_LEDGER_01 -.->|"Click dòng dữ liệu"| SCR_LEDGER_DETAIL_01["SCR-LEDGER-DETAIL-01: Modal Chi tiết & Vết duyệt"]
+    SCR_LEDGER_01 -.->|"Nút Thêm / FAB"| SCR_EMISSION_ADD_01["SCR-EMISSION-ADD-01: Modal Thêm Phát thải 3 Tabs"]
+    SCR_EMISSION_ADD_01 --> SCR_AI_PREVIEW_01["SCR-AI-PREVIEW-01: Modal Kiểm chứng AI Vision"]
+    SCR_EMISSION_ADD_01 --> SCR_EXCEL_PREVIEW_01["SCR-EXCEL-PREVIEW-01: Modal Xem trước Import Excel"]
+
+    %% Modals của Duyệt & Cài đặt
+    SCR_APPROVE_01 -.->|"Click Từ chối"| SCR_APPROVE_REJECT_01["SCR-APPROVE-REJECT-01: Modal Nhập Lý do Từ chối"]
+    SCR_SETTING_01 -.->|"Nút Tạo mã mời"| SCR_INVITE_MODAL_01["SCR-INVITE-MODAL-01: Modal Quản lý Mã mời"]
+    SCR_SETTING_01 -.->|"Nút Từ chối đơn"| SCR_JOIN_REJECT_01["SCR-JOIN-REJECT-01: Modal Từ chối Gia nhập"]
+
+    %% Khối 3: Admin Backoffice
+    L1_Admin --> SCR_ADM_DASH_01["SCR-ADM-DASH-01: Dashboard Quản trị Hệ thống (/admin/dashboard)"]
+    L1_Admin --> SCR_ADM_FACTOR_01["SCR-ADM-FACTOR-01: Quản lý Hệ số Quy chuẩn (/admin/emission-factors)"]
+    SCR_ADM_FACTOR_01 -.->|"Nút Thêm/Sửa"| SCR_ADM_FACTOR_MODAL_01["SCR-ADM-FACTOR-MODAL-01: Modal Thêm/Sửa Hệ số"]
+    L1_Admin --> SCR_ADM_TENANT_01["SCR-ADM-TENANT-01: Quản lý Workspace Tenants (/admin/workspaces)"]
+    SCR_ADM_TENANT_01 -.->|"Tạo Tenant"| SCR_WS_MODAL_01
+    L1_Admin --> SCR_ADM_AUDIT_01["SCR-ADM-AUDIT-01: Cấu hình AI & Nhật ký Kiểm toán (/admin/settings)"]
+
+    %% Khối 4: Error Pages
+    L1_Error --> SCR_ERR_403["SCR-ERR-403: 403 Forbidden (/403)"]
+    L1_Error --> SCR_ERR_404["SCR-ERR-404: 404 Not Found (/404)"]
+```
+
+### 3.2. Cấu trúc Phân cấp theo Cấp độ Giao diện (Level Hierarchy)
+
+Hệ thống được chia tách thành 5 tầng cấu trúc kỹ thuật rõ ràng:
+- **Level 0 (Global Context & Session):** Quản lý phiên đăng nhập (Session), chuyển đổi ngữ cảnh Không gian làm việc (`workspace_id`), Toast Notification Provider.
+- **Level 1 (Root Layout Shells):**
+  - `AuthShell`: Bố cục tối giản căn giữa cho Đăng nhập / Đăng ký.
+  - `AppShell`: Sidebar menu trái, Header chứa thanh chuyển Workspace & chuông thông báo, FAB góc phải dưới mobile.
+  - `AdminShell`: Header màu than chì riêng biệt kèm huy hiệu `System Admin`.
+  - `ErrorShell`: Bố cục toàn trang không sidebar cho lỗi `403` và `404`.
+- **Level 2 (Trang Chính - Primary Pages):** 14 màn hình gắn với định tuyến URL cấp 1 (`/dashboard`, `/ledger`, `/approvals`, `/insights`, `/settings`, `/profile`, `/admin/*`).
+- **Level 3 (Sub-views & Tabs lồng nhau):** Quản lý trạng thái tab qua query parameters (3 Tabs nạp phát thải, 3 Tabs cài đặt workspace, 2 Tabs cấu hình admin).
+- **Level 4 (Lớp phủ Modals, Drawers & Dialogs):** 10 modals/drawers kiểm soát xác nhận, preview bóc tách AI, kiểm tra lỗi file Excel, nhập lý do từ chối và tạo mã mời.
+
+### 3.3. Tóm tắt 4 Khối Màn hình Chính:
+1. **Khối 1: Xác thực & Khởi tạo (Auth & Onboarding):**
+   - `SCR-AUTH-01` (`/auth/login`, `/auth/register`): Đăng nhập, Đăng ký (Google SSO, Email/Mật khẩu).
+   - `SCR-AUTH-02` (`/auth/forgot-password`, `/auth/reset-password`): Quên & Đặt lại mật khẩu.
+   - `SCR-WS-01` (`/workspaces`): Danh sách Workspace (Switcher).
+   - `SCR-WS-MODAL-01` (Modal): Khởi tạo Workspace mới (Tên, Loại hình, m², Số người).
+   - `SCR-WS-JOIN-01` (`/workspaces/join`): Nhập mã mời 6 ký tự để gửi đơn xin gia nhập.
+2. **Khối 2: Ứng dụng Không gian làm việc Cốt lõi (Workspace App):**
+   - `SCR-DASH-01` (`/workspace/[id]/dashboard`): Dashboard KPI, chỉ số chuẩn hóa quy mô ($\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$), biểu đồ xu hướng, thanh tiến độ và Banner cảnh báo đổi màu $85\%$ / $100\%$.
+   - `SCR-LEDGER-01` (`/workspace/[id]/ledger`): Sổ cái phát thải Grid lọc đa tiêu chí, nguồn nạp và xuất file Excel.
+   - `SCR-LEDGER-DETAIL-01` (Modal): Xem chi tiết bản ghi, hệ số quy chuẩn áp dụng và vết kiểm duyệt (Audit trail).
+   - `SCR-EMISSION-ADD-01` (Modal 3 Tabs): Khai báo thủ công (quy đổi realtime), Quét AI Vision, Nạp file mẫu Excel.
+   - `SCR-AI-PREVIEW-01` (Modal): Kiểm chứng dữ liệu bóc tách từ AI (Human-in-the-loop) trước khi lưu.
+   - `SCR-EXCEL-PREVIEW-01` (Modal): Bảng xem trước và xác thực dòng hợp lệ / dòng lỗi trước khi nạp batch.
+   - `SCR-APPROVE-01` (`/workspace/[id]/approvals`): Hàng đợi duyệt dành riêng cho Reviewer (`Accept` / `Reject`).
+   - `SCR-APPROVE-REJECT-01` (Modal): Bắt buộc Reviewer nhập lý do từ chối nạp phát thải.
+   - `SCR-INSIGHT-01` (`/workspace/[id]/insights`): Báo cáo AI phân tích xu hướng, Actionable Advice và xuất file PDF.
+   - `SCR-SETTING-01` (`/workspace/[id]/settings`): Cài đặt thông số nền ($m^2$, số người), ngân sách tháng và quản lý thành viên.
+   - `SCR-INVITE-MODAL-01` (Modal): Sinh mã mời 6 ký tự (hạn 7 ngày) và sao chép link mời.
+   - `SCR-JOIN-REJECT-01` (Modal): Nhập lý do từ chối đơn xin gia nhập của thành viên mới.
+   - `SCR-PROFILE-01` (`/profile`): Hồ sơ cá nhân, thống kê tỷ lệ phát thải đóng góp cá nhân và cài đặt thông báo.
+   - `SCR-NOTIF-01` (Drawer): Trung tâm thông báo cảnh báo ngân sách 85%/100% và kết quả duyệt đơn.
+3. **Khối 3: Cổng Quản trị Hệ thống (System Admin Backoffice):**
+   - `SCR-ADM-DASH-01` (`/admin/dashboard`): Dashboard toàn hệ thống (KPIs, giám sát lượng gọi API và chi phí AI).
+   - `SCR-ADM-FACTOR-01` & `SCR-ADM-FACTOR-MODAL-01` (`/admin/emission-factors`): Quản lý Master Data hệ số phát thải quy chuẩn (EVN, IPCC, Bộ TN&MT).
+   - `SCR-ADM-TENANT-01` (`/admin/workspaces`): Quản trị danh sách Tenants, hỗ trợ khóa/mở khóa workspace.
+   - `SCR-ADM-AUDIT-01` (`/admin/settings`): Cấu hình tham số AI (model, prompt template) và Nhật ký kiểm toán (Audit Logs).
+4. **Khối 4: Hệ thống Xử lý Sự cố & Điều hướng Lỗi (System Error Pages):**
+   - `SCR-ERR-403` (`/403`): Trang chặn truy cập khi thành viên thiếu quyền (Route Guard cho Approval Queue hoặc Workspace lạ).
+   - `SCR-ERR-404` (`/404`): Trang thông báo đường dẫn hoặc bản ghi không tồn tại.
+
+👉 **Xem chi tiết đặc tả 26 màn hình, UI/UX State Contract và Screen-to-API Mapping tại:** [docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/information-architecture/information-architecture.md)
 
 ---
 
@@ -179,7 +259,7 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
 - **[docs/MVP.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/MVP.md):** Kế hoạch chi tiết triển khai và phát hành MVP trong 6 tuần (3 Sprints), định nghĩa DoR/DoD và quản trị rủi ro kỹ thuật.
 - **[docs/activity-supported.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/activity-supported.md):** Danh mục 8 hoạt động phát thải được hỗ trợ (bao gồm năng lượng, di chuyển, rác thải, nước sạch, vật tư và du lịch hàng không), đơn vị tính, phân loại Scope 1, 2, 3 và trích dẫn nguồn hệ số chuẩn (Bộ TN&MT, IPCC, ICAO, DEFRA, US EPA, IEA).
 - **[spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md):** Định nghĩa chi tiết phạm vi In-Scope / Out-of-Scope, ma trận RBAC, 4 luồng hoạt động cốt lõi và danh mục 12 Use Cases.
-- **[docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/information-architecture/information-architecture.md):** Thiết kế sơ đồ cây kiến trúc thông tin (Sitemap), ma trận phân quyền View và đặc tả UI chi tiết cho toàn bộ các màn hình.
+- **[docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/information-architecture/information-architecture.md):** Danh mục 26 màn hình chuẩn hóa (Screen ID, Routes), sơ đồ phân cấp Screen Hierarchy 5 tầng, Hợp đồng 5 Cung bậc Trạng thái UI (State Contract), Screen-to-API Mapping Matrix và Ma trận phân quyền RBAC chi tiết.
 - **[docs/usecase/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/usecase/use-cases.md):** Đặc tả chi tiết từng Use Case từ UC01 đến UC12 (Tiền điều kiện, Hậu điều kiện, Luồng chính, Luồng ngoại lệ).
 - **[docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/user-stories.md):** Danh mục 15 User Stories được chuẩn hóa theo chuẩn **INVEST** và tiêu chí nghiệm thu **Gherkin Syntax (Given-When-Then)** theo phương pháp luận của BA Zone & Digital School (Phúc NT).
 
