@@ -71,14 +71,14 @@ Bảng tổng hợp dưới đây đặc tả đầy đủ 8 hoạt động hỗ
 
 | STT | Nhóm hoạt động | Hoạt động chi tiết | Mã danh mục (Category Code) | Đơn vị tính (Input Unit) | Phân loại Scope | Nguồn hệ số phát thải (EF) khuyến nghị | Hệ số phát thải mặc định (Default EF) | Khí nhà kính quy đổi |
 |:---:|---|---|:---:|:---:|:---:|---|:---:|:---:|
-| **1** | **Điện năng** | Sử dụng điện lưới | `ELEC_GRID` | **kWh** | **Scope 2** | **Bộ TN&MT Việt Nam** / **US EPA** / **IEA** | **`0.7221`** $\text{kg CO}_2\text{e/kWh}$ | $\text{CO}_2, \text{CH}_4, \text{N}_2\text{O}$ |
-| **2** | **Nhiên liệu** | Đốt gas (LPG) nấu ăn | `FUEL_LPG` | **kg** | **Scope 1** | **IPCC Guidelines** / **UK DEFRA** | **`2.9830`** $\text{kg CO}_2\text{e/kg}$ | $\text{CO}_2, \text{CH}_4, \text{N}_2\text{O}$ |
+| **1** | **Điện năng** | Sử dụng điện lưới | `ELEC_GRID` | **kWh** | **Scope 2** | **Công văn 1232/BNNMT-BĐKH (BCT chủ trì)** / **EPA** / **IEA** | **`0.6187`** $\text{kg CO}_2\text{e/kWh}$ *(Lưới điện 2024)* | $\text{CO}_2, \text{CH}_4, \text{N}_2\text{O}$ |
+| **2** | **Nhiên liệu** | Đốt gas (LPG) nấu ăn | `FUEL_LPG` | **kg** hoặc **Tấn** | **Scope 1** | **UK DEFRA 2026** / **IPCC Guidelines** | **`2939.36095`** $\text{kg CO}_2\text{e/tấn}$<br>*(tương đương **`2.9394`** $\text{kg CO}_2\text{e/kg}$)* | $\text{CO}_2, \text{CH}_4, \text{N}_2\text{O}$ |
 | **3** | **Nhiên liệu** | Dầu Diesel chạy máy phát | `FUEL_DIESEL` | **Lít** | **Scope 1** | **IPCC Guidelines** / **UK DEFRA** | **`2.6870`** $\text{kg CO}_2\text{e/Lít}$ | $\text{CO}_2, \text{CH}_4, \text{N}_2\text{O}$ |
-| **4** | **Di chuyển** | Xe máy / Ô tô cá nhân | `MOBILITY` | **km** hoặc **Lít** | **Scope 1 & 3** | **UK DEFRA** / **US EPA** / **IPCC** | Xe máy: **`0.0650`** $\text{kg/km}$<br>Ô tô xăng: **`0.1920`** $\text{kg/km}$<br>Xăng RON95: **`2.3100`** $\text{kg/Lít}$ | $\text{CO}_2, \text{CH}_4, \text{N}_2\text{O}$ |
-| **5** | **Rác thải** | Rác sinh hoạt chôn lấp | `WASTE_LANDFILL` | **kg** | **Scope 3** | **US EPA (WARM)** / **UK DEFRA** | **`0.4500`** $\text{kg CO}_2\text{e/kg}$ | $\text{CH}_4, \text{CO}_2$ |
-| **6** | **Nước** | Tiêu thụ và xử lý nước | `WATER_SUPPLY_TREAT` | **$m^3$** | **Scope 3** | **UK DEFRA** / **US EPA** | **`0.3440`** $\text{kg CO}_2\text{e/}m^3$ | $\text{CO}_2, \text{CH}_4$ |
+| **4** | **Di chuyển** | Xe máy / Ô tô cá nhân | `MOBILITY` | **km** | **Scope 1 & 3** | **UK DEFRA 2026** (Theo Size & Nhiên liệu) | **`[ Để trống - Người dùng tự nhập tay ]`**<br>*(Đơn vị: $\text{kg CO}_2\text{e/km}$)* | $\text{CO}_2, \text{CH}_4, \text{N}_2\text{O}$ |
+| **5** | **Rác thải** | Rác sinh hoạt chôn lấp | `WASTE_LANDFILL` | **kg** hoặc **Tấn** | **Scope 3** | **UK DEFRA 2026** / **US EPA WARM** | **`4.465358`** $\text{kg CO}_2\text{e/tấn}$<br>*(tương đương **`0.004465`** $\text{kg CO}_2\text{e/kg}$)* | $\text{CH}_4, \text{CO}_2$ |
+| **6** | **Nước** | Tiêu thụ và xử lý nước | `WATER_SUPPLY_TREAT` | **$m^3$** hoặc **Triệu Lít** | **Scope 3** | **UK DEFRA 2026** / **US EPA** | **`0.19130`** $\text{kg CO}_2\text{e/}m^3$<br>*(tương đương **`191.30156`** $\text{kg/triệu Lít}$)* | $\text{CO}_2, \text{CH}_4$ |
 | **7** | **Vật tư** | Tiêu thụ giấy in | `OFFICE_PAPER` | **kg** | **Scope 3** | **UK DEFRA** / **US EPA** | **`1.2500`** $\text{kg CO}_2\text{e/kg}$ | $\text{CO}_2$ |
-| **8** | **Du lịch & Đi lại** | Di chuyển bằng máy bay | `TRAVEL_FLIGHT` | **p.km** hoặc **Chặng bay** | **Scope 3 (Cat 6)** & Cá nhân | **ICAO** / **UK DEFRA** / **US EPA** | Cự ly ngắn (<3700km): **`0.1535`** $\text{kg/p.km}$<br>Nội địa (<500km): **`0.2458`** $\text{kg/p.km}$<br>Cự ly dài (>3700km): **`0.1930`** $\text{kg/p.km}$ | $\text{CO}_2, \text{CH}_4, \text{N}_2\text{O}$ + RF |
+| **8** | **Du lịch & Đi lại** | Di chuyển bằng máy bay | `TRAVEL_FLIGHT` | **p.km** hoặc **Chặng bay** | **Scope 3 (Cat 6)** & Cá nhân | **UK DEFRA 2026** / **ICAO** / **US EPA** | Theo hạng ghế (DEFRA 2026):<br>• Economy: **`0.10916`** $\text{kg/p.km}$<br>• Premium Economy: **`0.17465`** $\text{kg/p.km}$<br>• Business: **`0.31656`** $\text{kg/p.km}$<br>• First: **`0.43663`** $\text{kg/p.km}$ | $\text{CO}_2, \text{CH}_4, \text{N}_2\text{O}$ + RF |
 
 ---
 
@@ -92,16 +92,16 @@ Bảng tổng hợp dưới đây đặc tả đầy đủ 8 hoạt động hỗ
   - Đơn vị chuẩn: Kilowatt-giờ (**kWh**).
   - Kênh nạp dữ liệu: Nhập số đo công tơ/hóa đơn tiền điện (Thủ công), Quét ảnh hóa đơn EVN / công tơ cơ/điện tử bằng AI Vision (`US-CL-003`), hoặc Import Excel (`US-CL-005`).
 - **Nguồn trích dẫn hệ số phát thải khuyến nghị:**
-  1. **Bộ Tài nguyên và Môi trường Việt Nam (Cục Biến đổi khí hậu):**
-     - *Văn bản trích dẫn:* Công văn số **263/BĐKH-TTBĐKH** ngày 12/04/2022 của Cục Biến đổi khí hậu - Bộ Tài nguyên và Môi trường về việc công bố Hệ số phát thải của lưới điện Việt Nam; Quyết định số **2626/QĐ-BTNMT** ngày 10/10/2022 về Danh mục hệ số phát thải phục vụ kiểm kê khí nhà kính.
-     - *Giá trị công bố:* **$0.7221\text{ kg CO}_2/\text{kWh}$** (tương đương $0.7221\text{ tCO}_2/\text{MWh}$). Đây là hệ số chuẩn quốc gia được áp dụng mặc định cho toàn bộ người dùng tại Việt Nam.
+  1. **Cơ quan quản lý Nhà nước Việt Nam (Bộ TN&MT / Bộ Nông nghiệp & Môi trường - Cục Biến đổi khí hậu):**
+     - *Văn bản trích dẫn mới nhất:* **Công văn số 1232/BNNMT-BĐKH ngày 30/09/2026** (Bộ Công Thương chủ trì tính toán) về việc công bố Hệ số phát thải của lưới điện Việt Nam năm 2024. *(Tham chiếu lịch sử: Công văn 263/BĐKH-TTBĐKH ngày 12/04/2022 và Quyết định số 2626/QĐ-BTNMT ngày 10/10/2022)*.
+     - *Giá trị công bố áp dụng:* **`0.6187` $\text{kg CO}_2\text{e/kWh}$** (tương đương $0.6187\text{ tCO}_2/\text{MWh}$). Đây là hệ số chuẩn quốc gia mới nhất được cập nhật vào hệ thống.
   2. **US EPA (Cơ quan Bảo vệ Môi trường Hoa Kỳ):**
      - *Văn bản trích dẫn:* **EPA eGRID** (Emissions & Generation Resource Integrated Database) và **EPA GHG Emission Factors Hub** (Bảng *Electricity: US National Average*).
      - *Phạm vi áp dụng:* Dự phòng cho trường hợp Workspace đặt cấu hình vị trí tại khu vực Bắc Mỹ hoặc so sánh đối chuẩn quốc tế ($\approx 0.370 - 0.410\text{ kg CO}_2\text{e/kWh}$).
   3. **IEA (Cơ quan Năng lượng Quốc tế):**
      - *Tài liệu trích dẫn:* **IEA Emission Factors Database** (Báo cáo thường niên về *CO2 Emissions from Fuel Combustion*). Cung cấp ma trận hệ số lưới điện cho hơn 150 quốc gia.
 - **Công thức tính toán:**
-  $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Điện tiêu thụ (kWh)} \times 0.7221$$
+  $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Điện tiêu thụ (kWh)} \times 0.6187$$
 
 ---
 
@@ -110,17 +110,22 @@ Bảng tổng hợp dưới đây đặc tả đầy đủ 8 hoạt động hỗ
 - **Đặc tả hoạt động:** Tiêu thụ Khí dầu mỏ hóa lỏng (LPG - thành phần chính gồm Propane $\text{C}_3\text{H}_8$ và Butane $\text{C}_4\text{H}_{10}$) phục vụ bếp nấu sinh hoạt gia đình, căn-tin văn phòng hoặc bình gas mini.
 - **Phân loại Scope:** **Scope 1** (Phát thải trực tiếp từ đốt cháy nhiên liệu cố định - Stationary Combustion).
 - **Đơn vị đo lường:**
-  - Đơn vị chuẩn: Kilogram (**kg**).
-  - Đơn vị phụ hỗ trợ quy đổi: Bình gas gia dụng tiêu chuẩn $12\text{ kg}$ ($1\text{ bình} = 12\text{ kg} \rightarrow 35.796\text{ kg CO}_2\text{e}$); bình mini $0.22\text{ kg}$.
+  - Đơn vị chuẩn: Kilogram (**kg**) hoặc Tấn (**Tonne**).
+  - Đơn vị phụ hỗ trợ quy đổi: Bình gas gia dụng tiêu chuẩn $12\text{ kg}$ ($1\text{ bình} = 12\text{ kg} \rightarrow 12 \times 2.93936095 \approx \mathbf{35.2723\text{ kg CO}_2\text{e}}$); bình mini $0.22\text{ kg}$.
 - **Nguồn trích dẫn hệ số phát thải khuyến nghị:**
-  1. **IPCC (Ban Liên chính phủ về Biến đổi Khí hậu):**
+  1. **UK DEFRA / DESNZ 2026 (Vương quốc Anh):**
+     - *Tài liệu trích dẫn:* **UK Government GHG Conversion Factors for Company Reporting (DEFRA 2026)**, Bảng *Fuel properties - Gaseous fuels: LPG*.
+     - *Giá trị công bố chuẩn:*
+       - Tính theo tấn: **`2939.36095` $\text{kg CO}_2\text{e/tấn LPG}$**.
+       - Quy đổi theo kg: $\frac{2939.36095}{1000} \approx \mathbf{2.93936\text{ kg CO}_2\text{e/kg LPG}}$ (làm tròn $2.9394\text{ kg CO}_2\text{e/kg}$).
+  2. **IPCC (Ban Liên chính phủ về Biến đổi Khí hậu):**
      - *Tài liệu trích dẫn:* **2006 IPCC Guidelines for National Greenhouse Gas Inventories**, Volume 2: Energy, Chapter 2 (Stationary Combustion), Bảng 2.2 và Bảng 2.3.
-     - *Hệ số cơ sở:* Nhiệt trị ròng (NCV) của LPG là $47.3\text{ TJ/Gg}$, hệ số phát thải mặc định là $63,100\text{ kg CO}_2/\text{TJ}$ cộng với phát thải $\text{CH}_4$ và $\text{N}_2\text{O}$, tương đương $\approx 2.98 - 3.00\text{ kg CO}_2\text{e/kg LPG}$.
-  2. **UK DEFRA / DESNZ (Vương quốc Anh):**
-     - *Tài liệu trích dẫn:* **UK Government GHG Conversion Factors for Company Reporting** (Ban hành bởi Department for Environment, Food & Rural Affairs và Department for Energy Security and Net Zero). Bảng *Fuel properties - Gaseous fuels*.
-     - *Giá trị công bố:* **$2.9830\text{ kg CO}_2\text{e/kg LPG}$** (tính gộp $\text{CO}_2, \text{CH}_4, \text{N}_2\text{O}$ theo thế năng làm nóng toàn cầu GWP AR5).
+     - *Hệ số cơ sở:* Nhiệt trị ròng (NCV) của LPG là $47.3\text{ TJ/Gg}$, hệ số phát thải nhiệt mặc định là $63,100\text{ kg CO}_2/\text{TJ}$ cộng với phát thải $\text{CH}_4$ và $\text{N}_2\text{O}$.
 - **Công thức tính toán:**
-  $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Khối lượng gas (kg)} \times 2.9830$$
+  - *Tính theo kg:*
+    $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Khối lượng gas (kg)} \times 2.93936$$
+  - *Tính theo tấn:*
+    $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Khối lượng gas (tấn)} \times 2939.36095$$
 
 ---
 
@@ -146,31 +151,35 @@ Bảng tổng hợp dưới đây đặc tả đầy đủ 8 hoạt động hỗ
 
 ### 4.4. Nhóm Di chuyển: Xe máy / Ô tô cá nhân (`MOBILITY`)
 
-- **Đặc tả hoạt động:** Di chuyển của thành viên gia đình hoặc lộ trình đi lại hàng ngày giữa nơi ở và văn phòng của nhân viên (Employee Commuting), cũng như đi công tác lẻ bằng phương tiện đường bộ.
+- **Đặc tả hoạt động:** Di chuyển của thành viên gia đình hoặc lộ trình đi lại hàng ngày giữa nơi ở và văn phòng của nhân viên (Employee Commuting), cũng như đi công tác bằng phương tiện đường bộ.
 - **Phân loại Scope:**
   - **Scope 1:** Nếu phương tiện thuộc quyền sở hữu đứng tên văn phòng/công ty và công ty trực tiếp thanh toán tiền nhiên liệu.
   - **Scope 3 (Category 7: Employee Commuting / Category 6: Business Travel):** Áp dụng cho phương tiện thuộc sở hữu cá nhân của thành viên/nhân viên dùng để đi làm hoặc công việc chung của văn phòng. (Đối với Workspace Hộ gia đình, được tính chung vào dấu chân sinh hoạt tổng thể).
-- **Đơn vị đo lường:**
-  - Phương pháp 1 (Theo quãng đường): Kilomet (**km**).
-  - Phương pháp 2 (Theo lượng nhiên liệu mua): **Lít** (Xăng RON95 / E5 / Diesel).
-- **Nguồn trích dẫn hệ số phát thải khuyến nghị:**
-  1. **UK DEFRA / DESNZ:**
-     - *Tài liệu trích dẫn:* **UK GHG Conversion Factors**, Bảng *Passenger vehicles* & Bảng *Fuel: Petrol*.
-     - *Giá trị công bố:*
-       - Xe máy trung bình (<125cc phổ biến tại Việt Nam): **$0.0650\text{ kg CO}_2\text{e/km}$**.
-       - Xe máy phân khối lớn (>125cc - 500cc): **$0.1030\text{ kg CO}_2\text{e/km}$**.
-       - Xe ô tô con chạy xăng trung bình (Average petrol car): **$0.1920\text{ kg CO}_2\text{e/km}$**.
-       - Nhiên liệu xăng tiêu thụ: **$2.3100\text{ kg CO}_2\text{e/Lít}$** (Xăng 100% khoáng) hoặc **$2.1600\text{ kg CO}_2\text{e/Lít}$** (Xăng sinh học E5 Ron92).
-  2. **US EPA:**
-     - *Tài liệu trích dẫn:* **EPA GHG Emission Factors Hub**, Bảng *Mobile Combustion - Passenger Cars and Light-Duty Trucks*.
-     - *Giá trị công bố:* Ô tô con cá nhân trung bình $\approx 0.192\text{ kg CO}_2/\text{km}$ ($0.34\text{ kg CO}_2/\text{dặm}$).
-  3. **IPCC:**
-     - *Tài liệu trích dẫn:* **2006 IPCC Guidelines**, Volume 2: Energy, Chapter 3 (Mobile Combustion - Road Transportation).
+- **Đơn vị đo lường:** Kilomet (**km**).
+- **Phương pháp luận phân loại theo UK DEFRA 2026:**
+  - Hệ số phát thải phương tiện đường bộ theo **DEFRA 2026** được chuẩn hóa phân tầng theo **Kích cỡ phương tiện (Size: Small / Medium / Large / Average)**.
+  - Riêng đối với **Ô tô (Passenger Cars)**, hệ số được tách bạch thành 2 nhánh động cơ chính: **Nhiên liệu Xăng (Petrol)** và **Nhiên liệu Dầu (Diesel)**.
+- **Bảng khung danh mục cấu hình hệ số (Để trống để người dùng/System Admin tự nhập tay):**
+
+| STT | Loại phương tiện | Phân hạng Kích cỡ (Size) | Loại Nhiên liệu | Đơn vị tính | Hệ số phát thải DEFRA 2026 ($\text{kg CO}_2\text{e/km}$) | Trạng thái cấu hình |
+|:---:|---|:---:|:---:|:---:|:---:|---|
+| **1** | **Xe máy (Motorbike)** | **Small** (<125cc) | Xăng (Petrol) | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
+| **2** | **Xe máy (Motorbike)** | **Medium** (125 - 500cc) | Xăng (Petrol) | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
+| **3** | **Xe máy (Motorbike)** | **Large** (>500cc) | Xăng (Petrol) | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
+| **4** | **Xe máy (Motorbike)** | **Average** (Trung bình chung) | Xăng (Petrol) | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
+| **5** | **Ô tô con (Car)** | **Small** (Cỡ nhỏ) | **Petrol (Xăng)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
+| **6** | **Ô tô con (Car)** | **Medium** (Cỡ trung) | **Petrol (Xăng)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
+| **7** | **Ô tô con (Car)** | **Large** (Cỡ lớn / SUV) | **Petrol (Xăng)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
+| **8** | **Ô tô con (Car)** | **Average** (Trung bình chung) | **Petrol (Xăng)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
+| **9** | **Ô tô con (Car)** | **Small** (Cỡ nhỏ) | **Diesel (Dầu)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
+| **10** | **Ô tô con (Car)** | **Medium** (Cỡ trung) | **Diesel (Dầu)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
+| **11** | **Ô tô con (Car)** | **Large** (Cỡ lớn / SUV) | **Diesel (Dầu)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
+| **12** | **Ô tô con (Car)** | **Average** (Trung bình chung) | **Diesel (Dầu)** | **km** | `[ ________________ ]` | *Để trống - Người dùng tự nhập tay* |
+
+> *Ghi chú vận hành:* Khung 12 tham số trên đã được khởi tạo sẵn trong cấu trúc bảng `standard_emission_factors`. System Admin có toàn quyền nhập tay giá trị $\text{kg CO}_2\text{e/km}$ tương ứng qua giao diện Quản lý Hệ số Quy chuẩn (`US-SA-001`).
+
 - **Công thức tính toán:**
-  - *Tính theo quãng đường:*
-    $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Quãng đường (km)} \times EF_{\text{loại xe}} (\text{kg CO}_2\text{e/km})$$
-  - *Tính theo nhiên liệu đổ:*
-    $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Lượng xăng (Lít)} \times 2.3100$$
+  $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Quãng đường (km)} \times EF_{\text{loại xe & size}} (\text{kg CO}_2\text{e/km})$$
 
 ---
 
@@ -179,39 +188,45 @@ Bảng tổng hợp dưới đây đặc tả đầy đủ 8 hoạt động hỗ
 - **Đặc tả hoạt động:** Lượng rác thải rắn sinh hoạt hỗn hợp (Municipal Solid Waste - MSW) phát sinh từ sinh hoạt của hộ gia đình và hoạt động văn phòng (bao gồm bao bì, thực phẩm thừa, chất thải hữu cơ không phân loại) được xe thu gom chuyển về các bãi chôn lấp tập trung.
 - **Cơ chế phát thải:** Quá trình phân hủy kỵ khí của các hợp chất hữu cơ trong điều kiện thiếu oxy tại bãi chôn lấp sinh ra khí nhà kính nguy hại là Khí Methane ($\text{CH}_4$, có thế năng làm nóng toàn cầu GWP cao gấp 28 lần $\text{CO}_2$ theo IPCC AR5).
 - **Phân loại Scope:** **Scope 3 (Category 5: Waste Generated in Operations)** theo *GHG Protocol Corporate Value Chain Standard*.
-- **Đơn vị đo lường:** Kilogram (**kg**).
+- **Đơn vị đo lường:** Kilogram (**kg**) hoặc Tấn (**Tonne**).
 - **Nguồn trích dẫn hệ số phát thải khuyến nghị:**
-  1. **US EPA (Cơ quan Bảo vệ Môi trường Hoa Kỳ):**
-     - *Tài liệu trích dẫn:* **US EPA WARM (Waste Reduction Model)** và **EPA GHG Emission Factors Hub**, Bảng *Waste: Landfilled Mixed Municipal Solid Waste (MSW)*.
-     - *Giá trị khuyến nghị:* **$0.4500\text{ kg CO}_2\text{e/kg rác sinh hoạt}$** (áp dụng cho mô hình bãi chôn lấp hỗn hợp có hệ thống thu gom khí gas bán phần hoặc không thu gom phổ biến ở các nước đang phát triển).
-  2. **UK DEFRA / DESNZ:**
-     - *Tài liệu trích dẫn:* **UK GHG Conversion Factors**, Bảng *Waste disposal: Commercial and industrial waste / Household residual waste to landfill*.
-     - *Giá trị công bố:* Dao động từ $0.446\text{ - }0.587\text{ kg CO}_2\text{e/kg}$ rác thải chôn lấp.
+  1. **UK DEFRA 2026 (Vương quốc Anh):**
+     - *Tài liệu trích dẫn:* **UK Government GHG Conversion Factors for Company Reporting (DEFRA 2026)**, Bảng *Waste disposal - Commercial and industrial waste / Municipal waste to landfill*.
+     - *Giá trị công bố chuẩn:*
+       - Tính theo tấn: **`4.465358` $\text{kg CO}_2\text{e/tấn rác}$**.
+       - Quy đổi theo kg: $\frac{4.465358}{1000} \approx \mathbf{0.004465358\text{ kg CO}_2\text{e/kg rác}}$ (làm tròn $0.004465\text{ kg CO}_2\text{e/kg}$).
+  2. **US EPA (Cơ quan Bảo vệ Môi trường Hoa Kỳ):**
+     - *Tài liệu trích dẫn:* **US EPA WARM (Waste Reduction Model)** và **EPA GHG Emission Factors Hub**.
   3. **IPCC Guidelines:**
      - *Tài liệu trích dẫn:* **2006 IPCC Guidelines for National GHG Inventories**, Volume 5: Waste, Chapter 3 (Solid Waste Disposal).
 - **Công thức tính toán:**
-  $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Khối lượng rác (kg)} \times 0.4500$$
+  - *Tính theo kg:*
+    $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Khối lượng rác (kg)} \times 0.004465$$
+  - *Tính theo tấn:*
+    $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Khối lượng rác (tấn)} \times 4.465358$$
 
 ---
 
 ### 4.6. Nhóm Nước: Tiêu thụ và xử lý nước sạch (`WATER_SUPPLY_TREAT`)
 
-- **Đặc tả hoạt động:** Khối lượng nước sạch sử dụng từ hệ thống cấp nước sinh hoạt/đô thị (Tổng công ty Cấp nước Sawaco / Viwaco / Nước ngầm xử lý). Bao gồm năng lượng tiêu thụ tại nhà máy nước để bơm hút xử lý hóa chất sạch, truyền tải qua đường ống, và công đoạn thu gom xử lý nước thải sinh hoạt sau sử dụng.
+- **Đặc tả hoạt động:** Khối lượng nước sạch sử dụng từ hệ thống cấp nước sinh hoạt/đô thị (Sawaco, Viwaco, mạng lưới cấp nước sinh hoạt). Bao gồm năng lượng tiêu thụ tại nhà máy nước để bơm hút xử lý hóa chất sạch, truyền tải qua đường ống, và công đoạn thu gom xử lý nước thải sinh hoạt sau sử dụng.
 - **Phân loại Scope:** **Scope 3 (Category 1: Purchased Goods and Services & Category 5: Waste generated in operations)** theo *GHG Protocol*.
-- **Đơn vị đo lường:** Mét khối (**$m^3$**).
+- **Đơn vị đo lường:** Mét khối (**$m^3$**) hoặc Triệu Lít (**Million Litres**).
+  - Quy đổi: $1\text{ million litres} = 1,000\text{ }m^3$.
   - Kênh nạp: Quét hóa đơn tiền nước bằng AI Vision (`US-CL-003`) hoặc nhập thủ công số mét khối trên đồng hồ đo nước.
 - **Nguồn trích dẫn hệ số phát thải khuyến nghị:**
-  1. **UK DEFRA / DESNZ:**
-     - *Tài liệu trích dẫn:* **UK GHG Conversion Factors for Company Reporting**, Bảng *Water supply and Water treatment*.
-     - *Chi tiết phân rã hệ số:*
-       - Cung cấp nước sạch (Water supply): $0.149\text{ kg CO}_2\text{e/}m^3$.
-       - Thu gom & Xử lý nước thải (Water treatment): $0.272\text{ kg CO}_2\text{e/}m^3$.
-       - Tổng phát thải vòng đời nước cấp & thoát: $0.149 + 0.272 \approx 0.421\text{ kg CO}_2\text{e/}m^3$.
-     - *Giá trị chuẩn lựa chọn mặc định trong dự án:* **`0.3440` $\text{kg CO}_2\text{e/}m^3$** (tính toán dựa trên mức độ xử lý nước sạch trung bình đô thị Việt Nam kết hợp chỉ số điện năng tiêu hao).
+  1. **UK DEFRA 2026 (Vương quốc Anh):**
+     - *Tài liệu trích dẫn:* **UK Government GHG Conversion Factors for Company Reporting (DEFRA 2026)**, Bảng *Water supply and Water treatment*.
+     - *Giá trị công bố chuẩn:*
+       - Mỗi mét khối ($m^3$): **`0.19130` $\text{kg CO}_2\text{e/}m^3$**.
+       - Mỗi triệu lít (Million litres): **`191.30156` $\text{kg CO}_2\text{e / million litres}$** ($1,000 \times 0.19130156 \approx 191.30156\text{ kg CO}_2\text{e}$).
   2. **US EPA:**
-     - *Tài liệu trích dẫn:* **EPA Energy and Carbon Footprint of Water Supply and Wastewater Facilities**. Báo cáo chỉ ra tiêu hao năng lượng điện trung bình từ $0.5 - 1.2\text{ kWh/}m^3$ nước xử lý.
+     - *Tài liệu trích dẫn:* **EPA Energy and Carbon Footprint of Water Supply and Wastewater Facilities**.
 - **Công thức tính toán:**
-  $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Lượng nước tiêu thụ } (m^3) \times 0.3440$$
+  - *Tính theo $m^3$:*
+    $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Lượng nước } (m^3) \times 0.19130$$
+  - *Tính theo triệu lít:*
+    $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Lượng nước (triệu lít)} \times 191.30156$$
 
 ---
 
@@ -256,33 +271,30 @@ Bảng tổng hợp dưới đây đặc tả đầy đủ 8 hoạt động hỗ
   - Ngoài $\text{CO}_2$, khí xả còn sinh ra hơi nước $\text{H}_2\text{O}$ ngưng tụ tạo thành các vệt khói trắng (contrails) và kích thích hình thành mây ti nhân tạo (cirrus clouds) giữ nhiệt, cùng khí $\text{NO}_x$ làm thay đổi cân bằng ozone tầng đối lưu.
   - Theo nghiên cứu của **IPCC** và hướng dẫn của **UK DEFRA**, tổng tác động làm ấm khí hậu (Radiative Forcing) thực tế cao gấp **$1.7\text{ - }1.9$ lần** so với việc chỉ tính riêng khí $\text{CO}_2$. Do đó, hệ thống mặc định áp dụng bộ hệ số chuẩn **"With RF"** để bảo đảm tính trung thực và toàn diện của dấu chân sinh thái.
 - **Nguồn trích dẫn hệ số phát thải khuyến nghị:**
-  1. **ICAO (Tổ chức Hàng không Dân dụng Quốc tế - Liên Hợp Quốc):**
+  1. **UK DEFRA 2026 (Vương quốc Anh):**
+     - *Tài liệu trích dẫn:* **UK Government GHG Conversion Factors for Company Reporting (DEFRA 2026)**, Bảng *Business travel - air*.
+     - *Hệ số phát thải chuẩn hóa theo từng hạng vé (Cabin Class) tính trên passenger.km (p.km - đã bao gồm Radiative Forcing):*
+       - **Hạng Phổ thông (Economy class):** **`0.10916` $\text{kg CO}_2\text{e / p.km}$**
+       - **Hạng Phổ thông đặc biệt (Premium economy class):** **`0.17465` $\text{kg CO}_2\text{e / p.km}$**
+       - **Hạng Thương gia (Business class):** **`0.31656` $\text{kg CO}_2\text{e / p.km}$**
+       - **Hạng Nhất (First class):** **`0.43663` $\text{kg CO}_2\text{e / p.km}$**
+  2. **ICAO (Tổ chức Hàng không Dân dụng Quốc tế - Liên Hợp Quốc):**
      - *Tài liệu trích dẫn:* **ICAO Carbon Emissions Calculator (ICEC) Methodology**. Phương pháp luận chuẩn hóa toàn cầu về phân bổ nhiên liệu bay theo tải trọng hành khách và hàng hóa khoang bụng (belly freight).
-  2. **UK DEFRA / DESNZ:**
-     - *Tài liệu trích dẫn:* **UK Government GHG Conversion Factors for Company Reporting**, Bảng *Business travel - air*.
-     - *Chi tiết phân loại cự ly bay (Hạng phổ thông - Economy, đã bao gồm Radiative Forcing):*
-       - *Chuyến bay nội địa cự ly ngắn (< 500 km):* **`0.2458` $\text{kg CO}_2\text{e/p.km}$** (suất tiêu hao trên mỗi km lớn do giai đoạn cất cánh/hạ cánh chiếm tỷ trọng cao).
-       - *Chuyến bay cự ly ngắn (Short-haul, 500 - 3,700 km):* **`0.1535` $\text{kg CO}_2\text{e/p.km}$** (áp dụng cho các chuyến bay trục Bắc - Nam tại Việt Nam và Đông Nam Á).
-       - *Chuyến bay cự ly dài (Long-haul, > 3,700 km):* **`0.1930` $\text{kg CO}_2\text{e/p.km}$** (các tuyến liên lục địa đi châu Âu, Mỹ, Úc).
   3. **US EPA:**
      - *Tài liệu trích dẫn:* **EPA GHG Emission Factors Hub**, Bảng *Scope 3 Category 6: Business Travel - Commercial Air Travel*.
-- **Hệ số nhân theo Hạng vé (Cabin Class Multiplier):**
-  - Hạng Phổ thông (Economy Class): $\times \mathbf{1.0}$
-  - Hạng Phổ thông đặc biệt (Premium Economy): $\times \mathbf{1.6}$
-  - Hạng Thương gia (Business Class): $\times \mathbf{2.9}$ (Short-haul) / $\times \mathbf{3.0}$ (Long-haul)
-  - Hạng Nhất (First Class): $\times \mathbf{4.0}$
-- **Bảng tra cứu quy đổi nhanh các chặng du lịch phổ biến tại Việt Nam (Route Lookup Matrix):**
 
-| Tuyến bay (Origin ⇄ Destination) | Khoảng cách 1 chiều | Loại chặng | Phát thải Khứ hồi / Hành khách (Hạng Phổ thông) | Tương đương điện sinh hoạt |
-|---|:---:|:---:|:---:|:---:|
-| **Hà Nội (HAN) ⇄ TP. Hồ Chí Minh (SGN)** | $\approx 1,160\text{ km}$ | Short-haul | $2,320\text{ km} \times 0.1535 = \mathbf{356.1\text{ kg CO}_2\text{e}}$ | $\approx 493\text{ kWh}$ điện |
-| **Hà Nội (HAN) ⇄ Đà Nẵng (DAD)** | $\approx 630\text{ km}$ | Short-haul | $1,260\text{ km} \times 0.1535 = \mathbf{193.4\text{ kg CO}_2\text{e}}$ | $\approx 268\text{ kWh}$ điện |
-| **TP. Hồ Chí Minh (SGN) ⇄ Phú Quốc (PQC)** | $\approx 300\text{ km}$ | Nội địa ngắn | $600\text{ km} \times 0.2458 = \mathbf{147.5\text{ kg CO}_2\text{e}}$ | $\approx 204\text{ kWh}$ điện |
-| **Hà Nội / TP.HCM ⇄ Bangkok (BKK)** | $\approx 1,300\text{ km}$ | Quốc tế ngắn | $2,600\text{ km} \times 0.1535 = \mathbf{399.1\text{ kg CO}_2\text{e}}$ | $\approx 553\text{ kWh}$ điện |
-| **Hà Nội / TP.HCM ⇄ Tokyo / Seoul** | $\approx 3,600\text{ km}$ | Quốc tế ngắn | $7,200\text{ km} \times 0.1535 = \mathbf{1,105.2\text{ kg CO}_2\text{e}}$ | $\approx 1.53\text{ MWh}$ điện |
+- **Bảng tra cứu quy đổi nhanh các chặng du lịch phổ biến tại Việt Nam (Route Lookup Matrix theo DEFRA 2026):**
+
+| Tuyến bay (Origin ⇄ Destination) | Khoảng cách 1 chiều | Cự ly khứ hồi | Phát thải Khứ hồi / Hành khách (Hạng Phổ thông: `0.10916`) | Phát thải Khứ hồi / Hành khách (Hạng Thương gia: `0.31656`) | Tương đương điện lưới 2024 (`0.6187`) |
+|---|:---:|:---:|:---:|:---:|:---:|
+| **Hà Nội (HAN) ⇄ TP. Hồ Chí Minh (SGN)** | $\approx 1,160\text{ km}$ | $2,320\text{ km}$ | $2,320 \times 0.10916 = \mathbf{253.25\text{ kg CO}_2\text{e}}$ | $2,320 \times 0.31656 = \mathbf{734.42\text{ kg CO}_2\text{e}}$ | $\approx 409\text{ kWh}$ điện |
+| **Hà Nội (HAN) ⇄ Đà Nẵng (DAD)** | $\approx 630\text{ km}$ | $1,260\text{ km}$ | $1,260 \times 0.10916 = \mathbf{137.54\text{ kg CO}_2\text{e}}$ | $1,260 \times 0.31656 = \mathbf{398.87\text{ kg CO}_2\text{e}}$ | $\approx 222\text{ kWh}$ điện |
+| **TP. Hồ Chí Minh (SGN) ⇄ Phú Quốc (PQC)** | $\approx 300\text{ km}$ | $600\text{ km}$ | $600 \times 0.10916 = \mathbf{65.50\text{ kg CO}_2\text{e}}$ | $600 \times 0.31656 = \mathbf{189.94\text{ kg CO}_2\text{e}}$ | $\approx 106\text{ kWh}$ điện |
+| **Hà Nội / TP.HCM ⇄ Bangkok (BKK)** | $\approx 1,300\text{ km}$ | $2,600\text{ km}$ | $2,600 \times 0.10916 = \mathbf{283.82\text{ kg CO}_2\text{e}}$ | $2,600 \times 0.31656 = \mathbf{823.06\text{ kg CO}_2\text{e}}$ | $\approx 459\text{ kWh}$ điện |
+| **Hà Nội / TP.HCM ⇄ Tokyo / Seoul** | $\approx 3,600\text{ km}$ | $7,200\text{ km}$ | $7,200 \times 0.10916 = \mathbf{785.95\text{ kg CO}_2\text{e}}$ | $7,200 \times 0.31656 = \mathbf{2,279.23\text{ kg CO}_2\text{e}}$ | $\approx 1.27\text{ MWh}$ điện |
 
 - **Công thức tính toán:**
-  $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Số hành khách} \times \text{Khoảng cách (km)} \times EF_{\text{cự ly}} \times \text{Hệ số hạng vé}$$
+  $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Số hành khách} \times \text{Khoảng cách (km)} \times EF_{\text{hạng vé (DEFRA 2026)}} (\text{kg CO}_2\text{e/p.km})$$
 
 ---
 
@@ -343,32 +355,39 @@ sequenceDiagram
     UI->>API: GET /api/v1/admin/emission-factors
     API->>DB: Query standard_emission_factors
     DB-->>UI: Trả về danh sách 8 hoạt động
-    Admin->>UI: Thay đổi EF Điện EVN = 0.7500 kèm Số hiệu văn bản mới
-    UI->>API: PUT /api/v1/admin/emission-factors/ELEC_GRID {factor: 0.7500, ref: "Báo cáo EVN 2026"}
-    API->>DB: UPDATE standard_emission_factors SET factor = 0.7500, updated_at = NOW()
+    Admin->>UI: Thay đổi EF Điện EVN = 0.6187 kèm Số hiệu văn bản mới (Công văn 1232/BNNMT-BĐKH)
+    UI->>API: PUT /api/v1/admin/emission-factors/ELEC_GRID {factor: 0.6187, ref: "Công văn 1232/BNNMT-BĐKH"}
+    API->>DB: UPDATE standard_emission_factors SET factor = 0.6187, updated_at = NOW()
     API-->>UI: Cập nhật thành công
 
     Note over User, DB: Áp dụng vào Giao dịch mới (US-CL-001 & US-CL-002)
     User->>UI: Nhập 100 kWh điện sinh hoạt (Draft)
     UI->>API: POST /api/v1/workspaces/{id}/emission-logs
-    API->>DB: Đọc hệ số mới nhất (0.7500)
-    API->>API: Tính toán: 100 * 0.7500 = 75.00 kg CO2e
-    API->>DB: Lưu bản ghi với applied_emission_factor = 0.7500
-    API-->>User: Ghi nhận thành công 75.00 kg CO2e
+    API->>DB: Đọc hệ số mới nhất (0.6187)
+    API->>API: Tính toán: 100 * 0.6187 = 61.87 kg CO2e
+    API->>DB: Lưu bản ghi với applied_emission_factor = 0.6187
+    API-->>User: Ghi nhận thành công 61.87 kg CO2e
 ```
 
 ---
 
 ## 📚 7. DANH MỤC TÀI LIỆU THAM KHẢO CHÍNH THỨC (OFFICIAL CITATIONS)
 
-1. **Bộ Tài nguyên và Môi trường Việt Nam (MONRE):**
+1. **Cơ quan Quản lý Nhà nước Việt Nam (Bộ TN&MT / Bộ Nông nghiệp & Môi trường / Bộ Công Thương):**
+   - **Công văn số 1232/BNNMT-BĐKH ngày 30/09/2026** của Cục Biến đổi khí hậu (Bộ Công Thương chủ trì tính toán) về việc công bố Hệ số phát thải của lưới điện Việt Nam năm 2024 ($0.6187\text{ tCO}_2/\text{MWh} \leftrightarrow 0.6187\text{ kg CO}_2/\text{kWh}$).
    - Quyết định số 2626/QĐ-BTNMT ngày 10/10/2022 về việc ban hành danh mục hệ số phát thải phục vụ kiểm kê khí nhà kính cấp lĩnh vực.
-   - Công văn số 263/BĐKH-TTBĐKH ngày 12/04/2022 của Cục Biến đổi khí hậu về việc công bố Hệ số phát thải của lưới điện Việt Nam năm 2020 ($0.7221\text{ tCO}_2/\text{MWh}$).
+   - Công văn số 263/BĐKH-TTBĐKH ngày 12/04/2022 của Cục Biến đổi khí hậu về hệ số phát thải lưới điện 2020 ($0.7221\text{ tCO}_2/\text{MWh}$).
 2. **IPCC (Intergovernmental Panel on Climate Change):**
    - *2006 IPCC Guidelines for National Greenhouse Gas Inventories* (Volume 2: Energy, Volume 5: Waste). [Truy cập: ipcc-nggip.iges.or.jp](https://www.ipcc-nggip.iges.or.jp/public/2006gl/)
    - *2019 Refinement to the 2006 IPCC Guidelines for National Greenhouse Gas Inventories*.
-3. **UK DEFRA / DESNZ (Vương quốc Anh):**
-   - *UK Government GHG Conversion Factors for Company Reporting (2022 - 2024)*. Cung cấp bộ hệ số chuyển đổi toàn diện cho nhiên liệu, điện, nước thải, chất thải và vật liệu tiêu hao. [Truy cập: gov.uk/government/collections/government-conversion-factors-for-company-reporting](https://www.gov.uk/government/collections/government-conversion-factors-for-company-reporting)
+3. **UK DEFRA / DESNZ 2026 (Vương quốc Anh):**
+   - *UK Government GHG Conversion Factors for Company Reporting (DEFRA 2026)*. Cung cấp bộ hệ số chuyển đổi toàn diện cho:
+     - Nhiên liệu LPG: $2939.36095\text{ kg CO}_2\text{e/tấn}$ ($2.9394\text{ kg CO}_2\text{e/kg}$).
+     - Cấp & thoát nước: $0.19130\text{ kg CO}_2\text{e/}m^3$ ($191.30156\text{ kg CO}_2\text{e/triệu Lít}$).
+     - Rác sinh hoạt chôn lấp: $4.465358\text{ kg CO}_2\text{e/tấn}$ ($0.004465\text{ kg CO}_2\text{e/kg}$).
+     - Du lịch hàng không: Economy $0.10916$, Premium Economy $0.17465$, Business $0.31656$, First $0.43663\text{ kg CO}_2\text{e/p.km}$.
+     - Phương tiện giao thông đường bộ: Phân tầng theo Kích cỡ (Small, Medium, Large, Average) và loại nhiên liệu (Petrol, Diesel).
+     - [Truy cập: gov.uk/government/collections/government-conversion-factors-for-company-reporting](https://www.gov.uk/government/collections/government-conversion-factors-for-company-reporting)
 4. **US EPA (Cơ quan Bảo vệ Môi trường Hoa Kỳ):**
    - *GHG Emission Factors Hub (March 2024)*. [Truy cập: epa.gov/climateleadership/ghg-emission-factors-hub](https://www.epa.gov/climateleadership/ghg-emission-factors-hub)
    - *EPA WARM (Waste Reduction Model)* - Quản trị và tính toán giảm thiểu phát thải vòng đời rác thải rắn.
