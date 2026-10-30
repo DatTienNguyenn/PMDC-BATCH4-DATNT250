@@ -76,7 +76,7 @@ flowchart LR
 
 | Mã US | Tên User Story | Vai trò | SP | Sản phẩm bàn giao (Deliverables) |
 |:---:|---|---|:---:|---|
-| **US-WS-001** | Khởi tạo Không gian làm việc (Workspace) | Reviewer | 2 | API CRUD Workspace; Màn hình tạo Workspace (React Vite). |
+| **US-WS-001** | Khởi tạo & Cấu hình Workspace | Reviewer / System Admin | 2 | API CRUD & Cấu hình Workspace; Màn hình tạo Workspace (React Vite). |
 | **US-WS-002** | Khai báo thông số nền ($m^2$, số người) | Reviewer | 3 | Bảng `workspace_baselines`; Form nhập số người và diện tích. |
 | **US-WS-003** | Mời thành viên vào Workspace qua mã mời | Reviewer / Editor | 3 | API sinh mã mời 6 ký tự; Màn hình nhập mã gia nhập role Editor. |
 | **US-SA-001** | Quản lý & Cập nhật Hệ số chuẩn quốc gia | System Admin | 3 | Bảng `standard_emission_factors`; Cổng cập nhật hệ số của System Admin. |

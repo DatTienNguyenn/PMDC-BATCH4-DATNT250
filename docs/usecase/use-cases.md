@@ -82,6 +82,7 @@ flowchart LR
     Editor --> UC10
 
     %% System Admin
+    SysAdmin --> UC01
     SysAdmin --> UC12
 ```
 
@@ -93,15 +94,15 @@ flowchart LR
 
 ### UC01: Khởi tạo & Cấu hình Workspace
 - **Mã Use Case:** UC01
-- **Tác nhân chính:** Trưởng nhóm (Reviewer)
-- **Mô tả vắn tắt:** Người dùng đăng ký tài khoản, khởi tạo một Không gian làm việc (Workspace) mới đại diện cho Hộ gia đình hoặc Văn phòng nhỏ.
-- **Tiền điều kiện:** Người dùng đã hoàn tất đăng ký và đăng nhập vào ứng dụng.
-- **Hậu điều kiện:** Workspace được khởi tạo thành công, người dùng được cấp vai trò `Reviewer (Workspace Admin)`.
+- **Tác nhân chính:** Trưởng nhóm (Reviewer) / Quản trị viên Hệ thống (System Admin)
+- **Mô tả vắn tắt:** Người dùng (Reviewer hoặc System Admin) khởi tạo và cấu hình một Không gian làm việc (Workspace) mới đại diện cho Hộ gia đình hoặc Văn phòng nhỏ.
+- **Tiền điều kiện:** Người dùng đã hoàn tất đăng ký và đăng nhập vào ứng dụng (hoặc phiên làm việc System Admin).
+- **Hậu điều kiện:** Workspace được khởi tạo thành công, người dùng được cấp vai trò `Reviewer (Workspace Admin)` (đối với người dùng thông thường) hoặc ghi nhận quyền quản trị Workspace cho System Admin.
 - **Luồng sự kiện chính:**
-  1. Người dùng chọn chức năng "Khởi tạo Không gian làm việc".
+  1. Người dùng chọn chức năng "Khởi tạo Không gian làm việc" (từ giao diện người dùng hoặc Cổng Quản trị Hệ thống).
   2. Hệ thống hiển thị form nhập: Tên Workspace (từ 3 đến 50 ký tự), Loại hình ("Hộ gia đình" hoặc "Văn phòng nhỏ").
-  3. Người dùng nhập thông tin hợp lệ và nhấn "Tiếp tục".
-  4. Hệ thống lưu Workspace vào cơ sở dữ liệu, gán quyền `Reviewer` cho người dùng và chuyển tiếp đến bước Khai báo thông số nền (UC02).
+  3. Người dùng nhập thông tin hợp lệ và nhấn "Tiếp tục" (hoặc "Tạo Workspace").
+  4. Hệ thống lưu Workspace vào cơ sở dữ liệu, kích hoạt quyền quản trị Workspace và chuyển tiếp đến bước Khai báo thông số nền (UC02).
 - **Luồng rẽ nhánh / Ngoại lệ:**
   - *2a. Tên Workspace trống hoặc vượt quá 50 ký tự:* Hệ thống hiển thị lỗi yêu cầu điều chỉnh.
 

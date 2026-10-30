@@ -35,46 +35,46 @@ Hệ thống được cấu trúc thành **9 phân hệ chức năng hoàn chỉ
 ```mermaid
 mindmap
   root((Hệ thống Quản trị & Phân tích Dấu chân Carbon))
-    1. Đăng nhập & Phân quyền IAM
-      Đăng nhập / Đăng ký (Email, Password, Google SSO)
-      Quên & Đặt lại mật khẩu
-      Quản lý phiên đăng nhập
-      Kiểm soát truy cập RBAC (System Admin, Reviewer, Editor)
-    2. Quản lý Tenant Workspace
-      Cấu hình tên, loại hình (Gia đình / Văn phòng)
-      Thông số nền (Số thành viên, Diện tích m²)
-      Mời thành viên (Invite Link / Mã mời)
-      Phân quyền & Quản lý danh sách thành viên
-    3. Dashboard Trung tâm
-      Thẻ KPI (Tổng phát thải tháng, Số dư ngân sách)
-      Chỉ số chuẩn hóa (CO2e/người, CO2e/m²)
-      Đồ thị Donut phân bổ danh mục & Line/Bar theo thời gian
-      Thanh tiến độ Budget Progress Bar & 5 hoạt động gần nhất
-    4. Quản lý Hoạt động Phát thải
-      Sổ cái Data Grid (Bộ lọc thời gian, danh mục, thành viên)
-      CRUD hoạt động phát thải & đính kèm minh chứng
-      Quy đổi tự động (Sản lượng x Hệ số = kg CO2e)
-    5. Import Dữ liệu Đa kênh
-      AI Vision Ingestion (Quét hóa đơn EVN/nước/công tơ)
-      Trích xuất JSON & Popup xem trước đối chiếu
-      Bulk Upload file mẫu Excel/CSV & Export dữ liệu
-    6. Phân tích Target & Ngân sách
-      Cài đặt Hạn ngạch tháng & Ngưỡng cảnh báo 85%
-      Dự báo cạn kiệt ngân sách theo tốc độ tiêu thụ
-      Cảnh báo thời gian thực vi phạm ngân sách
-    7. Báo cáo Insight AI Analytics
-      Tổng hợp định kỳ cuối tuần / tháng / quý
-      So sánh kỳ trước Period-over-Period
-      AI Reasoning phát hiện bất thường & Đề xuất Actionable Advice
-      Xuất bản & Tải xuống Báo cáo file PDF
-    8. Hồ sơ Cá nhân User Profile
-      Thông tin cá nhân (Tên, Avatar)
-      Thống kê tỷ lệ đóng góp phát thải vào Workspace
-      Tùy chỉnh nhận thông báo (Notification In-app)
-    9. Quản trị Hệ thống System Admin
-      CRUD Bảng Hệ số phát thải chuẩn (EVN, GHG Protocol)
-      Quản lý danh sách Workspace toàn hệ thống
-      Cấu hình tham số AI (API Keys, Prompt) & Audit Logs
+    ["1. Đăng nhập & Phân quyền IAM"]
+      ["Đăng nhập / Đăng ký (Email, Password, Google SSO)"]
+      ["Quên & Đặt lại mật khẩu"]
+      ["Quản lý phiên đăng nhập"]
+      ["Kiểm soát truy cập RBAC (System Admin, Reviewer, Editor)"]
+    ["2. Quản lý Tenant Workspace"]
+      ["Cấu hình tên, loại hình (Gia đình / Văn phòng)"]
+      ["Thông số nền (Số thành viên, Diện tích m²)"]
+      ["Mời thành viên (Invite Link / Mã mời)"]
+      ["Phân quyền & Quản lý danh sách thành viên"]
+    ["3. Dashboard Trung tâm"]
+      ["Thẻ KPI (Tổng phát thải tháng, Số dư ngân sách)"]
+      ["Chỉ số chuẩn hóa (CO2e/người, CO2e/m²)"]
+      ["Đồ thị Donut phân bổ danh mục & Line/Bar theo thời gian"]
+      ["Thanh tiến độ Budget Progress Bar & 5 hoạt động gần nhất"]
+    ["4. Quản lý Hoạt động Phát thải"]
+      ["Sổ cái Data Grid (Bộ lọc thời gian, danh mục, thành viên)"]
+      ["CRUD hoạt động phát thải & đính kèm minh chứng"]
+      ["Quy đổi tự động (Sản lượng x Hệ số = kg CO2e)"]
+    ["5. Import Dữ liệu Đa kênh"]
+      ["AI Vision Ingestion (Quét hóa đơn EVN/nước/công tơ)"]
+      ["Trích xuất JSON & Popup xem trước đối chiếu"]
+      ["Bulk Upload file mẫu Excel/CSV & Export dữ liệu"]
+    ["6. Phân tích Target & Ngân sách"]
+      ["Cài đặt Hạn ngạch tháng & Ngưỡng cảnh báo 85%"]
+      ["Dự báo cạn kiệt ngân sách theo tốc độ tiêu thụ"]
+      ["Cảnh báo thời gian thực vi phạm ngân sách"]
+    ["7. Báo cáo Insight AI Analytics"]
+      ["Tổng hợp định kỳ cuối tuần / tháng / quý"]
+      ["So sánh kỳ trước Period-over-Period"]
+      ["AI Reasoning phát hiện bất thường & Đề xuất Actionable Advice"]
+      ["Xuất bản & Tải xuống Báo cáo file PDF"]
+    ["8. Hồ sơ Cá nhân User Profile"]
+      ["Thông tin cá nhân (Tên, Avatar)"]
+      ["Thống kê tỷ lệ đóng góp phát thải vào Workspace"]
+      ["Tùy chỉnh nhận thông báo (Notification In-app)"]
+    ["9. Quản trị Hệ thống System Admin"]
+      ["CRUD Bảng Hệ số phát thải chuẩn (EVN, GHG Protocol)"]
+      ["Quản lý danh sách Workspace toàn hệ thống"]
+      ["Cấu hình tham số AI (API Keys, Prompt) & Audit Logs"]
 ```
 
 ---
@@ -129,13 +129,14 @@ Hệ thống phân định 3 vai trò rõ ràng, kết hợp mô hình Multi-ten
    - Khai báo hoạt động phát thải qua 3 phương thức (Thủ công, Quét AI, File Excel); mọi bản ghi lưu ở trạng thái **`Draft / Chờ duyệt (Pending Review)`**.
    - Xem Dashboard tiến độ chung, nhận notification cảnh báo ngưỡng 85% và theo dõi trạng thái duyệt các yêu cầu cá nhân.
 3. **Quản trị viên Hệ thống (System Admin):**
-   - Độc lập với dữ liệu các Workspace. Chịu trách nhiệm quản lý và cập nhật các **Hệ số phát thải quy chuẩn (Standard Emission Factors)** theo quy định của Nhà nước (EVN, Bộ TN&MT, GHG Protocol).
+   - Quản lý và cập nhật các **Hệ số phát thải quy chuẩn (Standard Emission Factors)** theo quy định của Nhà nước (EVN, Bộ TN&MT, GHG Protocol).
+   - **Có toàn quyền khởi tạo, cấu hình và quản trị các Không gian làm việc (Workspace)** trên hệ thống phục vụ công tác thiết lập tenant, cấu hình thông số ban đầu và hỗ trợ người dùng.
 
 #### Bảng Ma trận Phân quyền (RBAC Matrix)
 
 | Chức năng / Thao tác                                                          | System Admin | Trưởng nhóm (Reviewer) |  Thành viên (Editor)  |
 | ----------------------------------------------------------------------------- | :----------: | :--------------------: | :-------------------: |
-| Khởi tạo & Cấu hình Workspace                                                 |      ❌      |           ✅           |          ❌           |
+| Khởi tạo & Cấu hình Workspace                                                 |      ✅      |           ✅           |          ❌           |
 | Khai báo thông số nền (thành viên, diện tích $m^2$)                           |      ❌      |           ✅           |          ❌           |
 | Mời thành viên vào Workspace                                                  |      ❌      |           ✅           |          ❌           |
 | Xem Dashboard & chỉ số chuẩn hóa ($\text{CO}_2\text{e}/\text{người}$, $/m^2$) |      ❌      |     ✅ (Toàn diện)     |    ✅ (Xem chung)     |
@@ -207,6 +208,7 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
 ├── spec.md                            # Đặc tả phạm vi bài toán, 3 Roles, 4 Luồng & 12 Use Cases
 └── docs/
     ├── MVP.md                         # Kế hoạch triển khai & phát hành MVP 6 tuần (3 Sprints x 2 tuần)
+    ├── activity-supported.md          # Danh mục hoạt động phát thải & Hệ số phát thải quy chuẩn (Scope 1, 2, 3)
     ├── cau_truc_san_pham_xmind.png    # Sơ đồ Mindmap cấu trúc sản phẩm 9 phân hệ
     ├── information-architecture/
     │   ├── information-architecture.md# Tài liệu Kiến trúc Thông tin & Đặc tả giao diện (IA)
@@ -220,6 +222,7 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
 ### Chi tiết các tài liệu liên kết:
 
 - **[docs/MVP.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/MVP.md):** Kế hoạch chi tiết triển khai và phát hành MVP trong 6 tuần (3 Sprints), định nghĩa DoR/DoD và quản trị rủi ro kỹ thuật.
+- **[docs/activity-supported.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/activity-supported.md):** Danh mục 8 hoạt động phát thải được hỗ trợ (bao gồm năng lượng, di chuyển, rác thải, nước sạch, vật tư và du lịch hàng không), đơn vị tính, phân loại Scope 1, 2, 3 và trích dẫn nguồn hệ số chuẩn (Bộ TN&MT, IPCC, ICAO, DEFRA, US EPA, IEA).
 - **[spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md):** Định nghĩa chi tiết phạm vi In-Scope / Out-of-Scope, ma trận RBAC, 4 luồng hoạt động cốt lõi và danh mục 12 Use Cases.
 - **[docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/information-architecture/information-architecture.md):** Thiết kế sơ đồ cây kiến trúc thông tin (Sitemap), ma trận phân quyền View và đặc tả UI chi tiết cho toàn bộ các màn hình.
 - **[docs/usecase/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/usecase/use-cases.md):** Đặc tả chi tiết từng Use Case từ UC01 đến UC12 (Tiền điều kiện, Hậu điều kiện, Luồng chính, Luồng ngoại lệ).
@@ -231,7 +234,7 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
 
 | Mã US         | Tên User Story                                               | Phân hệ / Luồng       | Persona chính                   | MoSCoW | Est. (SP) |
 | ------------- | ------------------------------------------------------------ | --------------------- | ------------------------------- | :----: | :-------: |
-| **US-WS-001** | Khởi tạo Không gian làm việc (Workspace)                     | Luồng 1: Onboarding   | Trưởng nhóm (Reviewer)          |  Must  |     2     |
+| **US-WS-001** | Khởi tạo & Cấu hình Không gian làm việc (Workspace)          | Luồng 1: Onboarding   | Reviewer / System Admin         |  Must  |     2     |
 | **US-WS-002** | Khai báo thông số nền ($m^2$, số người)                      | Luồng 1: Onboarding   | Trưởng nhóm (Reviewer)          |  Must  |     3     |
 | **US-WS-003** | Mời thành viên gia nhập với vai trò Editor                   | Luồng 1: Onboarding   | Trưởng nhóm (Reviewer) / Editor |  Must  |     3     |
 | **US-SA-001** | Quản lý & cập nhật Hệ số phát thải quy chuẩn                 | Quản trị Hệ thống     | System Admin                    | Should |     3     |
