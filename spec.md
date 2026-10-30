@@ -7,6 +7,12 @@
 ## 1. Mục đích tài liệu
 Tài liệu này xác định rõ ranh giới của dự án, quy định cụ thể các vai trò người dùng (Roles), các luồng hoạt động chính của ứng dụng (Application Workflows), danh mục Use Cases và các tính năng nghiệp vụ mà hệ thống phục vụ, đồng thời loại trừ các yếu tố phức tạp không cần thiết để đảm bảo tính khả thi trong khung thời gian 6 tuần.
 
+> [!NOTE]
+> **Định vị cốt lõi của Sản phẩm:**
+> - **Nỗi đau giải quyết:** Người dùng cá nhân và văn phòng nhỏ hiện nay phải tự mình tìm kiếm, tra cứu từng danh mục (category), đối chiếu hệ số phát thải quy chuẩn tương ứng và tự tính toán/tổng hợp thủ công bằng tay, gây nản lòng, tốn nhiều thời gian và dễ sai sót.
+> - **Mục tiêu hệ thống:** Hệ thống **không hướng tới việc tự động nạp hóa dữ liệu** mà tập trung vào **tự động tính toán dấu chân carbon dựa theo những hoạt động mà người dùng nhập liệu vào hệ thống một cách có kiến trúc và dễ dàng theo dõi**.
+> - **Trọng tâm luồng nạp:** Hai luồng nạp chính là **Khai báo thủ công (Manual Entry)** và **Nạp hàng loạt bằng file mẫu Excel (Excel Template Import)**. Phương thức quét ảnh bằng AI Vision chỉ là tiện ích phụ và là **ưu tiên sau cùng** sau khi luồng nạp tay và Excel đã hoàn thành và hoạt động ổn định.
+
 ---
 
 ## 2. Phạm vi Người dùng & Ma trận Phân quyền (Roles & Permissions)
@@ -20,7 +26,7 @@ Hệ thống phân định 3 vai trò rõ ràng, kết hợp mô hình Multi-ten
    - **Quyền Giám sát & Chiến lược:** Xem Dashboard tổng thể (gồm các chỉ số chuẩn hóa $\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$), thiết lập và theo dõi Target tiến độ phát thải, xem báo cáo phân tích, nhận thông báo cảnh báo và xuất Kế hoạch cắt giảm phát thải (Reduction Plan) ra file PDF.
 
 2. **Thành viên gia đình / Văn phòng (Editor / Workspace Member):**
-   - **Quyền Editor:** Khai báo các hoạt động tiêu thụ năng lượng cá nhân qua 3 phương thức: Thủ công (Manual), Quét ảnh hóa đơn/công tơ bằng AI (AI Vision), hoặc Nhập file mẫu Excel (Excel Template Import). Mọi bản ghi do Editor tạo sẽ ở trạng thái **`Draft / Chờ duyệt (Pending Review)`** để chờ Reviewer chấp thuận trước khi chính thức ghi vào sổ cái.
+   - **Quyền Editor:** Khai báo các hoạt động tiêu thụ năng lượng cá nhân qua 2 phương thức chính: **Thủ công (Manual)** hoặc **Nạp file mẫu Excel (Excel Template Import)**, cùng luồng phụ là **Quét ảnh hóa đơn/công tơ bằng AI (AI Vision)** (tiện ích bổ trợ, ưu tiên sau cùng khi nạp tay và Excel đã ổn định). Mọi bản ghi do Editor tạo sẽ ở trạng thái **`Draft / Chờ duyệt (Pending Review)`** để chờ Reviewer chấp thuận trước khi chính thức ghi vào sổ cái.
    - **Quyền Giám sát:** Xem Dashboard tiến độ phát thải chung của Workspace, nhận thông báo cảnh báo ngưỡng 85% và theo dõi lịch sử trạng thái duyệt các hoạt động do mình khai báo.
 
 3. **Quản trị viên Hệ thống (System Admin):**
@@ -35,9 +41,9 @@ Hệ thống phân định 3 vai trò rõ ràng, kết hợp mô hình Multi-ten
 | Khai báo thông số nền (thành viên, diện tích $m^2$) | ❌ | ✅ | ❌ |
 | Mời thành viên vào Workspace | ❌ | ✅ | ❌ |
 | Xem Dashboard & chỉ số chuẩn hóa ($\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$) | ❌ | ✅ (Toàn diện) | ✅ (Xem chung) |
-| Khai báo phát thải thủ công (Manual Entry) | ❌ | ✅ (Tự duyệt) | ✅ (Trạng thái Draft) |
-| Quét hóa đơn / công tơ bằng AI Vision | ❌ | ✅ (Tự duyệt) | ✅ (Trạng thái Draft) |
-| Nạp dữ liệu bằng Excel Template | ❌ | ✅ (Tự duyệt) | ✅ (Trạng thái Draft) |
+| Khai báo phát thải thủ công (Manual Entry) [Luồng chính] | ❌ | ✅ (Tự duyệt) | ✅ (Trạng thái Draft) |
+| Nạp dữ liệu bằng Excel Template [Luồng chính] | ❌ | ✅ (Tự duyệt) | ✅ (Trạng thái Draft) |
+| Quét hóa đơn / công tơ bằng AI Vision [Luồng phụ - Ưu tiên sau cùng] | ❌ | ✅ (Tự duyệt) | ✅ (Trạng thái Draft) |
 | Phê duyệt / Từ chối Request phát thải | ❌ | ✅ | ❌ |
 | Thiết lập Ngân sách (Budgeting) & Target tháng | ❌ | ✅ | ❌ |
 | Nhận Notification cảnh báo ngưỡng 85% & 100% | ❌ | ✅ | ✅ |
@@ -56,12 +62,16 @@ flowchart TD
         A3 --> A4["Thiết lập Ngân sách tháng & Ngưỡng cảnh báo 85%"]
     end
 
-    subgraph Flow2["2. Luồng Nạp dữ liệu Sổ cái (Data Ingestion - 3 Phương thức)"]
+    subgraph Flow2["2. Luồng Nạp dữ liệu Sổ cái (Activity Data Ingestion)"]
         direction TB
-        B1["Thủ công (Manual Entry)"]
-        B2["AI Vision Quét Hóa đơn / Công tơ"]
-        B3["Nạp file mẫu Excel (Excel Template Import)"]
-        B1 & B2 & B3 --> B4["Màn hình Xem trước & Xác nhận (Preview)"]
+        subgraph MainIngestion["LUỒNG NẠP CHÍNH"]
+            B1["Khai báo Thủ công (Manual Entry)"]
+            B3["Nạp file mẫu Excel (Excel Template Import)"]
+        end
+        subgraph SecondaryIngestion["LUỒNG PHỤ (ƯU TIÊN SAU CÙNG)"]
+            B2["AI Vision Quét Hóa đơn / Công tơ"]
+        end
+        B1 & B3 & B2 --> B4["Màn hình Xem trước & Xác nhận (Preview)"]
         B4 -->|Editor thực hiện| B5["Lưu trạng thái Draft (Pending Review)"]
         B4 -->|Reviewer thực hiện| B6["Ghi trực tiếp Sổ cái (Approved)"]
         B5 --> B7["Reviewer Phê duyệt (Accept / Reject)"]
@@ -93,18 +103,21 @@ flowchart TD
    $$\text{Chỉ số theo diện tích} = \frac{\text{Tổng kg CO}_2\text{e}}{\text{Diện tích mặt sàn}} \quad (\text{kg CO}_2\text{e}/m^2)$$
 3. **Thiết lập Ngân sách (Budgeting):** Vào đầu tháng, Admin đặt ra ngưỡng phát thải tối đa (ví dụ: $300\text{ kg CO}_2\text{e}$ cho tháng 10) và hệ thống kích hoạt cơ chế theo dõi cùng ngưỡng cảnh báo sớm ở mức $85\%$.
 
-### 3.2. Luồng 2: Nạp dữ liệu (Data Ingestion Workflow)
-Hệ thống cung cấp **3 phương thức** linh hoạt để ghi nhận vào Sổ cái:
-1. **Luồng thủ công (Manual Entry):** Member điền form định lượng cho các sinh hoạt lẻ (ví dụ: khai báo đi làm bằng xe máy xăng 110cc với quãng đường 15 km, nấu ăn dùng gas LPG).
-2. **Luồng AI quét hóa đơn & công tơ (AI Vision Ingestion):**
-   - Member chụp ảnh và tải lên ảnh hóa đơn tiền điện/nước hoặc ảnh chụp công tơ thực tế.
-   - Backend đẩy ảnh qua Multimodal AI API (Google Gemini / Anthropic Claude) để bóc tách thông tin.
-   - AI trả về kết quả JSON có cấu trúc (loại dịch vụ, sản lượng tiêu thụ, đơn vị đo, kỳ hóa đơn, số tiền).
-   - Frontend hiển thị popup preview để người dùng rà soát, điều chỉnh nếu cần và nhấn "Xác nhận".
-3. **Luồng nạp dữ liệu bằng file mẫu Excel (Excel Template Ingestion):**
+### 3.2. Luồng 2: Nạp dữ liệu Activity có Cấu trúc (Data Ingestion Workflow)
+Hệ thống phân định rõ ràng giữa **Luồng nạp chính** và **Luồng nạp phụ**:
+
+#### A. Các luồng nạp chính (Primary Ingestion Flows):
+1. **Luồng thủ công (Manual Entry):** Member điền form định lượng có cấu trúc cho các sinh hoạt lẻ thường nhật (ví dụ: đi xe máy, nấu ăn gas LPG). Hệ thống tự động tính toán quy đổi lượng kg CO2e ngay trên giao diện form.
+2. **Luồng nạp dữ liệu bằng file mẫu Excel (Excel Template Ingestion):**
    - Người dùng tải template file Excel chuẩn do hệ thống cung cấp (gồm các cột: Ngày, Danh mục, Phân loại chi tiết, Sản lượng, Đơn vị, Ghi chú).
    - Người dùng điền dữ liệu hàng loạt và upload file lên hệ thống.
    - Hệ thống tự động đọc, ánh xạ (map) các trường thông tin và hiển thị bảng preview xác nhận trên giao diện trước khi lưu.
+
+#### B. Luồng nạp phụ (Secondary Flow - Ưu tiên sau cùng):
+3. **Luồng AI quét hóa đơn & công tơ (AI Vision Ingestion):**
+   - Tiện ích phụ hỗ trợ quét ảnh hóa đơn điện/nước/công tơ, bóc tách JSON và hiển thị popup xem trước đối chiếu.
+   - Được xếp vào **ưu tiên sau cùng**, chỉ triển khai khi hai luồng nạp chính bằng tay và Excel đã hoạt động ổn định.
+
 *Quy tắc duyệt:* Nếu người nạp là Thành viên (Editor), bản ghi tạo ra sẽ ở trạng thái `Draft / Pending Review` chờ Reviewer phê duyệt. Nếu là Trưởng nhóm (Reviewer) nạp, bản ghi sẽ được ghi sổ `Approved` trực tiếp.
 
 ### 3.3. Luồng 3: Xử lý Sổ cái & Cảnh báo (Ledger Processing & Alert)
@@ -127,9 +140,9 @@ Hệ thống cung cấp **3 phương thức** linh hoạt để ghi nhận vào 
 
 ### 4.1. Các nghiệp vụ NẰM TRONG phạm vi (In-Scope)
 Hệ thống giải quyết 4 trụ cột nghiệp vụ:
-1. **Quản lý Sổ cái phát thải đa phương thức có phê duyệt:** Số hóa các hoạt động tiêu thụ năng lượng thành chỉ số kg CO2e chuẩn thông qua 3 kênh nhập liệu (Thủ công, AI Vision quét hóa đơn/công tơ, Import Excel template); quy trình kiểm duyệt Draft -> Approved/Rejected.
+1. **Quản lý Sổ cái phát thải có cấu trúc & tự động tính toán quy đổi:** Tự động tính toán phát thải chính xác dựa theo các hoạt động người dùng nhập liệu vào hệ thống một cách có kiến trúc và dễ dàng theo dõi. Tập trung vào 2 luồng nạp chính (Thủ công, Excel Template) và luồng phụ (AI Vision - ưu tiên sau cùng); quy trình kiểm duyệt Draft -> Approved/Rejected.
 2. **Quản trị Ngân sách & Chỉ số Chuẩn hóa:** Khai báo thông số nền (thành viên, diện tích $m^2$), thiết lập hạn ngạch tháng, tính toán $\text{CO}_2\text{e}/\text{người}$ và $\text{CO}_2\text{e}/m^2$, bắn notification cảnh báo ngưỡng 85% & 100% đến toàn thể thành viên.
-3. **Tự động hóa AI & Báo cáo Thông minh:** Vision Parser bóc tách hóa đơn/công tơ; Insight Generator chạy Cronjob định kỳ phân tích bất thường, đề xuất hành động định lượng cá nhân hóa và xuất file báo cáo PDF.
+3. **Phân tích Thông minh & Đề xuất Cắt giảm Cá nhân hóa:** Insight Generator chạy Cronjob định kỳ phân tích dữ liệu, đề xuất phương án cắt giảm cá nhân hóa và xuất file báo cáo PDF; module AI Vision bổ trợ quét hóa đơn/công tơ (ưu tiên sau cùng).
 4. **Quản trị Hệ thống & Chuẩn hóa Hệ số:** System Admin quản lý danh mục quy chuẩn quốc gia (EVN, GHG Protocol).
 
 ### 4.2. Các nghiệp vụ NẰM NGOÀI phạm vi (Out-of-Scope)

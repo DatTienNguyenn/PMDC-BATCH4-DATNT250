@@ -19,7 +19,7 @@
 | **US-SA-001** | Quản lý & cập nhật Hệ số phát thải quy chuẩn | Quản trị Hệ thống | System Admin | Should | 3 | Sprint 1 |
 | **US-CL-001** | Khai báo phát thải thủ công ở trạng thái Draft | Luồng 2: Nạp dữ liệu | Thành viên (Editor) | Must | 3 | Sprint 1 |
 | **US-CL-002** | Tự động quy đổi mức tiêu thụ ra chỉ số kg CO2e | Luồng 3: Xử lý Sổ cái | Editor / Reviewer | Must | 2 | Sprint 1 |
-| **US-CL-003** | Quét hóa đơn / công tơ bằng AI Vision (Popup xác nhận) | Luồng 2: Nạp dữ liệu | Editor / Reviewer | Should | 5 | Sprint 3 |
+| **US-CL-003** | Quét hóa đơn / công tơ bằng AI Vision (Tiện ích phụ) | Luồng 2: Nạp dữ liệu | Editor / Reviewer | Could (Sau cùng) | 5 | Sprint 3 |
 | **US-CL-004** | Nạp dữ liệu phát thải qua file mẫu Excel (Preview & Import) | Luồng 2: Nạp dữ liệu | Editor / Reviewer | Should | 4 | Sprint 2 |
 | **US-CL-005** | Kiểm duyệt & phê duyệt (Accept / Reject) request phát thải | Luồng 2: Phê duyệt | Trưởng nhóm (Reviewer) | Must | 3 | Sprint 2 |
 | **US-CL-006** | Tra cứu lịch sử sổ cái và trạng thái phê duyệt | Luồng 2: Lịch sử | Editor / Reviewer | Must | 3 | Sprint 2 |
@@ -372,10 +372,10 @@
 **So that** tôi chỉ cần kiểm tra lại và nhấn "Xác nhận", loại bỏ hoàn toàn thao tác gõ tay phức tạp và tránh nhầm lẫn chỉ số  
 
 #### Metadata
-- **Epic/Feature**: Luồng 2 - Nạp dữ liệu (Phương thức 2: AI Vision Ingestion)
-- **Priority**: Should Have (MoSCoW)
+- **Epic/Feature**: Luồng 2 - Nạp dữ liệu (Phương thức 3: AI Vision Ingestion - Luồng phụ)
+- **Priority**: Could Have / Nice-to-have (Ưu tiên sau cùng, chỉ triển khai khi US-CL-001 Nạp thủ công và US-CL-004 Import Excel đã hoàn thành và hoạt động ổn định)
 - **Estimate**: 5 Story Points
-- **Dependencies**: Tích hợp Commercial Multimodal AI API (Google Gemini 1.5 Flash hoặc Anthropic Claude)
+- **Dependencies**: Tích hợp Commercial Multimodal AI API (Google Gemini 1.5 Flash hoặc Anthropic Claude); US-CL-001 & US-CL-004 đã hoàn thành.
 - **Assumptions**: Ảnh chụp hóa đơn điện EVN, hóa đơn nước hoặc mặt công tơ có độ rõ nét đủ để nhận dạng chữ số.
 
 #### INVEST Self-check
