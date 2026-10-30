@@ -19,10 +19,10 @@
 Trong mô hình kiểm kê phát thải khí nhà kính dành cho **Hộ gia đình** và **Văn phòng nhỏ**, việc xác định chính xác danh mục hoạt động phát sinh phát thải và áp dụng đúng hệ số phát thải quy chuẩn (Emission Factor - EF) đóng vai trò quyết định đến độ tin cậy và giá trị pháp lý/kiểm toán của sổ cái carbon.
 
 Tài liệu này được lập ra nhằm:
-1. **Chuẩn hóa danh mục hoạt động:** Định nghĩa chính xác 7 hoạt động phát sinh carbon vi mô cốt lõi mà hệ thống hỗ trợ ghi nhận qua 3 kênh: Nhập thủ công sinh hoạt (`US-CL-001`), Quét hóa đơn/công tơ AI OCR (`US-CL-003`) và Import bảng tính Excel (`US-CL-005`).
-2. **Quy định đơn vị tính đầu vào (Input Units):** Đồng bộ hóa đơn vị đo lường trực quan với người dùng ($kWh, kg, Lít, km, m^3$) và bảng quy đổi cho các đơn vị đóng gói thương mại (Bình gas 12kg, Ram giấy A4).
-3. **Phân loại Scope nghiêm ngặt:** Phân định rõ ràng ranh giới Scope 1 (Trực tiếp), Scope 2 (Gián tiếp qua điện mua ngoài) và Scope 3 (Chuỗi giá trị: rác thải, nước sạch, vật tư, đi lại).
-4. **Cung cấp cơ sở pháp lý & khoa học trích dẫn:** Minh bạch hóa nguồn gốc các Hệ số phát thải khuyến nghị từ các cơ quan thẩm quyền quốc gia (**Bộ TN&MT Việt Nam**) và các tổ chức khí hậu quốc tế hàng đầu (**IPCC, UK DEFRA/DESNZ, US EPA, IEA**).
+1. **Chuẩn hóa danh mục hoạt động:** Định nghĩa chính xác 8 hoạt động phát sinh carbon cốt lõi mà hệ thống hỗ trợ ghi nhận qua 3 kênh: Nhập thủ công sinh hoạt (`US-CL-001`), Quét hóa đơn/vé điện tử/công tơ AI OCR (`US-CL-003`) và Import bảng tính Excel (`US-CL-005`). Bao gồm toàn diện từ sinh hoạt gia đình, vận hành văn phòng đến du lịch/công tác hàng không.
+2. **Quy định đơn vị tính đầu vào (Input Units):** Đồng bộ hóa đơn vị đo lường trực quan với người dùng ($kWh, kg, Lít, km, m^3, \text{hành khách-km}$) và bảng quy đổi cho các đơn vị đóng gói thương mại (Bình gas 12kg, Ram giấy A4, Chặng bay khứ hồi).
+3. **Phân loại Scope nghiêm ngặt:** Phân định rõ ràng ranh giới Scope 1 (Trực tiếp), Scope 2 (Gián tiếp qua điện mua ngoài) và Scope 3 (Chuỗi giá trị: rác thải, nước sạch, vật tư, di chuyển cá nhân và du lịch/công tác hàng không).
+4. **Cung cấp cơ sở pháp lý & khoa học trích dẫn:** Minh bạch hóa nguồn gốc các Hệ số phát thải khuyến nghị từ các cơ quan thẩm quyền quốc gia (**Bộ TN&MT Việt Nam**) và các tổ chức khí hậu quốc tế hàng đầu (**IPCC, ICAO, UK DEFRA/DESNZ, US EPA, IEA**).
 5. **Cấu hình dữ liệu nền tảng cho Engine tính toán:** Thiết lập bộ thông số mặc định (Default Baseline Factors) cho bảng cơ sở dữ liệu `standard_emission_factors` phục vụ công thức quy đổi tự động:
    $$\text{Lượng phát thải } (\text{kg CO}_2\text{e}) = \text{Sản lượng tiêu thụ (Activity Data)} \times \text{Hệ số phát thải (Emission Factor)}$$
 
@@ -50,6 +50,7 @@ flowchart TD
             W2["Tiêu thụ và xử lý nước sạch (m³) - Cat 1 & 5"]
             W3["Tiêu thụ giấy in văn phòng (kg) - Cat 1"]
             M1["Di chuyển cá nhân xe máy/ô tô (km) - Cat 7"]
+            T1["Du lịch & Công tác bằng máy bay (p.km) - Cat 6"]
         end
     end
 
@@ -60,13 +61,13 @@ flowchart TD
 
 - **Scope 1 (Phát thải trực tiếp):** Bắt nguồn từ các hoạt động đốt cháy nhiên liệu tại chỗ thuộc quyền sở hữu hoặc kiểm soát trực tiếp của hộ gia đình/văn phòng nhỏ (bếp gas nấu nướng, máy phát điện dự phòng khi mất điện, phương tiện thuộc sở hữu văn phòng).
 - **Scope 2 (Phát thải năng lượng gián tiếp):** Phát thải sinh ra từ quá trình sản xuất điện năng mà hộ gia đình hoặc văn phòng tiêu thụ từ lưới điện quốc gia (EVN).
-- **Scope 3 (Phát thải gián tiếp khác):** Các phát thải xảy ra trong chuỗi giá trị ngược dòng (Upstream) hoặc xuôi dòng (Downstream), bao gồm cung cấp và xử lý nước sạch, xử lý chôn lấp rác thải sinh hoạt, khai thác sản xuất giấy in văn phòng, và phương tiện di chuyển cá nhân của thành viên/nhân viên đi làm (Commuting).
+- **Scope 3 (Phát thải gián tiếp khác):** Các phát thải xảy ra trong chuỗi giá trị ngược dòng (Upstream) hoặc xuôi dòng (Downstream), bao gồm cung cấp và xử lý nước sạch, xử lý chôn lấp rác thải sinh hoạt, khai thác sản xuất giấy in văn phòng, phương tiện di chuyển cá nhân của thành viên/nhân viên đi làm (Commuting), và các chuyến bay du lịch/công tác đường dài (Business Travel & Tourism).
 
 ---
 
 ## 📊 3. BẢNG TỔNG HỢP CÁC HOẠT ĐỘNG ĐƯỢC HỖ TRỢ (MASTER ACTIVITY MATRIX)
 
-Bảng tổng hợp dưới đây đặc tả đầy đủ 7 hoạt động hỗ trợ trong phiên bản MVP, bao gồm mã định danh hệ thống, đơn vị đo, phân loại Scope, nguồn trích dẫn và hệ số quy đổi mặc định:
+Bảng tổng hợp dưới đây đặc tả đầy đủ 8 hoạt động hỗ trợ trong hệ thống, bao gồm mã định danh hệ thống, đơn vị đo, phân loại Scope, nguồn trích dẫn và hệ số quy đổi mặc định:
 
 | STT | Nhóm hoạt động | Hoạt động chi tiết | Mã danh mục (Category Code) | Đơn vị tính (Input Unit) | Phân loại Scope | Nguồn hệ số phát thải (EF) khuyến nghị | Hệ số phát thải mặc định (Default EF) | Khí nhà kính quy đổi |
 |:---:|---|---|:---:|:---:|:---:|---|:---:|:---:|
@@ -77,6 +78,7 @@ Bảng tổng hợp dưới đây đặc tả đầy đủ 7 hoạt động hỗ
 | **5** | **Rác thải** | Rác sinh hoạt chôn lấp | `WASTE_LANDFILL` | **kg** | **Scope 3** | **US EPA (WARM)** / **UK DEFRA** | **`0.4500`** $\text{kg CO}_2\text{e/kg}$ | $\text{CH}_4, \text{CO}_2$ |
 | **6** | **Nước** | Tiêu thụ và xử lý nước | `WATER_SUPPLY_TREAT` | **$m^3$** | **Scope 3** | **UK DEFRA** / **US EPA** | **`0.3440`** $\text{kg CO}_2\text{e/}m^3$ | $\text{CO}_2, \text{CH}_4$ |
 | **7** | **Vật tư** | Tiêu thụ giấy in | `OFFICE_PAPER` | **kg** | **Scope 3** | **UK DEFRA** / **US EPA** | **`1.2500`** $\text{kg CO}_2\text{e/kg}$ | $\text{CO}_2$ |
+| **8** | **Du lịch & Đi lại** | Di chuyển bằng máy bay | `TRAVEL_FLIGHT` | **p.km** hoặc **Chặng bay** | **Scope 3 (Cat 6)** & Cá nhân | **ICAO** / **UK DEFRA** / **US EPA** | Cự ly ngắn (<3700km): **`0.1535`** $\text{kg/p.km}$<br>Nội địa (<500km): **`0.2458`** $\text{kg/p.km}$<br>Cự ly dài (>3700km): **`0.1930`** $\text{kg/p.km}$ | $\text{CO}_2, \text{CH}_4, \text{N}_2\text{O}$ + RF |
 
 ---
 
@@ -240,6 +242,50 @@ Bảng tổng hợp dưới đây đặc tả đầy đủ 7 hoạt động hỗ
 
 ---
 
+### 4.8. Nhóm Du lịch & Đi lại: Di chuyển bằng máy bay (`TRAVEL_FLIGHT`)
+
+- **Đặc tả hoạt động:** Hoạt động di chuyển bằng đường hàng không thương mại phục vụ các chuyến đi du lịch nghỉ dưỡng gia đình, về quê dịp lễ tết, hoặc các chuyến đi công tác xa (Business Trip), tham dự hội thảo, du lịch tập thể (Team building/Retreat) của văn phòng nhỏ.
+- **Phân loại Scope:**
+  - **Scope 3 (Category 6: Business Travel):** Áp dụng cho văn phòng nhỏ khi công ty thanh toán vé máy bay cho nhân viên đi công tác hoặc tổ chức kỳ nghỉ/du lịch thường niên.
+  - **Dấu chân Carbon Du lịch Cá nhân / Hộ gia đình:** Áp dụng cho Workspace Hộ gia đình. (Hàng không là nguồn phát thải tập trung có quy mô đột biến: chỉ 1 chuyến du lịch khứ hồi bằng máy bay có thể tạo ra lượng phát thải bằng cả 3 - 6 tháng tiêu thụ điện sinh hoạt của cả gia đình).
+- **Đơn vị đo lường:**
+  - Đơn vị cơ sở: **Hành khách-kilomet (p.km - passenger.km)**.
+  - Đơn vị tiện ích theo nghiệp vụ: **Chặng bay (Lượt bay / Tuyến bay)**. Người dùng chỉ cần chọn sân bay khởi hành - sân bay đến và số lượng vé, hệ thống tự động ánh xạ cự ly đại viên (Great Circle Distance - GCD) cộng bù hao phí không lưu $8\%$ (theo tiêu chuẩn ICAO).
+- **Cơ chế phát thải & Hiệu ứng Bức xạ Tầng cao (Radiative Forcing - RF):**
+  - Động cơ máy bay phản lực đốt dầu Jet-A1 xả khí thải ở độ cao hành trình 9,000 - 12,000 m (tầng đối lưu trên và bình lưu dưới).
+  - Ngoài $\text{CO}_2$, khí xả còn sinh ra hơi nước $\text{H}_2\text{O}$ ngưng tụ tạo thành các vệt khói trắng (contrails) và kích thích hình thành mây ti nhân tạo (cirrus clouds) giữ nhiệt, cùng khí $\text{NO}_x$ làm thay đổi cân bằng ozone tầng đối lưu.
+  - Theo nghiên cứu của **IPCC** và hướng dẫn của **UK DEFRA**, tổng tác động làm ấm khí hậu (Radiative Forcing) thực tế cao gấp **$1.7\text{ - }1.9$ lần** so với việc chỉ tính riêng khí $\text{CO}_2$. Do đó, hệ thống mặc định áp dụng bộ hệ số chuẩn **"With RF"** để bảo đảm tính trung thực và toàn diện của dấu chân sinh thái.
+- **Nguồn trích dẫn hệ số phát thải khuyến nghị:**
+  1. **ICAO (Tổ chức Hàng không Dân dụng Quốc tế - Liên Hợp Quốc):**
+     - *Tài liệu trích dẫn:* **ICAO Carbon Emissions Calculator (ICEC) Methodology**. Phương pháp luận chuẩn hóa toàn cầu về phân bổ nhiên liệu bay theo tải trọng hành khách và hàng hóa khoang bụng (belly freight).
+  2. **UK DEFRA / DESNZ:**
+     - *Tài liệu trích dẫn:* **UK Government GHG Conversion Factors for Company Reporting**, Bảng *Business travel - air*.
+     - *Chi tiết phân loại cự ly bay (Hạng phổ thông - Economy, đã bao gồm Radiative Forcing):*
+       - *Chuyến bay nội địa cự ly ngắn (< 500 km):* **`0.2458` $\text{kg CO}_2\text{e/p.km}$** (suất tiêu hao trên mỗi km lớn do giai đoạn cất cánh/hạ cánh chiếm tỷ trọng cao).
+       - *Chuyến bay cự ly ngắn (Short-haul, 500 - 3,700 km):* **`0.1535` $\text{kg CO}_2\text{e/p.km}$** (áp dụng cho các chuyến bay trục Bắc - Nam tại Việt Nam và Đông Nam Á).
+       - *Chuyến bay cự ly dài (Long-haul, > 3,700 km):* **`0.1930` $\text{kg CO}_2\text{e/p.km}$** (các tuyến liên lục địa đi châu Âu, Mỹ, Úc).
+  3. **US EPA:**
+     - *Tài liệu trích dẫn:* **EPA GHG Emission Factors Hub**, Bảng *Scope 3 Category 6: Business Travel - Commercial Air Travel*.
+- **Hệ số nhân theo Hạng vé (Cabin Class Multiplier):**
+  - Hạng Phổ thông (Economy Class): $\times \mathbf{1.0}$
+  - Hạng Phổ thông đặc biệt (Premium Economy): $\times \mathbf{1.6}$
+  - Hạng Thương gia (Business Class): $\times \mathbf{2.9}$ (Short-haul) / $\times \mathbf{3.0}$ (Long-haul)
+  - Hạng Nhất (First Class): $\times \mathbf{4.0}$
+- **Bảng tra cứu quy đổi nhanh các chặng du lịch phổ biến tại Việt Nam (Route Lookup Matrix):**
+
+| Tuyến bay (Origin ⇄ Destination) | Khoảng cách 1 chiều | Loại chặng | Phát thải Khứ hồi / Hành khách (Hạng Phổ thông) | Tương đương điện sinh hoạt |
+|---|:---:|:---:|:---:|:---:|
+| **Hà Nội (HAN) ⇄ TP. Hồ Chí Minh (SGN)** | $\approx 1,160\text{ km}$ | Short-haul | $2,320\text{ km} \times 0.1535 = \mathbf{356.1\text{ kg CO}_2\text{e}}$ | $\approx 493\text{ kWh}$ điện |
+| **Hà Nội (HAN) ⇄ Đà Nẵng (DAD)** | $\approx 630\text{ km}$ | Short-haul | $1,260\text{ km} \times 0.1535 = \mathbf{193.4\text{ kg CO}_2\text{e}}$ | $\approx 268\text{ kWh}$ điện |
+| **TP. Hồ Chí Minh (SGN) ⇄ Phú Quốc (PQC)** | $\approx 300\text{ km}$ | Nội địa ngắn | $600\text{ km} \times 0.2458 = \mathbf{147.5\text{ kg CO}_2\text{e}}$ | $\approx 204\text{ kWh}$ điện |
+| **Hà Nội / TP.HCM ⇄ Bangkok (BKK)** | $\approx 1,300\text{ km}$ | Quốc tế ngắn | $2,600\text{ km} \times 0.1535 = \mathbf{399.1\text{ kg CO}_2\text{e}}$ | $\approx 553\text{ kWh}$ điện |
+| **Hà Nội / TP.HCM ⇄ Tokyo / Seoul** | $\approx 3,600\text{ km}$ | Quốc tế ngắn | $7,200\text{ km} \times 0.1535 = \mathbf{1,105.2\text{ kg CO}_2\text{e}}$ | $\approx 1.53\text{ MWh}$ điện |
+
+- **Công thức tính toán:**
+  $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Số hành khách} \times \text{Khoảng cách (km)} \times EF_{\text{cự ly}} \times \text{Hệ số hạng vé}$$
+
+---
+
 ## 🗄️ 5. THIẾT KẾ CƠ SỞ DỮ LIỆU & CHIẾN LƯỢC SNAPSHOT (DATA SCHEMA ALIGNMENT)
 
 Để đảm bảo tính toàn vẹn và không làm sai lệch báo cáo lịch sử khi System Admin điều chỉnh hệ số phát thải theo chu kỳ năm (`US-SA-001`), cơ sở dữ liệu PostgreSQL thực hiện lưu trữ theo **Chiến lược Snapshot (Snapshot Pattern)**:
@@ -296,7 +342,7 @@ sequenceDiagram
     Admin->>UI: Mở màn hình "Quản lý Hệ số Quy chuẩn"
     UI->>API: GET /api/v1/admin/emission-factors
     API->>DB: Query standard_emission_factors
-    DB-->>UI: Trả về danh sách 7 hoạt động
+    DB-->>UI: Trả về danh sách 8 hoạt động
     Admin->>UI: Thay đổi EF Điện EVN = 0.7500 kèm Số hiệu văn bản mới
     UI->>API: PUT /api/v1/admin/emission-factors/ELEC_GRID {factor: 0.7500, ref: "Báo cáo EVN 2026"}
     API->>DB: UPDATE standard_emission_factors SET factor = 0.7500, updated_at = NOW()
@@ -333,3 +379,8 @@ sequenceDiagram
    - *Corporate Value Chain (Scope 3) Accounting and Reporting Standard*.
 6. **IEA (International Energy Agency):**
    - *IEA Emissions Factors Database (2023 Edition)* - Báo cáo thường niên về phát thải $\text{CO}_2$ từ đốt nhiên liệu hóa thạch và sản xuất điện năng.
+7. **ICAO (Tổ chức Hàng không Dân dụng Quốc tế - International Civil Aviation Organization):**
+   - *ICAO Carbon Emissions Calculator (ICEC) Methodology (Version 12/2023)* - Phương pháp luận chuẩn hóa của Liên Hợp Quốc về phân bổ phát thải khí nhà kính cho hành khách thương mại đường hàng không. [Truy cập: icao.int/environmental-protection/CarbonOffset](https://www.icao.int/environmental-protection/CarbonOffset/Pages/default.aspx)
+8. **IATA (Hiệp hội Vận tải Hàng không Quốc tế):**
+   - *IATA Recommended Practice 1726 - Passenger CO2 Calculation Methodology* & Sáng kiến *IATA CO2 Connect*.
+   - Khuyến nghị tính toán phát thải kết hợp hệ số bức xạ tầng cao (Radiative Forcing Index) và tải trọng hạng ghế.
