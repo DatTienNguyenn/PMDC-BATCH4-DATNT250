@@ -227,7 +227,7 @@ flowchart TD
   4. `MOBILITY`: Di chuyển xe máy / Ô tô (**km**), Scope 1 & 3, Hệ số phân cấp theo loại xe và nhiên liệu (DEFRA 2026).
   5. `WASTE_LANDFILL`: Rác thải sinh hoạt chôn lấp (**kg**), Scope 3, Hệ số **`0.004465`** $\text{kg CO}_2\text{e}/\text{kg}$ (DEFRA 2026 / EPA WARM).
   6. `WATER_SUPPLY_TREAT`: Cung cấp & xử lý nước sạch (**$m^3$**), Scope 3, Hệ số **`0.19130`** $\text{kg CO}_2\text{e}/m^3$ (DEFRA 2026 / EPA).
-  7. `OFFICE_PAPER`: Giấy in văn phòng (**kg**), Scope 3, Hệ số **`1.2500`** $\text{kg CO}_2\text{e}/\text{kg}$ (DEFRA / EPA).
+  7. `OFFICE_PAPER`: Giấy in văn phòng (**kg**), Scope 3, Hệ số **`1.3436`** $\text{kg CO}_2\text{e}/\text{kg}$ (tương đương **`1343.59114`** $\text{kg CO}_2\text{e}/\text{tấn}$ theo UK DEFRA 2026).
   8. `TRAVEL_FLIGHT`: Du lịch & Đi lại bằng máy bay (**p.km**), Scope 3, Economy: **`0.10916`**, Business: **`0.31656`** (DEFRA 2026 / ICAO).
 
 ### 5.3. Phân hệ 3: Nhập liệu Hoạt động có Cấu trúc (Activity Ingestion)

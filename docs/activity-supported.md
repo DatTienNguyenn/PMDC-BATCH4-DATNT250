@@ -82,7 +82,7 @@ Bảng tổng hợp dưới đây đặc tả đầy đủ 8 hoạt động hỗ
 | **4** | **Di chuyển** | Xe máy / Ô tô cá nhân | `MOBILITY` | **km** | **Scope 1 & 3** | **UK DEFRA 2026** (Theo Size & Nhiên liệu) | **`[ Định nghĩa mục 4.4]`**<br>*(Đơn vị: kg CO₂e/km - Để trống để nhập tay)* | CO₂, CH₄, N₂O |
 | **5** | **Rác thải** | Rác sinh hoạt chôn lấp | `WASTE_LANDFILL` | **kg** hoặc **Tấn** | **Scope 3** | **UK DEFRA 2026** / **US EPA WARM** | **`4.465358`** kg CO₂e/tấn<br>*(tương đương **`0.004465`** kg CO₂e/kg)* | CH₄, CO₂ |
 | **6** | **Nước** | Tiêu thụ và xử lý nước | `WATER_SUPPLY_TREAT` | **m³** hoặc **Triệu Lít** | **Scope 3** | **UK DEFRA 2026** / **US EPA** | **`0.19130`** kg CO₂e/m³<br>*(tương đương **`191.30156`** kg/triệu Lít)* | CO₂, CH₄ |
-| **7** | **Vật tư** | Tiêu thụ giấy in | `OFFICE_PAPER` | **kg** | **Scope 3** | **UK DEFRA** / **US EPA** | **`1.2500`** kg CO₂e/kg | CO₂ |
+| **7** | **Vật tư** | Tiêu thụ giấy in | `OFFICE_PAPER` | **kg** hoặc **Tấn** | **Scope 3** | **UK DEFRA 2026** / **US EPA** | **`1343.59114`** kg CO₂e/tấn<br>*(tương đương **`1.3436`** kg CO₂e/kg)* | CO₂ |
 | **8** | **Du lịch & Đi lại** | Di chuyển bằng máy bay | `TRAVEL_FLIGHT` | **p.km** hoặc **Chặng bay** | **Scope 3 (Cat 6)** & Cá nhân | **UK DEFRA 2026** / **ICAO** / **US EPA** | Theo hạng ghế (DEFRA 2026):<br>• Economy: **`0.10916`** kg CO₂e/p.km<br>• Premium Economy: **`0.17465`** kg CO₂e/p.km<br>• Business: **`0.31656`** kg CO₂e/p.km<br>• First: **`0.43663`** kg CO₂e/p.km | CO₂, CH₄, N₂O + RF |
 
 ---
@@ -246,19 +246,19 @@ Bảng tổng hợp dưới đây đặc tả đầy đủ 8 hoạt động hỗ
     - _Giấy A4 định lượng 70 gsm (g/$m^2$):_ 1 tờ $A4 = 0.21 \times 0.297\text{ m} = 0.06237\text{ m}^2$. Trọng lượng 1 tờ $= 4.366\text{ g}$. Trọng lượng 1 ram (500 tờ) $\approx \mathbf{2.18\text{ kg}}$.
     - _Giấy A4 định lượng 80 gsm:_ Trọng lượng 1 tờ $= 4.99\text{ g}$. Trọng lượng 1 ram (500 tờ) $\approx \mathbf{2.49\text{ kg}}$.
 - **Nguồn trích dẫn hệ số phát thải khuyến nghị:**
-  1. **UK DEFRA / DESNZ:**
-     - _Tài liệu trích dẫn:_ **UK GHG Conversion Factors**, Bảng _Material use: Paper and board_.
-     - _Chi tiết phân loại bột giấy:_
-       - Giấy từ bột gỗ nguyên sinh (Virgin pulp): **$1.2500\text{ kg CO}_2\text{e/kg}$**.
-       - Giấy văn phòng tái chế (Closed loop recycled paper): **$0.9190\text{ kg CO}_2\text{e/kg}$**.
-     - _Giá trị chuẩn lựa chọn mặc định trong dự án:_ **`1.2500` $\text{kg CO}_2\text{e/kg}$** (đáp ứng nguyên tắc Thận trọng - Conservativeness trong kiểm kê phát thải khi chưa rõ tỷ lệ bột giấy tái chế).
+  1. **UK DEFRA 2026 / DESNZ:**
+     - _Tài liệu trích dẫn:_ **UK GHG Conversion Factors for Company Reporting 2026**, Bảng _Material use: Paper and board_ (Mục: _Paper and board: paper_).
+     - _Hệ số phát thải chính thức:_ **`1343.59114` $\text{kg CO}_2\text{e}/\text{tấn}$** (tương đương **`1.34359114` $\text{kg CO}_2\text{e}/\text{kg}$**, làm tròn hiển thị: **`1.3436` $\text{kg CO}_2\text{e}/\text{kg}$**).
+     - _Giá trị chuẩn lựa chọn mặc định trong dự án:_ **`1343.59114` $\text{kg CO}_2\text{e}/\text{tấn}$** (tương đương **`1.3436` $\text{kg CO}_2\text{e}/\text{kg}$**).
   2. **US EPA (WARM Model):**
      - _Tài liệu trích dẫn:_ **US EPA Waste Reduction Model - Office Paper Documentation**. Phát thải vòng đời sản xuất giấy văn phòng dao động $1.11 - 1.30\text{ kg CO}_2\text{e/kg}$.
 - **Công thức tính toán:**
-  - _Tính theo khối lượng:_
-    $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Khối lượng giấy (kg)} \times 1.2500$$
-  - _Tính theo số ram giấy A4 (định lượng 70 gsm):_
-    $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Số ram} \times 2.18\text{ kg} \times 1.2500 = \text{Số ram} \times 2.725\text{ kg CO}_2\text{e}$$
+  - _Tính theo khối lượng (kg):_
+    $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Khối lượng giấy (kg)} \times 1.3436$$
+  - _Tính theo số ram giấy A4 (định lượng 70 gsm, trọng lượng ~2.18 kg/ram):_
+    $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Số ram} \times 2.18\text{ kg} \times 1.3436 \approx \text{Số ram} \times 2.929\text{ kg CO}_2\text{e}$$
+  - _Tính theo số ram giấy A4 (định lượng 80 gsm, trọng lượng ~2.49 kg/ram):_
+    $$\text{Phát thải } (\text{kg CO}_2\text{e}) = \text{Số ram} \times 2.49\text{ kg} \times 1.3436 \approx \text{Số ram} \times 3.346\text{ kg CO}_2\text{e}$$
 
 ---
 
