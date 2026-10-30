@@ -1,0 +1,1149 @@
+openapi: 3.1.0
+info:
+  title: Personal & Micro-Office Carbon Ledger API
+  version: 1.0.0
+  description: >
+    RESTful API Schema cho Hệ thống Quản trị & Phân tích Dấu chân Carbon cho Gia đình và Văn phòng nhỏ.
+    Được thiết kế dựa trên Screen-to-API Mapping Matrix và đặc tả kiến trúc thông tin hệ thống.
+servers:
+  - url: https://api.carbonledger.io/api/v1
+    description: Production Server
+  - url: http://localhost:8080/api/v1
+    description: Local Development Server
+
+security:
+  - BearerAuth: []
+
+paths:
+  # ================= AUTHENTICATION =================
+  /auth/register:
+    post:
+      summary: Đăng ký tài khoản mới (SCR-AUTH-01)
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '201':
+          description: Đăng ký thành công
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseUser'
+        '400':
+          $ref: '#/components/responses/400BadRequest'
+
+  /auth/login:
+    post:
+      summary: Đăng nhập bằng Email & Mật khẩu (SCR-AUTH-01)
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Đăng nhập thành công, trả về JWT Access/Refresh tokens
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseLogin'
+        '401':
+          $ref: '#/components/responses/401Unauthorized'
+
+  /auth/google:
+    post:
+      summary: Đăng nhập một chạm Google OAuth SSO (SCR-AUTH-01)
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id_token]
+              properties:
+                id_token:
+                  type: string
+      responses:
+        '200':
+          $ref: '#/components/schemas/ApiResponseLogin'
+
+  /auth/refresh:
+    post:
+      summary: Làm mới Access Token
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [refresh_token]
+              properties:
+                refresh_token:
+                  type: string
+      responses:
+        '200':
+          description: Cấp token mới thành công
+
+  /auth/forgot-password:
+    post:
+      summary: Gửi yêu cầu đặt lại mật khẩu (SCR-AUTH-02)
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                  format: email
+      responses:
+        '200':
+          description: Gửi mã khôi phục thành công
+
+  /auth/reset-password:
+    post:
+      summary: Đặt lại mật khẩu mới (SCR-AUTH-02)
+      security: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email, reset_token, new_password]
+              properties:
+                email: { type: string, format: email }
+                reset_token: { type: string }
+                new_password: { type: string, minLength: 8 }
+      responses:
+        '200':
+          description: Cập nhật mật khẩu thành công
+
+  # ================= WORKSPACES & BASELINES =================
+  /workspaces/my-workspaces:
+    get:
+      summary: Lấy danh sách Workspace của người dùng (SCR-WS-01)
+      responses:
+        '200':
+          description: Danh sách workspaces
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiResponseMyWorkspaces'
+
+  /workspaces:
+    post:
+      summary: Khởi tạo Không gian làm việc mới (SCR-WS-MODAL-01, UC01)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateWorkspaceRequest'
+      responses:
+        '201':
+          description: Khởi tạo Workspace thành công
+
+  /workspaces/{id}:
+    get:
+      summary: Lấy thông tin Workspace
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: Thông tin Workspace
+    patch:
+      summary: Cập nhật thông tin Workspace (SCR-SETTING-01 Tab 1)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name: { type: string, minLength: 3, maxLength: 50 }
+      responses:
+        '200':
+          description: Cập nhật thành công
+    delete:
+      summary: Giải tán / Xóa Workspace (SCR-SETTING-01 Tab 1)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: Xóa thành công
+
+  /workspaces/{id}/baselines:
+    post:
+      summary: Khai báo thông số nền ban đầu (SCR-WS-MODAL-01, UC02)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BaselineRequest'
+      responses:
+        '201':
+          description: Lưu thông số nền thành công
+    put:
+      summary: Điều chỉnh thông số nền (SCR-SETTING-01 Tab 1, UC02)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BaselineRequest'
+      responses:
+        '200':
+          description: Cập nhật thông số nền thành công
+
+  # ================= INVITES & JOIN REQUESTS =================
+  /workspaces/{id}/invite-codes:
+    post:
+      summary: Sinh mã mời mới 6 ký tự (SCR-INVITE-MODAL-01, UC03)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '201':
+          description: Sinh mã mời thành công
+
+  /workspaces/invite-lookup:
+    get:
+      summary: Tra cứu thông tin mã mời xem trước (SCR-WS-JOIN-01, UC03)
+      parameters:
+        - name: code
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Thông tin Workspace mời
+
+  /workspaces/join-requests:
+    post:
+      summary: Gửi yêu cầu gia nhập Workspace bằng mã mời (SCR-WS-JOIN-01, UC03)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [invite_code]
+              properties:
+                invite_code: { type: string, example: "CARB26" }
+      responses:
+        '201':
+          description: Gửi yêu cầu thành công
+        '400':
+          description: Mã mời hết hạn
+        '409':
+          description: Đã có yêu cầu chờ duyệt
+
+  /workspaces/{id}/join-requests:
+    get:
+      summary: Lấy danh sách yêu cầu gia nhập chờ duyệt (SCR-SETTING-01 Tab 3)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [PENDING, APPROVED, REJECTED]
+            default: PENDING
+      responses:
+        '200':
+          description: Danh sách yêu cầu gia nhập
+
+  /workspaces/{id}/join-requests/{requestId}/accept:
+    post:
+      summary: Phê duyệt đơn xin gia nhập (SCR-SETTING-01 Tab 3, UC03)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: requestId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Chấp thuận thành công
+
+  /workspaces/{id}/join-requests/{requestId}/reject:
+    post:
+      summary: Từ chối đơn xin gia nhập (SCR-JOIN-REJECT-01, UC03)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: requestId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [rejection_reason]
+              properties:
+                rejection_reason: { type: string, minLength: 5, maxLength: 255 }
+      responses:
+        '200':
+          description: Từ chối thành công
+
+  /workspaces/{id}/members:
+    get:
+      summary: Lấy danh sách thành viên hiện tại (SCR-SETTING-01 Tab 3)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: Danh sách thành viên
+
+  /workspaces/{id}/members/{userId}:
+    delete:
+      summary: Xóa thành viên khỏi Workspace (SCR-SETTING-01 Tab 3)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: userId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Gỡ thành viên thành công
+
+  # ================= DASHBOARD & CHARTS =================
+  /workspaces/{id}/dashboard/summary:
+    get:
+      summary: Tổng hợp KPI, chuẩn hóa per capita, per m2 và Benchmark (SCR-DASH-01, UC10)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: period
+          in: query
+          schema:
+            type: string
+            example: "2026-10"
+      responses:
+        '200':
+          description: Dữ liệu tóm tắt Dashboard
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DashboardSummaryResponse'
+
+  /workspaces/{id}/dashboard/charts:
+    get:
+      summary: Dữ liệu chuỗi thời gian tích lũy và cơ cấu danh mục (SCR-DASH-01, UC10)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: period
+          in: query
+          schema:
+            type: string
+            example: "2026-10"
+      responses:
+        '200':
+          description: Dữ liệu đồ thị Dashboard
+
+  # ================= EMISSION FACTORS =================
+  /emission-factors/categories:
+    get:
+      summary: Lấy danh mục hệ số quy chuẩn để tính nhẩm thời gian thực (SCR-EMISSION-ADD-01)
+      responses:
+        '200':
+          description: Danh mục hệ số
+
+  # ================= EMISSION LOGS & INGESTION =================
+  /workspaces/{id}/logs/manual:
+    post:
+      summary: Khai báo phát thải thủ công (SCR-EMISSION-ADD-01 Tab 2, UC04)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManualLogRequest'
+      responses:
+        '201':
+          description: Khai báo thành công
+
+  /workspaces/{id}/ai/scan-bill:
+    post:
+      summary: Quét ảnh hóa đơn / công tơ bằng Multimodal AI Vision (SCR-EMISSION-ADD-01 Tab 1, UC05)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Bóc tách thành công
+
+  /workspaces/{id}/logs/ai-confirm:
+    post:
+      summary: Xác nhận và lưu dữ liệu bóc tách từ AI (SCR-AI-PREVIEW-01, UC05)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiConfirmLogRequest'
+      responses:
+        '201':
+          description: Lưu bản ghi thành công
+
+  /workspaces/{id}/logs/excel-template:
+    get:
+      summary: Tải file mẫu Excel chuẩn (SCR-EMISSION-ADD-01 Tab 3, UC06)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: File template .xlsx
+          content:
+            application/vnd.openxmlformats-officedocument.spreadsheetml.sheet:
+              schema:
+                type: string
+                format: binary
+
+  /workspaces/{id}/logs/excel-preview:
+    post:
+      summary: Đọc và kiểm tra file Excel tải lên trong <= 5s (SCR-EXCEL-PREVIEW-01, UC06)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [file]
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Bảng xem trước dữ liệu hợp lệ / lỗi
+
+  /workspaces/{id}/logs/excel-import:
+    post:
+      summary: Xác nhận nạp hàng loạt dữ liệu hợp lệ từ Excel (SCR-EXCEL-PREVIEW-01, UC06)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ExcelImportRequest'
+      responses:
+        '201':
+          description: Batch insert thành công
+
+  /workspaces/{id}/logs:
+    get:
+      summary: Tra cứu sổ cái phát thải phân trang và bộ lọc (SCR-LEDGER-01, UC08)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: page
+          in: query
+          schema: { type: integer, default: 1 }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 20 }
+        - name: period
+          in: query
+          schema: { type: string, example: "2026-10" }
+        - name: category_code
+          in: query
+          schema: { type: string }
+        - name: status
+          in: query
+          schema: { type: string, enum: [APPROVED, PENDING_REVIEW, REJECTED] }
+      responses:
+        '200':
+          description: Danh sách bản ghi sổ cái
+
+  /workspaces/{id}/logs/export-excel:
+    get:
+      summary: Xuất dữ liệu sổ cái ra file Excel (SCR-LEDGER-01, UC08)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: File Excel kết xuất
+
+  /workspaces/{id}/logs/{logId}:
+    get:
+      summary: Xem chi tiết bản ghi & vết kiểm duyệt Audit Trail (SCR-LEDGER-DETAIL-01)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: logId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Chi tiết bản ghi
+    put:
+      summary: Chỉnh sửa bản ghi đang chờ duyệt (SCR-LEDGER-DETAIL-01)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: logId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ManualLogRequest'
+      responses:
+        '200':
+          description: Cập nhật thành công
+    delete:
+      summary: Xóa bản ghi phát thải (SCR-LEDGER-DETAIL-01)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: logId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Xóa thành công
+
+  # ================= APPROVAL QUEUE =================
+  /workspaces/{id}/approvals/pending:
+    get:
+      summary: Lấy hàng đợi yêu cầu chờ duyệt (SCR-APPROVE-01, UC07)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: page
+          in: query
+          schema: { type: integer, default: 1 }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 20 }
+      responses:
+        '200':
+          description: Hàng đợi chờ duyệt
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+
+  /workspaces/{id}/approvals/{logId}/accept:
+    post:
+      summary: Phê duyệt bản ghi phát thải đơn lẻ (SCR-APPROVE-01, UC07)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: logId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Phê duyệt thành công
+
+  /workspaces/{id}/approvals/bulk-accept:
+    post:
+      summary: Phê duyệt đồng thời nhiều bản ghi (SCR-APPROVE-01, UC07)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [log_ids]
+              properties:
+                log_ids:
+                  type: array
+                  items: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Phê duyệt hàng loạt thành công
+
+  /workspaces/{id}/approvals/{logId}/reject:
+    post:
+      summary: Từ chối bản ghi phát thải kèm lý do bắt buộc (SCR-APPROVE-REJECT-01, UC07)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: logId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [rejection_reason]
+              properties:
+                rejection_reason: { type: string, minLength: 5, maxLength: 500 }
+      responses:
+        '200':
+          description: Từ chối thành công
+
+  # ================= CARBON BUDGETS =================
+  /workspaces/{id}/budgets/recommendation:
+    get:
+      summary: Gợi ý hạn ngạch ngân sách thông minh dựa trên Mức chuẩn quốc gia (SCR-SETTING-01 Tab 2, UC09)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: Gợi ý các mức ngân sách
+
+  /workspaces/{id}/budgets:
+    put:
+      summary: Thiết lập trần ngân sách tháng và ngưỡng 85% (SCR-SETTING-01 Tab 2, UC09)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BudgetRequest'
+      responses:
+        '200':
+          description: Thiết lập ngân sách thành công
+
+  /workspaces/{id}/budgets/history:
+    get:
+      summary: Lịch sử ngân sách các tháng trước (SCR-SETTING-01 Tab 2)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: Lịch sử ngân sách
+
+  # ================= AI REPORTING & PDF =================
+  /workspaces/{id}/ai-reports/current:
+    get:
+      summary: Lấy nội dung báo cáo AI và Kế hoạch cắt giảm (SCR-INSIGHT-01, UC11)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: period
+          in: query
+          schema: { type: string, example: "2026-10" }
+      responses:
+        '200':
+          description: Báo cáo AI
+
+  /workspaces/{id}/ai-reports/generate-manual:
+    post:
+      summary: Kích hoạt sinh báo cáo AI tức thì On-demand (SCR-INSIGHT-01, UC11)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                period: { type: string, example: "2026-10" }
+      responses:
+        '201':
+          description: Khởi tạo báo cáo mới thành công
+
+  /workspaces/{id}/ai-reports/{reportId}/export-pdf:
+    get:
+      summary: Xuất Báo cáo Kế hoạch cắt giảm ra file PDF vector (SCR-INSIGHT-01, UC11)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+        - name: reportId
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: File PDF
+          content:
+            application/pdf:
+              schema:
+                type: string
+                format: binary
+
+  /workspaces/{id}/ai-schedule:
+    put:
+      summary: Cấu hình lịch trình chạy AI tự động (SCR-SETTING-01 Tab 1, UC11)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AiScheduleRequest'
+      responses:
+        '200':
+          description: Cập nhật lịch trình thành công
+
+  # ================= PROFILE & CONTRIBUTIONS =================
+  /users/me:
+    get:
+      summary: Lấy hồ sơ tài khoản cá nhân (SCR-PROFILE-01)
+      responses:
+        '200':
+          description: Hồ sơ cá nhân
+    patch:
+      summary: Cập nhật thông tin hồ sơ (SCR-PROFILE-01)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                full_name: { type: string }
+                avatar_url: { type: string }
+      responses:
+        '200':
+          description: Cập nhật thành công
+
+  /users/me/password:
+    put:
+      summary: Đổi mật khẩu đăng nhập (SCR-PROFILE-01)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [current_password, new_password]
+              properties:
+                current_password: { type: string }
+                new_password: { type: string, minLength: 8 }
+      responses:
+        '200':
+          description: Đổi mật khẩu thành công
+
+  /users/me/contributions:
+    get:
+      summary: Thống kê định lượng đóng góp cá nhân của thành viên (SCR-PROFILE-01)
+      parameters:
+        - name: workspaceId
+          in: query
+          required: true
+          schema: { type: string, format: uuid }
+      responses:
+        '200':
+          description: Thống kê đóng góp
+
+  /users/me/notification-preferences:
+    get:
+      summary: Lấy tùy chỉnh nhận thông báo
+      responses:
+        '200':
+          description: Cài đặt thông báo
+    put:
+      summary: Cập nhật tùy chỉnh thông báo
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                notify_budget_warning: { type: boolean }
+                notify_approval_result: { type: boolean }
+      responses:
+        '200':
+          description: Cập nhật thành công
+
+  # ================= REAL-TIME NOTIFICATIONS =================
+  /workspaces/{id}/notifications:
+    get:
+      summary: Lấy feed thông báo thời gian thực tổng hợp động (SCR-NOTIF-01, UC10)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: Danh sách thông báo động
+
+  /workspaces/{id}/notifications/mark-all-read:
+    post:
+      summary: Đánh dấu tất cả thông báo là đã đọc (SCR-NOTIF-01)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      responses:
+        '200':
+          description: Đánh dấu thành công
+
+  # ================= SYSTEM ADMIN BACKOFFICE =================
+  /admin/dashboard/kpis:
+    get:
+      summary: Lấy KPI toàn hệ thống (SCR-ADM-DASH-01, UC12)
+      responses:
+        '200':
+          description: KPIs toàn hệ thống
+        '403':
+          $ref: '#/components/responses/403Forbidden'
+
+  /admin/dashboard/ai-usage:
+    get:
+      summary: Giám sát tần suất gọi API và chi phí AI (SCR-ADM-DASH-01)
+      parameters:
+        - name: period
+          in: query
+          schema: { type: string, example: "2026-10" }
+      responses:
+        '200':
+          description: Số liệu chi phí AI
+
+  /admin/emission-factors:
+    get:
+      summary: Danh mục hệ số quy chuẩn quốc gia (SCR-ADM-FACTOR-01, UC12)
+      responses:
+        '200':
+          description: Danh sách hệ số chuẩn
+
+  /admin/emission-factors/{id}:
+    put:
+      summary: Cập nhật hệ số phát thải quy chuẩn mới (SCR-ADM-FACTOR-MODAL-01, UC12)
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema: { type: string, format: uuid }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [default_emission_factor, official_citation]
+              properties:
+                default_emission_factor: { type: number, minimum: 0 }
+                official_citation: { type: string }
+                is_active: { type: boolean }
+      responses:
+        '200':
+          description: Cập nhật hệ số thành công
+
+  /admin/workspaces:
+    get:
+      summary: Quản lý danh sách Workspace Tenants toàn hệ thống (SCR-ADM-TENANT-01)
+      parameters:
+        - name: page
+          in: query
+          schema: { type: integer, default: 1 }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 20 }
+        - name: search
+          in: query
+          schema: { type: string }
+        - name: status
+          in: query
+          schema: { type: string }
+      responses:
+        '200':
+          description: Danh sách workspaces
+
+  /admin/workspaces/{id}/status:
+    patch:
+      summary: Khóa hoặc mở khóa Workspace (SCR-ADM-TENANT-01)
+      parameters:
+        - $ref: '#/components/parameters/WorkspaceId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [status]
+              properties:
+                status: { type: string, enum: [ACTIVE, SUSPENDED, ARCHIVED] }
+                reason: { type: string }
+      responses:
+        '200':
+          description: Cập nhật trạng thái thành công
+
+  /admin/ai-config:
+    get:
+      summary: Lấy cấu hình dịch vụ AI và Prompts (SCR-ADM-AUDIT-01)
+      responses:
+        '200':
+          description: Cấu hình AI
+    put:
+      summary: Cập nhật Model và Prompt Template (SCR-ADM-AUDIT-01)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                model_name: { type: string }
+                api_key: { type: string }
+                vision_prompt_template: { type: string }
+                report_prompt_template: { type: string }
+      responses:
+        '200':
+          description: Cập nhật cấu hình thành công
+
+  /admin/audit-logs:
+    get:
+      summary: Tra cứu nhật ký kiểm toán hệ thống (SCR-ADM-AUDIT-01)
+      parameters:
+        - name: page
+          in: query
+          schema: { type: integer, default: 1 }
+        - name: limit
+          in: query
+          schema: { type: integer, default: 50 }
+      responses:
+        '200':
+          description: Danh sách Audit logs
+
+# ================= COMPONENTS =================
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  parameters:
+    WorkspaceId:
+      name: id
+      in: path
+      required: true
+      schema:
+        type: string
+        format: uuid
+      description: Mã UUID định danh Không gian làm việc
+
+  responses:
+    400BadRequest:
+      description: Dữ liệu gửi lên không hợp lệ
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorResponse'
+    401Unauthorized:
+      description: Chưa xác thực hoặc Token không hợp lệ
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorResponse'
+    403Forbidden:
+      description: Không có quyền truy cập
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorResponse'
+    404NotFound:
+      description: Tài nguyên không tồn tại
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApiErrorResponse'
+
+  schemas:
+    RegisterRequest:
+      type: object
+      required: [email, password, full_name]
+      properties:
+        email: { type: string, format: email }
+        password: { type: string, minLength: 8, maxLength: 50 }
+        full_name: { type: string, minLength: 2, maxLength: 100 }
+
+    LoginRequest:
+      type: object
+      required: [email, password]
+      properties:
+        email: { type: string, format: email }
+        password: { type: string }
+        remember_me: { type: boolean, default: false }
+
+    CreateWorkspaceRequest:
+      type: object
+      required: [name, type]
+      properties:
+        name: { type: string, minLength: 3, maxLength: 50 }
+        type: { type: string, enum: [HOME, OFFICE] }
+
+    BaselineRequest:
+      type: object
+      required: [occupants, floor_area_m2, period_valid_from]
+      properties:
+        occupants: { type: integer, minimum: 1 }
+        floor_area_m2: { type: number, minimum: 0.1 }
+        period_valid_from: { type: string, example: "2026-10" }
+
+    ManualLogRequest:
+      type: object
+      required: [factor_id, consumption_quantity, activity_date]
+      properties:
+        factor_id: { type: string, format: uuid }
+        consumption_quantity: { type: number, minimum: 0.001 }
+        activity_date: { type: string, format: date }
+        note: { type: string }
+        receipt_image_url: { type: string }
+
+    AiConfirmLogRequest:
+      type: object
+      required: [factor_id, consumption_quantity, activity_date]
+      properties:
+        factor_id: { type: string, format: uuid }
+        consumption_quantity: { type: number, minimum: 0.001 }
+        activity_date: { type: string, format: date }
+        receipt_image_url: { type: string }
+        note: { type: string }
+
+    ExcelImportRequest:
+      type: object
+      required: [records]
+      properties:
+        skip_invalid_rows: { type: boolean, default: true }
+        records:
+          type: array
+          items:
+            type: object
+            required: [factor_id, consumption_quantity, activity_date]
+            properties:
+              factor_id: { type: string, format: uuid }
+              consumption_quantity: { type: number, minimum: 0.001 }
+              activity_date: { type: string, format: date }
+              note: { type: string }
+
+    BudgetRequest:
+      type: object
+      required: [period, target_co2e_kg]
+      properties:
+        period: { type: string, example: "2026-10" }
+        target_co2e_kg: { type: number, minimum: 1.0 }
+        alert_threshold_ratio: { type: number, default: 0.85, minimum: 0.5, maximum: 0.95 }
+
+    AiScheduleRequest:
+      type: object
+      required: [ai_report_frequency]
+      properties:
+        ai_report_frequency: { type: string, enum: [DISABLED, WEEKLY, MONTHLY] }
+        ai_report_day_of_month: { type: integer, minimum: -1, maximum: 31 }
+        ai_report_day_of_week: { type: integer, minimum: 1, maximum: 7 }
+        ai_report_time: { type: string, example: "23:59:00" }
+
+    DashboardSummaryResponse:
+      type: object
+      properties:
+        status: { type: string, example: "SUCCESS" }
+        code: { type: integer, example: 200 }
+        data:
+          type: object
+          properties:
+            period: { type: string }
+            budget_status:
+              type: object
+              properties:
+                target_co2e_kg: { type: number }
+                current_co2e_kg: { type: number }
+                percentage_consumed: { type: number }
+                state: { type: string, enum: [NORMAL, WARNING, OVER_BUDGET] }
+            normalized_metrics:
+              type: object
+              properties:
+                co2e_per_capita_kg: { type: number }
+                co2e_per_m2_kg: { type: number }
+                national_reference_benchmark_kg: { type: number }
+                benchmark_intensity_ratio_r: { type: number }
+                benchmark_tier: { type: string, enum: [GREEN_PIONEER, STANDARD, ABOVE_BENCHMARK] }
+
+    ApiResponseUser:
+      type: object
+      properties:
+        status: { type: string, example: "SUCCESS" }
+        code: { type: integer, example: 201 }
+        data:
+          type: object
+          properties:
+            user_id: { type: string, format: uuid }
+            email: { type: string }
+            full_name: { type: string }
+            global_role: { type: string }
+
+    ApiResponseLogin:
+      type: object
+      properties:
+        status: { type: string, example: "SUCCESS" }
+        code: { type: integer, example: 200 }
+        data:
+          type: object
+          properties:
+            access_token: { type: string }
+            refresh_token: { type: string }
+            expires_in_seconds: { type: integer }
+
+    ApiResponseMyWorkspaces:
+      type: object
+      properties:
+        status: { type: string, example: "SUCCESS" }
+        code: { type: integer, example: 200 }
+        data:
+          type: array
+          items:
+            type: object
+            properties:
+              workspace_id: { type: string, format: uuid }
+              name: { type: string }
+              type: { type: string }
+              role: { type: string }
+
+    ApiErrorResponse:
+      type: object
+      properties:
+        status: { type: string, example: "ERROR" }
+        code: { type: integer, example: 400 }
+        error_code: { type: string, example: "INVALID_INPUT" }
+        message: { type: string }
+        errors:
+          type: array
+          items:
+            type: object
+            properties:
+              field: { type: string }
+              message: { type: string }
+        timestamp: { type: string }
+        path: { type: string }
