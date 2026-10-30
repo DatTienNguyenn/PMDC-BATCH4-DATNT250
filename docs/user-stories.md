@@ -462,11 +462,11 @@
 
 **AC1: Nạp thành công file Excel mẫu hợp lệ qua màn hình Preview - Happy path**
 - **Given** người dùng tải về file mẫu Excel `carbon_ledger_template.xlsx` gồm các cột chuẩn: `Ngày phát sinh`, `Danh mục`, `Phân loại cụ thể`, `Sản lượng tiêu thụ`, `Đơn vị`, `Ghi chú`
-- **And** người dùng đã điền 10 dòng hoạt động phát thải hợp lệ
+- **And** người dùng đã điền 100 dòng hoạt động phát thải hợp lệ
 - **When** người dùng upload file lên hệ thống
-- **Then** hệ thống đọc file, tự động ánh xạ các cột và hiển thị Bảng Xem trước (Import Preview Table) trong vòng dưới 2 giây
-- **And** hiển thị thông tin tóm tắt: "10/10 dòng hợp lệ sẵn sàng nạp. Tổng phát thải ước tính: 145.20 kg CO2e"
-- **And** khi người dùng nhấn nút "Xác nhận Lưu", hệ thống lưu hàng loạt 10 bản ghi vào hệ thống (Editor -> Draft; Reviewer -> Approved).
+- **Then** hệ thống đọc file, tự động ánh xạ các cột và hiển thị Bảng Xem trước (Import Preview Table) trong vòng không quá 5 giây
+- **And** hiển thị thông tin tóm tắt: "100/100 dòng hợp lệ sẵn sàng nạp. Tổng phát thải ước tính: 1,450.20 kg CO2e"
+- **And** khi người dùng nhấn nút "Xác nhận Lưu", hệ thống lưu hàng loạt các bản ghi vào hệ thống (Editor -> Draft; Reviewer -> Approved).
 
 **AC2: File Excel chứa một số dòng bị sai định dạng - Edge case**
 - **Given** file Excel có 8 dòng hợp lệ và 2 dòng bị sai (1 dòng sản lượng âm `-10`, 1 dòng để trống ngày)
@@ -711,11 +711,11 @@
 
 ---
 
-### US-AI-001: AI Insight định kỳ (Cronjob) & Kế hoạch cắt giảm cá nhân hóa
+### US-AI-001: AI Insight linh hoạt (Cấu hình lịch tự động hoặc kích hoạt bằng tay) & Kế hoạch cắt giảm cá nhân hóa
 
 **As a** Trưởng nhóm gia đình hoặc Quản lý văn phòng (Reviewer)  
-**I want to** hệ thống tự động chạy tác vụ định kỳ (Cronjob) vào ngày cuối tuần/tháng để gom nhóm dữ liệu tiêu thụ và gọi LLM phân tích, trả về Kế hoạch cắt giảm mang tính cá nhân hóa có số liệu định lượng  
-**So that** tôi và các thành viên biết chính xác nhóm phát thải đột biến và có giải pháp thực tế cụ thể (ví dụ: đi tàu điện Cát Linh - Hà Đông) để cắt giảm kg CO2e trong kỳ tới  
+**I want to** có quyền tự cấu hình lịch chạy tác vụ tự động (hàng tuần, hàng tháng hoặc tắt) vào thời điểm tùy chọn, đồng thời có thể bấm nút "Sinh báo cáo ngay" bất kỳ lúc nào để AI gom nhóm dữ liệu tiêu thụ và đề xuất Kế hoạch cắt giảm cá nhân hóa có số liệu định lượng  
+**So that** tôi chủ động kiểm soát thời điểm nhận báo cáo, biết chính xác nhóm phát thải đột biến và có giải pháp thực tế cụ thể (ví dụ: đi tàu điện Cát Linh - Hà Đông) để cắt giảm kg CO2e trong kỳ tới  
 
 #### Metadata
 - **Epic/Feature**: Luồng 4 - Phân tích & Báo cáo AI (AI Reasoning & Actionable Advice)
@@ -729,32 +729,41 @@
 | Tiêu chí | ✅/⚠️ | Ghi chú đánh giá |
 |:---|:---:|:---|
 | **I**ndependent | ✅ | Hoạt động như một module tư vấn chạy nền, không ảnh hưởng đến tính toàn vẹn của sổ cái. |
-| **N**egotiable | ✅ | System Prompt cho LLM có thể tinh chỉnh để đưa ra gợi ý phù hợp văn hóa gia đình hoặc môi trường văn phòng. |
+| **N**egotiable | ✅ | Reviewer tự do chọn tần suất chạy (Weekly/Monthly/Disabled), chọn ngày/giờ chạy hoặc kích hoạt bằng tay on-demand. |
 | **V**aluable | ✅ | Đáp ứng trực tiếp yêu cầu đề tài: AI Reasoning đưa ra ví dụ cắt giảm định lượng cá nhân hóa thực tế. |
-| **E**stimable | ✅ | Tác vụ Cronjob tổng hợp dữ liệu JSON + Prompt Engineering, ước lượng 3-4 ngày dev. |
+| **E**stimable | ✅ | Tác vụ Cronjob tổng hợp dữ liệu JSON + Prompt Engineering + On-demand API, ước lượng 3-4 ngày dev. |
 | **S**mall | ✅ | Giới hạn ở việc phân tích dữ liệu tổng hợp của Workspace và sinh báo cáo văn bản có cấu trúc. |
-| **T**estable | ✅ | Kiểm thử kích hoạt Cronjob và kiểm tra tính đầy đủ của các trường trong báo cáo AI trả về. |
+| **T**estable | ✅ | Kiểm thử kích hoạt theo lịch cấu hình, kiểm thử nút bấm on-demand và kiểm tra tính đầy đủ của báo cáo AI. |
 
 #### Acceptance Criteria
 
-**AC1: Cronjob tự động phân tích và sinh Kế hoạch cắt giảm định lượng cá nhân hóa - Happy path**
-- **Given** hôm nay là ngày cuối cùng của tháng 10/2026, Workspace có dữ liệu tiêu thụ với tổng phát thải 320 kg CO2e (trong đó Xe máy xăng tăng 40% so với tháng trước)
-- **When** tác vụ Cronjob được kích hoạt tự động vào lúc 23:59
+**AC1: Cronjob tự động phân tích và sinh Kế hoạch cắt giảm định lượng theo lịch cấu hình - Happy path**
+- **Given** Reviewer đã cấu hình lịch báo cáo tự động là `MONTHLY` vào ngày cuối tháng lúc 23:59, Workspace có dữ liệu tiêu thụ với tổng phát thải 320 kg CO2e (trong đó Xe máy xăng tăng 40% so với tháng trước)
+- **When** tác vụ Cronjob được kích hoạt tự động theo đúng lịch đã cấu hình
 - **Then** hệ thống gom nhóm dữ liệu (Điện chiếm bao nhiêu %, Xăng xe chiếm bao nhiêu %, Nước chiếm bao nhiêu %) và đẩy vào LLM Prompt
 - **And** LLM phân tích và trả về báo cáo Kế hoạch cắt giảm mang tính cá nhân hóa trong vòng dưới 15 giây với nội dung định lượng cụ thể:
   - *Phát hiện bất thường:* "Tháng này lượng phát thải từ việc sử dụng xe máy cá nhân tăng đột biến 40% (chiếm 45% tổng phát thải)."
   - *Khuyến nghị hành động cá nhân hóa:* "Nếu 2 thành viên chuyển sang dùng tàu điện trên cao Cát Linh - Hà Đông 3 ngày/tuần, gia đình có thể cắt giảm 18 kg CO2e vào tháng sau."
 - **And** báo cáo được lưu vào bảng `ai_reports` và hiển thị trên Dashboard chính của Reviewer.
 
-**AC2: Reviewer chủ động bấm nút "Phân tích ngay" trước lịch Cronjob - Edge case**
-- **Given** chưa đến ngày cuối tháng nhưng Reviewer muốn xem đánh giá sơ bộ giữa kỳ
-- **When** Reviewer bấm nút "Kích hoạt Phân tích AI ngay" trên giao diện
-- **Then** hệ thống thực thi tác vụ phân tích theo số liệu tích lũy đến hiện tại
-- **And** hiển thị báo cáo sơ bộ mà không cần chờ đến lịch Cronjob tự động cuối tháng.
+**AC2: Reviewer chủ động bấm nút "Sinh báo cáo ngay" (On-demand) bất kỳ lúc nào - Alternative path**
+- **Given** Reviewer đã tắt tự động (`DISABLED`) hoặc chưa đến lịch hẹn nhưng muốn xem ngay phân tích số liệu tích lũy đến hiện tại
+- **When** Reviewer bấm nút "Sinh báo cáo ngay" trên giao diện Báo cáo AI
+- **Then** hệ thống thực thi tác vụ phân tích tức thời theo số liệu lũy kế đến hiện tại
+- **And** hiển thị báo cáo AI hoàn chỉnh trên màn hình mà không cần chờ đến lịch cronjob tự động.
 
-**AC3: Lỗi gián đoạn kết nối hoặc timeout API AI (> 15 giây) - Negative path**
+**AC3: Reviewer cấu hình lịch tự động sinh báo cáo trong Workspace Settings - Setup path**
+- **Given** Reviewer truy cập trang Cài đặt Workspace (Workspace Settings) -> mục Cấu hình Báo cáo AI
+- **When** Reviewer tùy chọn:
+  - Tần suất: `DISABLED` (Tắt) / `WEEKLY` (Hàng tuần) / `MONTHLY` (Hàng tháng)
+  - Chọn thứ trong tuần (1-7) nếu chọn Weekly, hoặc chọn ngày trong tháng (1-31 hoặc Cuối tháng) nếu chọn Monthly
+  - Chọn giờ chạy trong ngày (mặc định 23:59:00)
+  - Nhấn "Lưu cấu hình"
+- **Then** hệ thống cập nhật các trường `ai_report_frequency`, `ai_report_day_of_week`, `ai_report_day_of_month`, `ai_report_time` trong bảng `workspaces` và lên lịch chạy chính xác theo cấu hình mới.
+
+**AC4: Lỗi gián đoạn kết nối hoặc timeout API AI (> 15 giây) - Negative path**
 - **Given** dịch vụ API LLM bên ngoài bị quá tải hoặc mất mạng
-- **When** tác vụ AI đang thực thi
+- **When** tác vụ AI đang thực thi (tự động hoặc kích hoạt bằng tay)
 - **Then** hệ thống hủy yêu cầu an toàn (graceful timeout)
 - **And** ghi nhận nhật ký lỗi và hiển thị thông báo thân thiện: "Dịch vụ AI đang bận hoặc gián đoạn kết nối. Hệ thống sẽ tự động thử lại vào chu kỳ tiếp theo"
 - **And** không làm gián đoạn các tính năng khác trên hệ thống.

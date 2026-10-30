@@ -18,10 +18,10 @@
 
 Hệ thống giải quyết nỗi đau lớn nhất của người dùng là **phải tự tra cứu danh mục, hệ số phát thải tương ứng và tự tính toán/tổng hợp bằng tay** gây nản lòng và mất nhiều thời gian, thông qua sự kết hợp giữa:
 - **Tự động quy đổi chuẩn mực:** Tự động áp dụng hệ số phát thải quy chuẩn để tính toán chính xác kg CO2e theo từng hoạt động người dùng nhập vào.
-- **Luồng nạp dữ liệu có kiến trúc:** Hai luồng nạp chính là **Khai báo thủ công** (nhập nhanh sinh hoạt lẻ $\le 20-30\text{s}$/activity) và **Nạp hàng loạt bằng file mẫu Excel** (xử lý 100 activities $< 2\text{s}$). Quét ảnh hóa đơn bằng AI Vision là **tiện ích phụ và là ưu tiên sau cùng**, chỉ triển khai khi luồng nạp tay và Excel đã ổn định.
+- **Luồng nạp dữ liệu có kiến trúc:** Hai luồng nạp chính là **Khai báo thủ công** (nhập nhanh sinh hoạt lẻ $\le 20-30\text{s}$/activity) và **Nạp hàng loạt bằng file mẫu Excel** (xử lý 100 activities $\le 5\text{s}$). Quét ảnh hóa đơn bằng AI Vision là **tiện ích phụ và là ưu tiên sau cùng**, chỉ triển khai khi luồng nạp tay và Excel đã ổn định.
 - **Quy trình kiểm duyệt sổ cái chặt chẽ (Approval Workflow):** Tách bạch vai trò Thành viên (Editor - nạp dữ liệu ở trạng thái Draft) và Trưởng nhóm (Reviewer - kiểm duyệt chính thức trước khi ghi sổ).
 - **Kiểm soát ngân sách & Cảnh báo sớm:** Thiết lập trần phát thải (Target Quota) theo tháng và tự động bắn Notification cảnh báo tới toàn bộ thành viên khi chạm ngưỡng $85\%$ và vượt trần $100\%$.
-- **Đề xuất cá nhân hóa từ AI & Phản hồi nhanh:** AI phân tích dữ liệu định kỳ và đề xuất phương án cắt giảm cá nhân hóa khả thi, hỗ trợ xuất báo cáo PDF chuẩn in ấn phản hồi nhanh trong $\le 3-5\text{ giây}$.
+- **Đề xuất cá nhân hóa từ AI & Phản hồi nhanh (Tự động hoặc Kích hoạt bằng tay):** Cho phép Reviewer tùy biến lịch tự động (tuần/tháng/tắt) hoặc kích hoạt on-demand tức thời, AI phân tích dữ liệu và đề xuất phương án cắt giảm cá nhân hóa khả thi, hỗ trợ xuất báo cáo PDF chuẩn in ấn phản hồi nhanh trong $\le 3-5\text{ giây}$.
 
 ---
 

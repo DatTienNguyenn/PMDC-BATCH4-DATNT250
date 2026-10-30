@@ -3,28 +3,12 @@
 # Hệ thống Quản trị & Phân tích Dấu chân Carbon cho Gia đình/Văn phòng nhỏ
 ## (Personal & Micro-Office Carbon Ledger)
 
-> **Mã tài liệu:** `PRD-POL-2026-V1.1`  
-> **Phiên bản:** `1.1.0 (Reviewed & Aligned)`  
+> **Mã tài liệu:** `PRD-POL-2026-V1.2`  
+> **Phiên bản:** `1.2.0 (Official Approved PRD)`  
+> **Trạng thái:** `Đã Phê Duyệt (Approved by Reviewer)`  
 > **Nhánh phát triển (Git Worktree):** [`docs/prd`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd)  
 > **Thời gian triển khai:** 6 tuần (3 Sprints $\times$ 2 tuần) | Tổng Story Points: 44 SP  
 > **Tài liệu căn cứ:** [spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/spec.md), [docs/MVP.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/MVP.md), [docs/activity-supported.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/activity-supported.md), [docs/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/usecase/use-cases.md), [docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md), [docs/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/information-architecture/information-architecture.md)
-
----
-
-> [!IMPORTANT]
-> **THÔNG BÁO DÀNH CHO NGƯỜI DUYỆT (REVIEWER CALLOUT):**  
-> Tài liệu PRD này đã được cập nhật toàn diện theo các ý kiến phản hồi review của bạn:
-> 1. **Rõ ràng hóa nỗi đau người dùng:** Xác định rào cản cốt lõi là người dùng phải tự tra cứu danh mục (category), hệ số phát thải tương ứng và tự tính toán/tổng hợp bằng tay gây nản lòng và tốn thời gian.
-> 2. **Định vị sản phẩm đúng trọng tâm:** Hệ thống không hướng tới việc tự động nạp hóa dữ liệu qua AI mà tập trung vào **tự động tính toán dựa theo những hoạt động mà người dùng nhập liệu vào hệ thống một cách có kiến trúc và dễ dàng theo dõi**.
-> 3. **Chuẩn hóa Metrics đo lường:** Tập trung vào thời gian nạp dữ liệu qua **Import Excel và nhập tay** (thời gian trung bình nạp 1 activity không quá lâu) và bổ sung metric **thời gian phản hồi kế hoạch cắt giảm / xuất báo cáo không quá lâu**.
-> 4. **Tách bạch Luồng chính và Luồng phụ:** Luồng nạp chính là **Nạp activity bằng tay** và **Nạp file mẫu Excel**. Quét ảnh bằng AI chỉ là luồng phụ.
-> 5. **Ưu tiên triển khai:** Quét ảnh bằng AI là **ưu tiên sau cùng**, chỉ tiến hành sau khi việc nạp bằng tay và import Excel đã hoàn thành và hoạt động ổn định.
-> 
-> Hai phân phần kiến trúc kỹ thuật:
-> - **Mục 6: Thiết kế Kiến trúc Hệ thống Tổng thể (High-Level Architecture)**
-> - **Mục 7: Thiết kế Cơ sở Dữ liệu Chi tiết (Database System Design)**  
-> 
-> Tiếp tục được trình bày chi tiết và giữ ở trạng thái chờ bạn phê duyệt hoàn tất.
 
 ---
 
@@ -35,12 +19,12 @@
 3. [Mô hình Người dùng & Ma trận Phân quyền (Roles & RBAC Matrix)](#3-mô-hình-người-dùng--ma-trận-phân-quyền-roles--rbac-matrix)
 4. [Các Luồng Hoạt động Cốt lõi & Quy trình Nghiệp vụ (Core Workflows)](#4-các-luồng-hoạt-động-cốt-lõi--quy-trình-nghiệp-vụ-core-workflows)
 5. [Đặc tả Yêu cầu Tính năng Chi tiết (Functional Requirements)](#5-đặc-tả-yêu-cầu-tính-năng-chi-tiết-functional-requirements)
-6. [🔥 [REVIEW REQUIRED] Thiết kế Kiến trúc Hệ thống Tổng thể (High-Level Architecture)](#6-review-required-thiết-kế-kiến-trúc-hệ-thống-tổng-thể-high-level-architecture)
-7. [🔥 [REVIEW REQUIRED] Thiết kế Cơ sở Dữ liệu Chi tiết (Database System Design)](#7-review-required-thiết-kế-cơ-sở-dữ-liệu-chi-tiết-database-system-design)
+6. [Thiết kế Kiến trúc Hệ thống Tổng thể (High-Level Architecture)](#6-thiết-kế-kiến-trúc-hệ-thống-tổng-thể-high-level-architecture)
+7. [Thiết kế Cơ sở Dữ liệu Chi tiết (Database System Design)](#7-thiết-kế-cơ-sở-dữ-liệu-chi-tiết-database-system-design)
 8. [Yêu cầu Phi chức năng & Tiêu chuẩn Kỹ thuật (Non-Functional Requirements)](#8-yêu-cầu-phi-chức-năng--tiêu-chuẩn-kỹ-thuật-non-functional-requirements)
 9. [Lộ trình Phát triển 3 Sprints (MVP Release Plan & Backlog Mapping)](#9-lộ-trình-phát-triển-3-sprints-mvp-release-plan--backlog-mapping)
 10. [Quản trị Rủi ro & Chiến lược Giảm thiểu (Risk Management)](#10-quản-trị-rủi-ro--chiến-lược-giảm-thiểu-risk-management)
-11. [Danh mục Điểm Thảo luận Cần Phê duyệt (Reviewer Action Items)](#11-danh-mục-điểm-thảo-luận-cần-phê-duyệt-reviewer-action-items)
+11. [Tổng hợp Các Quyết định Thiết kế Đã Được Phê duyệt (Approved Design Decisions & Sign-Off)](#11-tổng-hợp-các-quyết-định-thiết-kế-đã-được-phê-duyệt-approved-design-decisions--sign-off)
 
 ---
 
@@ -66,14 +50,14 @@ Tại Việt Nam, cam kết phát thải ròng bằng 0 (Net Zero 2050) đang th
   $$\text{Lượng phát thải } (\text{kg CO}_2\text{e}) = \text{Sản lượng tiêu thụ (Activity Data)} \times \text{Hệ số phát thải (Emission Factor)}$$
 - **Minh bạch hóa dòng dữ liệu:** Thiết lập cơ chế **Approval Queue** phân định giữa người nạp (Editor - Draft) và người duyệt (Reviewer - Approved).
 - **Kiểm soát hạn ngạch phát thải:** Đặt Target ngân sách tháng, chuẩn hóa chỉ số theo quy mô ($\text{kg CO}_2\text{e}/\text{người}$, $\text{kg CO}_2\text{e}/m^2$) và tự động bắn cảnh báo sớm ở ngưỡng **85%** và **100%**.
-- **Cố vấn hành động thông minh từ AI:** Định kỳ cuối tuần/tháng, AI phân tích dữ liệu, phát hiện bất thường và hỗ trợ đề xuất phương án cắt giảm cá nhân hóa (hệ thống cố vấn định lượng chứ không tự can thiệp cắt giảm phát thải vật lý), hỗ trợ kết xuất báo cáo PDF chuẩn in ấn.
+- **Cố vấn hành động thông minh từ AI (Tự động theo lịch hoặc Kích hoạt bằng tay):** Hỗ trợ Reviewer cấu hình lịch tự động sinh báo cáo theo chu kỳ (Tuần / Tháng, chọn ngày và giờ cụ thể) hoặc tắt tự động (Disabled); đồng thời luôn sẵn sàng nút bấm "Sinh báo cáo ngay" (On-demand) để Reviewer tự kích hoạt bất kỳ lúc nào. AI phân tích dữ liệu, phát hiện bất thường và hỗ trợ đề xuất phương án cắt giảm cá nhân hóa định lượng khả thi, hỗ trợ kết xuất báo cáo PDF chuẩn in ấn.
 - **Quét ảnh bằng AI Vision (Luồng phụ - Ưu tiên sau cùng):** Được định vị là một **tiện ích bổ trợ phụ (Secondary / Nice-to-have)** nhằm hỗ trợ bóc tách hóa đơn/công tơ; **ưu tiên triển khai sau cùng** khi hai phương thức nạp chính (bằng tay và Excel) đã hoàn thiện và hoạt động ổn định.
 
 ### 1.3. Mục tiêu Đo lường Thành công (Key Success Metrics)
 | Chỉ số (KPI) | Mục tiêu MVP (6 tuần) | Phương pháp đo lường |
 |---|---|---|
 | **Thời gian nạp trung bình 1 activity (Nhập tay)** | $\le 20-30\text{ giây}$ / hoạt động | Đo lường thời gian từ khi người dùng mở form nạp thủ công đến khi gửi bản ghi thành công |
-| **Tốc độ xử lý nạp hàng loạt (Import Excel)** | Xử lý file 100 activities $< 2\text{ giây}$<br>*(trung bình $< 0.02\text{s}$ / activity)* | Thời gian backend Apache POI đọc, validate dữ liệu và trả về bảng Preview trên giao diện |
+| **Tốc độ xử lý nạp hàng loạt (Import Excel)** | Xử lý và preview file 100 activities $\le 5\text{ giây}$<br>*(trung bình $\le 0.05\text{s}$ / activity)* | Thời gian backend Apache POI đọc, validate dữ liệu và trả về bảng Preview trên giao diện |
 | **Thời gian phản hồi Kế hoạch cắt giảm & Báo cáo** | $\le 3-5\text{ giây}$ | Thời gian hệ thống tổng hợp dữ liệu, nhận phản hồi đề xuất từ AI và kết xuất file PDF báo cáo |
 | **Độ chính xác quy đổi phát thải** | $100\%$ tuân thủ hệ số quy chuẩn | Đối chiếu kết quả tự động tính: $\text{Activity Data} \times \text{Emission Factor}$ |
 | **Tỷ lệ phê duyệt request** | $100\%$ giao dịch của Editor được duyệt/từ chối rõ ràng | Báo cáo trạng thái giao dịch trong bảng `emission_logs` |
@@ -95,7 +79,7 @@ flowchart TD
         IN5["Luồng nạp phụ: Quét hóa đơn/công tơ bằng AI Vision (Ưu tiên sau cùng)"]
         IN6["Tự động quy đổi kg CO2e theo hệ số chuẩn & Quy trình kiểm duyệt Sổ cái"]
         IN7["Ngân sách tháng, Chuẩn hóa kg CO2e/người & kg CO2e/m², Cảnh báo 85% & 100%"]
-        IN8["Cronjob AI Insight định kỳ đề xuất phương án cắt giảm cá nhân hóa & Xuất file PDF"]
+        IN8["Cấu hình lịch tự động hoặc kích hoạt sinh báo cáo AI bằng tay (On-demand) & Xuất file PDF"]
     end
 
     subgraph OUT_SCOPE["NGOÀI PHẠM VI (OUT-OF-SCOPE)"]
@@ -147,7 +131,7 @@ flowchart TD
 | **Ngân sách & Giám sát**| Thiết lập Target hạn ngạch tháng & mốc 85% | ❌ | ✅ | ❌ |
 | | Xem Dashboard & Chỉ số $\text{CO}_2\text{e}/\text{người}$, $/m^2$ | ❌ | ✅ | ✅ |
 | | Nhận In-App Notification cảnh báo 85% & 100% | ❌ | ✅ | ✅ |
-| **AI Insight & Báo cáo**| Kích hoạt/Tiếp nhận AI Insight từ Cronjob | ❌ | ✅ | ❌ |
+| **AI Insight & Báo cáo**| Cấu hình lịch tự động & Kích hoạt sinh báo cáo bằng tay (On-demand) | ❌ | ✅ | ❌ |
 | | Xuất Báo cáo Kế hoạch cắt giảm ra file PDF | ❌ | ✅ | ❌ |
 | **Quản trị Hệ thống** | CRUD Danh mục Hệ số chuẩn Master Data | ✅ | ❌ | ❌ |
 | | Quản lý danh mục toàn bộ Workspace (Tenants) | ✅ | ❌ | ❌ |
@@ -202,7 +186,10 @@ flowchart TD
     end
 
     subgraph Flow4["Luồng 4: Phân tích AI, Đề xuất Cắt giảm & Xuất PDF"]
-        D1["Spring Scheduler kích hoạt Cronjob cuối tuần / cuối tháng"] --> D2["Gom nhóm dữ liệu tiêu thụ theo danh mục & so sánh kỳ trước"]
+        direction TB
+        D1a["Kích hoạt Tự động: Spring Scheduler theo lịch cấu hình (Tuần/Tháng/Giờ)"]
+        D1b["Kích hoạt Bằng tay: Reviewer bấm nút 'Sinh báo cáo ngay' (On-demand)"]
+        D1a & D1b --> D2["Gom nhóm dữ liệu tiêu thụ theo danh mục & so sánh kỳ trước"]
         D2 --> D3["Gọi Multimodal/LLM Prompt phân tích bất thường"]
         D3 --> D4["AI hỗ trợ đề xuất phương án cắt giảm cá nhân hóa"]
         D4 --> D5["Hiển thị trên Dashboard Reviewer & Phản hồi nhanh xuất PDF (<= 3-5s)"]
@@ -255,7 +242,7 @@ flowchart TD
 - Hệ thống cung cấp template `.xlsx` chuẩn (chứa danh mục thả xuống Data Validation tránh sai chính tả).
 - Backend sử dụng Apache POI đọc và validate dữ liệu từng dòng (kiểm tra kiểu số, ngày tháng hợp lệ, danh mục tồn tại).
 - Bảng Preview hiển thị danh sách dòng hợp lệ (màu xanh) và dòng lỗi (đánh dấu đỏ kèm mô tả nguyên nhân). Cho phép người dùng bỏ qua dòng lỗi hoặc tải lại file chuẩn.
-- **Tốc độ xử lý:** Xử lý và preview file 100 activities trong vòng $< 2\text{ giây}$ (trung bình $< 0.02\text{ giây / activity}$).
+- **Tốc độ xử lý:** Xử lý và preview file 100 activities trong vòng $\le 5\text{ giây}$ (trung bình $\le 0.05\text{ giây / activity}$).
 
 #### C. [LUỒNG PHỤ - ƯU TIÊN SAU CÙNG] Kênh 3: AI Vision Quét hóa đơn & Công tơ
 > [!NOTE]
@@ -285,21 +272,24 @@ flowchart TD
 
 ### 5.6. Phân hệ 6: AI Insight, Đề xuất Phương án Cắt giảm Cá nhân hóa & Báo cáo PDF
 - **Mã User Stories:** [`US-AI-001`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-AI-001), [`US-AI-002`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd/docs/user-stories.md#US-AI-002) | **Use Cases:** `UC11`
-- **Tác vụ nền tự động (Background Cronjob):**
-  - Chạy vào 23:59 ngày Chủ nhật hàng tuần và ngày cuối cùng mỗi tháng thông qua Spring Boot `@Scheduled`.
-  - Gom nhóm dữ liệu, tính tỷ lệ tăng giảm so với kỳ trước (Period-over-Period).
-- **Cơ chế AI Reasoning:**
+- **Cơ chế Sinh Báo cáo Linh hoạt (Lịch Tự động hoặc Kích hoạt Bằng tay):**
+  - **Tùy biến Cấu hình Lịch Tự động (Scheduled Cronjob):**
+    - Reviewer có thể thiết lập lịch chạy tự động trong phần Cài đặt Workspace (`Workspace Settings`):
+      - *Tần suất (`ai_report_frequency`):* Chọn `DISABLED` (Tắt tự động), `WEEKLY` (Hàng tuần) hoặc `MONTHLY` (Hàng tháng).
+      - *Ngày thực thi:* Nếu chọn Hàng tuần, Reviewer chọn thứ trong tuần (`ai_report_day_of_week`: Thứ Hai đến Chủ Nhật). Nếu chọn Hàng tháng, Reviewer chọn ngày trong tháng (`ai_report_day_of_month`: Ngày 1 đến 31, hoặc Ngày cuối cùng của tháng `-1`).
+      - *Giờ thực thi (`ai_report_time`):* Cho phép chọn khung giờ chạy tác vụ nền (mặc định `23:59:00`).
+    - Khi đến lịch hẹn, Spring Boot `@Scheduled` tự động gom nhóm dữ liệu kỳ và gọi LLM phân tích.
+  - **Kích hoạt Bằng tay Tức thời (On-demand Manual Trigger):**
+    - Nếu Reviewer tắt tự động hoặc muốn xem ngay báo cáo giữa kỳ, hệ thống cung cấp nút bấm **"Sinh báo cáo ngay"** trên giao diện Báo cáo AI (`POST /api/v1/reports/generate`).
+    - Hệ thống tổng hợp dữ liệu lũy kế tính đến thời điểm hiện tại và gọi AI sinh báo cáo tức thì mà không cần chờ đến lịch cronjob.
+- **Cơ chế AI Reasoning & Đề xuất Cắt giảm:**
   - AI phát hiện nhóm hoạt động có mức phát thải bất thường và hỗ trợ đề xuất phương án cắt giảm cá nhân hóa mang tính định lượng (ví dụ: chuyển 2 nhân viên sang đi xe buýt điện 3 ngày/tuần giúp giảm thiểu dự kiến 28.5 kg CO2e).
   - **Thời gian phản hồi kế hoạch cắt giảm / xuất báo cáo:** Mục tiêu $\le 3-5\text{ giây}$.
   - Hỗ trợ xuất file báo cáo Kế hoạch cắt giảm (Reduction Plan) ra định dạng PDF chuẩn in ấn qua OpenPDF / iText.
 
 ---
 
-## 6. [REVIEW REQUIRED] THIẾT KẾ KIẾN TRÚC HỆ THỐNG TỔNG THỂ (HIGH-LEVEL ARCHITECTURE)
-
-> [!IMPORTANT]
-> **PHẦN NÀY ĐƯỢC ĐẶT Ở TRẠNG THÁI CHỜ PHÊ DUYỆT (PENDING REVIEW).**  
-> Kiến trúc dưới đây ưu tiên tối đa cho luồng nạp dữ liệu thủ công và Excel template chuẩn mực, đảm bảo hiệu năng cao, bảo mật phân lập tenant và khả năng mở rộng.
+## 6. THIẾT KẾ KIẾN TRÚC HỆ THỐNG TỔNG THỂ (HIGH-LEVEL ARCHITECTURE)
 
 ### 6.1. Sơ đồ Kiến trúc Tổng thể (High-Level Topology Diagram)
 
@@ -403,7 +393,7 @@ sequenceDiagram
     Calc-->>ExcelService: Danh sách dòng hợp lệ & dòng lỗi
     ExcelService-->>Controller: ExcelImportPreviewDTO (Valid rows, Invalid rows kèm lý do)
     Controller-->>Client: HTTP 200 OK (Preview Data)
-    Note over Client: Thời gian xử lý 100 dòng < 2 giây
+    Note over Client: Thời gian xử lý 100 dòng <= 5 giây
     Client->>User: Hiển thị bảng Preview đối chiếu (Xanh: hợp lệ, Đỏ: lỗi)
     User->>Client: Nhấn "Xác nhận nạp vào hệ thống"
     Client->>Controller: POST /api/v1/emissions/excel-confirm (Valid Rows Payload)
@@ -412,41 +402,54 @@ sequenceDiagram
     Controller-->>Client: HTTP 201 Created
 ```
 
-### 6.4. Luồng Chạy Cronjob AI Insight & Xuất Báo cáo PDF
+### 6.4. Luồng Sinh Báo cáo AI Insight (Tự động theo Lịch hoặc Kích hoạt Bằng tay) & Xuất PDF
 
 ```mermaid
 sequenceDiagram
     autonumber
-    participant Cron as Spring @Scheduled (23:59 CN / Cuối tháng)
+    actor Reviewer as Reviewer (Trưởng nhóm)
+    participant Client as React Vite Client
+    participant Controller as AIReportController
+    participant Cron as Spring @Scheduled (Lịch Cấu hình)
     participant InsightService as AIInsightService
     participant DB as PostgreSQL
     participant LLM as Google Gemini API
     participant PDFService as PDFGenerator
 
-    Cron->>InsightService: triggerWeeklyMonthlyInsightJob()
-    loop Từng Workspace hoạt động
-        InsightService->>DB: Lấy tổng hợp dữ liệu tiêu thụ theo danh mục kỳ này & kỳ trước
-        DB-->>InsightService: Aggregated Data (Điện, Xăng, Nước, Giấy...)
-        InsightService->>LLM: Gửi Prompt Context (Tỷ lệ tiêu thụ, biến động tăng giảm)
-        LLM-->>InsightService: Trả về Khuyến nghị đề xuất cắt giảm cá nhân hóa
-        InsightService->>DB: Lưu kết quả vào bảng ai_reports
-        Note over InsightService: Frontend Dashboard tự nhận diện có báo cáo mới qua kỳ period
-        Note over PDFService: Khi Reviewer bấm "Xuất PDF", PDFGenerator kết xuất file trong <= 3-5s
+    alt Luồng 1: Tự động chạy theo lịch cấu hình (Weekly/Monthly/Custom Time)
+        Cron->>InsightService: triggerScheduledInsightJob()
+        InsightService->>DB: Kiểm tra workspaces có ai_report_frequency != 'DISABLED' & khớp lịch
+    else Luồng 2: Reviewer kích hoạt bằng tay trên giao diện (On-demand)
+        Reviewer->>Client: Nhấn nút "Sinh báo cáo ngay"
+        Client->>Controller: POST /api/v1/reports/generate (workspaceId, period)
+        Controller->>InsightService: generateReportOnDemand(workspaceId, period)
+    end
+
+    InsightService->>DB: Gom nhóm dữ liệu tiêu thụ theo danh mục kỳ này & kỳ trước
+    DB-->>InsightService: Aggregated Data (Điện, Xăng, Nước, Rác, Giấy...)
+    InsightService->>LLM: Gửi Prompt Context (Tỷ lệ tiêu thụ, biến động tăng giảm)
+    LLM-->>InsightService: Trả về Khuyến nghị đề xuất cắt giảm cá nhân hóa định lượng
+    InsightService->>DB: Lưu kết quả phân tích vào bảng ai_reports
+    InsightService-->>Client: Trả về dữ liệu báo cáo mới nhất (hiển thị trên Dashboard)
+    
+    opt Reviewer bấm xuất file PDF
+        Reviewer->>Client: Nhấn nút "Xuất PDF Báo cáo"
+        Client->>Controller: GET /api/v1/reports/{id}/export-pdf
+        Controller->>PDFService: buildPdfDocument(reportData)
+        PDFService-->>Client: Trả về file PDF hoàn thiện trong <= 3-5 giây
     end
 ```
 
-### 6.5. Các Điểm Cần Reviewer Đánh giá về Kiến trúc (Architecture Review Points)
-1. **Ưu tiên Luồng nạp:** Bạn có đồng ý với việc tập trung tối ưu hóa hiệu năng và trải nghiệm cho luồng Nhập tay ($\le 20-30\text{s}$) và Import Excel ($< 2\text{s}$ cho 100 rows), đưa AI Vision xuống thành luồng phụ ở Sprint 3?
-2. **Cơ chế Multi-tenancy:** Xác nhận sử dụng mô hình Discriminator Column `workspace_id` kết hợp Spring Security Filter & JPA Specification.
-3. **Phản hồi báo cáo AI:** Cronjob chạy nền định kỳ để khi Reviewer mở trang hoặc xuất PDF, dữ liệu đã có sẵn trong bảng `ai_reports` giúp thời gian phản hồi đạt $\le 3-5\text{ giây}$.
+### 6.5. Các Quyết định Kiến trúc Đã Được Phê duyệt (Approved Architecture Decisions)
+1. **Ưu tiên Luồng nạp:** Tập trung tối đa vào hiệu năng và độ ổn định của hai luồng chính: Nhập tay ($\le 20-30\text{s}$) và Import Excel ($\le 5\text{s}$ cho 100 rows). Đưa AI Vision xuống thành luồng phụ ở Sprint 3, chỉ thực hiện khi nạp tay và Excel đã hoàn thiện.
+2. **Cơ chế Multi-tenancy:** Mô hình **Shared Database, Shared Schema with Discriminator Column (`workspace_id`)** kết hợp Spring Security Filter (`TenantContextFilter`) và Hibernate Filter / JPA Specification đảm bảo cách ly dữ liệu tuyệt đối giữa các Workspace.
+3. **Cơ chế Báo cáo AI Linh hoạt:** Hỗ trợ Reviewer tùy biến cấu hình lịch tự động (Hàng tuần, Hàng tháng hoặc Tắt/Disabled) với ngày/giờ tự chọn, đồng thời luôn hỗ trợ kích hoạt sinh báo cáo bằng tay on-demand tức thời, kết xuất báo cáo PDF chuẩn in ấn trong $\le 3-5\text{ giây}$.
 
 ---
 
-## 7. [REVIEW REQUIRED] THIẾT KẾ CƠ SỞ DỮ LIỆU CHI TIẾT (DATABASE SYSTEM DESIGN)
+## 7. THIẾT KẾ CƠ SỞ DỮ LIỆU CHI TIẾT (DATABASE SYSTEM DESIGN)
 
-> [!IMPORTANT]
-> **PHẦN NÀY ĐƯỢC ĐẶT Ở TRẠNG THÁI CHỜ PHÊ DUYỆT (PENDING REVIEW).**  
-> Lược đồ cơ sở dữ liệu quan hệ (PostgreSQL) dưới đây được thiết kế chuẩn hóa 3NF, phục vụ trọn vẹn việc tính toán tự động dựa trên hoạt động người dùng nạp vào và đảm bảo tính bất biến của sổ cái carbon.
+Lược đồ cơ sở dữ liệu quan hệ (PostgreSQL) dưới đây được thiết kế chuẩn hóa 3NF, phục vụ trọn vẹn việc tính toán tự động dựa trên hoạt động người dùng nạp vào và đảm bảo tính bất biến của sổ cái carbon.
 
 ### 7.1. Sơ đồ Thực thể Quan hệ (Entity Relationship Diagram - ERD)
 
@@ -487,6 +490,10 @@ erDiagram
         varchar invite_code UK
         timestamp invite_code_expires_at
         varchar status
+        varchar ai_report_frequency
+        int ai_report_day_of_week
+        int ai_report_day_of_month
+        time ai_report_time
         timestamp created_at
         timestamp updated_at
     }
@@ -604,6 +611,10 @@ erDiagram
 - `invite_code`: `VARCHAR(10) NULL UNIQUE`
 - `invite_code_expires_at`: `TIMESTAMPTZ NULL`
 - `status`: `VARCHAR(20) NOT NULL DEFAULT 'ACTIVE'` (`ACTIVE`, `ARCHIVED`)
+- `ai_report_frequency`: `VARCHAR(20) NOT NULL DEFAULT 'MONTHLY'` (`DISABLED`, `WEEKLY`, `MONTHLY`)
+- `ai_report_day_of_week`: `INT NULL CHECK (ai_report_day_of_week BETWEEN 1 AND 7)` (1 = Thứ Hai, 7 = Chủ Nhật; áp dụng khi frequency là `WEEKLY`)
+- `ai_report_day_of_month`: `INT NULL CHECK (ai_report_day_of_month BETWEEN -1 AND 31)` (-1: ngày cuối cùng của tháng, 1..31: ngày cụ thể; áp dụng khi frequency là `MONTHLY`)
+- `ai_report_time`: `TIME NOT NULL DEFAULT '23:59:00'` (Thời điểm trong ngày tác vụ nền chạy)
 - `created_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 - `updated_at`: `TIMESTAMPTZ NOT NULL DEFAULT CURRENT_TIMESTAMP`
 
@@ -671,7 +682,7 @@ Quản lý luồng kiểm duyệt gia nhập 2 bước, bảo vệ an toàn cho 
 - `consumption_quantity`: `NUMERIC(12, 3) NOT NULL CHECK (consumption_quantity >= 0)`
 - `input_unit`: `VARCHAR(20) NOT NULL`
 - `factor_applied`: `NUMERIC(12, 6) NOT NULL` (Lưu cứng hệ số tại thời điểm ghi nhận để đảm bảo tính bất biến của sổ cái)
-- `total_co2e_kg`: `NUMERIC(12, 4) NOT NULL` ($\text{consumption\_quantity} \times \text{factor\_applied}$)
+- `total_co2e_kg`: `NUMERIC(12, 4) NOT NULL` (Giá trị quy đổi: `consumption_quantity` $\times$ `factor_applied`)
 - `activity_date`: `DATE NOT NULL`
 - `billing_period`: `VARCHAR(7) NOT NULL` (Định dạng `YYYY-MM`)
 - `ingestion_source`: `VARCHAR(20) NOT NULL` (`MANUAL`, `EXCEL_IMPORT`, `AI_VISION`)
@@ -713,13 +724,19 @@ Quản lý luồng kiểm duyệt gia nhập 2 bước, bảo vệ an toàn cho 
 3. `idx_emission_logs_approval`: `(workspace_id, status)` WHERE `status = 'PENDING_REVIEW'` -> Partial Index cho Hàng đợi duyệt tức thời.
 4. `idx_ws_join_requests_pending`: `(workspace_id, status)` WHERE `status = 'PENDING'` -> Partial Index giúp Reviewer tải danh sách Yêu cầu gia nhập Workspace tức thời (< 50ms).
 
+### 7.4. Các Quyết định Thiết kế CSDL Đã Được Phê duyệt (Approved Database Design Decisions)
+1. **Loại bỏ Bảng `notifications`:** Chuyển sang mô hình Frontend tự động tính toán trạng thái cảnh báo theo thời gian thực (Real-time Dynamic Derivation) từ dữ liệu Dashboard/Sổ cái, tránh dư thừa lưu trữ và lệch pha đồng bộ.
+2. **Bổ sung Bảng `workspace_join_requests`:** Thiết lập quy trình kiểm duyệt gia nhập 2 bước chặt chẽ: Khi người dùng nhập Invite Code, hệ thống tạo bản ghi `PENDING` và yêu cầu Reviewer duyệt (`Accept`/`Reject`) trước khi thêm vào `workspace_members`, ngăn chặn triệt để nguy cơ người ngoài chủ đích hoặc dò mã gia nhập trái phép.
+3. **Tích hợp Cấu hình Lịch Báo cáo AI vào Bảng `workspaces`:** Lưu trữ `ai_report_frequency`, `ai_report_day_of_week`, `ai_report_day_of_month`, `ai_report_time` trực tiếp tại bảng `workspaces`, hỗ trợ Reviewer chủ động chọn chu kỳ chạy tự động hoặc tắt đi, kết hợp API kích hoạt thủ công on-demand.
+4. **Bảo toàn Tính Bất biến của Sổ cái:** Lưu cứng `factor_applied` tại `emission_logs` tại thời điểm ghi nhận, ngăn chặn việc cập nhật hệ số trong tương lai làm sai lệch số liệu lịch sử của sổ cái phát thải.
+
 ---
 
 ## 8. YÊU CẦU PHI CHỨC NĂNG & TIÊU CHUẨN KỸ THUẬT (NON-FUNCTIONAL REQUIREMENTS)
 
 ### 8.1. Hiệu năng & Khả năng Đáp ứng (Performance)
 - **Thời gian nạp trung bình 1 activity (Nhập tay):** $\le 20-30\text{s}$.
-- **Tốc độ đọc và preview file Excel:** Parse và validate 100 dòng dữ liệu Excel trong vòng $< 2\text{ giây}$ (trung bình $< 0.02\text{s}$ / activity) bằng Apache POI Streaming API.
+- **Tốc độ đọc và preview file Excel:** Parse và validate 100 dòng dữ liệu Excel trong vòng $\le 5\text{ giây}$ (trung bình $\le 0.05\text{s}$ / activity) bằng Apache POI Streaming API.
 - **Thời gian phản hồi Kế hoạch cắt giảm & Xuất báo cáo PDF:** $\le 3-5\text{ giây}$.
 - **Thời gian phản hồi API chuẩn:** $P95 < 300\text{ms}$ cho các thao tác CRUD thông thường.
 - **Tải dữ liệu Dashboard:** Tải toàn bộ thẻ KPI và đồ thị trong vòng $< 1\text{ giây}$.
@@ -794,18 +811,27 @@ flowchart LR
 
 ---
 
-## 11. DANH MỤC ĐIỂM THẢO LUẬN CẦN PHÊ DUYỆT (REVIEWER ACTION ITEMS)
+## 11. TỔNG HỢP CÁC QUYẾT ĐỊNH THIẾT KẾ ĐÃ ĐƯỢC PHÊ DUYỆT (APPROVED DESIGN DECISIONS & SIGN-OFF)
 
-Kính mời bạn (Reviewer) xem xét các điểm thiết kế kỹ thuật trọng tâm đã được đồng bộ hóa:
+Toàn bộ các nội dung về định vị sản phẩm, luồng nghiệp vụ, kiến trúc kỹ thuật và thiết kế cơ sở dữ liệu đã được **Reviewer chính thức phê duyệt (Approved)** với các quyết định then chốt:
 
-1. **Về Ưu tiên Luồng nạp dữ liệu (Mục 1.2 & Mục 4):**  
-   - Đã xác lập rõ 2 luồng nạp chính là **Khai báo thủ công** và **Import File mẫu Excel**. Quét ảnh bằng AI là **luồng phụ, ưu tiên sau cùng** ở Sprint 3. Bạn đã hoàn toàn hài lòng với định hướng này chưa?
-2. **Về Metrics Đo lường (Mục 1.3):**  
-   - Bổ sung chỉ số thời gian nạp trung bình 1 activity ($\le 20-30\text{s}$ cho nhập tay, $< 2\text{s}$ cho file 100 activities Excel) và thời gian phản hồi kế hoạch cắt giảm / xuất báo cáo ($\le 3-5\text{s}$). Bạn có muốn điều chỉnh con số ngưỡng này không?
-3. **Về Kiến trúc Multi-tenancy & Database (Mục 6 & Mục 7):**  
-   - Xác nhận giải pháp **Shared Database, Shared Schema with Discriminator Column (`workspace_id`)** và lưu cứng `factor_applied` tại `emission_logs` để đảm bảo tính bất biến của sổ cái kế toán.
-   - **Đã tiếp thu và loại bỏ bảng `notifications`:** Chuyển sang mô hình Frontend tính toán cảnh báo thời gian thực (Real-time Dynamic Derivation) từ dữ liệu Dashboard/Sổ cái.
-   - **Đã tiếp thu và bổ sung bảng `workspace_join_requests`:** Thiết lập cơ chế kiểm duyệt gia nhập 2 bước (Two-step Join Approval Flow). Khi user nhập đúng Invite Code, hệ thống tạo Join Request ở trạng thái PENDING để Reviewer phê duyệt (Accept/Reject) trước khi chính thức thêm vào `workspace_members`, ngăn chặn triệt để nguy cơ người ngoài chủ đích hoặc dò mã gia nhập trái phép.
+1. **Định vị Sản phẩm & Nỗi đau Cốt lõi (Đã Phê duyệt):**
+   - Xác định rào cản lớn nhất của người dùng là việc phải tự tra cứu danh mục, hệ số phát thải và tự tính toán/tổng hợp bằng tay gây nản lòng và tốn thời gian.
+   - Sản phẩm không hướng tới việc tự động nạp hóa dữ liệu qua AI, mà tập trung vào **tự động tính toán phát thải dựa trên hoạt động người dùng nhập liệu một cách có kiến trúc và dễ dàng theo dõi**.
+2. **Phân cấp Luồng Nạp & Metrics Hiệu năng (Đã Phê duyệt):**
+   - **Luồng nạp chính:** Khai báo thủ công (thời gian nạp trung bình 1 activity $\le 20-30\text{s}$) và Nạp hàng loạt qua file mẫu Excel (thời gian xử lý và preview file 100 dòng $\le 5\text{s}$).
+   - **Luồng nạp phụ:** Quét ảnh hóa đơn/công tơ bằng AI Vision được xếp là tiện ích phụ và là **ưu tiên sau cùng** ở Sprint 3, chỉ triển khai khi 2 luồng nạp chính đã hoạt động ổn định.
+   - Thời gian phản hồi kế hoạch cắt giảm / xuất báo cáo PDF: $\le 3-5\text{s}$.
+3. **Kiến trúc Hệ thống High-Level & Multi-tenancy (Đã Phê duyệt):**
+   - Sử dụng kiến trúc Multi-tenancy mô hình **Shared Database, Shared Schema with Discriminator Column (`workspace_id`)** kết hợp Spring Security Filter (`TenantContextFilter`) và Hibernate Filter / JPA Specification đảm bảo cách ly tenant tuyệt đối.
+4. **Cơ chế Báo cáo AI Linh hoạt (Tự động & Thủ công On-demand) (Đã Phê duyệt):**
+   - Cho phép Reviewer tùy biến cấu hình lịch tự động sinh báo cáo trong phần Cài đặt Workspace (`Workspace Settings`): Tần suất (`DISABLED`, `WEEKLY`, `MONTHLY`), chọn thứ/ngày trong kỳ và giờ thực thi cụ thể.
+   - Luôn hỗ trợ Reviewer kích hoạt sinh báo cáo tức thời bằng tay (On-demand) qua nút bấm "Sinh báo cáo ngay" (`POST /api/v1/reports/generate`) mà không phải chờ cronjob.
+5. **Cơ sở Dữ liệu Quan hệ Tinh gọn & Bất biến (Đã Phê duyệt):**
+   - **Loại bỏ bảng `notifications`:** Frontend tự động tính toán trạng thái và hiển thị thông báo theo thời gian thực (Real-time Dynamic Derivation) từ dữ liệu Dashboard/Sổ cái, tránh dư thừa và lệch pha đồng bộ.
+   - **Bổ sung bảng `workspace_join_requests`:** Thiết lập cơ chế kiểm duyệt gia nhập 2 bước (Two-step Join Approval Flow), ngăn chặn triệt để việc người ngoài tùy tiện hoặc dò mã vào Workspace.
+   - **Tích hợp cấu hình lịch báo cáo AI vào bảng `workspaces`:** Lưu trữ `ai_report_frequency`, `ai_report_day_of_week`, `ai_report_day_of_month`, `ai_report_time`.
+   - **Lưu cứng `factor_applied` tại `emission_logs`:** Bảo đảm tính bất biến tuyệt đối của sổ cái kế toán carbon kể cả khi Master Data hệ số thay đổi trong tương lai.
 
 ---
-*Tài liệu PRD Phiên bản 1.1 đã cập nhật đầy đủ các điểm review trên nhánh worktree [`docs/prd`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-prd).*
+*Tài liệu PRD Phiên bản 1.2.0 đã được hoàn thiện, phê duyệt trọn vẹn và sẵn sàng cho giai đoạn thực thi Sprint 1.*

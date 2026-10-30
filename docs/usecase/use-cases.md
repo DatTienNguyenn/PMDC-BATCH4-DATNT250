@@ -195,8 +195,8 @@ flowchart LR
 - **Luồng sự kiện chính:**
   1. Người dùng nhấn nút "Nạp file Excel" và có thể bấm "Tải file mẫu" nếu chưa có.
   2. Người dùng tải lên file Excel đã điền dữ liệu.
-  3. Hệ thống đọc file, kiểm tra tính hợp lệ và tự động ánh xạ các cột: Ngày phát sinh, Danh mục, Phân loại, Sản lượng, Đơn vị, Ghi chú.
-  4. Hệ thống hiển thị bảng Xem trước (Import Preview Table) chỉ rõ:
+  3. Hệ thống đọc file qua Apache POI, kiểm tra tính hợp lệ và tự động ánh xạ các cột: Ngày phát sinh, Danh mục, Phân loại, Sản lượng, Đơn vị, Ghi chú.
+  4. Hệ thống hiển thị bảng Xem trước (Import Preview Table) trong vòng không quá 5 giây (với file 100 dòng) chỉ rõ:
      - Số dòng hợp lệ sẵn sàng nạp.
      - Số dòng bị lỗi định dạng (nếu có, highlight màu đỏ kèm lý do).
      - Tổng lượng phát thải quy đổi ước tính của file.
@@ -278,20 +278,23 @@ flowchart LR
 
 ---
 
-### UC11: Chạy Cronjob AI Insight & Xuất Báo cáo PDF
+### UC11: Sinh Báo cáo AI Insight (Lịch Tự động hoặc Kích hoạt Bằng tay) & Xuất PDF
 - **Mã Use Case:** UC11
-- **Tác nhân chính:** Trưởng nhóm (Reviewer), Hệ thống (Background Cronjob)
-- **Mô tả vắn tắt:** Vào ngày cuối tuần hoặc cuối tháng, hệ thống tự động kích hoạt Cronjob gom nhóm dữ liệu tiêu thụ, đẩy context vào LLM để sinh báo cáo tối ưu mang tính cá nhân hóa có số liệu định lượng; Reviewer xem báo cáo trên Dashboard và có quyền xuất ra file PDF.
+- **Tác nhân chính:** Trưởng nhóm (Reviewer), Hệ thống (Background Cronjob / API On-demand)
+- **Mô tả vắn tắt:** Reviewer có thể thiết lập lịch chạy tự động (Hàng tuần, Hàng tháng hoặc Tắt/Disabled) vào khung giờ mong muốn, hoặc chủ động bấm nút "Sinh báo cáo ngay" bất cứ lúc nào để hệ thống gom nhóm dữ liệu tiêu thụ, đẩy context vào LLM để sinh báo cáo Kế hoạch cắt giảm định lượng cá nhân hóa; Reviewer xem báo cáo trên Dashboard và có quyền xuất ra file PDF trong vòng 3-5 giây.
 - **Tiền điều kiện:** Workspace có dữ liệu giao dịch phát thải trong kỳ.
 - **Hậu điều kiện:** Báo cáo AI được lưu trữ trong Workspace và tệp PDF được tải về máy của Reviewer.
 - **Luồng sự kiện chính:**
-  1. *Lịch trình tự động (Cronjob):* Vào 23:59 ngày cuối tuần hoặc cuối tháng, Cronjob tự động tổng hợp tỷ trọng tiêu thụ (Điện %, Xăng xe %, so sánh kỳ trước) và gọi LLM (Gemini/Claude).
-  2. AI phân tích lý do phát thải tăng/giảm và sinh Kế hoạch cắt giảm định lượng (ví dụ: khuyến nghị đi tàu điện Cát Linh - Hà Đông 3 ngày/tuần giúp giảm 18 kg CO2e).
-  3. Báo cáo được lưu trữ và hiển thị trực quan trên Dashboard của Trưởng nhóm (Reviewer).
-  4. Reviewer xem báo cáo và nhấn nút **"Xuất Báo cáo PDF"**.
-  5. Hệ thống kết xuất tài liệu PDF chuẩn định dạng in ấn (gồm logo, biểu đồ tỷ trọng, bảng số liệu, các chỉ số $\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$ và các khuyến nghị hành động của AI) và tải về máy trong vòng 3 giây.
+  1. *Lựa chọn phương thức kích hoạt:*
+     - **Cách 1 (Lịch trình tự động):** Nếu cấu hình `ai_report_frequency` là `WEEKLY` hoặc `MONTHLY`, tác vụ Cronjob tự động chạy vào ngày và giờ đã thiết lập (mặc định 23:59).
+     - **Cách 2 (Kích hoạt bằng tay on-demand):** Nếu cấu hình là `DISABLED` hoặc Reviewer muốn xem đánh giá tức thì, Reviewer bấm nút **"Sinh báo cáo ngay"** trên giao diện Báo cáo AI.
+  2. Hệ thống tổng hợp tỷ trọng tiêu thụ (Điện %, Xăng xe %, Nước %, so sánh kỳ trước) và gọi LLM (Gemini).
+  3. AI phân tích lý do phát thải tăng/giảm và sinh Kế hoạch cắt giảm định lượng (ví dụ: khuyến nghị đi tàu điện Cát Linh - Hà Đông 3 ngày/tuần giúp giảm 18 kg CO2e).
+  4. Báo cáo được lưu trữ vào bảng `ai_reports` và hiển thị trực quan trên Dashboard của Trưởng nhóm (Reviewer).
+  5. Reviewer xem báo cáo và nhấn nút **"Xuất Báo cáo PDF"**.
+  6. Hệ thống kết xuất tài liệu PDF chuẩn định dạng in ấn (gồm biểu đồ tỷ trọng, bảng số liệu, các chỉ số $\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$ và các khuyến nghị hành động của AI) và tải về máy trong vòng 3-5 giây.
 - **Luồng rẽ nhánh / Ngoại lệ:**
-  - *Chưa đến lịch Cronjob nhưng Reviewer muốn tạo ngay:* Reviewer có thể bấm nút "Phân tích ngay" trên giao diện để kích hoạt thủ công.
+  - *Cấu hình lịch:* Reviewer có thể vào Cài đặt Workspace để thay đổi tần suất (Weekly/Monthly/Disabled), thứ trong tuần, ngày trong tháng hoặc giờ chạy bất kỳ lúc nào.
 
 ---
 

@@ -89,7 +89,7 @@ flowchart TD
     end
 
     subgraph Flow4["4. Luồng Phân tích & Gợi ý hành động (AI Insight & Reporting)"]
-        D1["Lịch trình Cronjob (Cuối tuần / Cuối tháng)"] --> D2["Gom nhóm dữ liệu (Điện %, Xăng %, so sánh kỳ trước)"]
+        D1["Lịch trình Cronjob tự động (hoặc kích hoạt bằng tay On-demand)"] --> D2["Gom nhóm dữ liệu (Điện %, Xăng %, so sánh kỳ trước)"]
         D2 --> D3["Đẩy Prompt vào LLM (Gemini/Claude) - AI Reasoning"]
         D3 --> D4["Báo cáo Phân tích & Khuyến nghị cá nhân hóa"]
         D4 --> D5["Hiển thị trên Dashboard & Cho phép Xuất PDF"]
@@ -110,11 +110,11 @@ flowchart TD
 Hệ thống phân định rõ ràng giữa **Luồng nạp chính** và **Luồng nạp phụ**:
 
 #### A. Các luồng nạp chính (Primary Ingestion Flows):
-1. **Luồng thủ công (Manual Entry):** Member điền form định lượng có cấu trúc cho các sinh hoạt lẻ thường nhật (ví dụ: đi xe máy, nấu ăn gas LPG). Hệ thống tự động tính toán quy đổi lượng kg CO2e ngay trên giao diện form.
+1. **Luồng thủ công (Manual Entry):** Member điền form định lượng có cấu trúc cho các sinh hoạt lẻ thường nhật (ví dụ: đi xe máy, nấu ăn gas LPG). Hệ thống tự động tính toán quy đổi lượng kg CO2e ngay trên giao diện form (thời gian nạp trung bình $\le 20-30\text{s}$ / activity).
 2. **Luồng nạp dữ liệu bằng file mẫu Excel (Excel Template Ingestion):**
    - Người dùng tải template file Excel chuẩn do hệ thống cung cấp (gồm các cột: Ngày, Danh mục, Phân loại chi tiết, Sản lượng, Đơn vị, Ghi chú).
    - Người dùng điền dữ liệu hàng loạt và upload file lên hệ thống.
-   - Hệ thống tự động đọc, ánh xạ (map) các trường thông tin và hiển thị bảng preview xác nhận trên giao diện trước khi lưu.
+   - Hệ thống tự động đọc, ánh xạ (map) các trường thông tin và hiển thị bảng preview xác nhận trên giao diện trong vòng $\le 5\text{s}$ (với file 100 dòng) trước khi lưu.
 
 #### B. Luồng nạp phụ (Secondary Flow - Ưu tiên sau cùng):
 3. **Luồng AI quét hóa đơn & công tơ (AI Vision Ingestion):**
@@ -132,10 +132,10 @@ Hệ thống phân định rõ ràng giữa **Luồng nạp chính** và **Luồ
    - Nếu tổng phát thải vượt $\ge 100\%$ ngân sách, hệ thống bắn notification báo động vượt trần và chuyển trạng thái Dashboard sang mức Đỏ.
 
 ### 3.4. Luồng 4: Phân tích & Gợi ý hành động (AI Insight & Reporting)
-1. **Lịch trình chạy tự động (Cronjob):** Vào ngày cuối cùng của tuần hoặc ngày cuối cùng của tháng, hệ thống tự động kích hoạt module AI Report chạy nền (Background Task).
+1. **Cơ chế sinh báo cáo linh hoạt (Lịch tự động hoặc Bằng tay):** Reviewer có thể cấu hình lịch tự động chạy nền (Background Task) theo chu kỳ tuần/tháng vào thời điểm tùy chọn trong Workspace Settings, hoặc tắt tự động và kích hoạt thủ công on-demand (nút "Sinh báo cáo ngay") bất cứ khi nào cần xem báo cáo tức thì.
 2. **Gom nhóm dữ liệu (Aggregation):** Hệ thống tổng hợp toàn bộ dữ liệu tiêu dùng của Workspace theo nhóm (Điện chiếm bao nhiêu %, Xăng xe chiếm bao nhiêu %, Nước chiếm bao nhiêu %, so sánh tỷ lệ tăng/giảm với kỳ trước).
 3. **Sinh khuyến nghị bằng AI (AI Reasoning):** Đẩy context dữ liệu tổng hợp vào LLM Prompt. LLM phân tích nguyên nhân cốt lõi và trả về báo cáo tối ưu hóa mang tính cá nhân hóa và định lượng cao (ví dụ: *"Tháng này lượng phát thải từ việc sử dụng xe máy cá nhân tăng đột biến 40%. Nếu 2 thành viên chuyển sang dùng tàu điện trên cao Cát Linh - Hà Đông 3 ngày/tuần, gia đình có thể cắt giảm 18 kg CO2e vào tháng sau"*).
-4. **Trình bày & Xuất bản:** Báo cáo Kế hoạch cắt giảm (Reduction Plan) được hiển thị trực quan trên Dashboard chính của Reviewer và hỗ trợ **xuất ra file PDF** chuẩn in ấn để lưu trữ hoặc chia sẻ nội bộ gia đình/văn phòng.
+4. **Trình bày & Xuất bản:** Báo cáo Kế hoạch cắt giảm (Reduction Plan) được hiển thị trực quan trên Dashboard chính của Reviewer và hỗ trợ **xuất ra file PDF** chuẩn in ấn trong vòng $\le 3-5\text{s}$ để lưu trữ hoặc chia sẻ nội bộ gia đình/văn phòng.
 
 ---
 
@@ -145,7 +145,7 @@ Hệ thống phân định rõ ràng giữa **Luồng nạp chính** và **Luồ
 Hệ thống giải quyết 4 trụ cột nghiệp vụ:
 1. **Quản lý Sổ cái phát thải có cấu trúc & tự động tính toán quy đổi:** Tự động tính toán phát thải chính xác dựa theo các hoạt động người dùng nhập liệu vào hệ thống một cách có kiến trúc và dễ dàng theo dõi. Tập trung vào 2 luồng nạp chính (Thủ công, Excel Template) và luồng phụ (AI Vision - ưu tiên sau cùng); quy trình kiểm duyệt Draft -> Approved/Rejected.
 2. **Quản trị Ngân sách & Chỉ số Chuẩn hóa:** Khai báo thông số nền (thành viên, diện tích $m^2$), thiết lập hạn ngạch tháng, tính toán $\text{CO}_2\text{e}/\text{người}$ và $\text{CO}_2\text{e}/m^2$, bắn notification cảnh báo ngưỡng 85% & 100% đến toàn thể thành viên.
-3. **Phân tích Thông minh & Đề xuất Cắt giảm Cá nhân hóa:** Insight Generator chạy Cronjob định kỳ phân tích dữ liệu, đề xuất phương án cắt giảm cá nhân hóa và xuất file báo cáo PDF; module AI Vision bổ trợ quét hóa đơn/công tơ (ưu tiên sau cùng).
+3. **Phân tích Thông minh & Đề xuất Cắt giảm Cá nhân hóa:** Insight Generator chạy theo lịch định kỳ hoặc kích hoạt thủ công on-demand phân tích dữ liệu, đề xuất phương án cắt giảm cá nhân hóa và xuất file báo cáo PDF; module AI Vision bổ trợ quét hóa đơn/công tơ (ưu tiên sau cùng).
 4. **Quản trị Hệ thống & Chuẩn hóa Hệ số:** System Admin quản lý danh mục quy chuẩn quốc gia (EVN, GHG Protocol).
 
 ### 4.2. Các nghiệp vụ NẰM NGOÀI phạm vi (Out-of-Scope)
