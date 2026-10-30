@@ -728,9 +728,11 @@ export enum BudgetThresholdState {
 - **Validation & Business Logic:**
   - `consumption_quantity`: Bắt buộc, số thực $> 0$.
   - `activity_date`: Bắt buộc, không được vượt quá ngày hiện tại (`<= CURRENT_DATE`).
-  - Backend tự động tính:
-    $$\text{factor\_applied} = \text{standard\_emission\_factors.default\_emission\_factor}$$
-    $$\text{total\_co2e\_kg} = \text{consumption\_quantity} \times \text{factor\_applied}$$
+  - Backend tự động tính toán theo công thức quy chuẩn:
+    $$\text{Lượng phát thải } (\text{kg CO}_2\text{e}) = \text{Sản lượng tiêu thụ} \times \text{Hệ số quy chuẩn áp dụng}$$
+    *Ánh xạ giá trị lưu vào cơ sở dữ liệu (`emission_logs`):*
+    - `factor_applied` = `standard_emission_factors.default_emission_factor` (lưu cứng hệ số)
+    - `total_co2e_kg` = `consumption_quantity` $\times$ `factor_applied`
   - Tự động suy ra `billing_period` từ `activity_date` (ví dụ: `2026-10`).
   - Gán `ingestion_source = 'MANUAL'`.
 - **Response 201 Created:**
