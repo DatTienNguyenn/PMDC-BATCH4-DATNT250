@@ -104,7 +104,7 @@ flowchart TD
    $$\text{Chỉ số theo nhân khẩu} = \frac{\text{Tổng kg CO}_2\text{e}}{\text{Số thành viên}} \quad (\text{kg CO}_2\text{e}/\text{người})$$
    $$\text{Chỉ số theo diện tích} = \frac{\text{Tổng kg CO}_2\text{e}}{\text{Diện tích mặt sàn}} \quad (\text{kg CO}_2\text{e}/m^2)$$
    Đồng thời, hệ thống tự động xác định **Mức phát thải Tham chiếu Quốc gia (National Reference Benchmark)** theo chuẩn Our World in Data ($3.67\text{ tấn CO}_2\text{e/người/năm}$):
-   - **Hộ gia đình (Household):** Chiếm $47,5\%$ cơ cấu phát thải quốc gia (thuộc 4 nhóm: Điện & Nhiệt, Giao thông, Rác thải, Hàng không) $\rightarrow \mathbf{145.27\text{ kg CO}_2\text{e/người/tháng}}$.
+   - **Hộ gia đình (Household):** Chiếm $46,4\%$ cơ cấu phát thải quốc gia (thuộc 3 nhóm sinh hoạt cốt lõi: Điện & Nhiệt, Giao thông đường bộ, Rác sinh hoạt) $\rightarrow \mathbf{141.93\text{ kg CO}_2\text{e/người/tháng}}$.
    - **Nơi làm việc / Văn phòng (Workplace):** Đối sánh $100\%$ nền kinh tế lao động $\rightarrow \mathbf{305.83\text{ kg CO}_2\text{e/nhân sự/tháng}}$.
    *(Chi tiết quy định và phương pháp luận tại [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md)).*
 3. **Thiết lập Ngân sách (Budgeting):** Vào đầu tháng, Admin đặt ra ngưỡng phát thải tối đa (ví dụ: $300\text{ kg CO}_2\text{e}$ cho tháng 10). Hệ thống cung cấp gợi ý ngân sách thông minh dựa trên Mức tham chiếu quốc gia (khuyến nghị mức Xanh giảm 10%, mức Chuẩn 100%, hoặc mức Linh hoạt) và kích hoạt cơ chế theo dõi cùng ngưỡng cảnh báo sớm ở mức $85\%$.
@@ -136,7 +136,7 @@ Hệ thống phân định rõ ràng giữa **Luồng nạp chính** và **Luồ
      + Nếu tổng phát thải đạt ngưỡng $\ge 85\%$ của Carbon Budget tháng, hệ thống tự động kích hoạt notification cảnh báo sớm gửi đến **toàn bộ thành viên** trong Workspace và đổi màu tiến độ sang Vàng cam.
      + Nếu tổng phát thải vượt $\ge 100\%$ ngân sách, hệ thống bắn notification báo động vượt trần và chuyển trạng thái Dashboard sang mức Đỏ.
    - **Cơ chế 2 - Cảnh báo Dị biệt Tham chiếu Quốc gia (National Reference Anomaly Alert):**
-     + Hệ thống đối sánh phát thải bình quân đầu người thực tế với Mức tham chiếu quốc gia ($145.27\text{ kg/người}$ cho Household hoặc $305.83\text{ kg/người}$ cho Workplace).
+     + Hệ thống đối sánh phát thải bình quân đầu người thực tế với Mức tham chiếu quốc gia ($141.93\text{ kg/người}$ cho Household hoặc $305.83\text{ kg/người}$ cho Workplace).
      + Nếu phát thải thực tế hoặc dự báo Run-rate cuối tháng vượt mức chuẩn tham chiếu, hệ thống kích hoạt huy hiệu cảnh báo dị biệt (Anomaly Warning) trên Dashboard để người dùng kịp thời điều chỉnh hành vi tiêu thụ. *(Xem chi tiết tại [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md)).*
 
 ### 3.4. Luồng 4: Phân tích & Gợi ý hành động (AI Insight & Reporting)

@@ -120,7 +120,7 @@ flowchart LR
      - Số lượng thành viên (ví dụ: `4` người).
      - Diện tích mặt sàn sử dụng (ví dụ: `85.5` $m^2$).
   3. Reviewer nhấn "Lưu thông số".
-  4. Hệ thống kiểm tra tính hợp lệ của số liệu, lưu vào bảng `workspace_baselines`, tự động xác định Mức phát thải Tham chiếu chuẩn quốc gia ($145.27\text{ kg CO}_2\text{e/người/tháng}$ cho Hộ gia đình - $47,5\%$ ranh giới phát thải, hoặc $305.83\text{ kg CO}_2\text{e/người/tháng}$ cho Nơi làm việc - $100\%$ theo [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md)) và thông báo hoàn tất cài đặt nền tảng.
+  4. Hệ thống kiểm tra tính hợp lệ của số liệu, lưu vào bảng `workspace_baselines`, tự động xác định Mức phát thải Tham chiếu chuẩn quốc gia ($141.93\text{ kg CO}_2\text{e/người/tháng}$ cho Hộ gia đình - $46,4\%$ ranh giới phát thải, hoặc $305.83\text{ kg CO}_2\text{e/người/tháng}$ cho Nơi làm việc - $100\%$ theo [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md)) và thông báo hoàn tất cài đặt nền tảng.
 - **Luồng rẽ nhánh / Ngoại lệ:**
   - *2a. Nhập số thành viên <= 0 hoặc diện tích <= 0:* Hệ thống báo lỗi: "Số lượng thành viên và diện tích mặt sàn phải là số dương lớn hơn 0".
 
@@ -243,12 +243,12 @@ flowchart LR
 ### UC09: Thiết lập Target Ngân sách Tháng & Ngưỡng 85%
 - **Mã Use Case:** UC09
 - **Tác nhân chính:** Trưởng nhóm (Reviewer)
-- **Mô tả vắn tắt:** Vào đầu tháng, Reviewer thiết lập hạn ngạch phát thải tối đa cho cả Workspace (ví dụ: $300\text{ kg CO}_2\text{e}$) và kích hoạt ngưỡng cảnh báo sớm ở mức $85\%$. Hệ thống hỗ trợ gợi ý thông minh dựa trên Mức phát thải Tham chiếu Quốc gia ($47,5\%$ cho Household, $100\%$ cho Workplace).
+- **Mô tả vắn tắt:** Vào đầu tháng, Reviewer thiết lập hạn ngạch phát thải tối đa cho cả Workspace (ví dụ: $300\text{ kg CO}_2\text{e}$) và kích hoạt ngưỡng cảnh báo sớm ở mức $85\%$. Hệ thống hỗ trợ gợi ý thông minh dựa trên Mức phát thải Tham chiếu Quốc gia ($46,4\%$ cho Household, $100\%$ cho Workplace).
 - **Tiền điều kiện:** Người dùng là Reviewer của Workspace.
 - **Hậu điều kiện:** Hạn ngạch tháng và ngưỡng 85% được thiết lập cho Workspace.
 - **Luồng sự kiện chính:**
   1. Reviewer vào mục "Ngân sách Carbon".
-  2. Hệ thống tự động hiển thị gợi ý thông minh dựa trên thông số nền và Mức tham chiếu quốc gia (ví dụ: Hộ gia đình 4 người có mức tham chiếu chuẩn là $581\text{ kg CO}_2\text{e/tháng}$; gợi ý mục tiêu Xanh $523\text{ kg}$, mục tiêu Chuẩn $581\text{ kg}$).
+  2. Hệ thống tự động hiển thị gợi ý thông minh dựa trên thông số nền và Mức tham chiếu quốc gia (ví dụ: Hộ gia đình 4 người có mức tham chiếu chuẩn là $568\text{ kg CO}_2\text{e/tháng}$; gợi ý mục tiêu Xanh $511\text{ kg}$, mục tiêu Chuẩn $568\text{ kg}$).
   3. Reviewer chọn tháng áp dụng, chọn mức gợi ý hoặc nhập trần phát thải mục tiêu tùy chỉnh (ví dụ: `300` kg CO2e).
   4. Hệ thống tự động tính ngưỡng cảnh báo sớm 85% ($300 \times 0.85 = 255\text{ kg CO}_2\text{e}$).
   5. Reviewer nhấn "Lưu ngân sách".

@@ -1,12 +1,12 @@
 # QUY ĐỊNH & PHƯƠNG PHÁP LUẬN XÁC ĐỊNH MỨC PHÁT THẢI THAM CHIẾU QUỐC GIA
 ## (National Emission Reference Benchmark Specification)
-### Chuẩn đối sánh phát thải Hộ gia đình (47,5%) & Văn phòng (100%) phục vụ Gợi ý Ngân sách, Phân tích Hiệu suất và Kích hoạt Cảnh báo Thông minh
+### Chuẩn đối sánh phát thải Hộ gia đình (46,4%) & Văn phòng (100%) phục vụ Gợi ý Ngân sách, Phân tích Hiệu suất và Kích hoạt Cảnh báo Thông minh
 
 ```
 Dự án: Hệ thống Quản trị & Phân tích Dấu chân Carbon cho Gia đình/Văn phòng nhỏ (Personal & Micro-Office Carbon Ledger)
 Tài liệu Kỹ thuật & Nghiệp vụ: Quy định Mức phát thải Tham chiếu & Thuật toán Cảnh báo
 Trạng thái: Hoàn thiện & Sẵn sàng Triển khai (Approved Specification)
-Phiên bản: 1.0.0
+Phiên bản: 1.1.0
 Ngày ban hành: 30/10/2026
 ```
 
@@ -32,7 +32,7 @@ Tài liệu này xác lập quy chuẩn kỹ thuật toàn diện nhằm:
 
 1. **Chuẩn hóa cơ sở khoa học & dữ liệu nguồn:** Sử dụng dữ liệu kiểm kê khí nhà kính quốc gia Việt Nam công bố trên nền tảng khoa học toàn cầu **Our World in Data** ($3.67\text{ tấn CO}_2\text{e/người/năm}$).
 2. **Luận giải phương pháp luận phân bổ ranh giới hoạt động (Operational Boundary):**
-   - Giải thích tại sao một cá nhân trong phạm vi **Hộ gia đình** chỉ gánh chịu và chi phối **$47,5\%$** tổng phát thải bình quân quốc gia (tương đương $145.27\text{ kg CO}_2\text{e/người/tháng}$).
+   - Giải thích tại sao một cá nhân trong phạm vi **Hộ gia đình** chỉ gánh chịu và chi phối **$46,4\%$** tổng phát thải bình quân quốc gia (tương đương $141.93\text{ kg CO}_2\text{e/người/tháng}$) dựa trên 3 nhóm sinh hoạt cốt lõi: Điện & Nhiệt, Giao thông đường bộ và Rác sinh hoạt (loại trừ nhóm `Aviation and shipping` do tính chất logistics vĩ mô và không mang tính định kỳ hàng tháng).
    - Giải thích tại sao một nhân sự trong không gian **Văn phòng làm việc** đối sánh với **$100\%$** mức bình quân của nền kinh tế (tương đương $305.83\text{ kg CO}_2\text{e/người/tháng}$).
 3. **Quy định công thức toán học & ma trận tham chiếu hệ thống:** Tự động tính toán mức trần tham chiếu theo quy mô nhân khẩu ($N$) và loại hình không gian làm việc (`HOUSEHOLD` vs `WORKPLACE`).
 4. **Đặc tả thuật toán cảnh báo thông minh (Smart Alert Engine):** Thiết lập cơ chế cảnh báo dị biệt (Anomaly Alert) kết hợp với cảnh báo tiến độ ngân sách cam kết ($85\%$ và $100\%$).
@@ -65,22 +65,21 @@ Hệ sinh thái phát thải quốc gia bao gồm toàn bộ 11 danh mục/lĩnh
 | **7** | Fugitive emissions (Phát thải rò rỉ nhiên liệu) | 21.10 | $4.36\%$ | Khí rò rỉ trong quá trình khai thác than đá, giàn khoan dầu khí ngoài khơi. | ❌ Thượng nguồn công nghiệp khai khoáng |
 | **8** | Other fuel combustion (Đốt nhiên liệu khác) | 8.34 | $1.72\%$ | Lò đốt sinh khối phụ trợ trong thương mại và tiểu thủ công nghiệp. | ❌ Hoạt động sản xuất chuyên biệt |
 | **9** | Buildings (Tòa nhà & Công trình thương mại) | 7.61 | $1.57\%$ | Năng lượng đốt trực tiếp tại các tòa nhà cao ốc thương mại, khách sạn. | ❌ Hạ tầng bất động sản thương mại |
-| **10** | **Aviation and shipping (Hàng không & Vận tải biển)** | **5.42** | **$1.12\%$** | Các chuyến bay thương mại nội địa, quốc tế và vận tải hàng hải. | ✅ **Thuộc sinh hoạt (Chuyến bay du lịch)** |
+| **10** | Aviation and shipping (Hàng không & Vận tải biển) | 5.42 | $1.12\%$ | Các chuyến bay thương mại nội địa, quốc tế và vận tải hàng hải. | ❌ Ngoài ranh giới Hộ gia đình (Logistics vĩ mô & không mang tính định kỳ sinh hoạt) |
 | **11** | Land-use change and forestry (LULUCF - Lâm nghiệp) | -1.06 | $-0.22\%$ | Rừng tự nhiên hấp thụ carbon (Bể hấp thụ ròng quốc gia). | ❌ Lâm nghiệp quốc gia quản lý |
 | | **TỔNG CỘNG TOÀN QUỐC** | **484.41** | **$100.00\%$** | **Toàn bộ nền kinh tế Việt Nam** | |
 
-### 2.3. Xác định Tỷ trọng Nhóm phát thải Hộ gia đình ($47,5\%$)
+### 2.3. Xác định Tỷ trọng Nhóm phát thải Hộ gia đình ($46,4\%$)
 
-Trong 11 danh mục trên, khi xem xét các hoạt động sinh hoạt thường nhật mà một cá nhân hoặc hộ gia đình có thể trực tiếp quyết định, tiêu dùng và kiểm soát, chỉ có **4 nhóm cốt lõi**:
+Trong 11 danh mục trên, khi xem xét các hoạt động sinh hoạt thường nhật mang tính chất tiêu dùng định kỳ hàng tháng mà một cá nhân hoặc hộ gia đình trực tiếp quyết định và kiểm soát, hệ thống quy định **3 nhóm sinh hoạt cốt lõi** (loại trừ nhóm `Aviation and shipping` ra khỏi chuẩn tham chiếu định kỳ của hộ gia đình vì các chuyến bay thương mại và vận tải biển chủ yếu phục vụ logistics hàng hóa vĩ mô, chuỗi cung ứng quốc gia và công tác/du lịch đột xuất, không đại diện cho mức sinh hoạt nền tảng hàng tháng của đại bộ phận hộ gia đình):
 
-1. **Electricity and heat:** $153.00\text{ triệu tấn}$
-2. **Transport:** $46.40\text{ triệu tấn}$
-3. **Waste:** $25.40\text{ triệu tấn}$
-4. **Aviation and shipping:** $5.42\text{ triệu tấn}$
+1. **Electricity and heat (Điện sinh hoạt & dân dụng):** $153.00\text{ triệu tấn}$
+2. **Transport (Giao thông đường bộ cá nhân & nội địa):** $46.40\text{ triệu tấn}$
+3. **Waste (Chất thải sinh hoạt & Nước thải):** $25.40\text{ triệu tấn}$
 
-$$\text{Tổng phát thải của 4 nhóm sinh hoạt} = 153.00 + 46.40 + 25.40 + 5.42 = \mathbf{230.22 \text{ triệu tấn CO}_2\text{e}}$$
+$$\text{Tổng phát thải của 3 nhóm sinh hoạt cốt lõi} = 153.00 + 46.40 + 25.40 = \mathbf{224.80 \text{ triệu tấn CO}_2\text{e}}$$
 
-$$\text{Tỷ trọng phát thải Hộ gia đình} = \frac{230.22\text{ Mt}}{484.41\text{ Mt}} \times 100\% = 47.5258\% \approx \mathbf{47,5\%}$$
+$$\text{Tỷ trọng phát thải Hộ gia đình} = \frac{224.80\text{ Mt}}{484.41\text{ Mt}} \times 100\% = 46.4070\% \approx \mathbf{46,4\%}$$
 
 ```mermaid
 flowchart TD
@@ -89,19 +88,19 @@ flowchart TD
         NAT["Bình quân đầu người toàn quốc: 3.67 tấn CO2e/người/năm (100%)"]
     end
 
-    Total --> HB["Phạm vi Hộ gia đình (Household Boundary)<br>Tổng: 230.22 Mt CO2e (47.5%)"]
-    Total --> MB["Phạm vi Vĩ mô & Công nghiệp nặng<br>Tổng: 254.19 Mt CO2e (52.5%)"]
+    Total --> HB["Phạm vi Hộ gia đình (Household Boundary)<br>Tổng: 224.80 Mt CO2e (46.4%)"]
+    Total --> MB["Phạm vi Vĩ mô & Ngoài ranh giới Hộ gia đình<br>Tổng: 259.61 Mt CO2e (53.6%)"]
 
-    subgraph HBGroup["4 Nhóm Sinh hoạt Hộ gia đình (47.5%)"]
+    subgraph HBGroup["3 Nhóm Sinh hoạt Hộ gia đình Cốt lõi (46.4%)"]
         direction TB
         H1["1. Electricity & Heat (Điện gia dụng): 153.0 Mt (31.58%)"]
         H2["2. Transport (Xe máy, ô tô cá nhân): 46.4 Mt (9.58%)"]
         H3["3. Waste (Rác sinh hoạt & nước thải): 25.4 Mt (5.24%)"]
-        H4["4. Aviation & Shipping (Hàng không cá nhân): 5.42 Mt (1.12%)"]
     end
 
-    subgraph MBGroup["Các ngành ngoài tầm kiểm soát Hộ gia đình (52.5%)"]
+    subgraph MBGroup["Các ngành ngoài tầm kiểm soát định kỳ Hộ gia đình (53.6%)"]
         direction TB
+        M0["Aviation & Shipping (Hàng không, vận tải biển): 5.42 Mt (1.12%)"]
         M1["Manufacturing & Construction (Xi măng, thép): 81.3 Mt (16.78%)"]
         M2["Agriculture (Lúa nước, chăn nuôi vĩ mô): 73.5 Mt (15.17%)"]
         M3["Industry (Hóa chất, công nghiệp nặng): 63.4 Mt (13.09%)"]
@@ -113,18 +112,19 @@ flowchart TD
     HB --> HBGroup
     MB --> MBGroup
 
-    HBGroup ==> BENCH_HH["Mức tham chiếu Hộ gia đình:<br>3.67 x 47.5% = 1.743 tấn/năm (145.27 kg/tháng/người)"]
+    HBGroup ==> BENCH_HH["Mức tham chiếu Hộ gia đình:<br>3.67 x 46.4% = 1.703 tấn/năm (141.93 kg/tháng/người)"]
     Total ==> BENCH_WP["Mức tham chiếu Nơi làm việc (Workplace):<br>3.67 x 100% = 3.67 tấn/năm (305.83 kg/tháng/người)"]
 ```
 
 ---
 
-## ⚖️ 3. LUẬN GIẢI PHƯƠNG PHÁP LUẬN: HOUSEHOLD (47,5%) VS. WORKPLACE (100%)
+## ⚖️ 3. LUẬN GIẢI PHƯƠNG PHÁP LUẬN: HOUSEHOLD (46,4%) VS. WORKPLACE (100%)
 
-### 3.1. Ranh giới Hoạt động Hộ gia đình (Household Operational Boundary - 47,5%)
+### 3.1. Ranh giới Hoạt động Hộ gia đình (Household Operational Boundary - 46,4%)
 
-#### A. Căn cứ loại trừ $52,5\%$ còn lại
+#### A. Căn cứ loại trừ $53,6\%$ còn lại
 Một cá nhân tại nhà không thể chịu trách nhiệm hay trực tiếp giảm phát thải từ:
+- Các chuyến bay thương mại quốc gia và đội tàu vận tải hàng hải quốc tế (`Aviation and shipping` - $5.42\text{ Mt}$, chủ yếu phục vụ chuỗi cung ứng logistics hàng hóa xuất nhập khẩu và giao thương kinh tế).
 - Các lò nung clinker xi măng hay nhà máy luyện thép cán nóng (`Manufacturing & Construction` - $81.3\text{ Mt}$).
 - Hàng triệu hecta đồng ruộng ngập nước phát sinh khí metan (`Agriculture` - $73.5\text{ Mt}$).
 - Các tổ hợp hóa dầu hay nhà máy phân đạm (`Industry` - $63.4\text{ Mt}$).
@@ -132,16 +132,16 @@ Một cá nhân tại nhà không thể chịu trách nhiệm hay trực tiếp 
 
 #### B. Nguy cơ méo mó nếu áp dụng sai chuẩn 100% cho Hộ gia đình
 Nếu hệ thống áp dụng con số $3.67\text{ tấn/năm}$ ($305.83\text{ kg CO}_2\text{e/người/tháng}$) làm chuẩn tham chiếu cho hộ gia đình:
-- Mức trần bị "thổi phồng" lên **gấp $2.1$ lần** so với mức tiêu thụ dân sinh thực tế.
+- Mức trần bị "thổi phồng" lên **gấp $2.15$ lần** so với mức tiêu thụ dân sinh thực tế.
 - Một gia đình 4 người nếu xài điện điều hòa 24/7, chạy ô tô phân khối lớn phát thải tới $800\text{ kg CO}_2\text{e/tháng}$ vẫn thấy mình "thấp hơn mức trung bình" ($4 \times 305.83 = 1,223\text{ kg CO}_2\text{e}$).
 - Hậu quả: **Hệ thống cảnh báo sớm bị tê liệt hoàn toàn, triệt tiêu động lực tiết kiệm điện và làm sai lệch thuật toán phân tích của AI.**
 
 #### C. Mức chuẩn quy định cho 1 nhân khẩu trong Hộ gia đình
-$$\text{Ref}_{\text{Household, Năm}} = 3.67 \text{ tấn} \times 47.5\% = \mathbf{1.74325\text{ tấn CO}_2\text{e/người/năm}} \approx \mathbf{1,743.25\text{ kg CO}_2\text{e/người/năm}}$$
+$$\text{Ref}_{\text{Household, Năm}} = 3.67 \text{ tấn} \times 46.407\% = \mathbf{1.70314\text{ tấn CO}_2\text{e/người/năm}} \approx \mathbf{1,703.14\text{ kg CO}_2\text{e/người/năm}}$$
 
-$$\text{Ref}_{\text{Household, Tháng}} = \frac{1,743.25\text{ kg}}{12} \approx \mathbf{145.27\text{ kg CO}_2\text{e/người/tháng}}$$
+$$\text{Ref}_{\text{Household, Tháng}} = \frac{1,703.14\text{ kg}}{12} \approx \mathbf{141.93\text{ kg CO}_2\text{e/người/tháng}}$$
 
-$$\text{Ref}_{\text{Household, Ngày}} = \frac{145.27\text{ kg}}{30.42\text{ ngày}} \approx \mathbf{4.78\text{ kg CO}_2\text{e/người/ngày}}$$
+$$\text{Ref}_{\text{Household, Ngày}} = \frac{141.93\text{ kg}}{30.42\text{ ngày}} \approx \mathbf{4.67\text{ kg CO}_2\text{e/người/ngày}}$$
 
 ---
 
@@ -179,9 +179,9 @@ Hệ thống lưu trữ các hằng số quy chuẩn này trong bảng cơ sở 
 | Mã tham số | Tên định danh | Giá trị quy chuẩn | Đơn vị tính | Nguồn cơ sở |
 |---|---|---|---|---|
 | `NAT_PER_CAPITA_ANNUAL` | Phát thải bình quân đầu người toàn quốc | `3670.00` | $\text{kg CO}_2\text{e/người/năm}$ | OWID Vietnam Profile |
-| `RATIO_HOUSEHOLD_BOUNDARY` | Tỷ lệ ranh giới Hộ gia đình | `0.4750` | Tỷ lệ ($47,5\%$) | 4 nhóm sinh hoạt / Tổng 11 nhóm |
+| `RATIO_HOUSEHOLD_BOUNDARY` | Tỷ lệ ranh giới Hộ gia đình | `0.4641` | Tỷ lệ ($46,4\%$) | 3 nhóm sinh hoạt cốt lõi / Tổng 11 nhóm |
 | `RATIO_WORKPLACE_BOUNDARY` | Tỷ lệ ranh giới Nơi làm việc | `1.0000` | Tỷ lệ ($100,0\%$) | Toàn bộ nền kinh tế lao động |
-| `BENCHMARK_HOUSEHOLD_MONTH` | Mức tham chiếu Hộ gia đình tháng | `145.27` | $\text{kg CO}_2\text{e/người/tháng}$ | $3,670 \times 47.5\% / 12$ |
+| `BENCHMARK_HOUSEHOLD_MONTH` | Mức tham chiếu Hộ gia đình tháng | `141.93` | $\text{kg CO}_2\text{e/người/tháng}$ | $3,670 \times 46.407\% / 12$ |
 | `BENCHMARK_WORKPLACE_MONTH` | Mức tham chiếu Nơi làm việc tháng | `305.83` | $\text{kg CO}_2\text{e/nhân sự/tháng}$ | $3,670 \times 100\% / 12$ |
 | `BENCHMARK_OFFICE_FLOOR_MONTH` | Mức tham chiếu sàn văn phòng tháng | `13.00` | $\text{kg CO}_2\text{e}/m^2/\text{tháng}$ | Chuẩn công trình thương mại VN |
 
@@ -194,16 +194,16 @@ Khi khởi tạo hoặc tính toán cho một Workspace $W$ trong tháng $M$:
 
 **Mức phát thải tham chiếu hàng tháng của Workspace ($\text{Ref}_{\text{Workspace}}$):**
 
-$$\text{Ref}_{\text{Workspace}}(W, M) = \begin{cases} N \times 145.27 & \text{nếu } T_W = \text{HOUSEHOLD} \\ N \times 305.83 & \text{nếu } T_W = \text{WORKPLACE} \end{cases} \quad (\text{kg CO}_2\text{e/tháng})$$
+$$\text{Ref}_{\text{Workspace}}(W, M) = \begin{cases} N \times 141.93 & \text{nếu } T_W = \text{HOUSEHOLD} \\ N \times 305.83 & \text{nếu } T_W = \text{WORKPLACE} \end{cases} \quad (\text{kg CO}_2\text{e/tháng})$$
 
 ### 4.3. Ma trận tra cứu nhanh theo quy mô Workspace
 
 | Loại hình | Quy mô ($N$) | Diện tích sàn ($S$) | Mức tham chiếu Tháng ($\text{Ref}$) | Mức tham chiếu Ngày ($\text{Ref}/30$) | Ngưỡng Cảnh báo Sớm $85\%$ |
 |---|:---:|:---:|:---:|:---:|:---:|
-| **Hộ gia đình độc thân** | 1 người | $35\text{ }m^2$ | **$145.3\text{ kg CO}_2\text{e}$** | $4.8\text{ kg}$ | $123.5\text{ kg}$ |
-| **Hộ gia đình trẻ** | 2 người | $60\text{ }m^2$ | **$290.5\text{ kg CO}_2\text{e}$** | $9.7\text{ kg}$ | $247.0\text{ kg}$ |
-| **Hộ gia đình tiêu chuẩn** | 4 người | $85\text{ }m^2$ | **$581.1\text{ kg CO}_2\text{e}$** | $19.4\text{ kg}$ | $493.9\text{ kg}$ |
-| **Đại gia đình 3 thế hệ** | 6 người | $130\text{ }m^2$ | **$871.6\text{ kg CO}_2\text{e}$** | $29.1\text{ kg}$ | $740.9\text{ kg}$ |
+| **Hộ gia đình độc thân** | 1 người | $35\text{ }m^2$ | **$141.9\text{ kg CO}_2\text{e}$** | $4.7\text{ kg}$ | $120.6\text{ kg}$ |
+| **Hộ gia đình trẻ** | 2 người | $60\text{ }m^2$ | **$283.9\text{ kg CO}_2\text{e}$** | $9.5\text{ kg}$ | $241.3\text{ kg}$ |
+| **Hộ gia đình tiêu chuẩn** | 4 người | $85\text{ }m^2$ | **$567.7\text{ kg CO}_2\text{e}$** | $18.9\text{ kg}$ | $482.6\text{ kg}$ |
+| **Đại gia đình 3 thế hệ** | 6 người | $130\text{ }m^2$ | **$851.6\text{ kg CO}_2\text{e}$** | $28.4\text{ kg}$ | $723.8\text{ kg}$ |
 | **Văn phòng Khởi nghiệp (Startup)** | 5 người | $50\text{ }m^2$ | **$1,529.2\text{ kg CO}_2\text{e}$** | $51.0\text{ kg}$ | $1,299.8\text{ kg}$ |
 | **Văn phòng Nhỏ (Micro-Office)** | 10 người | $100\text{ }m^2$ | **$3,058.3\text{ kg CO}_2\text{e}$** | $101.9\text{ kg}$ | $2,599.6\text{ kg}$ |
 | **Văn phòng Trung bình** | 20 người | $200\text{ }m^2$ | **$6,116.6\text{ kg CO}_2\text{e}$** | $203.9\text{ kg}$ | $5,199.1\text{ kg}$ |
@@ -233,7 +233,7 @@ flowchart TD
         end
 
         subgraph Track2["Cơ chế 2: Đối sánh Mức tham chiếu Quốc gia (Reference Benchmark Tracking)"]
-            REF --> C3{"Phát thải/người > Chuẩn Quốc gia (145.27 / 305.83)?"}
+            REF --> C3{"Phát thải/người > Chuẩn Quốc gia (141.93 / 305.83)?"}
             C3 -- Đúng --> ALERT_REF_ANOMALY["⚠️ Cảnh báo Dị biệt Mức tiêu thụ Quốc gia"]
             C3 -- Sai --> RUN_RATE{"Run-rate Dự báo cuối tháng vượt chuẩn?"}
             RUN_RATE -- Đúng --> ALERT_PROJECTED["🟡 Cảnh báo Nguy cơ Vượt chuẩn Quốc gia"]
@@ -308,12 +308,12 @@ Khi Reviewer mở form "Thiết lập Target Ngân sách Tháng", hệ thống k
 ```
 [ Form Thiết lập Ngân sách Carbon Tháng 11 ]
 Loại hình: Hộ gia đình | Thành viên: 4 người
-Mức chuẩn tham chiếu trung bình Việt Nam: 581 kg CO2e/tháng
+Mức chuẩn tham chiếu trung bình Việt Nam: 568 kg CO2e/tháng
 
 Chọn mục tiêu hành động:
-( ) 🟢 Mục tiêu Xanh Cam kết (Giảm 10% so với Chuẩn quốc gia):  523 kg CO2e/tháng
-( ) 🔵 Mục tiêu Chuẩn Quốc gia (Bằng 100% Chuẩn tham chiếu):    581 kg CO2e/tháng
-( ) 🟡 Mục tiêu Chuyển đổi Dần (Cho phép cao hơn 10% chuẩn):   639 kg CO2e/tháng
+( ) 🟢 Mục tiêu Xanh Cam kết (Giảm 10% so với Chuẩn quốc gia):  511 kg CO2e/tháng
+( ) 🔵 Mục tiêu Chuẩn Quốc gia (Bằng 100% Chuẩn tham chiếu):    568 kg CO2e/tháng
+( ) 🟡 Mục tiêu Chuyển đổi Dần (Cho phép cao hơn 10% chuẩn):   624 kg CO2e/tháng
 (•) ⚙️ Tùy chỉnh thủ công: [ 550 ] kg CO2e
 ```
 
@@ -325,7 +325,7 @@ Việc này giúp Reviewer ngay lập tức có cơ sở định lượng rõ r�
 
 ### 6.1. Vai trò của Tham chiếu trong việc định hình Prompt LLM
 
-Nếu không có con số Reference ($47,5\%$ cho Household và $100\%$ cho Workplace), khi đẩy dữ liệu vào LLM (Gemini / Claude), mô hình AI rất dễ:
+Nếu không có con số Reference ($46,4\%$ cho Household và $100\%$ cho Workplace), khi đẩy dữ liệu vào LLM (Gemini / Claude), mô hình AI rất dễ:
 1. Đưa ra so sánh khập khiễng với mức phát thải của các quốc gia phương Tây ($14\text{ tấn/năm}$ tại Mỹ).
 2. Nhầm lẫn giữa sinh hoạt hộ gia đình và sản xuất công nghiệp, khuyên người dùng gia đình "hãy giảm tiêu thụ xi măng, hạn chế phân bón hóa học"!
 
@@ -339,12 +339,12 @@ Khi Cronjob chạy vào ngày cuối tháng, hệ thống tổng hợp thông s�
     "type": "HOUSEHOLD",
     "member_count": 4,
     "floor_area_m2": 85.0,
-    "national_benchmark_monthly_total": 581.08,
-    "national_benchmark_per_capita": 145.27,
+    "national_benchmark_monthly_total": 567.72,
+    "national_benchmark_per_capita": 141.93,
     "actual_monthly_total": 680.50,
     "actual_per_capita": 170.13,
-    "benchmark_ratio_percent": 117.11,
-    "anomaly_status": "ABOVE_BENCHMARK_17_PERCENT"
+    "benchmark_ratio_percent": 119.87,
+    "anomaly_status": "ABOVE_BENCHMARK_20_PERCENT"
   },
   "consumption_breakdown": {
     "ELEC_GRID": { "amount_co2e": 442.3, "percentage": 65.0 },
@@ -357,10 +357,10 @@ Khi Cronjob chạy vào ngày cuối tháng, hệ thống tổng hợp thông s�
 
 ### 6.3. Mẫu Khuyến nghị Định lượng do AI sinh ra nhờ có Reference
 
-Nhờ có đối sánh chính xác $47,5\%$, AI đưa ra nhận định sắc bén và gợi ý hành động khả thi:
+Nhờ có đối sánh chính xác $46,4\%$, AI đưa ra nhận định sắc bén và gợi ý hành động khả thi:
 
 > **Nhận định từ Cố vấn AI:**
-> *"Trong tháng 10, hộ gia đình bạn phát thải trung bình **$170.13\text{ kg CO}_2\text{e/người}$**, cao hơn **$17.1\%$** so với mức trung bình hộ gia đình Việt Nam ($145.27\text{ kg CO}_2\text{e/người}$). Nguyên nhân cốt lõi đến từ việc tiêu thụ điện sinh hoạt vượt định mức ($442.3\text{ kg CO}_2\text{e}$, chiếm $65\%$).*
+> *"Trong tháng 10, hộ gia đình bạn phát thải trung bình **$170.13\text{ kg CO}_2\text{e/người}$**, cao hơn **$19.9\%$** so với mức trung bình hộ gia đình Việt Nam ($141.93\text{ kg CO}_2\text{e/người}$). Nguyên nhân cốt lõi đến từ việc tiêu thụ điện sinh hoạt vượt định mức ($442.3\text{ kg CO}_2\text{e}$, chiếm $65\%$).*
 >
 > **Đề xuất kế hoạch hành động cá nhân hóa:**
 > 1. *Điều chỉnh nhiệt độ điều hòa phòng khách từ 22°C lên 26°C kết hợp bật quạt trần: Dự kiến tiết kiệm $45\text{ kWh/tháng}$ ($\approx 32.5\text{ kg CO}_2\text{e}$).*
@@ -386,7 +386,7 @@ erDiagram
         bigint id PK
         varchar benchmark_code "NAT_PER_CAPITA, RATIO_HOUSEHOLD, v.v."
         varchar description "Mô tả tham số"
-        decimal benchmark_value "3670.00, 0.475, 1.000, 145.27"
+        decimal benchmark_value "3670.00, 0.4641, 1.000, 141.93"
         varchar unit "kg_co2e_per_capita, ratio, kg_co2e_per_m2"
         varchar source_url "ourworldindata.org/profile/co2/vietnam"
         int reference_year "2024"
@@ -410,7 +410,7 @@ erDiagram
         int year "2026"
         int month "10"
         decimal target_amount "Hạn ngạch Reviewer cam kết"
-        decimal national_reference_amount "N * 145.27 hoặc N * 305.83"
+        decimal national_reference_amount "N * 141.93 hoặc N * 305.83"
         boolean has_alerted_85_percent "Đã bắn cảnh báo 85%"
         boolean has_alerted_100_percent "Đã bắn cảnh báo 100%"
         boolean has_alerted_anomaly "Đã bắn cảnh báo vượt chuẩn quốc gia"
@@ -460,9 +460,9 @@ INSERT INTO system_reference_benchmarks
 (benchmark_code, benchmark_name, benchmark_value, unit, ratio_multiplier, source_citation, reference_year)
 VALUES
 ('VN_PER_CAPITA_ANNUAL', 'Mức phát thải bình quân đầu người toàn quốc', 3670.0000, 'kg_co2e/capita/year', 1.0000, 'Our World in Data (OWID) - Vietnam Profile', 2024),
-('HOUSEHOLD_BOUNDARY_RATIO', 'Tỷ lệ ranh giới phát thải Hộ gia đình', 0.4750, 'ratio', 0.4750, 'OWID 4 groups: Electricity, Transport, Waste, Aviation', 2024),
+('HOUSEHOLD_BOUNDARY_RATIO', 'Tỷ lệ ranh giới phát thải Hộ gia đình', 0.4641, 'ratio', 0.4641, 'OWID 3 groups: Electricity, Transport, Waste', 2024),
 ('WORKPLACE_BOUNDARY_RATIO', 'Tỷ lệ ranh giới phát thải Nơi làm việc', 1.0000, 'ratio', 1.0000, 'National Economic Per Capita Basis', 2024),
-('HOUSEHOLD_PER_CAPITA_MONTHLY', 'Mức tham chiếu Hộ gia đình mỗi nhân khẩu/tháng', 145.2708, 'kg_co2e/capita/month', 0.4750, '3670 * 47.5% / 12', 2024),
+('HOUSEHOLD_PER_CAPITA_MONTHLY', 'Mức tham chiếu Hộ gia đình mỗi nhân khẩu/tháng', 141.9283, 'kg_co2e/capita/month', 0.4641, '3670 * 46.407% / 12', 2024),
 ('WORKPLACE_PER_CAPITA_MONTHLY', 'Mức tham chiếu Nơi làm việc mỗi nhân sự/tháng', 305.8333, 'kg_co2e/capita/month', 1.0000, '3670 * 100% / 12', 2024);
 ```
 
@@ -472,9 +472,9 @@ ALTER TABLE workspace_baselines
 ADD COLUMN workspace_type VARCHAR(20) NOT NULL DEFAULT 'HOUSEHOLD' CHECK (workspace_type IN ('HOUSEHOLD', 'WORKPLACE')),
 ADD COLUMN reference_monthly_co2e NUMERIC(10, 2) GENERATED ALWAYS AS (
     CASE 
-        WHEN workspace_type = 'HOUSEHOLD' THEN member_count * 145.27
+        WHEN workspace_type = 'HOUSEHOLD' THEN member_count * 141.93
         WHEN workspace_type = 'WORKPLACE' THEN member_count * 305.83
-        ELSE member_count * 145.27
+        ELSE member_count * 141.93
     END
 ) STORED;
 ```
@@ -499,10 +499,10 @@ sequenceDiagram
     Reviewer->>UI: Mở Modal "Thiết lập Ngân sách Tháng"
     UI->>API: GET /api/v1/workspaces/{id}/budget-recommendation?month=11&year=2026
     API->>DB: Query workspace_baselines & system_reference_benchmarks
-    DB-->>API: Trả về {type: "HOUSEHOLD", members: 4, ref_monthly: 581.08}
-    API-->>UI: Gợi ý 3 mức: Xanh (523 kg), Chuẩn (581 kg), Linh hoạt (639 kg)
+    DB-->>API: Trả về {type: "HOUSEHOLD", members: 4, ref_monthly: 567.72}
+    API-->>UI: Gợi ý 3 mức: Xanh (511 kg), Chuẩn (568 kg), Linh hoạt (624 kg)
     Reviewer->>UI: Chọn hạn ngạch cam kết: 550 kg CO2e
-    UI->>API: POST /api/v1/workspaces/{id}/budgets {target: 550, reference: 581.08}
+    UI->>API: POST /api/v1/workspaces/{id}/budgets {target: 550, reference: 567.72}
     API->>DB: Lưu bản ghi carbon_budgets
 
     Note over Reviewer, Members: Giai đoạn 2: Phê duyệt Sổ cái & Kiểm tra Cảnh báo Kép (UC07, UC10)
@@ -517,7 +517,7 @@ sequenceDiagram
     Engine->>Engine: 475 / 550 = 86.36% (>= 85%) -> Kích hoạt Budget 85% Alert
 
     Note over Engine: Kiểm tra Cơ chế 2: Mức Tham chiếu Quốc gia
-    Engine->>Engine: 475 / 4 người = 118.75 kg/người. Projected cuối tháng = 165 kg/người (> 145.27) -> Kích hoạt Anomaly Warning
+    Engine->>Engine: 475 / 4 người = 118.75 kg/người. Projected cuối tháng = 158 kg/người (> 141.93) -> Kích hoạt Anomaly Warning
 
     Engine->>DB: INSERT notifications (Loại: BUDGET_85 & BENCHMARK_WARNING)
     Engine->>Members: Bắn Push Notification & WebSocket Alert tới mọi thiết bị
