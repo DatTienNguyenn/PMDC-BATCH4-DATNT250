@@ -269,102 +269,40 @@
 <!-- ==================== MAIN PAGE VIEWPORT ==================== -->
 <main class="flex-1 p-6 max-w-7xl w-full mx-auto space-y-6">
 <!-- 2. Page Header & Primary Actions -->
-<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-<div>
+<div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"><div>
 <h1 class="font-headline-sm text-headline-sm font-bold text-gray-900 tracking-tight flex items-center gap-2.5">
-            Sổ cái Phát thải Carbon
-            <span class="font-body-sm text-body-sm font-normal px-2.5 py-0.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200">
-              EVN &amp; IPCC Verified
-            </span>
+            Sổ cái Phát thải
 </h1>
 <p class="font-body-md text-body-md text-gray-500 mt-1">
-            Nhật ký toàn bộ hoạt động phát sinh khí thải CO2e sinh hoạt theo tiêu chuẩn EVN và IPCC
+            Quản lý và theo dõi chi tiết toàn bộ hoạt động phát thải carbon của tổ chức.
           </p>
 </div>
 <div class="flex items-center gap-3 shrink-0">
-<!-- Sleek Excel Export Button -->
 <button class="px-3.5 py-2 rounded-lg border border-gray-200 bg-white hover:bg-gray-50 text-gray-700 font-medium text-sm flex items-center gap-2 shadow-sm transition-all duration-150 active:scale-[0.99]" type="button">
 <span class="material-symbols-outlined text-[19px] text-[#00A76F]" style="font-variation-settings: 'FILL' 1;">table_chart</span>
             Xuất Excel (.xlsx)
           </button>
-<!-- Add New Record Button -->
 <button class="px-4 py-2 rounded-lg bg-[#00A76F] hover:bg-[#009462] text-white font-medium text-sm flex items-center gap-2 shadow-sm transition-all duration-150 active:scale-[0.99]" type="button">
 <span class="material-symbols-outlined text-[18px]">add</span>
-            + Thêm bản ghi mới
+            + Thêm phát thải
           </button>
-</div>
-</div>
+</div></div>
 <!-- 3. Summary Mini Banner (Minimals KPI Bar) -->
-<div class="bg-white rounded-xl border border-[#DFE3E8] p-4 px-6 minimals-card flex flex-wrap items-center justify-between gap-4">
-<!-- Tổng phát thải -->
-<div class="flex items-center gap-3">
-<div class="w-10 h-10 rounded-full bg-emerald-50 flex items-center justify-center text-[#00A76F]">
-<span class="material-symbols-outlined text-[22px]">energy_savings_leaf</span>
-</div>
-<div>
-<div class="text-xs font-medium text-gray-500 uppercase tracking-wider">Tổng phát thải tháng</div>
-<div class="text-base font-bold text-gray-900">85.40 <span class="text-xs font-semibold text-gray-500">kg CO2e</span></div>
-</div>
-</div>
-<div class="hidden md:block h-8 w-[1px] bg-gray-200"></div>
-<!-- Đã duyệt -->
-<div class="flex items-center gap-2.5">
-<span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
-<div>
-<div class="text-xs text-gray-500">Đã duyệt</div>
-<div class="text-sm font-semibold text-green-700">78.61 <span class="text-xs font-normal">kg CO2e</span></div>
-</div>
-</div>
-<div class="hidden md:block h-8 w-[1px] bg-gray-200"></div>
-<!-- Đang chờ duyệt -->
-<div class="flex items-center gap-2.5">
-<span class="w-2.5 h-2.5 rounded-full bg-amber-400"></span>
-<div>
-<div class="text-xs text-gray-500">Đang chờ duyệt</div>
-<div class="text-sm font-semibold text-amber-700">2.79 <span class="text-xs font-normal">kg CO2e</span></div>
-</div>
-</div>
-<div class="hidden md:block h-8 w-[1px] bg-gray-200"></div>
-<!-- Bị từ chối -->
-<div class="flex items-center gap-2.5">
-<span class="w-2.5 h-2.5 rounded-full bg-rose-500"></span>
-<div>
-<div class="text-xs text-gray-500">Bị từ chối</div>
-<div class="text-sm font-semibold text-rose-600">4.00 <span class="text-xs font-normal">kg CO2e</span></div>
-</div>
-</div>
-<div class="hidden lg:block h-8 w-[1px] bg-gray-200"></div>
-<!-- Tỷ lệ thẩm định -->
-<div class="flex items-center gap-3 pl-2">
-<div class="text-right">
-<div class="text-xs text-gray-500">Tỷ lệ đã xử lý</div>
-<div class="text-xs font-bold text-gray-800">96.7%</div>
-</div>
-<div class="w-16 bg-gray-100 rounded-full h-2 overflow-hidden">
-<div class="bg-[#00A76F] h-2 rounded-full" style="width: 96.7%"></div>
-</div>
-</div>
-</div>
 <!-- 4. Minimals.cc Status Tabs & Filter Toolbar -->
-<div class="bg-white rounded-xl border border-[#DFE3E8] p-4 space-y-4 minimals-card">
-<!-- Status Tabs Bar -->
+<div class="bg-white rounded-xl border border-[#DFE3E8] p-4 space-y-4 minimals-card"><!-- Status Tabs Bar -->
 <div class="flex items-center gap-6 border-b border-gray-100 overflow-x-auto pb-px">
-<!-- Tab: Tất cả (Active) -->
 <button class="pb-3 text-sm font-bold text-[#00A76F] border-b-2 border-[#00A76F] flex items-center gap-2 whitespace-nowrap">
 <span>Tất cả</span>
 <span class="px-2 py-0.5 rounded-full bg-gray-900 text-white text-xs font-bold">45</span>
 </button>
-<!-- Tab: Đã duyệt -->
 <button class="pb-3 text-sm font-medium text-gray-500 hover:text-gray-900 border-b-2 border-transparent flex items-center gap-2 whitespace-nowrap transition-colors">
 <span>Đã duyệt</span>
 <span class="px-2 py-0.5 rounded-full bg-emerald-50 text-emerald-700 text-xs font-bold">38</span>
 </button>
-<!-- Tab: Chờ duyệt -->
 <button class="pb-3 text-sm font-medium text-gray-500 hover:text-gray-900 border-b-2 border-transparent flex items-center gap-2 whitespace-nowrap transition-colors">
 <span>Chờ duyệt</span>
 <span class="px-2 py-0.5 rounded-full bg-amber-50 text-amber-700 text-xs font-bold">5</span>
 </button>
-<!-- Tab: Bị từ chối -->
 <button class="pb-3 text-sm font-medium text-gray-500 hover:text-gray-900 border-b-2 border-transparent flex items-center gap-2 whitespace-nowrap transition-colors">
 <span>Bị từ chối</span>
 <span class="px-2 py-0.5 rounded-full bg-rose-50 text-rose-700 text-xs font-bold">2</span>
@@ -372,20 +310,17 @@
 </div>
 <!-- Filter Controls Toolbar -->
 <div class="grid grid-cols-1 md:grid-cols-12 gap-3 items-center pt-1">
-<!-- Search Input Box -->
-<div class="md:col-span-4 relative">
+<div class="md:col-span-5 relative">
 <span class="material-symbols-outlined text-[18px] text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2">search</span>
-<input class="w-full pl-10 pr-3.5 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#00A76F] focus:border-[#00A76F] focus:bg-white transition-all" placeholder="Tìm theo hoạt động, tên thành viên, mã log..." type="text"/>
+<input class="w-full pl-10 pr-3.5 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-900 placeholder-gray-400 focus:outline-none focus:ring-1 focus:ring-[#00A76F] focus:border-[#00A76F] focus:bg-white transition-all" placeholder="Tìm theo hoạt động, thành viên..." type="text"/>
 </div>
-<!-- Date Range Picker -->
 <div class="md:col-span-3">
 <div class="flex items-center gap-2 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-sm text-gray-700 cursor-pointer hover:bg-white transition-colors">
 <span class="material-symbols-outlined text-[18px] text-gray-400">calendar_today</span>
 <span class="text-xs font-medium text-gray-800">01/10/2026 - 31/10/2026</span>
 </div>
 </div>
-<!-- Category Dropdown -->
-<div class="md:col-span-2">
+<div class="md:col-span-3">
 <select class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-xs font-medium text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#00A76F] cursor-pointer">
 <option>Tất cả danh mục</option>
 <option>Điện năng (EVN)</option>
@@ -395,81 +330,58 @@
 <option>Ô tô</option>
 </select>
 </div>
-<!-- Input Method Dropdown -->
-<div class="md:col-span-2">
-<select class="w-full px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg text-xs font-medium text-gray-700 focus:outline-none focus:ring-1 focus:ring-[#00A76F] cursor-pointer">
-<option>Mọi nguồn nạp</option>
-<option>Quét AI Vision</option>
-<option>Nhập tay thủ công</option>
-<option>File Excel / CSV</option>
-</select>
-</div>
-<!-- Reset Filter Button -->
 <div class="md:col-span-1 text-center md:text-right">
 <button class="text-xs font-semibold text-gray-500 hover:text-[#00A76F] transition-colors py-1" type="button">
               Đặt lại
             </button>
 </div>
-</div>
-</div>
+</div></div>
 <!-- 5. Data Grid Table (Clean Minimals UI Table) -->
 <div class="rounded-xl border border-gray-200 bg-white shadow-sm overflow-hidden minimals-card">
 <div class="overflow-x-auto custom-scrollbar">
 <table class="w-full text-left border-collapse">
 <!-- Table Header -->
-<thead>
-<tr class="bg-[#F4F6F8] text-[11px] font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-200">
+<thead><tr class="bg-[#F4F6F8] text-[11px] font-semibold text-gray-500 uppercase tracking-wider border-b border-gray-200">
 <th class="py-3.5 px-4 w-10 text-center">
 <input class="rounded border-gray-300 text-[#00A76F] focus:ring-[#00A76F] w-4 h-4" type="checkbox"/>
 </th>
 <th class="py-3.5 px-3">Ngày</th>
-<th class="py-3.5 px-3">Thành viên</th>
-<th class="py-3.5 px-4">Hoạt động &amp; Phân loại</th>
-<th class="py-3.5 px-3 text-right">Sản lượng</th>
-<th class="py-3.5 px-4 text-right">Quy đổi (kg CO2e)</th>
-<th class="py-3.5 px-3">Nguồn</th>
+<th class="py-3.5 px-3">Người tạo</th>
+<th class="py-3.5 px-4">Hoạt động tiêu thụ</th>
+<th class="py-3.5 px-3 text-right">Số lượng</th>
+<th class="py-3.5 px-4 text-right">Phát thải</th>
 <th class="py-3.5 px-3 text-center">Trạng thái</th>
 <th class="py-3.5 px-3 text-center">Thao tác</th>
-</tr>
-</thead>
+</tr></thead>
 <!-- Table Body Rows -->
-<tbody class="divide-y divide-gray-100 font-body-sm text-sm">
-<!-- ROW 1 -->
+<tbody class="divide-y divide-gray-100 font-body-sm text-sm"><!-- ROW 1 -->
 <tr class="hover:bg-gray-50/80 transition-colors">
-<td class="py-3.5 px-4 text-center">
+<td class="py-4 px-4 text-center">
 <input class="rounded border-gray-300 text-[#00A76F] focus:ring-[#00A76F] w-4 h-4" type="checkbox"/>
 </td>
-<td class="py-3.5 px-3 text-gray-600 font-medium whitespace-nowrap">28/10/2026</td>
-<td class="py-3.5 px-3">
-<div class="flex items-center gap-2 whitespace-nowrap">
-<div class="w-7 h-7 rounded-full bg-emerald-100 text-[#00A76F] font-bold text-xs flex items-center justify-center">A</div>
-<span class="font-medium text-gray-800 text-xs">Nguyễn Văn A</span>
+<td class="py-4 px-3 text-gray-600 font-medium whitespace-nowrap text-sm">28/10/2026</td>
+<td class="py-4 px-3">
+<div class="flex items-center gap-2.5 whitespace-nowrap">
+<div class="w-7 h-7 rounded-full bg-emerald-100 text-[#00A76F] font-bold text-xs flex items-center justify-center">NA</div>
+<span class="font-medium text-gray-800 text-sm">Nguyễn Văn A</span>
 </div>
 </td>
-<td class="py-3.5 px-4">
-<div>
-<div class="font-semibold text-gray-900 text-xs">Hóa đơn điện EVN</div>
-<div class="text-[11px] text-gray-400 font-mono">Mã: EVN-8921 • Điện lực Hà Nội</div>
-</div>
+<td class="py-4 px-4">
+<span class="font-medium text-gray-900 text-sm">Hóa đơn điện EVN</span>
 </td>
-<td class="py-3.5 px-3 text-right text-gray-700 font-medium whitespace-nowrap">250 kWh</td>
-<td class="py-3.5 px-4 text-right font-bold text-gray-900 whitespace-nowrap">172.50</td>
-<td class="py-3.5 px-3 whitespace-nowrap">
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-purple-50 text-purple-700 border border-purple-200">
-                    AI Vision 🤖
-                  </span>
+<td class="py-4 px-3 text-right text-gray-700 font-normal whitespace-nowrap text-sm">250 kWh</td>
+<td class="py-4 px-4 text-right font-semibold text-gray-900 whitespace-nowrap text-sm">172.50 kg CO2e</td>
+<td class="py-4 px-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#00A76F]/10 text-[#00A76F]">
+Đã duyệt
+</span>
 </td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700">
-                    Đã duyệt
-                  </span>
-</td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
+<td class="py-4 px-3 text-center whitespace-nowrap">
 <div class="flex items-center justify-center gap-1 text-gray-400">
-<button class="p-1 hover:text-[#00A76F] rounded hover:bg-gray-100 transition-colors" title="Xem chi tiết">
+<button class="p-1.5 hover:text-[#00A76F] rounded-lg hover:bg-gray-100 transition-colors" title="Xem chi tiết">
 <span class="material-symbols-outlined text-[18px]">visibility</span>
 </button>
-<button class="p-1 hover:text-gray-700 rounded hover:bg-gray-100 transition-colors">
+<button class="p-1.5 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
 <span class="material-symbols-outlined text-[18px]">more_vert</span>
 </button>
 </div>
@@ -477,40 +389,32 @@
 </tr>
 <!-- ROW 2 -->
 <tr class="hover:bg-gray-50/80 transition-colors">
-<td class="py-3.5 px-4 text-center">
+<td class="py-4 px-4 text-center">
 <input class="rounded border-gray-300 text-[#00A76F] focus:ring-[#00A76F] w-4 h-4" type="checkbox"/>
 </td>
-<td class="py-3.5 px-3 text-gray-600 font-medium whitespace-nowrap">27/10/2026</td>
-<td class="py-3.5 px-3">
-<div class="flex items-center gap-2 whitespace-nowrap">
-<div class="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center">B</div>
-<span class="font-medium text-gray-800 text-xs">Trần Thị B</span>
+<td class="py-4 px-3 text-gray-600 font-medium whitespace-nowrap text-sm">27/10/2026</td>
+<td class="py-4 px-3">
+<div class="flex items-center gap-2.5 whitespace-nowrap">
+<div class="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center">TB</div>
+<span class="font-medium text-gray-800 text-sm">Trần Thị B</span>
 </div>
 </td>
-<td class="py-3.5 px-4">
-<div>
-<div class="font-semibold text-gray-900 text-xs">Xe máy Honda Wave 110cc</div>
-<div class="text-[11px] text-gray-400">Lộ trình: Đi làm nội ô</div>
-</div>
+<td class="py-4 px-4">
+<span class="font-medium text-gray-900 text-sm">Xe máy Honda Wave 110cc</span>
 </td>
-<td class="py-3.5 px-3 text-right text-gray-700 font-medium whitespace-nowrap">15 km</td>
-<td class="py-3.5 px-4 text-right font-bold text-gray-900 whitespace-nowrap">1.55</td>
-<td class="py-3.5 px-3 whitespace-nowrap">
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-amber-50 text-amber-800 border border-amber-200">
-                    Nhập tay ✍️
-                  </span>
+<td class="py-4 px-3 text-right text-gray-700 font-normal whitespace-nowrap text-sm">15 km</td>
+<td class="py-4 px-4 text-right font-semibold text-gray-900 whitespace-nowrap text-sm">1.55 kg CO2e</td>
+<td class="py-4 px-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700">
+Chờ duyệt
+</span>
 </td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700">
-                    Chờ duyệt
-                  </span>
-</td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
+<td class="py-4 px-3 text-center whitespace-nowrap">
 <div class="flex items-center justify-center gap-1 text-gray-400">
-<button class="p-1 hover:text-[#00A76F] rounded hover:bg-gray-100 transition-colors">
+<button class="p-1.5 hover:text-[#00A76F] rounded-lg hover:bg-gray-100 transition-colors" title="Xem chi tiết">
 <span class="material-symbols-outlined text-[18px]">visibility</span>
 </button>
-<button class="p-1 hover:text-gray-700 rounded hover:bg-gray-100 transition-colors">
+<button class="p-1.5 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
 <span class="material-symbols-outlined text-[18px]">more_vert</span>
 </button>
 </div>
@@ -518,40 +422,32 @@
 </tr>
 <!-- ROW 3 -->
 <tr class="hover:bg-gray-50/80 transition-colors">
-<td class="py-3.5 px-4 text-center">
+<td class="py-4 px-4 text-center">
 <input class="rounded border-gray-300 text-[#00A76F] focus:ring-[#00A76F] w-4 h-4" type="checkbox"/>
 </td>
-<td class="py-3.5 px-3 text-gray-600 font-medium whitespace-nowrap">26/10/2026</td>
-<td class="py-3.5 px-3">
-<div class="flex items-center gap-2 whitespace-nowrap">
-<div class="w-7 h-7 rounded-full bg-emerald-100 text-[#00A76F] font-bold text-xs flex items-center justify-center">A</div>
-<span class="font-medium text-gray-800 text-xs">Nguyễn Văn A</span>
+<td class="py-4 px-3 text-gray-600 font-medium whitespace-nowrap text-sm">26/10/2026</td>
+<td class="py-4 px-3">
+<div class="flex items-center gap-2.5 whitespace-nowrap">
+<div class="w-7 h-7 rounded-full bg-emerald-100 text-[#00A76F] font-bold text-xs flex items-center justify-center">NA</div>
+<span class="font-medium text-gray-800 text-sm">Nguyễn Văn A</span>
 </div>
 </td>
-<td class="py-3.5 px-4">
-<div>
-<div class="font-semibold text-gray-900 text-xs">Hóa đơn Nước máy Sawaco</div>
-<div class="text-[11px] text-gray-400">Định mức sinh hoạt 4 người</div>
-</div>
+<td class="py-4 px-4">
+<span class="font-medium text-gray-900 text-sm">Hóa đơn Nước máy Sawaco</span>
 </td>
-<td class="py-3.5 px-3 text-right text-gray-700 font-medium whitespace-nowrap">12 m³</td>
-<td class="py-3.5 px-4 text-right font-bold text-gray-900 whitespace-nowrap">4.20</td>
-<td class="py-3.5 px-3 whitespace-nowrap">
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-emerald-50 text-emerald-800 border border-emerald-200">
-                    Excel 📊
-                  </span>
+<td class="py-4 px-3 text-right text-gray-700 font-normal whitespace-nowrap text-sm">12 m³</td>
+<td class="py-4 px-4 text-right font-semibold text-gray-900 whitespace-nowrap text-sm">4.20 kg CO2e</td>
+<td class="py-4 px-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#00A76F]/10 text-[#00A76F]">
+Đã duyệt
+</span>
 </td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700">
-                    Đã duyệt
-                  </span>
-</td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
+<td class="py-4 px-3 text-center whitespace-nowrap">
 <div class="flex items-center justify-center gap-1 text-gray-400">
-<button class="p-1 hover:text-[#00A76F] rounded hover:bg-gray-100 transition-colors">
+<button class="p-1.5 hover:text-[#00A76F] rounded-lg hover:bg-gray-100 transition-colors" title="Xem chi tiết">
 <span class="material-symbols-outlined text-[18px]">visibility</span>
 </button>
-<button class="p-1 hover:text-gray-700 rounded hover:bg-gray-100 transition-colors">
+<button class="p-1.5 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
 <span class="material-symbols-outlined text-[18px]">more_vert</span>
 </button>
 </div>
@@ -559,40 +455,32 @@
 </tr>
 <!-- ROW 4 -->
 <tr class="hover:bg-gray-50/80 transition-colors">
-<td class="py-3.5 px-4 text-center">
+<td class="py-4 px-4 text-center">
 <input class="rounded border-gray-300 text-[#00A76F] focus:ring-[#00A76F] w-4 h-4" type="checkbox"/>
 </td>
-<td class="py-3.5 px-3 text-gray-600 font-medium whitespace-nowrap">25/10/2026</td>
-<td class="py-3.5 px-3">
-<div class="flex items-center gap-2 whitespace-nowrap">
-<div class="w-7 h-7 rounded-full bg-orange-100 text-orange-700 font-bold text-xs flex items-center justify-center">C</div>
-<span class="font-medium text-gray-800 text-xs">Lê Văn C</span>
+<td class="py-4 px-3 text-gray-600 font-medium whitespace-nowrap text-sm">25/10/2026</td>
+<td class="py-4 px-3">
+<div class="flex items-center gap-2.5 whitespace-nowrap">
+<div class="w-7 h-7 rounded-full bg-orange-100 text-orange-700 font-bold text-xs flex items-center justify-center">LC</div>
+<span class="font-medium text-gray-800 text-sm">Lê Văn C</span>
 </div>
 </td>
-<td class="py-3.5 px-4">
-<div>
-<div class="font-semibold text-gray-900 text-xs">Bình Gas Petrolimex 12kg</div>
-<div class="text-[11px] text-gray-400">Nấu ăn gia đình</div>
-</div>
+<td class="py-4 px-4">
+<span class="font-medium text-gray-900 text-sm">Bình Gas Petrolimex 12kg</span>
 </td>
-<td class="py-3.5 px-3 text-right text-gray-700 font-medium whitespace-nowrap">1 bình (12 kg)</td>
-<td class="py-3.5 px-4 text-right font-bold text-gray-900 whitespace-nowrap">35.80</td>
-<td class="py-3.5 px-3 whitespace-nowrap">
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-amber-50 text-amber-800 border border-amber-200">
-                    Nhập tay ✍️
-                  </span>
+<td class="py-4 px-3 text-right text-gray-700 font-normal whitespace-nowrap text-sm">1 bình</td>
+<td class="py-4 px-4 text-right font-semibold text-gray-900 whitespace-nowrap text-sm">35.80 kg CO2e</td>
+<td class="py-4 px-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#00A76F]/10 text-[#00A76F]">
+Đã duyệt
+</span>
 </td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700">
-                    Đã duyệt
-                  </span>
-</td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
+<td class="py-4 px-3 text-center whitespace-nowrap">
 <div class="flex items-center justify-center gap-1 text-gray-400">
-<button class="p-1 hover:text-[#00A76F] rounded hover:bg-gray-100 transition-colors">
+<button class="p-1.5 hover:text-[#00A76F] rounded-lg hover:bg-gray-100 transition-colors" title="Xem chi tiết">
 <span class="material-symbols-outlined text-[18px]">visibility</span>
 </button>
-<button class="p-1 hover:text-gray-700 rounded hover:bg-gray-100 transition-colors">
+<button class="p-1.5 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
 <span class="material-symbols-outlined text-[18px]">more_vert</span>
 </button>
 </div>
@@ -600,82 +488,65 @@
 </tr>
 <!-- ROW 5 -->
 <tr class="hover:bg-gray-50/80 transition-colors">
-<td class="py-3.5 px-4 text-center">
+<td class="py-4 px-4 text-center">
 <input class="rounded border-gray-300 text-[#00A76F] focus:ring-[#00A76F] w-4 h-4" type="checkbox"/>
 </td>
-<td class="py-3.5 px-3 text-gray-600 font-medium whitespace-nowrap">24/10/2026</td>
-<td class="py-3.5 px-3">
-<div class="flex items-center gap-2 whitespace-nowrap">
-<div class="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center">B</div>
-<span class="font-medium text-gray-800 text-xs">Trần Thị B</span>
+<td class="py-4 px-3 text-gray-600 font-medium whitespace-nowrap text-sm">24/10/2026</td>
+<td class="py-4 px-3">
+<div class="flex items-center gap-2.5 whitespace-nowrap">
+<div class="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center">TB</div>
+<span class="font-medium text-gray-800 text-sm">Trần Thị B</span>
 </div>
 </td>
-<td class="py-3.5 px-4">
-<div>
-<div class="font-semibold text-gray-900 text-xs">Xe máy Wave 110cc (Đi chợ)</div>
-<div class="text-[11px] text-gray-400">Hoạt động định kỳ cuối tuần</div>
-</div>
+<td class="py-4 px-4">
+<span class="font-medium text-gray-900 text-sm">Xe máy Wave 110cc</span>
 </td>
-<td class="py-3.5 px-3 text-right text-gray-700 font-medium whitespace-nowrap">12 km</td>
-<td class="py-3.5 px-4 text-right font-bold text-gray-900 whitespace-nowrap">1.24</td>
-<td class="py-3.5 px-3 whitespace-nowrap">
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-amber-50 text-amber-800 border border-amber-200">
-                    Nhập tay ✍️
-                  </span>
+<td class="py-4 px-3 text-right text-gray-700 font-normal whitespace-nowrap text-sm">12 km</td>
+<td class="py-4 px-4 text-right font-semibold text-gray-900 whitespace-nowrap text-sm">1.24 kg CO2e</td>
+<td class="py-4 px-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-amber-50 text-amber-700">
+Chờ duyệt
+</span>
 </td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700">
-                    Chờ duyệt
-                  </span>
-</td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
+<td class="py-4 px-3 text-center whitespace-nowrap">
 <div class="flex items-center justify-center gap-1 text-gray-400">
-<button class="p-1 hover:text-[#00A76F] rounded hover:bg-gray-100 transition-colors">
+<button class="p-1.5 hover:text-[#00A76F] rounded-lg hover:bg-gray-100 transition-colors" title="Xem chi tiết">
 <span class="material-symbols-outlined text-[18px]">visibility</span>
 </button>
-<button class="p-1 hover:text-gray-700 rounded hover:bg-gray-100 transition-colors">
+<button class="p-1.5 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
 <span class="material-symbols-outlined text-[18px]">more_vert</span>
 </button>
 </div>
 </td>
 </tr>
 <!-- ROW 6 -->
-<tr class="hover:bg-gray-50/80 transition-colors bg-rose-50/20">
-<td class="py-3.5 px-4 text-center">
+<tr class="hover:bg-gray-50/80 transition-colors">
+<td class="py-4 px-4 text-center">
 <input class="rounded border-gray-300 text-[#00A76F] focus:ring-[#00A76F] w-4 h-4" type="checkbox"/>
 </td>
-<td class="py-3.5 px-3 text-gray-600 font-medium whitespace-nowrap">23/10/2026</td>
-<td class="py-3.5 px-3">
-<div class="flex items-center gap-2 whitespace-nowrap">
-<div class="w-7 h-7 rounded-full bg-rose-100 text-rose-700 font-bold text-xs flex items-center justify-center">D</div>
-<span class="font-medium text-gray-800 text-xs">Phạm Thị D</span>
+<td class="py-4 px-3 text-gray-600 font-medium whitespace-nowrap text-sm">23/10/2026</td>
+<td class="py-4 px-3">
+<div class="flex items-center gap-2.5 whitespace-nowrap">
+<div class="w-7 h-7 rounded-full bg-rose-100 text-rose-700 font-bold text-xs flex items-center justify-center">PD</div>
+<span class="font-medium text-gray-800 text-sm">Phạm Thị D</span>
 </div>
 </td>
-<td class="py-3.5 px-4">
-<div>
-<div class="font-semibold text-gray-900 text-xs">Ô tô xăng 1.5L về quê</div>
-<div class="text-[11px] text-gray-400">Cao tốc Hà Nội - Hải Phòng</div>
-</div>
+<td class="py-4 px-4">
+<span class="font-medium text-gray-900 text-sm">Ô tô xăng 1.5L về quê</span>
 </td>
-<td class="py-3.5 px-3 text-right text-gray-700 font-medium whitespace-nowrap">45 km</td>
-<td class="py-3.5 px-4 text-right font-bold text-gray-900 whitespace-nowrap">7.65</td>
-<td class="py-3.5 px-3 whitespace-nowrap">
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-amber-50 text-amber-800 border border-amber-200">
-                    Nhập tay ✍️
-                  </span>
+<td class="py-4 px-3 text-right text-gray-700 font-normal whitespace-nowrap text-sm">45 km</td>
+<td class="py-4 px-4 text-right font-semibold text-gray-900 whitespace-nowrap text-sm">7.65 kg CO2e</td>
+<td class="py-4 px-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-rose-50 text-rose-700">
+Bị từ chối
+</span>
 </td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
-<div class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-rose-50 text-rose-700">
-<span>Bị từ chối</span>
-<span class="text-[10px] font-normal underline decoration-dotted ml-0.5" title="Ảnh công tơ mét mờ">Ảnh mờ</span>
-</div>
-</td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
+<td class="py-4 px-3 text-center whitespace-nowrap">
 <div class="flex items-center justify-center gap-1 text-gray-400">
-<button class="p-1 hover:text-[#00A76F] rounded hover:bg-gray-100 transition-colors">
+<button class="p-1.5 hover:text-[#00A76F] rounded-lg hover:bg-gray-100 transition-colors" title="Xem chi tiết">
 <span class="material-symbols-outlined text-[18px]">visibility</span>
 </button>
-<button class="p-1 hover:text-gray-700 rounded hover:bg-gray-100 transition-colors">
+<button class="p-1.5 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
 <span class="material-symbols-outlined text-[18px]">more_vert</span>
 </button>
 </div>
@@ -683,40 +554,32 @@
 </tr>
 <!-- ROW 7 -->
 <tr class="hover:bg-gray-50/80 transition-colors">
-<td class="py-3.5 px-4 text-center">
+<td class="py-4 px-4 text-center">
 <input class="rounded border-gray-300 text-[#00A76F] focus:ring-[#00A76F] w-4 h-4" type="checkbox"/>
 </td>
-<td class="py-3.5 px-3 text-gray-600 font-medium whitespace-nowrap">22/10/2026</td>
-<td class="py-3.5 px-3">
-<div class="flex items-center gap-2 whitespace-nowrap">
-<div class="w-7 h-7 rounded-full bg-emerald-100 text-[#00A76F] font-bold text-xs flex items-center justify-center">A</div>
-<span class="font-medium text-gray-800 text-xs">Nguyễn Văn A</span>
+<td class="py-4 px-3 text-gray-600 font-medium whitespace-nowrap text-sm">22/10/2026</td>
+<td class="py-4 px-3">
+<div class="flex items-center gap-2.5 whitespace-nowrap">
+<div class="w-7 h-7 rounded-full bg-emerald-100 text-[#00A76F] font-bold text-xs flex items-center justify-center">NA</div>
+<span class="font-medium text-gray-800 text-sm">Nguyễn Văn A</span>
 </div>
 </td>
-<td class="py-3.5 px-4">
-<div>
-<div class="font-semibold text-gray-900 text-xs">Xe máy Vision 110cc</div>
-<div class="text-[11px] text-gray-400">Giao dịch ngân hàng</div>
-</div>
+<td class="py-4 px-4">
+<span class="font-medium text-gray-900 text-sm">Xe máy Vision 110cc</span>
 </td>
-<td class="py-3.5 px-3 text-right text-gray-700 font-medium whitespace-nowrap">18 km</td>
-<td class="py-3.5 px-4 text-right font-bold text-gray-900 whitespace-nowrap">1.86</td>
-<td class="py-3.5 px-3 whitespace-nowrap">
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-amber-50 text-amber-800 border border-amber-200">
-                    Nhập tay ✍️
-                  </span>
+<td class="py-4 px-3 text-right text-gray-700 font-normal whitespace-nowrap text-sm">18 km</td>
+<td class="py-4 px-4 text-right font-semibold text-gray-900 whitespace-nowrap text-sm">1.86 kg CO2e</td>
+<td class="py-4 px-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#00A76F]/10 text-[#00A76F]">
+Đã duyệt
+</span>
 </td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700">
-                    Đã duyệt
-                  </span>
-</td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
+<td class="py-4 px-3 text-center whitespace-nowrap">
 <div class="flex items-center justify-center gap-1 text-gray-400">
-<button class="p-1 hover:text-[#00A76F] rounded hover:bg-gray-100 transition-colors">
+<button class="p-1.5 hover:text-[#00A76F] rounded-lg hover:bg-gray-100 transition-colors" title="Xem chi tiết">
 <span class="material-symbols-outlined text-[18px]">visibility</span>
 </button>
-<button class="p-1 hover:text-gray-700 rounded hover:bg-gray-100 transition-colors">
+<button class="p-1.5 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
 <span class="material-symbols-outlined text-[18px]">more_vert</span>
 </button>
 </div>
@@ -724,46 +587,37 @@
 </tr>
 <!-- ROW 8 -->
 <tr class="hover:bg-gray-50/80 transition-colors">
-<td class="py-3.5 px-4 text-center">
+<td class="py-4 px-4 text-center">
 <input class="rounded border-gray-300 text-[#00A76F] focus:ring-[#00A76F] w-4 h-4" type="checkbox"/>
 </td>
-<td class="py-3.5 px-3 text-gray-600 font-medium whitespace-nowrap">20/10/2026</td>
-<td class="py-3.5 px-3">
-<div class="flex items-center gap-2 whitespace-nowrap">
-<div class="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center">B</div>
-<span class="font-medium text-gray-800 text-xs">Trần Thị B</span>
+<td class="py-4 px-3 text-gray-600 font-medium whitespace-nowrap text-sm">20/10/2026</td>
+<td class="py-4 px-3">
+<div class="flex items-center gap-2.5 whitespace-nowrap">
+<div class="w-7 h-7 rounded-full bg-blue-100 text-blue-700 font-bold text-xs flex items-center justify-center">TB</div>
+<span class="font-medium text-gray-800 text-sm">Trần Thị B</span>
 </div>
 </td>
-<td class="py-3.5 px-4">
-<div>
-<div class="font-semibold text-gray-900 text-xs">Sạc xe đạp điện</div>
-<div class="text-[11px] text-gray-400">Nguồn trạm sạc hộ gia đình</div>
-</div>
+<td class="py-4 px-4">
+<span class="font-medium text-gray-900 text-sm">Sạc xe đạp điện</span>
 </td>
-<td class="py-3.5 px-3 text-right text-gray-700 font-medium whitespace-nowrap">5 kWh</td>
-<td class="py-3.5 px-4 text-right font-bold text-gray-900 whitespace-nowrap">3.45</td>
-<td class="py-3.5 px-3 whitespace-nowrap">
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-amber-50 text-amber-800 border border-amber-200">
-                    Nhập tay ✍️
-                  </span>
+<td class="py-4 px-3 text-right text-gray-700 font-normal whitespace-nowrap text-sm">5 kWh</td>
+<td class="py-4 px-4 text-right font-semibold text-gray-900 whitespace-nowrap text-sm">3.45 kg CO2e</td>
+<td class="py-4 px-3 text-center whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-[#00A76F]/10 text-[#00A76F]">
+Đã duyệt
+</span>
 </td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-emerald-700">
-                    Đã duyệt
-                  </span>
-</td>
-<td class="py-3.5 px-3 text-center whitespace-nowrap">
+<td class="py-4 px-3 text-center whitespace-nowrap">
 <div class="flex items-center justify-center gap-1 text-gray-400">
-<button class="p-1 hover:text-[#00A76F] rounded hover:bg-gray-100 transition-colors">
+<button class="p-1.5 hover:text-[#00A76F] rounded-lg hover:bg-gray-100 transition-colors" title="Xem chi tiết">
 <span class="material-symbols-outlined text-[18px]">visibility</span>
 </button>
-<button class="p-1 hover:text-gray-700 rounded hover:bg-gray-100 transition-colors">
+<button class="p-1.5 hover:text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
 <span class="material-symbols-outlined text-[18px]">more_vert</span>
 </button>
 </div>
 </td>
-</tr>
-</tbody>
+</tr></tbody>
 </table>
 </div>
 <!-- 6. Table Footer & Pagination -->

@@ -309,165 +309,97 @@
 <!-- ========================================================================= -->
 <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md transition-opacity">
 <!-- Modal Dialog Card (min-w / max-w-[720px]) -->
-<div class="relative bg-surface-container-lowest rounded-2xl minimals-modal-shadow max-w-[720px] w-full border border-slate-100 overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-200">
-<!-- 1. Modal Header -->
-<div class="px-6 pt-6 pb-2 flex items-start justify-between">
+<div class="relative bg-surface-container-lowest rounded-2xl minimals-modal-shadow max-w-[580px] w-full border border-slate-100/80 overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-200 p-6 sm:p-7">
+<!-- Modal Header -->
+<div class="flex items-start justify-between mb-5">
 <div>
-<h2 class="font-headline-md text-headline-md text-on-surface">Ghi nhận Phát thải Mới</h2>
-<p class="font-body-md text-body-md text-secondary mt-0.5">Chọn phương thức nạp dữ liệu hoạt động tiêu thụ năng lượng và quy đổi dấu chân carbon.</p>
+<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface tracking-tight">Thêm phát thải mới</h2>
+<p class="font-body-sm text-body-sm text-secondary mt-0.5">Ghi nhận và quy đổi dữ liệu phát thải carbon</p>
 </div>
-<!-- Close button (X icon button) -->
 <button aria-label="Đóng modal" class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:bg-slate-100 hover:text-on-surface transition-colors cursor-pointer">
 <span class="material-symbols-outlined text-xl">close</span>
 </button>
 </div>
-<!-- 2. Segmented 3-Tab Header (Minimals pill container) -->
-<div class="mx-6 mt-3 bg-slate-100 p-1.5 rounded-xl flex gap-1 items-center">
-<!-- Tab 1: AI Inactive -->
-<button class="flex-1 py-2 px-3 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-200/50 font-body-md text-body-md font-medium text-center transition-all flex items-center justify-center gap-1.5" type="button">
+<!-- 3 Input Mode Tabs (Pill switcher) -->
+<div class="bg-slate-100 p-1 rounded-xl flex gap-1 mb-5">
+<button class="flex-1 py-2 px-3 rounded-lg text-secondary hover:text-on-surface font-body-sm text-body-sm font-medium text-center transition-all flex items-center justify-center gap-1.5" type="button">
 <span>🤖</span>
-<span>Quét Hóa đơn AI</span>
+<span>Quét AI</span>
 </button>
-<!-- Tab 2: Khai báo Thủ công (ACTIVE) -->
-<button class="flex-1 py-2 px-3 rounded-lg bg-surface-container-lowest text-primary-container font-headline-sm text-title-md shadow-sm font-semibold text-center transition-all flex items-center justify-center gap-1.5 border border-slate-200/60" type="button">
+<button class="flex-1 py-2 px-3 rounded-lg bg-surface-container-lowest text-primary-container font-title-md text-title-md shadow-sm font-semibold text-center transition-all flex items-center justify-center gap-1.5 border border-slate-200/60" type="button">
 <span>✍️</span>
-<span>Khai báo Thủ công</span>
-<span class="w-1.5 h-1.5 rounded-full bg-primary-container ml-0.5"></span>
+<span>Nhập tay</span>
 </button>
-<!-- Tab 3: Excel Inactive -->
-<button class="flex-1 py-2 px-3 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-200/50 font-body-md text-body-md font-medium text-center transition-all flex items-center justify-center gap-1.5" type="button">
+<button class="flex-1 py-2 px-3 rounded-lg text-secondary hover:text-on-surface font-body-sm text-body-sm font-medium text-center transition-all flex items-center justify-center gap-1.5" type="button">
 <span>📊</span>
-<span>Nạp File Excel</span>
+<span>Excel</span>
 </button>
 </div>
-<!-- 3. Tab 2 Content: Khai báo Thủ công Form Body -->
-<div class="px-6 py-5 space-y-4 max-h-[calc(85vh-190px)] overflow-y-auto">
-<!-- Row 1: 2-Column Dropdowns -->
-<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<!-- Left: Danh mục hoạt động -->
+<!-- Form Body -->
+<div class="space-y-4">
+<!-- Activity Selection -->
 <div>
-<label class="block font-label-status text-label-status text-slate-700 mb-1.5">
-              Danh mục hoạt động <span class="text-tertiary">*</span>
-</label>
+<label class="block font-label-status text-label-status text-slate-700 mb-1.5">Hoạt động tiêu thụ</label>
 <div class="relative">
-<select class="w-full appearance-none bg-surface-container-lowest border border-slate-200 rounded-lg px-3.5 py-2.5 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all cursor-pointer pr-10">
-<option selected="" value="motorbike">Xe máy cá nhân 🛵</option>
-<option value="car">Ô tô cá nhân (Xăng/Dầu) 🚗</option>
-<option value="electricity">Điện lưới văn phòng ⚡</option>
-<option value="flight">Chuyến bay công tác ✈️</option>
-<option value="bus">Xe buýt công cộng 🚌</option>
-</select>
-<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-xl">expand_more</span>
-</div>
-</div>
-<!-- Right: Phân loại chi tiết & Hệ số -->
-<div>
-<label class="block font-label-status text-label-status text-slate-700 mb-1.5">
-              Phân loại chi tiết &amp; Hệ số <span class="text-tertiary">*</span>
-</label>
-<div class="relative">
-<select class="w-full appearance-none bg-surface-container-lowest border border-slate-200 rounded-lg px-3.5 py-2.5 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all cursor-pointer pr-10 text-ellipsis overflow-hidden whitespace-nowrap">
+<select class="w-full appearance-none bg-surface-container-lowest border border-slate-200 rounded-xl px-4 py-2.5 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all cursor-pointer pr-10 text-ellipsis">
 <option selected="">Xe máy số Honda Wave 110cc (0.1033 kg CO2e/km)</option>
 <option>Xe tay ga 125cc-150cc (0.1342 kg CO2e/km)</option>
-<option>Xe máy điện VinFast (0.0380 kg CO2e/km)</option>
-<option>Xe phân khối lớn &gt; 300cc (0.1850 kg CO2e/km)</option>
+<option>Ô tô xăng 1.5L-2.0L (0.1720 kg CO2e/km)</option>
+<option>Điện lưới sinh hoạt (0.7221 kg CO2e/kWh)</option>
 </select>
-<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-xl">expand_more</span>
+<span class="material-symbols-outlined absolute right-3.5 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-xl">expand_more</span>
 </div>
 </div>
-</div>
-<!-- Row 2: 2-Column Inputs (Sản lượng & Ngày phát sinh) -->
+<!-- 2 Columns: Consumption & Date -->
 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-<!-- Left: Sản lượng tiêu thụ -->
 <div>
-<label class="block font-label-status text-label-status text-slate-700 mb-1.5">
-              Sản lượng tiêu thụ <span class="text-tertiary">*</span>
-</label>
+<label class="block font-label-status text-label-status text-slate-700 mb-1.5">Sản lượng tiêu thụ</label>
 <div class="relative flex items-center">
-<input class="w-full bg-surface-container-lowest border border-slate-200 rounded-lg pl-3.5 pr-14 py-2.5 font-body-md text-body-md text-on-surface font-semibold focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" step="0.1" type="number" value="15"/>
-<div class="absolute right-2 px-2.5 py-1 rounded bg-slate-100 text-slate-600 font-label-status text-label-status select-none">
-                km
-              </div>
+<input class="w-full bg-surface-container-lowest border border-slate-200 rounded-xl pl-4 pr-14 py-2.5 font-body-md text-body-md text-on-surface font-semibold focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" step="0.1" type="number" value="15"/>
+<div class="absolute right-2.5 px-2.5 py-1 rounded-md bg-slate-100 text-slate-600 font-label-status text-label-status select-none">
+            km
+          </div>
 </div>
 </div>
-<!-- Right: Ngày phát sinh -->
 <div>
-<label class="block font-label-status text-label-status text-slate-700 mb-1.5">
-              Ngày phát sinh <span class="text-tertiary">*</span>
-</label>
+<label class="block font-label-status text-label-status text-slate-700 mb-1.5">Ngày phát sinh</label>
 <div class="relative flex items-center">
-<input class="w-full bg-surface-container-lowest border border-slate-200 rounded-lg pl-3.5 pr-10 py-2.5 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" type="text" value="28/10/2026"/>
-<span class="material-symbols-outlined absolute right-3 text-secondary pointer-events-none text-xl">calendar_today</span>
+<input class="w-full bg-surface-container-lowest border border-slate-200 rounded-xl pl-4 pr-10 py-2.5 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" type="text" value="28/10/2026"/>
+<span class="material-symbols-outlined absolute right-3.5 text-secondary pointer-events-none text-xl">calendar_today</span>
 </div>
 </div>
 </div>
-<!-- Row 3: Real-time Conversion Preview Box (Instant Eco Card) -->
-<div class="bg-emerald-50/80 border border-emerald-200/80 rounded-xl p-4 flex items-center justify-between">
-<div class="flex items-center gap-3.5">
-<div class="w-10 h-10 rounded-full bg-primary-container/20 text-primary flex items-center justify-center flex-shrink-0">
-<span class="material-symbols-outlined text-2xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">eco</span>
+<!-- Conversion Output Box -->
+<div class="bg-emerald-50/80 border border-emerald-200/80 rounded-2xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container/15 text-primary-container flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">eco</span>
 </div>
 <div>
-<div class="text-primary font-bold text-headline-sm flex items-center gap-1.5">
-<span>Quy đổi ước tính tức thì:</span>
-<span class="text-emerald-950 font-extrabold tracking-tight">1.55 kg CO2e</span>
-</div>
-<div class="text-body-sm font-body-sm text-slate-600 mt-0.5">
-                Công thức: 15 km × 0.1033 kg CO2e/km (Hệ số phát thải chuẩn IPCC/Bộ Công Thương)
-              </div>
+<div class="font-title-md text-title-md text-slate-700 font-semibold">Quy đổi ước tính</div>
+<div class="font-body-sm text-body-sm text-secondary mt-0.5">15 km × 0.1033 kg CO2e/km</div>
 </div>
 </div>
-<!-- Status badge -->
-<div class="flex-shrink-0 ml-3">
-<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-100 text-primary font-label-status text-label-status border border-emerald-300">
-<span class="material-symbols-outlined text-sm font-bold">check</span>
-              Đạt ngưỡng xanh
-            </span>
+<div class="text-right pl-3">
+<span class="font-headline-md text-headline-md text-primary-container font-extrabold tracking-tight">≈ 1.55</span>
+<span class="font-body-sm text-body-sm text-primary font-semibold ml-1">kg CO2e</span>
 </div>
 </div>
-<!-- Row 4: Optional Fields -->
-<div class="space-y-4 pt-1">
-<!-- Ghi chú hoạt động -->
+<!-- Note Field -->
 <div>
-<label class="block font-label-status text-label-status text-slate-700 mb-1.5">
-              Ghi chú hoạt động <span class="text-slate-400 font-normal text-body-sm">(Không bắt buộc)</span>
-</label>
-<textarea class="w-full bg-surface-container-lowest border border-slate-200 rounded-lg px-3.5 py-2 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all resize-none" placeholder="Nhập mục đích hoặc chi tiết lộ trình..." rows="2">Đi làm ca sáng + đón con</textarea>
-</div>
-<!-- Upload zone -->
-<div>
-<label class="block font-label-status text-label-status text-slate-700 mb-1.5">
-              Ảnh chứng từ / Đồng hồ công tơ <span class="text-slate-400 font-normal text-body-sm">(Không bắt buộc)</span>
-</label>
-<div class="border-dashed border-2 border-slate-200 rounded-xl p-3.5 text-center bg-slate-50/50 hover:bg-slate-50 transition-colors flex items-center justify-center gap-3 cursor-pointer group">
-<div class="w-8 h-8 rounded-full bg-slate-200/80 group-hover:bg-primary-container/15 group-hover:text-primary transition-colors flex items-center justify-center text-slate-600">
-<span class="material-symbols-outlined text-lg">photo_camera</span>
-</div>
-<div class="text-left">
-<span class="text-body-md font-body-md text-slate-700 font-medium group-hover:text-primary transition-colors">Kéo thả hoặc chụp ảnh công tơ / hóa đơn xăng</span>
-<span class="block text-body-sm font-body-sm text-slate-400">Hỗ trợ JPG, PNG, HEIC hoặc PDF (Tối đa 10MB)</span>
+<label class="block font-label-status text-label-status text-slate-700 mb-1.5">Ghi chú (tùy chọn)</label>
+<input class="w-full bg-surface-container-lowest border border-slate-200 rounded-xl px-4 py-2.5 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all placeholder-secondary" placeholder="Nhập mục đích hoặc chi tiết lộ trình..." type="text" value="Đi làm ca sáng + đón con"/>
 </div>
 </div>
-</div>
-</div>
-</div>
-<!-- 4. Modal Footer -->
-<div class="px-6 py-4 bg-slate-50/70 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
-<!-- Note Left -->
-<div class="flex items-center gap-1.5 text-slate-500 font-body-sm text-body-sm">
-<span class="material-symbols-outlined text-base text-slate-400">info</span>
-<span>Bản ghi sẽ được gửi vào Hàng đợi kiểm duyệt của Trưởng nhóm</span>
-</div>
-<!-- Action Buttons Right -->
-<div class="flex items-center gap-2.5 w-full sm:w-auto justify-end">
-<button class="px-4 py-2 rounded-lg text-slate-600 border border-slate-200 bg-surface-container-lowest hover:bg-slate-100 font-title-md text-title-md transition-colors cursor-pointer" type="button">
-            Hủy bỏ
-          </button>
-<button class="px-6 py-2 rounded-lg bg-primary-container hover:bg-emerald-600 text-on-primary font-title-md text-title-md shadow-md transition-all flex items-center gap-2 cursor-pointer active:scale-[0.98]" type="button">
+<!-- Modal Footer -->
+<div class="pt-5 mt-5 border-t border-slate-100 flex items-center justify-end gap-3">
+<button class="px-5 py-2.5 rounded-xl text-secondary hover:bg-slate-100 hover:text-on-surface font-title-md text-title-md font-medium transition-colors cursor-pointer" type="button">
+      Hủy
+    </button>
+<button class="px-6 py-2.5 rounded-xl bg-primary-container hover:bg-emerald-600 text-on-primary font-title-md text-title-md font-semibold shadow-sm transition-all flex items-center gap-2 cursor-pointer active:scale-[0.98]" type="button">
 <span class="material-symbols-outlined text-lg">send</span>
-<span>Gửi Phê duyệt</span>
+<span>Lưu bản ghi</span>
 </button>
-</div>
 </div>
 </div>
 </div>
