@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+
+<html class="h-full bg-background" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CarbonLedger - 3-in-1 Emission Ingestion Modal</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Public Sans Typography -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary": "#565f6a",
+            "surface-tint": "#006c46",
+            "on-secondary": "#ffffff",
+            "surface-container-highest": "#d7e4f2",
+            "secondary-fixed-dim": "#bec7d3",
+            "on-surface": "#101d27",
+            "surface-dim": "#cedce9",
+            "surface-container": "#e2effe",
+            "surface-container-low": "#ecf4ff",
+            "on-error-container": "#93000a",
+            "surface-bright": "#f6f9ff",
+            "primary-container": "#00a76f",
+            "on-tertiary-fixed": "#3d0600",
+            "tertiary-fixed-dim": "#ffb4a3",
+            "outline-variant": "#bccabf",
+            "tertiary-container": "#ff5a35",
+            "surface": "#f6f9ff",
+            "primary-fixed-dim": "#5adda0",
+            "on-tertiary": "#ffffff",
+            "on-secondary-container": "#5c6570",
+            "error-container": "#ffdad6",
+            "surface-container-lowest": "#ffffff",
+            "outline": "#6d7a71",
+            "surface-container-high": "#dceaf8",
+            "inverse-on-surface": "#e6f2ff",
+            "on-secondary-fixed": "#131c25",
+            "on-primary-fixed": "#002112",
+            "secondary-fixed": "#dae3f0",
+            "error": "#ba1a1a",
+            "tertiary-fixed": "#ffdad2",
+            "tertiary": "#b62500",
+            "primary": "#006c46",
+            "on-tertiary-container": "#590d00",
+            "background": "#f6f9ff",
+            "surface-variant": "#d7e4f2",
+            "on-tertiary-fixed-variant": "#8b1a00",
+            "inverse-surface": "#25323c",
+            "on-background": "#101d27",
+            "inverse-primary": "#5adda0",
+            "secondary-container": "#dae3f0",
+            "on-secondary-fixed-variant": "#3f4852",
+            "on-primary-fixed-variant": "#005234",
+            "on-surface-variant": "#3d4a41",
+            "on-primary-container": "#00321f",
+            "on-error": "#ffffff",
+            "primary-fixed": "#79fabb",
+            "on-primary": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "space-lg": "1.5rem",
+            "margin": "1.5rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "space-md": "1rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Public Sans"],
+            "title-md": ["Public Sans"],
+            "headline-lg": ["Public Sans"],
+            "body-sm": ["Public Sans"],
+            "label-status": ["Public Sans"],
+            "body-md": ["Public Sans"],
+            "headline-sm": ["Public Sans"]
+          },
+          "fontSize": {
+            "headline-md": ["1.375rem", { "lineHeight": "1.75rem", "fontWeight": "700" }],
+            "title-md": ["1rem", { "lineHeight": "1.375rem", "fontWeight": "600" }],
+            "headline-lg": ["1.75rem", { "lineHeight": "2.25rem", "fontWeight": "700" }],
+            "body-sm": ["0.75rem", { "lineHeight": "1.125rem", "fontWeight": "400" }],
+            "label-status": ["0.75rem", { "lineHeight": "1rem", "fontWeight": "700" }],
+            "body-md": ["0.875rem", { "lineHeight": "1.375rem", "fontWeight": "400" }],
+            "headline-sm": ["1.125rem", { "lineHeight": "1.5rem", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .minimals-card-shadow {
+      box-shadow: 0 0 2px 0 rgba(145, 158, 171, 0.2), 0 12px 24px -4px rgba(145, 158, 171, 0.12);
+    }
+    .minimals-modal-shadow {
+      box-shadow: 0 0 2px 0 rgba(145, 158, 171, 0.24), 0 20px 40px -4px rgba(145, 158, 171, 0.24);
+    }
+  </style>
+</head>
+<body class="h-full font-body-md text-body-md text-on-surface bg-background antialiased selection:bg-primary-container selection:text-on-primary">
+<!-- ========================================================================= -->
+<!-- BACKGROUND LAYOUT: CarbonLedger Persistent Shell & Blurred Dashboard View -->
+<!-- ========================================================================= -->
+<div class="min-h-screen w-full flex flex-col bg-background">
+<!-- TopNavBar (Shared Component) -->
+<header class="sticky top-0 right-0 w-full pl-64 border-b border-secondary-container bg-surface-container-lowest/80 backdrop-blur-md shadow-sm z-10">
+<div class="flex justify-between items-center h-16 px-6 w-full">
+<!-- Search bar left -->
+<div class="flex items-center gap-3 w-96">
+<div class="relative w-full">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-secondary text-lg">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-container-low border border-secondary-container rounded-lg font-body-md text-body-md text-on-surface placeholder-secondary focus:outline-none focus:border-primary-container transition-colors" disabled="" placeholder="Tìm kiếm tài sản, trạm phát thải, hóa đơn..." type="text"/>
+</div>
+</div>
+<!-- Navigation Links & Trailing actions -->
+<div class="flex items-center gap-6">
+<nav class="hidden lg:flex items-center gap-6">
+<span class="text-secondary hover:text-on-surface font-body-md text-body-md transition-colors cursor-pointer">Global Scope 1-3</span>
+<span class="text-secondary hover:text-on-surface font-body-md text-body-md transition-colors cursor-pointer">EU ETS Compliance</span>
+<span class="text-primary font-semibold border-b-2 border-primary pb-1 font-body-md text-body-md">Real-Time Telemetry</span>
+</nav>
+<div class="h-6 w-px bg-secondary-container"></div>
+<div class="flex items-center gap-3">
+<span class="px-2.5 py-1 rounded-full bg-secondary-container text-on-secondary-fixed text-label-status font-label-status">Workspace: EMEA Operations</span>
+<button class="p-2 text-secondary hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">notifications</span>
+</button>
+<button class="p-2 text-secondary hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">help</span>
+</button>
+<button class="p-2 text-secondary hover:bg-surface-container-low rounded-lg transition-colors">
+<span class="material-symbols-outlined text-xl">dark_mode</span>
+</button>
+<!-- Profile Avatar -->
+<div class="flex items-center gap-2 pl-2">
+<img class="w-9 h-9 rounded-full object-cover border border-secondary-container" data-alt="Professional studio portrait of an Asian woman Chief Sustainability Officer with subtle green corporate lighting, sharp focus, clean minimalist aesthetic, wearing modern formal attire with CarbonLedger badge." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBlx6lgZqJaqaYDq3IU2VRsN1vJd_AQ-TFifBAhaGW6Mvq4GKWKnGaH6Z64OsrBG8RyPRtBrjvOYvtPTqoqHbEEnWrMB59KsZu0aTNlpGo7qXBWeveqILqrIPTk0fsLYc8YYLggwH5oJxA1vE2MDFyllMB_K6gEWUgRB3FYoLAzSWP9O4jfs2_p0R27L67oUiIHOSvEELh2H8kecZykyO_tIkPGnXjNKFJPlMClJBgvKXjM_9Zv13o3zCvhtr3k-zYMJY_lxeAFy5c"/>
+</div>
+</div>
+</div>
+</div>
+</header>
+<!-- SideNavBar (Shared Component) -->
+<aside class="fixed top-0 left-0 h-screen w-64 border-r border-secondary-container bg-surface-container-lowest z-20 flex flex-col justify-between p-4">
+<div>
+<!-- Brand Header -->
+<div class="flex items-center gap-3 px-2 py-3 mb-6 border-b border-secondary-container">
+<div class="w-10 h-10 rounded-xl bg-primary-container/15 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-2xl font-bold" data-weight="fill" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-primary">CarbonLedger</div>
+<div class="font-label-status text-label-status text-secondary">Enterprise ESG v2.4</div>
+</div>
+</div>
+<!-- Main Nav items -->
+<nav class="space-y-1.5">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-secondary hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">dashboard</span>
+<span class="font-body-md text-body-md">Dashboard</span>
+</a>
+<!-- Active Tab: Emissions -->
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg bg-surface-container-low text-primary font-semibold" href="#">
+<span class="material-symbols-outlined text-xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">co2</span>
+<span class="font-body-md text-body-md">Emissions</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-secondary hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">monitoring</span>
+<span class="font-body-md text-body-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-secondary hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">verified_user</span>
+<span class="font-body-md text-body-md">Verification</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-secondary hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">forest</span>
+<span class="font-body-md text-body-md">Offsets</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-secondary hover:bg-surface-container-low transition-colors" href="#">
+<span class="material-symbols-outlined text-xl">settings</span>
+<span class="font-body-md text-body-md">Settings</span>
+</a>
+</nav>
+</div>
+<!-- Footer & Invite -->
+<div>
+<div class="p-3 mb-4 rounded-xl bg-surface-container-low border border-secondary-container">
+<div class="text-label-status font-label-status text-on-surface mb-1">Cộng tác Tổ chức</div>
+<p class="text-body-sm font-body-sm text-secondary mb-3">Mời kiểm toán viên hoặc trưởng nhóm dự án.</p>
+<button class="w-full py-1.5 px-3 rounded-lg bg-primary-container text-on-primary font-label-status text-label-status flex items-center justify-center gap-1.5 shadow-sm">
+<span class="material-symbols-outlined text-base">person_add</span>
+            Invite Team Member
+          </button>
+</div>
+<div class="pt-2 border-t border-secondary-container flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-secondary hover:bg-surface-container-low text-body-sm font-body-sm" href="#">
+<span class="material-symbols-outlined text-lg">menu_book</span>
+            Documentation
+          </a>
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-secondary hover:bg-surface-container-low text-body-sm font-body-sm" href="#">
+<span class="material-symbols-outlined text-lg">headset_mic</span>
+            Support
+          </a>
+</div>
+</div>
+</aside>
+<!-- Underlying Main Canvas Content (Simulated for visual backdrop depth) -->
+<main class="ml-64 p-8 flex-1 space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface">Nhật ký Hoạt động Phát thải (Emission Logs)</h1>
+<p class="font-body-md text-body-md text-secondary">Theo dõi dòng phát thải Scope 1 &amp; Scope 2 theo chu kỳ kiểm kê ISO 14064-1</p>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 bg-surface-container-lowest border border-secondary-container rounded-lg text-secondary font-label-status text-label-status flex items-center gap-2">
+<span class="material-symbols-outlined text-base">filter_list</span>
+            Bộ lọc nâng cao
+          </button>
+<button class="px-4 py-2 bg-primary-container text-on-primary rounded-lg font-label-status text-label-status flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-base">add</span>
+            Ghi nhận phát thải
+          </button>
+</div>
+</div>
+<!-- KPI Stat Cards Grid (Minimals Style) -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-6">
+<div class="p-6 bg-surface-container-lowest rounded-xl minimals-card-shadow border border-slate-100 flex items-center justify-between">
+<div>
+<div class="text-body-sm font-body-sm text-secondary">Tổng phát thải tháng 10</div>
+<div class="font-headline-md text-headline-md text-on-surface mt-1">2,845.2 <span class="text-body-md text-secondary font-normal">tCO2e</span></div>
+<span class="inline-flex items-center text-xs font-semibold text-primary mt-2">
+<span class="material-symbols-outlined text-sm">trending_down</span> -4.2% so với tháng trước
+            </span>
+</div>
+<div class="w-12 h-12 rounded-full bg-emerald-50 text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">co2</span>
+</div>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-xl minimals-card-shadow border border-slate-100 flex items-center justify-between">
+<div>
+<div class="text-body-sm font-body-sm text-secondary">Di chuyển cá nhân (Scope 3)</div>
+<div class="font-headline-md text-headline-md text-on-surface mt-1">428.6 <span class="text-body-md text-secondary font-normal">tCO2e</span></div>
+<span class="inline-flex items-center text-xs font-semibold text-tertiary mt-2">
+<span class="material-symbols-outlined text-sm">trending_up</span> +1.8% tăng nhẹ
+            </span>
+</div>
+<div class="w-12 h-12 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">two_wheeler</span>
+</div>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-xl minimals-card-shadow border border-slate-100 flex items-center justify-between">
+<div>
+<div class="text-body-sm font-body-sm text-secondary">Đã phê duyệt kiểm định</div>
+<div class="font-headline-md text-headline-md text-on-surface mt-1">94.8%</div>
+<span class="inline-flex items-center text-xs font-semibold text-primary mt-2">
+<span class="material-symbols-outlined text-sm">check_circle</span> 184/194 bản ghi
+            </span>
+</div>
+<div class="w-12 h-12 rounded-full bg-emerald-50 text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">fact_check</span>
+</div>
+</div>
+<div class="p-6 bg-surface-container-lowest rounded-xl minimals-card-shadow border border-slate-100 flex items-center justify-between">
+<div>
+<div class="text-body-sm font-body-sm text-secondary">Ngân sách CO2 còn lại</div>
+<div class="font-headline-md text-headline-md text-on-surface mt-1">682.0 <span class="text-body-md text-secondary font-normal">tCO2e</span></div>
+<span class="inline-flex items-center text-xs font-semibold text-primary mt-2">
+<span class="material-symbols-outlined text-sm">shield</span> An toàn ngưỡng 85%
+            </span>
+</div>
+<div class="w-12 h-12 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl">energy_savings_leaf</span>
+</div>
+</div>
+</div>
+<!-- Sample Table In Background -->
+<div class="bg-surface-container-lowest rounded-xl minimals-card-shadow border border-slate-100 p-6">
+<div class="h-64 flex flex-col items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-4xl mb-2 text-outline-variant">table_chart</span>
+<p class="font-body-md text-body-md">Danh sách phát thải chi tiết đang được mở trong màn hình thao tác</p>
+</div>
+</div>
+</main>
+</div>
+<!-- ========================================================================= -->
+<!-- MODAL VIEW OVERLAY: SCR-EMISSION-ADD-01                                   -->
+<!-- 'Modal Thêm Phát thải Đa phương thức (3-in-1 Emission Ingestion Modal)'    -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-md transition-opacity">
+<!-- Modal Dialog Card (min-w / max-w-[720px]) -->
+<div class="relative bg-surface-container-lowest rounded-2xl minimals-modal-shadow max-w-[720px] w-full border border-slate-100 overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-200">
+<!-- 1. Modal Header -->
+<div class="px-6 pt-6 pb-2 flex items-start justify-between">
+<div>
+<h2 class="font-headline-md text-headline-md text-on-surface">Ghi nhận Phát thải Mới</h2>
+<p class="font-body-md text-body-md text-secondary mt-0.5">Chọn phương thức nạp dữ liệu hoạt động tiêu thụ năng lượng và quy đổi dấu chân carbon.</p>
+</div>
+<!-- Close button (X icon button) -->
+<button aria-label="Đóng modal" class="w-8 h-8 rounded-full flex items-center justify-center text-secondary hover:bg-slate-100 hover:text-on-surface transition-colors cursor-pointer">
+<span class="material-symbols-outlined text-xl">close</span>
+</button>
+</div>
+<!-- 2. Segmented 3-Tab Header (Minimals pill container) -->
+<div class="mx-6 mt-3 bg-slate-100 p-1.5 rounded-xl flex gap-1 items-center">
+<!-- Tab 1: AI Inactive -->
+<button class="flex-1 py-2 px-3 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-200/50 font-body-md text-body-md font-medium text-center transition-all flex items-center justify-center gap-1.5" type="button">
+<span>🤖</span>
+<span>Quét Hóa đơn AI</span>
+</button>
+<!-- Tab 2: Khai báo Thủ công (ACTIVE) -->
+<button class="flex-1 py-2 px-3 rounded-lg bg-surface-container-lowest text-primary-container font-headline-sm text-title-md shadow-sm font-semibold text-center transition-all flex items-center justify-center gap-1.5 border border-slate-200/60" type="button">
+<span>✍️</span>
+<span>Khai báo Thủ công</span>
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container ml-0.5"></span>
+</button>
+<!-- Tab 3: Excel Inactive -->
+<button class="flex-1 py-2 px-3 rounded-lg text-slate-600 hover:text-slate-900 hover:bg-slate-200/50 font-body-md text-body-md font-medium text-center transition-all flex items-center justify-center gap-1.5" type="button">
+<span>📊</span>
+<span>Nạp File Excel</span>
+</button>
+</div>
+<!-- 3. Tab 2 Content: Khai báo Thủ công Form Body -->
+<div class="px-6 py-5 space-y-4 max-h-[calc(85vh-190px)] overflow-y-auto">
+<!-- Row 1: 2-Column Dropdowns -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Left: Danh mục hoạt động -->
+<div>
+<label class="block font-label-status text-label-status text-slate-700 mb-1.5">
+              Danh mục hoạt động <span class="text-tertiary">*</span>
+</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-lowest border border-slate-200 rounded-lg px-3.5 py-2.5 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all cursor-pointer pr-10">
+<option selected="" value="motorbike">Xe máy cá nhân 🛵</option>
+<option value="car">Ô tô cá nhân (Xăng/Dầu) 🚗</option>
+<option value="electricity">Điện lưới văn phòng ⚡</option>
+<option value="flight">Chuyến bay công tác ✈️</option>
+<option value="bus">Xe buýt công cộng 🚌</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-xl">expand_more</span>
+</div>
+</div>
+<!-- Right: Phân loại chi tiết & Hệ số -->
+<div>
+<label class="block font-label-status text-label-status text-slate-700 mb-1.5">
+              Phân loại chi tiết &amp; Hệ số <span class="text-tertiary">*</span>
+</label>
+<div class="relative">
+<select class="w-full appearance-none bg-surface-container-lowest border border-slate-200 rounded-lg px-3.5 py-2.5 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all cursor-pointer pr-10 text-ellipsis overflow-hidden whitespace-nowrap">
+<option selected="">Xe máy số Honda Wave 110cc (0.1033 kg CO2e/km)</option>
+<option>Xe tay ga 125cc-150cc (0.1342 kg CO2e/km)</option>
+<option>Xe máy điện VinFast (0.0380 kg CO2e/km)</option>
+<option>Xe phân khối lớn &gt; 300cc (0.1850 kg CO2e/km)</option>
+</select>
+<span class="material-symbols-outlined absolute right-3 top-1/2 -translate-y-1/2 text-secondary pointer-events-none text-xl">expand_more</span>
+</div>
+</div>
+</div>
+<!-- Row 2: 2-Column Inputs (Sản lượng & Ngày phát sinh) -->
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+<!-- Left: Sản lượng tiêu thụ -->
+<div>
+<label class="block font-label-status text-label-status text-slate-700 mb-1.5">
+              Sản lượng tiêu thụ <span class="text-tertiary">*</span>
+</label>
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-lowest border border-slate-200 rounded-lg pl-3.5 pr-14 py-2.5 font-body-md text-body-md text-on-surface font-semibold focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" step="0.1" type="number" value="15"/>
+<div class="absolute right-2 px-2.5 py-1 rounded bg-slate-100 text-slate-600 font-label-status text-label-status select-none">
+                km
+              </div>
+</div>
+</div>
+<!-- Right: Ngày phát sinh -->
+<div>
+<label class="block font-label-status text-label-status text-slate-700 mb-1.5">
+              Ngày phát sinh <span class="text-tertiary">*</span>
+</label>
+<div class="relative flex items-center">
+<input class="w-full bg-surface-container-lowest border border-slate-200 rounded-lg pl-3.5 pr-10 py-2.5 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" type="text" value="28/10/2026"/>
+<span class="material-symbols-outlined absolute right-3 text-secondary pointer-events-none text-xl">calendar_today</span>
+</div>
+</div>
+</div>
+<!-- Row 3: Real-time Conversion Preview Box (Instant Eco Card) -->
+<div class="bg-emerald-50/80 border border-emerald-200/80 rounded-xl p-4 flex items-center justify-between">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 text-primary flex items-center justify-center flex-shrink-0">
+<span class="material-symbols-outlined text-2xl" data-weight="fill" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div>
+<div class="text-primary font-bold text-headline-sm flex items-center gap-1.5">
+<span>Quy đổi ước tính tức thì:</span>
+<span class="text-emerald-950 font-extrabold tracking-tight">1.55 kg CO2e</span>
+</div>
+<div class="text-body-sm font-body-sm text-slate-600 mt-0.5">
+                Công thức: 15 km × 0.1033 kg CO2e/km (Hệ số phát thải chuẩn IPCC/Bộ Công Thương)
+              </div>
+</div>
+</div>
+<!-- Status badge -->
+<div class="flex-shrink-0 ml-3">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-100 text-primary font-label-status text-label-status border border-emerald-300">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+              Đạt ngưỡng xanh
+            </span>
+</div>
+</div>
+<!-- Row 4: Optional Fields -->
+<div class="space-y-4 pt-1">
+<!-- Ghi chú hoạt động -->
+<div>
+<label class="block font-label-status text-label-status text-slate-700 mb-1.5">
+              Ghi chú hoạt động <span class="text-slate-400 font-normal text-body-sm">(Không bắt buộc)</span>
+</label>
+<textarea class="w-full bg-surface-container-lowest border border-slate-200 rounded-lg px-3.5 py-2 font-body-md text-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all resize-none" placeholder="Nhập mục đích hoặc chi tiết lộ trình..." rows="2">Đi làm ca sáng + đón con</textarea>
+</div>
+<!-- Upload zone -->
+<div>
+<label class="block font-label-status text-label-status text-slate-700 mb-1.5">
+              Ảnh chứng từ / Đồng hồ công tơ <span class="text-slate-400 font-normal text-body-sm">(Không bắt buộc)</span>
+</label>
+<div class="border-dashed border-2 border-slate-200 rounded-xl p-3.5 text-center bg-slate-50/50 hover:bg-slate-50 transition-colors flex items-center justify-center gap-3 cursor-pointer group">
+<div class="w-8 h-8 rounded-full bg-slate-200/80 group-hover:bg-primary-container/15 group-hover:text-primary transition-colors flex items-center justify-center text-slate-600">
+<span class="material-symbols-outlined text-lg">photo_camera</span>
+</div>
+<div class="text-left">
+<span class="text-body-md font-body-md text-slate-700 font-medium group-hover:text-primary transition-colors">Kéo thả hoặc chụp ảnh công tơ / hóa đơn xăng</span>
+<span class="block text-body-sm font-body-sm text-slate-400">Hỗ trợ JPG, PNG, HEIC hoặc PDF (Tối đa 10MB)</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- 4. Modal Footer -->
+<div class="px-6 py-4 bg-slate-50/70 border-t border-slate-100 flex flex-col sm:flex-row items-center justify-between gap-3">
+<!-- Note Left -->
+<div class="flex items-center gap-1.5 text-slate-500 font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-base text-slate-400">info</span>
+<span>Bản ghi sẽ được gửi vào Hàng đợi kiểm duyệt của Trưởng nhóm</span>
+</div>
+<!-- Action Buttons Right -->
+<div class="flex items-center gap-2.5 w-full sm:w-auto justify-end">
+<button class="px-4 py-2 rounded-lg text-slate-600 border border-slate-200 bg-surface-container-lowest hover:bg-slate-100 font-title-md text-title-md transition-colors cursor-pointer" type="button">
+            Hủy bỏ
+          </button>
+<button class="px-6 py-2 rounded-lg bg-primary-container hover:bg-emerald-600 text-on-primary font-title-md text-title-md shadow-md transition-all flex items-center gap-2 cursor-pointer active:scale-[0.98]" type="button">
+<span class="material-symbols-outlined text-lg">send</span>
+<span>Gửi Phê duyệt</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CarbonLedger - SCR-WS-01: Workspace Switcher</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container": "#e2effe",
+            "inverse-primary": "#5adda0",
+            "primary-container": "#00a76f",
+            "outline-variant": "#bccabf",
+            "surface-container-highest": "#d7e4f2",
+            "error": "#ba1a1a",
+            "tertiary-container": "#ff5a35",
+            "on-surface-variant": "#3d4a41",
+            "on-secondary-fixed-variant": "#3f4852",
+            "outline": "#6d7a71",
+            "on-primary-fixed-variant": "#005234",
+            "on-surface": "#101d27",
+            "tertiary-fixed-dim": "#ffb4a3",
+            "inverse-on-surface": "#e6f2ff",
+            "on-primary-fixed": "#002112",
+            "inverse-surface": "#25323c",
+            "on-tertiary-fixed": "#3d0600",
+            "surface-dim": "#cedce9",
+            "primary-fixed-dim": "#5adda0",
+            "secondary": "#565f6a",
+            "on-tertiary-fixed-variant": "#8b1a00",
+            "surface-tint": "#006c46",
+            "background": "#f6f9ff",
+            "on-background": "#101d27",
+            "tertiary": "#b62500",
+            "on-tertiary-container": "#590d00",
+            "surface-container-high": "#dceaf8",
+            "surface-bright": "#f6f9ff",
+            "on-primary": "#ffffff",
+            "surface-container-lowest": "#ffffff",
+            "on-secondary": "#ffffff",
+            "on-secondary-container": "#5c6570",
+            "surface": "#f6f9ff",
+            "on-primary-container": "#00321f",
+            "primary-fixed": "#79fabb",
+            "on-error-container": "#93000a",
+            "surface-variant": "#d7e4f2",
+            "on-tertiary": "#ffffff",
+            "primary": "#006c46",
+            "secondary-fixed": "#dae3f0",
+            "tertiary-fixed": "#ffdad2",
+            "error-container": "#ffdad6",
+            "surface-container-low": "#ecf4ff",
+            "secondary-fixed-dim": "#bec7d3",
+            "on-error": "#ffffff",
+            "secondary-container": "#dae3f0",
+            "on-secondary-fixed": "#131c25"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "margin": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-md": "1rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-xs": "0.25rem"
+          },
+          "fontFamily": {
+            "headline-lg": ["Public Sans"],
+            "body-sm": ["Public Sans"],
+            "body-md": ["Public Sans"],
+            "headline-sm": ["Public Sans"],
+            "headline-md": ["Public Sans"],
+            "label-status": ["Public Sans"],
+            "title-md": ["Public Sans"]
+          },
+          "fontSize": {
+            "headline-lg": ["1.75rem", { "lineHeight": "2.25rem", "fontWeight": "700" }],
+            "body-sm": ["0.75rem", { "lineHeight": "1.125rem", "fontWeight": "400" }],
+            "body-md": ["0.875rem", { "lineHeight": "1.375rem", "fontWeight": "400" }],
+            "headline-sm": ["1.125rem", { "lineHeight": "1.5rem", "fontWeight": "600" }],
+            "headline-md": ["1.375rem", { "lineHeight": "1.75rem", "fontWeight": "700" }],
+            "label-status": ["0.75rem", { "lineHeight": "1rem", "fontWeight": "700" }],
+            "title-md": ["1rem", { "lineHeight": "1.375rem", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .minimals-card-shadow {
+      box-shadow: 0 0 2px 0 rgba(145, 158, 171, 0.2), 0 12px 24px -4px rgba(145, 158, 171, 0.12);
+    }
+    .minimals-card-hover:hover {
+      box-shadow: 0 0 2px 0 rgba(145, 158, 171, 0.24), 0 16px 32px -4px rgba(145, 158, 171, 0.16);
+    }
+  </style>
+</head>
+<body class="bg-surface font-body-md text-on-surface antialiased min-h-screen flex flex-col justify-between">
+<!-- TOP APP BAR -->
+<header class="sticky top-0 z-40 bg-surface-container-lowest/90 backdrop-blur-md border-b border-secondary-container">
+<div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+<!-- Brand & Product Identity -->
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary flex items-center justify-center text-on-primary shadow-sm shadow-primary/20">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-sm text-headline-sm font-bold tracking-tight text-on-surface">CarbonLedger</span>
+<span class="bg-surface-container text-primary font-label-status text-label-status px-2 py-0.5 rounded-full">v2.4 ESG</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Hệ thống Quản trị &amp; Phân tích Dấu chân Carbon</p>
+</div>
+</div>
+<!-- Trailing Controls & User Identity -->
+<div class="flex items-center gap-4">
+<!-- Notification button -->
+<button aria-label="Notifications" class="relative p-2 rounded-xl text-secondary hover:bg-surface-container-low transition-colors duration-150" type="button">
+<span class="material-symbols-outlined">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-tertiary-container ring-2 ring-surface-container-lowest"></span>
+</button>
+<!-- Dark mode / Global settings toggle -->
+<button aria-label="Theme mode" class="p-2 rounded-xl text-secondary hover:bg-surface-container-low transition-colors duration-150" type="button">
+<span class="material-symbols-outlined">dark_mode</span>
+</button>
+<div class="h-6 w-px bg-secondary-container"></div>
+<!-- User Profile Component -->
+<div class="flex items-center gap-3 pl-1">
+<div class="relative">
+<div class="w-9 h-9 rounded-full bg-surface-container text-primary font-headline-sm text-headline-sm flex items-center justify-center ring-2 ring-surface-container-lowest shadow-sm font-bold">
+              A
+            </div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary-container ring-2 ring-surface-container-lowest"></span>
+</div>
+<div class="hidden sm:block text-left">
+<p class="font-title-md text-body-md font-semibold text-on-surface leading-tight">Nguyễn Văn A</p>
+<p class="font-body-sm text-body-sm text-secondary leading-tight">nguyen.vana@gmail.com</p>
+</div>
+</div>
+<!-- Logout Action -->
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-secondary-container text-secondary font-label-status text-label-status hover:text-error hover:bg-error-container/20 hover:border-error-container transition-all duration-150 ml-1" type="button">
+<span class="material-symbols-outlined text-base">logout</span>
+<span class="hidden md:inline">Đăng xuất</span>
+</button>
+</div>
+</div>
+</header>
+<!-- MAIN VIEW CONTAINER -->
+<main class="flex-grow max-w-7xl mx-auto w-full px-6 py-8">
+<!-- BREADCRUMB & INTRO HEADER -->
+<section class="mb-8">
+<nav class="flex items-center gap-2 font-body-sm text-body-sm text-secondary mb-3">
+<span class="hover:text-primary transition-colors cursor-pointer">Trang chủ</span>
+<span class="material-symbols-outlined text-xs">chevron_right</span>
+<span class="text-on-surface font-semibold">Không gian làm việc</span>
+</nav>
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg font-bold text-on-surface tracking-tight">Không gian làm việc của bạn</h1>
+<p class="font-body-md text-body-md text-secondary mt-1">Chọn không gian để tiếp tục theo dõi, ghi nhận và tối ưu hóa phát thải khí nhà kính sinh hoạt.</p>
+</div>
+<!-- Hero Actions -->
+<div class="flex items-center gap-3 shrink-0">
+<button class="border border-secondary-container bg-surface-container-lowest text-on-surface font-title-md text-title-md hover:bg-surface-container-low px-4 py-2.5 rounded-xl minimals-card-shadow transition-all duration-150 flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-base">link</span>
+<span>Tham gia bằng mã mời</span>
+</button>
+<button class="bg-primary-container hover:bg-primary text-on-primary font-title-md text-title-md px-5 py-2.5 rounded-xl shadow-md shadow-primary-container/20 transition-all duration-150 flex items-center gap-2 cursor-pointer" type="button">
+<span class="material-symbols-outlined text-base">add</span>
+<span>Tạo Không gian mới</span>
+</button>
+</div>
+</div>
+</section>
+<!-- SEARCH & STATUS FILTERS -->
+<section class="bg-surface-container-lowest rounded-2xl p-4 border border-secondary-container/80 minimals-card-shadow mb-8">
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4">
+<!-- Search Input -->
+<div class="relative flex-grow max-w-md">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-secondary text-lg">search</span>
+<input class="w-full pl-10 pr-4 py-2 bg-surface-bright border border-secondary-container rounded-xl font-body-md text-body-md text-on-surface placeholder:text-secondary focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all" placeholder="Tìm nhanh không gian..." type="text"/>
+</div>
+<!-- Filter Chips -->
+<div class="flex items-center gap-2 overflow-x-auto pb-1 sm:pb-0">
+<button class="px-3.5 py-1.5 rounded-xl bg-surface-container text-primary font-label-status text-label-status flex items-center gap-1.5 shadow-xs">
+<span>Tất cả</span>
+<span class="bg-primary text-on-primary px-1.5 py-0.2 rounded-full text-[10px]">3</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-xl text-secondary hover:bg-surface-container-low font-label-status text-label-status transition-colors">
+            Hộ gia đình (2)
+          </button>
+<button class="px-3.5 py-1.5 rounded-xl text-secondary hover:bg-surface-container-low font-label-status text-label-status transition-colors">
+            Văn phòng (1)
+          </button>
+</div>
+<!-- Real-Time Sync Indicator -->
+<div class="hidden lg:flex items-center gap-2 text-secondary font-body-sm text-body-sm pr-2">
+<span class="material-symbols-outlined text-primary-container text-base" style="font-variation-settings: 'FILL' 1;">sync</span>
+<span>Đồng bộ máy chủ GHG: 2 phút trước</span>
+</div>
+</div>
+</section>
+<!-- WORKSPACE CARDS BENTO GRID -->
+<section class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- CARD 1: Gia Đình Xanh -->
+<article class="bg-surface-container-lowest rounded-2xl border border-secondary-container p-6 relative minimals-card-shadow minimals-card-hover transition-all duration-200 flex flex-col justify-between group">
+<div>
+<!-- Card Header -->
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">home</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface group-hover:text-primary transition-colors">Gia Đình Xanh</h3>
+<p class="font-body-sm text-body-sm text-secondary">Hộ gia đình (Residential) • Mã CARB26</p>
+</div>
+</div>
+</div>
+<!-- Top-Right Role Chip -->
+<div class="mt-3 flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 bg-surface-container text-primary px-2.5 py-1 rounded-full font-label-status text-label-status font-semibold">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+              Reviewer (Chủ hộ)
+            </span>
+<span class="font-body-sm text-body-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">nest_eco_leaf</span> Đang hoạt động
+            </span>
+</div>
+<!-- Stats Row -->
+<div class="grid grid-cols-3 gap-2 py-3.5 my-3 border-y border-secondary-container text-center">
+<div>
+<p class="font-body-sm text-body-sm text-secondary">Thành viên</p>
+<p class="font-title-md text-title-md font-bold text-on-surface">4 người</p>
+</div>
+<div class="border-x border-secondary-container">
+<p class="font-body-sm text-body-sm text-secondary">Diện tích</p>
+<p class="font-title-md text-title-md font-bold text-on-surface">85.5 m²</p>
+</div>
+<div>
+<p class="font-body-sm text-body-sm text-secondary">Mục tiêu</p>
+<p class="font-title-md text-title-md font-bold text-on-surface">≤ 100 kg</p>
+</div>
+</div>
+<!-- Monthly Carbon Progress (Amber Warning State) -->
+<div class="bg-surface-bright rounded-xl p-4 border border-secondary-container/60 mb-5">
+<div class="flex items-center justify-between mb-1.5">
+<span class="font-body-sm text-body-sm text-secondary font-medium">Phát thải Tháng 10/2026</span>
+<span class="font-label-status text-label-status text-tertiary-container flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">warning</span>
+                85.4% (Sắp chạm trần)
+              </span>
+</div>
+<div class="flex items-baseline justify-between mb-2">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">85.40 <span class="font-body-sm text-body-sm font-normal text-secondary">/ 100.00 kg CO2e</span></span>
+<span class="font-body-sm text-body-sm text-secondary">Còn 14.60 kg</span>
+</div>
+<!-- Progress bar with Amber fill -->
+<div class="w-full bg-secondary-container h-2 rounded-full overflow-hidden">
+<div class="bg-tertiary-container h-full rounded-full transition-all duration-500" style="width: 85.4%"></div>
+</div>
+</div>
+</div>
+<!-- Footer CTA -->
+<a class="w-full bg-surface-container-low hover:bg-primary-container text-primary hover:text-on-primary border border-secondary-container hover:border-primary-container py-2.5 rounded-xl font-title-md text-title-md text-center transition-all duration-150 flex items-center justify-center gap-2" href="#">
+<span>Vào Không gian</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</article>
+<!-- CARD 2: Văn Phòng Sáng Tạo TechLabs -->
+<article class="bg-surface-container-lowest rounded-2xl border border-secondary-container p-6 relative minimals-card-shadow minimals-card-hover transition-all duration-200 flex flex-col justify-between group">
+<div>
+<!-- Card Header -->
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-surface-container text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">domain</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface group-hover:text-primary transition-colors">Văn Phòng Sáng Tạo TechLabs</h3>
+<p class="font-body-sm text-body-sm text-secondary">Văn phòng nhỏ (Micro-Office) • Mã LAB90</p>
+</div>
+</div>
+</div>
+<!-- Top-Right Role Chip -->
+<div class="mt-3 flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 bg-secondary-container text-on-secondary-container px-2.5 py-1 rounded-full font-label-status text-label-status font-semibold">
+<span class="material-symbols-outlined text-xs">edit_square</span>
+              Editor (Thành viên)
+            </span>
+<span class="font-body-sm text-body-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">schedule</span> Cập nhật hôm nay
+            </span>
+</div>
+<!-- Stats Row -->
+<div class="grid grid-cols-3 gap-2 py-3.5 my-3 border-y border-secondary-container text-center">
+<div>
+<p class="font-body-sm text-body-sm text-secondary">Thành viên</p>
+<p class="font-title-md text-title-md font-bold text-on-surface">12 người</p>
+</div>
+<div class="border-x border-secondary-container">
+<p class="font-body-sm text-body-sm text-secondary">Diện tích</p>
+<p class="font-title-md text-title-md font-bold text-on-surface">140 m²</p>
+</div>
+<div>
+<p class="font-body-sm text-body-sm text-secondary">Mục tiêu</p>
+<p class="font-title-md text-title-md font-bold text-on-surface">≤ 350 kg</p>
+</div>
+</div>
+<!-- Monthly Carbon Progress (Safe Green State) -->
+<div class="bg-surface-bright rounded-xl p-4 border border-secondary-container/60 mb-5">
+<div class="flex items-center justify-between mb-1.5">
+<span class="font-body-sm text-body-sm text-secondary font-medium">Phát thải Tháng 10/2026</span>
+<span class="font-label-status text-label-status text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                68.7% (An toàn)
+              </span>
+</div>
+<div class="flex items-baseline justify-between mb-2">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">240.50 <span class="font-body-sm text-body-sm font-normal text-secondary">/ 350.00 kg CO2e</span></span>
+<span class="font-body-sm text-body-sm text-secondary">Còn 109.50 kg</span>
+</div>
+<!-- Progress bar with Emerald fill -->
+<div class="w-full bg-secondary-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-500" style="width: 68.7%"></div>
+</div>
+</div>
+</div>
+<!-- Footer CTA -->
+<a class="w-full bg-surface-bright hover:bg-secondary-container/60 text-on-surface border border-secondary-container py-2.5 rounded-xl font-title-md text-title-md text-center transition-all duration-150 flex items-center justify-center gap-2" href="#">
+<span>Vào Không gian</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</article>
+<!-- CARD 3: Nhà Vườn Nghỉ Dưỡng Đà Lạt -->
+<article class="bg-surface-container-lowest rounded-2xl border border-secondary-container p-6 relative minimals-card-shadow minimals-card-hover transition-all duration-200 flex flex-col justify-between group">
+<div>
+<!-- Card Header -->
+<div class="flex items-start justify-between gap-3">
+<div class="flex items-center gap-3">
+<div class="w-12 h-12 rounded-xl bg-surface-container-low text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl" style="font-variation-settings: 'FILL' 1;">villa</span>
+</div>
+<div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface group-hover:text-primary transition-colors">Nhà Vườn Nghỉ Dưỡng Đà Lạt</h3>
+<p class="font-body-sm text-body-sm text-secondary">Hộ gia đình thứ hai • Mã DLT04</p>
+</div>
+</div>
+</div>
+<!-- Top-Right Role Chip -->
+<div class="mt-3 flex items-center justify-between">
+<span class="inline-flex items-center gap-1.5 bg-surface-container text-primary px-2.5 py-1 rounded-full font-label-status text-label-status font-semibold">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+              Reviewer (Chủ sở hữu)
+            </span>
+<span class="font-body-sm text-body-sm text-secondary flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">energy_savings_leaf</span> Tối ưu xuất sắc
+            </span>
+</div>
+<!-- Stats Row -->
+<div class="grid grid-cols-3 gap-2 py-3.5 my-3 border-y border-secondary-container text-center">
+<div>
+<p class="font-body-sm text-body-sm text-secondary">Thành viên</p>
+<p class="font-title-md text-title-md font-bold text-on-surface">2 người</p>
+</div>
+<div class="border-x border-secondary-container">
+<p class="font-body-sm text-body-sm text-secondary">Diện tích</p>
+<p class="font-title-md text-title-md font-bold text-on-surface">210 m²</p>
+</div>
+<div>
+<p class="font-body-sm text-body-sm text-secondary">Mục tiêu</p>
+<p class="font-title-md text-title-md font-bold text-on-surface">≤ 60 kg</p>
+</div>
+</div>
+<!-- Monthly Carbon Progress (Very Safe Emerald State) -->
+<div class="bg-surface-bright rounded-xl p-4 border border-secondary-container/60 mb-5">
+<div class="flex items-center justify-between mb-1.5">
+<span class="font-body-sm text-body-sm text-secondary font-medium">Phát thải Tháng 10/2026</span>
+<span class="font-label-status text-label-status text-primary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">verified</span>
+                30.3% (Rất tối ưu)
+              </span>
+</div>
+<div class="flex items-baseline justify-between mb-2">
+<span class="font-headline-sm text-headline-sm font-bold text-on-surface">18.20 <span class="font-body-sm text-body-sm font-normal text-secondary">/ 60.00 kg CO2e</span></span>
+<span class="font-body-sm text-body-sm text-secondary">Còn 41.80 kg</span>
+</div>
+<!-- Progress bar with Emerald fill -->
+<div class="w-full bg-secondary-container h-2 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full transition-all duration-500" style="width: 30.3%"></div>
+</div>
+</div>
+</div>
+<!-- Footer CTA -->
+<a class="w-full bg-surface-container-low hover:bg-primary-container text-primary hover:text-on-primary border border-secondary-container hover:border-primary-container py-2.5 rounded-xl font-title-md text-title-md text-center transition-all duration-150 flex items-center justify-center gap-2" href="#">
+<span>Vào Không gian</span>
+<span class="material-symbols-outlined text-base">arrow_forward</span>
+</a>
+</article>
+<!-- CARD 4: Add New Workspace Slot (Dashed interactive card) -->
+<article class="border-2 border-dashed border-secondary-container hover:border-primary-container rounded-2xl bg-surface-container-lowest/60 hover:bg-surface-container-low/40 cursor-pointer p-8 flex flex-col items-center justify-center text-center transition-all duration-200 min-h-[360px] group">
+<div class="w-14 h-14 rounded-full bg-surface-container group-hover:bg-primary group-hover:text-on-primary text-primary flex items-center justify-center transition-all duration-200 mb-4 shadow-sm">
+<span class="material-symbols-outlined text-3xl">add</span>
+</div>
+<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface group-hover:text-primary transition-colors">Tạo Không gian mới</h3>
+<p class="font-body-sm text-body-sm text-secondary max-w-xs mt-2 leading-relaxed">
+          Khởi tạo không gian hộ gia đình hoặc văn phòng và thiết lập hạn ngạch carbon ban đầu.
+        </p>
+<div class="mt-5 inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-surface-container text-primary font-label-status text-label-status group-hover:bg-primary-container group-hover:text-on-primary transition-colors">
+<span>Bắt đầu thiết lập</span>
+<span class="material-symbols-outlined text-base">chevron_right</span>
+</div>
+</article>
+<!-- CARD 5: Enterprise Organization Banner Card -->
+<article class="bg-gradient-to-br from-inverse-surface to-on-surface rounded-2xl p-7 text-inverse-on-surface flex flex-col justify-between minimals-card-shadow lg:col-span-2">
+<div>
+<div class="flex items-center justify-between mb-4">
+<span class="bg-surface-container-lowest/10 text-primary-fixed-dim border border-surface-container-lowest/15 px-3 py-1 rounded-full font-label-status text-label-status flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm">corporate_fare</span>
+              Gói Doanh nghiệp &amp; Tổ chức
+            </span>
+<span class="font-body-sm text-body-sm text-secondary-fixed-dim">EMEA &amp; APAC Multi-Tenant</span>
+</div>
+<h3 class="font-headline-md text-headline-md font-bold text-inverse-on-surface tracking-tight mb-2">
+            Mở rộng phạm vi kiểm kê GHG quy mô tập đoàn?
+          </h3>
+<p class="font-body-md text-body-md text-secondary-fixed-dim max-w-2xl leading-relaxed">
+            Kết nối trực tiếp hệ thống API đo lường điện năng thông minh, trạm IoT và hóa đơn logistics tự động chuẩn hóa Scope 1-3 theo chuẩn GHG Protocol và ISO 14064-1.
+          </p>
+</div>
+<div class="flex flex-wrap items-center justify-between gap-4 mt-6 pt-5 border-t border-secondary/30">
+<div class="flex items-center gap-4 text-xs text-secondary-fixed-dim">
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-primary-fixed text-sm">check</span> Tích hợp Telemetry</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-primary-fixed text-sm">check</span> Phân quyền RACI</span>
+<span class="flex items-center gap-1"><span class="material-symbols-outlined text-primary-fixed text-sm">check</span> Báo cáo Audit-Ready</span>
+</div>
+<button class="bg-surface-container-lowest text-on-surface hover:bg-surface-container font-title-md text-title-md px-4 py-2 rounded-xl transition-colors">
+            Nâng cấp Tổ chức
+          </button>
+</div>
+</article>
+</section>
+<!-- QUICK JOIN SECTION BANNER -->
+<section class="mt-10 bg-surface-container-lowest rounded-2xl border border-secondary-container p-6 minimals-card-shadow">
+<div class="flex flex-col lg:flex-row items-center justify-between gap-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-surface-container text-primary flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-2xl">mail</span>
+</div>
+<div>
+<h4 class="font-title-md text-title-md font-bold text-on-surface">Bạn có lời mời gia nhập không gian khác?</h4>
+<p class="font-body-sm text-body-sm text-secondary">Nhập mã 6 ký tự được gửi từ quản trị viên để tham gia ngay mà không cần tạo mới.</p>
+</div>
+</div>
+<!-- Code Input Group -->
+<form class="flex items-center gap-2 w-full lg:w-auto" onsubmit="event.preventDefault()">
+<div class="relative flex-grow sm:w-64">
+<input class="w-full px-4 py-2.5 bg-surface-bright border border-secondary-container rounded-xl font-headline-sm text-headline-sm uppercase tracking-wider text-center text-on-surface placeholder:text-secondary focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container" maxlength="10" placeholder="VD: C26-89A" type="text"/>
+</div>
+<button class="bg-primary text-on-primary hover:bg-primary-container px-5 py-2.5 rounded-xl font-title-md text-title-md font-semibold transition-all duration-150 shrink-0" type="submit">
+            Gửi yêu cầu
+          </button>
+</form>
+</div>
+</section>
+</main>
+<!-- CLEAN MINIMAL FOOTER -->
+<footer class="border-t border-secondary-container bg-surface-container-lowest mt-12 py-6">
+<div class="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4 font-body-sm text-body-sm text-secondary">
+<div class="flex items-center gap-2">
+<span class="font-semibold text-on-surface">CarbonLedger Enterprise ESG v2.4</span>
+<span>•</span>
+<span>Đạt chuẩn kiểm định ESG Quốc tế GHG Protocol &amp; ISO 14064-1</span>
+</div>
+<div class="flex items-center gap-6">
+<a class="hover:text-primary transition-colors" href="#">Tài liệu API</a>
+<a class="hover:text-primary transition-colors" href="#">Trung tâm bảo mật</a>
+<a class="hover:text-primary transition-colors" href="#">Chính sách riêng tư</a>
+<a class="hover:text-primary transition-colors" href="#">Hỗ trợ kỹ thuật</a>
+</div>
+</div>
+</footer>
+</body></html>

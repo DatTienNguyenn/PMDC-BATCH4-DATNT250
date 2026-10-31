@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+
+<html class="h-full" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Đăng nhập &amp; Đăng ký - CarbonLedger Enterprise ESG</title>
+<!-- Google Fonts: Public Sans (Minimals.cc standard) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface": "#f6f9ff",
+            "background": "#f6f9ff",
+            "on-secondary": "#ffffff",
+            "on-error": "#ffffff",
+            "primary": "#006c46",
+            "error": "#ba1a1a",
+            "on-primary-container": "#00321f",
+            "on-tertiary": "#ffffff",
+            "on-surface": "#101d27",
+            "on-tertiary-fixed-variant": "#8b1a00",
+            "tertiary-fixed-dim": "#ffb4a3",
+            "on-background": "#101d27",
+            "surface-container-high": "#dceaf8",
+            "on-primary-fixed": "#002112",
+            "surface-container-low": "#ecf4ff",
+            "primary-fixed": "#79fabb",
+            "outline": "#6d7a71",
+            "surface-container-lowest": "#ffffff",
+            "surface-container-highest": "#d7e4f2",
+            "on-primary-fixed-variant": "#005234",
+            "on-error-container": "#93000a",
+            "on-surface-variant": "#3d4a41",
+            "surface-container": "#e2effe",
+            "surface-variant": "#d7e4f2",
+            "inverse-primary": "#5adda0",
+            "tertiary-container": "#ff5a35",
+            "surface-tint": "#006c46",
+            "secondary-fixed": "#dae3f0",
+            "on-secondary-fixed-variant": "#3f4852",
+            "surface-bright": "#f6f9ff",
+            "secondary-container": "#dae3f0",
+            "on-tertiary-fixed": "#3d0600",
+            "on-tertiary-container": "#590d00",
+            "surface-dim": "#cedce9",
+            "secondary-fixed-dim": "#bec7d3",
+            "on-secondary-fixed": "#131c25",
+            "outline-variant": "#bccabf",
+            "tertiary": "#b62500",
+            "on-primary": "#ffffff",
+            "secondary": "#565f6a",
+            "tertiary-fixed": "#ffdad2",
+            "primary-container": "#00a76f",
+            "on-secondary-container": "#5c6570",
+            "inverse-on-surface": "#e6f2ff",
+            "primary-fixed-dim": "#5adda0",
+            "inverse-surface": "#25323c",
+            "error-container": "#ffdad6"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-sm": "0.5rem",
+            "space-xl": "2rem",
+            "gutter": "1.5rem",
+            "space-md": "1rem",
+            "space-xs": "0.25rem",
+            "margin": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-sm": ["Public Sans"],
+            "label-status": ["Public Sans"],
+            "headline-md": ["Public Sans"],
+            "title-md": ["Public Sans"],
+            "body-sm": ["Public Sans"],
+            "body-md": ["Public Sans"],
+            "headline-lg": ["Public Sans"]
+          },
+          "fontSize": {
+            "headline-sm": ["1.125rem", { "lineHeight": "1.5rem", "fontWeight": "600" }],
+            "label-status": ["0.75rem", { "lineHeight": "1rem", "fontWeight": "700" }],
+            "headline-md": ["1.375rem", { "lineHeight": "1.75rem", "fontWeight": "700" }],
+            "title-md": ["1rem", { "lineHeight": "1.375rem", "fontWeight": "600" }],
+            "body-sm": ["0.75rem", { "lineHeight": "1.125rem", "fontWeight": "400" }],
+            "body-md": ["0.875rem", { "lineHeight": "1.375rem", "fontWeight": "400" }],
+            "headline-lg": ["1.75rem", { "lineHeight": "2.25rem", "fontWeight": "700" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Public Sans', sans-serif;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .minimals-card-shadow {
+      box-shadow: 0 0 2px 0 rgba(145, 158, 171, 0.2), 0 12px 24px -4px rgba(145, 158, 171, 0.12);
+    }
+    .minimals-card-hover {
+      box-shadow: 0 0 2px 0 rgba(145, 158, 171, 0.24), 0 16px 32px -4px rgba(145, 158, 171, 0.16);
+    }
+  </style>
+</head>
+<body class="h-full bg-surface text-on-surface antialiased">
+<!-- Semantic Shell Filter: Auth page is transactional/login journey, top/bottom navigation shell is suppressed to prioritize canvas -->
+<main class="min-h-screen w-full flex flex-col lg:flex-row">
+<!-- LEFT COLUMN: Brand Hero & ESG Credibility (45% on desktop) -->
+<section class="lg:w-[45%] w-full min-h-screen relative overflow-hidden bg-gradient-to-br from-emerald-50/80 via-surface-container-lowest to-emerald-50/30 border-r border-secondary-container p-8 lg:p-14 flex flex-col justify-between">
+<!-- Subtle Decorative Eco Mesh & Ambient Orbs -->
+<div class="pointer-events-none absolute -top-24 -left-24 w-96 h-96 rounded-full bg-primary-fixed/25 blur-3xl"></div>
+<div class="pointer-events-none absolute bottom-10 right-0 w-80 h-80 rounded-full bg-primary-container/10 blur-2xl"></div>
+<div class="pointer-events-none absolute inset-0 opacity-[0.035] bg-[radial-gradient(#006c46_1px,transparent_1px)] [background-size:16px_16px]"></div>
+<!-- Top Brand Header -->
+<div class="relative z-10">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-primary-container text-white flex items-center justify-center shadow-md shadow-primary-container/30">
+<span class="material-symbols-outlined text-white" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="font-headline-md text-headline-md font-bold text-on-surface tracking-tight">CarbonLedger</span>
+<span class="font-label-status text-label-status px-2 py-0.5 rounded-full bg-primary-fixed text-on-primary-fixed font-bold tracking-wide">v2.4 ESG</span>
+</div>
+<p class="font-body-sm text-body-sm text-secondary">Enterprise Carbon Accounting</p>
+</div>
+</div>
+</div>
+<!-- Center Hero Body -->
+<div class="relative z-10 py-10 lg:py-8 my-auto">
+<!-- Badge -->
+<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-primary-fixed/40 border border-primary-fixed-dim/60 text-primary font-label-status text-label-status mb-4">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 1;">potted_plant</span>
+<span>Nền tảng Kế toán Khí nhà kính</span>
+</div>
+<!-- Headline -->
+<h1 class="font-headline-lg text-headline-lg lg:text-3xl font-bold text-on-surface tracking-tight leading-snug mb-4">
+          Theo dõi &amp; Cắt giảm Dấu chân Carbon Gia đình &amp; Văn phòng
+        </h1>
+<!-- Subtitle -->
+<p class="font-body-md text-body-md text-secondary leading-relaxed mb-6 max-w-lg">
+          Hệ thống sổ cái phát thải chuẩn GHG Protocol &amp; ISO 14064-1 đầu tiên tại Việt Nam, kết hợp AI Vision bóc tách hóa đơn công tơ tự động.
+        </p>
+<!-- Feature Points -->
+<div class="space-y-3 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-primary-fixed/50 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium">Tự động tính nhẩm kg CO2e thời gian thực khi nạp dữ liệu</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-primary-fixed/50 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium">AI Vision trích xuất hóa đơn EVN và đồng hồ nước chính xác</span>
+</div>
+<div class="flex items-center gap-3">
+<div class="w-6 h-6 rounded-full bg-primary-fixed/50 flex items-center justify-center text-primary flex-shrink-0">
+<span class="material-symbols-outlined text-sm font-bold">check</span>
+</div>
+<span class="font-body-md text-body-md text-on-surface font-medium">Lộ trình hành động xanh cắt giảm tới 30% năng lượng</span>
+</div>
+</div>
+<!-- Testimonial Quote Card (MUI Minimals floating card) -->
+<div class="bg-surface-container-lowest/90 backdrop-blur-md p-5 rounded-2xl border border-secondary-container minimals-card-shadow transition-transform hover:-translate-y-0.5 duration-200">
+<div class="flex items-center gap-1 text-primary-container mb-2">
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+<span class="material-symbols-outlined text-base" style="font-variation-settings: 'FILL' 1;">star</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface italic mb-4">
+            “CarbonLedger giúp gia đình tôi tiết kiệm 450.000đ tiền điện mỗi tháng và giảm 25% phát thải!”
+          </p>
+<div class="flex items-center justify-between border-t border-secondary-container pt-3">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-primary font-bold text-xs">
+                GX
+              </div>
+<div>
+<p class="font-title-md text-title-md text-on-surface leading-tight">Gia đình Xanh Q.1, TP.HCM</p>
+<p class="font-body-sm text-body-sm text-secondary">Hộ gia đình tiên phong</p>
+</div>
+</div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-primary-fixed/40 text-primary font-label-status text-label-status">
+<span class="material-symbols-outlined text-xs" style="font-variation-settings: 'FILL' 1;">verified</span>
+              Đã xác thực ESG
+            </span>
+</div>
+</div>
+</div>
+<!-- Left Column Footer -->
+<div class="relative z-10 pt-4 border-t border-secondary-container/60">
+<p class="font-body-sm text-body-sm text-secondary">
+          © 2026 CarbonLedger · Đạt chuẩn kiểm định ESG Quốc tế GHG Protocol &amp; ISO 14064-1
+        </p>
+</div>
+</section>
+<!-- RIGHT COLUMN: Authentication Card & Form (55% on desktop) -->
+<section class="lg:w-[55%] w-full min-h-screen bg-surface flex items-center justify-center p-6 sm:p-10 lg:p-12">
+<div class="w-full max-w-md bg-surface-container-lowest rounded-3xl p-8 lg:p-10 border border-secondary-container minimals-card-shadow">
+<!-- Header -->
+<div class="mb-6">
+<h2 class="font-headline-md text-headline-md text-on-surface font-bold tracking-tight mb-1.5 flex items-center gap-2">
+            Chào mừng trở lại! <span>👋</span>
+</h2>
+<p class="font-body-md text-body-md text-secondary">
+            Đăng nhập vào không gian làm việc của bạn để quản lý phát thải.
+          </p>
+</div>
+<!-- Minimals.cc Segmented Pill Switcher Tabs -->
+<div class="bg-surface-container-low p-1 rounded-xl flex gap-1 mb-6 border border-secondary-container/50">
+<button class="flex-1 py-2 px-3 rounded-lg text-sm font-semibold text-primary-container bg-surface-container-lowest shadow-sm text-center transition-all cursor-pointer" id="tab-login" type="button">
+            Đăng nhập
+          </button>
+<button class="flex-1 py-2 px-3 rounded-lg text-sm font-medium text-secondary hover:text-on-surface text-center transition-all cursor-pointer" id="tab-register" type="button">
+            Đăng ký tài khoản mới
+          </button>
+</div>
+<!-- Social Fast Login -->
+<button class="w-full py-2.5 px-4 rounded-xl border border-secondary-container bg-surface-container-lowest hover:bg-surface-container-low text-on-surface font-title-md text-title-md flex items-center justify-center gap-3 transition-colors duration-150" type="button">
+<!-- Google G Icon SVG -->
+<svg class="w-4 h-4 flex-shrink-0" viewbox="0 0 24 24">
+<path d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.8-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z" fill="#4285F4"></path>
+<path d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.33 24 12 24z" fill="#34A853"></path>
+<path d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.18 0 9.99 0 12s.45 3.82 1.25 5.42l4.03-3.15z" fill="#FBBC05"></path>
+<path d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.33 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z" fill="#EA4335"></path>
+</svg>
+<span>Đăng nhập nhanh với Google</span>
+</button>
+<!-- Divider -->
+<div class="relative my-6 flex items-center justify-center">
+<div class="absolute inset-0 flex items-center">
+<div class="w-full border-t border-secondary-container"></div>
+</div>
+<span class="relative bg-surface-container-lowest px-3 font-label-status text-label-status text-secondary tracking-wider uppercase">
+            HOẶC VỚI EMAIL
+          </span>
+</div>
+<!-- Form -->
+<form class="space-y-4" onsubmit="event.preventDefault();">
+<!-- Email Field -->
+<div>
+<label class="block font-title-md text-title-md text-on-surface mb-1.5 font-semibold text-xs" for="email">
+              Địa chỉ Email
+            </label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-secondary">
+<span class="material-symbols-outlined text-lg">mail</span>
+</span>
+<input class="w-full pl-10 pr-4 py-2.5 rounded-xl border border-secondary-container bg-surface-container-lowest text-on-surface text-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all outline-none" id="email" placeholder="ten.ban@domain.com" required="" type="email" value="nguyen.vana@gmail.com"/>
+</div>
+</div>
+<!-- Password Field -->
+<div>
+<label class="block font-title-md text-title-md text-on-surface mb-1.5 font-semibold text-xs" for="password">
+              Mật khẩu
+            </label>
+<div class="relative">
+<span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-secondary">
+<span class="material-symbols-outlined text-lg">lock</span>
+</span>
+<input class="w-full pl-10 pr-10 py-2.5 rounded-xl border border-secondary-container bg-surface-container-lowest text-on-surface text-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-all outline-none" id="password" placeholder="••••••••••••" required="" type="password" value="secretPassword123"/>
+<button aria-label="Toggle password visibility" class="absolute inset-y-0 right-0 pr-3.5 flex items-center text-secondary hover:text-on-surface transition-colors cursor-pointer" id="toggle-password" type="button">
+<span class="material-symbols-outlined text-lg" id="eye-icon">visibility_off</span>
+</button>
+</div>
+</div>
+<!-- Options Row -->
+<div class="flex items-center justify-between pt-1 text-sm">
+<label class="flex items-center gap-2 cursor-pointer select-none">
+<input checked="" class="w-4 h-4 rounded border-secondary-container text-primary-container focus:ring-primary-container" type="checkbox"/>
+<span class="font-body-sm text-body-sm text-secondary">Ghi nhớ đăng nhập (30 ngày)</span>
+</label>
+<a class="font-body-sm text-body-sm text-primary-container hover:text-primary font-semibold transition-colors" href="#">
+              Quên mật khẩu?
+            </a>
+</div>
+<!-- Submit Button -->
+<button class="w-full mt-6 py-3 px-4 rounded-xl bg-primary-container hover:bg-primary text-white font-headline-sm text-headline-sm font-semibold shadow-lg shadow-primary-container/25 transition-all duration-150 flex items-center justify-center gap-2 cursor-pointer active:scale-[0.99]" type="submit">
+<span>Đăng nhập</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+</form>
+<!-- Workspace Quick Peek / Demo hint -->
+<div class="mt-5 p-3 rounded-xl bg-surface-container-low border border-secondary-container flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary-container text-lg" style="font-variation-settings: 'FILL' 1;">home</span>
+<div class="flex-1 min-w-0">
+<p class="font-body-sm text-body-sm text-secondary truncate">
+              Sẽ chuyển hướng tới: <strong class="text-on-surface font-semibold">Gia Đình Xanh (Mã: CARB26)</strong>
+</p>
+</div>
+<span class="w-2 h-2 rounded-full bg-primary-container flex-shrink-0 animate-pulse"></span>
+</div>
+<!-- Footer / Legal & Admin Link -->
+<div class="mt-6 text-center space-y-2 border-t border-secondary-container/60 pt-4">
+<p class="font-body-sm text-body-sm text-secondary leading-relaxed">
+            Bằng cách đăng nhập, bạn đồng ý với <a class="underline hover:text-on-surface" href="#">Điều khoản Dịch vụ</a> và <a class="underline hover:text-on-surface" href="#">Chính sách Quyền riêng tư</a> của CarbonLedger.
+          </p>
+<a class="inline-flex items-center gap-1 font-body-sm text-body-sm text-secondary hover:text-primary-container font-medium transition-colors" href="#">
+<span>Bạn là Quản trị viên Hệ thống? Đăng nhập Cổng Quản trị</span>
+<span class="material-symbols-outlined text-xs">arrow_forward</span>
+</a>
+</div>
+</div>
+</section>
+</main>
+<script>
+    // Tab Segmented Switcher Interactions
+    const tabLogin = document.getElementById('tab-login');
+    const tabRegister = document.getElementById('tab-register');
+
+    if (tabLogin && tabRegister) {
+      tabLogin.addEventListener('click', () => {
+        tabLogin.className = 'flex-1 py-2 px-3 rounded-lg text-sm font-semibold text-primary-container bg-surface-container-lowest shadow-sm text-center transition-all cursor-pointer';
+        tabRegister.className = 'flex-1 py-2 px-3 rounded-lg text-sm font-medium text-secondary hover:text-on-surface text-center transition-all cursor-pointer';
+      });
+
+      tabRegister.addEventListener('click', () => {
+        tabRegister.className = 'flex-1 py-2 px-3 rounded-lg text-sm font-semibold text-primary-container bg-surface-container-lowest shadow-sm text-center transition-all cursor-pointer';
+        tabLogin.className = 'flex-1 py-2 px-3 rounded-lg text-sm font-medium text-secondary hover:text-on-surface text-center transition-all cursor-pointer';
+      });
+    }
+
+    // Password Toggle Mask/Unmask
+    const togglePasswordBtn = document.getElementById('toggle-password');
+    const passwordInput = document.getElementById('password');
+    const eyeIcon = document.getElementById('eye-icon');
+
+    if (togglePasswordBtn && passwordInput && eyeIcon) {
+      togglePasswordBtn.addEventListener('click', () => {
+        const isPassword = passwordInput.getAttribute('type') === 'password';
+        passwordInput.setAttribute('type', isPassword ? 'text' : 'password');
+        eyeIcon.textContent = isPassword ? 'visibility' : 'visibility_off';
+      });
+    }
+  </script>
+</body></html>

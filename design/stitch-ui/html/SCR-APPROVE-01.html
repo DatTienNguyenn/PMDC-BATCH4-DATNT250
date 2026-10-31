@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+
+<html class="light" lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>SCR-APPROVE-01: Hàng đợi Kiểm duyệt Sổ cái | CarbonLedger</title>
+<!-- Google Font: Public Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary-fixed-dim": "#ffb4a3",
+            "on-tertiary-fixed": "#3d0600",
+            "surface-tint": "#006c46",
+            "surface-dim": "#cedce9",
+            "on-tertiary": "#ffffff",
+            "surface-variant": "#d7e4f2",
+            "on-secondary-fixed": "#131c25",
+            "on-background": "#101d27",
+            "surface-container-lowest": "#ffffff",
+            "on-surface-variant": "#3d4a41",
+            "error": "#ba1a1a",
+            "inverse-on-surface": "#e6f2ff",
+            "on-primary": "#ffffff",
+            "surface-container": "#e2effe",
+            "on-tertiary-fixed-variant": "#8b1a00",
+            "surface-container-highest": "#d7e4f2",
+            "outline-variant": "#bccabf",
+            "on-primary-fixed": "#002112",
+            "secondary-fixed-dim": "#bec7d3",
+            "primary-fixed-dim": "#5adda0",
+            "secondary-container": "#dae3f0",
+            "surface-container-low": "#ecf4ff",
+            "error-container": "#ffdad6",
+            "on-error": "#ffffff",
+            "surface-bright": "#f6f9ff",
+            "outline": "#6d7a71",
+            "on-secondary-container": "#5c6570",
+            "inverse-primary": "#5adda0",
+            "surface-container-high": "#dceaf8",
+            "secondary-fixed": "#dae3f0",
+            "on-primary-fixed-variant": "#005234",
+            "on-primary-container": "#00321f",
+            "tertiary-fixed": "#ffdad2",
+            "on-surface": "#101d27",
+            "on-secondary": "#ffffff",
+            "primary-container": "#00a76f",
+            "on-tertiary-container": "#590d00",
+            "surface": "#f6f9ff",
+            "on-error-container": "#93000a",
+            "tertiary": "#b62500",
+            "primary-fixed": "#79fabb",
+            "on-secondary-fixed-variant": "#3f4852",
+            "secondary": "#565f6a",
+            "primary": "#006c46",
+            "tertiary-container": "#ff5a35",
+            "inverse-surface": "#25323c",
+            "background": "#f6f9ff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "margin": "1.5rem",
+            "space-xl": "2rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "space-lg": "1.5rem"
+          },
+          "fontFamily": {
+            "headline-md": ["Public Sans"],
+            "title-md": ["Public Sans"],
+            "label-status": ["Public Sans"],
+            "headline-sm": ["Public Sans"],
+            "body-md": ["Public Sans"],
+            "headline-lg": ["Public Sans"],
+            "body-sm": ["Public Sans"]
+          },
+          "fontSize": {
+            "headline-md": ["1.375rem", { lineHeight: "1.75rem", fontWeight: "700" }],
+            "title-md": ["1rem", { lineHeight: "1.375rem", fontWeight: "600" }],
+            "label-status": ["0.75rem", { lineHeight: "1rem", fontWeight: "700" }],
+            "headline-sm": ["1.125rem", { lineHeight: "1.5rem", fontWeight: "600" }],
+            "body-md": ["0.875rem", { lineHeight: "1.375rem", fontWeight: "400" }],
+            "headline-lg": ["1.75rem", { lineHeight: "2.25rem", fontWeight: "700" }],
+            "body-sm": ["0.75rem", { lineHeight: "1.125rem", fontWeight: "400" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Public Sans', sans-serif;
+      background-color: #f9fafb;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    .material-symbols-fill {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+    /* Minimals ambient shadow */
+    .minimal-card-shadow {
+      box-shadow: 0 0 2px 0 rgba(145, 158, 171, 0.2), 0 12px 24px -4px rgba(145, 158, 171, 0.08);
+    }
+    .minimal-card-shadow:hover {
+      box-shadow: 0 0 2px 0 rgba(145, 158, 171, 0.24), 0 16px 32px -4px rgba(145, 158, 171, 0.12);
+    }
+  </style>
+</head>
+<body class="bg-[#f9fafb] text-[#101d27] antialiased flex min-h-screen">
+<!-- ================= SIDEBAR (Shared Component: SideNavBar) ================= -->
+<aside class="fixed top-0 left-0 h-screen w-64 border-r border-[#e2e8f0] bg-surface-container-lowest z-40 flex flex-col justify-between p-4">
+<!-- Header: Brand Identity -->
+<div>
+<div class="flex items-center gap-3 px-2 py-3 mb-5 border-b border-[#f1f5f9]">
+<div class="w-10 h-10 rounded-xl bg-[#00a76f]/10 text-primary-container flex items-center justify-center font-bold">
+<span class="material-symbols-outlined text-[26px] material-symbols-fill" data-icon="forest">forest</span>
+</div>
+<div>
+<div class="font-headline-sm text-headline-sm font-bold text-primary tracking-tight">CarbonLedger</div>
+<div class="font-body-sm text-body-sm text-secondary">Enterprise ESG v2.4</div>
+</div>
+</div>
+<!-- Navigation Tabs -->
+<nav class="space-y-1">
+<!-- 1. Dashboard -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span class="font-body-md text-body-md font-medium">Dashboard</span>
+</a>
+<!-- 2. Sổ cái phát thải (Emissions) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="co2">co2</span>
+<span class="font-body-md text-body-md font-medium">Sổ cái phát thải</span>
+</a>
+<!-- 3. Phân tích (Analytics) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="monitoring">monitoring</span>
+<span class="font-body-md text-body-md font-medium">Phân tích</span>
+</a>
+<!-- 4. Kiểm duyệt (Verification) - ACTIVE COMPONENT -->
+<a class="flex items-center justify-between px-3 py-2.5 rounded-lg bg-[#00a76f]/10 text-[#00a76f] font-semibold transition-colors duration-150" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px] material-symbols-fill" data-icon="verified_user">verified_user</span>
+<span class="font-body-md text-body-md">Kiểm duyệt</span>
+</div>
+<span class="px-2 py-0.5 text-[11px] font-bold rounded-full bg-[#fef3c7] text-[#b45309] border border-[#fde68a]">
+            5 chờ
+          </span>
+</a>
+<!-- 5. Bù trừ Carbon (Offsets) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="forest">forest</span>
+<span class="font-body-md text-body-md font-medium">Bù trừ Carbon</span>
+</a>
+<!-- 6. Cài đặt (Settings) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-lg text-secondary hover:bg-surface-container-low transition-colors duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span class="font-body-md text-body-md font-medium">Cài đặt</span>
+</a>
+</nav>
+</div>
+<!-- Bottom Sidebar Section -->
+<div class="pt-4 border-t border-[#f1f5f9] space-y-3">
+<!-- Member quota / Workspace indicator card -->
+<div class="p-3 bg-[#f8fafc] rounded-xl border border-[#e2e8f0]/80">
+<div class="flex items-center justify-between text-xs text-secondary mb-1.5 font-medium">
+<span>Hạn ngạch tháng 10</span>
+<span class="text-[#00a76f] font-semibold">85.4%</span>
+</div>
+<div class="w-full bg-[#e2e8f0] h-1.5 rounded-full overflow-hidden">
+<div class="bg-[#00a76f] h-full rounded-full" style="width: 85.4%"></div>
+</div>
+<div class="text-[11px] text-secondary mt-1.5 flex justify-between">
+<span>85.4 / 100 kg CO2e</span>
+<span class="text-amber-600 font-medium">Sắp chạm trần</span>
+</div>
+</div>
+<!-- Invite Team Member CTA -->
+<button class="w-full py-2 px-3 rounded-lg border border-dashed border-[#00a76f]/50 text-[#00a76f] hover:bg-[#00a76f]/5 font-label-status text-label-status flex items-center justify-center gap-1.5 transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="group_add">group_add</span>
+<span>Invite Team Member</span>
+</button>
+<!-- Footer Tabs -->
+<div class="space-y-0.5 pt-1">
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-secondary hover:text-[#101d27] font-body-sm text-body-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="menu_book">menu_book</span>
+<span>Tài liệu</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-1.5 rounded-lg text-secondary hover:text-[#101d27] font-body-sm text-body-sm transition-colors" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="headset_mic">headset_mic</span>
+<span>Hỗ trợ</span>
+</a>
+</div>
+</div>
+</aside>
+<!-- ================= MAIN CANVAS CONTAINER ================= -->
+<div class="pl-64 flex-1 flex flex-col min-w-0">
+<!-- ================= TOP APP BAR (Shared Component: TopNavBar) ================= -->
+<header class="sticky top-0 z-30 h-16 bg-surface-container-lowest/90 backdrop-blur-md border-b border-[#e2e8f0] flex items-center justify-between px-8">
+<!-- Breadcrumbs & Workspace Title -->
+<div class="flex items-center gap-3">
+<nav class="flex items-center text-body-sm font-body-sm text-secondary gap-1.5">
+<span class="hover:text-primary transition-colors cursor-pointer">Gia Đình Xanh</span>
+<span class="material-symbols-outlined text-sm text-outline-variant" data-icon="chevron_right">chevron_right</span>
+<span class="text-primary font-semibold">Hàng đợi kiểm duyệt</span>
+</nav>
+<span class="text-outline-variant">|</span>
+<div class="flex items-center gap-2 bg-[#f8fafc] border border-[#e2e8f0] px-3 py-1 rounded-lg text-body-sm text-[#1e293b]">
+<span class="material-symbols-outlined text-base text-[#00a76f]" data-icon="home_work">home_work</span>
+<span class="font-medium">Gia Đình Xanh (4 người - 85.5 m²)</span>
+<span class="material-symbols-outlined text-xs text-secondary" data-icon="arrow_drop_down">arrow_drop_down</span>
+</div>
+</div>
+<!-- Topbar Trailing Cluster -->
+<div class="flex items-center gap-4">
+<!-- Month Selector -->
+<div class="flex items-center gap-1.5 bg-white border border-[#e2e8f0] px-3 py-1.5 rounded-lg text-body-sm text-secondary font-medium hover:border-[#cbd5e1] cursor-pointer shadow-sm">
+<span class="material-symbols-outlined text-base text-secondary" data-icon="calendar_month">calendar_month</span>
+<span class="text-[#0f172a]">Tháng 10, 2026</span>
+<span class="material-symbols-outlined text-xs text-secondary" data-icon="expand_more">expand_more</span>
+</div>
+<!-- Trailing Icon Actions -->
+<div class="flex items-center gap-1">
+<!-- Notification with Badge '3' -->
+<button class="relative p-2 rounded-lg text-secondary hover:bg-[#f1f5f9] transition-colors">
+<span class="material-symbols-outlined text-[22px]" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-4 h-4 bg-rose-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+              3
+            </span>
+</button>
+<!-- Help -->
+<button class="p-2 rounded-lg text-secondary hover:bg-[#f1f5f9] transition-colors">
+<span class="material-symbols-outlined text-[22px]" data-icon="help">help</span>
+</button>
+</div>
+<div class="h-6 w-px bg-[#e2e8f0]"></div>
+<!-- User Profile Pill -->
+<div class="flex items-center gap-3 pl-1">
+<div class="relative">
+<img class="w-9 h-9 rounded-full object-cover border border-[#e2e8f0]" data-alt="A professional, crisp portrait photograph of an Asian male sustainability auditor in his early 40s wearing a modern tailored navy blazer with an open collar shirt against a clean minimal bright studio background in high-key daylight." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBhCDK1q-Kg5AwsVQaAEvatO0KoFXKIlXzBkZVGSV1R5EPgOadHViUIAs8wj1aSXCb8OfDMMWIQxVqgzEPf3zA6tFGbjDU2a961yUeTWpacPBLvKRAJ6Fj-4O-itpokGikdOjo-W9BtmAyGO3EWG4SFSHlI13zxa9XIw3P3_hCS-xLY8MBN_QkppfMpOCSXsMY1lWFWPf96uHRc6YRFp97WXf9XbyDxpH3JYen9X0iahV0Rzr3ddYq09z6Te-D6nUup9TJ9A9b08mA"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 bg-[#00a76f] border-2 border-white rounded-full"></span>
+</div>
+<div class="text-left hidden lg:block">
+<div class="font-title-md text-[13px] font-semibold text-[#0f172a] leading-none mb-1">Nguyễn Văn A</div>
+<div class="font-body-sm text-[11px] text-secondary leading-none">Reviewer / Chủ hộ</div>
+</div>
+</div>
+</div>
+</header>
+<!-- ================= MAIN CONTENT AREA ================= -->
+<main class="flex-1 p-8 max-w-7xl mx-auto w-full space-y-6">
+<!-- SECTION 1: Page Header & Bulk Actions -->
+<section class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="font-headline-lg text-headline-lg text-[#0f172a] font-bold tracking-tight">
+            Hàng đợi Kiểm duyệt Phát thải
+          </h1>
+<p class="font-body-md text-body-md text-secondary mt-1">
+            Kiểm tra tính hợp lệ của các yêu cầu nạp phát thải do các thành viên Editor gửi lên trước khi chốt vào Sổ cái và tính vào Ngân sách tháng.
+          </p>
+</div>
+<!-- Right Header Action cluster -->
+<div class="flex items-center gap-4 shrink-0">
+<label class="flex items-center gap-2 cursor-pointer select-none bg-white border border-[#e2e8f0] px-3.5 py-2.5 rounded-lg text-body-sm font-medium text-secondary hover:bg-slate-50 transition-colors shadow-sm">
+<input class="w-4 h-4 rounded text-[#00a76f] focus:ring-[#00a76f] border-slate-300" id="selectAllCheckbox" type="checkbox"/>
+<span class="text-slate-800">Chọn tất cả (5 mục)</span>
+</label>
+<button class="bg-[#00a76f] text-white hover:bg-[#008f5d] font-title-md text-body-md px-4 py-2.5 rounded-lg shadow-sm flex items-center gap-2 transition-all duration-150 active:scale-[0.98]">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle">check_circle</span>
+<span>✓ Phê duyệt hàng loạt (Bulk Accept)</span>
+</button>
+</div>
+</section>
+<!-- SECTION 2: Pending Summary Metric Banner (Card) -->
+<section class="bg-white rounded-xl border border-[#e2e8f0] minimal-card-shadow p-5 relative overflow-hidden">
+<div class="absolute -top-12 -right-12 w-48 h-48 bg-amber-500/5 rounded-full blur-2xl pointer-events-none"></div>
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-5">
+<!-- Left: Pending records status badge -->
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-xl bg-amber-50 border border-amber-200 text-amber-700 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-2xl material-symbols-fill" data-icon="schedule">schedule</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-bold bg-amber-100 text-amber-800">
+<span class="w-1.5 h-1.5 rounded-full bg-amber-600 animate-pulse"></span>
+                  5 bản ghi đang chờ xử lý
+                </span>
+<span class="text-xs text-secondary font-medium">• Cập nhật 2 phút trước</span>
+</div>
+<div class="mt-1 font-headline-sm text-headline-sm font-bold text-slate-900">
+                Tổng phát thải tạm tính: <span class="text-[#00a76f]">+23.85 kg CO2e</span>
+</div>
+</div>
+</div>
+<!-- Center: Warning / Impact Context -->
+<div class="bg-[#fffbeb] border border-[#fef3c7] rounded-lg p-3 text-xs text-amber-900 max-w-md">
+<div class="flex items-start gap-2">
+<span class="material-symbols-outlined text-amber-600 text-base shrink-0 mt-0.5" data-icon="warning">warning</span>
+<span>
+<strong>Cảnh báo ngân sách:</strong> Nếu duyệt tất cả, phát thải tháng sẽ tăng từ <strong>85.40</strong> lên <strong>109.25 kg CO2e</strong> — <span class="text-rose-600 font-semibold underline decoration-rose-400">Vượt trần cảnh báo 100 kg CO2e!</span>
+</span>
+</div>
+</div>
+<!-- Right: Member Filter Pill Tabs -->
+<div class="flex items-center gap-1.5 flex-wrap">
+<button class="px-3 py-1.5 rounded-lg text-xs font-semibold bg-[#00a76f] text-white shadow-sm transition-colors">
+              Tất cả thành viên (5)
+            </button>
+<button class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">
+              Trần Thị B (2)
+            </button>
+<button class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">
+              Lê Văn C (1)
+            </button>
+<button class="px-3 py-1.5 rounded-lg text-xs font-medium bg-slate-100 hover:bg-slate-200 text-slate-700 transition-colors">
+              Phạm Thị D (2)
+            </button>
+</div>
+</div>
+</section>
+<!-- SECTION 3: List of 5 Pending Request Cards -->
+<section class="space-y-3.5">
+<!-- CARD 1 -->
+<article class="bg-white rounded-xl border border-slate-200/80 minimal-card-shadow p-5 transition-all duration-200 hover:border-slate-300">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<!-- Left Header: Member info & activity details -->
+<div class="flex items-start gap-4 flex-1">
+<div class="pt-1">
+<input class="w-4 h-4 rounded text-[#00a76f] focus:ring-[#00a76f] border-slate-300 cursor-pointer" type="checkbox"/>
+</div>
+<!-- Avatar & Member tag -->
+<div class="w-10 h-10 rounded-full bg-emerald-100 text-[#00a76f] font-bold flex items-center justify-center text-sm shrink-0 border border-emerald-200">
+                B
+              </div>
+<div class="space-y-1.5 flex-1 min-w-0">
+<!-- Metadata row -->
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-title-md text-sm font-semibold text-slate-900">Trần Thị B</span>
+<span class="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-emerald-50 text-[#00a76f] border border-emerald-200/60">
+                    Editor
+                  </span>
+<span class="text-xs text-slate-400">•</span>
+<span class="text-xs text-slate-500 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+                    Gửi lúc 09:30, 27/10/2026
+                  </span>
+</div>
+<!-- Main Activity title -->
+<div class="font-body-md text-sm font-semibold text-slate-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-slate-500" data-icon="two_wheeler">two_wheeler</span>
+<span>Xe máy Honda Wave 110cc - Đi làm ca sáng</span>
+</div>
+<!-- Emission formula row & Proof -->
+<div class="flex items-center gap-3 flex-wrap pt-0.5">
+<div class="inline-flex items-center gap-2 px-2.5 py-1 bg-slate-50 border border-slate-200 rounded-lg text-xs">
+<span class="text-slate-600 font-medium">15 km</span>
+<span class="text-slate-400">→</span>
+<span class="font-bold text-[#00a76f]">1.55 kg CO2e</span>
+<span class="text-[10px] text-slate-500 bg-white px-1.5 py-0.5 rounded border border-slate-200 font-mono">
+                      15 × 0.1033 kg CO2e/km
+                    </span>
+</div>
+<!-- Proof Attachment Chip -->
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-50/70 border border-blue-200 text-blue-700 rounded-lg text-xs hover:bg-blue-100 cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="photo_camera">photo_camera</span>
+<span class="font-medium">Ảnh đồng hồ công tơ xe</span>
+<span class="material-symbols-outlined text-xs text-blue-500" data-icon="open_in_new">open_in_new</span>
+</div>
+</div>
+<!-- Note description -->
+<p class="text-xs text-slate-600 bg-slate-50/50 p-2 rounded-md border border-slate-100 mt-1">
+<strong class="text-slate-700 font-medium">Ghi chú:</strong> Đi làm từ nhà đến công ty Quận 1 và về
+                </p>
+</div>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center lg:flex-col xl:flex-row gap-2 shrink-0 self-end lg:self-center">
+<button class="border border-rose-300 text-rose-600 hover:bg-rose-50 px-3.5 py-1.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+<span>Từ chối (Reject)</span>
+</button>
+<button class="bg-[#00a76f] text-white hover:bg-[#008f5d] px-4 py-1.5 rounded-lg text-sm font-medium shadow-sm transition-all flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+<span>✓ Phê duyệt</span>
+</button>
+</div>
+</div>
+</article>
+<!-- CARD 2 -->
+<article class="bg-white rounded-xl border border-slate-200/80 minimal-card-shadow p-5 transition-all duration-200 hover:border-slate-300">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<div class="flex items-start gap-4 flex-1">
+<div class="pt-1">
+<input class="w-4 h-4 rounded text-[#00a76f] focus:ring-[#00a76f] border-slate-300 cursor-pointer" type="checkbox"/>
+</div>
+<div class="w-10 h-10 rounded-full bg-emerald-100 text-[#00a76f] font-bold flex items-center justify-center text-sm shrink-0 border border-emerald-200">
+                B
+              </div>
+<div class="space-y-1.5 flex-1 min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-title-md text-sm font-semibold text-slate-900">Trần Thị B</span>
+<span class="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-emerald-50 text-[#00a76f] border border-emerald-200/60">
+                    Editor
+                  </span>
+<span class="text-xs text-slate-400">•</span>
+<span class="text-xs text-slate-500 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+                    Gửi lúc 17:15, 24/10/2026
+                  </span>
+</div>
+<div class="font-body-md text-sm font-semibold text-slate-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-slate-500" data-icon="two_wheeler">two_wheeler</span>
+<span>Xe máy Honda Wave 110cc - Đi chợ cuối tuần</span>
+</div>
+<div class="flex items-center gap-3 flex-wrap pt-0.5">
+<div class="inline-flex items-center gap-2 px-2.5 py-1 bg-slate-50 border border-slate-200 rounded-lg text-xs">
+<span class="text-slate-600 font-medium">12 km</span>
+<span class="text-slate-400">→</span>
+<span class="font-bold text-[#00a76f]">1.24 kg CO2e</span>
+<span class="text-[10px] text-slate-500 bg-white px-1.5 py-0.5 rounded border border-slate-200 font-mono">
+                      12 × 0.1033
+                    </span>
+</div>
+</div>
+<p class="text-xs text-slate-600 bg-slate-50/50 p-2 rounded-md border border-slate-100 mt-1">
+<strong class="text-slate-700 font-medium">Ghi chú:</strong> Mua thực phẩm cho gia đình cả tuần
+                </p>
+</div>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center lg:flex-col xl:flex-row gap-2 shrink-0 self-end lg:self-center">
+<button class="border border-rose-300 text-rose-600 hover:bg-rose-50 px-3.5 py-1.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+<span>Từ chối</span>
+</button>
+<button class="bg-[#00a76f] text-white hover:bg-[#008f5d] px-4 py-1.5 rounded-lg text-sm font-medium shadow-sm transition-all flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+<span>✓ Phê duyệt</span>
+</button>
+</div>
+</div>
+</article>
+<!-- CARD 3 -->
+<article class="bg-white rounded-xl border border-slate-200/80 minimal-card-shadow p-5 transition-all duration-200 hover:border-slate-300">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<div class="flex items-start gap-4 flex-1">
+<div class="pt-1">
+<input class="w-4 h-4 rounded text-[#00a76f] focus:ring-[#00a76f] border-slate-300 cursor-pointer" type="checkbox"/>
+</div>
+<!-- Avatar C -->
+<div class="w-10 h-10 rounded-full bg-blue-100 text-blue-600 font-bold flex items-center justify-center text-sm shrink-0 border border-blue-200">
+                C
+              </div>
+<div class="space-y-1.5 flex-1 min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-title-md text-sm font-semibold text-slate-900">Lê Văn C</span>
+<span class="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-emerald-50 text-[#00a76f] border border-emerald-200/60">
+                    Editor
+                  </span>
+<span class="text-xs text-slate-400">•</span>
+<span class="text-xs text-slate-500 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+                    Gửi lúc 11:20, 25/10/2026
+                  </span>
+</div>
+<div class="font-body-md text-sm font-semibold text-slate-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-amber-600" data-icon="mode_heat">mode_heat</span>
+<span>Đổi bình Gas Petrolimex 12kg nấu ăn</span>
+</div>
+<div class="flex items-center gap-3 flex-wrap pt-0.5">
+<div class="inline-flex items-center gap-2 px-2.5 py-1 bg-amber-50/70 border border-amber-200 rounded-lg text-xs">
+<span class="text-slate-700 font-medium">1 bình (12 kg)</span>
+<span class="text-slate-400">→</span>
+<span class="font-bold text-amber-700">35.80 kg CO2e</span>
+<span class="text-[10px] text-slate-500 bg-white px-1.5 py-0.5 rounded border border-amber-200 font-mono">
+                      12 kg × 2.9833
+                    </span>
+</div>
+<!-- Proof Attachment -->
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-50/70 border border-blue-200 text-blue-700 rounded-lg text-xs hover:bg-blue-100 cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="receipt_long">receipt_long</span>
+<span class="font-medium">Hóa đơn giao gas Petrolimex #GAS-9912</span>
+<span class="material-symbols-outlined text-xs text-blue-500" data-icon="zoom_in">zoom_in</span>
+</div>
+</div>
+<p class="text-xs text-slate-600 bg-slate-50/50 p-2 rounded-md border border-slate-100 mt-1">
+<strong class="text-slate-700 font-medium">Ghi chú:</strong> Thay bình gas bếp nấu tầng 1
+                </p>
+</div>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center lg:flex-col xl:flex-row gap-2 shrink-0 self-end lg:self-center">
+<button class="border border-rose-300 text-rose-600 hover:bg-rose-50 px-3.5 py-1.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+<span>Từ chối</span>
+</button>
+<button class="bg-[#00a76f] text-white hover:bg-[#008f5d] px-4 py-1.5 rounded-lg text-sm font-medium shadow-sm transition-all flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+<span>✓ Phê duyệt</span>
+</button>
+</div>
+</div>
+</article>
+<!-- CARD 4 -->
+<article class="bg-white rounded-xl border border-slate-200/80 minimal-card-shadow p-5 transition-all duration-200 hover:border-slate-300">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<div class="flex items-start gap-4 flex-1">
+<div class="pt-1">
+<input class="w-4 h-4 rounded text-[#00a76f] focus:ring-[#00a76f] border-slate-300 cursor-pointer" type="checkbox"/>
+</div>
+<!-- Avatar D -->
+<div class="w-10 h-10 rounded-full bg-purple-100 text-purple-700 font-bold flex items-center justify-center text-sm shrink-0 border border-purple-200">
+                D
+              </div>
+<div class="space-y-1.5 flex-1 min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-title-md text-sm font-semibold text-slate-900">Phạm Thị D</span>
+<span class="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-emerald-50 text-[#00a76f] border border-emerald-200/60">
+                    Editor
+                  </span>
+<span class="text-xs text-slate-400">•</span>
+<span class="text-xs text-slate-500 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+                    Gửi lúc 08:45, 26/10/2026
+                  </span>
+</div>
+<div class="font-body-md text-sm font-semibold text-slate-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-slate-500" data-icon="local_gas_station">local_gas_station</span>
+<span>Đổ xăng xe máy Honda Lead 125cc</span>
+</div>
+<div class="flex items-center gap-3 flex-wrap pt-0.5">
+<div class="inline-flex items-center gap-2 px-2.5 py-1 bg-slate-50 border border-slate-200 rounded-lg text-xs">
+<span class="text-slate-700 font-medium">3.5 Lít xăng RON 95</span>
+<span class="text-slate-400">→</span>
+<span class="font-bold text-[#00a76f]">8.16 kg CO2e</span>
+<span class="text-[10px] text-slate-500 bg-white px-1.5 py-0.5 rounded border border-slate-200 font-mono">
+                      3.5 L × 2.3308
+                    </span>
+</div>
+<!-- Proof Attachment -->
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 bg-blue-50/70 border border-blue-200 text-blue-700 rounded-lg text-xs hover:bg-blue-100 cursor-pointer transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="receipt">receipt</span>
+<span class="font-medium">Hóa đơn Petrolimex Cửa hàng #14</span>
+<span class="material-symbols-outlined text-xs text-blue-500" data-icon="zoom_in">zoom_in</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center lg:flex-col xl:flex-row gap-2 shrink-0 self-end lg:self-center">
+<button class="border border-rose-300 text-rose-600 hover:bg-rose-50 px-3.5 py-1.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+<span>Từ chối</span>
+</button>
+<button class="bg-[#00a76f] text-white hover:bg-[#008f5d] px-4 py-1.5 rounded-lg text-sm font-medium shadow-sm transition-all flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+<span>✓ Phê duyệt</span>
+</button>
+</div>
+</div>
+</article>
+<!-- CARD 5 -->
+<article class="bg-white rounded-xl border border-slate-200/80 minimal-card-shadow p-5 transition-all duration-200 hover:border-slate-300">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<div class="flex items-start gap-4 flex-1">
+<div class="pt-1">
+<input class="w-4 h-4 rounded text-[#00a76f] focus:ring-[#00a76f] border-slate-300 cursor-pointer" type="checkbox"/>
+</div>
+<!-- Avatar D -->
+<div class="w-10 h-10 rounded-full bg-purple-100 text-purple-700 font-bold flex items-center justify-center text-sm shrink-0 border border-purple-200">
+                D
+              </div>
+<div class="space-y-1.5 flex-1 min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="font-title-md text-sm font-semibold text-slate-900">Phạm Thị D</span>
+<span class="px-2 py-0.5 rounded-md text-[11px] font-semibold bg-emerald-50 text-[#00a76f] border border-emerald-200/60">
+                    Editor
+                  </span>
+<span class="text-xs text-slate-400">•</span>
+<span class="text-xs text-slate-500 font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-xs" data-icon="schedule">schedule</span>
+                    Gửi lúc 14:10, 26/10/2026
+                  </span>
+</div>
+<div class="font-body-md text-sm font-semibold text-slate-800 flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-cyan-600" data-icon="water_drop">water_drop</span>
+<span>Nước sinh hoạt bổ sung</span>
+</div>
+<div class="flex items-center gap-3 flex-wrap pt-0.5">
+<div class="inline-flex items-center gap-2 px-2.5 py-1 bg-slate-50 border border-slate-200 rounded-lg text-xs">
+<span class="text-slate-700 font-medium">5 m³</span>
+<span class="text-slate-400">→</span>
+<span class="font-bold text-[#00a76f]">1.75 kg CO2e</span>
+<span class="text-[10px] text-slate-500 bg-white px-1.5 py-0.5 rounded border border-slate-200 font-mono">
+                      5 m³ × 0.35
+                    </span>
+</div>
+</div>
+</div>
+</div>
+<!-- Right Actions -->
+<div class="flex items-center lg:flex-col xl:flex-row gap-2 shrink-0 self-end lg:self-center">
+<button class="border border-rose-300 text-rose-600 hover:bg-rose-50 px-3.5 py-1.5 rounded-lg text-sm font-medium transition-colors flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base" data-icon="close">close</span>
+<span>Từ chối</span>
+</button>
+<button class="bg-[#00a76f] text-white hover:bg-[#008f5d] px-4 py-1.5 rounded-lg text-sm font-medium shadow-sm transition-all flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base" data-icon="check">check</span>
+<span>✓ Phê duyệt</span>
+</button>
+</div>
+</div>
+</article>
+</section>
+<!-- Bottom Pagination / Status Footer -->
+<div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-secondary border-t border-slate-200">
+<div>
+          Đang hiển thị <span class="font-semibold text-slate-800">5 trên 5</span> yêu cầu đang chờ phê duyệt
+        </div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-500 cursor-not-allowed" disabled="">
+            Trước
+          </button>
+<span class="px-3 py-1 rounded-lg bg-[#00a76f]/10 text-[#00a76f] font-semibold">1</span>
+<button class="px-3 py-1.5 rounded-lg border border-slate-200 bg-white text-slate-500 cursor-not-allowed" disabled="">
+            Tiếp
+          </button>
+</div>
+</div>
+</main>
+</div>
+<!-- Inline Interaction Logic: Select All Toggle -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const selectAll = document.getElementById('selectAllCheckbox');
+      const itemCheckboxes = document.querySelectorAll('article input[type="checkbox"]');
+
+      if (selectAll && itemCheckboxes.length > 0) {
+        selectAll.addEventListener('change', (e) => {
+          itemCheckboxes.forEach((cb) => {
+            cb.checked = e.target.checked;
+          });
+        });
+
+        itemCheckboxes.forEach((cb) => {
+          cb.addEventListener('change', () => {
+            const allChecked = Array.from(itemCheckboxes).every((c) => c.checked);
+            const someChecked = Array.from(itemCheckboxes).some((c) => c.checked);
+            selectAll.checked = allChecked;
+            selectAll.indeterminate = !allChecked && someChecked;
+          });
+        });
+      }
+    });
+  </script>
+</body></html>
