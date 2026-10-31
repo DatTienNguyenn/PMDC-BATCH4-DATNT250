@@ -7,7 +7,7 @@
 > **Phong cách UI/UX:** MUI Minimal UI ([minimals.cc](https://minimals.cc))  
 > **Tone màu chủ đạo:** Trắng sáng (`#FFFFFF` / `#F9FAFB`) & Xanh ngọc lục bảo Emerald Green (`#00A76F`)  
 > **Nhánh Git Worktree:** `design/stitch-minimal-ui`  
-> **Căn cứ nghiệp vụ:** [docs/information-architecture/information-architecture.md](../../docs/information-architecture/information-architecture.md), [docs/PRD.md](../../docs/PRD.md), [docs/user-stories.md](../../docs/user-stories.md)
+> **Căn cứ nghiệp vụ:** [docs/09-information-architecture.md](../../docs/09-information-architecture.md), [docs/01-PRD.md](../../docs/01-PRD.md), [docs/04-user-stories.md](../../docs/04-user-stories.md)
 
 ---
 
