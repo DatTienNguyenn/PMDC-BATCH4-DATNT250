@@ -2,11 +2,11 @@
 ## Dự án: Personal & Micro-Office Carbon Ledger (Hệ thống Quản trị & Phân tích Dấu chân Carbon)
 
 > **Căn cứ thiết kế:**
-> - [docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-api-schema/docs/information-architecture/information-architecture.md) (Mục 4: Screen-to-API Mapping Matrix & Mục 6: RBAC Matrix)
-> - [docs/PRD.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-api-schema/docs/PRD.md) (Mục 7: Database Architecture & Technical Specs)
-> - [docs/usecase/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-api-schema/docs/usecase/use-cases.md) (Danh mục 12 Use Cases UC01 - UC12)
-> - [docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-api-schema/docs/user-stories.md) (Tiêu chí chấp nhận AC & Gherkin Scenarios)
-> - [docs/activity-supported.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-api-schema/docs/activity-supported.md) & [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-api-schema/docs/emission-reference-benchmark.md)
+> - [docs/09-information-architecture.md](../09-information-architecture.md) (Mục 4: Screen-to-API Mapping Matrix & Mục 6: RBAC Matrix)
+> - [docs/01-PRD.md](../01-PRD.md) (Mục 7: Database Architecture & Technical Specs)
+> - [docs/03-use-cases.md](../03-use-cases.md) (Danh mục 12 Use Cases UC01 - UC12)
+> - [docs/04-user-stories.md](../04-user-stories.md) (Tiêu chí chấp nhận AC & Gherkin Scenarios)
+> - [docs/activity-supported.md](../activity-supported.md) & [docs/emission-reference-benchmark.md](../emission-reference-benchmark.md)
 >
 > **Phiên bản:** 1.0 (Chuẩn hóa toàn diện RESTful API Schema, Data Contracts, Validation Rules và Ma trận Đối soát 100% Use Case)  
 > **Ngôn ngữ & Nền tảng đích:** Java Spring Boot 3.x, Spring Security 6 (JWT + Method Security), Spring Data JPA, PostgreSQL 16  
@@ -1827,4 +1827,4 @@ Mọi API Endpoint trọng yếu đều có chỉ mục (Index) tương ứng tr
 
 ---
 
-*Tài liệu Đặc tả API Schema này là bản quy chuẩn kỹ thuật chính thức của dự án, đồng bộ hoàn toàn với [spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-api-schema/spec.md), [docs/PRD.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-api-schema/docs/PRD.md) và [docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250-api-schema/docs/information-architecture/information-architecture.md).*
+*Tài liệu Đặc tả API Schema này là bản quy chuẩn kỹ thuật chính thức của dự án, đồng bộ hoàn toàn với [spec.md](../../spec.md), [docs/01-PRD.md](../01-PRD.md) và [docs/09-information-architecture.md](../09-information-architecture.md).*

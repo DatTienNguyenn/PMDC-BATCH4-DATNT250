@@ -2,7 +2,7 @@
 ## Dự án: Personal & Micro-Office Carbon Ledger
 
 > **Dự án:** Hệ thống Quản trị & Phân tích Dấu chân Carbon cho Gia đình/Văn phòng nhỏ  
-> **Căn cứ nghiệp vụ:** [Đặc tả phạm vi bài toán (spec.md)](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md)  
+> **Căn cứ nghiệp vụ:** [Đặc tả phạm vi bài toán (spec.md)](../spec.md)  
 > **Phiên bản:** 3.0 (Đồng bộ toàn diện 4 Luồng hoạt động, 3 Phương thức nạp dữ liệu, Notification cảnh báo và Xuất PDF)  
 
 ---
@@ -20,7 +20,7 @@
 ## 2. SƠ ĐỒ USE CASE TỔNG THỂ (USE CASE DIAGRAM)
 
 ### 2.1. Sơ đồ Chuẩn UML (UCD)
-![Sơ đồ UML Use Case Tổng quan](UCD.png)
+![Sơ đồ UML Use Case Tổng quan](image/UCD.png)
 
 *Sơ đồ thể hiện 3 tác nhân chính (`Workspace Admin`, `Member`, `System Admin`), quan hệ kế thừa (Generalization) giữa Workspace Admin và Member, cùng quan hệ phụ thuộc `<<include>>` trong việc quét và xác nhận dữ liệu AI.*
 
@@ -120,7 +120,7 @@ flowchart LR
      - Số lượng thành viên (ví dụ: `4` người).
      - Diện tích mặt sàn sử dụng (ví dụ: `85.5` $m^2$).
   3. Reviewer nhấn "Lưu thông số".
-  4. Hệ thống kiểm tra tính hợp lệ của số liệu, lưu vào bảng `workspace_baselines`, tự động xác định Mức phát thải Tham chiếu chuẩn quốc gia ($141.93\text{ kg CO}_2\text{e/người/tháng}$ cho Hộ gia đình - $46,4\%$ ranh giới phát thải, hoặc $305.83\text{ kg CO}_2\text{e/người/tháng}$ cho Nơi làm việc - $100\%$ theo [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md)) và thông báo hoàn tất cài đặt nền tảng.
+  4. Hệ thống kiểm tra tính hợp lệ của số liệu, lưu vào bảng `workspace_baselines`, tự động xác định Mức phát thải Tham chiếu chuẩn quốc gia ($141.93\text{ kg CO}_2\text{e/người/tháng}$ cho Hộ gia đình - $46,4\%$ ranh giới phát thải, hoặc $305.83\text{ kg CO}_2\text{e/người/tháng}$ cho Nơi làm việc - $100\%$ theo [docs/emission-reference-benchmark.md](emission-reference-benchmark.md)) và thông báo hoàn tất cài đặt nền tảng.
 - **Luồng rẽ nhánh / Ngoại lệ:**
   - *2a. Nhập số thành viên <= 0 hoặc diện tích <= 0:* Hệ thống báo lỗi: "Số lượng thành viên và diện tích mặt sàn phải là số dương lớn hơn 0".
 
@@ -278,7 +278,7 @@ flowchart LR
      - Hệ thống bắn **Notification báo động vượt trần** đến toàn bộ thành viên.
      - Đổi màu thanh tiến độ sang Đỏ (Danger).
   5. Khi phát thải bình quân đầu người vượt mức tham chiếu quốc gia hoặc Run-rate dự báo cuối tháng vượt chuẩn:
-     - Hệ thống kích hoạt **Cảnh báo Dị biệt Tham chiếu Quốc gia (Anomaly Warning)** trên Dashboard và gửi thông báo khuyến cáo kiểm tra các nhóm phát thải trọng điểm (Điện, Phương tiện di chuyển). *(Mức chuẩn tham chiếu được quy định tại [docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md)).*
+     - Hệ thống kích hoạt **Cảnh báo Dị biệt Tham chiếu Quốc gia (Anomaly Warning)** trên Dashboard và gửi thông báo khuyến cáo kiểm tra các nhóm phát thải trọng điểm (Điện, Phương tiện di chuyển). *(Mức chuẩn tham chiếu được quy định tại [docs/emission-reference-benchmark.md](emission-reference-benchmark.md)).*
 
 ---
 
@@ -326,4 +326,4 @@ flowchart LR
 
 ---
 
-*Tài liệu đặc tả Use Case này đảm bảo đồng bộ 100% với [spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md) và phản ánh trọn vẹn 4 Luồng hoạt động cốt lõi của hệ thống.*
+*Tài liệu đặc tả Use Case này đảm bảo đồng bộ 100% với [spec.md](../spec.md) và phản ánh trọn vẹn 4 Luồng hoạt động cốt lõi của hệ thống.*

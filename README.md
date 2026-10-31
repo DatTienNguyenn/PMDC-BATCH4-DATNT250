@@ -3,9 +3,9 @@
 ## (Personal & Micro-Office Carbon Ledger)
 
 [![Batch](https://img.shields.io/badge/Batch-PMDC%20Batch%204-green.svg)](https://github.com/DatTienNguyenn/PMDC-BATCH4-DATNT250)
-[![Status](https://img.shields.io/badge/Status-Specification%20%26%20Backlog%20Ready-blue.svg)](docs/user-stories.md)
-[![Methodology](https://img.shields.io/badge/Methodology-INVEST%20%26%20Gherkin-orange.svg)](docs/user-stories.md)
-[![Timeline](https://img.shields.io/badge/Timeline-6%20Weeks%20%283%20Sprints%29-purple.svg)](docs/user-stories.md)
+[![Status](https://img.shields.io/badge/Status-Specification%20%26%20Backlog%20Ready-blue.svg)](docs/04-user-stories.md)
+[![Methodology](https://img.shields.io/badge/Methodology-INVEST%20%26%20Gherkin-orange.svg)](docs/04-user-stories.md)
+[![Timeline](https://img.shields.io/badge/Timeline-6%20Weeks%20%283%20Sprints%29-purple.svg)](docs/04-user-stories.md)
 
 ---
 
@@ -29,7 +29,7 @@ Hệ thống giải quyết nỗi đau lớn nhất của người dùng là **p
 
 Hệ thống được cấu trúc thành **9 phân hệ chức năng hoàn chỉnh** như thể hiện trong sơ đồ Mindmap sản phẩm dưới đây:
 
-![Cấu trúc sản phẩm Mindmap](docs/cau_truc_san_pham_xmind.png)
+![Cấu trúc sản phẩm Mindmap](docs/mindmap.png)
 
 ---
 
@@ -37,7 +37,7 @@ Hệ thống được cấu trúc thành **9 phân hệ chức năng hoàn chỉ
 
 Hệ thống được thiết kế và chuẩn hóa toàn diện thành **26 Màn hình & Giao diện tương tác** (Full Pages, Modals, Drawers và Error Views), được tổ chức phân cấp mạch lạc từ khâu xác thực, quản lý không gian làm việc cho tới cổng quản trị hệ thống:
 
-![Sơ đồ Kiến trúc Thông tin & Sitemap](docs/information-architecture/sitemap.png)
+![Sơ đồ Kiến trúc Thông tin & Sitemap](docs/image/sitemap.png)
 
 ### 3.1. Sơ đồ Phân cấp Màn hình Toàn hệ thống (Mermaid Screen Hierarchy)
 
@@ -132,7 +132,7 @@ Hệ thống được chia tách thành 5 tầng cấu trúc kỹ thuật rõ r�
    - `SCR-ERR-403` (`/403`): Trang chặn truy cập khi thành viên thiếu quyền (Route Guard cho Approval Queue hoặc Workspace lạ).
    - `SCR-ERR-404` (`/404`): Trang thông báo đường dẫn hoặc bản ghi không tồn tại.
 
-👉 **Xem chi tiết đặc tả 26 màn hình, UI/UX State Contract và Screen-to-API Mapping tại:** [docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/information-architecture/information-architecture.md)
+👉 **Xem chi tiết đặc tả 26 màn hình, UI/UX State Contract và Screen-to-API Mapping tại:** [docs/09-information-architecture.md](docs/09-information-architecture.md)
 
 ---
 
@@ -142,7 +142,7 @@ Hệ thống được chia tách thành 5 tầng cấu trúc kỹ thuật rõ r�
 
 Hệ thống được mô hình hóa theo chuẩn UML với 3 tác nhân chính (`Workspace Admin`, `Member`, `System Admin`), quan hệ kế thừa (Generalization) giữa Workspace Admin và Member, cùng quan hệ phụ thuộc `<<include>>` trong luồng xử lý AI:
 
-![Sơ đồ UML Use Case Tổng quan](docs/usecase/UCD.png)
+![Sơ đồ UML Use Case Tổng quan](docs/image/UCD.png)
 
 _Ghi chú quan hệ trên sơ đồ:_
 
@@ -241,39 +241,44 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
 ├── README.md                          # Tài liệu tổng quan dự án (File này)
 ├── spec.md                            # Đặc tả phạm vi bài toán, 3 Roles, 4 Luồng & 12 Use Cases
 └── docs/
-    ├── PRD.md                         # Tài liệu Yêu cầu Sản phẩm (Product Requirements Document)
-    ├── MVP.md                         # Kế hoạch triển khai & phát hành MVP 6 tuần (3 Sprints x 2 tuần)
-    ├── activity-supported.md          # Danh mục hoạt động phát thải & Hệ số phát thải quy chuẩn (Scope 1, 2, 3)
-    ├── cau_truc_san_pham_xmind.png    # Sơ đồ Mindmap cấu trúc sản phẩm 9 phân hệ
-    ├── emission-reference-benchmark.md# Quy định & phương pháp luận mức phát thải tham chiếu (Household 46.4% vs Workplace 100%)
-    ├── api-schema/
-    │   ├── api-schema.md              # Đặc tả chi tiết RESTful API Schema, Data Contracts & Kiểm tra Use Cases
-    │   └── openapi.yaml               # Đặc tả chuẩn máy OpenAPI 3.1 (Swagger)
-    ├── c4-documentation/
-    │   ├── c4-documentation.md        # Tài liệu Thiết kế Kiến trúc C4 Model (Context, Container, Component, Deployment)
-    │   └── c4-verification-checklist.md # Bảng kiểm chuẩn kiến trúc C4, Ma trận truy vết & Biên bản nghiệm thu
-    ├── information-architecture/
-    │   ├── information-architecture.md# Tài liệu Kiến trúc Thông tin & Đặc tả giao diện (IA)
-    │   └── sitemap.png                # Sơ đồ kiến trúc thông tin & cây màn hình (Sitemap)
-    ├── usecase/
-    │   ├── UCD.png                    # Sơ đồ UML Use Case Diagram tổng quan hệ thống
-    │   └── use-cases.md               # Đặc tả chi tiết 12 Use Cases (Actors, Flows, Alternatives)
-    └── user-stories.md                # Bộ 15 User Stories chuẩn INVEST & Gherkin ACs (Given-When-Then)
+    ├── 01-PRD.md                      # Tài liệu Yêu cầu Sản phẩm (Product Requirements Document)
+    ├── 02-MVP.md                      # Kế hoạch triển khai & phát hành MVP 6 tuần (3 Sprints x 2 tuần)
+    ├── 03-use-cases.md                # Đặc tả chi tiết 12 Use Cases (UC01 - UC12, Actors, Flows, Exceptions)
+    ├── 04-user-stories.md             # Bộ 15 User Stories chuẩn INVEST (Story Statement, Metadata, INVEST check)
+    ├── 05-data-model.md               # Thiết kế Cơ sở Dữ liệu quan hệ PostgreSQL 16 & Data Model chi tiết (13 bảng, ERD)
+    ├── 06-acceptance-criteria.md      # Bộ Tiêu chí Nghiệm thu chi tiết cho 15 User Stories (Gherkin Given-When-Then, 51 ACs)
+    ├── 07-folder-structure.md         # Quy chuẩn Cấu trúc Thư mục & Quản trị Tài liệu Dự án
+    ├── 09-information-architecture.md # Kiến trúc Thông tin & Đặc tả 26 Màn hình (IA, Screen Hierarchy, UI State Contract)
+    ├── activity-supported.md          # Danh mục 8 hoạt động phát thải & Hệ số phát thải quy chuẩn (Scope 1, 2, 3)
+    ├── emission-reference-benchmark.md# Phương pháp luận Mức phát thải tham chiếu quốc gia (Household 46.4% vs Workplace 100%)
+    ├── mindmap.png                    # Sơ đồ Mindmap cấu trúc sản phẩm 9 phân hệ chức năng
+    ├── image/                         # Thư mục lưu trữ hình ảnh minh họa, sơ đồ thiết kế
+    │   ├── sitemap.png                # Sơ đồ Kiến trúc Thông tin & Sitemap cây màn hình
+    │   └── UCD.png                    # Sơ đồ UML Use Case Diagram tổng quan toàn hệ thống
+    ├── api-schema/                    # Phân hệ đặc tả giao diện lập trình ứng dụng RESTful API
+    │   ├── api-schema.md              # Đặc tả chi tiết RESTful API Endpoints, Data Contracts & Kiểm tra Use Cases
+    │   └── openapi.yaml               # Đặc tả kỹ thuật chuẩn máy OpenAPI 3.1 (Swagger)
+    └── c4-documentation/              # Phân hệ tài liệu thiết kế kiến trúc hệ thống chuẩn C4 Model
+        ├── c4-documentation.md        # Tài liệu Kiến trúc C4 đầy đủ 4 tầng (Context, Container, Component, Deployment)
+        └── c4-verification-checklist.md# Bảng kiểm chuẩn kiến trúc C4 (5 trụ cột, 26 tiêu chí, Ma trận truy vết)
 ```
 
 ### Chi tiết các tài liệu liên kết:
 
-- **[docs/MVP.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/MVP.md):** Kế hoạch chi tiết triển khai và phát hành MVP trong 6 tuần (3 Sprints), định nghĩa DoR/DoD và quản trị rủi ro kỹ thuật.
-- **[docs/activity-supported.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/activity-supported.md):** Danh mục 8 hoạt động phát thải được hỗ trợ (bao gồm năng lượng, di chuyển, rác thải, nước sạch, vật tư và du lịch hàng không), đơn vị tính, phân loại Scope 1, 2, 3 và trích dẫn nguồn hệ số chuẩn (Bộ TN&MT, IPCC, ICAO, DEFRA, US EPA, IEA).
-- **[docs/emission-reference-benchmark.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/emission-reference-benchmark.md):** Quy định và giải thích nguồn gốc dữ liệu, phương pháp luận xác định mức phát thải tham chiếu quốc gia dựa trên Our World in Data ($3.67\text{ tấn/người/năm}$), phân bổ tỷ lệ $46,4\%$ cho Hộ gia đình (3 nhóm sinh hoạt cốt lõi: Điện, Giao thông đường bộ, Rác thải) và $100\%$ cho Nơi làm việc, đặc tả công thức toán học và cấu trúc dữ liệu tham chiếu.
-- **[spec.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/spec.md):** Định nghĩa chi tiết phạm vi In-Scope / Out-of-Scope, ma trận RBAC, 4 luồng hoạt động cốt lõi và danh mục 12 Use Cases.
-- **[docs/information-architecture/information-architecture.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/information-architecture/information-architecture.md):** Danh mục 26 màn hình chuẩn hóa (Screen ID, Routes), sơ đồ phân cấp Screen Hierarchy 5 tầng, Hợp đồng 5 Cung bậc Trạng thái UI (State Contract), Screen-to-API Mapping Matrix và Ma trận phân quyền RBAC chi tiết.
-- **[docs/api-schema/api-schema.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/api-schema/api-schema.md):** Đặc tả toàn diện hệ thống RESTful API Schema, Data Contracts (Request/Response Envelopes, Validation Rules), kiểm tra đối soát quy trình nghiệp vụ và bao phủ 100% danh mục 12 Use Cases (kèm file OpenAPI 3.1 [`docs/api-schema/openapi.yaml`](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/api-schema/openapi.yaml)).
-- **[docs/c4-documentation/c4-documentation.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/c4-documentation/c4-documentation.md):** Tài liệu Thiết kế Kiến trúc Hệ thống theo chuẩn C4 Model đầy đủ 4 tầng: Ngữ cảnh (System Context L1), Khối ứng dụng (Container L2), Thành phần nội bộ (Component L3) và Mô hình miền/Triển khai hạ tầng Docker (Code & Deployment L4), tích hợp các quyết định kiến trúc then chốt (ADRs).
-- **[docs/c4-documentation/c4-verification-checklist.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/c4-documentation/c4-verification-checklist.md):** Bảng kiểm chuẩn kiến trúc C4 Documentation với bộ tiêu chuẩn 5 trụ cột (26 tiêu chí, 100 điểm), Ma trận đối soát truy vết đầu - cuối (End-to-End Traceability Matrix 100% Use Cases, User Stories, Màn hình IA, REST APIs, Bảng CSDL và SLAs) cùng Biên bản nghiệm thu kiến trúc chính thức.
-- **[docs/usecase/use-cases.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/usecase/use-cases.md):** Đặc tả chi tiết từng Use Case từ UC01 đến UC12 (Tiền điều kiện, Hậu điều kiện, Luồng chính, Luồng ngoại lệ).
-- **[docs/user-stories.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/user-stories.md):** Danh mục 15 User Stories được chuẩn hóa theo chuẩn **INVEST** và tiêu chí nghiệm thu **Gherkin Syntax (Given-When-Then)** theo phương pháp luận của BA Zone & Digital School (Phúc NT).
-
+- **[docs/01-PRD.md](docs/01-PRD.md):** Tài liệu Yêu cầu Sản phẩm (Product Requirements Document) hoàn chỉnh, đặc tả 6 phân hệ, ma trận RBAC và các quyết định kiến trúc then chốt.
+- **[docs/02-MVP.md](docs/02-MVP.md):** Kế hoạch chi tiết triển khai và phát hành MVP trong 6 tuần (3 Sprints), định nghĩa DoR/DoD và quản trị rủi ro kỹ thuật.
+- **[docs/03-use-cases.md](docs/03-use-cases.md):** Đặc tả chi tiết từng Use Case từ UC01 đến UC12 (Tiền điều kiện, Hậu điều kiện, Luồng chính, Luồng ngoại lệ).
+- **[docs/04-user-stories.md](docs/04-user-stories.md):** Danh mục 15 User Stories được chuẩn hóa theo chuẩn **INVEST** (Story Narrative, Metadata, INVEST check).
+- **[docs/05-data-model.md](docs/05-data-model.md):** Thiết kế Cơ sở Dữ liệu quan hệ PostgreSQL 16 chi tiết: Sơ đồ ERD, 13 bảng dữ liệu, kiểu dữ liệu, ràng buộc CHECK/DEFAULT, Partial Indexes và các quyết định tối ưu.
+- **[docs/06-acceptance-criteria.md](docs/06-acceptance-criteria.md):** Bộ Tiêu chí Nghiệm thu chi tiết cho 15 User Stories (51 kịch bản Gherkin Syntax `Given - When - Then - And`, bao phủ Happy Path, Edge Cases, Negative Paths).
+- **[docs/07-folder-structure.md](docs/07-folder-structure.md):** Quy chuẩn Cấu trúc Thư mục & Quản trị Tài liệu Dự án, hướng dẫn liên kết nội bộ và ma trận truy vết tài liệu.
+- **[docs/09-information-architecture.md](docs/09-information-architecture.md):** Danh mục 26 màn hình chuẩn hóa (Screen ID, Routes), sơ đồ phân cấp Screen Hierarchy 5 tầng, Hợp đồng 5 Cung bậc Trạng thái UI (State Contract), Screen-to-API Mapping Matrix và Ma trận phân quyền RBAC chi tiết.
+- **[docs/activity-supported.md](docs/activity-supported.md):** Danh mục 8 hoạt động phát thải được hỗ trợ (bao gồm năng lượng, di chuyển, rác thải, nước sạch, vật tư và du lịch hàng không), đơn vị tính, phân loại Scope 1, 2, 3 và trích dẫn nguồn hệ số chuẩn (Bộ TN&MT, IPCC, ICAO, DEFRA, US EPA, IEA).
+- **[docs/emission-reference-benchmark.md](docs/emission-reference-benchmark.md):** Quy định và giải thích nguồn gốc dữ liệu, phương pháp luận xác định mức phát thải tham chiếu quốc gia dựa trên Our World in Data ($3.67	ext{ tấn/người/năm}$), phân bổ tỷ lệ $46,4\%$ cho Hộ gia đình (3 nhóm sinh hoạt cốt lõi: Điện, Giao thông đường bộ, Rác thải) và $100\%$ cho Nơi làm việc, đặc tả công thức toán học và cấu trúc dữ liệu tham chiếu.
+- **[spec.md](spec.md):** Định nghĩa chi tiết phạm vi In-Scope / Out-of-Scope, ma trận RBAC, 4 luồng hoạt động cốt lõi và danh mục 12 Use Cases.
+- **[docs/api-schema/api-schema.md](docs/api-schema/api-schema.md):** Đặc tả toàn diện hệ thống RESTful API Schema, Data Contracts (Request/Response Envelopes, Validation Rules), kiểm tra đối soát quy trình nghiệp vụ và bao phủ 100% danh mục 12 Use Cases (kèm file OpenAPI 3.1 [`docs/api-schema/openapi.yaml`](docs/api-schema/openapi.yaml)).
+- **[docs/c4-documentation/c4-documentation.md](docs/c4-documentation/c4-documentation.md):** Tài liệu Thiết kế Kiến trúc Hệ thống theo chuẩn C4 Model đầy đủ 4 tầng: Ngữ cảnh (System Context L1), Khối ứng dụng (Container L2), Thành phần nội bộ (Component L3) và Mô hình miền/Triển khai hạ tầng Docker (Code & Deployment L4), tích hợp các quyết định kiến trúc then chốt (ADRs).
+- **[docs/c4-documentation/c4-verification-checklist.md](docs/c4-documentation/c4-verification-checklist.md):** Bảng kiểm chuẩn kiến trúc C4 Documentation với bộ tiêu chuẩn 5 trụ cột (26 tiêu chí, 100 điểm), Ma trận đối soát truy vết đầu - cuối (End-to-End Traceability Matrix 100% Use Cases, User Stories, Màn hình IA, REST APIs, Bảng CSDL và SLAs) cùng Biên bản nghiệm thu kiến trúc chính thức.
 ---
 
 ## 📋 7. Danh mục 15 User Stories (Backlog Overview)
@@ -302,7 +307,7 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
 
 Chi tiết kế hoạch phát hành MVP trong **6 tuần (3 Sprints x 2 tuần)**, bảng phân bổ Story Points, định nghĩa Definition of Ready (DoR), Definition of Done (DoD) và quản trị rủi ro kỹ thuật đã được tách riêng vào tài liệu:
 
-👉 **Xem chi tiết tại:** [docs/MVP.md](file:///home/datnguyen-nuoa/PMDC-BATCH4-DATNT250/docs/MVP.md)
+👉 **Xem chi tiết tại:** [docs/02-MVP.md](docs/02-MVP.md)
 
 - **Sprint 1 (Tuần 1 - 2 | 16 SP):** Onboarding, Thiết lập Thông số nền $m^2$/số người, Quản lý Hệ số chuẩn (System Admin), Form nạp phát thải thủ công (Draft) & Engine tính toán quy đổi $\text{kg CO}_2\text{e}$.
 - **Sprint 2 (Tuần 3 - 4 | 18 SP):** Nạp dữ liệu qua file mẫu Excel (Bulk Import with Preview), Hàng đợi duyệt Reviewer (Approval Queue), Lịch sử sổ cái, Ngân sách tháng, Dashboard chỉ số chuẩn hóa và Bắn Notification cảnh báo $85\%$.
