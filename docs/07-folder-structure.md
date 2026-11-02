@@ -36,7 +36,7 @@ Dưới đây là cấu trúc thư mục hiện tại của toàn bộ kho lưu 
     ├── 07-folder-structure.md         # Quy chuẩn Cấu trúc Thư mục & Quản trị Tài liệu Dự án (Tài liệu này)
     ├── 09-information-architecture.md # Kiến trúc Thông tin & Đặc tả 26 Màn hình (IA, Screen Hierarchy, UI State Contract)
     ├── activity-supported.md          # Danh mục 8 hoạt động phát thải & Hệ số phát thải quy chuẩn (Scope 1, 2, 3)
-    ├── emission-reference-benchmark.md# Phương pháp luận Mức phát thải tham chiếu quốc gia (Household 46.4% vs Workplace 100%)
+    ├── emission-reference-benchmark.md# Phương pháp luận Mức phát thải tham chiếu quốc gia (Household 50.8% vs Workplace 100%)
     ├── mindmap.png                    # Sơ đồ Mindmap cấu trúc sản phẩm 9 phân hệ chức năng
     ├── image/                         # Thư mục lưu trữ hình ảnh minh họa, sơ đồ thiết kế
     │   ├── sitemap.png                # Sơ đồ Kiến trúc Thông tin & Sitemap cây màn hình

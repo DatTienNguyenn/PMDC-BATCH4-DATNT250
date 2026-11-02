@@ -147,7 +147,7 @@ export enum GlobalRole {
 }
 
 export enum WorkspaceType {
-  HOME = "HOME",           // Hộ gia đình (Benchmark tham chiếu: 141.93 kg CO2e/người/tháng)
+  HOME = "HOME",           // Hộ gia đình (Benchmark tham chiếu: 155.25 kg CO2e/người/tháng)
   OFFICE = "OFFICE"        // Văn phòng nhỏ (Benchmark tham chiếu: 305.83 kg CO2e/người/tháng)
 }
 
@@ -403,9 +403,9 @@ export enum BudgetThresholdState {
     "floor_area_m2": 85.50,
     "period_valid_from": "2026-10",
     "reference_benchmark": {
-      "national_monthly_per_capita_kg": 141.93,
-      "benchmark_basis": "Our World in Data 2026 (3.67 tonnes CO2e/year) - 46.4% Household Scope Boundary",
-      "expected_baseline_total_kg": 567.72
+      "national_monthly_per_capita_kg": 155.25,
+      "benchmark_basis": "Our World in Data 2026 (3.67 tonnes CO2e/year) - 50.8% Household Scope Boundary",
+      "expected_baseline_total_kg": 621.00
     }
   }
 }
@@ -597,8 +597,8 @@ export enum BudgetThresholdState {
     "normalized_metrics": {
       "co2e_per_capita_kg": 87.13,
       "co2e_per_m2_kg": 4.08,
-      "national_reference_benchmark_kg": 141.93,
-      "benchmark_intensity_ratio_r": 0.61,
+      "national_reference_benchmark_kg": 155.25,
+      "benchmark_intensity_ratio_r": 0.56,
       "benchmark_tier": "GREEN_PIONEER",
       "anomaly_detected": false
     },
@@ -1212,22 +1212,22 @@ export enum BudgetThresholdState {
   "data": {
     "workspace_type": "HOME",
     "occupants": 4,
-    "national_benchmark_per_person_month_kg": 141.93,
-    "baseline_total_benchmark_kg": 567.72,
+    "national_benchmark_per_person_month_kg": 155.25,
+    "baseline_total_benchmark_kg": 621.00,
     "recommendations": {
       "green_tier": {
         "title": "Mục tiêu Tiên phong Xanh (Giảm 10%)",
-        "target_co2e_kg": 510.95,
+        "target_co2e_kg": 558.90,
         "description": "Phù hợp hộ gia đình tích cực tiết kiệm điện và sử dụng phương tiện công cộng."
       },
       "standard_tier": {
         "title": "Mục tiêu Chuẩn Quốc gia (100%)",
-        "target_co2e_kg": 567.72,
+        "target_co2e_kg": 621.00,
         "description": "Tương đương mức phát thải trung bình của hộ gia đình Việt Nam."
       },
       "flexible_tier": {
         "title": "Mục tiêu Linh hoạt (+15%)",
-        "target_co2e_kg": 652.88,
+        "target_co2e_kg": 714.15,
         "description": "Dành cho các tháng nắng nóng cao điểm có nhu cầu điều hòa nhiều."
       }
     }
@@ -1368,7 +1368,7 @@ export enum BudgetThresholdState {
   - `baseline_period`: Tùy chọn, định dạng `YYYY-MM` (mặc định lấy tháng có dữ liệu gần nhất).
   - `focus_categories`: Tùy chọn, danh sách mảng các mã danh mục ưu tiên (`ELEC_GRID`, `MOBILITY`, `FUEL_LPG`, `WATER_SUPPLY_TREAT`...).
 - **Cơ chế Phân tích AI & Lưu trữ:**
-  1. Backend tổng hợp cơ cấu tiêu thụ kỳ cơ sở ($348.50\text{ kg CO}_2\text{e}$), chỉ số per capita ($87.13\text{ kg}$), diện tích sàn ($85.5\text{ }m^2$) và khoảng cách tới Mức tham chiếu quốc gia ($141.93\text{ kg}$).
+  1. Backend tổng hợp cơ cấu tiêu thụ kỳ cơ sở ($348.50\text{ kg CO}_2\text{e}$), chỉ số per capita ($87.13\text{ kg}$), diện tích sàn ($85.5\text{ }m^2$) và khoảng cách tới Mức tham chiếu quốc gia ($155.25\text{ kg}$).
   2. Tính mức phát thải đích cuối kỳ:
      $$\text{Target Final} = 348.50 \times (1 - 0.15) = 296.225\text{ kg CO}_2\text{e} \quad (\text{Giảm } -52.275\text{ kg})$$
   3. LLM (Gemini 1.5 Pro) lập kế hoạch phân bổ chỉ tiêu giảm qua 3 tháng, gắn liền với các hành động định lượng khả thi được cá nhân hóa riêng cho thành viên trong Workspace.
@@ -1694,7 +1694,7 @@ flowchart TD
         F3_1["Bản ghi APPROVED"] --> F3_2["Backend nhân Hệ số chuẩn -> Lưu cứng factor_applied"]
         F3_2 --> F3_3["Cộng dồn vào tổng phát thải tháng của Workspace"]
         F3_3 --> F3_4["GET /dashboard/summary (Tính toán chuẩn hóa kg CO2e/người, kg CO2e/m²)"]
-        F3_4 --> F3_5["Đối sánh Mức tham chiếu quốc gia (Household 141.93, Workplace 305.83)"]
+        F3_4 --> F3_5["Đối sánh Mức tham chiếu quốc gia (Household 155.25, Workplace 305.83)"]
         F3_3 --> F3_6{"Kiểm tra Ngưỡng Ngân sách"}
         F3_6 -->|>= 85%| F3_7["Kích hoạt Cảnh báo Vàng (Warning) qua Dynamic Notification"]
         F3_6 -->|>= 100%| F3_8["Kích hoạt Báo động Đỏ (Danger) vượt trần ngân sách"]
