@@ -7,7 +7,7 @@
 > **Căn cứ tài liệu kỹ thuật & nghiệp vụ:**
 >
 > - [spec.md](../spec.md): Mục 4 - Mô hình Dữ liệu và Công thức Tính toán Dấu chân Carbon
-> - [docs/emission-reference-benchmark.md](emission-reference-benchmark.md): Quy định Nguồn gốc & Phương pháp luận Xác định Mức phát thải Tham chiếu Quốc gia (Household 46.4% vs Workplace 100%)
+> - [docs/emission-reference-benchmark.md](emission-reference-benchmark.md): Quy định Nguồn gốc & Phương pháp luận Xác định Mức phát thải Tham chiếu Quốc gia (Household 50.8% vs Workplace 100%)
 > - [docs/04-user-stories.md](04-user-stories.md): `US-CL-001` (Nạp thủ công), `US-CL-002` (Quy đổi kg CO2e tự động), `US-SA-001` (Quản lý hệ số quy chuẩn của System Admin)
 > - [docs/02-MVP.md](02-MVP.md): Danh mục phân bổ Sprint 1 và Cấu trúc cơ sở dữ liệu `standard_emission_factors`
 >

@@ -177,7 +177,7 @@ flowchart TD
         CalcEngine["EmissionCalculationEngine<br/>Tự động tra cứu hệ số quy chuẩn & Tính kg CO2e = Sản lượng x Factor"]
         ExcelProcessor["ExcelProcessingEngine<br/>Apache POI Streaming, Validate định dạng & Phân loại dòng Hợp lệ/Lỗi (<= 5s)"]
         ApprovalEngine["ApprovalWorkflowEngine<br/>Quản trị vòng đời Draft -> Pending Review -> Approved / Rejected kèm lý do"]
-        BudgetAlertEngine["BudgetAndAlertEngine<br/>Kiểm tra trần Quota, Ngưỡng 85%/100%, Đối soát Benchmark Quốc gia 46.4% / 100%"]
+        BudgetAlertEngine["BudgetAndAlertEngine<br/>Kiểm tra trần Quota, Ngưỡng 85%/100%, Đối soát Benchmark Quốc gia 50.8% / 100%"]
         AIInsightService["AIInsightService<br/>Gom nhóm dữ liệu, Prompt Engineering, Gọi Gemini LLM Reasoning"]
         AIVisionService["AIVisionService<br/>OCR Vision bóc tách hóa đơn điện/nước/công tơ thành JSON (Luồng phụ)"]
         PDFGenerator["PDFReportBuilder<br/>OpenPDF / iText, Tạo tài liệu đồ họa chuẩn in ấn (<= 3-5s)"]
@@ -262,7 +262,7 @@ flowchart TD
    - Khi tỷ lệ đạt $\ge 85\%$: Hệ thống kích hoạt cảnh báo sớm mức Vàng.
    - Khi tỷ lệ đạt $\ge 100\%$: Hệ thống kích hoạt cảnh báo vượt trần mức Đỏ.
    - Tích hợp Engine đối soát Mức tham chiếu Quốc gia (National Benchmark Engine):
-     - **Hộ gia đình (Household):** Áp dụng tỷ lệ $46.4\%$ mức phát thải bình quân quốc gia ($3.67\text{ tấn/người/năm} \times 46.4\% = 1.70288\text{ tấn/người/năm} \approx 141.91\text{ kg CO}_2\text{e}/\text{người/tháng}$).
+     - **Hộ gia đình (Household):** Áp dụng tỷ lệ $50.8\%$ mức phát thải bình quân quốc gia ($3.67\text{ tấn/người/năm} \times 50.763\% = 1.863\text{ tấn/người/năm} \approx 155.25\text{ kg CO}_2\text{e}/\text{người/tháng}$).
      - **Nơi làm việc (Workplace):** Áp dụng tỷ lệ $100\%$ ($305.83\text{ kg CO}_2\text{e}/\text{người/tháng}$).
 5. **`AIInsightService`:**
    - Thu thập và tổng hợp dữ liệu tiêu thụ theo danh mục hoạt động trong kỳ báo cáo (so sánh với kỳ trước liền kề).

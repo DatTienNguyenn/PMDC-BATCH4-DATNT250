@@ -250,7 +250,7 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
     ├── 07-folder-structure.md         # Quy chuẩn Cấu trúc Thư mục & Quản trị Tài liệu Dự án
     ├── 09-information-architecture.md # Kiến trúc Thông tin & Đặc tả 26 Màn hình (IA, Screen Hierarchy, UI State Contract)
     ├── activity-supported.md          # Danh mục 8 hoạt động phát thải & Hệ số phát thải quy chuẩn (Scope 1, 2, 3)
-    ├── emission-reference-benchmark.md# Phương pháp luận Mức phát thải tham chiếu quốc gia (Household 46.4% vs Workplace 100%)
+    ├── emission-reference-benchmark.md# Phương pháp luận Mức phát thải tham chiếu quốc gia (Household 50.8% vs Workplace 100%)
     ├── mindmap.png                    # Sơ đồ Mindmap cấu trúc sản phẩm 9 phân hệ chức năng
     ├── image/                         # Thư mục lưu trữ hình ảnh minh họa, sơ đồ thiết kế
     │   ├── sitemap.png                # Sơ đồ Kiến trúc Thông tin & Sitemap cây màn hình
@@ -274,7 +274,7 @@ Tất cả các tài liệu đặc tả và backlog đã được hoàn thiện 
 - **[docs/07-folder-structure.md](docs/07-folder-structure.md):** Quy chuẩn Cấu trúc Thư mục & Quản trị Tài liệu Dự án, hướng dẫn liên kết nội bộ và ma trận truy vết tài liệu.
 - **[docs/09-information-architecture.md](docs/09-information-architecture.md):** Danh mục 26 màn hình chuẩn hóa (Screen ID, Routes), sơ đồ phân cấp Screen Hierarchy 5 tầng, Hợp đồng 5 Cung bậc Trạng thái UI (State Contract), Screen-to-API Mapping Matrix và Ma trận phân quyền RBAC chi tiết.
 - **[docs/activity-supported.md](docs/activity-supported.md):** Danh mục 8 hoạt động phát thải được hỗ trợ (bao gồm năng lượng, di chuyển, rác thải, nước sạch, vật tư và du lịch hàng không), đơn vị tính, phân loại Scope 1, 2, 3 và trích dẫn nguồn hệ số chuẩn (Bộ TN&MT, IPCC, ICAO, DEFRA, US EPA, IEA).
-- **[docs/emission-reference-benchmark.md](docs/emission-reference-benchmark.md):** Quy định và giải thích nguồn gốc dữ liệu, phương pháp luận xác định mức phát thải tham chiếu quốc gia dựa trên Our World in Data ($3.67	ext{ tấn/người/năm}$), phân bổ tỷ lệ $46,4\%$ cho Hộ gia đình (3 nhóm sinh hoạt cốt lõi: Điện, Giao thông đường bộ, Rác thải) và $100\%$ cho Nơi làm việc, đặc tả công thức toán học và cấu trúc dữ liệu tham chiếu.
+- **[docs/emission-reference-benchmark.md](docs/emission-reference-benchmark.md):** Quy định và giải thích nguồn gốc dữ liệu, phương pháp luận xác định mức phát thải tham chiếu quốc gia dựa trên Our World in Data ($3.67\text{ tấn/người/năm}$), phân bổ tỷ lệ $50,8\%$ cho Hộ gia đình (4 nhóm sinh hoạt cốt lõi: Điện, Giao thông đường bộ, Rác thải, Rò rỉ khí gas/nhiên liệu) và $100\%$ cho Nơi làm việc, đặc tả công thức toán học và cấu trúc dữ liệu tham chiếu.
 - **[spec.md](spec.md):** Định nghĩa chi tiết phạm vi In-Scope / Out-of-Scope, ma trận RBAC, 4 luồng hoạt động cốt lõi và danh mục 12 Use Cases.
 - **[docs/api-schema/api-schema.md](docs/api-schema/api-schema.md):** Đặc tả toàn diện hệ thống RESTful API Schema, Data Contracts (Request/Response Envelopes, Validation Rules), kiểm tra đối soát quy trình nghiệp vụ và bao phủ 100% danh mục 12 Use Cases (kèm file OpenAPI 3.1 [`docs/api-schema/openapi.yaml`](docs/api-schema/openapi.yaml)).
 - **[docs/c4-documentation/c4-documentation.md](docs/c4-documentation/c4-documentation.md):** Tài liệu Thiết kế Kiến trúc Hệ thống theo chuẩn C4 Model đầy đủ 4 tầng: Ngữ cảnh (System Context L1), Khối ứng dụng (Container L2), Thành phần nội bộ (Component L3) và Mô hình miền/Triển khai hạ tầng Docker (Code & Deployment L4), tích hợp các quyết định kiến trúc then chốt (ADRs).
