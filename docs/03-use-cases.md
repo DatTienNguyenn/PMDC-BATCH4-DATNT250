@@ -11,9 +11,9 @@
 
 | Tác nhân (Actor) | Tên vai trò | Trách nhiệm trong các luồng hoạt động |
 |---|---|---|
-| **Trưởng nhóm (Reviewer)** | Workspace Admin / Reviewer | **Luồng 1:** Tạo Workspace, khai báo thông số nền ($m^2$, số nhân khẩu), thiết lập ngân sách tháng.<br>**Luồng 2:** Nạp dữ liệu (tự động duyệt) hoặc phê duyệt (`Accept` / `Reject`) các request nạp dữ liệu từ Editor.<br>**Luồng 3:** Theo dõi tiến độ ngân sách, nhận notification cảnh báo 85% & 100%.<br>**Luồng 4:** Tiếp nhận báo cáo AI định kỳ từ Cronjob và xuất Kế hoạch cắt giảm ra file PDF. |
-| **Thành viên (Editor)** | Workspace Member / Editor | **Luồng 2:** Thực hiện nạp dữ liệu phát thải qua 3 phương thức (Thủ công, Quét ảnh hóa đơn/công tơ bằng AI, Import file mẫu Excel) ở trạng thái **`Draft / Chờ duyệt`**.<br>**Luồng 3:** Xem Dashboard, nhận notification cảnh báo ngưỡng 85% của Workspace.<br>**Lịch sử:** Theo dõi tiến độ duyệt các yêu cầu cá nhân đã gửi. |
-| **Quản trị viên Hệ thống (System Admin)** | System Admin | Quản trị độc lập danh mục và giá trị các **Hệ số phát thải quy chuẩn (Standard Emission Factors)** phục vụ công thức nhân tự động của Backend khi giao dịch được ghi sổ. |
+| **Trưởng nhóm (Reviewer)** | Workspace Admin / Reviewer | **Luồng 1:** Tạo Workspace, cấu hình Workspace (khai báo thông số nền $m^2$, số nhân khẩu; quản lý thành viên và thiết lập ngân sách tháng theo cơ chế `<<extend>>`).<br>**Luồng 2:** Nạp dữ liệu (tự động duyệt) hoặc phê duyệt (`Accept` / `Reject`) các request nạp dữ liệu từ Editor.<br>**Luồng 3:** Xem **Dashboard tổng quan của Workspace**, theo dõi tiến độ ngân sách, nhận notification cảnh báo 85% & 100%.<br>**Luồng 4:** **Độc quyền** tiếp nhận báo cáo phát thải định kỳ từ Cronjob, xem báo cáo phát thải của Workspace và khuyến nghị giảm phát thải AI, xuất Kế hoạch cắt giảm ra file PDF. |
+| **Thành viên (Editor)** | Workspace Member / Editor | **Luồng 1:** Nhập mã mời để gửi Yêu cầu gia nhập (**Tham gia workspace bằng mã**) ở trạng thái PENDING chờ Admin phê duyệt.<br>**Luồng 2:** Thực hiện nạp dữ liệu phát thải qua 3 phương thức (Thủ công, Quét ảnh hóa đơn/công tơ bằng AI, Import file mẫu Excel) ở trạng thái **`Draft / Chờ duyệt`**.<br>**Luồng 3:** **Chỉ có quyền xem Dashboard phân tích của cá nhân Member đó**, nhận notification cảnh báo ngưỡng 85% của Workspace (không có quyền xem Dashboard tổng quan Workspace).<br>**Luồng 4:** **Không có quyền** xem báo cáo phát thải và khuyến nghị xanh của Workspace.<br>**Lịch sử:** Theo dõi tiến độ duyệt các yêu cầu cá nhân đã gửi. |
+| **Quản trị viên Hệ thống (System Admin)** | System Admin | Quản trị độc lập danh mục và giá trị các **Hệ số phát thải quy chuẩn (Standard Emission Factors)** phục vụ công thức nhân tự động của Backend khi giao dịch được ghi sổ; quản trị cấu hình Workspace/Tenants trên toàn hệ thống. |
 
 ---
 
@@ -22,68 +22,81 @@
 ### 2.1. Sơ đồ Chuẩn UML (UCD)
 ![Sơ đồ UML Use Case Tổng quan](image/UCD.png)
 
-*Sơ đồ thể hiện 3 tác nhân chính (`Workspace Admin`, `Member`, `System Admin`), quan hệ kế thừa (Generalization) giữa Workspace Admin và Member, cùng quan hệ phụ thuộc `<<include>>` trong việc quét và xác nhận dữ liệu AI.*
+*Sơ đồ thể hiện 3 tác nhân chính (`Workspace Admin`, `Member`, `System Admin`), quan hệ kế thừa (Generalization) giữa Workspace Admin và Member, quan hệ mở rộng `<<extend>>` (với Workspace Admin, Quản lý thành viên và Thiết lập ngân sách là `<<extend>>` của Quản lý cấu hình Workspace, không tách rời thành các use case riêng), cùng quan hệ phụ thuộc `<<include>>` trong việc quét và xác nhận dữ liệu AI qua popup xem trước.*
+
+*Đặc biệt về quy tắc phân quyền:*
+- **Tham gia Workspace:** Thành viên (Member) có Use Case **`Tham gia workspace bằng mã`** để nhập mã mời và gửi yêu cầu gia nhập (Join Request) vào Không gian làm việc.
+- **Báo cáo phát thải & Khuyến nghị:** Thành viên (Member) **không có quyền** xem báo cáo phát thải và khuyến nghị xanh; **chỉ Workspace Admin** mới có quyền xem báo cáo phát thải của Workspace và khuyến nghị giảm phát thải.
+- **Cấu hình Workspace:** Quản lý thành viên và Thiết lập ngân sách là phần mở rộng (`<<extend>>`) của Quản lý cấu hình Workspace, không tách rời làm các use case riêng biệt từ Actor.
+- **Dashboard:** Member **chỉ có quyền xem Dashboard phân tích của member đó**, **chỉ Workspace Admin** mới có quyền xem Dashboard tổng quan của Workspace.
 
 ### 2.2. Sơ đồ Phân rã theo 4 Luồng Hoạt động (Mermaid)
 
 ```mermaid
 flowchart LR
     subgraph Actors["Tác nhân (Actors)"]
-        Reviewer["Trưởng nhóm (Reviewer)"]
-        Editor["Thành viên (Editor)"]
+        Reviewer["Trưởng nhóm (Reviewer / Workspace Admin)"]
+        Editor["Thành viên (Editor / Member)"]
         SysAdmin["System Admin"]
     end
 
-    subgraph Flow1Scope["1. Khởi tạo & Lập kế hoạch (Onboarding & Budgeting)"]
+    subgraph Flow1Scope["1. Khởi tạo & Cấu hình Workspace (Onboarding & Budgeting)"]
         UC01["UC01: Khởi tạo & Cấu hình Workspace"]
         UC02["UC02: Khai báo Thông số nền (m², Số người)"]
         UC03["UC03: Mời & Quản lý Thành viên"]
+        UC03B["UC03B: Tham gia Workspace bằng mã"]
         UC09["UC09: Thiết lập Ngân sách Tháng & Ngưỡng 85%"]
+        UC03 -.->|«extend»| UC01
+        UC09 -.->|«extend»| UC01
     end
 
     subgraph Flow2Scope["2. Nạp dữ liệu (3 Phương thức) & Phê duyệt"]
         UC04["UC04: Khai báo Phát thải Thủ công (Manual)"]
         UC05["UC05: Quét Hóa đơn / Công tơ bằng AI"]
         UC06["UC06: Nạp dữ liệu qua File mẫu Excel"]
+        UC05_INC["Xác nhận & Chỉnh sửa số liệu AI"]
+        UC05 -.->|«include»| UC05_INC
         UC07["UC07: Kiểm duyệt Request (Accept / Reject)"]
         UC08["UC08: Tra cứu Lịch sử & Trạng thái Duyệt"]
     end
 
-    subgraph Flow3Scope["3. Xử lý Sổ cái & Cảnh báo (Alerting)"]
-        UC10["UC10: Giám sát Dashboard & Nhận Notification Cảnh báo"]
+    subgraph Flow3Scope["3. Giám sát Dashboard & Cảnh báo (Alerting)"]
+        UC10_WS["UC10A: Xem Dashboard Tổng quan của Workspace (Admin Only)"]
+        UC10_MEM["UC10B: Xem Dashboard Phân tích của Member (Personal)"]
     end
 
     subgraph Flow4Scope["4. Phân tích & Gợi ý hành động (AI Insight & PDF)"]
-        UC11["UC11: Chạy Cronjob AI Insight & Xuất Báo cáo PDF"]
+        UC11["UC11: Xem Báo cáo Phát thải của Workspace & Khuyến nghị Giảm phát thải (Admin Only)"]
     end
 
-    subgraph SystemScope["Quản trị Hệ chuẩn"]
+    subgraph SystemScope["Quản trị Hệ chuẩn & Hệ thống"]
         UC12["UC12: Quản lý Hệ số Phát thải Quy chuẩn"]
+        UC13["UC13: Quản lý Hệ thống / Tenants"]
     end
 
     %% Reviewer
     Reviewer --> UC01
     Reviewer --> UC02
-    Reviewer --> UC03
     Reviewer --> UC04
     Reviewer --> UC05
     Reviewer --> UC06
     Reviewer --> UC07
     Reviewer --> UC08
-    Reviewer --> UC09
-    Reviewer --> UC10
+    Reviewer --> UC10_WS
     Reviewer --> UC11
 
     %% Editor
+    Editor --> UC03B
     Editor --> UC04
     Editor --> UC05
     Editor --> UC06
     Editor --> UC08
-    Editor --> UC10
+    Editor --> UC10_MEM
 
     %% System Admin
     SysAdmin --> UC01
     SysAdmin --> UC12
+    SysAdmin --> UC13
 ```
 
 ---
@@ -94,8 +107,9 @@ flowchart LR
 
 ### UC01: Khởi tạo & Cấu hình Workspace
 - **Mã Use Case:** UC01
-- **Tác nhân chính:** Trưởng nhóm (Reviewer) / Quản trị viên Hệ thống (System Admin)
+- **Tác nhân chính:** Trưởng nhóm (Reviewer / Workspace Admin) / Quản trị viên Hệ thống (System Admin)
 - **Mô tả vắn tắt:** Người dùng (Reviewer hoặc System Admin) khởi tạo và cấu hình một Không gian làm việc (Workspace) mới đại diện cho Hộ gia đình hoặc Văn phòng nhỏ.
+- **Mối quan hệ Use Case:** Là Base Use Case. Đối với Workspace Admin, các chức năng Quản lý thành viên (`UC03`) và Thiết lập ngân sách (`UC09`) đóng vai trò là các phần mở rộng (`<<extend>>`) của Cấu hình Workspace, không tách rời thành các Use Case riêng biệt từ Actor.
 - **Tiền điều kiện:** Người dùng đã hoàn tất đăng ký và đăng nhập vào ứng dụng (hoặc phiên làm việc System Admin).
 - **Hậu điều kiện:** Workspace được khởi tạo thành công, người dùng được cấp vai trò `Reviewer (Workspace Admin)` (đối với người dùng thông thường) hoặc ghi nhận quyền quản trị Workspace cho System Admin.
 - **Luồng sự kiện chính:**
@@ -126,17 +140,27 @@ flowchart LR
 
 ---
 
-### UC03: Mời & Phê duyệt Thành viên Gia nhập (Member Invitation & Join Approval)
-- **Mã Use Case:** UC03
-- **Tác nhân chính:** Trưởng nhóm (Reviewer)
-- **Tác nhân phụ:** Người dùng xin gia nhập (Editor)
-- **Mô tả vắn tắt:** Reviewer sinh mã mời 6 ký tự; người dùng nhập mã mời để gửi Yêu cầu gia nhập (Join Request) ở trạng thái chờ duyệt (PENDING); Reviewer xem xét phê duyệt (Accept) để thêm vào Workspace hoặc từ chối (Reject), đảm bảo an toàn tuyệt đối cho dữ liệu gia đình/văn phòng.
-- **Tiền điều kiện:** Workspace đã được khởi tạo; người dùng xin gia nhập đã có tài khoản trên hệ thống.
-- **Hậu điều kiện:** Người dùng được thêm vào bảng `workspace_members` với vai trò `Editor` chỉ khi Reviewer chấp thuận.
+### UC03: Mời & Quản lý Thành viên (Member Management)
+- **Mã Use Case:** UC03 (gồm UC03A & UC03B)
+- **Mối quan hệ Use Case:** 
+  - `UC03A` là phần mở rộng (`<<extend>>`) của `UC01: Khởi tạo & Cấu hình Workspace`, không tách rời làm use case độc lập từ phía Workspace Admin.
+  - `UC03B` là Use Case trực tiếp của **Thành viên (Member)**.
+
+#### UC03A: Quản lý Thành viên & Phê duyệt Gia nhập (Admin Flow)
+- **Tác nhân chính:** Trưởng nhóm (Reviewer / Workspace Admin)
+- **Mô tả vắn tắt:** Reviewer sinh mã mời 6 ký tự, theo dõi danh sách thành viên và xem xét phê duyệt (Accept) hoặc từ chối (Reject) các yêu cầu gia nhập từ người dùng.
+- **Tiền điều kiện:** Workspace đã được khởi tạo.
+- **Hậu điều kiện:** Thành viên được duyệt sẽ nhận vai trò `Editor`.
+
+#### UC03B: Tham gia Workspace bằng mã (Member Flow)
+- **Tác nhân chính:** Thành viên (Editor / Member)
+- **Mô tả vắn tắt:** Thành viên nhập mã mời 6 ký tự (ví dụ: `CARB26`) tại màn hình Tham gia Không gian làm việc để gửi Yêu cầu gia nhập (`Join Request`) ở trạng thái chờ duyệt (`PENDING`).
+- **Tiền điều kiện:** Người dùng đã có tài khoản trên hệ thống và có mã mời hợp lệ do Trưởng nhóm cung cấp.
+- **Hậu điều kiện:** Yêu cầu được ghi vào bảng `workspace_join_requests` với trạng thái `PENDING` và hiển thị thông báo chờ Trưởng nhóm phê duyệt.
 - **Luồng sự kiện chính:**
   1. Reviewer vào mục "Quản lý Thành viên" và nhấn "Tạo mã mời".
-  2. Hệ thống sinh mã ngẫu nhiên 6 ký tự (ví dụ: `CARB26`) hiệu lực 7 ngày và lưu vào `workspaces.invite_code`.
-  3. Người dùng đăng nhập tài khoản của mình, vào màn hình "Tham gia Workspace", nhập mã mời và nhấn "Gửi yêu cầu".
+  2. Hệ thống sinh mã ngẫu nhiên 6 ký tự hiệu lực 7 ngày và lưu vào `workspaces.invite_code`.
+  3. Member đăng nhập tài khoản của mình, vào màn hình "Tham gia Workspace", nhập mã mời và nhấn "Gửi yêu cầu".
   4. Hệ thống kiểm tra mã mời hợp lệ, tạo bản ghi trong bảng `workspace_join_requests` với trạng thái `PENDING` và hiển thị thông báo chờ phê duyệt.
   5. Reviewer vào danh sách "Yêu cầu chờ duyệt", xem thông tin người xin gia nhập (Tên, Email) và nhấn "Chấp thuận (Accept)".
   6. Hệ thống cập nhật yêu cầu sang `APPROVED`, tự động liên kết người dùng vào Workspace với vai trò `Editor` và gửi thông báo thành công.
@@ -242,12 +266,13 @@ flowchart LR
 
 ### UC09: Thiết lập Target Ngân sách Tháng & Ngưỡng 85%
 - **Mã Use Case:** UC09
-- **Tác nhân chính:** Trưởng nhóm (Reviewer)
+- **Tác nhân chính:** Trưởng nhóm (Reviewer / Workspace Admin)
+- **Mối quan hệ Use Case:** Là phần mở rộng (`<<extend>>`) của `UC01: Khởi tạo & Cấu hình Workspace`, không tách rời làm use case độc lập từ phía Workspace Admin.
 - **Mô tả vắn tắt:** Vào đầu tháng, Reviewer thiết lập hạn ngạch phát thải tối đa cho cả Workspace (ví dụ: $300\text{ kg CO}_2\text{e}$) và kích hoạt ngưỡng cảnh báo sớm ở mức $85\%$. Hệ thống hỗ trợ gợi ý thông minh dựa trên Mức phát thải Tham chiếu Quốc gia ($50,8\%$ cho Household, $100\%$ cho Workplace).
 - **Tiền điều kiện:** Người dùng là Reviewer của Workspace.
 - **Hậu điều kiện:** Hạn ngạch tháng và ngưỡng 85% được thiết lập cho Workspace.
 - **Luồng sự kiện chính:**
-  1. Reviewer vào mục "Ngân sách Carbon".
+  1. Reviewer vào mục "Ngân sách Carbon" (thuộc phân hệ Cấu hình Workspace).
   2. Hệ thống tự động hiển thị gợi ý thông minh dựa trên thông số nền và Mức tham chiếu quốc gia (ví dụ: Hộ gia đình 4 người có mức tham chiếu chuẩn là $621\text{ kg CO}_2\text{e/tháng}$; gợi ý mục tiêu Xanh $559\text{ kg}$, mục tiêu Chuẩn $621\text{ kg}$).
   3. Reviewer chọn tháng áp dụng, chọn mức gợi ý hoặc nhập trần phát thải mục tiêu tùy chỉnh (ví dụ: `300` kg CO2e).
   4. Hệ thống tự động tính ngưỡng cảnh báo sớm 85% ($300 \times 0.85 = 255\text{ kg CO}_2\text{e}$).
@@ -260,34 +285,41 @@ flowchart LR
 
 ### UC10: Giám sát Dashboard & Bắn Notification Cảnh báo
 - **Mã Use Case:** UC10
-- **Tác nhân chính:** Thành viên (Editor), Trưởng nhóm (Reviewer)
-- **Mô tả vắn tắt:** Người dùng theo dõi trực quan tiến độ phát thải thực tế so với ngân sách, các chỉ số chuẩn hóa ($\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$, đối sánh Mức tham chiếu quốc gia) và tự động nhận Notification cảnh báo khi chạm mốc 85%, vượt 100% hoặc phát hiện dị biệt tiêu thụ.
+- **Tác nhân chính:** Trưởng nhóm (Reviewer / Workspace Admin), Thành viên (Editor / Member)
+- **Quy tắc phân quyền Dashboard:**
+  - **Trưởng nhóm (Workspace Admin):** Toàn quyền truy cập **Dashboard Tổng quan của Workspace** (theo dõi tiến độ tổng thể cả Workspace, % ngân sách đã tiêu thụ, các chỉ số chuẩn hóa $\text{CO}_2\text{e}/\text{người}$, $\text{CO}_2\text{e}/m^2$, đối sánh Mức tham chiếu quốc gia và phân rã đóng góp của toàn bộ thành viên).
+  - **Thành viên (Member):** **CHỈ CÓ QUYỀN** xem **Dashboard phân tích cá nhân của Member đó** (theo dõi lượng phát thải do cá nhân mình nạp, phân rã danh mục cá nhân, lịch sử đóng góp cá nhân). Thành viên **không có quyền** xem Dashboard tổng quan của toàn Workspace.
+  - Cả hai tác nhân đều nhận notification cảnh báo khi phát thải Workspace chạm ngưỡng $85\%$ và vượt trần $100\%$.
+- **Mô tả vắn tắt:** Người dùng theo dõi trực quan dữ liệu phân tích phát thải phù hợp với vai trò của mình (Tổng quan Workspace đối với Admin; Phân tích cá nhân đối với Member) và tự động nhận Notification cảnh báo khi chạm mốc 85%, vượt 100% hoặc phát hiện dị biệt tiêu thụ.
 - **Tiền điều kiện:** Người dùng đã đăng nhập Workspace.
-- **Hậu điều kiện:** Giao diện Dashboard hiển thị cập nhật thời gian thực; notification được gửi đến thiết bị của toàn bộ thành viên khi chạm ngưỡng.
+- **Hậu điều kiện:** Giao diện Dashboard hiển thị cập nhật thời gian thực theo đúng phân quyền; notification được gửi đến thiết bị của toàn bộ thành viên khi chạm ngưỡng.
 - **Luồng sự kiện chính:**
-  1. Người dùng mở Dashboard chính của Workspace.
-  2. Hệ thống tổng hợp các giao dịch `Approved` trong tháng và chia cho số người, diện tích mặt sàn đã khai báo ở UC02 để hiển thị:
-     - Tổng kg CO2e đã phát thải và thanh tiến độ % so với Target.
-     - Chỉ số chuẩn hóa $\text{kg CO}_2\text{e}/\text{người}$.
-     - Chỉ số chuẩn hóa $\text{kg CO}_2\text{e}/m^2$.
-     - Tỷ lệ đối sánh với Mức tham chiếu quốc gia (Benchmark Intensity Ratio $\mathcal{R}$) và Huy hiệu phân hạng Xanh (Green Pioneer, Standard, Above Benchmark).
-  3. Khi phát thải tích lũy đạt $\ge 85\%$ ngân sách:
+  1. Người dùng mở Dashboard:
+     - Nếu là Workspace Admin: Hệ thống tải Dashboard Tổng quan của Workspace (tổng hợp mọi giao dịch Approved trong tháng của toàn bộ thành viên).
+     - Nếu là Member: Hệ thống chỉ tải Dashboard Phân tích của Member đó (tổng hợp các giao dịch của riêng Member).
+  2. Hệ thống tổng hợp số liệu và hiển thị:
+     - Tổng kg CO2e phát thải và tiến độ so với Target tháng.
+     - Các chỉ số chuẩn hóa ($\text{kg CO}_2\text{e}/\text{người}$, $\text{kg CO}_2\text{e}/m^2$, Benchmark Intensity Ratio $\mathcal{R}$).
+  3. Khi phát thải tích lũy của Workspace đạt $\ge 85\%$ ngân sách:
      - Hệ thống tự động bắn **Notification cảnh báo** đến toàn bộ các thành viên trong Workspace.
      - Đổi màu thanh tiến độ sang Vàng cam (Warning) trên giao diện.
   4. Khi phát thải tích lũy đạt $\ge 100\%$ ngân sách:
      - Hệ thống bắn **Notification báo động vượt trần** đến toàn bộ thành viên.
      - Đổi màu thanh tiến độ sang Đỏ (Danger).
   5. Khi phát thải bình quân đầu người vượt mức tham chiếu quốc gia hoặc Run-rate dự báo cuối tháng vượt chuẩn:
-     - Hệ thống kích hoạt **Cảnh báo Dị biệt Tham chiếu Quốc gia (Anomaly Warning)** trên Dashboard và gửi thông báo khuyến cáo kiểm tra các nhóm phát thải trọng điểm (Điện, Phương tiện di chuyển). *(Mức chuẩn tham chiếu được quy định tại [docs/emission-reference-benchmark.md](emission-reference-benchmark.md)).*
+     - Hệ thống kích hoạt **Cảnh báo Dị biệt Tham chiếu Quốc gia (Anomaly Warning)** trên Dashboard của Workspace Admin và gửi thông báo khuyến cáo kiểm tra các nhóm phát thải trọng điểm (Điện, Phương tiện di chuyển). *(Mức chuẩn tham chiếu được quy định tại [docs/emission-reference-benchmark.md](emission-reference-benchmark.md)).*
 
 ---
 
-### UC11: Sinh Báo cáo AI Insight, Đề xuất Lộ trình Cắt giảm Cá nhân hóa (Reduction Plan Roadmap) & Xuất PDF
+### UC11: Xem Báo cáo Phát thải của Workspace & Khuyến nghị Giảm phát thải (AI Insight & Xuất PDF)
 - **Mã Use Case:** UC11
-- **Tác nhân chính:** Trưởng nhóm (Reviewer), Hệ thống (Background Cronjob / API On-demand)
-- **Mô tả vắn tắt:** Reviewer có thể thiết lập lịch chạy tự động hoặc kích hoạt tức thời để xem nhận định xu hướng phát thải kỳ hiện tại; đồng thời Reviewer có thể **thiết lập mục tiêu cắt giảm dài hạn (giảm bao nhiêu % và tầm nhìn bao nhiêu tháng)** để AI phân tích dữ liệu lịch sử của Workspace và sinh ra một **Kế hoạch Lộ trình Cắt giảm Cá nhân hóa Theo Từng Tháng (Month-by-Month Reduction Roadmap)** với các hành động định lượng cụ thể; Reviewer xem lộ trình trên giao diện và có quyền xuất ra file PDF chuẩn in ấn trong vòng 3-5 giây.
+- **Tác nhân chính:** Trưởng nhóm (Reviewer / Workspace Admin), Hệ thống (Background Cronjob / API On-demand)
+- **Quy tắc phân quyền:**
+  - **Thành viên (Member):** **KHÔNG CÓ QUYỀN** xem báo cáo phát thải và khuyến nghị xanh (hệ thống chặn 403 Forbidden nếu cố truy cập API hoặc màn hình báo cáo).
+  - **Chỉ Workspace Admin:** Mới có quyền xem báo cáo phát thải của Workspace và các khuyến nghị giảm phát thải từ AI; có quyền thiết lập mục tiêu lộ trình cắt giảm cá nhân hóa và xuất file PDF chuẩn in ấn trong $\le 3-5\text{s}$.
+- **Mô tả vắn tắt:** Workspace Admin xem nhận định xu hướng phát thải kỳ hiện tại do Cronjob AI sinh tự động hoặc kích hoạt tức thời; đồng thời thiết lập mục tiêu cắt giảm dài hạn để AI sinh ra **Kế hoạch Lộ trình Cắt giảm Cá nhân hóa Theo Từng Tháng (Month-by-Month Reduction Roadmap)** và xuất ra file PDF.
 - **Tiền điều kiện:** Workspace có dữ liệu giao dịch phát thải trong kỳ.
-- **Hậu điều kiện:** Báo cáo AI và Kế hoạch Lộ trình Cắt giảm được lưu trữ trong Workspace, hỗ trợ tải file PDF về thiết bị.
+- **Hậu điều kiện:** Báo cáo AI và Kế hoạch Lộ trình Cắt giảm được hiển thị độc quyền cho Workspace Admin, hỗ trợ tải file PDF về thiết bị.
 - **Luồng sự kiện chính:**
   - **Nhánh A - Báo cáo Xu hướng Định kỳ & Tức thời (AI Insight Report):**
     1. Tác vụ Cronjob tự động chạy theo lịch cấu hình (`WEEKLY`, `MONTHLY`) hoặc Reviewer chủ động bấm nút "Sinh báo cáo ngay" (On-demand).

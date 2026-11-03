@@ -555,7 +555,7 @@ Bảng tổng hợp quyền hạn truy cập đối với toàn bộ 26 Màn hì
 | **SCR-WS-01** | Chọn Workspace | ❌ | ❌ | ✅ | ✅ |
 | **SCR-WS-MODAL-01** | Modal Khởi tạo Workspace | ❌ | ✅ | ✅ | ❌ |
 | **SCR-WS-JOIN-01** | Gửi Yêu cầu Gia nhập bằng mã | ❌ | ❌ | ❌ | ✅ |
-| **SCR-DASH-01** | Dashboard Trung tâm | ❌ | ❌ | ✅ (Toàn diện) | ✅ (Xem chung) |
+| **SCR-DASH-01** | Dashboard Trung tâm | ❌ | ❌ | ✅ (Tổng quan Workspace) | ✅ (Chỉ phân tích cá nhân) |
 | **SCR-LEDGER-01** | Sổ cái Phát thải & Xuất Excel | ❌ | ❌ | ✅ (Toàn quyền) | ✅ (Xem & xuất) |
 | **SCR-LEDGER-DETAIL-01**| Modal Chi tiết Bản ghi | ❌ | ❌ | ✅ (Toàn quyền) | ✅ (Xem & sửa draft) |
 | **SCR-EMISSION-ADD-01** | Modal Thêm Phát thải 3 Tabs | ❌ | ❌ | ✅ (Tự duyệt) | ✅ (Tạo Draft) |
@@ -563,7 +563,7 @@ Bảng tổng hợp quyền hạn truy cập đối với toàn bộ 26 Màn hì
 | **SCR-EXCEL-PREVIEW-01**| Modal Xem trước Nạp Excel | ❌ | ❌ | ✅ | ✅ |
 | **SCR-APPROVE-01** | Hàng đợi Kiểm duyệt Sổ cái | ❌ | ❌ | ✅ (Accept/Reject) | ❌ (Chặn 403) |
 | **SCR-APPROVE-REJECT-01**| Modal Nhập Lý do Từ chối | ❌ | ❌ | ✅ | ❌ |
-| **SCR-INSIGHT-01** | Báo cáo AI & Xuất file PDF | ❌ | ❌ | ✅ (Toàn quyền) | ✅ (Xem tóm tắt) |
+| **SCR-INSIGHT-01** | Báo cáo AI & Xuất file PDF | ❌ | ❌ | ✅ (Toàn quyền) | ❌ (Chặn 403) |
 | **SCR-SETTING-01** | Cài đặt Không gian làm việc | ❌ | ❌ | ✅ | ❌ (Chặn 403) |
 | **SCR-INVITE-MODAL-01** | Modal Quản lý Mã mời | ❌ | ❌ | ✅ | ❌ |
 | **SCR-JOIN-REJECT-01** | Modal Từ chối Gia nhập | ❌ | ❌ | ✅ | ❌ |
