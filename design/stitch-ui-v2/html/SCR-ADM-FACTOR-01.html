@@ -1,14 +1,13 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
+<html lang="vi"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>CarbonLedger v2 - Emission Factors Management</title>
+<title>CarbonLedger - Hệ số phát thải quy chuẩn</title>
 <!-- Public Sans Font & Material Symbols -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Tailwind CSS CDN -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -24,18 +23,18 @@
             "on-secondary-fixed-variant": "#005145",
             "on-tertiary-fixed-variant": "#653e00",
             "tertiary-fixed-dim": "#ffb95e",
-            "on-surface-variant": "#3d4a41",
+            "on-surface-variant": "#637381",
             "on-secondary": "#ffffff",
             "surface-container-highest": "#d9e3f2",
             "on-tertiary": "#ffffff",
-            "surface-container": "#e4effe",
+            "surface-container": "#f4f6f8",
             "inverse-primary": "#5adda0",
             "on-secondary-fixed": "#00201a",
             "on-primary-fixed-variant": "#005234",
-            "background": "#f7f9ff",
+            "background": "#F9FAFB",
             "on-secondary-container": "#007261",
             "on-primary": "#ffffff",
-            "surface": "#f7f9ff",
+            "surface": "#ffffff",
             "on-tertiary-fixed": "#2a1700",
             "on-primary-container": "#00321f",
             "on-error": "#ffffff",
@@ -43,27 +42,27 @@
             "primary-fixed-dim": "#5adda0",
             "error-container": "#ffdad6",
             "secondary-fixed-dim": "#7bd7c2",
-            "surface-bright": "#f7f9ff",
+            "surface-bright": "#ffffff",
             "error": "#ba1a1a",
             "tertiary-container": "#cc8200",
-            "surface-container-low": "#eef4ff",
+            "surface-container-low": "#f9fafb",
             "secondary-container": "#97f4de",
-            "on-surface": "#121c27",
+            "on-surface": "#212B36",
             "on-error-container": "#93000a",
-            "primary": "#006c46",
-            "on-background": "#121c27",
-            "outline-variant": "#bccabf",
-            "outline": "#6d7a71",
+            "primary": "#00A76F",
+            "on-background": "#212B36",
+            "outline-variant": "#E5E8EB",
+            "outline": "#919EAB",
             "tertiary-fixed": "#ffddb7",
             "inverse-on-surface": "#e9f1ff",
-            "surface-variant": "#d9e3f2",
+            "surface-variant": "#f4f6f8",
             "secondary-fixed": "#97f4de",
             "on-tertiary-container": "#3f2500",
             "inverse-surface": "#27313c",
             "surface-container-lowest": "#ffffff",
             "tertiary": "#855400",
             "surface-dim": "#d1dbea",
-            "surface-container-high": "#dfe9f8",
+            "surface-container-high": "#EDF0F2",
             "primary-fixed": "#79fabb",
             "on-primary-fixed": "#002112"
           },
@@ -71,32 +70,20 @@
             "DEFAULT": "0.25rem",
             "lg": "0.5rem",
             "xl": "0.75rem",
+            "2xl": "1rem",
             "full": "9999px"
           },
-          "spacing": {
-            "space-sm": "0.5rem",
-            "space-lg": "1.5rem",
-            "gutter-sm": "1rem",
-            "margin": "2.5rem",
-            "space-md": "1rem",
-            "space-xl": "2rem",
-            "space-xs": "0.25rem",
-            "margin-mobile": "1rem",
-            "gutter": "1.5rem"
-          },
           "fontFamily": {
-            "title": ["Public Sans"],
-            "headline-lg": ["Public Sans"],
-            "body-md": ["Public Sans"],
-            "label-lg": ["Public Sans"],
-            "label-md": ["Public Sans"],
-            "label-sm": ["Public Sans"],
-            "headline-lg-mobile": ["Public Sans"],
-            "display": ["Public Sans"],
-            "body-sm": ["Public Sans"],
-            "headline-md": ["Public Sans"],
-            "body-lg": ["Public Sans"],
-            "headline-sm": ["Public Sans"]
+            "title": ["Public Sans", "sans-serif"],
+            "headline-lg": ["Public Sans", "sans-serif"],
+            "body-md": ["Public Sans", "sans-serif"],
+            "label-lg": ["Public Sans", "sans-serif"],
+            "label-md": ["Public Sans", "sans-serif"],
+            "label-sm": ["Public Sans", "sans-serif"],
+            "body-sm": ["Public Sans", "sans-serif"],
+            "headline-md": ["Public Sans", "sans-serif"],
+            "body-lg": ["Public Sans", "sans-serif"],
+            "headline-sm": ["Public Sans", "sans-serif"]
           },
           "fontSize": {
             "title": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
@@ -105,8 +92,6 @@
             "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
             "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
             "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }],
-            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-            "display": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
             "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
             "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
             "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
@@ -129,120 +114,98 @@
       height: 5px;
     }
     .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(188, 202, 191, 0.4);
+      background: #DFE3E8;
       border-radius: 9999px;
     }
   </style>
 </head>
-<body class="bg-background text-on-surface antialiased font-body-md text-body-md min-h-screen flex selection:bg-primary-container selection:text-surface-container-lowest">
+<body class="bg-[#F9FAFB] text-[#212B36] antialiased font-body-md text-body-md min-h-screen flex selection:bg-[#00A76F]/20 selection:text-[#00A76F]">
 <!-- ========================================================================= -->
-<!-- SHARED COMPONENT: SideNavBar                                              -->
+<!-- SIDEBAR (MUI Minimal Light Theme - 3 items only)                          -->
 <!-- ========================================================================= -->
-<aside class="fixed top-0 left-0 h-screen w-64 border-r border-outline-variant/20 bg-inverse-surface z-50 flex flex-col justify-between p-4 transition-all duration-150 ease-in-out">
+<aside class="fixed top-0 left-0 h-screen w-64 border-r border-gray-200 bg-white z-50 flex flex-col justify-between p-4 transition-all duration-150 ease-in-out">
 <!-- Top Area: Brand & Primary Navigation -->
 <div class="flex flex-col gap-6">
 <!-- Brand Logo / Product Info -->
 <div class="flex items-center gap-3 px-2 pt-2">
-<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-surface-container-lowest shadow-sm">
+<div class="w-10 h-10 rounded-xl bg-[#00A76F] flex items-center justify-center text-white shadow-sm shadow-[#00A76F]/20">
 <span class="material-symbols-outlined text-2xl" data-icon="eco">eco</span>
 </div>
 <div class="flex flex-col">
-<span class="text-title font-title font-bold text-surface-container-lowest tracking-tight">CarbonLedger</span>
-<span class="text-label-sm font-label-sm text-outline-variant font-medium">Enterprise v2.0</span>
+<span class="text-title font-title font-bold text-[#212B36] tracking-tight">CarbonLedger</span>
+<span class="text-label-sm font-label-sm text-[#919EAB] font-medium">Enterprise v2.0</span>
 </div>
 </div>
-<!-- Navigation Tabs Cluster -->
+<!-- Navigation Tabs Cluster: Strictly 3 items -->
 <nav aria-label="Main Navigation" class="flex flex-col space-y-1.5">
-<!-- Overview (Inactive) -->
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest hover:bg-surface-variant/10 font-body-md transition-colors duration-150" href="#overview">
-<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
-<span class="text-body-md font-body-md">Overview</span>
+<!-- 1. Tổng quan (Inactive) -->
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] font-body-md font-medium transition-colors duration-150" href="#overview">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span class="text-body-md">Tổng quan</span>
 </a>
-<!-- Emission Factors (Active -> style_active_navigation applied) -->
-<a aria-current="page" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary-container/15 text-primary-container font-label-md transition-colors" href="#emission-factors">
-<span class="material-symbols-outlined" data-icon="co2" data-weight="fill" style="font-variation-settings: 'FILL' 1;">co2</span>
-<span class="text-label-md font-label-md font-semibold tracking-wide">Emission Factors</span>
+<!-- 2. Hệ số phát thải (ACTIVE: highlighted with soft emerald bg and text #00A76F) -->
+<a aria-current="page" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-[#00A76F]/10 text-[#00A76F] font-semibold transition-colors duration-150" href="#emission-factors">
+<span class="material-symbols-outlined text-[20px]" data-icon="co2" data-weight="fill" style="font-variation-settings: 'FILL' 1;">co2</span>
+<span class="text-body-md">Hệ số phát thải</span>
 </a>
-<!-- Workspaces (Inactive) -->
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest hover:bg-surface-variant/10 font-body-md transition-colors duration-150" href="#workspaces">
-<span class="material-symbols-outlined" data-icon="corporate_fare">corporate_fare</span>
-<span class="text-body-md font-body-md">Workspaces</span>
-</a>
-<!-- Audit Log (Inactive) -->
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest hover:bg-surface-variant/10 font-body-md transition-colors duration-150" href="#audit-log">
-<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
-<span class="text-body-md font-body-md">Audit Log</span>
+<!-- 3. Không gian làm việc (Inactive) -->
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] font-body-md font-medium transition-colors duration-150" href="#workspaces">
+<span class="material-symbols-outlined text-[20px]" data-icon="corporate_fare">corporate_fare</span>
+<span class="text-body-md">Không gian làm việc</span>
 </a>
 </nav>
 </div>
-<!-- Bottom Cluster: Utility links, Admin Profile & CTA -->
-<div class="flex flex-col gap-3 pt-4 border-t border-outline-variant/10">
-<!-- Footer Nav Tabs -->
-<div class="flex flex-col space-y-1">
-<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest hover:bg-surface-variant/10 font-body-md transition-colors duration-150" href="#settings">
-<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
-<span class="text-body-md font-body-md">Settings</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest hover:bg-surface-variant/10 font-body-md transition-colors duration-150" href="#documentation">
-<span class="material-symbols-outlined text-lg" data-icon="help_outline">help_outline</span>
-<span class="text-body-md font-body-md">Documentation</span>
-</a>
-</div>
-<!-- Action Button: Export Report (cta from JSON) -->
-<button class="w-full mt-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-surface-variant/15 text-surface-container-lowest hover:bg-surface-variant/25 transition-all text-label-md font-label-md border border-outline-variant/20">
-<span class="material-symbols-outlined text-base" data-icon="download">download</span>
-<span>Export Report</span>
-</button>
-<!-- Administrator Profile Badge -->
-<div class="mt-2 p-2.5 rounded-xl bg-surface-variant/10 flex items-center gap-3 border border-outline-variant/10">
-<img class="w-9 h-9 rounded-full object-cover border border-outline-variant/30" data-alt="Close up studio portrait of Alex Mercer, a clean-cut technical operations director wearing a minimal black collar shirt against a neutral cool-gray studio backdrop. Diffused high-key lighting casts subtle realistic highlights on his facial features, expressing confidence, intelligence, and modern executive composure with zero glare." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnoRZG0fagvfQafHUX7H4kpbjN743l--5b-j-u9zxo67SLZ43kgRLCpHqP5M7ocmq08W6SE1AKoiNNPsHNT1uKzdTMzX07CBSUlri_o7Md4yq_aRHWVwPoCL11R_9HY8fOQqm4huGuGS-SQumONCdP7YKTo69oaKx4JZPVe_4Kr8ONs-XfB_NACZsk9_ZsJyhuWSqd6_Sbkqrgtsnk--dEbjAueW3WW6-iKgR4aYs9-67KaGEK6D-wWBlgMokCZUgh-0LlmnFcwQ"/>
+<!-- Bottom Cluster: User Profile -->
+<div class="pt-4 border-t border-gray-100">
+<div class="p-2.5 rounded-xl bg-[#F4F6F8] flex items-center justify-between border border-gray-200/60">
+<div class="flex items-center gap-3 min-w-0">
+<img class="w-9 h-9 rounded-full object-cover border border-white shadow-xs" data-alt="Alex Mercer avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnoRZG0fagvfQafHUX7H4kpbjN743l--5b-j-u9zxo67SLZ43kgRLCpHqP5M7ocmq08W6SE1AKoiNNPsHNT1uKzdTMzX07CBSUlri_o7Md4yq_aRHWVwPoCL11R_9HY8fOQqm4huGuGS-SQumONCdP7YKTo69oaKx4JZPVe_4Kr8ONs-XfB_NACZsk9_ZsJyhuWSqd6_Sbkqrgtsnk--dEbjAueW3WW6-iKgR4aYs9-67KaGEK6D-wWBlgMokCZUgh-0LlmnFcwQ"/>
 <div class="flex flex-col min-w-0">
-<span class="text-surface-container-lowest text-label-md font-label-md font-semibold truncate leading-tight">Alex Mercer</span>
-<span class="text-outline-variant text-label-sm font-label-sm truncate">SecOps Lead</span>
+<span class="text-[#212B36] text-label-md font-semibold truncate leading-tight">Alex Mercer</span>
+<span class="text-[#919EAB] text-label-sm truncate">Quản trị cấp cao</span>
 </div>
+</div>
+<button class="p-1 rounded-lg text-[#919EAB] hover:text-[#212B36] hover:bg-white transition-colors" title="Cài đặt">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+</button>
 </div>
 </div>
 </aside>
 <!-- ========================================================================= -->
-<!-- MAIN CONTENT CANVAS CONTAINER                                            -->
+<!-- MAIN CONTENT CANVAS CONTAINER                                             -->
 <!-- ========================================================================= -->
-<div class="ml-64 w-[calc(100%-16rem)] min-h-screen flex flex-col bg-background">
+<div class="ml-64 w-[calc(100%-16rem)] min-h-screen flex flex-col bg-[#F9FAFB]">
 <!-- ======================================================================= -->
-<!-- SHARED COMPONENT: TopNavBar                                             -->
+<!-- TOP BAR: Sticky white background with subtle border                     -->
 <!-- ======================================================================= -->
-<header class="docked full-width top-0 sticky z-40 border-b border-surface-container-high/80 bg-surface-container-lowest/80 backdrop-blur-md flex justify-between items-center h-16 px-8 shadow-sm">
-<!-- Left side: Breadcrumb & Search Bar -->
-<div class="flex items-center gap-6">
-<div class="flex items-center gap-2 text-label-md font-label-md text-outline">
-<span>Admin</span>
-<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
-<span class="text-on-surface font-semibold">Emission Factors</span>
+<header class="sticky top-0 z-40 border-b border-gray-200 bg-white/95 backdrop-blur-md flex justify-between items-center h-16 px-8">
+<!-- Left side: Leaf logo CarbonLedger + Badge + Search -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#00A76F] text-xl" data-icon="eco">eco</span>
+<span class="text-sm font-bold text-[#212B36] tracking-tight">CarbonLedger</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#00A76F]/10 text-[#00A76F]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
+            Quản trị hệ thống
+          </span>
 </div>
-<div class="relative w-72">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg pointer-events-none" data-icon="search">search</span>
-<input class="w-full pl-9 pr-4 py-1.5 bg-surface rounded-lg text-body-sm font-body-sm text-on-surface placeholder:text-outline border border-outline-variant/40 focus:border-primary-container focus:ring-1 focus:ring-primary-container focus:outline-none transition-colors" placeholder="Search parameters, tags..." type="text"/>
+<div class="h-4 w-px bg-gray-200 mx-1 hidden md:block"></div>
+<div class="relative w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#919EAB] text-lg pointer-events-none" data-icon="search">search</span>
+<input class="w-full pl-9 pr-4 py-1.5 bg-[#F4F6F8] hover:bg-[#EDF0F2] rounded-lg text-body-sm text-[#212B36] placeholder:text-[#919EAB] border border-transparent focus:border-[#00A76F] focus:bg-white focus:ring-1 focus:ring-[#00A76F] focus:outline-none transition-all" placeholder="Tìm kiếm hệ số, hoạt động..." type="text"/>
 </div>
 </div>
-<!-- Right side: Notifications, Dark mode toggle, System Admin pill, Profile -->
+<!-- Right side: Notification bell icon + Admin Avatar -->
 <div class="flex items-center gap-3">
 <!-- Notification Button -->
-<button aria-label="Notifications" class="w-9 h-9 rounded-lg flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors relative">
+<button aria-label="Thông báo" class="w-9 h-9 rounded-lg flex items-center justify-center text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] transition-colors relative">
 <span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#00A76F]"></span>
 </button>
-<!-- Theme Contrast Button -->
-<button aria-label="Contrast Toggle" class="w-9 h-9 rounded-lg flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors">
-<span class="material-symbols-outlined" data-icon="contrast">contrast</span>
-</button>
-<div class="h-5 w-px bg-outline-variant/30 mx-1"></div>
-<!-- Trailing primary action tag: System Admin -->
-<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm font-semibold bg-surface-container-high text-on-surface-variant">
-<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
-          System Admin
-        </span>
+<div class="h-5 w-px bg-gray-200"></div>
 <!-- Profile Avatar Link -->
 <div class="flex items-center pl-1 cursor-pointer">
-<img class="w-9 h-9 rounded-full object-cover border border-outline-variant/50 ring-2 ring-transparent hover:ring-primary-container/40 transition-all" data-alt="Minimal modern avatar of a system administrator with neat styling against a quiet soft gray studio background. Perfectly balanced high-key light highlights the refined contours of the face, mirroring clean contemporary enterprise design conventions with exceptional photographic clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA00TjkrE_IjuZ3FZB6Z0qkhycJ0CfOI7tygl1EduDjVhhQzlf4B9KuUNbmS3fr-kLh-DyFclZapeitqABE1rNe-yU7tkqrGIv33sGChRXyjnX1K69c29NM5gnuC3sri-0hVRMSN_C9nsDPi18c6FRWxf_K0R3LCfGazAZorvF9cLy_m2owUpiN26-2b1tTqGe4sOnx-udGo1DQgdB0evgNuwWTJMRMuAw9LMjD9hSGRSJHMd1fWJbEiYuDosah9KFNoNc8SttNag"/>
+<img class="w-9 h-9 rounded-full object-cover border border-gray-200 ring-2 ring-transparent hover:ring-[#00A76F]/40 transition-all" data-alt="Alex Mercer Avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnoRZG0fagvfQafHUX7H4kpbjN743l--5b-j-u9zxo67SLZ43kgRLCpHqP5M7ocmq08W6SE1AKoiNNPsHNT1uKzdTMzX07CBSUlri_o7Md4yq_aRHWVwPoCL11R_9HY8fOQqm4huGuGS-SQumONCdP7YKTo69oaKx4JZPVe_4Kr8ONs-XfB_NACZsk9_ZsJyhuWSqd6_Sbkqrgtsnk--dEbjAueW3WW6-iKgR4aYs9-67KaGEK6D-wWBlgMokCZUgh-0LlmnFcwQ"/>
 </div>
 </div>
 </header>
@@ -250,420 +213,423 @@
 <!-- MAIN WORKSPACE VIEWPORT                                                 -->
 <!-- ======================================================================= -->
 <main class="flex-1 px-8 py-8 max-w-[1440px] w-full mx-auto space-y-6">
-<!-- PAGE HEADER -->
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-<div>
-<h1 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight">Emission Factors</h1>
-<p class="text-body-md font-body-md text-outline mt-1 max-w-2xl">
-            Manage standardized GHG conversion coefficients and global emission factors across workspace ledgers.
-          </p>
-</div>
-<!-- Action Button Group -->
-<div class="flex items-center gap-3 self-start md:self-auto">
-<!-- Outlined Button -->
-<button class="flex items-center gap-2 px-4 py-2 rounded-lg border border-outline-variant text-on-surface font-label-lg text-label-lg hover:border-primary hover:text-primary transition-colors duration-150 bg-surface-container-lowest shadow-sm">
-<span class="material-symbols-outlined text-lg" data-icon="sync">sync</span>
-<span>Sync Protocols</span>
-</button>
-<!-- Solid Primary Emerald Green (#00A76F) Button -->
-<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-container text-surface-container-lowest font-label-lg text-label-lg font-semibold hover:bg-secondary transition-all duration-150 shadow-[0px_8px_16px_0px_rgba(0,167,111,0.24)] active:scale-95">
+<!-- BREADCRUMB -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-label-sm font-medium text-[#919EAB]">
+<span>CarbonLedger</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span>Quản trị hệ thống</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span class="text-[#212B36] font-semibold">Hệ số phát thải</span>
+</nav>
+<!-- PAGE TITLE & PRIMARY ACTIONS -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<h1 class="text-headline-md font-headline-md font-bold text-[#212B36] tracking-tight">Hệ số phát thải quy chuẩn</h1>
+<div class="flex items-center gap-3">
+<button class="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#00A76F] hover:bg-[#007850] text-white font-label-lg font-semibold transition-all shadow-[0px_8px_16px_0px_rgba(0,167,111,0.24)] active:scale-95">
 <span class="material-symbols-outlined text-lg" data-icon="add">add</span>
-<span>+ Add Factor</span>
+<span>+ Thêm hệ số mới</span>
 </button>
 </div>
 </div>
-<!-- METRIC HIGHLIGHT STRIP (Modular Bento Strip) -->
+<!-- SUMMARY STAT CARDS (MUI Minimal style cards) -->
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-<!-- Metric 1 -->
-<div class="p-5 rounded-2xl bg-surface-container-lowest border border-surface-container-high shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] flex flex-col justify-between">
+<!-- Card 1 -->
+<div class="p-5 rounded-2xl bg-white border border-gray-200/80 shadow-xs flex flex-col justify-between">
 <div class="flex items-center justify-between">
-<span class="text-label-md font-label-md text-outline font-medium">Standardized Factors</span>
-<span class="w-8 h-8 rounded-lg bg-primary-container/10 text-primary-container flex items-center justify-center">
-<span class="material-symbols-outlined text-base" data-icon="analytics">analytics</span>
+<span class="text-label-md text-[#919EAB] font-medium">Tổng số hệ số</span>
+<span class="w-8 h-8 rounded-lg bg-[#00A76F]/10 text-[#00A76F] flex items-center justify-center">
+<span class="material-symbols-outlined text-base" data-icon="calculate">calculate</span>
 </span>
 </div>
 <div class="mt-3">
-<div class="text-headline-md font-headline-md font-bold text-on-surface">1,482</div>
-<div class="flex items-center gap-1.5 mt-1 text-label-sm font-label-sm text-primary">
-<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
-<span>+12 verified this month</span>
+<div class="text-headline-md font-bold text-[#212B36]">18</div>
+<div class="flex items-center gap-1.5 mt-1 text-label-sm text-[#00A76F]">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span>
+<span>Hệ số quy chuẩn</span>
 </div>
 </div>
 </div>
-<!-- Metric 2 -->
-<div class="p-5 rounded-2xl bg-surface-container-lowest border border-surface-container-high shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] flex flex-col justify-between">
+<!-- Card 2 -->
+<div class="p-5 rounded-2xl bg-white border border-gray-200/80 shadow-xs flex flex-col justify-between">
 <div class="flex items-center justify-between">
-<span class="text-label-md font-label-md text-outline font-medium">Primary Source Protocol</span>
-<span class="w-8 h-8 rounded-lg bg-secondary-container/30 text-secondary flex items-center justify-center">
-<span class="material-symbols-outlined text-base" data-icon="verified">verified</span>
+<span class="text-label-md text-[#919EAB] font-medium">Nguồn chính</span>
+<span class="w-8 h-8 rounded-lg bg-[#006B5C]/10 text-[#006B5C] flex items-center justify-center">
+<span class="material-symbols-outlined text-base" data-icon="library_books">library_books</span>
 </span>
 </div>
 <div class="mt-3">
-<div class="text-headline-md font-headline-md font-bold text-on-surface">IPCC AR6</div>
-<div class="flex items-center gap-1.5 mt-1 text-label-sm font-label-sm text-outline">
-<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
-<span>Updated 3 days ago</span>
+<div class="text-headline-md font-bold text-[#212B36]">IPCC &amp; EVN</div>
+<div class="flex items-center gap-1.5 mt-1 text-label-sm text-[#919EAB]">
+<span class="material-symbols-outlined text-sm" data-icon="update">update</span>
+<span>Cập nhật chu kỳ mới nhất</span>
 </div>
 </div>
 </div>
-<!-- Metric 3 -->
-<div class="p-5 rounded-2xl bg-surface-container-lowest border border-surface-container-high shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] flex flex-col justify-between">
+<!-- Card 3 -->
+<div class="p-5 rounded-2xl bg-white border border-gray-200/80 shadow-xs flex flex-col justify-between">
 <div class="flex items-center justify-between">
-<span class="text-label-md font-label-md text-outline font-medium">Active Regional Grids</span>
-<span class="w-8 h-8 rounded-lg bg-surface-container text-on-surface-variant flex items-center justify-center">
+<span class="text-label-md text-[#919EAB] font-medium">Khu vực áp dụng</span>
+<span class="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
 <span class="material-symbols-outlined text-base" data-icon="public">public</span>
 </span>
 </div>
 <div class="mt-3">
-<div class="text-headline-md font-headline-md font-bold text-on-surface">34 Zones</div>
-<div class="flex items-center gap-1.5 mt-1 text-label-sm font-label-sm text-primary">
+<div class="text-headline-md font-bold text-[#212B36]">Toàn quốc</div>
+<div class="flex items-center gap-1.5 mt-1 text-label-sm text-[#00A76F]">
 <span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
-<span>100% telemetry synced</span>
+<span>Việt Nam (Lưới điện EVN)</span>
 </div>
 </div>
 </div>
-<!-- Metric 4 -->
-<div class="p-5 rounded-2xl bg-surface-container-lowest border border-surface-container-high shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] flex flex-col justify-between">
+<!-- Card 4 -->
+<div class="p-5 rounded-2xl bg-white border border-gray-200/80 shadow-xs flex flex-col justify-between">
 <div class="flex items-center justify-between">
-<span class="text-label-md font-label-md text-outline font-medium">Review Flags</span>
-<span class="w-8 h-8 rounded-lg bg-tertiary-fixed text-tertiary flex items-center justify-center">
-<span class="material-symbols-outlined text-base" data-icon="flag">flag</span>
+<span class="text-label-md text-[#919EAB] font-medium">Trạng thái kiểm duyệt</span>
+<span class="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
+<span class="material-symbols-outlined text-base" data-icon="task_alt">task_alt</span>
 </span>
 </div>
 <div class="mt-3">
-<div class="text-headline-md font-headline-md font-bold text-on-surface">0 Pending</div>
-<div class="flex items-center gap-1.5 mt-1 text-label-sm font-label-sm text-outline">
-<span class="material-symbols-outlined text-sm" data-icon="task_alt">task_alt</span>
-<span>All factors validated</span>
+<div class="text-headline-md font-bold text-[#212B36]">100%</div>
+<div class="flex items-center gap-1.5 mt-1 text-label-sm text-[#00A76F]">
+<span class="material-symbols-outlined text-sm" data-icon="done_all">done_all</span>
+<span>Đã chuẩn hóa</span>
 </div>
 </div>
 </div>
 </div>
 <!-- FILTER & TOOLBAR CARD -->
-<div class="p-4 bg-surface-container-lowest rounded-2xl border border-surface-container-high shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<div class="p-4 bg-white rounded-2xl border border-gray-200/80 shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4">
 <!-- Left Filter Elements -->
 <div class="flex flex-wrap items-center gap-3">
 <!-- Activity/Source Search -->
-<div class="relative min-w-[240px]">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg pointer-events-none" data-icon="search">search</span>
-<input class="w-full pl-9 pr-3 py-2 bg-surface rounded-lg text-body-sm font-body-sm text-on-surface placeholder:text-outline border border-outline-variant/30 focus:border-primary-container focus:ring-1 focus:ring-primary-container focus:outline-none" placeholder="Filter activities, sources..." type="text"/>
+<div class="relative min-w-[280px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#919EAB] text-lg pointer-events-none" data-icon="search">search</span>
+<input class="w-full pl-9 pr-3 py-2 bg-[#F4F6F8] rounded-xl text-body-sm text-[#212B36] placeholder:text-[#919EAB] border border-gray-200/60 focus:border-[#00A76F] focus:bg-white focus:ring-1 focus:ring-[#00A76F] focus:outline-none transition-colors" placeholder="Tìm kiếm theo tên hoạt động hoặc nguồn..." type="text"/>
 </div>
 <!-- Category Select Dropdown -->
 <div class="relative">
-<select class="appearance-none pl-3 pr-8 py-2 bg-surface rounded-lg text-body-sm font-body-sm text-on-surface border border-outline-variant/30 focus:border-primary-container focus:ring-1 focus:ring-primary-container focus:outline-none cursor-pointer">
-<option value="all">Category: All</option>
-<option value="electricity">Electricity</option>
-<option value="transport">Transport</option>
-<option value="gas">Gas</option>
-<option value="water">Water</option>
+<select class="appearance-none pl-3 pr-8 py-2 bg-[#F4F6F8] rounded-xl text-body-sm text-[#212B36] border border-gray-200/60 focus:border-[#00A76F] focus:bg-white focus:ring-1 focus:ring-[#00A76F] focus:outline-none cursor-pointer">
+<option value="all">Tất cả danh mục</option>
+<option value="dien">Điện</option>
+<option value="giao-thong">Giao thông</option>
+<option value="chat-dot">Chất đốt &amp; Gas</option>
+<option value="nuoc">Nước</option>
+<option value="khac">Khác</option>
 </select>
-<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-outline text-base pointer-events-none" data-icon="expand_more">expand_more</span>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 text-[#919EAB] text-base pointer-events-none" data-icon="expand_more">expand_more</span>
 </div>
 <!-- Source Quick Chips -->
 <div class="flex items-center gap-1.5 pl-1 overflow-x-auto">
-<button class="px-3 py-1.5 rounded-full text-label-sm font-label-sm font-semibold bg-primary-container text-surface-container-lowest shadow-sm transition-colors">
-              All Sources
+<button class="px-3 py-1.5 rounded-full text-label-sm font-semibold bg-[#00A76F] text-white shadow-xs transition-colors">
+              Tất cả
             </button>
-<button class="px-3 py-1.5 rounded-full text-label-sm font-label-sm font-semibold bg-surface-container-high text-on-surface-variant hover:bg-surface-variant/40 transition-colors">
-              IPCC 2023
-            </button>
-<button class="px-3 py-1.5 rounded-full text-label-sm font-label-sm font-semibold bg-surface-container-high text-on-surface-variant hover:bg-surface-variant/40 transition-colors">
+<button class="px-3 py-1.5 rounded-full text-label-sm font-semibold bg-[#F4F6F8] text-[#637381] hover:bg-gray-200 transition-colors">
               EVN 2026
             </button>
-<button class="px-3 py-1.5 rounded-full text-label-sm font-label-sm font-semibold bg-surface-container-high text-on-surface-variant hover:bg-surface-variant/40 transition-colors">
-              MONRE 2024
+<button class="px-3 py-1.5 rounded-full text-label-sm font-semibold bg-[#F4F6F8] text-[#637381] hover:bg-gray-200 transition-colors">
+              IPCC 2023
+            </button>
+<button class="px-3 py-1.5 rounded-full text-label-sm font-semibold bg-[#F4F6F8] text-[#637381] hover:bg-gray-200 transition-colors">
+              Bộ TN&amp;MT
             </button>
 </div>
 </div>
 <!-- Right Quick Actions -->
 <div class="flex items-center gap-2 self-end lg:self-auto">
-<button class="p-2 rounded-lg text-outline hover:text-on-surface hover:bg-surface transition-colors border border-outline-variant/20" title="Advanced Filters">
+<button class="p-2 rounded-xl text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] transition-colors border border-gray-200/80" title="Bộ lọc nâng cao">
 <span class="material-symbols-outlined text-lg" data-icon="filter_list">filter_list</span>
 </button>
-<button class="p-2 rounded-lg text-outline hover:text-on-surface hover:bg-surface transition-colors border border-outline-variant/20" title="Export Dataset">
+<button class="p-2 rounded-xl text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] transition-colors border border-gray-200/80" title="Xuất dữ liệu">
 <span class="material-symbols-outlined text-lg" data-icon="file_download">file_download</span>
 </button>
-<button class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-primary-container text-surface-container-lowest font-label-sm text-label-sm font-semibold hover:bg-secondary transition-all shadow-sm">
+<button class="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-[#00A76F] hover:bg-[#007850] text-white font-label-sm font-semibold transition-all shadow-xs">
 <span class="material-symbols-outlined text-base" data-icon="add">add</span>
-<span>+ Add Factor</span>
+<span>+ Thêm hệ số mới</span>
 </button>
 </div>
 </div>
-<!-- DATA TABLE CARD -->
-<div class="bg-surface-container-lowest rounded-2xl border border-surface-container-high shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] overflow-hidden">
+<!-- MAIN DATA TABLE (MUI Minimal style table) -->
+<div class="bg-white rounded-2xl border border-gray-200/80 shadow-xs overflow-hidden">
 <div class="overflow-x-auto custom-scrollbar">
 <table class="w-full text-left border-collapse">
 <thead>
-<tr class="bg-surface border-b border-surface-container-high text-label-sm font-label-sm text-outline tracking-wider uppercase">
-<th class="py-3.5 px-6 font-semibold" scope="col">Activity</th>
-<th class="py-3.5 px-6 font-semibold" scope="col">Category</th>
-<th class="py-3.5 px-6 font-semibold" scope="col">Factor</th>
-<th class="py-3.5 px-6 font-semibold" scope="col">Unit</th>
-<th class="py-3.5 px-6 font-semibold" scope="col">Source</th>
-<th class="py-3.5 px-6 font-semibold" scope="col">Last Updated</th>
-<th class="py-3.5 px-6 font-semibold text-right" scope="col">Actions</th>
+<tr class="bg-[#F4F6F8] border-b border-gray-200/80 text-label-sm text-[#919EAB] tracking-wider uppercase font-semibold">
+<th class="py-3.5 px-6" scope="col">HOẠT ĐỘNG</th>
+<th class="py-3.5 px-6" scope="col">DANH MỤC</th>
+<th class="py-3.5 px-6" scope="col">HỆ SỐ QUY CHUẨN</th>
+<th class="py-3.5 px-6" scope="col">ĐƠN VỊ</th>
+<th class="py-3.5 px-6" scope="col">NGUỒN THAM CHIẾU</th>
+<th class="py-3.5 px-6" scope="col">NGÀY CẬP NHẬT</th>
+<th class="py-3.5 px-6 text-right" scope="col">THAO TÁC</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-surface-container-high text-body-md font-body-md text-on-surface">
+<tbody class="divide-y divide-gray-100 text-body-md text-[#212B36]">
 <!-- ROW 1: Grid Electricity -->
-<tr class="hover:bg-surface/50 transition-colors">
+<tr class="hover:bg-[#F9FAFB] transition-colors">
 <td class="py-4 px-6 whitespace-nowrap">
 <div class="flex items-center gap-3">
-<div class="w-9 h-9 rounded-full bg-primary-container/15 text-primary flex items-center justify-center">
+<div class="w-9 h-9 rounded-xl bg-[#00A76F]/10 text-[#00A76F] flex items-center justify-center">
 <span class="material-symbols-outlined text-lg" data-icon="bolt">bolt</span>
 </div>
 <div>
-<span class="font-semibold text-on-surface block text-body-md font-body-md">Grid Electricity</span>
-<span class="text-outline text-body-sm font-body-sm">National power grid mix</span>
+<span class="font-semibold text-[#212B36] block">Điện lưới quốc gia (EVN)</span>
+<span class="text-[#919EAB] text-body-sm">Hệ số lưới điện quốc gia Việt Nam</span>
 </div>
 </div>
 </td>
 <td class="py-4 px-6 whitespace-nowrap">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-secondary-container/40 text-on-secondary-container">
-                    Electricity
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-emerald-50 text-[#007261]">
+                    Điện sinh hoạt
                   </span>
 </td>
-<td class="py-4 px-6 whitespace-nowrap font-mono font-semibold text-on-surface text-body-md font-body-md">
+<td class="py-4 px-6 whitespace-nowrap font-mono font-bold text-[#212B36]">
                   0.4536
                 </td>
-<td class="py-4 px-6 whitespace-nowrap text-outline text-body-md font-body-md">
+<td class="py-4 px-6 whitespace-nowrap text-[#637381]">
                   kg CO2e/kWh
                 </td>
 <td class="py-4 px-6 whitespace-nowrap">
-<div class="flex items-center gap-2">
-<span class="w-2 h-2 rounded-full bg-primary-container"></span>
-<span class="font-medium text-on-surface text-body-sm font-body-sm">EVN 2026</span>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#F4F6F8] text-body-sm font-medium text-[#212B36]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
+<span>EVN 2026</span>
 </div>
 </td>
-<td class="py-4 px-6 whitespace-nowrap text-outline text-body-sm font-body-sm">
-                  Oct 2026
+<td class="py-4 px-6 whitespace-nowrap text-[#637381] text-body-sm">
+                  10/2026
                 </td>
 <td class="py-4 px-6 whitespace-nowrap text-right">
 <div class="inline-flex items-center gap-1.5 justify-end">
-<button class="px-2.5 py-1 text-label-sm font-label-sm font-semibold rounded-md border border-outline-variant/50 text-on-surface hover:border-primary-container hover:text-primary-container transition-colors">
-                      Edit
-                    </button>
-<button class="p-1 rounded-md text-outline hover:text-on-surface hover:bg-surface transition-colors" title="More options">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 text-label-sm font-semibold rounded-lg border border-gray-200 text-[#212B36] hover:border-[#00A76F] hover:text-[#00A76F] hover:bg-[#00A76F]/5 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+<span>Sửa</span>
+</button>
+<button class="p-1 rounded-lg text-[#919EAB] hover:text-[#212B36] hover:bg-gray-100 transition-colors" title="Thêm tùy chọn">
 <span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
 </button>
 </div>
 </td>
 </tr>
-<!-- ROW 2: Petrol (Car) -->
-<tr class="hover:bg-surface/50 transition-colors">
+<!-- ROW 2: Petrol Car -->
+<tr class="hover:bg-[#F9FAFB] transition-colors">
 <td class="py-4 px-6 whitespace-nowrap">
 <div class="flex items-center gap-3">
-<div class="w-9 h-9 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center">
+<div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
 <span class="material-symbols-outlined text-lg" data-icon="directions_car">directions_car</span>
 </div>
 <div>
-<span class="font-semibold text-on-surface block text-body-md font-body-md">Petrol (Car)</span>
-<span class="text-outline text-body-sm font-body-sm">Passenger vehicle gasoline</span>
+<span class="font-semibold text-[#212B36] block">Xăng sinh học (Ô tô)</span>
+<span class="text-[#919EAB] text-body-sm">Nhiên liệu phương tiện hành khách</span>
 </div>
 </div>
 </td>
 <td class="py-4 px-6 whitespace-nowrap">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-surface-container text-on-surface-variant">
-                    Transport
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-700">
+                    Giao thông
                   </span>
 </td>
-<td class="py-4 px-6 whitespace-nowrap font-mono font-semibold text-on-surface text-body-md font-body-md">
+<td class="py-4 px-6 whitespace-nowrap font-mono font-bold text-[#212B36]">
                   2.3100
                 </td>
-<td class="py-4 px-6 whitespace-nowrap text-outline text-body-md font-body-md">
-                  kg CO2e/L
+<td class="py-4 px-6 whitespace-nowrap text-[#637381]">
+                  kg CO2e/lít
                 </td>
 <td class="py-4 px-6 whitespace-nowrap">
-<div class="flex items-center gap-2">
-<span class="w-2 h-2 rounded-full bg-primary-container"></span>
-<span class="font-medium text-on-surface text-body-sm font-body-sm">IPCC 2023</span>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#F4F6F8] text-body-sm font-medium text-[#212B36]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
+<span>IPCC 2023</span>
 </div>
 </td>
-<td class="py-4 px-6 whitespace-nowrap text-outline text-body-sm font-body-sm">
-                  Aug 2026
+<td class="py-4 px-6 whitespace-nowrap text-[#637381] text-body-sm">
+                  08/2026
                 </td>
 <td class="py-4 px-6 whitespace-nowrap text-right">
 <div class="inline-flex items-center gap-1.5 justify-end">
-<button class="px-2.5 py-1 text-label-sm font-label-sm font-semibold rounded-md border border-outline-variant/50 text-on-surface hover:border-primary-container hover:text-primary-container transition-colors">
-                      Edit
-                    </button>
-<button class="p-1 rounded-md text-outline hover:text-on-surface hover:bg-surface transition-colors" title="More options">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 text-label-sm font-semibold rounded-lg border border-gray-200 text-[#212B36] hover:border-[#00A76F] hover:text-[#00A76F] hover:bg-[#00A76F]/5 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+<span>Sửa</span>
+</button>
+<button class="p-1 rounded-lg text-[#919EAB] hover:text-[#212B36] hover:bg-gray-100 transition-colors" title="Thêm tùy chọn">
 <span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
 </button>
 </div>
 </td>
 </tr>
-<!-- ROW 3: Petrol (Motorbike) -->
-<tr class="hover:bg-surface/50 transition-colors">
+<!-- ROW 3: Petrol Motorbike -->
+<tr class="hover:bg-[#F9FAFB] transition-colors">
 <td class="py-4 px-6 whitespace-nowrap">
 <div class="flex items-center gap-3">
-<div class="w-9 h-9 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center">
+<div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
 <span class="material-symbols-outlined text-lg" data-icon="two_wheeler">two_wheeler</span>
 </div>
 <div>
-<span class="font-semibold text-on-surface block text-body-md font-body-md">Petrol (Motorbike)</span>
-<span class="text-outline text-body-sm font-body-sm">Two-wheeler standard fuel</span>
+<span class="font-semibold text-[#212B36] block">Xăng RON 95 (Xe máy)</span>
+<span class="text-[#919EAB] text-body-sm">Nhiên liệu phương tiện hai bánh</span>
 </div>
 </div>
 </td>
 <td class="py-4 px-6 whitespace-nowrap">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-surface-container text-on-surface-variant">
-                    Transport
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-700">
+                    Giao thông
                   </span>
 </td>
-<td class="py-4 px-6 whitespace-nowrap font-mono font-semibold text-on-surface text-body-md font-body-md">
+<td class="py-4 px-6 whitespace-nowrap font-mono font-bold text-[#212B36]">
                   2.1900
                 </td>
-<td class="py-4 px-6 whitespace-nowrap text-outline text-body-md font-body-md">
-                  kg CO2e/L
+<td class="py-4 px-6 whitespace-nowrap text-[#637381]">
+                  kg CO2e/lít
                 </td>
 <td class="py-4 px-6 whitespace-nowrap">
-<div class="flex items-center gap-2">
-<span class="w-2 h-2 rounded-full bg-primary-container"></span>
-<span class="font-medium text-on-surface text-body-sm font-body-sm">IPCC 2023</span>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#F4F6F8] text-body-sm font-medium text-[#212B36]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
+<span>IPCC 2023</span>
 </div>
 </td>
-<td class="py-4 px-6 whitespace-nowrap text-outline text-body-sm font-body-sm">
-                  Aug 2026
+<td class="py-4 px-6 whitespace-nowrap text-[#637381] text-body-sm">
+                  08/2026
                 </td>
 <td class="py-4 px-6 whitespace-nowrap text-right">
 <div class="inline-flex items-center gap-1.5 justify-end">
-<button class="px-2.5 py-1 text-label-sm font-label-sm font-semibold rounded-md border border-outline-variant/50 text-on-surface hover:border-primary-container hover:text-primary-container transition-colors">
-                      Edit
-                    </button>
-<button class="p-1 rounded-md text-outline hover:text-on-surface hover:bg-surface transition-colors" title="More options">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 text-label-sm font-semibold rounded-lg border border-gray-200 text-[#212B36] hover:border-[#00A76F] hover:text-[#00A76F] hover:bg-[#00A76F]/5 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+<span>Sửa</span>
+</button>
+<button class="p-1 rounded-lg text-[#919EAB] hover:text-[#212B36] hover:bg-gray-100 transition-colors" title="Thêm tùy chọn">
 <span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
 </button>
 </div>
 </td>
 </tr>
 <!-- ROW 4: LPG Gas -->
-<tr class="hover:bg-surface/50 transition-colors">
+<tr class="hover:bg-[#F9FAFB] transition-colors">
 <td class="py-4 px-6 whitespace-nowrap">
 <div class="flex items-center gap-3">
-<div class="w-9 h-9 rounded-full bg-tertiary-fixed text-tertiary flex items-center justify-center">
+<div class="w-9 h-9 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center">
 <span class="material-symbols-outlined text-lg" data-icon="local_fire_department">local_fire_department</span>
 </div>
 <div>
-<span class="font-semibold text-on-surface block text-body-md font-body-md">LPG Gas</span>
-<span class="text-outline text-body-sm font-body-sm">Liquefied petroleum heating gas</span>
+<span class="font-semibold text-[#212B36] block">Khí gas hóa lỏng (LPG)</span>
+<span class="text-[#919EAB] text-body-sm">Nhiên liệu khí đốt hóa lỏng sinh hoạt</span>
 </div>
 </div>
 </td>
 <td class="py-4 px-6 whitespace-nowrap">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-tertiary-fixed/60 text-on-tertiary-container">
-                    Gas
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-amber-50 text-amber-800">
+                    Chất đốt &amp; Gas
                   </span>
 </td>
-<td class="py-4 px-6 whitespace-nowrap font-mono font-semibold text-on-surface text-body-md font-body-md">
+<td class="py-4 px-6 whitespace-nowrap font-mono font-bold text-[#212B36]">
                   2.9830
                 </td>
-<td class="py-4 px-6 whitespace-nowrap text-outline text-body-md font-body-md">
+<td class="py-4 px-6 whitespace-nowrap text-[#637381]">
                   kg CO2e/kg
                 </td>
 <td class="py-4 px-6 whitespace-nowrap">
-<div class="flex items-center gap-2">
-<span class="w-2 h-2 rounded-full bg-primary-container"></span>
-<span class="font-medium text-on-surface text-body-sm font-body-sm">IPCC 2023</span>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#F4F6F8] text-body-sm font-medium text-[#212B36]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
+<span>IPCC 2023</span>
 </div>
 </td>
-<td class="py-4 px-6 whitespace-nowrap text-outline text-body-sm font-body-sm">
-                  Aug 2026
+<td class="py-4 px-6 whitespace-nowrap text-[#637381] text-body-sm">
+                  08/2026
                 </td>
 <td class="py-4 px-6 whitespace-nowrap text-right">
 <div class="inline-flex items-center gap-1.5 justify-end">
-<button class="px-2.5 py-1 text-label-sm font-label-sm font-semibold rounded-md border border-outline-variant/50 text-on-surface hover:border-primary-container hover:text-primary-container transition-colors">
-                      Edit
-                    </button>
-<button class="p-1 rounded-md text-outline hover:text-on-surface hover:bg-surface transition-colors" title="More options">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 text-label-sm font-semibold rounded-lg border border-gray-200 text-[#212B36] hover:border-[#00A76F] hover:text-[#00A76F] hover:bg-[#00A76F]/5 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+<span>Sửa</span>
+</button>
+<button class="p-1 rounded-lg text-[#919EAB] hover:text-[#212B36] hover:bg-gray-100 transition-colors" title="Thêm tùy chọn">
 <span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
 </button>
 </div>
 </td>
 </tr>
-<!-- ROW 5: Water Supply -->
-<tr class="hover:bg-surface/50 transition-colors">
+<!-- ROW 5: Tap Water -->
+<tr class="hover:bg-[#F9FAFB] transition-colors">
 <td class="py-4 px-6 whitespace-nowrap">
 <div class="flex items-center gap-3">
-<div class="w-9 h-9 rounded-full bg-secondary-container/50 text-secondary flex items-center justify-center">
+<div class="w-9 h-9 rounded-xl bg-cyan-50 text-cyan-600 flex items-center justify-center">
 <span class="material-symbols-outlined text-lg" data-icon="water_drop">water_drop</span>
 </div>
 <div>
-<span class="font-semibold text-on-surface block text-body-md font-body-md">Water Supply</span>
-<span class="text-outline text-body-sm font-body-sm">Municipal treated tap distribution</span>
+<span class="font-semibold text-[#212B36] block">Nước máy sinh hoạt</span>
+<span class="text-[#919EAB] text-body-sm">Nước cấp nhà máy xử lý đô thị</span>
 </div>
 </div>
 </td>
 <td class="py-4 px-6 whitespace-nowrap">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-secondary-container/30 text-on-secondary-fixed-variant">
-                    Water
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-cyan-50 text-cyan-800">
+                    Cấp nước
                   </span>
 </td>
-<td class="py-4 px-6 whitespace-nowrap font-mono font-semibold text-on-surface text-body-md font-body-md">
+<td class="py-4 px-6 whitespace-nowrap font-mono font-bold text-[#212B36]">
                   0.3440
                 </td>
-<td class="py-4 px-6 whitespace-nowrap text-outline text-body-md font-body-md">
+<td class="py-4 px-6 whitespace-nowrap text-[#637381]">
                   kg CO2e/m³
                 </td>
 <td class="py-4 px-6 whitespace-nowrap">
-<div class="flex items-center gap-2">
-<span class="w-2 h-2 rounded-full bg-primary-container"></span>
-<span class="font-medium text-on-surface text-body-sm font-body-sm">MONRE 2024</span>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#F4F6F8] text-body-sm font-medium text-[#212B36]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
+<span>Bộ TN&amp;MT</span>
 </div>
 </td>
-<td class="py-4 px-6 whitespace-nowrap text-outline text-body-sm font-body-sm">
-                  Sep 2026
+<td class="py-4 px-6 whitespace-nowrap text-[#637381] text-body-sm">
+                  09/2026
                 </td>
 <td class="py-4 px-6 whitespace-nowrap text-right">
 <div class="inline-flex items-center gap-1.5 justify-end">
-<button class="px-2.5 py-1 text-label-sm font-label-sm font-semibold rounded-md border border-outline-variant/50 text-on-surface hover:border-primary-container hover:text-primary-container transition-colors">
-                      Edit
-                    </button>
-<button class="p-1 rounded-md text-outline hover:text-on-surface hover:bg-surface transition-colors" title="More options">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 text-label-sm font-semibold rounded-lg border border-gray-200 text-[#212B36] hover:border-[#00A76F] hover:text-[#00A76F] hover:bg-[#00A76F]/5 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+<span>Sửa</span>
+</button>
+<button class="p-1 rounded-lg text-[#919EAB] hover:text-[#212B36] hover:bg-gray-100 transition-colors" title="Thêm tùy chọn">
 <span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
 </button>
 </div>
 </td>
 </tr>
-<!-- ROW 6: Bus -->
-<tr class="hover:bg-surface/50 transition-colors">
+<!-- ROW 6: Public Bus -->
+<tr class="hover:bg-[#F9FAFB] transition-colors">
 <td class="py-4 px-6 whitespace-nowrap">
 <div class="flex items-center gap-3">
-<div class="w-9 h-9 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center">
+<div class="w-9 h-9 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
 <span class="material-symbols-outlined text-lg" data-icon="directions_bus">directions_bus</span>
 </div>
 <div>
-<span class="font-semibold text-on-surface block text-body-md font-body-md">Bus</span>
-<span class="text-outline text-body-sm font-body-sm">Public transit per passenger-km</span>
+<span class="font-semibold text-[#212B36] block">Xe buýt công cộng</span>
+<span class="text-[#919EAB] text-body-sm">Vận tải hành khách công cộng theo km</span>
 </div>
 </div>
 </td>
 <td class="py-4 px-6 whitespace-nowrap">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-surface-container text-on-surface-variant">
-                    Transport
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-blue-50 text-blue-700">
+                    Giao thông
                   </span>
 </td>
-<td class="py-4 px-6 whitespace-nowrap font-mono font-semibold text-on-surface text-body-md font-body-md">
+<td class="py-4 px-6 whitespace-nowrap font-mono font-bold text-[#212B36]">
                   0.0890
                 </td>
-<td class="py-4 px-6 whitespace-nowrap text-outline text-body-md font-body-md">
+<td class="py-4 px-6 whitespace-nowrap text-[#637381]">
                   kg CO2e/km
                 </td>
 <td class="py-4 px-6 whitespace-nowrap">
-<div class="flex items-center gap-2">
-<span class="w-2 h-2 rounded-full bg-primary-container"></span>
-<span class="font-medium text-on-surface text-body-sm font-body-sm">IPCC 2023</span>
+<div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-md bg-[#F4F6F8] text-body-sm font-medium text-[#212B36]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
+<span>IPCC 2023</span>
 </div>
 </td>
-<td class="py-4 px-6 whitespace-nowrap text-outline text-body-sm font-body-sm">
-                  Aug 2026
+<td class="py-4 px-6 whitespace-nowrap text-[#637381] text-body-sm">
+                  08/2026
                 </td>
 <td class="py-4 px-6 whitespace-nowrap text-right">
 <div class="inline-flex items-center gap-1.5 justify-end">
-<button class="px-2.5 py-1 text-label-sm font-label-sm font-semibold rounded-md border border-outline-variant/50 text-on-surface hover:border-primary-container hover:text-primary-container transition-colors">
-                      Edit
-                    </button>
-<button class="p-1 rounded-md text-outline hover:text-on-surface hover:bg-surface transition-colors" title="More options">
+<button class="inline-flex items-center gap-1 px-2.5 py-1 text-label-sm font-semibold rounded-lg border border-gray-200 text-[#212B36] hover:border-[#00A76F] hover:text-[#00A76F] hover:bg-[#00A76F]/5 transition-colors">
+<span class="material-symbols-outlined text-sm" data-icon="edit">edit</span>
+<span>Sửa</span>
+</button>
+<button class="p-1 rounded-lg text-[#919EAB] hover:text-[#212B36] hover:bg-gray-100 transition-colors" title="Thêm tùy chọn">
 <span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
 </button>
 </div>
@@ -673,13 +639,13 @@
 </table>
 </div>
 <!-- TABLE PAGINATION FOOTER -->
-<div class="px-6 py-4 bg-surface-container-lowest border-t border-surface-container-high flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-body-sm font-body-sm text-outline">
+<div class="px-6 py-4 bg-white border-t border-gray-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-body-sm text-[#919EAB]">
 <div class="flex items-center gap-4">
-<span>Showing <strong class="text-on-surface font-semibold">1-6</strong> of <strong class="text-on-surface font-semibold">18</strong> factors</span>
-<div class="h-4 w-px bg-outline-variant/30 hidden sm:block"></div>
+<span>Hiển thị <strong class="text-[#212B36] font-semibold">1 đến 6</strong> trong số <strong class="text-[#212B36] font-semibold">18</strong> hệ số</span>
+<div class="h-4 w-px bg-gray-200 hidden sm:block"></div>
 <div class="flex items-center gap-2">
-<span>Rows per page:</span>
-<select class="bg-surface border border-outline-variant/30 rounded py-1 px-2 text-on-surface text-label-sm font-label-sm focus:outline-none focus:border-primary-container cursor-pointer">
+<span>Hàng mỗi trang:</span>
+<select class="bg-[#F4F6F8] border border-gray-200 rounded-lg py-1 px-2 text-[#212B36] text-label-sm font-medium focus:outline-none focus:border-[#00A76F] cursor-pointer">
 <option value="6">6</option>
 <option value="10">10</option>
 <option value="25">25</option>
@@ -687,27 +653,29 @@
 </div>
 </div>
 <!-- Page Navigation Controls -->
-<div class="flex items-center gap-2 self-end sm:self-auto">
-<button aria-label="Previous Page" class="p-1.5 rounded-lg border border-outline-variant/30 text-outline hover:text-on-surface hover:bg-surface disabled:opacity-40 disabled:cursor-not-allowed transition-colors" disabled="">
+<div class="flex items-center gap-1.5 self-end sm:self-auto">
+<button aria-label="Trang trước" class="p-1.5 rounded-lg border border-gray-200 text-[#919EAB] hover:text-[#212B36] hover:bg-[#F4F6F8] disabled:opacity-40 disabled:cursor-not-allowed transition-colors" disabled="">
 <span class="material-symbols-outlined text-base" data-icon="chevron_left">chevron_left</span>
 </button>
-<span class="text-body-sm font-body-sm font-medium px-2">Page <strong class="text-on-surface font-semibold">1</strong> of 3</span>
-<button aria-label="Next Page" class="p-1.5 rounded-lg border border-outline-variant/30 text-outline hover:text-on-surface hover:bg-surface transition-colors">
+<button class="w-8 h-8 rounded-lg bg-[#00A76F] text-white font-semibold text-xs transition-colors">1</button>
+<button class="w-8 h-8 rounded-lg text-[#637381] hover:bg-[#F4F6F8] font-semibold text-xs transition-colors">2</button>
+<button class="w-8 h-8 rounded-lg text-[#637381] hover:bg-[#F4F6F8] font-semibold text-xs transition-colors">3</button>
+<button aria-label="Trang sau" class="p-1.5 rounded-lg border border-gray-200 text-[#919EAB] hover:text-[#212B36] hover:bg-[#F4F6F8] transition-colors">
 <span class="material-symbols-outlined text-base" data-icon="chevron_right">chevron_right</span>
 </button>
 </div>
 </div>
 </div>
 <!-- FOOTER NOTE / AUDIT STATUS CALLOUT -->
-<div class="p-4 rounded-xl bg-surface-container-low/60 border border-surface-container flex items-center justify-between text-body-sm font-body-sm text-outline">
+<div class="p-4 rounded-xl bg-white border border-gray-200/80 shadow-xs flex items-center justify-between text-body-sm text-[#637381]">
 <div class="flex items-center gap-2.5">
-<span class="material-symbols-outlined text-primary text-base" data-icon="lock">lock</span>
-<span>Conversion values are cryptographically verified against ISO 14064-1 accounting principles.</span>
+<span class="material-symbols-outlined text-[#00A76F] text-base" data-icon="verified">verified</span>
+<span>Cơ sở dữ liệu hệ số quy chuẩn tuân thủ hướng dẫn kỹ thuật GHG Protocol và tiêu chuẩn quốc gia TCVN ISO 14064-1.</span>
 </div>
-<a class="text-primary hover:underline font-label-sm font-label-sm font-semibold flex items-center gap-1" href="#audit-log">
-<span>View Ledger Proofs</span>
+<div class="flex items-center gap-1 text-label-sm font-semibold text-[#00A76F] cursor-pointer hover:underline">
+<span>Xem chứng nhận</span>
 <span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
-</a>
+</div>
 </div>
 </main>
 </div>

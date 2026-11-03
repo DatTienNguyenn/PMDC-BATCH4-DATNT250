@@ -130,548 +130,513 @@
 </head>
 <body class="min-h-screen text-on-surface antialiased bg-[#F9FAFB] flex flex-col">
 <!-- ==================== SIDE NAVIGATION (SHARED COMPONENT) ==================== -->
-<aside class="fixed top-0 left-0 h-screen w-64 border-r border-outline-variant/20 bg-inverse-surface z-50 flex flex-col justify-between p-4">
-<!-- Header: Brand Identity -->
-<div>
-<div class="flex items-center gap-3 px-2 py-3 mb-6">
-<div class="h-10 w-10 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary-container">
+<aside class="fixed top-0 left-0 h-screen w-64 border-r border-outline-variant/20 bg-surface-container-lowest z-50 flex flex-col justify-between p-4 shadow-sm">
+<div class="flex flex-col gap-6">
+<!-- Brand Logo / Product Info -->
+<div class="flex items-center gap-3 px-2 pt-2">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-on-primary shadow-sm shadow-primary-container/20">
 <span class="material-symbols-outlined text-2xl" data-icon="eco">eco</span>
 </div>
 <div class="flex flex-col">
-<span class="text-title font-title font-bold text-surface-container-lowest">CarbonLedger</span>
-<span class="text-label-sm font-label-sm text-outline-variant/80 tracking-wide">Enterprise v2.0</span>
+<span class="text-title font-title font-bold text-[#212B36] tracking-tight">CarbonLedger</span>
+<span class="text-label-sm font-label-sm text-[#919EAB] font-medium">Enterprise v2.0</span>
 </div>
 </div>
-<!-- Main Navigation Links -->
-<nav aria-label="Main Administration" class="space-y-1.5">
-<!-- Overview (Inactive) -->
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest font-body-md transition-colors hover:bg-surface-variant/10" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
-<span>Overview</span>
+<!-- Navigation Tabs Cluster: Strictly 3 items -->
+<nav aria-label="Main Navigation" class="flex flex-col space-y-1.5">
+<!-- 1. Tổng quan (Inactive) -->
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[#637381] hover:text-[#212B36] hover:bg-surface-container font-body-md font-medium transition-colors" href="#overview">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span class="text-body-md">Tổng quan</span>
 </a>
-<!-- Emission Factors (Inactive) -->
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest font-body-md transition-colors hover:bg-surface-variant/10" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="co2">co2</span>
-<span>Emission Factors</span>
+<!-- 2. Hệ số phát thải (Inactive) -->
+<a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[#637381] hover:text-[#212B36] hover:bg-surface-container font-body-md font-medium transition-colors" href="#emission-factors">
+<span class="material-symbols-outlined text-[20px]" data-icon="co2">co2</span>
+<span class="text-body-md">Hệ số phát thải</span>
 </a>
-<!-- Workspaces (ACTIVE TAB per destination match) -->
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary-container/15 text-primary-container font-label-md transition-colors shadow-sm" href="#">
-<span class="material-symbols-outlined text-xl text-primary-container" data-icon="corporate_fare" data-weight="fill" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
-<span class="font-semibold text-surface-container-lowest">Workspaces</span>
-<span class="ml-auto bg-primary-container/20 text-primary-container text-label-sm font-label-sm px-2 py-0.5 rounded-full font-bold">24</span>
-</a>
-<!-- Audit Log (Inactive) -->
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest font-body-md transition-colors hover:bg-surface-variant/10" href="#">
-<span class="material-symbols-outlined text-xl" data-icon="history_edu">history_edu</span>
-<span>Audit Log</span>
+<!-- 3. Không gian làm việc (ACTIVE: soft emerald background) -->
+<a aria-current="page" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-primary-container/10 text-primary font-semibold transition-colors" href="#workspaces">
+<span class="material-symbols-outlined text-[20px] text-primary" data-icon="corporate_fare" data-weight="fill" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+<span class="text-body-md flex-1">Không gian làm việc</span>
+<span class="bg-primary-container/20 text-primary text-label-sm font-label-sm px-2 py-0.5 rounded-full font-bold">24</span>
 </a>
 </nav>
 </div>
-<!-- Secondary Utilities & User Profile Anchor -->
-<div class="space-y-4 pt-4 border-t border-outline-variant/20">
-<div class="px-2">
-<button class="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-surface-variant/10 text-surface-container-lowest hover:bg-surface-variant/20 text-label-md font-label-md transition-colors">
-<span class="material-symbols-outlined text-base" data-icon="file_download">file_download</span>
-<span>Export Report</span>
-</button>
-</div>
-<nav aria-label="Support Navigation" class="space-y-1">
-<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest font-body-md transition-colors hover:bg-surface-variant/10" href="#">
-<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
-<span class="text-body-sm font-body-sm">Settings</span>
-</a>
-<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest font-body-md transition-colors hover:bg-surface-variant/10" href="#">
-<span class="material-symbols-outlined text-lg" data-icon="help_outline">help_outline</span>
-<span class="text-body-sm font-body-sm">Documentation</span>
-</a>
-</nav>
-<!-- User Admin Profile Card -->
-<div class="flex items-center gap-3 p-2 rounded-xl bg-surface-variant/5 border border-outline-variant/10">
-<div class="relative">
-<img class="w-10 h-10 rounded-full object-cover border border-outline-variant/30" data-alt="Portrait photo of Alex Mercer, SecOps System Administrator, professional headshot in modern lighting against a clean corporate tech studio backdrop with soft emerald green ambient lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgrBL-Zr4B7MyohhJy8FbjN8E8nRZe6uQRbkAMctXzzootc07-QW-TU0eEfs_NGlbfNYzNsEI8-mZ2y724TymsQjCFnIzzrm2CaGGHX847cyu4RQANuOHR_sPZXxH1bXIr5u9uZH7tFYPIzpktmM5BPnat3iD9MoT7Q3bhJK9mff9lvW2R0EDLAGPhFLyuBnCnjNZS5ImiUVGBbfUm83b0SFOl3qj9SY0_QXie26AHIQK5VpbkGrXzoVzxqUmpal-xLhZl8708rQ"/>
-<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary-container ring-2 ring-inverse-surface"></span>
-</div>
+<!-- Bottom Cluster: User Profile in light theme -->
+<div class="pt-4 border-t border-outline-variant/20">
+<div class="p-2.5 rounded-xl bg-surface-container flex items-center justify-between border border-outline-variant/20">
+<div class="flex items-center gap-3 min-w-0">
+<img class="w-9 h-9 rounded-full object-cover border border-surface-container-lowest shadow-sm" data-alt="Alex Mercer avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnoRZG0fagvfQafHUX7H4kpbjN743l--5b-j-u9zxo67SLZ43kgRLCpHqP5M7ocmq08W6SE1AKoiNNPsHNT1uKzdTMzX07CBSUlri_o7Md4yq_aRHWVwPoCL11R_9HY8fOQqm4huGuGS-SQumONCdP7YKTo69oaKx4JZPVe_4Kr8ONs-XfB_NACZsk9_ZsJyhuWSqd6_Sbkqrgtsnk--dEbjAueW3WW6-iKgR4aYs9-67KaGEK6D-wWBlgMokCZUgh-0LlmnFcwQ"/>
 <div class="flex flex-col min-w-0">
-<span class="text-label-md font-label-md text-surface-container-lowest truncate">Alex Mercer</span>
-<span class="text-label-sm font-label-sm text-outline-variant/80 truncate">SecOps / SysAdmin</span>
+<span class="text-[#212B36] text-label-md font-semibold truncate leading-tight">Alex Mercer</span>
+<span class="text-[#919EAB] text-label-sm truncate">Quản trị cấp cao</span>
 </div>
-<button class="ml-auto text-inverse-on-surface/50 hover:text-surface-container-lowest p-1" title="Account context menu">
-<span class="material-symbols-outlined text-base" data-icon="more_vert">more_vert</span>
+</div>
+<button class="p-1 rounded-lg text-[#919EAB] hover:text-[#212B36] hover:bg-surface-container-lowest transition-colors" title="Cài đặt">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
 </button>
 </div>
 </div>
 </aside>
 <!-- ==================== TOP NAVIGATION BAR (SHARED COMPONENT) ==================== -->
-<header class="docked full-width top-0 sticky z-40 border-b border-surface-container-high/60 bg-surface-container-lowest/80 backdrop-blur-md flex justify-between items-center h-16 px-6 ml-64 w-[calc(100%-16rem)]">
-<!-- Breadcrumb & Search Telemetry -->
-<div class="flex items-center gap-6">
-<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-label-md font-label-md text-outline">
-<span class="hover:text-on-surface transition-colors">Admin</span>
-<span class="text-outline-variant">/</span>
-<span class="text-primary font-semibold">Workspaces</span>
-</nav>
-<!-- Global Filter/Search bar -->
-<div class="relative hidden lg:block w-72">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant text-lg" data-icon="search">search</span>
-<input class="w-full h-9 pl-9 pr-3 text-body-sm font-body-sm bg-surface-container-low/50 border border-outline-variant/40 rounded-lg focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container placeholder:text-outline/70" placeholder="Telemetry ID or quick query..." type="text"/>
-</div>
-</div>
-<!-- Right Controls -->
-<div class="flex items-center gap-3">
-<!-- Notification Icon Button -->
-<button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" title="Notifications">
-<span class="material-symbols-outlined text-xl" data-icon="notifications">notifications</span>
-<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full ring-2 ring-surface-container-lowest"></span>
-</button>
-<!-- Theme Switcher -->
-<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" title="Toggle theme contrast">
-<span class="material-symbols-outlined text-xl" data-icon="contrast">contrast</span>
-</button>
-<div class="h-5 w-px bg-surface-container-high mx-1"></div>
-<!-- Gray Pill Badge for Role -->
-<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant/30 text-label-sm font-label-sm font-bold">
+<header class="sticky top-0 z-40 border-b border-outline-variant/20 bg-surface-container-lowest/95 backdrop-blur-md flex justify-between items-center h-16 px-8 ml-64 w-[calc(100%-16rem)]">
+<!-- Left side: Leaf logo CarbonLedger + Badge + Search -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-xl" data-icon="eco">eco</span>
+<span class="text-sm font-bold text-[#212B36] tracking-tight">CarbonLedger</span>
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary-container/10 text-primary border border-primary-container/20">
 <span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
-<span>System Admin</span>
+        Quản trị hệ thống
+      </span>
 </div>
-<!-- Quick Avatar -->
-<div class="flex items-center gap-2 pl-2">
-<img class="w-8 h-8 rounded-full border border-primary-container/40 object-cover" data-alt="System Administrator profile avatar thumbnail of Alex Mercer wearing professional minimalist tech apparel with crisp neutral lighting and soft focus studio setup." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF_x2TQJfjuPvAeCuQAW2U-tKUzTgfOyPh5LcSIJfB1-Hq_8BGoKVb7h2TNYz2VMUdEg6ey7Bd01KGn-NWFrCG5tHbgLgcqW6qwcgPnnxtGOw99SPoJqjlWlcpfxg-WigqAG-a0bQy5jkC8GwjOMJ4rAKAIh36nHOg9boyLbVahIIub4NG6ULzaeSmNxZdJjB8q87NAHVqU7d9vGwdToOU4dB6yHZhEXzPdKOihEQP4fLypxGc0pBU_D6DfdiXL45aAh6y_TciTA"/>
+<div class="h-4 w-px bg-outline-variant/40 mx-1 hidden md:block"></div>
+<div class="relative w-80">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#919EAB] text-lg pointer-events-none" data-icon="search">search</span>
+<input class="w-full pl-9 pr-4 py-1.5 bg-surface-container hover:bg-surface-container-high rounded-lg text-body-sm text-[#212B36] placeholder:text-[#919EAB] border border-transparent focus:border-primary-container focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary-container focus:outline-none transition-all" placeholder="Tìm kiếm hệ số, hoạt động..." type="text"/>
+</div>
+</div>
+<!-- Right side: Notification bell icon + Admin Avatar -->
+<div class="flex items-center gap-3">
+<button aria-label="Thông báo" class="w-9 h-9 rounded-lg flex items-center justify-center text-[#637381] hover:text-[#212B36] hover:bg-surface-container transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container"></span>
+</button>
+<div class="h-5 w-px bg-outline-variant/30"></div>
+<div class="flex items-center pl-1 cursor-pointer">
+<img class="w-9 h-9 rounded-full object-cover border border-outline-variant/40 ring-2 ring-transparent hover:ring-primary-container/40 transition-all" data-alt="Alex Mercer Avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnoRZG0fagvfQafHUX7H4kpbjN743l--5b-j-u9zxo67SLZ43kgRLCpHqP5M7ocmq08W6SE1AKoiNNPsHNT1uKzdTMzX07CBSUlri_o7Md4yq_aRHWVwPoCL11R_9HY8fOQqm4huGuGS-SQumONCdP7YKTo69oaKx4JZPVe_4Kr8ONs-XfB_NACZsk9_ZsJyhuWSqd6_Sbkqrgtsnk--dEbjAueW3WW6-iKgR4aYs9-67KaGEK6D-wWBlgMokCZUgh-0LlmnFcwQ"/>
 </div>
 </div>
 </header>
 <!-- ==================== MAIN CONTENT CANVAS ==================== -->
-<main class="ml-64 w-[calc(100%-16rem)] p-8 flex-1 flex flex-col gap-6">
-<!-- PAGE HEADER -->
+<main class="ml-64 w-[calc(100%-16rem)] p-8 flex-1 flex flex-col gap-6"><!-- BREADCRUMB -->
+<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-label-sm font-medium text-[#919EAB]">
+<span>CarbonLedger</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span>Quản trị hệ thống</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span class="text-[#212B36] font-semibold">Không gian làm việc</span>
+</nav>
+<!-- PAGE HEADER ROW: NO SUBTITLE per prompt specifications -->
 <section class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-<div>
-<h1 class="text-headline-lg font-headline-lg text-[#1C252E] tracking-tight">Workspaces</h1>
-<p class="text-body-md font-body-md text-outline mt-1 max-w-3xl">
-          Manage tenant organizations, monitor organizational footprints, and manage workspace access controls.
-        </p>
-</div>
+<h1 class="text-2xl font-bold text-[#212B36] tracking-tight">Quản lý không gian làm việc</h1>
 <!-- Top Action Buttons -->
 <div class="flex items-center gap-3 shrink-0">
-<button class="h-10 px-4 rounded-lg border border-outline-variant/60 bg-surface-container-lowest text-on-surface hover:bg-surface-container-low hover:border-primary-container text-label-md font-label-md flex items-center gap-2 transition-all shadow-sm">
+<button class="h-10 px-4 rounded-lg border border-outline-variant/60 bg-surface-container-lowest text-on-surface hover:bg-surface-container hover:border-primary-container text-label-md font-label-md flex items-center gap-2 transition-all shadow-sm">
 <span class="material-symbols-outlined text-lg" data-icon="download">download</span>
-<span>Export CSV</span>
+<span>Xuất dữ liệu CSV</span>
 </button>
-<button class="h-10 px-4 rounded-lg bg-primary-container text-on-primary hover:bg-[#007867] text-label-md font-label-md flex items-center gap-2 transition-all shadow-[0px_8px_16px_0px_rgba(0,167,111,0.24)]">
+<button class="h-10 px-4 rounded-lg bg-primary-container hover:bg-[#007867] text-on-primary text-label-md font-label-md flex items-center gap-2 transition-all shadow-[0px_8px_16px_0px_rgba(0,167,111,0.24)]">
 <span class="material-symbols-outlined text-lg" data-icon="add">add</span>
-<span>+ New Workspace</span>
+<span>+ Tạo không gian mới</span>
 </button>
 </div>
 </section>
-<!-- METRIC SUMMARY CARDS (MUI Minimal Stat Grid) -->
-<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-<!-- Stat 1: Total Workspaces -->
-<div class="bg-surface-container-lowest border border-[#F3F4F6] rounded-2xl p-6 shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] hover:shadow-[0px_12px_24px_-4px_rgba(145,158,171,0.12),0px_0px_2px_0px_rgba(145,158,171,0.20)] transition-shadow">
+<!-- METRIC SUMMARY CARDS (4 light cards with soft icons and clean typography) -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Card 1: Tổng không gian làm việc -->
+<div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
 <div class="flex items-center justify-between">
-<span class="text-label-md font-label-md text-outline">Total Workspaces</span>
-<div class="w-10 h-10 rounded-xl bg-surface-container-low flex items-center justify-center text-primary">
-<span class="material-symbols-outlined text-xl" data-icon="domain">domain</span>
+<span class="text-label-md text-[#919EAB] font-medium">Tổng không gian làm việc</span>
+<span class="w-9 h-9 rounded-xl bg-primary-container/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="corporate_fare">corporate_fare</span>
+</span>
 </div>
-</div>
-<div class="mt-4 flex items-baseline gap-2">
-<span class="text-display font-display text-[#1C252E]">24</span>
-</div>
-<div class="mt-2 flex items-center gap-1.5 text-label-sm font-label-sm">
-<span class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-primary-container/15 text-[#007867] font-bold">
+<div class="mt-3">
+<div class="text-2xl font-bold text-[#212B36]">24</div>
+<div class="flex items-center gap-1.5 mt-1 text-label-sm text-primary font-semibold">
 <span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
-            +3
-          </span>
-<span class="text-outline">added this month</span>
+<span>↑ 3 tháng này</span>
 </div>
 </div>
-<!-- Stat 2: Active Workspaces -->
-<div class="bg-surface-container-lowest border border-[#F3F4F6] rounded-2xl p-6 shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] hover:shadow-[0px_12px_24px_-4px_rgba(145,158,171,0.12),0px_0px_2px_0px_rgba(145,158,171,0.20)] transition-shadow">
+</div>
+<!-- Card 2: Đang hoạt động -->
+<div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
 <div class="flex items-center justify-between">
-<span class="text-label-md font-label-md text-outline">Active Workspaces</span>
-<div class="w-10 h-10 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary-container">
-<span class="material-symbols-outlined text-xl" data-icon="check_circle">check_circle</span>
+<span class="text-label-md text-[#919EAB] font-medium">Đang hoạt động</span>
+<span class="w-9 h-9 rounded-xl bg-primary-container/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="check_circle">check_circle</span>
+</span>
 </div>
-</div>
-<div class="mt-4 flex items-baseline gap-2">
-<span class="text-display font-display text-[#1C252E]">21</span>
-</div>
-<div class="mt-2 flex items-center gap-2">
-<div class="flex-1 bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="mt-3">
+<div class="text-2xl font-bold text-[#212B36]">21</div>
+<div class="flex items-center gap-2 mt-1">
+<div class="flex-1 bg-surface-container h-1.5 rounded-full overflow-hidden">
 <div class="bg-primary-container h-full rounded-full" style="width: 87.5%"></div>
 </div>
-<span class="text-label-sm font-label-sm font-bold text-[#007867]">87.5%</span>
+<span class="text-label-sm font-semibold text-primary">87.5% đang chạy</span>
 </div>
 </div>
-<!-- Stat 3: Suspended Workspaces -->
-<div class="bg-surface-container-lowest border border-[#F3F4F6] rounded-2xl p-6 shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] hover:shadow-[0px_12px_24px_-4px_rgba(145,158,171,0.12),0px_0px_2px_0px_rgba(145,158,171,0.20)] transition-shadow">
+</div>
+<!-- Card 3: Tạm khóa / Ngừng -->
+<div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
 <div class="flex items-center justify-between">
-<span class="text-label-md font-label-md text-outline">Suspended</span>
-<div class="w-10 h-10 rounded-xl bg-tertiary-container/15 flex items-center justify-center text-[#B76E00]">
-<span class="material-symbols-outlined text-xl" data-icon="pause_circle">pause_circle</span>
+<span class="text-label-md text-[#919EAB] font-medium">Tạm khóa / Ngừng</span>
+<span class="w-9 h-9 rounded-xl bg-tertiary-container/15 text-[#B76E00] flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="pause_circle">pause_circle</span>
+</span>
+</div>
+<div class="mt-3">
+<div class="text-2xl font-bold text-[#212B36]">3</div>
+<div class="flex items-center gap-1.5 mt-1 text-label-sm text-[#B76E00] font-semibold">
+<span class="material-symbols-outlined text-sm" data-icon="info">info</span>
+<span>12.5% tổng số</span>
 </div>
 </div>
-<div class="mt-4 flex items-baseline gap-2">
-<span class="text-display font-display text-[#1C252E]">3</span>
 </div>
-<div class="mt-2 flex items-center gap-1.5 text-label-sm font-label-sm">
-<span class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-tertiary-container/15 text-[#B76E00] font-bold">
-            12.5%
-          </span>
-<span class="text-outline">of total fleet</span>
-</div>
-</div>
-<!-- Stat 4: Managed Emissions -->
-<div class="bg-surface-container-lowest border border-[#F3F4F6] rounded-2xl p-6 shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] hover:shadow-[0px_12px_24px_-4px_rgba(145,158,171,0.12),0px_0px_2px_0px_rgba(145,158,171,0.20)] transition-shadow">
+<!-- Card 4: Tổng phát thải quản lý -->
+<div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow">
 <div class="flex items-center justify-between">
-<span class="text-label-md font-label-md text-outline">Managed Emissions</span>
-<div class="w-10 h-10 rounded-xl bg-secondary-fixed/50 flex items-center justify-center text-secondary">
-<span class="material-symbols-outlined text-xl" data-icon="cloud">cloud</span>
+<span class="text-label-md text-[#919EAB] font-medium">Tổng phát thải quản lý</span>
+<span class="w-9 h-9 rounded-xl bg-secondary-fixed/50 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="cloud">cloud</span>
+</span>
 </div>
+<div class="mt-3">
+<div class="flex items-baseline gap-1.5">
+<span class="text-2xl font-bold text-[#212B36]">12,450</span>
+<span class="text-body-sm text-[#919EAB] font-semibold">kg CO2e</span>
 </div>
-<div class="mt-4 flex items-baseline gap-1">
-<span class="text-display font-display text-[#1C252E]">12,450</span>
-<span class="text-body-sm font-body-sm text-outline font-semibold">kg CO2e</span>
-</div>
-<div class="mt-2 flex items-center gap-1.5 text-label-sm font-label-sm text-[#007867]">
+<div class="flex items-center gap-1.5 mt-1 text-label-sm text-primary font-medium">
 <span class="material-symbols-outlined text-sm" data-icon="verified">verified</span>
-<span>Telemetry updated 4m ago</span>
+<span>Cập nhật thời gian thực</span>
+</div>
 </div>
 </div>
 </section>
-<!-- FILTER AND SEARCH BAR COMPONENT -->
-<section class="bg-surface-container-lowest rounded-2xl p-4 border border-[#F3F4F6] shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] flex flex-col md:flex-row md:items-center justify-between gap-4">
+<!-- FILTER & SEARCH BAR COMPONENT -->
+<section class="bg-surface-container-lowest rounded-2xl p-4 border border-outline-variant/20 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
 <div class="flex flex-1 flex-col sm:flex-row items-stretch sm:items-center gap-3">
 <!-- Search Input -->
 <div class="relative flex-1">
-<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline-variant text-xl" data-icon="search">search</span>
-<input class="w-full h-11 pl-10 pr-4 rounded-lg border border-outline-variant/30 text-body-md font-body-md text-[#212B36] placeholder:text-outline focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 focus:outline-none transition-all" placeholder="Search workspace name or owner email..." type="text"/>
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-[#919EAB] text-lg pointer-events-none" data-icon="search">search</span>
+<input class="w-full h-10 pl-10 pr-4 rounded-xl border border-outline-variant/30 bg-surface-container text-body-sm text-[#212B36] placeholder:text-[#919EAB] focus:border-primary-container focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary-container focus:outline-none transition-all" placeholder="Tìm kiếm theo tên không gian hoặc email chủ sở hữu..." type="text"/>
 </div>
-<!-- Filter Dropdown: Type -->
+<!-- Filter Dropdown: Loại hình -->
 <div class="relative w-full sm:w-44">
-<select class="w-full h-11 pl-3.5 pr-8 rounded-lg border border-outline-variant/30 text-body-md font-body-md text-[#212B36] bg-surface-container-lowest appearance-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 focus:outline-none transition-all cursor-pointer">
-<option value="all">Type: All</option>
-<option value="household">Household</option>
-<option value="office">Small Office</option>
+<select class="w-full h-10 pl-3.5 pr-8 rounded-xl border border-outline-variant/30 text-body-sm text-[#212B36] bg-surface-container appearance-none focus:border-primary-container focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary-container focus:outline-none transition-all cursor-pointer">
+<option value="all">Loại hình: Tất cả</option>
+<option value="household">Hộ gia đình</option>
+<option value="office">Văn phòng nhỏ</option>
 </select>
-<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-outline-variant text-lg" data-icon="expand_more">expand_more</span>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#919EAB] text-lg" data-icon="expand_more">expand_more</span>
 </div>
-<!-- Filter Dropdown: Status -->
+<!-- Filter Dropdown: Trạng thái -->
 <div class="relative w-full sm:w-40">
-<select class="w-full h-11 pl-3.5 pr-8 rounded-lg border border-outline-variant/30 text-body-md font-body-md text-[#212B36] bg-surface-container-lowest appearance-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 focus:outline-none transition-all cursor-pointer">
-<option value="all">Status: All</option>
-<option value="active">Active</option>
-<option value="suspended">Suspended</option>
+<select class="w-full h-10 pl-3.5 pr-8 rounded-xl border border-outline-variant/30 text-body-sm text-[#212B36] bg-surface-container appearance-none focus:border-primary-container focus:bg-surface-container-lowest focus:ring-1 focus:ring-primary-container focus:outline-none transition-all cursor-pointer">
+<option value="all">Trạng thái: Tất cả</option>
+<option value="active">Hoạt động</option>
+<option value="suspended">Tạm khóa</option>
 </select>
-<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-outline-variant text-lg" data-icon="expand_more">expand_more</span>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-[#919EAB] text-lg" data-icon="expand_more">expand_more</span>
 </div>
 </div>
 <!-- Quick Utilities -->
 <div class="flex items-center gap-2 self-end sm:self-auto shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-outline-variant/20">
-<button class="p-2.5 rounded-lg border border-outline-variant/30 text-outline hover:text-on-surface hover:bg-surface-container-low transition-colors" title="Refresh Table">
-<span class="material-symbols-outlined text-xl" data-icon="refresh">refresh</span>
+<button class="p-2 rounded-xl border border-outline-variant/30 text-[#637381] hover:text-[#212B36] hover:bg-surface-container transition-colors" title="Làm mới">
+<span class="material-symbols-outlined text-lg" data-icon="refresh">refresh</span>
 </button>
-<button class="p-2.5 rounded-lg border border-outline-variant/30 bg-surface-container-low text-primary-container" title="Table View">
-<span class="material-symbols-outlined text-xl" data-icon="table_rows">table_rows</span>
-</button>
-<button class="p-2.5 rounded-lg border border-outline-variant/30 text-outline hover:text-on-surface hover:bg-surface-container-low transition-colors" title="Grid View">
-<span class="material-symbols-outlined text-xl" data-icon="grid_view">grid_view</span>
+<button class="p-2 rounded-xl border border-outline-variant/30 bg-surface-container text-primary font-semibold" title="Xem dạng danh sách">
+<span class="material-symbols-outlined text-lg" data-icon="table_rows">table_rows</span>
 </button>
 </div>
 </section>
-<!-- DATA TABLE CONTAINER -->
-<section class="bg-surface-container-lowest rounded-2xl border border-[#F3F4F6] shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] overflow-hidden">
+<!-- MAIN DATA TABLE CONTAINER -->
+<section class="bg-surface-container-lowest rounded-2xl border border-outline-variant/20 shadow-sm overflow-hidden">
 <div class="overflow-x-auto">
 <table class="w-full text-left border-collapse">
 <thead>
-<tr class="bg-surface-container-low/60 border-b border-[#F3F4F6] text-label-md font-label-md text-outline">
-<th class="py-3.5 px-6 font-semibold" scope="col">Workspace</th>
-<th class="py-3.5 px-6 font-semibold" scope="col">Owner</th>
-<th class="py-3.5 px-6 font-semibold" scope="col">Type</th>
-<th class="py-3.5 px-6 font-semibold" scope="col">Members</th>
-<th class="py-3.5 px-6 font-semibold" scope="col">Total Emissions</th>
-<th class="py-3.5 px-6 font-semibold" scope="col">Status</th>
-<th class="py-3.5 px-6 font-semibold text-right" scope="col">Actions</th>
+<tr class="bg-surface-container border-b border-outline-variant/20 text-label-sm text-[#919EAB] tracking-wider uppercase font-semibold">
+<th class="py-3.5 px-6" scope="col">TÊN KHÔNG GIAN</th>
+<th class="py-3.5 px-6" scope="col">EMAIL CHỦ SỞ HỮU</th>
+<th class="py-3.5 px-6" scope="col">PHÂN LOẠI</th>
+<th class="py-3.5 px-6" scope="col">SỐ THÀNH VIÊN</th>
+<th class="py-3.5 px-6" scope="col">TỔNG PHÁT THẢI</th>
+<th class="py-3.5 px-6" scope="col">TRẠNG THÁI</th>
+<th class="py-3.5 px-6 text-right" scope="col">THAO TÁC</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-[#F3F4F6]">
-<!-- ROW 1 -->
-<tr class="hover:bg-surface-container-low/30 transition-colors">
-<td class="py-4 px-6">
+<tbody class="divide-y divide-outline-variant/10 text-body-md text-[#212B36]">
+<!-- ROW 1: My Home -->
+<tr class="hover:bg-[#F9FAFB] transition-colors">
+<td class="py-4 px-6 whitespace-nowrap">
 <div class="flex items-center gap-3">
-<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-outline">
+<div class="w-9 h-9 rounded-xl bg-primary-container/10 text-primary flex items-center justify-center">
 <span class="material-symbols-outlined text-lg" data-icon="home">home</span>
 </div>
 <div>
-<div class="text-label-lg font-label-lg text-[#212B36] font-semibold">My Home</div>
-<div class="text-body-sm font-body-sm text-outline">ws-01824-us</div>
+<span class="font-semibold text-[#212B36] block">My Home</span>
+<span class="text-[#919EAB] text-body-sm">ws-01824-vn</span>
 </div>
 </div>
 </td>
-<td class="py-4 px-6 text-body-md font-body-md text-[#212B36]">
-                nguyen@example.com
-              </td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-[#F3F4F6] text-[#637381]">
-                  Household
-                </span>
+<td class="py-4 px-6 whitespace-nowrap text-body-sm text-[#637381]">
+            nguyen@example.com
+          </td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-[#E4EFFE] text-[#006B5C]">
+              Hộ gia đình
+            </span>
 </td>
-<td class="py-4 px-6">
-<div class="flex items-center gap-1.5 text-body-md font-body-md text-[#212B36]">
-<span class="material-symbols-outlined text-base text-outline" data-icon="group">group</span>
-<span>4 members</span>
+<td class="py-4 px-6 whitespace-nowrap text-body-sm text-[#212B36]">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-[#919EAB]" data-icon="group">group</span>
+<span>4 thành viên</span>
 </div>
 </td>
-<td class="py-4 px-6">
+<td class="py-4 px-6 whitespace-nowrap">
 <div class="flex flex-col">
-<span class="text-label-lg font-label-lg text-[#212B36] font-semibold">892 kg CO2e</span>
+<span class="font-semibold text-[#212B36] text-body-sm">892 kg CO2e</span>
 <div class="w-24 bg-surface-container-high h-1.5 rounded-full mt-1.5 overflow-hidden">
 <div class="bg-primary-container h-full rounded-full" style="width: 28%"></div>
 </div>
 </div>
 </td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-primary-container/15 text-[#007867]">
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary-container/10 text-primary">
 <span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
-                  Active
-                </span>
+              Hoạt động
+            </span>
 </td>
-<td class="py-4 px-6 text-right">
-<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-error/30 text-error hover:bg-error-container/20 text-label-sm font-label-sm font-semibold transition-colors" title="Suspend Workspace">
-<span class="material-symbols-outlined text-base" data-icon="lock">lock</span>
-<span>Lock</span>
+<td class="py-4 px-6 whitespace-nowrap text-right">
+<button class="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium rounded-lg border border-error/30 text-error hover:bg-error-container/20 transition-colors" title="Khóa không gian">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+<span>Khóa</span>
 </button>
 </td>
 </tr>
-<!-- ROW 2 -->
-<tr class="hover:bg-surface-container-low/30 transition-colors">
-<td class="py-4 px-6">
+<!-- ROW 2: TechLabs Office -->
+<tr class="hover:bg-[#F9FAFB] transition-colors">
+<td class="py-4 px-6 whitespace-nowrap">
 <div class="flex items-center gap-3">
-<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-outline">
-<span class="material-symbols-outlined text-lg" data-icon="apartment">apartment</span>
+<div class="w-9 h-9 rounded-xl bg-primary-container/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="corporate_fare">corporate_fare</span>
 </div>
 <div>
-<div class="text-label-lg font-label-lg text-[#212B36] font-semibold">Startup Office</div>
-<div class="text-body-sm font-body-sm text-outline">ws-01825-us</div>
+<span class="font-semibold text-[#212B36] block">TechLabs Office</span>
+<span class="text-[#919EAB] text-body-sm">ws-04418-vn</span>
 </div>
 </div>
 </td>
-<td class="py-4 px-6 text-body-md font-body-md text-[#212B36]">
-                tran@example.com
-              </td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-[#E4EFFE] text-[#006B5C]">
-                  Small Office
-                </span>
+<td class="py-4 px-6 whitespace-nowrap text-body-sm text-[#637381]">
+            tran@example.com
+          </td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-[#E4EFFE] text-[#006B5C]">
+              Văn phòng nhỏ
+            </span>
 </td>
-<td class="py-4 px-6">
-<div class="flex items-center gap-1.5 text-body-md font-body-md text-[#212B36]">
-<span class="material-symbols-outlined text-base text-outline" data-icon="group">group</span>
-<span>8 members</span>
+<td class="py-4 px-6 whitespace-nowrap text-body-sm text-[#212B36]">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-[#919EAB]" data-icon="group">group</span>
+<span>8 thành viên</span>
 </div>
 </td>
-<td class="py-4 px-6">
+<td class="py-4 px-6 whitespace-nowrap">
 <div class="flex flex-col">
-<span class="text-label-lg font-label-lg text-[#212B36] font-semibold">2,450 kg CO2e</span>
+<span class="font-semibold text-[#212B36] text-body-sm">2,450 kg CO2e</span>
 <div class="w-24 bg-surface-container-high h-1.5 rounded-full mt-1.5 overflow-hidden">
 <div class="bg-primary-container h-full rounded-full" style="width: 72%"></div>
 </div>
 </div>
 </td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-primary-container/15 text-[#007867]">
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary-container/10 text-primary">
 <span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
-                  Active
-                </span>
+              Hoạt động
+            </span>
 </td>
-<td class="py-4 px-6 text-right">
-<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-error/30 text-error hover:bg-error-container/20 text-label-sm font-label-sm font-semibold transition-colors" title="Suspend Workspace">
-<span class="material-symbols-outlined text-base" data-icon="lock">lock</span>
-<span>Lock</span>
+<td class="py-4 px-6 whitespace-nowrap text-right">
+<button class="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium rounded-lg border border-error/30 text-error hover:bg-error-container/20 transition-colors" title="Khóa không gian">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+<span>Khóa</span>
 </button>
 </td>
 </tr>
-<!-- ROW 3 -->
-<tr class="hover:bg-surface-container-low/30 transition-colors">
-<td class="py-4 px-6">
+<!-- ROW 3: Nhà Vườn Đà Lạt -->
+<tr class="hover:bg-[#F9FAFB] transition-colors">
+<td class="py-4 px-6 whitespace-nowrap">
 <div class="flex items-center gap-3">
-<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-outline">
+<div class="w-9 h-9 rounded-xl bg-primary-container/10 text-primary flex items-center justify-center">
 <span class="material-symbols-outlined text-lg" data-icon="home">home</span>
 </div>
 <div>
-<div class="text-label-lg font-label-lg text-[#212B36] font-semibold">Parent Home</div>
-<div class="text-body-sm font-body-sm text-outline">ws-01826-us</div>
+<span class="font-semibold text-[#212B36] block">Nhà Vườn Đà Lạt</span>
+<span class="text-[#919EAB] text-body-sm">ws-01826-vn</span>
 </div>
 </div>
 </td>
-<td class="py-4 px-6 text-body-md font-body-md text-[#212B36]">
-                le@example.com
-              </td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-[#F3F4F6] text-[#637381]">
-                  Household
-                </span>
+<td class="py-4 px-6 whitespace-nowrap text-body-sm text-[#637381]">
+            le@example.com
+          </td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-[#E4EFFE] text-[#006B5C]">
+              Hộ gia đình
+            </span>
 </td>
-<td class="py-4 px-6">
-<div class="flex items-center gap-1.5 text-body-md font-body-md text-[#212B36]">
-<span class="material-symbols-outlined text-base text-outline" data-icon="group">group</span>
-<span>3 members</span>
+<td class="py-4 px-6 whitespace-nowrap text-body-sm text-[#212B36]">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-[#919EAB]" data-icon="group">group</span>
+<span>3 thành viên</span>
 </div>
 </td>
-<td class="py-4 px-6">
+<td class="py-4 px-6 whitespace-nowrap">
 <div class="flex flex-col">
-<span class="text-label-lg font-label-lg text-[#212B36] font-semibold">341 kg CO2e</span>
+<span class="font-semibold text-[#212B36] text-body-sm">341 kg CO2e</span>
 <div class="w-24 bg-surface-container-high h-1.5 rounded-full mt-1.5 overflow-hidden">
 <div class="bg-primary-container h-full rounded-full" style="width: 14%"></div>
 </div>
 </div>
 </td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-primary-container/15 text-[#007867]">
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary-container/10 text-primary">
 <span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
-                  Active
-                </span>
+              Hoạt động
+            </span>
 </td>
-<td class="py-4 px-6 text-right">
-<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-error/30 text-error hover:bg-error-container/20 text-label-sm font-label-sm font-semibold transition-colors" title="Suspend Workspace">
-<span class="material-symbols-outlined text-base" data-icon="lock">lock</span>
-<span>Lock</span>
+<td class="py-4 px-6 whitespace-nowrap text-right">
+<button class="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium rounded-lg border border-error/30 text-error hover:bg-error-container/20 transition-colors" title="Khóa không gian">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+<span>Khóa</span>
 </button>
 </td>
 </tr>
-<!-- ROW 4 -->
-<tr class="hover:bg-surface-container-low/30 transition-colors">
-<td class="py-4 px-6">
+<!-- ROW 4: Căn Hộ Sài Gòn -->
+<tr class="hover:bg-[#F9FAFB] transition-colors">
+<td class="py-4 px-6 whitespace-nowrap">
 <div class="flex items-center gap-3">
-<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-outline">
-<span class="material-symbols-outlined text-lg" data-icon="store">store</span>
+<div class="w-9 h-9 rounded-xl bg-primary-container/10 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="home">home</span>
 </div>
 <div>
-<div class="text-label-lg font-label-lg text-[#212B36] font-semibold">Old Team</div>
-<div class="text-body-sm font-body-sm text-outline">ws-01827-us</div>
+<span class="font-semibold text-[#212B36] block">Căn Hộ Sài Gòn</span>
+<span class="text-[#919EAB] text-body-sm">ws-0051-vn</span>
 </div>
 </div>
 </td>
-<td class="py-4 px-6 text-body-md font-body-md text-[#212B36]">
-                pham@example.com
-              </td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-[#E4EFFE] text-[#006B5C]">
-                  Small Office
-                </span>
+<td class="py-4 px-6 whitespace-nowrap text-body-sm text-[#637381]">
+            bui@example.com
+          </td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-[#E4EFFE] text-[#006B5C]">
+              Văn phòng nhỏ
+            </span>
 </td>
-<td class="py-4 px-6">
-<div class="flex items-center gap-1.5 text-body-md font-body-md text-[#212B36]">
-<span class="material-symbols-outlined text-base text-outline" data-icon="group">group</span>
-<span>2 members</span>
+<td class="py-4 px-6 whitespace-nowrap text-body-sm text-[#212B36]">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-[#919EAB]" data-icon="group">group</span>
+<span>5 thành viên</span>
 </div>
 </td>
-<td class="py-4 px-6">
+<td class="py-4 px-6 whitespace-nowrap">
 <div class="flex flex-col">
-<span class="text-label-lg font-label-lg text-[#212B36] font-semibold">180 kg CO2e</span>
-<div class="w-24 bg-surface-container-high h-1.5 rounded-full mt-1.5 overflow-hidden">
-<div class="bg-[#B76E00] h-full rounded-full" style="width: 8%"></div>
-</div>
-</div>
-</td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-tertiary-container/15 text-[#B76E00]">
-<span class="w-1.5 h-1.5 rounded-full bg-[#B76E00]"></span>
-                  Suspended
-                </span>
-</td>
-<td class="py-4 px-6 text-right">
-<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-primary-container text-primary-container hover:bg-primary-container/10 text-label-sm font-label-sm font-semibold transition-colors" title="Activate Workspace">
-<span class="material-symbols-outlined text-base" data-icon="lock_open">lock_open</span>
-<span>Unlock</span>
-</button>
-</td>
-</tr>
-<!-- ROW 5 -->
-<tr class="hover:bg-surface-container-low/30 transition-colors">
-<td class="py-4 px-6">
-<div class="flex items-center gap-3">
-<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-outline">
-<span class="material-symbols-outlined text-lg" data-icon="apartment">apartment</span>
-</div>
-<div>
-<div class="text-label-lg font-label-lg text-[#212B36] font-semibold">New Startup</div>
-<div class="text-body-sm font-body-sm text-outline">ws-01828-us</div>
-</div>
-</div>
-</td>
-<td class="py-4 px-6 text-body-md font-body-md text-[#212B36]">
-                bui@example.com
-              </td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-[#E4EFFE] text-[#006B5C]">
-                  Small Office
-                </span>
-</td>
-<td class="py-4 px-6">
-<div class="flex items-center gap-1.5 text-body-md font-body-md text-[#212B36]">
-<span class="material-symbols-outlined text-base text-outline" data-icon="group">group</span>
-<span>5 members</span>
-</div>
-</td>
-<td class="py-4 px-6">
-<div class="flex flex-col">
-<span class="text-label-lg font-label-lg text-[#212B36] font-semibold">1,200 kg CO2e</span>
+<span class="font-semibold text-[#212B36] text-body-sm">1,200 kg CO2e</span>
 <div class="w-24 bg-surface-container-high h-1.5 rounded-full mt-1.5 overflow-hidden">
 <div class="bg-primary-container h-full rounded-full" style="width: 44%"></div>
 </div>
 </div>
 </td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-primary-container/15 text-[#007867]">
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-primary-container/10 text-primary">
 <span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
-                  Active
-                </span>
+              Hoạt động
+            </span>
 </td>
-<td class="py-4 px-6 text-right">
-<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-error/30 text-error hover:bg-error-container/20 text-label-sm font-label-sm font-semibold transition-colors" title="Suspend Workspace">
-<span class="material-symbols-outlined text-base" data-icon="lock">lock</span>
-<span>Lock</span>
+<td class="py-4 px-6 whitespace-nowrap text-right">
+<button class="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium rounded-lg border border-error/30 text-error hover:bg-error-container/20 transition-colors" title="Khóa không gian">
+<span class="material-symbols-outlined text-sm" data-icon="lock">lock</span>
+<span>Khóa</span>
+</button>
+</td>
+</tr>
+<!-- ROW 5: Old Team -->
+<tr class="hover:bg-[#F9FAFB] transition-colors">
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-tertiary-container/15 text-[#B76E00] flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="domain_disabled">domain_disabled</span>
+</div>
+<div>
+<span class="font-semibold text-[#212B36] block">Old Team</span>
+<span class="text-[#919EAB] text-body-sm">ws-01827-vn</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap text-body-sm text-[#637381]">
+            pham@example.com
+          </td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-semibold bg-[#E4EFFE] text-[#006B5C]">
+              Văn phòng nhỏ
+            </span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap text-body-sm text-[#212B36]">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-base text-[#919EAB]" data-icon="group">group</span>
+<span>2 thành viên</span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex flex-col">
+<span class="font-semibold text-[#212B36] text-body-sm">180 kg CO2e</span>
+<div class="w-24 bg-surface-container-high h-1.5 rounded-full mt-1.5 overflow-hidden">
+<div class="bg-[#B76E00] h-full rounded-full" style="width: 8%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-tertiary-container/15 text-[#B76E00]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B76E00]"></span>
+              Tạm khóa
+            </span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap text-right">
+<button class="inline-flex items-center gap-1 px-3 py-1 text-xs font-medium rounded-lg border border-primary-container text-primary hover:bg-primary-container/10 transition-colors" title="Kích hoạt lại">
+<span class="material-symbols-outlined text-sm" data-icon="lock_open">lock_open</span>
+<span>Mở khóa</span>
 </button>
 </td>
 </tr>
 </tbody>
 </table>
 </div>
-<!-- PAGINATION BAR -->
-<div class="p-4 bg-surface-container-lowest border-t border-[#F3F4F6] flex flex-col sm:flex-row items-center justify-between gap-4">
-<div class="flex items-center gap-4 text-body-sm font-body-sm text-outline">
-<span>Showing <strong class="text-[#212B36] font-semibold">1-5</strong> of <strong class="text-[#212B36] font-semibold">24</strong> workspaces</span>
+<!-- TABLE PAGINATION FOOTER -->
+<div class="px-6 py-4 bg-surface-container-lowest border-t border-outline-variant/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-body-sm text-[#919EAB]">
+<div class="flex items-center gap-4">
+<span>Hiển thị <strong class="text-[#212B36] font-semibold">1-5</strong> trong số <strong class="text-[#212B36] font-semibold">24</strong> không gian làm việc</span>
+<div class="h-4 w-px bg-outline-variant/30 hidden sm:block"></div>
 <div class="flex items-center gap-2">
-<span>Rows per page:</span>
-<select class="h-8 px-2 py-0 border border-outline-variant/30 rounded-md bg-surface-container-lowest text-body-sm font-body-sm text-[#212B36] focus:border-primary-container focus:outline-none">
+<span>Hàng mỗi trang:</span>
+<select class="bg-surface-container border border-outline-variant/30 rounded-lg py-1 px-2 text-[#212B36] text-label-sm font-medium focus:outline-none focus:border-primary-container cursor-pointer">
 <option selected="" value="5">5</option>
 <option value="10">10</option>
 <option value="25">25</option>
 </select>
 </div>
 </div>
-<!-- Controls -->
-<div class="flex items-center gap-2">
-<span class="text-body-sm font-body-sm text-outline mr-2">Page 1 of 5</span>
-<button class="p-1.5 rounded-lg border border-outline-variant/30 text-outline-variant cursor-not-allowed" disabled="" title="Previous Page">
-<span class="material-symbols-outlined text-lg" data-icon="chevron_left">chevron_left</span>
+<!-- Page Navigation Controls -->
+<div class="flex items-center gap-1.5 self-end sm:self-auto">
+<button aria-label="Trang trước" class="p-1.5 rounded-lg border border-outline-variant/30 text-[#919EAB] hover:text-[#212B36] hover:bg-surface-container disabled:opacity-40 disabled:cursor-not-allowed transition-colors" disabled="">
+<span class="material-symbols-outlined text-base" data-icon="chevron_left">chevron_left</span>
 </button>
-<button class="p-1.5 rounded-lg border border-outline-variant/30 text-outline hover:text-on-surface hover:bg-surface-container-low transition-colors" title="Next Page">
-<span class="material-symbols-outlined text-lg" data-icon="chevron_right">chevron_right</span>
+<button class="w-8 h-8 rounded-lg bg-primary-container text-on-primary font-semibold text-xs transition-colors">1</button>
+<button class="w-8 h-8 rounded-lg text-[#637381] hover:bg-surface-container font-semibold text-xs transition-colors">2</button>
+<button class="w-8 h-8 rounded-lg text-[#637381] hover:bg-surface-container font-semibold text-xs transition-colors">3</button>
+<button aria-label="Trang sau" class="p-1.5 rounded-lg border border-outline-variant/30 text-[#919EAB] hover:text-[#212B36] hover:bg-surface-container transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="chevron_right">chevron_right</span>
 </button>
 </div>
 </div>
 </section>
-<!-- BOTTOM COMPLIANCE FOOTER -->
-<footer class="mt-auto pt-4 pb-2 border-t border-surface-container-high/70 flex flex-col md:flex-row items-center justify-between gap-2 text-label-sm font-label-sm text-outline">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-base text-primary-container" data-icon="security">security</span>
-<span>Verified cryptographic tenant isolation</span>
-<span class="text-outline-variant">•</span>
-<span>GHG Protocol Corporate Standard compliant</span>
+<!-- FOOTER COMPLIANCE CALLOUT -->
+<div class="p-4 rounded-xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm flex items-center justify-between text-body-sm text-[#637381]">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-base" data-icon="verified">verified</span>
+<span>Cơ sở dữ liệu tuân thủ quy chuẩn cách ly dữ liệu đa người thuê (Multi-tenant) &amp; tiêu chuẩn TCVN ISO 14064-1.</span>
 </div>
-<div class="flex items-center gap-2 text-outline-variant/90">
-<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
-<span>Audit log hash synchronized (SHA-256)</span>
+<div class="flex items-center gap-1 text-label-sm font-semibold text-primary cursor-pointer hover:underline">
+<span>Xem chứng nhận</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
 </div>
-</footer>
-</main>
+</div></main>
 </body></html>

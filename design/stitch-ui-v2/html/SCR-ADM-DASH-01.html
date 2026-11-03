@@ -1,15 +1,14 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
+<html lang="vi"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>CarbonLedger v2 - Overview</title>
+<title>CarbonLedger - Cổng Quản trị Hệ thống</title>
 <!-- Public Sans Font -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&amp;display=swap" rel="stylesheet"/>
 <!-- Material Symbols Outlined -->
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Tailwind CSS v3 -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -18,109 +17,44 @@
       darkMode: "class",
       theme: {
         extend: {
-          "colors": {
-            "surface-bright": "#f7f9ff",
-            "outline-variant": "#bccabf",
-            "on-secondary-fixed": "#00201a",
-            "secondary-fixed-dim": "#7bd7c2",
-            "tertiary-fixed-dim": "#ffb95e",
-            "primary-fixed-dim": "#5adda0",
-            "secondary-container": "#97f4de",
-            "tertiary-fixed": "#ffddb7",
-            "surface-dim": "#d1dbea",
-            "inverse-surface": "#27313c",
-            "on-secondary": "#ffffff",
-            "on-primary-fixed": "#002112",
-            "background": "#f7f9ff",
-            "surface-container-lowest": "#ffffff",
-            "on-primary": "#ffffff",
-            "error": "#ba1a1a",
-            "primary": "#006c46",
-            "surface-container-highest": "#d9e3f2",
-            "tertiary": "#855400",
-            "on-tertiary-fixed": "#2a1700",
-            "secondary": "#006b5c",
-            "outline": "#6d7a71",
-            "on-tertiary": "#ffffff",
-            "surface-variant": "#d9e3f2",
-            "surface-container-low": "#eef4ff",
-            "inverse-primary": "#5adda0",
-            "tertiary-container": "#cc8200",
-            "on-surface-variant": "#3d4a41",
-            "on-secondary-container": "#007261",
-            "surface-container": "#e4effe",
-            "on-tertiary-fixed-variant": "#653e00",
-            "on-secondary-fixed-variant": "#005145",
-            "error-container": "#ffdad6",
-            "surface": "#f7f9ff",
-            "on-error": "#ffffff",
-            "surface-container-high": "#dfe9f8",
-            "on-primary-fixed-variant": "#005234",
-            "on-error-container": "#93000a",
-            "on-tertiary-container": "#3f2500",
-            "secondary-fixed": "#97f4de",
-            "inverse-on-surface": "#e9f1ff",
-            "primary-fixed": "#79fabb",
-            "surface-tint": "#006c46",
-            "primary-container": "#00a76f",
-            "on-primary-container": "#00321f",
-            "on-surface": "#121c27",
-            "on-background": "#121c27"
+          colors: {
+            brand: {
+              lighter: "#EBF8F2",
+              light: "#5ADDA0",
+              DEFAULT: "#00A76F",
+              dark: "#007B55",
+              darker: "#005234"
+            },
+            surface: "#F4F6F8",
+            "card-bg": "#FFFFFF",
+            neutral: {
+              900: "#212B36",
+              800: "#333E48",
+              600: "#637381",
+              500: "#919EAB",
+              300: "#C4CDD5",
+              200: "#DFE3E8",
+              100: "#F4F6F8",
+              50: "#F9FAFB"
+            }
           },
-          "borderRadius": {
-            "DEFAULT": "0.25rem",
-            "lg": "0.5rem",
+          borderRadius: {
             "xl": "0.75rem",
-            "full": "9999px"
+            "2xl": "1rem",
+            "3xl": "1.25rem"
           },
-          "spacing": {
-            "space-md": "1rem",
-            "gutter-sm": "1rem",
-            "space-lg": "1.5rem",
-            "space-sm": "0.5rem",
-            "margin-mobile": "1rem",
-            "space-xs": "0.25rem",
-            "space-xl": "2rem",
-            "gutter": "1.5rem",
-            "margin": "2.5rem"
-          },
-          "fontFamily": {
-            "body-sm": ["Public Sans"],
-            "headline-sm": ["Public Sans"],
-            "title": ["Public Sans"],
-            "label-sm": ["Public Sans"],
-            "label-lg": ["Public Sans"],
-            "headline-lg-mobile": ["Public Sans"],
-            "body-lg": ["Public Sans"],
-            "headline-lg": ["Public Sans"],
-            "body-md": ["Public Sans"],
-            "label-md": ["Public Sans"],
-            "display": ["Public Sans"],
-            "headline-md": ["Public Sans"]
-          },
-          "fontSize": {
-            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
-            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
-            "title": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
-            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }],
-            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
-            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
-            "headline-lg": ["32px", { "lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
-            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
-            "display": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
-            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+          fontFamily: {
+            sans: ["Public Sans", "sans-serif"]
           }
-        },
-      },
+        }
+      }
     }
   </script>
 <style>
     body {
       font-family: 'Public Sans', sans-serif;
-      background-color: #f7f9ff;
-      color: #121c27;
+      background-color: #F4F6F8;
+      color: #212B36;
       margin: 0;
       padding: 0;
     }
@@ -131,251 +65,225 @@
       display: inline-block;
       vertical-align: middle;
     }
-    .custom-scrollbar::-webkit-scrollbar {
-      width: 4px;
-    }
-    .custom-scrollbar::-webkit-scrollbar-thumb {
-      background: rgba(145, 158, 171, 0.2);
-      border-radius: 4px;
-    }
   </style>
 </head>
-<body class="bg-surface text-on-surface antialiased flex min-h-screen">
-<!-- ==================== SIDE NAVIGATION BAR (SHARED COMPONENT) ==================== -->
-<aside class="fixed top-0 left-0 h-screen w-64 border-r border-outline-variant/20 bg-inverse-surface z-50 transition-all duration-150 ease-in-out flex flex-col justify-between p-4">
+<body class="bg-[#F4F6F8] text-[#212B36] antialiased flex min-h-screen">
+<!-- ==================== SIDEBAR TRẮNG SÁNG (MUI MINIMAL STYLE) ==================== -->
+<aside class="fixed top-0 left-0 h-screen w-64 border-r border-[#919EAB]/20 bg-[#FFFFFF] z-50 transition-all duration-150 ease-in-out flex flex-col justify-between p-4 shadow-sm">
 <!-- Top Branding & Navigation Area -->
 <div class="flex flex-col gap-6">
 <!-- Brand Header -->
-<div class="flex items-center gap-3 px-2 pt-2">
-<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-surface-container-lowest shadow-md shadow-primary-container/20">
-<span class="material-symbols-outlined text-surface-container-lowest text-2xl" data-icon="co2">co2</span>
+<div class="flex items-center gap-3 px-3 pt-2">
+<div class="w-10 h-10 rounded-xl bg-[#00A76F]/10 flex items-center justify-center text-[#00A76F]">
+<span class="material-symbols-outlined text-[#00A76F] text-2xl" data-icon="eco">eco</span>
 </div>
 <div>
-<h1 class="font-title text-title font-bold text-surface-container-lowest leading-tight">CarbonLedger</h1>
-<p class="font-label-sm text-label-sm text-outline-variant tracking-wider">Enterprise v2.0</p>
+<h1 class="text-base font-bold text-[#212B36] leading-tight tracking-tight">CarbonLedger</h1>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-[#00A76F]/10 text-[#00A76F] mt-0.5">Admin Portal</span>
 </div>
 </div>
-<!-- Navigation Tabs Cluster -->
-<nav class="flex flex-col gap-1.5 pt-2">
-<!-- 1. Overview (Active Match) -->
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary-container/15 text-primary-container font-label-md transition-colors group" href="#">
-<span class="material-symbols-outlined text-primary-container" data-icon="dashboard">dashboard</span>
-<span class="font-label-md text-label-md flex-1">Overview</span>
-<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+<!-- Navigation Links: 3 Mục điều hướng chính -->
+<nav class="flex flex-col gap-1.5 pt-3">
+<!-- 1. Tổng quan (Active) -->
+<a class="flex items-center gap-3 px-3.5 py-3 rounded-xl bg-[#00A76F]/10 text-[#00A76F] font-semibold text-sm transition-all group" href="#">
+<span class="material-symbols-outlined text-[#00A76F]" data-icon="dashboard">dashboard</span>
+<span class="flex-1">Tổng quan</span>
 </a>
-<!-- 2. Emission Factors -->
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest hover:bg-surface-variant/10 font-body-md transition-colors group" href="#">
-<span class="material-symbols-outlined text-inverse-on-surface/70 group-hover:text-surface-container-lowest transition-colors" data-icon="co2">co2</span>
-<span class="font-body-md text-body-md">Emission Factors</span>
+<!-- 2. Hệ số phát thải -->
+<a class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] font-medium text-sm transition-all group" href="#">
+<span class="material-symbols-outlined text-[#637381] group-hover:text-[#212B36] transition-colors" data-icon="co2">co2</span>
+<span>Hệ số phát thải</span>
 </a>
-<!-- 3. Workspaces -->
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest hover:bg-surface-variant/10 font-body-md transition-colors group" href="#">
-<span class="material-symbols-outlined text-inverse-on-surface/70 group-hover:text-surface-container-lowest transition-colors" data-icon="corporate_fare">corporate_fare</span>
-<span class="font-body-md text-body-md">Workspaces</span>
-</a>
-<!-- 4. Audit Log -->
-<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest hover:bg-surface-variant/10 font-body-md transition-colors group" href="#">
-<span class="material-symbols-outlined text-inverse-on-surface/70 group-hover:text-surface-container-lowest transition-colors" data-icon="history_edu">history_edu</span>
-<span class="font-body-md text-body-md">Audit Log</span>
+<!-- 3. Không gian làm việc -->
+<a class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] font-medium text-sm transition-all group" href="#">
+<span class="material-symbols-outlined text-[#637381] group-hover:text-[#212B36] transition-colors" data-icon="corporate_fare">corporate_fare</span>
+<span>Không gian làm việc</span>
 </a>
 </nav>
 </div>
-<!-- Bottom Actions / Footer Cluster -->
-<div class="flex flex-col gap-3 pt-4 border-t border-outline-variant/15">
-<!-- Quick Action CTA -->
-<button class="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-surface-variant/10 hover:bg-surface-variant/20 text-surface-container-lowest font-label-md text-label-md transition-colors border border-outline-variant/20 shadow-sm">
-<span class="material-symbols-outlined text-lg" data-icon="file_download">file_download</span>
-        Export Report
-      </button>
-<!-- Secondary Sub-links -->
+<!-- Bottom Menu / Settings & Account Info -->
+<div class="flex flex-col gap-3 pt-4 border-t border-[#919EAB]/15">
 <div class="flex flex-col gap-1">
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-inverse-on-surface/60 hover:text-surface-container-lowest hover:bg-surface-variant/10 font-body-sm text-body-sm transition-colors" href="#">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] text-xs font-medium transition-colors" href="#">
 <span class="material-symbols-outlined text-base" data-icon="settings">settings</span>
-<span>Settings</span>
+<span>Cài đặt hệ thống</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-inverse-on-surface/60 hover:text-surface-container-lowest hover:bg-surface-variant/10 font-body-sm text-body-sm transition-colors" href="#">
-<span class="material-symbols-outlined text-base" data-icon="help_outline">help_outline</span>
-<span>Documentation</span>
-</a>
+<div class="px-3 py-1 text-[11px] text-[#919EAB]">
+        Phiên bản v2.4.0 (Enterprise)
+      </div>
 </div>
 <!-- User Card Footer -->
-<div class="flex items-center gap-3 px-2 py-2.5 rounded-lg bg-inverse-surface/80 border border-outline-variant/10 mt-1">
-<img class="w-9 h-9 rounded-full object-cover border border-outline-variant/30" data-alt="Close up professional portrait of an enterprise System Administrator in modern office environment with soft emerald backlight ambiance, cinematic lighting, corporate executive posture, and high key clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjcZ52PYl7sJKrI9tAoPN5YfQVWaTuiDxc1VB8gKUqNkDL_unocqL99fBNo-3sfgJj20ZxAilY65b8VID6Uc7qGV6KPCv7oMR9WrcRarhnmge1e66Cwrx-zQjawK0oBpbvGI44fzlrWNyQ-EfuPHVUSLcMDvDRBl-TSByqCkoumtCtKKCR_zZLt9vQJpJ7KEhJ2Bk050qCAkPhk55A4uZZjVThV4sQpR22DFf4RtcPqhsJk2jp45bWtV8P9O0jXgS0q0RDucmARA"/>
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#F9FAFB] border border-[#919EAB]/15">
+<img class="w-9 h-9 rounded-full object-cover border border-[#919EAB]/25" data-alt="Ảnh đại diện quản trị viên" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjcZ52PYl7sJKrI9tAoPN5YfQVWaTuiDxc1VB8gKUqNkDL_unocqL99fBNo-3sfgJj20ZxAilY65b8VID6Uc7qGV6KPCv7oMR9WrcRarhnmge1e66Cwrx-zQjawK0oBpbvGI44fzlrWNyQ-EfuPHVUSLcMDvDRBl-TSByqCkoumtCtKKCR_zZLt9vQJpJ7KEhJ2Bk050qCAkPhk55A4uZZjVThV4sQpR22DFf4RtcPqhsJk2jp45bWtV8P9O0jXgS0q0RDucmARA"/>
 <div class="flex flex-col flex-1 min-w-0">
-<span class="font-label-sm text-label-sm text-surface-container-lowest truncate">Alex Mercer</span>
-<span class="font-body-sm text-[11px] text-outline-variant truncate">Lead SecOps Admin</span>
+<span class="text-xs font-semibold text-[#212B36] truncate">Alex Mercer</span>
+<span class="text-[11px] text-[#919EAB] truncate">Quản trị cấp cao</span>
 </div>
 </div>
 </div>
 </aside>
 <!-- ==================== MAIN CONTENT WRAPPER ==================== -->
-<div class="flex-1 ml-64 flex flex-col min-h-screen bg-surface">
-<!-- ==================== TOP NAVIGATION BAR (SHARED COMPONENT) ==================== -->
-<header class="docked full-width top-0 sticky z-40 h-16 border-b border-surface-container-high bg-surface-container-lowest/80 backdrop-blur-md flex justify-between items-center px-8 shadow-sm">
-<!-- Left: Quick Search Bar with Icon -->
-<div class="flex items-center w-80">
-<div class="relative w-full">
-<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline text-lg pointer-events-none" data-icon="search">search</span>
-<input class="w-full h-10 pl-10 pr-4 py-2 bg-surface rounded-lg border border-outline-variant/40 text-on-surface placeholder:text-outline/70 font-body-sm text-body-sm focus:outline-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/15 transition-all" placeholder="Search telemetry, audits, tenant IDs..." type="text"/>
+<div class="flex-1 ml-64 flex flex-col min-h-screen bg-[#F4F6F8]">
+<!-- ==================== TOP NAVIGATION BAR ==================== -->
+<header class="sticky top-0 z-40 h-16 border-b border-[#919EAB]/15 bg-[#FFFFFF]/90 backdrop-blur-md flex justify-between items-center px-8 shadow-sm">
+<!-- Left: Logo & Breadcrumb / Admin Badge -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#00A76F]" data-icon="energy_savings_leaf">energy_savings_leaf</span>
+<span class="font-bold text-[#212B36] text-base tracking-tight">CarbonLedger</span>
+</div>
+<span class="text-[#919EAB]">/</span>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#00A76F]/10 border border-[#00A76F]/20 text-[#00A76F] text-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
+<span>Quản trị hệ thống</span>
 </div>
 </div>
-<!-- Right: Action Cluster & Status -->
-<div class="flex items-center gap-4">
-<!-- Notification Toggle -->
-<button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-150" title="Notifications">
-<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
-<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container ring-2 ring-surface-container-lowest"></span>
-</button>
-<!-- Theme Contrast Toggle -->
-<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors active:scale-95 duration-150" title="Contrast Toggle">
-<span class="material-symbols-outlined" data-icon="contrast">contrast</span>
+<!-- Right: Actions & User Avatar -->
+<div class="flex items-center gap-3">
+<!-- Quick Search -->
+<div class="relative w-64 hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#919EAB] text-base pointer-events-none" data-icon="search">search</span>
+<input class="w-full h-9 pl-9 pr-3 py-1.5 bg-[#F9FAFB] rounded-lg border border-[#919EAB]/25 text-[#212B36] placeholder:text-[#919EAB] text-xs focus:outline-none focus:border-[#00A76F] focus:ring-1 focus:ring-[#00A76F] transition-all" placeholder="Tìm kiếm dữ liệu..." type="text"/>
+</div>
+<!-- Notification Bell -->
+<button class="relative p-2 rounded-lg text-[#637381] hover:bg-[#F4F6F8] hover:text-[#212B36] transition-colors" title="Thông báo">
+<span class="material-symbols-outlined text-xl" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#00A76F] ring-2 ring-white"></span>
 </button>
 <!-- Divider -->
-<div class="h-6 w-[1px] bg-surface-container-high"></div>
-<!-- System Admin Pill Badge -->
-<div class="flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container border border-surface-container-high">
-<span class="w-2 h-2 rounded-full bg-primary-container"></span>
-<span class="font-label-sm text-label-sm text-on-surface-variant">System Admin</span>
-</div>
-<!-- Administrator Avatar Quick Trigger -->
-<div class="flex items-center gap-2 cursor-pointer group">
-<img class="w-9 h-9 rounded-full object-cover border border-outline-variant/40 group-hover:ring-2 ring-primary-container/30 transition-all" data-alt="Headshot of a senior female sustainability technologist wearing a dark blazer in a luminous Scandinavian styled architectural office with soft daylight and green tropical desk plant background." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBPgi6ker4oTxLTQPRcolHWNG_xiiM174N_yo9gngD-AdXH1bZcFI00hIARMmjcZexAgJT0f8kdXeVl28lUgHVadYef8pI95YOzQ1I6Kn8ALhbrVhWD4AUealScgjsYf1ifa6mrDMsGVXvwID_f6doKwDcmodB2Buzs9Pt8owEBMde0IStdnqo80_Li4_riwjMsWGxUOY-iVhx8IXLpVmruEDx5itLzaOAPV3GY6GGgacqGCAc43W_oX43l-XHG083nP16Rxk-2Q"/>
-<span class="material-symbols-outlined text-outline group-hover:text-on-surface text-base transition-colors" data-icon="expand_more">expand_more</span>
+<div class="h-6 w-[1px] bg-[#919EAB]/20 mx-1"></div>
+<!-- Admin User Profile Trigger -->
+<div class="flex items-center gap-2 cursor-pointer p-1 rounded-lg hover:bg-[#F4F6F8] transition-colors">
+<img class="w-8 h-8 rounded-full object-cover border border-[#919EAB]/30" data-alt="Ảnh hồ sơ cá nhân" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBPgi6ker4oTxLTQPRcolHWNG_xiiM174N_yo9gngD-AdXH1bZcFI00hIARMmjcZexAgJT0f8kdXeVl28lUgHVadYef8pI95YOzQ1I6Kn8ALhbrVhWD4AUealScgjsYf1ifa6mrDMsGVXvwID_f6doKwDcmodB2Buzs9Pt8owEBMde0IStdnqo80_Li4_riwjMsWGxUOY-iVhx8IXLpVmruEDx5itLzaOAPV3GY6GGgacqGCAc43W_oX43l-XHG083nP16Rxk-2Q"/>
+<span class="material-symbols-outlined text-[#637381] text-base" data-icon="expand_more">expand_more</span>
 </div>
 </div>
 </header>
 <!-- ==================== MAIN PAGE BODY ==================== -->
-<main class="flex-1 p-8 space-y-8 max-w-[1440px] w-full mx-auto">
-<!-- Page Header: Title, Description, and Range Filter Tabs -->
-<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
-<div>
-<div class="flex items-center gap-2">
-<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">Overview</h1>
-<span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-primary-container/10 text-primary border border-primary-container/20">LIVE ENGINE</span>
-</div>
-<p class="font-body-md text-body-md text-outline mt-1">Real-time enterprise sustainability telemetry and emission activity</p>
-</div>
+<main class="flex-1 p-8 space-y-6 max-w-[1440px] w-full mx-auto">
+<!-- Page Header: Tiêu đề trang (KHÔNG subtitle) & Bộ lọc thời gian -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<h1 class="text-2xl font-bold text-[#212B36] tracking-tight">Tổng quan hệ thống</h1>
 <!-- Date Range Filter Tabs -->
-<div class="inline-flex p-1 bg-surface-container rounded-xl border border-surface-container-high self-start md:self-auto shadow-sm">
-<button class="px-3.5 py-1.5 rounded-lg text-primary bg-surface-container-lowest font-label-md text-label-md shadow-sm transition-all">Last 6 Months</button>
-<button class="px-3.5 py-1.5 rounded-lg text-outline hover:text-on-surface font-label-md text-label-md transition-all">Year to Date</button>
-<button class="px-3.5 py-1.5 rounded-lg text-outline hover:text-on-surface font-label-md text-label-md transition-all">All Time</button>
+<div class="inline-flex p-1 bg-[#FFFFFF] rounded-xl border border-[#919EAB]/20 self-start sm:self-auto shadow-sm">
+<button class="px-3.5 py-1.5 rounded-lg text-[#00A76F] bg-[#00A76F]/10 font-semibold text-xs shadow-sm transition-all">6 tháng qua</button>
+<button class="px-3.5 py-1.5 rounded-lg text-[#637381] hover:text-[#212B36] font-medium text-xs transition-all">Từ đầu năm</button>
+<button class="px-3.5 py-1.5 rounded-lg text-[#637381] hover:text-[#212B36] font-medium text-xs transition-all">Toàn bộ</button>
 </div>
 </div>
-<!-- ==================== 4 KPI CARDS GRID ==================== -->
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-<!-- KPI 1: Total Workspaces -->
-<div class="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container-high shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<!-- ==================== 4 KPI CARDS ==================== -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+<!-- KPI 1: Tổng không gian làm việc -->
+<div class="bg-[#FFFFFF] rounded-2xl p-6 border border-[#919EAB]/20 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
 <div class="flex items-center justify-between">
-<span class="font-label-md text-label-md text-outline uppercase tracking-wider">Total Workspaces</span>
-<div class="w-9 h-9 rounded-xl bg-surface-container-low flex items-center justify-center text-primary">
-<span class="material-symbols-outlined" data-icon="corporate_fare">corporate_fare</span>
+<span class="text-xs font-semibold text-[#637381] uppercase tracking-wider">Tổng không gian làm việc</span>
+<div class="w-10 h-10 rounded-xl bg-[#00A76F]/10 flex items-center justify-center text-[#00A76F]">
+<span class="material-symbols-outlined text-[#00A76F]" data-icon="corporate_fare">corporate_fare</span>
 </div>
 </div>
 <div class="mt-4">
 <div class="flex items-baseline justify-between">
-<span class="font-display text-display font-extrabold text-on-surface">24</span>
-<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary-container/15 text-primary text-[12px] font-bold">
-<span class="material-symbols-outlined text-[14px]" data-icon="arrow_upward">arrow_upward</span>
-                3 this month
-              </span>
+<span class="text-3xl font-extrabold text-[#212B36]">24</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#00A76F]/15 text-[#00A76F] text-xs font-bold">
+<span class="material-symbols-outlined text-xs" data-icon="arrow_upward">arrow_upward</span>
+              ↑ 3 tháng này
+            </span>
 </div>
 <div class="mt-3 flex items-center gap-2">
-<div class="w-full bg-surface-container-high rounded-full h-1.5">
-<div class="bg-primary-container h-1.5 rounded-full" style="width: 78%"></div>
+<div class="w-full bg-[#F4F6F8] rounded-full h-1.5">
+<div class="bg-[#00A76F] h-1.5 rounded-full" style="width: 78%"></div>
 </div>
-<span class="text-[11px] font-medium text-outline whitespace-nowrap">78% cap</span>
+<span class="text-[11px] font-medium text-[#919EAB] whitespace-nowrap">78% hạn mức</span>
 </div>
 </div>
 </div>
-<!-- KPI 2: Total Users -->
-<div class="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container-high shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<!-- KPI 2: Tổng người dùng -->
+<div class="bg-[#FFFFFF] rounded-2xl p-6 border border-[#919EAB]/20 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
 <div class="flex items-center justify-between">
-<span class="font-label-md text-label-md text-outline uppercase tracking-wider">Total Users</span>
-<div class="w-9 h-9 rounded-xl bg-surface-container-low flex items-center justify-center text-primary">
-<span class="material-symbols-outlined" data-icon="group">group</span>
+<span class="text-xs font-semibold text-[#637381] uppercase tracking-wider">Tổng người dùng</span>
+<div class="w-10 h-10 rounded-xl bg-[#00A76F]/10 flex items-center justify-center text-[#00A76F]">
+<span class="material-symbols-outlined text-[#00A76F]" data-icon="group">group</span>
 </div>
 </div>
 <div class="mt-4">
 <div class="flex items-baseline justify-between">
-<span class="font-display text-display font-extrabold text-on-surface">87</span>
-<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-primary-container/15 text-primary text-[12px] font-bold">
-<span class="material-symbols-outlined text-[14px]" data-icon="arrow_upward">arrow_upward</span>
-                12 this month
-              </span>
+<span class="text-3xl font-extrabold text-[#212B36]">87</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#00A76F]/10 text-[#00A76F] text-xs font-medium">
+              Đang hoạt động
+            </span>
 </div>
 <div class="mt-3 flex items-center gap-2">
-<div class="w-full bg-surface-container-high rounded-full h-1.5">
-<div class="bg-primary-container h-1.5 rounded-full" style="width: 65%"></div>
+<div class="w-full bg-[#F4F6F8] rounded-full h-1.5">
+<div class="bg-[#00A76F] h-1.5 rounded-full" style="width: 65%"></div>
 </div>
-<span class="text-[11px] font-medium text-outline whitespace-nowrap">Active seat pool</span>
+<span class="text-[11px] font-medium text-[#919EAB] whitespace-nowrap">Tài khoản xác thực</span>
 </div>
 </div>
 </div>
-<!-- KPI 3: System Emissions -->
-<div class="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container-high shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<!-- KPI 3: Tổng phát thải toàn hệ thống -->
+<div class="bg-[#FFFFFF] rounded-2xl p-6 border border-[#919EAB]/20 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
 <div class="flex items-center justify-between">
-<span class="font-label-md text-label-md text-outline uppercase tracking-wider">System Emissions</span>
-<div class="w-9 h-9 rounded-xl bg-surface-container-low flex items-center justify-center text-primary">
-<span class="material-symbols-outlined" data-icon="eco">eco</span>
+<span class="text-xs font-semibold text-[#637381] uppercase tracking-wider">Tổng phát thải toàn hệ thống</span>
+<div class="w-10 h-10 rounded-xl bg-[#00A76F]/10 flex items-center justify-center text-[#00A76F]">
+<span class="material-symbols-outlined text-[#00A76F]" data-icon="eco">eco</span>
 </div>
 </div>
 <div class="mt-4">
 <div class="flex items-baseline gap-2">
-<span class="font-headline-lg text-headline-lg font-bold text-on-surface">12,450</span>
-<span class="font-body-sm text-body-sm text-outline font-semibold">kg CO2e</span>
+<span class="text-3xl font-extrabold text-[#212B36]">12,450</span>
+<span class="text-xs text-[#637381] font-semibold">kg CO2e</span>
 </div>
-<div class="flex items-center justify-between mt-2">
-<span class="font-body-sm text-body-sm text-outline">total all workspaces</span>
-<span class="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full bg-primary-container/15 text-primary text-[11px] font-bold">
-                -18% target reached
-              </span>
+<div class="flex items-center justify-between mt-3">
+<span class="text-xs text-[#919EAB]">tất cả không gian</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-[#00A76F]/15 text-[#00A76F] text-xs font-bold">
+              -18% mục tiêu
+            </span>
 </div>
 </div>
 </div>
-<!-- KPI 4: AI API Calls -->
-<div class="bg-surface-container-lowest rounded-2xl p-6 border border-surface-container-high shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<!-- KPI 4: Lượt gọi AI API -->
+<div class="bg-[#FFFFFF] rounded-2xl p-6 border border-[#919EAB]/20 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
 <div class="flex items-center justify-between">
-<span class="font-label-md text-label-md text-outline uppercase tracking-wider">AI API Calls</span>
-<div class="w-9 h-9 rounded-xl bg-surface-container-low flex items-center justify-center text-primary">
-<span class="material-symbols-outlined" data-icon="neurology">neurology</span>
+<span class="text-xs font-semibold text-[#637381] uppercase tracking-wider">Lượt gọi AI API</span>
+<div class="w-10 h-10 rounded-xl bg-[#00A76F]/10 flex items-center justify-center text-[#00A76F]">
+<span class="material-symbols-outlined text-[#00A76F]" data-icon="neurology">neurology</span>
 </div>
 </div>
 <div class="mt-4">
 <div class="flex items-baseline justify-between">
-<span class="font-display text-display font-extrabold text-on-surface">1,284</span>
-<span class="font-body-sm text-body-sm text-outline">this month</span>
+<span class="text-3xl font-extrabold text-[#212B36]">1,284</span>
+<span class="text-xs text-[#919EAB]">tháng này</span>
 </div>
-<div class="mt-2 flex items-center justify-between pt-1 border-t border-surface-container-high">
-<span class="text-[12px] text-outline">Avg Latency</span>
-<span class="inline-flex items-center gap-1 text-[12px] font-bold text-on-surface">
-<span class="w-2 h-2 rounded-full bg-primary-container"></span>
-                142ms
-              </span>
-</div>
-</div>
+<div class="mt-3 flex items-center justify-between pt-1 border-t border-[#919EAB]/15">
+<span class="text-xs text-[#637381]">Độ trễ trung bình</span>
+<span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#212B36]">
+<span class="w-2 h-2 rounded-full bg-[#00A76F]"></span>
+              142ms
+            </span>
 </div>
 </div>
-<!-- ==================== FULL-WIDTH CHART CARD: WORKSPACE GROWTH ==================== -->
-<div class="bg-surface-container-lowest rounded-2xl p-6 md:p-8 border border-surface-container-high shadow-sm">
+</div>
+</div>
+<!-- ==================== BIỂU ĐỒ ĐƯỜNG: TĂNG TRƯỞNG KHÔNG GIAN LÀM VIỆC ==================== -->
+<div class="bg-[#FFFFFF] rounded-2xl p-6 md:p-8 border border-[#919EAB]/20 shadow-sm">
 <!-- Chart Header -->
 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
 <div>
 <div class="flex items-center gap-3">
-<h2 class="font-headline-sm text-headline-sm font-bold text-on-surface">Workspace Growth</h2>
-<span class="px-2.5 py-0.5 rounded-full bg-primary-container/15 text-primary text-[12px] font-bold">+33.3% Net Growth</span>
+<h2 class="text-lg font-bold text-[#212B36]">Tăng trưởng không gian làm việc</h2>
+<span class="px-2.5 py-0.5 rounded-full bg-[#00A76F]/15 text-[#00A76F] text-xs font-bold">+33.3% Ròng</span>
 </div>
-<p class="font-body-md text-body-md text-outline mt-0.5">Monthly onboarding of active tenant workspaces over the last 6 months</p>
+<p class="text-xs text-[#637381] mt-1">Số lượng không gian làm việc hoạt động mới qua 6 tháng gần nhất</p>
 </div>
 <!-- Chart Controls / Legend -->
 <div class="flex items-center gap-4">
 <div class="flex items-center gap-2">
-<span class="w-3 h-3 rounded-full bg-primary-container"></span>
-<span class="font-label-md text-label-md text-on-surface">New Workspaces</span>
+<span class="w-3 h-3 rounded-full bg-[#00A76F]"></span>
+<span class="text-xs font-medium text-[#212B36]">Không gian mới</span>
 </div>
 <div class="flex items-center gap-2">
-<span class="w-3 h-3 rounded-full bg-surface-container-highest"></span>
-<span class="font-label-md text-label-md text-outline">Baseline Goal</span>
+<span class="w-3 h-3 rounded-full bg-[#DFE3E8]"></span>
+<span class="text-xs font-medium text-[#637381]">Mục tiêu cơ sở</span>
 </div>
 </div>
 </div>
@@ -385,253 +293,244 @@
 <defs>
 <!-- Primary Emerald Area Gradient -->
 <lineargradient id="emeraldGrowthFill" x1="0%" x2="0%" y1="0%" y2="100%">
-<stop offset="0%" stop-color="#00a76f" stop-opacity="0.28"></stop>
-<stop offset="70%" stop-color="#00a76f" stop-opacity="0.04"></stop>
-<stop offset="100%" stop-color="#00a76f" stop-opacity="0.00"></stop>
+<stop offset="0%" stop-color="#00A76F" stop-opacity="0.25"></stop>
+<stop offset="70%" stop-color="#00A76F" stop-opacity="0.04"></stop>
+<stop offset="100%" stop-color="#00A76F" stop-opacity="0.00"></stop>
 </lineargradient>
-<!-- Subtle Grid Line Stroke -->
-<pattern height="70" id="gridPattern" patternunits="userSpaceOnUse" width="1000">
-<line stroke="#f1f5f9" stroke-width="1" x1="0" x2="1000" y1="70" y2="70"></line>
-</pattern>
 </defs>
 <!-- Background Grid Lines -->
-<line stroke="#f1f5f9" stroke-dasharray="4,4" stroke-width="1" x1="40" x2="960" y1="20" y2="20"></line>
-<line stroke="#f1f5f9" stroke-dasharray="4,4" stroke-width="1" x1="40" x2="960" y1="85" y2="85"></line>
-<line stroke="#f1f5f9" stroke-dasharray="4,4" stroke-width="1" x1="40" x2="960" y1="150" y2="150"></line>
-<line stroke="#f1f5f9" stroke-dasharray="4,4" stroke-width="1" x1="40" x2="960" y1="215" y2="215"></line>
+<line stroke="#F4F6F8" stroke-dasharray="4,4" stroke-width="1.5" x1="40" x2="960" y1="20" y2="20"></line>
+<line stroke="#F4F6F8" stroke-dasharray="4,4" stroke-width="1.5" x1="40" x2="960" y1="85" y2="85"></line>
+<line stroke="#F4F6F8" stroke-dasharray="4,4" stroke-width="1.5" x1="40" x2="960" y1="150" y2="150"></line>
+<line stroke="#F4F6F8" stroke-dasharray="4,4" stroke-width="1.5" x1="40" x2="960" y1="215" y2="215"></line>
 <!-- Baseline Target Line -->
-<path d="M 80 200 L 240 185 L 400 160 L 560 145 L 720 120 L 880 105" fill="none" stroke="#cbd5e1" stroke-dasharray="6 6" stroke-width="1.5"></path>
+<path d="M 80 200 L 240 185 L 400 160 L 560 145 L 720 120 L 880 105" fill="none" stroke="#DFE3E8" stroke-dasharray="6 6" stroke-width="1.5"></path>
 <!-- Shaded Gradient Fill Underneath the Curve -->
 <path d="M 80 220 
-                     C 160 215, 200 195, 240 180 
-                     C 280 165, 340 160, 400 140 
-                     C 460 120, 520 110, 560 90 
-                     C 620 70, 680 75, 720 60 
-                     C 780 45, 840 40, 880 25 
-                     L 880 240 L 80 240 Z" fill="url(#emeraldGrowthFill)"></path>
+                   C 160 215, 200 195, 240 180 
+                   C 280 165, 340 160, 400 140 
+                   C 460 120, 520 110, 560 90 
+                   C 620 70, 680 75, 720 60 
+                   C 780 45, 840 40, 880 25 
+                   L 880 240 L 80 240 Z" fill="url(#emeraldGrowthFill)"></path>
 <!-- Primary Emerald Trend Line -->
 <path d="M 80 220 
-                     C 160 215, 200 195, 240 180 
-                     C 280 165, 340 160, 400 140 
-                     C 460 120, 520 110, 560 90 
-                     C 620 70, 680 75, 720 60 
-                     C 780 45, 840 40, 880 25" fill="none" stroke="#00a76f" stroke-linecap="round" stroke-width="3.5"></path>
+                   C 160 215, 200 195, 240 180 
+                   C 280 165, 340 160, 400 140 
+                   C 460 120, 520 110, 560 90 
+                   C 620 70, 680 75, 720 60 
+                   C 780 45, 840 40, 880 25" fill="none" stroke="#00A76F" stroke-linecap="round" stroke-width="3.5"></path>
 <!-- Data Point Markers (Nov - Apr) -->
-<!-- Nov: 8 -->
-<circle cx="80" cy="220" fill="#ffffff" r="4.5" stroke="#00a76f" stroke-width="2.5"></circle>
-<!-- Dec: 11 -->
-<circle cx="240" cy="180" fill="#ffffff" r="4.5" stroke="#00a76f" stroke-width="2.5"></circle>
-<!-- Jan: 14 -->
-<circle cx="400" cy="140" fill="#ffffff" r="4.5" stroke="#00a76f" stroke-width="2.5"></circle>
-<!-- Feb: 17 -->
-<circle cx="560" cy="90" fill="#ffffff" r="4.5" stroke="#00a76f" stroke-width="2.5"></circle>
-<!-- Mar: 19 -->
-<circle cx="720" cy="60" fill="#ffffff" r="4.5" stroke="#00a76f" stroke-width="2.5"></circle>
-<!-- Apr: 24 (Current Focus Marker) -->
-<circle cx="880" cy="25" fill="#00a76f" fill-opacity="0.2" r="7"></circle>
-<circle cx="880" cy="25" fill="#ffffff" r="5" stroke="#00a76f" stroke-width="3"></circle>
-<!-- Tooltip Anchor on Current Point -->
-<g transform="translate(830, -10)">
-<rect fill="#121c27" height="28" rx="6" width="100" x="0" y="0"></rect>
-<text fill="#ffffff" font-family="Public Sans" font-size="11" font-weight="700" text-anchor="middle" x="50" y="18">Current: 24</text>
+<circle cx="80" cy="220" fill="#FFFFFF" r="4.5" stroke="#00A76F" stroke-width="2.5"></circle>
+<circle cx="240" cy="180" fill="#FFFFFF" r="4.5" stroke="#00A76F" stroke-width="2.5"></circle>
+<circle cx="400" cy="140" fill="#FFFFFF" r="4.5" stroke="#00A76F" stroke-width="2.5"></circle>
+<circle cx="560" cy="90" fill="#FFFFFF" r="4.5" stroke="#00A76F" stroke-width="2.5"></circle>
+<circle cx="720" cy="60" fill="#FFFFFF" r="4.5" stroke="#00A76F" stroke-width="2.5"></circle>
+<!-- Current Point Marker -->
+<circle cx="880" cy="25" fill="#00A76F" fill-opacity="0.2" r="7"></circle>
+<circle cx="880" cy="25" fill="#FFFFFF" r="5" stroke="#00A76F" stroke-width="3"></circle>
+<!-- Tooltip Pill -->
+<g transform="translate(820, -12)">
+<rect fill="#212B36" height="28" rx="6" width="120" x="0" y="0"></rect>
+<text fill="#FFFFFF" font-family="Public Sans" font-size="11" font-weight="700" text-anchor="middle" x="60" y="18">Hiện tại: 24</text>
 </g>
 </svg>
 </div>
 <!-- Chart X-Axis Labels -->
-<div class="flex justify-between items-center px-12 mt-2 pt-2 border-t border-surface-container-high text-outline font-label-md text-label-md">
-<span>Nov 2024</span>
-<span>Dec 2024</span>
-<span>Jan 2025</span>
-<span>Feb 2025</span>
-<span>Mar 2025</span>
-<span class="text-primary font-bold">Apr 2025 (Active)</span>
+<div class="flex justify-between items-center px-12 mt-2 pt-2 border-t border-[#919EAB]/15 text-[#919EAB] text-xs font-semibold">
+<span>Tháng 11/2024</span>
+<span>Tháng 12/2024</span>
+<span>Tháng 01/2025</span>
+<span>Tháng 02/2025</span>
+<span>Tháng 03/2025</span>
+<span class="text-[#00A76F] font-bold">Tháng 04/2025 (Hiện tại)</span>
 </div>
 </div>
-<!-- ==================== DATA TABLE CARD: RECENT WORKSPACES ==================== -->
-<div class="bg-surface-container-lowest rounded-2xl border border-surface-container-high shadow-sm overflow-hidden">
+<!-- ==================== DATA TABLE CARD: KHÔNG GIAN LÀM VIỆC GẦN ĐÂY ==================== -->
+<div class="bg-[#FFFFFF] rounded-2xl border border-[#919EAB]/20 shadow-sm overflow-hidden">
 <!-- Table Toolbar -->
-<div class="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-surface-container-high">
+<div class="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#919EAB]/15">
 <div>
-<h3 class="font-headline-sm text-headline-sm font-bold text-on-surface">Recent Workspaces</h3>
-<p class="font-body-sm text-body-sm text-outline mt-0.5">Manage enterprise accounts and regional tenant clusters</p>
+<h3 class="text-lg font-bold text-[#212B36]">Không gian làm việc gần đây</h3>
+<p class="text-xs text-[#637381] mt-0.5">Quản trị các tổ chức và chi nhánh đang hoạt động trên hệ thống</p>
 </div>
 <div class="flex items-center gap-3">
 <!-- Filter Search -->
 <div class="relative">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-sm pointer-events-none" data-icon="search">search</span>
-<input class="h-9 pl-9 pr-3 py-1.5 bg-surface rounded-lg border border-outline-variant/30 text-body-sm text-on-surface placeholder:text-outline/70 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary text-xs" placeholder="Filter workspaces..." type="text"/>
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#919EAB] text-sm pointer-events-none" data-icon="search">search</span>
+<input class="h-9 pl-9 pr-3 py-1.5 bg-[#F9FAFB] rounded-lg border border-[#919EAB]/20 text-[#212B36] placeholder:text-[#919EAB] text-xs focus:outline-none focus:border-[#00A76F] focus:ring-1 focus:ring-[#00A76F]" placeholder="Tìm không gian..." type="text"/>
 </div>
-<!-- Primary 'New Workspace' Button -->
-<button class="flex items-center gap-2 h-9 px-4 rounded-lg bg-primary-container hover:bg-primary text-on-primary font-label-md text-label-md transition-all shadow-md shadow-primary-container/20 active:scale-95 duration-150">
+<!-- Button Tạo không gian mới -->
+<button class="flex items-center gap-2 h-9 px-4 rounded-lg bg-[#00A76F] hover:bg-[#007B55] text-[#FFFFFF] font-semibold text-xs transition-all shadow-sm active:scale-95 duration-150">
 <span class="material-symbols-outlined text-sm" data-icon="add">add</span>
-              New Workspace
+              + Tạo không gian mới
             </button>
 </div>
 </div>
-<!-- Table Grid Element -->
+<!-- Table Data -->
 <div class="overflow-x-auto">
 <table class="w-full text-left border-collapse">
 <thead>
-<tr class="bg-surface border-b border-surface-container-high">
-<th class="py-3.5 px-6 font-label-sm text-label-sm text-outline uppercase tracking-wider">Workspace Name</th>
-<th class="py-3.5 px-6 font-label-sm text-label-sm text-outline uppercase tracking-wider">Category</th>
-<th class="py-3.5 px-6 font-label-sm text-label-sm text-outline uppercase tracking-wider">Team Capacity</th>
-<th class="py-3.5 px-6 font-label-sm text-label-sm text-outline uppercase tracking-wider">Status</th>
-<th class="py-3.5 px-6 font-label-sm text-label-sm text-outline uppercase tracking-wider text-right">Actions</th>
+<tr class="bg-[#F9FAFB] border-b border-[#919EAB]/15">
+<th class="py-3.5 px-6 text-xs font-semibold text-[#637381] uppercase tracking-wider">Tên không gian</th>
+<th class="py-3.5 px-6 text-xs font-semibold text-[#637381] uppercase tracking-wider">Phân loại</th>
+<th class="py-3.5 px-6 text-xs font-semibold text-[#637381] uppercase tracking-wider">Số thành viên</th>
+<th class="py-3.5 px-6 text-xs font-semibold text-[#637381] uppercase tracking-wider">Trạng thái</th>
+<th class="py-3.5 px-6 text-xs font-semibold text-[#637381] uppercase tracking-wider text-right">Thao tác</th>
 </tr>
 </thead>
-<tbody class="divide-y divide-surface-container-high">
+<tbody class="divide-y divide-[#919EAB]/15 text-sm">
 <!-- Row 1: My Home -->
-<tr class="hover:bg-surface/50 transition-colors group">
+<tr class="hover:bg-[#F9FAFB] transition-colors group">
 <td class="py-4 px-6">
 <div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-lg bg-primary-container/10 text-primary flex items-center justify-center font-bold text-xs">
+<div class="w-8 h-8 rounded-lg bg-[#00A76F]/10 text-[#00A76F] flex items-center justify-center font-bold text-xs">
                       MH
                     </div>
 <div>
-<span class="font-label-lg text-label-lg text-on-surface font-semibold block">My Home</span>
-<span class="font-body-sm text-[11px] text-outline">ID: WS-0912-US</span>
+<span class="text-sm font-semibold text-[#212B36] block">My Home</span>
+<span class="text-[11px] text-[#919EAB]">Mã: WS-0912-VN</span>
 </div>
 </div>
 </td>
 <td class="py-4 px-6">
-<span class="font-body-md text-body-md text-on-surface-variant">Household</span>
+<span class="text-sm text-[#637381]">Hộ gia đình</span>
 </td>
 <td class="py-4 px-6">
 <div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-outline text-base" data-icon="group">group</span>
-<span class="font-body-md text-body-md text-on-surface">4 members</span>
+<span class="material-symbols-outlined text-[#919EAB] text-base" data-icon="group">group</span>
+<span class="text-sm text-[#212B36]">4 thành viên</span>
 </div>
 </td>
 <td class="py-4 px-6">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary-container/15 text-primary text-[12px] font-bold">
-<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
-                    Active
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#00A76F]/10 text-[#00A76F] text-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
+                    Hoạt động
                   </span>
 </td>
 <td class="py-4 px-6 text-right">
-<div class="inline-flex items-center gap-1 text-outline">
-<button class="p-1 hover:text-primary hover:bg-surface-container-high rounded transition-colors" title="Edit">
+<div class="inline-flex items-center gap-1 text-[#919EAB]">
+<button class="p-1 hover:text-[#00A76F] hover:bg-[#F4F6F8] rounded transition-colors" title="Chỉnh sửa">
 <span class="material-symbols-outlined text-base" data-icon="edit">edit</span>
 </button>
-<button class="p-1 hover:text-on-surface hover:bg-surface-container-high rounded transition-colors" title="Settings">
+<button class="p-1 hover:text-[#212B36] hover:bg-[#F4F6F8] rounded transition-colors" title="Thao tác khác">
 <span class="material-symbols-outlined text-base" data-icon="more_vert">more_vert</span>
 </button>
 </div>
 </td>
 </tr>
-<!-- Row 2: Startup Office -->
-<tr class="hover:bg-surface/50 transition-colors group">
+<!-- Row 2: TechLabs Office -->
+<tr class="hover:bg-[#F9FAFB] transition-colors group">
 <td class="py-4 px-6">
 <div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold text-xs">
-                      SO
+<div class="w-8 h-8 rounded-lg bg-[#00A76F]/10 text-[#00A76F] flex items-center justify-center font-bold text-xs">
+                      TL
                     </div>
 <div>
-<span class="font-label-lg text-label-lg text-on-surface font-semibold block">Startup Office</span>
-<span class="font-body-sm text-[11px] text-outline">ID: WS-4418-EU</span>
+<span class="text-sm font-semibold text-[#212B36] block">TechLabs Office</span>
+<span class="text-[11px] text-[#919EAB]">Mã: WS-4418-VN</span>
 </div>
 </div>
 </td>
 <td class="py-4 px-6">
-<span class="font-body-md text-body-md text-on-surface-variant">Small Office</span>
+<span class="text-sm text-[#637381]">Văn phòng nhỏ</span>
 </td>
 <td class="py-4 px-6">
 <div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-outline text-base" data-icon="group">group</span>
-<span class="font-body-md text-body-md text-on-surface">8 members</span>
+<span class="material-symbols-outlined text-[#919EAB] text-base" data-icon="group">group</span>
+<span class="text-sm text-[#212B36]">8 thành viên</span>
 </div>
 </td>
 <td class="py-4 px-6">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary-container/15 text-primary text-[12px] font-bold">
-<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
-                    Active
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#00A76F]/10 text-[#00A76F] text-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
+                    Hoạt động
                   </span>
 </td>
 <td class="py-4 px-6 text-right">
-<div class="inline-flex items-center gap-1 text-outline">
-<button class="p-1 hover:text-primary hover:bg-surface-container-high rounded transition-colors" title="Edit">
+<div class="inline-flex items-center gap-1 text-[#919EAB]">
+<button class="p-1 hover:text-[#00A76F] hover:bg-[#F4F6F8] rounded transition-colors" title="Chỉnh sửa">
 <span class="material-symbols-outlined text-base" data-icon="edit">edit</span>
 </button>
-<button class="p-1 hover:text-on-surface hover:bg-surface-container-high rounded transition-colors" title="Settings">
+<button class="p-1 hover:text-[#212B36] hover:bg-[#F4F6F8] rounded transition-colors" title="Thao tác khác">
 <span class="material-symbols-outlined text-base" data-icon="more_vert">more_vert</span>
 </button>
 </div>
 </td>
 </tr>
-<!-- Row 3: Parent Home -->
-<tr class="hover:bg-surface/50 transition-colors group">
+<!-- Row 3: Nhà Vườn Đà Lạt -->
+<tr class="hover:bg-[#F9FAFB] transition-colors group">
 <td class="py-4 px-6">
 <div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-lg bg-surface-container-high text-on-surface-variant flex items-center justify-center font-bold text-xs">
-                      PH
+<div class="w-8 h-8 rounded-lg bg-[#00A76F]/10 text-[#00A76F] flex items-center justify-center font-bold text-xs">
+                      NV
                     </div>
 <div>
-<span class="font-label-lg text-label-lg text-on-surface font-semibold block">Parent Home</span>
-<span class="font-body-sm text-[11px] text-outline">ID: WS-1082-US</span>
+<span class="text-sm font-semibold text-[#212B36] block">Nhà Vườn Đà Lạt</span>
+<span class="text-[11px] text-[#919EAB]">Mã: WS-1082-VN</span>
 </div>
 </div>
 </td>
 <td class="py-4 px-6">
-<span class="font-body-md text-body-md text-on-surface-variant">Household</span>
+<span class="text-sm text-[#637381]">Hộ gia đình</span>
 </td>
 <td class="py-4 px-6">
 <div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-outline text-base" data-icon="group">group</span>
-<span class="font-body-md text-body-md text-on-surface">3 members</span>
+<span class="material-symbols-outlined text-[#919EAB] text-base" data-icon="group">group</span>
+<span class="text-sm text-[#212B36]">3 thành viên</span>
 </div>
 </td>
 <td class="py-4 px-6">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-primary-container/15 text-primary text-[12px] font-bold">
-<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
-                    Active
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#00A76F]/10 text-[#00A76F] text-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
+                    Hoạt động
                   </span>
 </td>
 <td class="py-4 px-6 text-right">
-<div class="inline-flex items-center gap-1 text-outline">
-<button class="p-1 hover:text-primary hover:bg-surface-container-high rounded transition-colors" title="Edit">
+<div class="inline-flex items-center gap-1 text-[#919EAB]">
+<button class="p-1 hover:text-[#00A76F] hover:bg-[#F4F6F8] rounded transition-colors" title="Chỉnh sửa">
 <span class="material-symbols-outlined text-base" data-icon="edit">edit</span>
 </button>
-<button class="p-1 hover:text-on-surface hover:bg-surface-container-high rounded transition-colors" title="Settings">
+<button class="p-1 hover:text-[#212B36] hover:bg-[#F4F6F8] rounded transition-colors" title="Thao tác khác">
 <span class="material-symbols-outlined text-base" data-icon="more_vert">more_vert</span>
 </button>
 </div>
 </td>
 </tr>
-<!-- Row 4: Old Team -->
-<tr class="hover:bg-surface/50 transition-colors group">
+<!-- Row 4: Căn Hộ Sài Gòn -->
+<tr class="hover:bg-[#F9FAFB] transition-colors group">
 <td class="py-4 px-6">
 <div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-lg bg-surface-container-high text-outline flex items-center justify-center font-bold text-xs">
-                      OT
+<div class="w-8 h-8 rounded-lg bg-[#DFE3E8]/40 text-[#637381] flex items-center justify-center font-bold text-xs">
+                      CH
                     </div>
 <div>
-<span class="font-label-lg text-label-lg text-on-surface font-semibold block">Old Team</span>
-<span class="font-body-sm text-[11px] text-outline">ID: WS-0051-CA</span>
+<span class="text-sm font-semibold text-[#212B36] block">Căn Hộ Sài Gòn</span>
+<span class="text-[11px] text-[#919EAB]">Mã: WS-0051-VN</span>
 </div>
 </div>
 </td>
 <td class="py-4 px-6">
-<span class="font-body-md text-body-md text-on-surface-variant">Small Office</span>
+<span class="text-sm text-[#637381]">Văn phòng nhỏ</span>
 </td>
 <td class="py-4 px-6">
 <div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-outline text-base" data-icon="group">group</span>
-<span class="font-body-md text-body-md text-on-surface">2 members</span>
+<span class="material-symbols-outlined text-[#919EAB] text-base" data-icon="group">group</span>
+<span class="text-sm text-[#212B36]">2 thành viên</span>
 </div>
 </td>
 <td class="py-4 px-6">
-<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-tertiary-fixed text-tertiary text-[12px] font-bold">
-<span class="w-1.5 h-1.5 rounded-full bg-tertiary"></span>
-                    Suspended
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FFF5CC] text-[#B76E00] text-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B76E00]"></span>
+                    Tạm dừng
                   </span>
 </td>
 <td class="py-4 px-6 text-right">
-<div class="inline-flex items-center gap-1 text-outline">
-<button class="p-1 hover:text-primary hover:bg-surface-container-high rounded transition-colors" title="Reactivate">
+<div class="inline-flex items-center gap-1 text-[#919EAB]">
+<button class="p-1 hover:text-[#00A76F] hover:bg-[#F4F6F8] rounded transition-colors" title="Kích hoạt lại">
 <span class="material-symbols-outlined text-base" data-icon="refresh">refresh</span>
 </button>
-<button class="p-1 hover:text-on-surface hover:bg-surface-container-high rounded transition-colors" title="Settings">
+<button class="p-1 hover:text-[#212B36] hover:bg-[#F4F6F8] rounded transition-colors" title="Thao tác khác">
 <span class="material-symbols-outlined text-base" data-icon="more_vert">more_vert</span>
 </button>
 </div>
@@ -641,18 +540,18 @@
 </table>
 </div>
 <!-- Table Footer / Pagination -->
-<div class="p-4 px-6 border-t border-surface-container-high flex flex-col sm:flex-row items-center justify-between gap-4">
-<div class="font-body-sm text-body-sm text-outline">
-            Showing <span class="font-semibold text-on-surface">1</span> to <span class="font-semibold text-on-surface">4</span> of <span class="font-semibold text-on-surface">24</span> total workspaces
-          </div>
+<div class="p-4 px-6 border-t border-[#919EAB]/15 flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="text-xs text-[#637381]">
+          Hiển thị <span class="font-semibold text-[#212B36]">1</span> đến <span class="font-semibold text-[#212B36]">4</span> trong số <span class="font-semibold text-[#212B36]">24</span> không gian làm việc
+        </div>
 <div class="inline-flex items-center gap-1">
-<button class="p-2 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container disabled:opacity-40" disabled="">
+<button class="p-2 rounded-lg text-[#919EAB] hover:text-[#212B36] hover:bg-[#F4F6F8] disabled:opacity-40" disabled="">
 <span class="material-symbols-outlined text-base" data-icon="chevron_left">chevron_left</span>
 </button>
-<button class="w-8 h-8 rounded-lg bg-primary-container text-on-primary font-label-md text-label-md flex items-center justify-center">1</button>
-<button class="w-8 h-8 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container font-label-md text-label-md flex items-center justify-center">2</button>
-<button class="w-8 h-8 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container font-label-md text-label-md flex items-center justify-center">3</button>
-<button class="p-2 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container">
+<button class="w-8 h-8 rounded-lg bg-[#00A76F] text-white font-semibold text-xs flex items-center justify-center shadow-sm">1</button>
+<button class="w-8 h-8 rounded-lg text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] font-semibold text-xs flex items-center justify-center">2</button>
+<button class="w-8 h-8 rounded-lg text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] font-semibold text-xs flex items-center justify-center">3</button>
+<button class="p-2 rounded-lg text-[#919EAB] hover:text-[#212B36] hover:bg-[#F4F6F8]">
 <span class="material-symbols-outlined text-base" data-icon="chevron_right">chevron_right</span>
 </button>
 </div>
