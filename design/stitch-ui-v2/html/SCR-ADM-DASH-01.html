@@ -69,7 +69,7 @@
 </head>
 <body class="bg-[#F4F6F8] text-[#212B36] antialiased flex min-h-screen">
 <!-- ==================== SIDEBAR TRẮNG SÁNG (MUI MINIMAL STYLE) ==================== -->
-<aside class="fixed top-0 left-0 h-screen w-64 border-r border-[#919EAB]/20 bg-[#FFFFFF] z-50 transition-all duration-150 ease-in-out flex flex-col justify-between p-4 shadow-sm">
+<aside class="fixed top-0 left-0 h-screen w-64 border-r border-[#919EAB]/20 bg-[#FFFFFF] z-50 transition-all duration-150 ease-in-out flex flex-col justify-between p-4 shadow-sm select-none">
 <!-- Top Branding & Navigation Area -->
 <div class="flex flex-col gap-6">
 <!-- Brand Header -->
@@ -79,14 +79,14 @@
 </div>
 <div>
 <h1 class="text-base font-bold text-[#212B36] leading-tight tracking-tight">CarbonLedger</h1>
-<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-[#00A76F]/10 text-[#00A76F] mt-0.5">Admin Portal</span>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-[#00A76F]/10 text-[#00A76F] mt-0.5">Quản trị hệ thống</span>
 </div>
 </div>
 <!-- Navigation Links: 3 Mục điều hướng chính -->
 <nav class="flex flex-col gap-1.5 pt-3">
 <!-- 1. Tổng quan (Active) -->
 <a class="flex items-center gap-3 px-3.5 py-3 rounded-xl bg-[#00A76F]/10 text-[#00A76F] font-semibold text-sm transition-all group" href="#">
-<span class="material-symbols-outlined text-[#00A76F]" data-icon="dashboard">dashboard</span>
+<span class="material-symbols-outlined text-[#00A76F]" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
 <span class="flex-1">Tổng quan</span>
 </a>
 <!-- 2. Hệ số phát thải -->
@@ -95,9 +95,12 @@
 <span>Hệ số phát thải</span>
 </a>
 <!-- 3. Không gian làm việc -->
-<a class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] font-medium text-sm transition-all group" href="#">
+<a class="flex items-center justify-between px-3.5 py-3 rounded-xl text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] font-medium text-sm transition-all group" href="#">
+<div class="flex items-center gap-3">
 <span class="material-symbols-outlined text-[#637381] group-hover:text-[#212B36] transition-colors" data-icon="corporate_fare">corporate_fare</span>
 <span>Không gian làm việc</span>
+</div>
+<span class="bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-full font-bold">24</span>
 </a>
 </nav>
 </div>
@@ -109,7 +112,7 @@
 <span>Cài đặt hệ thống</span>
 </a>
 <div class="px-3 py-1 text-[11px] text-[#919EAB]">
-        Phiên bản v2.4.0 (Enterprise)
+        Phiên bản v2.4.0 (Hệ thống)
       </div>
 </div>
 <!-- User Card Footer -->

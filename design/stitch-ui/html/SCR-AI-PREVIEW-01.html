@@ -159,25 +159,48 @@
 <!-- ========================================================================= -->
 <!-- 2. VERTICAL SIDE NAV (Shared Components: SideNavBar - Ledger Active)       -->
 <!-- ========================================================================= -->
-<aside class="fixed left-0 top-16 bottom-0 w-52 flex flex-col py-6 px-3 bg-surface-container-lowest border-r border-outline-variant/30 z-20">
-<div class="text-[11px] font-label-sm text-outline px-3 mb-2 tracking-wider">WORKSPACE</div>
-<nav class="flex flex-col gap-1"><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#"><span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span><span>Tổng quan</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg shadow-sm shadow-primary-container/20" href="#"><span class="material-symbols-outlined text-[20px]" data-icon="receipt_long" data-weight="fill">receipt_long</span><span>Sổ cái</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#"><span class="material-symbols-outlined text-[20px]" data-icon="verified">verified</span><span>Phê duyệt</span><span class="ml-auto text-[10px] font-label-sm px-1.5 py-0.5 rounded-full bg-error-container text-on-error-container">3</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#"><span class="material-symbols-outlined text-[20px]" data-icon="insights">insights</span><span>Báo cáo &amp; Lộ trình</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#"><span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span><span>Cài đặt</span></a></nav>
-<!-- Side Nav Footer Badge -->
-<div class="mt-auto p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col gap-2">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary-container text-[18px]" data-icon="cloud_done">cloud_done</span>
-<span class="font-label-sm text-label-sm text-on-surface">GHG Protocol Verified</span>
+<aside class="fixed left-0 top-16 bottom-0 w-56 flex flex-col py-6 px-3 bg-white border-r border-gray-200 select-none z-20">
+<nav class="space-y-1.5 flex-1">
+<!-- 1. Tong quan -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span>Tổng quan</span>
+</a>
+<!-- 2. So cai (ACTIVE) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00A76F] text-white font-semibold text-sm shadow-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span>Sổ cái</span>
+</a>
+<!-- 3. Phe duyet -->
+<a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span>Phê duyệt</span>
 </div>
-<div class="w-full bg-surface-variant h-1 rounded-full overflow-hidden">
-<div class="bg-primary-container h-full w-[84%]"></div>
-</div>
-<span class="text-[11px] font-body-sm text-on-surface-variant">Q4 Sync: 84% Certified</span>
+<span class="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">5 chờ</span>
+</a>
+<!-- 4. Bao cao & Lo trinh -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">insights</span>
+<span>Báo cáo &amp; Lộ trình</span>
+</a>
+<!-- 5. Cai dat -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Cài đặt</span>
+</a>
+</nav>
+
+<!-- Sidebar Footer: Version & Status -->
+<div class="px-3 pt-4 border-t border-gray-200 flex items-center justify-between text-xs text-gray-400">
+<span>v2.4.0</span>
+<span class="w-2 h-2 rounded-full bg-[#00A76F]"></span>
 </div>
 </aside>
 <!-- ========================================================================= -->
 <!-- 3. UNDERLYING DESKTOP ACTIVITY LEDGER SCREEN (Blurred & Dimmed)           -->
 <!-- ========================================================================= -->
-<main class="ml-52 mt-16 p-8 min-h-[calc(100vh-4rem)] filter blur-[2px] opacity-75 select-none pointer-events-none transition-all">
+<main class="ml-56 mt-16 p-8 min-h-[calc(100vh-4rem)] filter blur-[2px] opacity-75 select-none pointer-events-none transition-all">
 <!-- Top Action Breadcrumbs & Header -->
 <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
 <div>

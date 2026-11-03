@@ -142,13 +142,46 @@
 </div>
 </header>
 <!-- SIDEBAR NAVIGATION -->
-<aside class="fixed left-0 top-16 bottom-0 w-52 flex flex-col py-6 px-3 bg-surface-container-lowest dark:bg-surface-container-low border-r border-outline-variant/30 dark:border-outline/20 z-10">
-<div class="space-y-1 w-full"><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#"><span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span><span>Tổng quan</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-lg transition-all duration-150 shadow-sm" href="#"><span class="material-symbols-outlined text-[20px]" data-icon="receipt_long">receipt_long</span><span>Sổ cái</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#"><span class="material-symbols-outlined text-[20px]" data-icon="verified">verified</span><span>Phê duyệt</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#"><span class="material-symbols-outlined text-[20px]" data-icon="insights">insights</span><span>Báo cáo &amp; Lộ trình</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#"><span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span><span>Cài đặt</span></a></div>
-<!-- Storage quota micro badge -->
-<div class="mt-auto p-3 rounded-xl bg-surface-container border border-outline-variant/20"><div class="flex items-center justify-between text-body-sm font-body-sm text-outline mb-1.5"><span>Hạn mức lưu trữ</span><span class="font-medium text-on-surface">82%</span></div><div class="w-full bg-surface-variant rounded-full h-1.5 overflow-hidden"><div class="bg-primary-container h-1.5 rounded-full w-4/5"></div></div><p class="text-[11px] font-label-sm text-outline mt-2">Sẵn sàng kiểm toán 2026</p></div>
+<aside class="fixed left-0 top-16 bottom-0 w-56 flex flex-col py-6 px-3 bg-white border-r border-gray-200 select-none z-10">
+<nav class="space-y-1.5 flex-1">
+<!-- 1. Tong quan -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span>Tổng quan</span>
+</a>
+<!-- 2. So cai (ACTIVE) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00A76F] text-white font-semibold text-sm shadow-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span>Sổ cái</span>
+</a>
+<!-- 3. Phe duyet -->
+<a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span>Phê duyệt</span>
+</div>
+<span class="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">5 chờ</span>
+</a>
+<!-- 4. Bao cao & Lo trinh -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">insights</span>
+<span>Báo cáo &amp; Lộ trình</span>
+</a>
+<!-- 5. Cai dat -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Cài đặt</span>
+</a>
+</nav>
+
+<!-- Sidebar Footer: Version & Status -->
+<div class="px-3 pt-4 border-t border-gray-200 flex items-center justify-between text-xs text-gray-400">
+<span>v2.4.0</span>
+<span class="w-2 h-2 rounded-full bg-[#00A76F]"></span>
+</div>
 </aside>
 <!-- UNDERLYING DESKTOP LEDGER CONTENT (BLURRED IN BACKGROUND) -->
-<main aria-hidden="true" class="ml-52 pt-16 min-h-screen bg-background p-8">
+<main aria-hidden="true" class="ml-56 pt-16 min-h-screen bg-background p-8">
 <!-- Header row -->
 <div class="flex items-center justify-between pb-6"><div><h1 class="text-headline-md font-headline-md text-on-surface">Sổ cái phát thải</h1><p class="text-body-md font-body-md text-outline">Nhật ký kiểm toán thời gian thực về phát thải, hệ số phát thải và xác minh.</p></div><div class="flex items-center gap-3"><button class="px-4 py-2 border border-outline-variant/30 rounded-xl bg-surface-container-lowest text-on-surface text-label-md font-label-md shadow-sm">Xuất báo cáo</button><button class="px-4 py-2 rounded-xl bg-primary-container text-on-primary text-label-md font-label-md shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>Ghi nhận phát thải</button></div></div>
 <!-- Metric summary bar -->

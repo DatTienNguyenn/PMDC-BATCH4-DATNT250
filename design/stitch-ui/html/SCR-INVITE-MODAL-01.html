@@ -55,30 +55,41 @@
     <!-- Main Layout Container -->
     <div class="flex-1 flex overflow-hidden">
       <!-- Sidebar Navigation -->
-      <aside class="w-56 bg-white border-r border-gray-200 p-4 flex flex-col justify-between">
-        <nav class="space-y-1">
+      <aside class="w-56 bg-white border-r border-gray-200 py-6 px-3 flex flex-col justify-between shrink-0 select-none">
+        <nav class="space-y-1.5 flex-1">
+          <!-- 1. Tong quan -->
           <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
-            <span class="material-symbols-outlined">dashboard</span>
+            <span class="material-symbols-outlined text-[20px]">dashboard</span>
             <span>Tổng quan</span>
           </div>
+          <!-- 2. So cai -->
           <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
-            <span class="material-symbols-outlined">receipt_long</span>
+            <span class="material-symbols-outlined text-[20px]">receipt_long</span>
             <span>Sổ cái</span>
           </div>
-          <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
-            <span class="material-symbols-outlined">verified</span>
-            <span>Phê duyệt</span>
+          <!-- 3. Phe duyet -->
+          <div class="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
+            <div class="flex items-center gap-3">
+              <span class="material-symbols-outlined text-[20px]">verified</span>
+              <span>Phê duyệt</span>
+            </div>
+            <span class="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">5 chờ</span>
           </div>
+          <!-- 4. Bao cao & Lo trinh -->
           <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
-            <span class="material-symbols-outlined">insights</span>
+            <span class="material-symbols-outlined text-[20px]">insights</span>
             <span>Báo cáo &amp; Lộ trình</span>
           </div>
+          <!-- 5. Cai dat (ACTIVE) -->
           <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00A76F] text-white font-semibold text-sm shadow-sm">
-            <span class="material-symbols-outlined">settings</span>
+            <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">settings</span>
             <span>Cài đặt</span>
           </div>
         </nav>
-        <div class="text-xs text-gray-400 px-3">v2.4.0</div>
+        <div class="px-3 pt-4 border-t border-gray-200 flex items-center justify-between text-xs text-gray-400">
+          <span>v2.4.0</span>
+          <span class="w-2 h-2 rounded-full bg-[#00A76F]"></span>
+        </div>
       </aside>
 
       <!-- Settings Content Area -->
