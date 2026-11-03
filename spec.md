@@ -184,7 +184,8 @@ flowchart LR
     subgraph WorkspaceMgmt["1. Khởi tạo & Cấu hình Workspace"]
         UC01["UC01: Khởi tạo & Cấu hình Workspace"]
         UC02["UC02: Khai báo Thông số nền (m², Số người)"]
-        UC03["UC03: Mời & Quản lý Thành viên"]
+        UC03["UC03A: Mời & Quản lý Thành viên"]
+        UC03B["UC03B: Tham gia Workspace bằng mã"]
         UC09["UC09: Thiết lập Ngân sách Tháng"]
         UC03 -.->|«extend»| UC01
         UC09 -.->|«extend»| UC01
@@ -226,6 +227,7 @@ flowchart LR
     Reviewer --> UC11
 
     %% Editor
+    Editor --> UC03B
     Editor --> UC04
     Editor --> UC05
     Editor --> UC06
@@ -244,7 +246,8 @@ flowchart LR
 |---|---|---|---|
 | **UC01** | Khởi tạo & Cấu hình Workspace | Trưởng nhóm (Reviewer), System Admin | **Base Use Case:** Tạo và cấu hình không gian dữ liệu riêng biệt cho gia đình/văn phòng. |
 | **UC02** | Khai báo Thông số nền | Trưởng nhóm (Reviewer) | Nhập số người, diện tích $m^2$ để tính chỉ số $\text{CO}_2\text{e}/\text{người}$, $/m^2$. |
-| **UC03** | Mời & Quản lý Thành viên | Trưởng nhóm (Reviewer) | **`<<extend>> UC01`:** Sinh mã mời, kiểm duyệt Yêu cầu gia nhập; là extend của Cấu hình Workspace. |
+| **UC03A** | Quản lý & Phê duyệt Thành viên | Trưởng nhóm (Reviewer) | **`<<extend>> UC01`:** Sinh mã mời, kiểm duyệt Yêu cầu gia nhập; là extend của Cấu hình Workspace. |
+| **UC03B** | Tham gia Workspace bằng mã | Thành viên (Editor / Member) | Nhập mã mời 6 ký tự gửi Yêu cầu gia nhập (Join Request) chờ duyệt. |
 | **UC04** | Khai báo phát thải thủ công | Thành viên (Editor), Reviewer | Nhập sinh hoạt lẻ (xe máy, gas, điện) tạo Draft / Approved. |
 | **UC05** | Quét hóa đơn / công tơ bằng AI | Thành viên (Editor), Reviewer | Dùng Multimodal AI bóc tách ảnh; `<<include>>` Xác nhận & Chỉnh sửa số liệu AI. |
 | **UC06** | Nạp dữ liệu qua File mẫu Excel | Thành viên (Editor), Reviewer | Upload Excel template, preview ánh xạ dữ liệu và lưu hàng loạt. |

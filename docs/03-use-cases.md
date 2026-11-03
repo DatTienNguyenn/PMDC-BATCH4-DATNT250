@@ -12,7 +12,7 @@
 | Tác nhân (Actor) | Tên vai trò | Trách nhiệm trong các luồng hoạt động |
 |---|---|---|
 | **Trưởng nhóm (Reviewer)** | Workspace Admin / Reviewer | **Luồng 1:** Tạo Workspace, cấu hình Workspace (khai báo thông số nền $m^2$, số nhân khẩu; quản lý thành viên và thiết lập ngân sách tháng theo cơ chế `<<extend>>`).<br>**Luồng 2:** Nạp dữ liệu (tự động duyệt) hoặc phê duyệt (`Accept` / `Reject`) các request nạp dữ liệu từ Editor.<br>**Luồng 3:** Xem **Dashboard tổng quan của Workspace**, theo dõi tiến độ ngân sách, nhận notification cảnh báo 85% & 100%.<br>**Luồng 4:** **Độc quyền** tiếp nhận báo cáo phát thải định kỳ từ Cronjob, xem báo cáo phát thải của Workspace và khuyến nghị giảm phát thải AI, xuất Kế hoạch cắt giảm ra file PDF. |
-| **Thành viên (Editor)** | Workspace Member / Editor | **Luồng 2:** Thực hiện nạp dữ liệu phát thải qua 3 phương thức (Thủ công, Quét ảnh hóa đơn/công tơ bằng AI, Import file mẫu Excel) ở trạng thái **`Draft / Chờ duyệt`**.<br>**Luồng 3:** **Chỉ có quyền xem Dashboard phân tích của cá nhân Member đó**, nhận notification cảnh báo ngưỡng 85% của Workspace (không có quyền xem Dashboard tổng quan Workspace).<br>**Luồng 4:** **Không có quyền** xem báo cáo phát thải và khuyến nghị xanh của Workspace.<br>**Lịch sử:** Theo dõi tiến độ duyệt các yêu cầu cá nhân đã gửi. |
+| **Thành viên (Editor)** | Workspace Member / Editor | **Luồng 1:** Nhập mã mời để gửi Yêu cầu gia nhập (**Tham gia workspace bằng mã**) ở trạng thái PENDING chờ Admin phê duyệt.<br>**Luồng 2:** Thực hiện nạp dữ liệu phát thải qua 3 phương thức (Thủ công, Quét ảnh hóa đơn/công tơ bằng AI, Import file mẫu Excel) ở trạng thái **`Draft / Chờ duyệt`**.<br>**Luồng 3:** **Chỉ có quyền xem Dashboard phân tích của cá nhân Member đó**, nhận notification cảnh báo ngưỡng 85% của Workspace (không có quyền xem Dashboard tổng quan Workspace).<br>**Luồng 4:** **Không có quyền** xem báo cáo phát thải và khuyến nghị xanh của Workspace.<br>**Lịch sử:** Theo dõi tiến độ duyệt các yêu cầu cá nhân đã gửi. |
 | **Quản trị viên Hệ thống (System Admin)** | System Admin | Quản trị độc lập danh mục và giá trị các **Hệ số phát thải quy chuẩn (Standard Emission Factors)** phục vụ công thức nhân tự động của Backend khi giao dịch được ghi sổ; quản trị cấu hình Workspace/Tenants trên toàn hệ thống. |
 
 ---
@@ -25,6 +25,7 @@
 *Sơ đồ thể hiện 3 tác nhân chính (`Workspace Admin`, `Member`, `System Admin`), quan hệ kế thừa (Generalization) giữa Workspace Admin và Member, quan hệ mở rộng `<<extend>>` (với Workspace Admin, Quản lý thành viên và Thiết lập ngân sách là `<<extend>>` của Quản lý cấu hình Workspace, không tách rời thành các use case riêng), cùng quan hệ phụ thuộc `<<include>>` trong việc quét và xác nhận dữ liệu AI qua popup xem trước.*
 
 *Đặc biệt về quy tắc phân quyền:*
+- **Tham gia Workspace:** Thành viên (Member) có Use Case **`Tham gia workspace bằng mã`** để nhập mã mời và gửi yêu cầu gia nhập (Join Request) vào Không gian làm việc.
 - **Báo cáo phát thải & Khuyến nghị:** Thành viên (Member) **không có quyền** xem báo cáo phát thải và khuyến nghị xanh; **chỉ Workspace Admin** mới có quyền xem báo cáo phát thải của Workspace và khuyến nghị giảm phát thải.
 - **Cấu hình Workspace:** Quản lý thành viên và Thiết lập ngân sách là phần mở rộng (`<<extend>>`) của Quản lý cấu hình Workspace, không tách rời làm các use case riêng biệt từ Actor.
 - **Dashboard:** Member **chỉ có quyền xem Dashboard phân tích của member đó**, **chỉ Workspace Admin** mới có quyền xem Dashboard tổng quan của Workspace.
@@ -43,6 +44,7 @@ flowchart LR
         UC01["UC01: Khởi tạo & Cấu hình Workspace"]
         UC02["UC02: Khai báo Thông số nền (m², Số người)"]
         UC03["UC03: Mời & Quản lý Thành viên"]
+        UC03B["UC03B: Tham gia Workspace bằng mã"]
         UC09["UC09: Thiết lập Ngân sách Tháng & Ngưỡng 85%"]
         UC03 -.->|«extend»| UC01
         UC09 -.->|«extend»| UC01
@@ -84,6 +86,7 @@ flowchart LR
     Reviewer --> UC11
 
     %% Editor
+    Editor --> UC03B
     Editor --> UC04
     Editor --> UC05
     Editor --> UC06
@@ -137,18 +140,27 @@ flowchart LR
 
 ---
 
-### UC03: Mời & Phê duyệt Thành viên Gia nhập (Member Invitation & Join Approval)
-- **Mã Use Case:** UC03
+### UC03: Mời & Quản lý Thành viên (Member Management)
+- **Mã Use Case:** UC03 (gồm UC03A & UC03B)
+- **Mối quan hệ Use Case:** 
+  - `UC03A` là phần mở rộng (`<<extend>>`) của `UC01: Khởi tạo & Cấu hình Workspace`, không tách rời làm use case độc lập từ phía Workspace Admin.
+  - `UC03B` là Use Case trực tiếp của **Thành viên (Member)**.
+
+#### UC03A: Quản lý Thành viên & Phê duyệt Gia nhập (Admin Flow)
 - **Tác nhân chính:** Trưởng nhóm (Reviewer / Workspace Admin)
-- **Tác nhân phụ:** Người dùng xin gia nhập (Editor / Member)
-- **Mối quan hệ Use Case:** Là phần mở rộng (`<<extend>>`) của `UC01: Khởi tạo & Cấu hình Workspace`, không tách rời làm use case độc lập từ phía Workspace Admin.
-- **Mô tả vắn tắt:** Reviewer sinh mã mời 6 ký tự; người dùng nhập mã mời để gửi Yêu cầu gia nhập (Join Request) ở trạng thái chờ duyệt (PENDING); Reviewer xem xét phê duyệt (Accept) để thêm vào Workspace hoặc từ chối (Reject), đảm bảo an toàn tuyệt đối cho dữ liệu gia đình/văn phòng.
-- **Tiền điều kiện:** Workspace đã được khởi tạo; người dùng xin gia nhập đã có tài khoản trên hệ thống.
-- **Hậu điều kiện:** Người dùng được thêm vào bảng `workspace_members` với vai trò `Editor` chỉ khi Reviewer chấp thuận.
+- **Mô tả vắn tắt:** Reviewer sinh mã mời 6 ký tự, theo dõi danh sách thành viên và xem xét phê duyệt (Accept) hoặc từ chối (Reject) các yêu cầu gia nhập từ người dùng.
+- **Tiền điều kiện:** Workspace đã được khởi tạo.
+- **Hậu điều kiện:** Thành viên được duyệt sẽ nhận vai trò `Editor`.
+
+#### UC03B: Tham gia Workspace bằng mã (Member Flow)
+- **Tác nhân chính:** Thành viên (Editor / Member)
+- **Mô tả vắn tắt:** Thành viên nhập mã mời 6 ký tự (ví dụ: `CARB26`) tại màn hình Tham gia Không gian làm việc để gửi Yêu cầu gia nhập (`Join Request`) ở trạng thái chờ duyệt (`PENDING`).
+- **Tiền điều kiện:** Người dùng đã có tài khoản trên hệ thống và có mã mời hợp lệ do Trưởng nhóm cung cấp.
+- **Hậu điều kiện:** Yêu cầu được ghi vào bảng `workspace_join_requests` với trạng thái `PENDING` và hiển thị thông báo chờ Trưởng nhóm phê duyệt.
 - **Luồng sự kiện chính:**
   1. Reviewer vào mục "Quản lý Thành viên" và nhấn "Tạo mã mời".
-  2. Hệ thống sinh mã ngẫu nhiên 6 ký tự (ví dụ: `CARB26`) hiệu lực 7 ngày và lưu vào `workspaces.invite_code`.
-  3. Người dùng đăng nhập tài khoản của mình, vào màn hình "Tham gia Workspace", nhập mã mời và nhấn "Gửi yêu cầu".
+  2. Hệ thống sinh mã ngẫu nhiên 6 ký tự hiệu lực 7 ngày và lưu vào `workspaces.invite_code`.
+  3. Member đăng nhập tài khoản của mình, vào màn hình "Tham gia Workspace", nhập mã mời và nhấn "Gửi yêu cầu".
   4. Hệ thống kiểm tra mã mời hợp lệ, tạo bản ghi trong bảng `workspace_join_requests` với trạng thái `PENDING` và hiển thị thông báo chờ phê duyệt.
   5. Reviewer vào danh sách "Yêu cầu chờ duyệt", xem thông tin người xin gia nhập (Tên, Email) và nhấn "Chấp thuận (Accept)".
   6. Hệ thống cập nhật yêu cầu sang `APPROVED`, tự động liên kết người dùng vào Workspace với vai trò `Editor` và gửi thông báo thành công.

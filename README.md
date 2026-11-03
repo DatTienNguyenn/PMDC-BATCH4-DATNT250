@@ -147,6 +147,7 @@ Hệ thống được mô hình hóa theo chuẩn UML với 3 tác nhân chính 
 _Ghi chú quan hệ trên sơ đồ:_
 
 - **Quan hệ Kế thừa (Generalization):** `Workspace Admin` kế thừa các Use Case của `Member` (khai báo phát thải thủ công, quét hóa đơn bằng AI, đăng nhập/đăng xuất, quản lý hồ sơ cá nhân, xem dashboard phân tích cá nhân).
+- **Tham gia Workspace:** `Member` có Use Case **`Tham gia workspace bằng mã`** để nhập mã mời 6 ký tự và gửi yêu cầu gia nhập (Join Request) vào Không gian làm việc.
 - **Quan hệ Mở rộng (`<<extend>>`):** Với `Workspace Admin`, `Quản lý thành viên` và `Thiết lập Ngân sách (Budget)` đóng vai trò là các phần mở rộng (`<<extend>>`) của `Quản lý cấu hình Workspace`, không tách rời ra làm các Use Case riêng biệt.
 - **Quan hệ Phụ thuộc (`<<include>>`):** Use Case `Quét hóa đơn bằng AI (Import)` bắt buộc bao gồm (`<<include>>`) bước `Xác nhận & Chỉnh sửa số liệu AI` qua Popup xem trước trước khi ghi dữ liệu.
 - **Phân định Quyền Báo cáo & Khuyến nghị:** `Member` **không có quyền** xem báo cáo phát thải và khuyến nghị xanh; **chỉ Workspace Admin** mới có quyền xem báo cáo phát thải của Workspace và khuyến nghị giảm phát thải từ AI.
@@ -163,6 +164,7 @@ Hệ thống phân định 3 vai trò rõ ràng, kết hợp mô hình Multi-ten
    - **Quyền Reviewer:** Phê duyệt (`Accept`) hoặc từ chối (`Reject` kèm lý do) các request phát thải từ thành viên.
    - **Độc quyền Giám sát & Báo cáo:** Xem Dashboard tổng quan của Workspace, tiếp nhận báo cáo phát thải của Workspace và khuyến nghị giảm phát thải AI, xuất Kế hoạch cắt giảm (Reduction Plan) ra file PDF.
 2. **Thành viên gia đình / Văn phòng (Editor / Workspace Member):**
+   - **Gia nhập:** Nhập mã mời để gửi yêu cầu gia nhập (**Tham gia workspace bằng mã**) chờ Reviewer phê duyệt.
    - Khai báo hoạt động phát thải qua 3 phương thức (Thủ công, Quét AI, File Excel); mọi bản ghi lưu ở trạng thái **`Draft / Chờ duyệt (Pending Review)`**.
    - **Chỉ có quyền xem Dashboard phân tích của cá nhân member đó** (theo dõi tiến độ cá nhân, nhận notification cảnh báo ngưỡng 85% của Workspace); **không có quyền xem Dashboard tổng quan Workspace** và **không có quyền xem báo cáo phát thải & khuyến nghị xanh**.
 3. **Quản trị viên Hệ thống (System Admin):**
@@ -175,6 +177,7 @@ Hệ thống phân định 3 vai trò rõ ràng, kết hợp mô hình Multi-ten
 | ----------------------------------------------------------------------------- | :----------: | :--------------------: | :-------------------: |
 | Khởi tạo & Cấu hình Workspace (Base Use Case)                                 |      ✅      |           ✅           |          ❌           |
 | Mời & Quản lý thành viên (`<<extend>>` Cấu hình Workspace)                    |      ❌      |           ✅           |          ❌           |
+| Tham gia Workspace bằng mã mời (Join Workspace)                               |      ❌      |           ❌           |          ✅           |
 | Thiết lập Ngân sách tháng & Ngưỡng 85% (`<<extend>>` Cấu hình Workspace)      |      ❌      |           ✅           |          ❌           |
 | Khai báo thông số nền (thành viên, diện tích $m^2$)                           |      ❌      |           ✅           |          ❌           |
 | Xem Dashboard tổng quan của Workspace                                         |      ❌      |     ✅ (Toàn diện)     |     ❌ (Chặn 403)     |
