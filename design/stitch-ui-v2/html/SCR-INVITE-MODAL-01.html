@@ -1,52 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
   <title>CarbonLedger - Mời thành viên</title>
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Public Sans Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet"/>
-  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
-  <script src="https://cdn.tailwindcss.com?plugins=forms"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script id="tailwind-config">
     tailwind.config = {
+      darkMode: "class",
       theme: {
         extend: {
           colors: {
-            primary: "#00A76F",
-            "primary-hover": "#00784E",
-            "primary-light": "#E8F8F2",
-            "primary-dark": "#004B31",
-            surface: "#F9FAFB",
-            "surface-white": "#FFFFFF",
-            "on-surface": "#212B36",
-            "on-surface-variant": "#637381",
-            "muted-text": "#919EAB",
-            outline: "#E5E7EB",
-            "outline-light": "#F3F4F6",
-            error: "#BA1A1A",
-            "error-light": "#FEE2E2",
-            "error-text": "#B91C1C",
+            "on-surface": "#121c27",
+            "outline-variant": "#bccabf",
+            "background": "#F9FAFB",
+            "primary": "#00a76f",
+            "outline": "#6d7a71"
           },
           fontFamily: {
             sans: ["Public Sans", "sans-serif"],
-            mono: ["JetBrains Mono", "monospace"],
           }
-        }
-      }
-    };
-  </script>
-  <style>
-    .material-symbols-outlined {
-      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+        },
+      },
     }
-  </style>
+  </script>
 </head>
-<body class="font-sans antialiased bg-[#F9FAFB] text-[#212B36] min-h-screen relative overflow-hidden flex flex-col justify-between selection:bg-primary/20 selection:text-primary">
+<body class="bg-[#F9FAFB] text-[#212B36] antialiased font-sans min-h-screen relative overflow-hidden select-none">
 
-  <!-- Background: Settings Page (Members tab active) -->
-  <div class="fixed inset-0 w-full h-full flex flex-col pointer-events-none select-none filter blur-[2px]" aria-hidden="true">
+  <!-- Underlying Background Canvas -->
+  <div class="min-h-screen flex flex-col bg-[#F9FAFB] filter blur-[2px] opacity-70 pointer-events-none">
     <!-- Top Header -->
     <header class="w-full h-16 bg-white border-b border-gray-200 px-6 flex items-center justify-between">
       <div class="flex items-center gap-3">
@@ -57,8 +46,8 @@
       </div>
       <div class="flex items-center gap-4">
         <span class="material-symbols-outlined text-gray-500 text-[22px]">notifications</span>
-        <div class="w-8 h-8 rounded-full bg-emerald-600 text-white font-semibold text-xs flex items-center justify-center">
-          SC
+        <div class="w-8 h-8 rounded-full bg-[#00A76F] text-white font-semibold text-xs flex items-center justify-center">
+          NA
         </div>
       </div>
     </header>
@@ -66,27 +55,27 @@
     <!-- Main Layout Container -->
     <div class="flex-1 flex overflow-hidden">
       <!-- Sidebar Navigation -->
-      <aside class="w-60 bg-white border-r border-gray-200 p-4 flex flex-col justify-between">
+      <aside class="w-56 bg-white border-r border-gray-200 p-4 flex flex-col justify-between">
         <nav class="space-y-1">
           <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
             <span class="material-symbols-outlined">dashboard</span>
-            <span>Dashboard</span>
+            <span>Tổng quan</span>
           </div>
           <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
             <span class="material-symbols-outlined">receipt_long</span>
-            <span>Ledger</span>
+            <span>Sổ cái</span>
           </div>
           <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
             <span class="material-symbols-outlined">verified</span>
-            <span>Approvals</span>
+            <span>Phê duyệt</span>
           </div>
           <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
             <span class="material-symbols-outlined">insights</span>
-            <span>Insights</span>
+            <span>Báo cáo &amp; Lộ trình</span>
           </div>
           <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00A76F] text-white font-semibold text-sm shadow-sm">
             <span class="material-symbols-outlined">settings</span>
-            <span>Settings</span>
+            <span>Cài đặt</span>
           </div>
         </nav>
         <div class="text-xs text-gray-400 px-3">v2.4.0</div>
@@ -95,25 +84,18 @@
       <!-- Settings Content Area -->
       <main class="flex-1 p-10 bg-[#F9FAFB] space-y-6 max-w-5xl">
         <div class="flex items-center justify-between">
-          <h1 class="text-2xl font-bold text-gray-900">Settings</h1>
+          <h1 class="text-2xl font-bold text-gray-900">Cài đặt</h1>
           <button class="bg-[#00A76F] text-white px-4 py-2 rounded-xl text-sm font-semibold flex items-center gap-2">
             <span class="material-symbols-outlined text-[18px]">group_add</span>
-            Invite Member
+            Mời thành viên
           </button>
         </div>
 
         <!-- Tabs -->
         <div class="flex gap-2">
-          <span class="px-4 py-1.5 rounded-full text-sm font-medium text-gray-600 bg-white border border-gray-200">Workspace</span>
-          <span class="px-4 py-1.5 rounded-full text-sm font-medium text-gray-600 bg-white border border-gray-200">Budget</span>
-          <span class="px-4 py-1.5 rounded-full text-sm font-semibold text-white bg-[#00A76F]">Members</span>
-        </div>
-
-        <!-- Dummy Card content -->
-        <div class="bg-white rounded-2xl border border-gray-200/80 p-6 space-y-4">
-          <div class="h-4 bg-gray-100 rounded w-1/4"></div>
-          <div class="h-10 bg-gray-50 rounded-xl w-full"></div>
-          <div class="h-10 bg-gray-50 rounded-xl w-full"></div>
+          <span class="px-4 py-1.5 rounded-full text-sm font-medium text-gray-600 bg-white border border-gray-200">Không gian</span>
+          <span class="px-4 py-1.5 rounded-full text-sm font-medium text-gray-600 bg-white border border-gray-200">Ngân sách</span>
+          <span class="px-4 py-1.5 rounded-full text-sm font-semibold text-white bg-[#00A76F]">Thành viên</span>
         </div>
       </main>
     </div>
@@ -121,9 +103,8 @@
 
   <!-- Modal Backdrop with blur -->
   <div class="fixed inset-0 bg-[#212B36]/48 backdrop-blur-sm z-50 flex items-center justify-center p-4">
-    <!-- Modal Card (max-w-sm, white, rounded-2xl, shadow-xl) -->
-    <div class="w-full max-w-sm bg-white rounded-2xl shadow-xl border border-gray-100/80 overflow-hidden flex flex-col animate-in fade-in zoom-in-95 duration-200">
-      
+    <!-- Modal Card -->
+    <div class="w-full max-w-sm bg-white rounded-2xl shadow-xl border border-gray-100 overflow-hidden flex flex-col">
       <!-- Modal Header -->
       <div class="px-5 pt-5 pb-3 flex items-center justify-between">
         <div class="flex items-center gap-2">
@@ -132,28 +113,27 @@
           </div>
           <h2 class="text-base font-bold text-[#212B36] tracking-tight">Mời thành viên mới</h2>
         </div>
-        <button type="button" class="w-8 h-8 rounded-lg flex items-center justify-center text-[#919EAB] hover:text-[#212B36] hover:bg-gray-100 transition-colors focus:outline-none" aria-label="Close modal">
+        <button type="button" class="w-8 h-8 rounded-lg flex items-center justify-center text-gray-400 hover:text-gray-700 hover:bg-gray-100 transition-colors" aria-label="Đóng">
           <span class="material-symbols-outlined text-[19px]">close</span>
         </button>
       </div>
 
       <!-- Modal Body -->
       <div class="px-5 py-3 space-y-4">
-
         <!-- Active Mã mời gia nhập Section -->
         <div class="bg-gradient-to-b from-[#F9FAFB] to-[#F4F6F8] rounded-xl p-4 border border-gray-200/70 text-center">
-          <span class="text-[11px] font-semibold tracking-wider text-[#637381] uppercase block mb-1">
+          <span class="text-[11px] font-semibold tracking-wider text-gray-500 uppercase block mb-1">
             Mã mời gia nhập
           </span>
           <div class="font-mono text-2xl font-bold tracking-[0.22em] text-[#212B36] select-all my-1.5 pl-[0.22em]">
             AB3X9K
           </div>
-          <div class="flex items-center justify-center gap-1.5 text-xs text-[#637381] mb-3">
+          <div class="flex items-center justify-center gap-1.5 text-xs text-gray-500 mb-3">
             <span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
-            <span>Expires in 6 days</span>
+            <span>Hết hạn sau 6 ngày</span>
           </div>
           
-          <button type="button" class="w-full py-2 px-3 rounded-lg border border-[#00A76F] bg-white hover:bg-emerald-50/50 text-[#00A76F] font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-2xs focus:outline-none focus:ring-2 focus:ring-[#00A76F]/20">
+          <button type="button" class="w-full py-2 px-3 rounded-lg border border-[#00A76F] bg-white hover:bg-emerald-50/50 text-[#00A76F] font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors shadow-xs">
             <span class="material-symbols-outlined text-[16px]">content_copy</span>
             <span>Sao chép mã</span>
           </button>
@@ -169,26 +149,26 @@
         <!-- Pending Join Requests Section -->
         <div class="space-y-2.5">
           <div class="flex items-center justify-between">
-            <span class="text-xs font-bold text-[#212B36] tracking-tight">Yêu cầu chờ duyệt</span>
-            <span class="text-[11px] font-semibold text-[#637381] bg-gray-100 px-2 py-0.5 rounded-full">2</span>
+            <span class="text-xs font-bold text-gray-900 tracking-tight">Yêu cầu chờ duyệt</span>
+            <span class="text-[11px] font-semibold text-gray-600 bg-gray-100 px-2 py-0.5 rounded-full">2</span>
           </div>
 
           <div class="space-y-2">
             <!-- Row 1: Le Van C -->
             <div class="flex items-center justify-between p-2.5 rounded-xl bg-[#F9FAFB] border border-gray-100 hover:border-gray-200 transition-colors">
               <div class="flex items-center gap-2.5 min-w-0 pr-2">
-                <div class="w-7 h-7 rounded-full bg-[#E8F8F2] text-[#00A76F] text-xs font-bold flex items-center justify-center shrink-0">
+                <div class="w-7 h-7 rounded-full bg-emerald-50 text-[#00A76F] text-xs font-bold flex items-center justify-center shrink-0">
                   LC
                 </div>
                 <div class="truncate">
-                  <div class="text-xs font-semibold text-[#212B36] truncate">Le Van C</div>
+                  <div class="text-xs font-semibold text-gray-900 truncate">Lê Văn C</div>
                 </div>
               </div>
               <div class="flex items-center gap-1.5 shrink-0">
-                <button type="button" class="px-2.5 py-1 text-xs font-semibold rounded-md bg-[#E8F8F2] text-[#00A76F] hover:bg-emerald-100 transition-colors focus:outline-none">
+                <button type="button" class="px-2.5 py-1 text-xs font-semibold rounded-md bg-emerald-50 text-[#00A76F] hover:bg-emerald-100 transition-colors">
                   Chấp thuận
                 </button>
-                <button type="button" class="px-2.5 py-1 text-xs font-semibold rounded-md bg-[#FEE2E2] text-[#B91C1C] hover:bg-red-200/80 transition-colors focus:outline-none">
+                <button type="button" class="px-2.5 py-1 text-xs font-semibold rounded-md bg-red-50 text-red-600 hover:bg-red-100 transition-colors">
                   Từ chối
                 </button>
               </div>
@@ -201,29 +181,28 @@
                   PD
                 </div>
                 <div class="truncate">
-                  <div class="text-xs font-semibold text-[#212B36] truncate">Pham Thi D</div>
+                  <div class="text-xs font-semibold text-gray-900 truncate">Phạm Thị D</div>
                 </div>
               </div>
               <div class="flex items-center gap-1.5 shrink-0">
-                <button type="button" class="px-2.5 py-1 text-xs font-semibold rounded-md bg-[#E8F8F2] text-[#00A76F] hover:bg-emerald-100 transition-colors focus:outline-none">
+                <button type="button" class="px-2.5 py-1 text-xs font-semibold rounded-md bg-emerald-50 text-[#00A76F] hover:bg-emerald-100 transition-colors">
                   Chấp thuận
                 </button>
-                <button type="button" class="px-2.5 py-1 text-xs font-semibold rounded-md bg-[#FEE2E2] text-[#B91C1C] hover:bg-red-200/80 transition-colors focus:outline-none">
+                <button type="button" class="px-2.5 py-1 text-xs font-semibold rounded-md bg-red-50 text-red-600 hover:bg-red-100 transition-colors">
                   Từ chối
                 </button>
               </div>
             </div>
           </div>
         </div>
-
       </div>
 
       <!-- Footer Bottom -->
-      <div class="px-5 pt-2 pb-5 mt-1 border-t border-gray-100/90 flex items-center justify-between">
-        <button type="button" class="text-xs text-[#637381] hover:text-[#212B36] transition-colors font-medium hover:underline focus:outline-none">
-          Generate New Code
+      <div class="px-5 pt-2 pb-5 mt-1 border-t border-gray-100 flex items-center justify-between">
+        <button type="button" class="text-xs text-gray-500 hover:text-gray-900 transition-colors font-medium hover:underline">
+          Tạo mã mới
         </button>
-        <button type="button" class="px-5 py-2 text-xs font-semibold rounded-xl bg-[#00A76F] hover:bg-[#00784E] text-white shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#00A76F]/30">
+        <button type="button" class="px-5 py-2 text-xs font-semibold rounded-xl bg-[#00A76F] hover:bg-[#009160] text-white shadow-sm transition-all">
           Hoàn tất
         </button>
       </div>

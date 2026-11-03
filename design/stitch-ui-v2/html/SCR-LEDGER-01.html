@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
+<html lang="vi"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>CarbonLedger - Sổ cái phát thải</title>
@@ -8,7 +8,6 @@
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -18,370 +17,300 @@
       theme: {
         extend: {
           "colors": {
-            "tertiary": "#855400",
-            "on-surface-variant": "#3d4a41",
-            "on-primary-fixed-variant": "#005234",
             "surface": "#f7f9ff",
-            "error-container": "#ffdad6",
-            "tertiary-fixed": "#ffddb7",
             "outline": "#6d7a71",
-            "primary-fixed": "#79fabb",
-            "on-surface": "#121c27",
-            "on-background": "#121c27",
-            "on-secondary-fixed-variant": "#005145",
-            "inverse-on-surface": "#e9f1ff",
-            "on-primary": "#ffffff",
-            "on-tertiary-container": "#3f2500",
-            "inverse-surface": "#27313c",
-            "inverse-primary": "#5adda0",
-            "surface-container-high": "#dfe9f8",
-            "on-tertiary-fixed-variant": "#653e00",
-            "surface-container": "#e4effe",
-            "on-secondary-container": "#007261",
             "primary": "#006c46",
-            "surface-bright": "#f7f9ff",
-            "secondary-fixed-dim": "#7bd7c2",
-            "primary-fixed-dim": "#5adda0",
-            "error": "#ba1a1a",
-            "on-primary-container": "#00321f",
-            "background": "#f7f9ff",
-            "tertiary-fixed-dim": "#ffb95e",
-            "surface-container-low": "#eef4ff",
-            "surface-variant": "#d9e3f2",
-            "surface-container-lowest": "#ffffff",
-            "on-secondary-fixed": "#00201a",
-            "surface-dim": "#d1dbea",
-            "on-secondary": "#ffffff",
-            "on-primary-fixed": "#002112",
-            "on-error-container": "#93000a",
-            "secondary-fixed": "#97f4de",
-            "surface-container-highest": "#d9e3f2",
-            "secondary": "#006b5c",
-            "secondary-container": "#97f4de",
-            "surface-tint": "#006c46",
-            "on-tertiary": "#ffffff",
-            "on-tertiary-fixed": "#2a1700",
-            "tertiary-container": "#cc8200",
-            "outline-variant": "#bccabf",
-            "on-error": "#ffffff",
-            "primary-container": "#00a76f"
-          },
-          "borderRadius": {
-            "DEFAULT": "0.25rem",
-            "lg": "0.5rem",
-            "xl": "0.75rem",
-            "full": "9999px"
-          },
-          "spacing": {
-            "space-sm": "0.5rem",
-            "space-lg": "1.5rem",
-            "margin": "2.5rem",
-            "space-xl": "2rem",
-            "margin-mobile": "1rem",
-            "gutter": "1.5rem",
-            "space-xs": "0.25rem",
-            "space-md": "1rem",
-            "gutter-sm": "1rem"
+            "primary-container": "#00a76f",
+            "background": "#F9FAFB",
+            "surface-container-lowest": "#ffffff"
           },
           "fontFamily": {
-            "label-sm": ["Public Sans"],
-            "display": ["Public Sans"],
-            "label-md": ["Public Sans"],
-            "headline-sm": ["Public Sans"],
-            "headline-md": ["Public Sans"],
-            "headline-lg": ["Public Sans"],
-            "body-sm": ["Public Sans"],
-            "title": ["Public Sans"],
             "body-md": ["Public Sans"],
-            "headline-lg-mobile": ["Public Sans"],
-            "body-lg": ["Public Sans"],
-            "label-lg": ["Public Sans"]
-          },
-          "fontSize": {
-            "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700"}],
-            "display": ["40px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
-            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
-            "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
-            "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-            "headline-lg": ["32px", {"lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-            "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
-            "title": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
-            "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
-            "headline-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
-            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-            "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
+            "title": ["Public Sans"]
           }
         }
       }
     }
   </script>
 </head>
-<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md selection:bg-primary-container selection:text-on-primary">
+<body class="bg-[#F9FAFB] text-gray-900 antialiased min-h-screen flex flex-col font-body-md selection:bg-primary-container selection:text-white">
 <!-- TopNavBar (Shared Component) -->
-<header class="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-6 h-16 w-full border-b border-outline-variant/30 bg-surface-container-lowest shadow-sm">
+<header class="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-6 h-16 w-full border-b border-gray-200 bg-white shadow-sm">
 <div class="flex items-center gap-4">
-<div class="flex items-center gap-2 text-title font-title font-bold text-on-surface">
-<div class="w-8 h-8 rounded-lg bg-[#00A76F] flex items-center justify-center text-white shadow-sm">
-<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">eco</span>
-</div>
-<span class="tracking-tight font-bold text-lg">CarbonLedger</span>
-</div>
-<div class="hidden md:flex items-center gap-2 pl-4 border-l border-gray-200 text-sm font-medium text-gray-500">
-<span>Gia Đình Xanh</span>
-<span class="text-gray-400">/</span>
-<span class="text-gray-900 font-semibold">Sổ cái phát thải</span>
-</div>
+  <div class="flex items-center gap-2 font-bold text-gray-900">
+    <div class="w-8 h-8 rounded-lg bg-[#00A76F] flex items-center justify-center text-white shadow-sm">
+      <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+    </div>
+    <span class="tracking-tight font-bold text-lg">CarbonLedger</span>
+  </div>
+  <div class="hidden md:flex items-center gap-2 pl-4 border-l border-gray-200 text-sm font-medium text-gray-500">
+    <span>Gia Đình Xanh</span>
+    <span class="text-gray-400">/</span>
+    <span class="text-gray-900 font-semibold">Sổ cái phát thải</span>
+  </div>
 </div>
 <div class="flex items-center gap-4">
-<button aria-label="Notifications" class="relative p-2 rounded-full hover:bg-surface-container-low text-on-surface-variant transition-colors duration-150 ease-in-out focus:outline-none">
-<span class="material-symbols-outlined text-[22px]">notifications</span>
-<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
-</button>
-<div class="flex items-center gap-3 pl-2 border-l border-outline-variant/30">
-<img alt="User profile photo" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCXrOz9C1H4V7HbTWUKR5t4qAaBuJCmTXnyimyzfuVapC_D6gH-1etGBJulftYEe0w0wg1lwGDQ3XdNX6_6fV0Fcv40IS2LR6EjZ-hBCg_iTmU4XzlCsvrbr8Aak7asTEzR1EC4201Ae8TLufqZSPtuXPplaEom_4EQyTtL2b8hY7b-rLNBibrMKk4hv-jabMC1PJ4xvm66DF6p7xX16Y3vKDOJGLNi4oQfIvh2EgazrPHkVHRYHjCgp0plR5BztOTItSEfopH1Bg"/>
-</div>
+  <button aria-label="Thông báo" class="relative p-2 rounded-full hover:bg-gray-100 text-gray-600 transition-colors focus:outline-none">
+    <span class="material-symbols-outlined text-[22px]">notifications</span>
+    <span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+  </button>
+  <div class="flex items-center gap-3 pl-2 border-l border-gray-200">
+    <div class="w-8 h-8 rounded-full bg-[#00A76F] text-white flex items-center justify-center font-bold text-xs shadow-sm">
+      NA
+    </div>
+  </div>
 </div>
 </header>
+
+<div class="flex flex-1">
 <!-- SideNavBar (Shared Component) -->
-<aside class="fixed left-0 top-16 bottom-0 w-52 flex flex-col py-6 px-3 bg-surface-container-lowest border-r border-outline-variant/30 select-none z-30">
-<nav class="space-y-1.5 flex-1">
-<!-- Tong quan -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
-<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
-<span class="text-label-lg font-label-lg">Tổng quan</span>
-</a>
-<!-- So cai (ACTIVE) -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00A76F]/10 text-primary font-semibold font-label-lg transition-all duration-150 ease-in-out" href="#">
-<span class="material-symbols-outlined text-[20px] text-primary" data-icon="receipt_long" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
-<span class="text-label-lg font-label-lg tracking-tight text-primary">Sổ cái</span>
-</a>
-<!-- Phe duyet -->
-<a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
-<div class="flex items-center gap-3">
-<span class="material-symbols-outlined text-[20px]" data-icon="verified">verified</span>
-<span class="text-label-lg font-label-lg">Phê duyệt</span>
-</div>
-<span class="px-2 py-0.5 rounded-full text-[11px] font-bold bg-[#FFAB00]/15 text-[#B76E00] border border-[#FFAB00]/30">5 chờ</span>
-</a>
-<!-- Bao cao & Lo trinh -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
-<span class="material-symbols-outlined text-[20px]" data-icon="insights">insights</span>
-<span class="text-label-lg font-label-lg">Báo cáo &amp; Lộ trình</span>
-</a>
-<!-- Cai dat -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
-<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
-<span class="text-label-lg font-label-lg">Cài đặt</span>
-</a>
+<aside class="fixed left-0 top-16 bottom-0 w-56 flex flex-col py-6 px-3 bg-white border-r border-gray-200 select-none z-30">
+<nav class="space-y-1 flex-1">
+  <!-- 1. Tong quan -->
+  <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm hover:bg-gray-100 transition-all" href="#">
+    <span class="material-symbols-outlined text-[20px]">dashboard</span>
+    <span>Tổng quan</span>
+  </a>
+  <!-- 2. So cai (ACTIVE) -->
+  <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00A76F] text-white font-semibold text-sm shadow-sm transition-all" href="#">
+    <span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+    <span>Sổ cái</span>
+  </a>
+  <!-- 3. Phe duyet -->
+  <a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm hover:bg-gray-100 transition-all" href="#">
+    <div class="flex items-center gap-3">
+      <span class="material-symbols-outlined text-[20px]">verified</span>
+      <span>Phê duyệt</span>
+    </div>
+    <span class="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">5 chờ</span>
+  </a>
+  <!-- 4. Bao cao & Lo trinh -->
+  <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm hover:bg-gray-100 transition-all" href="#">
+    <span class="material-symbols-outlined text-[20px]">insights</span>
+    <span>Báo cáo &amp; Lộ trình</span>
+  </a>
+  <!-- 5. Cai dat -->
+  <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm hover:bg-gray-100 transition-all" href="#">
+    <span class="material-symbols-outlined text-[20px]">settings</span>
+    <span>Cài đặt</span>
+  </a>
 </nav>
+<div class="px-3 pt-4 border-t border-gray-200 flex items-center justify-between text-xs text-gray-400">
+  <span>v2.4.0</span>
+  <span class="w-2 h-2 rounded-full bg-[#00A76F]"></span>
+</div>
 </aside>
+
 <!-- Main Content Layout Area -->
-<main class="ml-52 mt-16 p-8 flex-1 bg-background min-h-[calc(100vh-4rem)]">
+<main class="ml-56 mt-16 p-8 flex-1 bg-[#F9FAFB] min-h-[calc(100vh-4rem)]">
 <div class="max-w-[1440px] mx-auto space-y-6">
-<!-- Page Header -->
-<div class="flex items-center justify-between">
-<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Ledger</h1>
-</div>
-<!-- Filter / Action Bar -->
-<div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
-<!-- Left Controls -->
-<div class="flex flex-wrap items-center gap-3">
-<!-- Month Selector -->
-<div class="relative">
-<button class="h-10 px-3.5 bg-surface-container-lowest border border-outline-variant/40 rounded-lg flex items-center gap-2 font-label-md text-label-md text-on-surface shadow-sm hover:border-outline transition-colors" type="button">
-<span class="material-symbols-outlined text-outline">calendar_today</span>
-<span>November 2026</span>
-<span class="material-symbols-outlined text-outline">expand_more</span>
-</button>
-</div>
-<!-- Status Filter Dropdown -->
-<div class="relative">
-<button class="h-10 px-3.5 bg-surface-container-lowest border border-outline-variant/40 rounded-lg flex items-center gap-2 font-label-md text-label-md text-on-surface shadow-sm hover:border-outline transition-colors" type="button">
-<span class="text-on-surface-variant">Status:</span>
-<span class="font-bold">All Statuses</span>
-<span class="material-symbols-outlined text-outline">expand_more</span>
-</button>
-</div>
-<!-- Search Input -->
-<div class="relative min-w-[260px]">
-<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg">search</span>
-<input class="w-full h-10 pl-9 pr-3 text-body-md font-body-md bg-surface-container-lowest border border-outline-variant/40 rounded-lg focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container text-on-surface placeholder:text-outline shadow-sm transition-all" placeholder="Tìm kiếm theo tên hoạt động..." type="text"/>
-</div>
-</div>
-<!-- Right Controls -->
-<div class="flex items-center gap-3">
-<!-- Outlined Button: Export Excel -->
-<button class="h-10 px-4 bg-surface-container-lowest border border-outline-variant/50 rounded-lg flex items-center gap-2 font-label-md text-label-md text-on-surface hover:bg-surface-container-low hover:border-primary transition-colors shadow-sm" type="button">
-<span class="material-symbols-outlined text-base">download</span>
-<span>Xuất file Excel</span>
-</button>
-<!-- Primary Solid Emerald Button: + Add Entry -->
-<button class="h-10 px-4 bg-primary-container text-on-primary rounded-lg flex items-center gap-2 font-label-md text-label-md hover:bg-primary transition-colors shadow-sm" type="button">
-<span class="material-symbols-outlined text-base font-bold">add</span>
-<span>Add Entry</span>
-</button>
-</div>
-</div>
-<!-- Data Table Card -->
-<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 overflow-hidden shadow-sm">
-<div class="overflow-x-auto">
-<table class="w-full text-left border-collapse">
-<thead>
-<tr class="bg-surface-container-low/60 border-b border-outline-variant/30 text-on-surface-variant font-label-md text-label-md tracking-wider">
-<th class="py-3.5 px-6">Activity</th>
-<th class="py-3.5 px-6">Amount (kg CO2e)</th>
-<th class="py-3.5 px-6">Date</th>
-<th class="py-3.5 px-6">Status</th>
-<th class="py-3.5 px-6 text-right">Actions</th>
-</tr>
-</thead>
-<tbody class="divide-y divide-outline-variant/20 font-body-md text-body-md text-on-surface">
-<!-- Row 1 -->
-<tr class="hover:bg-slate-50/60 transition-colors">
-<td class="py-4 px-6 font-medium">Hóa đơn tiền điện sinh hoạt</td>
-<td class="py-4 px-6 text-on-surface-variant">42.5 kg CO2e</td>
-<td class="py-4 px-6 text-on-surface-variant">01/11/2026</td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-primary-container/15 text-primary">
-                    Đã duyệt
-                  </span>
-</td>
-<td class="py-4 px-6 text-right">
-<button aria-label="View Activity Details" class="p-1.5 text-outline hover:text-primary rounded-md hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-xl">visibility</span>
-</button>
-</td>
-</tr>
-<!-- Row 2 -->
-<tr class="hover:bg-slate-50/60 transition-colors">
-<td class="py-4 px-6 font-medium">Motorbike commute</td>
-<td class="py-4 px-6 text-on-surface-variant">8.2 kg CO2e</td>
-<td class="py-4 px-6 text-on-surface-variant">02/11/2026</td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-tertiary-fixed/40 text-tertiary">
-                    Chờ duyệt
-                  </span>
-</td>
-<td class="py-4 px-6 text-right">
-<button aria-label="View Activity Details" class="p-1.5 text-outline hover:text-primary rounded-md hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-xl">visibility</span>
-</button>
-</td>
-</tr>
-<!-- Row 3 -->
-<tr class="hover:bg-slate-50/60 transition-colors">
-<td class="py-4 px-6 font-medium">Gas LPG</td>
-<td class="py-4 px-6 text-on-surface-variant">12.1 kg CO2e</td>
-<td class="py-4 px-6 text-on-surface-variant">03/11/2026</td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-error-container/60 text-error">
-                    Rejected
-                  </span>
-</td>
-<td class="py-4 px-6 text-right">
-<button aria-label="View Activity Details" class="p-1.5 text-outline hover:text-primary rounded-md hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-xl">visibility</span>
-</button>
-</td>
-</tr>
-<!-- Row 4 -->
-<tr class="hover:bg-slate-50/60 transition-colors">
-<td class="py-4 px-6 font-medium">Hóa đơn nước sinh hoạt</td>
-<td class="py-4 px-6 text-on-surface-variant">2.3 kg CO2e</td>
-<td class="py-4 px-6 text-on-surface-variant">03/11/2026</td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-primary-container/15 text-primary">
-                    Đã duyệt
-                  </span>
-</td>
-<td class="py-4 px-6 text-right">
-<button aria-label="View Activity Details" class="p-1.5 text-outline hover:text-primary rounded-md hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-xl">visibility</span>
-</button>
-</td>
-</tr>
-<!-- Row 5 -->
-<tr class="hover:bg-slate-50/60 transition-colors">
-<td class="py-4 px-6 font-medium">Hóa đơn tiền điện sinh hoạt</td>
-<td class="py-4 px-6 text-on-surface-variant">38.7 kg CO2e</td>
-<td class="py-4 px-6 text-on-surface-variant">05/11/2026</td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-primary-container/15 text-primary">
-                    Đã duyệt
-                  </span>
-</td>
-<td class="py-4 px-6 text-right">
-<button aria-label="View Activity Details" class="p-1.5 text-outline hover:text-primary rounded-md hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-xl">visibility</span>
-</button>
-</td>
-</tr>
-<!-- Row 6 -->
-<tr class="hover:bg-slate-50/60 transition-colors">
-<td class="py-4 px-6 font-medium">Đi taxi công tác</td>
-<td class="py-4 px-6 text-on-surface-variant">5.6 kg CO2e</td>
-<td class="py-4 px-6 text-on-surface-variant">06/11/2026</td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-tertiary-fixed/40 text-tertiary">
-                    Chờ duyệt
-                  </span>
-</td>
-<td class="py-4 px-6 text-right">
-<button aria-label="View Activity Details" class="p-1.5 text-outline hover:text-primary rounded-md hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-xl">visibility</span>
-</button>
-</td>
-</tr>
-<!-- Row 7 -->
-<tr class="hover:bg-slate-50/60 transition-colors">
-<td class="py-4 px-6 font-medium">Đổi bình gas LPG</td>
-<td class="py-4 px-6 text-on-surface-variant">9.4 kg CO2e</td>
-<td class="py-4 px-6 text-on-surface-variant">07/11/2026</td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-primary-container/15 text-primary">
-                    Đã duyệt
-                  </span>
-</td>
-<td class="py-4 px-6 text-right">
-<button aria-label="View Activity Details" class="p-1.5 text-outline hover:text-primary rounded-md hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-xl">visibility</span>
-</button>
-</td>
-</tr>
-<!-- Row 8 -->
-<tr class="hover:bg-slate-50/60 transition-colors">
-<td class="py-4 px-6 font-medium">Xe buýt công cộng</td>
-<td class="py-4 px-6 text-on-surface-variant">1.8 kg CO2e</td>
-<td class="py-4 px-6 text-on-surface-variant">08/11/2026</td>
-<td class="py-4 px-6">
-<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-tertiary-fixed/40 text-tertiary">
-                    Chờ duyệt
-                  </span>
-</td>
-<td class="py-4 px-6 text-right">
-<button aria-label="View Activity Details" class="p-1.5 text-outline hover:text-primary rounded-md hover:bg-surface-container-low transition-colors">
-<span class="material-symbols-outlined text-xl">visibility</span>
-</button>
-</td>
-</tr>
-</tbody>
-</table>
-</div>
-<!-- Table Pagination Footer -->
-<div class="px-6 py-4 flex items-center justify-between border-t border-outline-variant/30 bg-surface-container-lowest font-body-sm text-body-sm text-on-surface-variant">
-<div>
-            Hiển thị <span class="font-semibold text-on-surface">1-8</span> trên <span class="font-semibold text-on-surface">24</span> mục
-          </div>
-<div class="flex items-center gap-1">
-<button aria-label="Previous page" class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant/30 text-outline hover:bg-surface-container-low hover:text-on-surface transition-colors disabled:opacity-40" disabled="">
-<span class="material-symbols-outlined text-lg">chevron_left</span>
-</button>
-<button aria-label="Next page" class="w-8 h-8 flex items-center justify-center rounded-lg border border-outline-variant/30 text-on-surface hover:bg-surface-container-low hover:text-primary transition-colors">
-<span class="material-symbols-outlined text-lg">chevron_right</span>
-</button>
-</div>
-</div>
-</div>
+  <!-- Page Header -->
+  <div class="flex items-center justify-between">
+    <h1 class="text-2xl font-bold text-gray-900 tracking-tight">Sổ cái phát thải</h1>
+  </div>
+
+  <!-- Filter / Action Bar -->
+  <div class="flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+    <!-- Left Controls -->
+    <div class="flex flex-wrap items-center gap-3">
+      <!-- Month Selector -->
+      <div class="relative">
+        <button class="h-10 px-3.5 bg-white border border-gray-300 rounded-lg flex items-center gap-2 text-sm text-gray-700 shadow-sm hover:border-gray-400 transition-colors" type="button">
+          <span class="material-symbols-outlined text-gray-500 text-lg">calendar_today</span>
+          <span>Tháng 11/2026</span>
+          <span class="material-symbols-outlined text-gray-400 text-lg">expand_more</span>
+        </button>
+      </div>
+      <!-- Status Filter Dropdown -->
+      <div class="relative">
+        <button class="h-10 px-3.5 bg-white border border-gray-300 rounded-lg flex items-center gap-2 text-sm text-gray-700 shadow-sm hover:border-gray-400 transition-colors" type="button">
+          <span class="text-gray-500">Trạng thái:</span>
+          <span class="font-semibold text-gray-900">Tất cả</span>
+          <span class="material-symbols-outlined text-gray-400 text-lg">expand_more</span>
+        </button>
+      </div>
+      <!-- Search Input -->
+      <div class="relative min-w-[260px]">
+        <span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg">search</span>
+        <input class="w-full h-10 pl-9 pr-3 text-sm bg-white border border-gray-300 rounded-lg focus:outline-none focus:border-[#00A76F] focus:ring-1 focus:ring-[#00A76F] text-gray-900 placeholder:text-gray-400 shadow-sm transition-all" placeholder="Tìm kiếm theo tên hoạt động..." type="text"/>
+      </div>
+    </div>
+    <!-- Right Controls -->
+    <div class="flex items-center gap-3">
+      <!-- Outlined Button: Export Excel -->
+      <button class="h-10 px-4 bg-white border border-gray-300 rounded-lg flex items-center gap-2 text-sm font-semibold text-gray-700 hover:bg-gray-50 hover:border-gray-400 transition-colors shadow-sm" type="button">
+        <span class="material-symbols-outlined text-base text-gray-500">download</span>
+        <span>Xuất file Excel</span>
+      </button>
+      <!-- Primary Solid Emerald Button: Add Entry (No double +) -->
+      <button class="h-10 px-4 bg-[#00A76F] text-white rounded-lg flex items-center gap-2 text-sm font-semibold hover:bg-[#009160] transition-colors shadow-sm" type="button">
+        <span class="material-symbols-outlined text-base font-bold">add</span>
+        <span>Thêm phát thải</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Data Table Card -->
+  <div class="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm">
+    <div class="overflow-x-auto">
+      <table class="w-full text-left border-collapse">
+        <thead>
+          <tr class="bg-gray-50 border-b border-gray-200 text-gray-600 font-semibold text-xs uppercase tracking-wider">
+            <th class="py-3.5 px-6">Hoạt động</th>
+            <th class="py-3.5 px-6">Lượng phát thải (kg CO₂e)</th>
+            <th class="py-3.5 px-6">Ngày phát sinh</th>
+            <th class="py-3.5 px-6">Trạng thái</th>
+            <th class="py-3.5 px-6 text-right">Thao tác</th>
+          </tr>
+        </thead>
+        <tbody class="divide-y divide-gray-100 text-sm text-gray-900">
+          <!-- Row 1 -->
+          <tr class="hover:bg-gray-50/70 transition-colors">
+            <td class="py-4 px-6 font-medium">Hóa đơn tiền điện sinh hoạt</td>
+            <td class="py-4 px-6 text-gray-600">42.5 kg CO₂e</td>
+            <td class="py-4 px-6 text-gray-500">01/11/2026</td>
+            <td class="py-4 px-6">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-[#00A76F]">
+                Đã duyệt
+              </span>
+            </td>
+            <td class="py-4 px-6 text-right">
+              <button aria-label="Xem chi tiết" class="p-1.5 text-gray-400 hover:text-[#00A76F] rounded-md hover:bg-gray-100 transition-colors">
+                <span class="material-symbols-outlined text-xl">visibility</span>
+              </button>
+            </td>
+          </tr>
+          <!-- Row 2 -->
+          <tr class="hover:bg-gray-50/70 transition-colors">
+            <td class="py-4 px-6 font-medium">Đi lại bằng xe máy</td>
+            <td class="py-4 px-6 text-gray-600">8.2 kg CO₂e</td>
+            <td class="py-4 px-6 text-gray-500">02/11/2026</td>
+            <td class="py-4 px-6">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700">
+                Chờ duyệt
+              </span>
+            </td>
+            <td class="py-4 px-6 text-right">
+              <button aria-label="Xem chi tiết" class="p-1.5 text-gray-400 hover:text-[#00A76F] rounded-md hover:bg-gray-100 transition-colors">
+                <span class="material-symbols-outlined text-xl">visibility</span>
+              </button>
+            </td>
+          </tr>
+          <!-- Row 3 -->
+          <tr class="hover:bg-gray-50/70 transition-colors">
+            <td class="py-4 px-6 font-medium">Gas sinh hoạt (LPG)</td>
+            <td class="py-4 px-6 text-gray-600">12.1 kg CO₂e</td>
+            <td class="py-4 px-6 text-gray-500">03/11/2026</td>
+            <td class="py-4 px-6">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-red-50 text-red-600">
+                Từ chối
+              </span>
+            </td>
+            <td class="py-4 px-6 text-right">
+              <button aria-label="Xem chi tiết" class="p-1.5 text-gray-400 hover:text-[#00A76F] rounded-md hover:bg-gray-100 transition-colors">
+                <span class="material-symbols-outlined text-xl">visibility</span>
+              </button>
+            </td>
+          </tr>
+          <!-- Row 4 -->
+          <tr class="hover:bg-gray-50/70 transition-colors">
+            <td class="py-4 px-6 font-medium">Hóa đơn nước sinh hoạt</td>
+            <td class="py-4 px-6 text-gray-600">2.3 kg CO₂e</td>
+            <td class="py-4 px-6 text-gray-500">03/11/2026</td>
+            <td class="py-4 px-6">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-[#00A76F]">
+                Đã duyệt
+              </span>
+            </td>
+            <td class="py-4 px-6 text-right">
+              <button aria-label="Xem chi tiết" class="p-1.5 text-gray-400 hover:text-[#00A76F] rounded-md hover:bg-gray-100 transition-colors">
+                <span class="material-symbols-outlined text-xl">visibility</span>
+              </button>
+            </td>
+          </tr>
+          <!-- Row 5 -->
+          <tr class="hover:bg-gray-50/70 transition-colors">
+            <td class="py-4 px-6 font-medium">Hóa đơn tiền điện sinh hoạt</td>
+            <td class="py-4 px-6 text-gray-600">38.7 kg CO₂e</td>
+            <td class="py-4 px-6 text-gray-500">05/11/2026</td>
+            <td class="py-4 px-6">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-[#00A76F]">
+                Đã duyệt
+              </span>
+            </td>
+            <td class="py-4 px-6 text-right">
+              <button aria-label="Xem chi tiết" class="p-1.5 text-gray-400 hover:text-[#00A76F] rounded-md hover:bg-gray-100 transition-colors">
+                <span class="material-symbols-outlined text-xl">visibility</span>
+              </button>
+            </td>
+          </tr>
+          <!-- Row 6 -->
+          <tr class="hover:bg-gray-50/70 transition-colors">
+            <td class="py-4 px-6 font-medium">Đi taxi công tác</td>
+            <td class="py-4 px-6 text-gray-600">5.6 kg CO₂e</td>
+            <td class="py-4 px-6 text-gray-500">06/11/2026</td>
+            <td class="py-4 px-6">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700">
+                Chờ duyệt
+              </span>
+            </td>
+            <td class="py-4 px-6 text-right">
+              <button aria-label="Xem chi tiết" class="p-1.5 text-gray-400 hover:text-[#00A76F] rounded-md hover:bg-gray-100 transition-colors">
+                <span class="material-symbols-outlined text-xl">visibility</span>
+              </button>
+            </td>
+          </tr>
+          <!-- Row 7 -->
+          <tr class="hover:bg-gray-50/70 transition-colors">
+            <td class="py-4 px-6 font-medium">Đổi bình gas LPG</td>
+            <td class="py-4 px-6 text-gray-600">9.4 kg CO₂e</td>
+            <td class="py-4 px-6 text-gray-500">07/11/2026</td>
+            <td class="py-4 px-6">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-emerald-50 text-[#00A76F]">
+                Đã duyệt
+              </span>
+            </td>
+            <td class="py-4 px-6 text-right">
+              <button aria-label="Xem chi tiết" class="p-1.5 text-gray-400 hover:text-[#00A76F] rounded-md hover:bg-gray-100 transition-colors">
+                <span class="material-symbols-outlined text-xl">visibility</span>
+              </button>
+            </td>
+          </tr>
+          <!-- Row 8 -->
+          <tr class="hover:bg-gray-50/70 transition-colors">
+            <td class="py-4 px-6 font-medium">Xe buýt công cộng</td>
+            <td class="py-4 px-6 text-gray-600">1.8 kg CO₂e</td>
+            <td class="py-4 px-6 text-gray-500">08/11/2026</td>
+            <td class="py-4 px-6">
+              <span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-amber-50 text-amber-700">
+                Chờ duyệt
+              </span>
+            </td>
+            <td class="py-4 px-6 text-right">
+              <button aria-label="Xem chi tiết" class="p-1.5 text-gray-400 hover:text-[#00A76F] rounded-md hover:bg-gray-100 transition-colors">
+                <span class="material-symbols-outlined text-xl">visibility</span>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- Table Pagination Footer -->
+    <div class="px-6 py-4 flex items-center justify-between border-t border-gray-200 bg-white text-xs text-gray-600">
+      <div>
+        Hiển thị <span class="font-semibold text-gray-900">1-8</span> trên <span class="font-semibold text-gray-900">24</span> mục
+      </div>
+      <div class="flex items-center gap-1">
+        <button aria-label="Trang trước" class="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-400 hover:bg-gray-50 disabled:opacity-40" disabled="">
+          <span class="material-symbols-outlined text-lg">chevron_left</span>
+        </button>
+        <button aria-label="Trang sau" class="w-8 h-8 flex items-center justify-center rounded-lg border border-gray-200 text-gray-700 hover:bg-gray-50 hover:text-[#00A76F] transition-colors">
+          <span class="material-symbols-outlined text-lg">chevron_right</span>
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
 </main>
+</div>
 </body></html>

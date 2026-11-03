@@ -142,47 +142,47 @@
 <!-- BODY SHELL WRAPPER -->
 <div class="flex pt-16 min-h-[calc(100vh-4rem)] w-full">
 <!-- LEFT SIDEBAR (Shared Component: SideNavBar execution) -->
-<aside class="fixed left-0 top-16 bottom-0 w-52 flex flex-col py-6 px-3 bg-surface-container-lowest border-r border-outline-variant/30 select-none z-30">
+<aside class="fixed left-0 top-16 bottom-0 w-56 flex flex-col py-6 px-3 bg-surface-container-lowest border-r border-outline-variant/30 select-none z-30">
 <nav class="space-y-1.5 flex-1">
 <!-- Dashboard (ACTIVE) -->
 <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-lg shadow-sm shadow-primary-container/30 transition-all duration-150 ease-in-out" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
-<span class="text-label-lg font-label-lg tracking-tight">Dashboard</span>
+<span class="text-label-lg font-label-lg tracking-tight">Tổng quan</span>
 </a>
 <!-- Ledger -->
 <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="receipt_long">receipt_long</span>
-<span class="text-label-lg font-label-lg">Ledger</span>
+<span class="text-label-lg font-label-lg">Sổ cái</span>
 </a>
 <!-- Approvals -->
 <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="verified">verified</span>
-<span class="text-label-lg font-label-lg">Approvals</span>
+<span class="text-label-lg font-label-lg">Phê duyệt</span>
 </a>
 <!-- Insights -->
 <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="insights">insights</span>
-<span class="text-label-lg font-label-lg">Insights</span>
+<span class="text-label-lg font-label-lg">Báo cáo &amp; Lộ trình</span>
 </a>
 <!-- Settings -->
 <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
-<span class="text-label-lg font-label-lg">Settings</span>
+<span class="text-label-lg font-label-lg">Cài đặt</span>
 </a>
 </nav>
 </aside>
 <!-- MAIN CONTENT CANVAS -->
-<main class="ml-52 flex-1 p-8 max-w-7xl">
+<main class="ml-56 flex-1 p-8 max-w-7xl">
 <!-- Page Header: Pure Minimal Title -->
 <div class="mb-8">
-<h1 class="text-headline-md font-headline-md text-on-surface tracking-tight">Dashboard</h1>
+<h1 class="text-headline-md font-headline-md text-on-surface tracking-tight">Tổng quan</h1>
 </div>
 <!-- 3 KPI Cards Grid -->
 <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
 <!-- KPI 1: Total Emissions -->
 <div class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm hover:border-outline-variant/60 transition-all duration-200">
 <div class="flex items-center justify-between mb-3">
-<span class="text-body-md font-body-md text-on-surface-variant">Total Emissions</span>
+<span class="text-body-md font-body-md text-on-surface-variant">Tổng phát thải</span>
 <span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-primary-fixed/40 text-primary">
 <span class="material-symbols-outlined text-[14px]" data-icon="arrow_downward">arrow_downward</span>
               -12% vs last month
@@ -366,16 +366,16 @@
 </div>
 <div class="flex-1 min-w-0 pr-2">
 <p class="text-body-sm font-bold text-slate-900 dark:text-white leading-snug">
-            Reached 85% of November budget
+            Đã đạt 85% hạn mức ngân sách Tháng 11
           </p>
 <div class="flex items-center gap-2 mt-1.5">
 <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-rose-50 text-rose-600 dark:bg-rose-950/50 dark:text-rose-400 border border-rose-100 dark:border-rose-900/50">
-              Budget Alert
+              Cảnh báo hạn mức
             </span>
-<span class="text-[11px] text-slate-400 dark:text-slate-500">2 hours ago</span>
+<span class="text-[11px] text-slate-400 dark:text-slate-500">2 giờ trước</span>
 </div>
 </div>
-<span class="w-2 h-2 rounded-full bg-[#00A76F] mt-1.5 flex-shrink-0" title="Unread"></span>
+<span class="w-2 h-2 rounded-full bg-[#00A76F] mt-1.5 flex-shrink-0" title="Chưa đọc"></span>
 </div>
 <!-- Item 2: Unread Approved Entry -->
 <div class="p-4 bg-[#00A76F]/[0.03] dark:bg-slate-800/40 hover:bg-slate-50 dark:hover:bg-slate-800/70 transition-colors flex gap-3 relative cursor-pointer">
@@ -384,16 +384,16 @@
 </div>
 <div class="flex-1 min-w-0 pr-2">
 <p class="text-body-sm font-bold text-slate-900 dark:text-white leading-snug">
-            Electricity Bill entry approved by Tran Thi B
+            Bản ghi Hóa đơn tiền điện đã được Trần Thị B phê duyệt
           </p>
 <div class="flex items-center gap-2 mt-1.5">
 <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-semibold bg-[#00A76F]/10 text-[#00A76F] border border-[#00A76F]/20">
-              Approved
+              Đã duyệt
             </span>
-<span class="text-[11px] text-slate-400 dark:text-slate-500">3 hours ago</span>
+<span class="text-[11px] text-slate-400 dark:text-slate-500">3 giờ trước</span>
 </div>
 </div>
-<span class="w-2 h-2 rounded-full bg-[#00A76F] mt-1.5 flex-shrink-0" title="Unread"></span>
+<span class="w-2 h-2 rounded-full bg-[#00A76F] mt-1.5 flex-shrink-0" title="Chưa đọc"></span>
 </div>
 <!-- Item 3: Read Rejected Entry -->
 <div class="p-4 hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors flex gap-3 cursor-pointer">
@@ -402,13 +402,13 @@
 </div>
 <div class="flex-1 min-w-0">
 <p class="text-body-sm font-medium text-slate-800 dark:text-slate-200 leading-snug">
-            Gas LPG entry rejected: amount too high
+            Bản ghi Gas LPG bị từ chối: Sản lượng quá cao so với thực tế
           </p>
 <div class="flex items-center gap-2 mt-1.5">
 <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-medium bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-400">
-              Rejected
+              Từ chối
             </span>
-<span class="text-[11px] text-slate-400 dark:text-slate-500">Yesterday</span>
+<span class="text-[11px] text-slate-400 dark:text-slate-500">Hôm qua</span>
 </div>
 </div>
 </div>
@@ -419,13 +419,13 @@
 </div>
 <div class="flex-1 min-w-0">
 <p class="text-body-sm font-medium text-slate-800 dark:text-slate-200 leading-snug">
-            Water bill approved
+            Hóa đơn nước sinh hoạt đã được phê duyệt
           </p>
 <div class="flex items-center gap-2 mt-1.5">
 <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-medium bg-[#00A76F]/10 text-[#00A76F]">
-              Approved
+              Đã duyệt
             </span>
-<span class="text-[11px] text-slate-400 dark:text-slate-500">Yesterday</span>
+<span class="text-[11px] text-slate-400 dark:text-slate-500">Hôm qua</span>
 </div>
 </div>
 </div>
@@ -436,13 +436,13 @@
 </div>
 <div class="flex-1 min-w-0">
 <p class="text-body-sm font-medium text-slate-800 dark:text-slate-200 leading-snug">
-            Reached 100% of October budget
+            Đã chạm ngưỡng 100% ngân sách phát thải Tháng 10
           </p>
 <div class="flex items-center gap-2 mt-1.5">
 <span class="inline-flex items-center px-2 py-0.5 rounded-md text-[11px] font-medium bg-rose-50 text-rose-600 dark:bg-rose-950/40 dark:text-rose-400">
-              Budget Alert
+              Cảnh báo hạn mức
             </span>
-<span class="text-[11px] text-slate-400 dark:text-slate-500">3 days ago</span>
+<span class="text-[11px] text-slate-400 dark:text-slate-500">3 ngày trước</span>
 </div>
 </div>
 </div>
@@ -450,7 +450,7 @@
 <!-- Drawer Footer -->
 <div class="p-4 border-t border-slate-100 dark:border-slate-800 text-center bg-white dark:bg-slate-900">
 <a class="inline-flex items-center justify-center text-body-sm font-semibold text-[#00A76F] hover:underline cursor-pointer transition-colors py-1" href="#">
-        View all notifications
+        Xem tất cả thông báo
       </a>
 </div>
 </aside>
