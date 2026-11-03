@@ -143,98 +143,90 @@
 <div class="flex pt-16 min-h-[calc(100vh-4rem)] w-full">
 <!-- LEFT SIDEBAR (Shared Component: SideNavBar execution) -->
 <aside class="fixed left-0 top-16 bottom-0 w-52 flex flex-col py-6 px-3 bg-surface-container-lowest border-r border-outline-variant/30 select-none z-30">
-<nav class="space-y-1.5 flex-1">
-<!-- Dashboard (ACTIVE) -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-lg shadow-sm shadow-primary-container/30 transition-all duration-150 ease-in-out" href="#">
-<span class="material-symbols-outlined text-[20px]" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
-<span class="text-label-lg font-label-lg tracking-tight">Dashboard</span>
+<nav class="space-y-1.5 flex-1"><!-- Tong quan (ACTIVE) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00A76F]/10 text-primary font-semibold font-label-lg transition-all duration-150 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[20px] text-primary" data-icon="dashboard" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="text-label-lg font-label-lg tracking-tight text-primary">Tổng quan</span>
 </a>
-<!-- Ledger -->
+<!-- So cai -->
 <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="receipt_long">receipt_long</span>
-<span class="text-label-lg font-label-lg">Ledger</span>
+<span class="text-label-lg font-label-lg">Sổ cái</span>
 </a>
-<!-- Approvals -->
+<!-- Phe duyet -->
 <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="verified">verified</span>
-<span class="text-label-lg font-label-lg">Approvals</span>
+<span class="text-label-lg font-label-lg">Phê duyệt</span>
 </a>
-<!-- Insights -->
+<!-- Bao cao -->
 <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="insights">insights</span>
-<span class="text-label-lg font-label-lg">Insights</span>
+<span class="text-label-lg font-label-lg">Báo cáo</span>
 </a>
-<!-- Settings -->
+<!-- Cai dat -->
 <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
-<span class="text-label-lg font-label-lg">Settings</span>
-</a>
-</nav>
+<span class="text-label-lg font-label-lg">Cài đặt</span>
+</a></nav>
 </aside>
 <!-- MAIN CONTENT CANVAS -->
 <main class="ml-52 flex-1 p-8 max-w-7xl">
 <!-- Page Header: Pure Minimal Title -->
 <div class="mb-8">
 <h1 class="text-headline-md font-headline-md text-on-surface tracking-tight">Dashboard</h1>
-</div>
+<div class="mt-4 flex items-center gap-3 px-4 py-3 rounded-xl bg-[#FFAB00]/15 border border-[#FFAB00]/30 text-[#B76E00] font-medium text-body-md shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-[#B76E00] flex-shrink-0">warning</span>
+<span class="text-body-md text-[#B76E00] font-medium">⚠️ Đã sử dụng 85.4% hạn ngạch phát thải tháng 10 (85.40 / 100 kg CO2e)</span>
+</div></div>
 <!-- 3 KPI Cards Grid -->
 <section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
 <!-- KPI 1: Total Emissions -->
-<div class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm hover:border-outline-variant/60 transition-all duration-200">
-<div class="flex items-center justify-between mb-3">
-<span class="text-body-md font-body-md text-on-surface-variant">Total Emissions</span>
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-primary-fixed/40 text-primary">
+<div class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm hover:border-outline-variant/60 transition-all duration-200"><div class="flex items-center justify-between mb-3">
+<span class="text-body-md font-body-md text-on-surface-variant font-medium">Tổng phát thải</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#00A76F]/10 text-primary font-semibold">
 <span class="material-symbols-outlined text-[14px]" data-icon="arrow_downward">arrow_downward</span>
-              -12% vs last month
-            </span>
+-12% so với tháng trước
+</span>
 </div>
 <div class="flex items-baseline gap-1 mt-1">
 <span class="text-display font-display text-on-surface tracking-tight leading-none">85.4</span>
 <span class="text-body-lg font-body-lg text-on-surface-variant font-medium">kg CO2e</span>
-</div>
-</div>
+</div></div>
 <!-- KPI 2: Budget Used -->
-<div class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm hover:border-outline-variant/60 transition-all duration-200 flex flex-col justify-between">
-<div>
+<div class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm hover:border-outline-variant/60 transition-all duration-200 flex flex-col justify-between"><div>
 <div class="flex items-center justify-between mb-3">
-<span class="text-body-md font-body-md text-on-surface-variant">Budget Used</span>
+<span class="text-body-md font-body-md text-on-surface-variant font-medium">Ngân sách tháng</span>
 <span class="text-body-sm font-body-sm text-on-surface-variant font-medium">85.4 / 125 kg</span>
 </div>
 <div class="flex items-baseline gap-1 mt-1">
 <span class="text-display font-display text-on-surface tracking-tight leading-none">68%</span>
 </div>
 </div>
-<!-- Integrated Linear Progress Bar -->
 <div class="mt-4 pt-1">
-<div class="w-full h-1.5 bg-surface-container-high rounded-full overflow-hidden">
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
 <div class="h-full bg-primary-container rounded-full" style="width: 68%;"></div>
 </div>
-</div>
-</div>
+</div></div>
 <!-- KPI 3: Per Person -->
-<div class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm hover:border-outline-variant/60 transition-all duration-200">
-<div class="flex items-center justify-between mb-3">
-<span class="text-body-md font-body-md text-on-surface-variant">Per Person</span>
-<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-low text-on-surface-variant">
-              4 team members
-            </span>
+<div class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm hover:border-outline-variant/60 transition-all duration-200"><div class="flex items-center justify-between mb-3">
+<span class="text-body-md font-body-md text-on-surface-variant font-medium">Bình quân người</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-low text-on-surface-variant font-semibold">
+4 thành viên
+</span>
 </div>
 <div class="flex items-baseline gap-1 mt-1">
 <span class="text-display font-display text-on-surface tracking-tight leading-none">21.4</span>
 <span class="text-body-lg font-body-lg text-on-surface-variant font-medium">kg CO2e</span>
-</div>
-</div>
+</div></div>
 </section>
 <!-- 2 Analytics / Chart Cards Layout -->
 <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
 <!-- Card A: Emission Trend (7 Cols) -->
 <div class="lg:col-span-7 bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm flex flex-col justify-between">
-<div class="flex items-center justify-between mb-6">
-<h2 class="text-title font-title text-on-surface">Emission Trend</h2>
-<span class="px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-surface-container text-on-surface-variant">
-              Last 6 months
-            </span>
-</div>
+<div class="flex items-center justify-between mb-6"><h2 class="text-title font-title text-on-surface font-semibold">Xu hướng phát thải</h2>
+<span class="px-2.5 py-1 rounded-full text-label-sm font-label-sm bg-surface-container text-on-surface-variant font-semibold">
+6 tháng qua
+</span></div>
 <!-- Minimalist Area/Line SVG Chart -->
 <div class="w-full h-64 flex flex-col justify-end">
 <div class="relative w-full h-48">
@@ -271,49 +263,36 @@
 </div>
 </div>
 <!-- Card B: By Category (5 Cols) -->
-<div class="lg:col-span-5 bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm flex flex-col justify-between">
-<div class="flex items-center justify-between mb-4">
-<h2 class="text-title font-title text-on-surface">By Category</h2>
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm flex flex-col justify-between"><div class="flex items-center justify-between mb-4">
+<h2 class="text-title font-title text-on-surface font-semibold">Cơ cấu nguồn phát</h2>
 </div>
-<!-- Clean Modern Donut Chart -->
 <div class="flex flex-col items-center justify-center my-auto py-2">
 <div class="relative w-44 h-44 flex items-center justify-center">
 <svg class="w-full h-full -rotate-90 transform" viewbox="0 0 100 100">
-<!-- Background track -->
 <circle cx="50" cy="50" fill="transparent" r="38" stroke="#F3F4F6" stroke-width="12"></circle>
-<!-- Segment 1: Electricity 45% (Emerald #00A76F) -->
-<!-- Circ = 2 * PI * 38 ≈ 238.76. 45% = 107.44 -->
 <circle cx="50" cy="50" fill="transparent" r="38" stroke="#00A76F" stroke-dasharray="107.44 238.76" stroke-dashoffset="0" stroke-linecap="round" stroke-width="12"></circle>
-<!-- Segment 2: Transport 25% (#00B8D9 / Secondary tint) -->
-<!-- 25% = 59.69, offset = -107.44 -->
 <circle cx="50" cy="50" fill="transparent" r="38" stroke="#00B8D9" stroke-dasharray="59.69 238.76" stroke-dashoffset="-107.44" stroke-width="12"></circle>
-<!-- Segment 3: Gas 20% (#FFAB00 / Amber tint) -->
-<!-- 20% = 47.75, offset = -167.13 -->
 <circle cx="50" cy="50" fill="transparent" r="38" stroke="#FFAB00" stroke-dasharray="47.75 238.76" stroke-dashoffset="-167.13" stroke-width="12"></circle>
-<!-- Segment 4: Other 10% (#DFE3E8) -->
-<!-- 10% = 23.88, offset = -214.88 -->
-<circle cx="50" cy="50" fill="transparent" r="38" stroke="#DFE3E8" stroke-dasharray="23.88 238.76" stroke-dashoffset="-214.88" stroke-width="12"></circle>
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#919EAB" stroke-dasharray="23.88 238.76" stroke-dashoffset="-214.88" stroke-width="12"></circle>
 </svg>
-<!-- Central Metric Summary -->
 <div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
-<span class="text-body-sm font-body-sm text-on-surface-variant font-medium">Total</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant font-medium">Tổng</span>
 <span class="text-title font-title text-on-surface font-bold leading-tight">85.4 kg</span>
 </div>
 </div>
 </div>
-<!-- Minimal Category Legend Grid -->
 <div class="grid grid-cols-2 gap-3 pt-4 border-t border-outline-variant/20">
 <div class="flex items-center justify-between text-body-sm font-body-sm pr-2">
 <div class="flex items-center gap-2">
 <span class="w-2.5 h-2.5 rounded-full bg-[#00A76F]"></span>
-<span class="text-on-surface-variant">Electricity</span>
+<span class="text-on-surface-variant">Điện</span>
 </div>
 <span class="font-semibold text-on-surface">45%</span>
 </div>
 <div class="flex items-center justify-between text-body-sm font-body-sm pl-2">
 <div class="flex items-center gap-2">
 <span class="w-2.5 h-2.5 rounded-full bg-[#00B8D9]"></span>
-<span class="text-on-surface-variant">Transport</span>
+<span class="text-on-surface-variant">Di chuyển</span>
 </div>
 <span class="font-semibold text-on-surface">25%</span>
 </div>
@@ -327,12 +306,11 @@
 <div class="flex items-center justify-between text-body-sm font-body-sm pl-2">
 <div class="flex items-center gap-2">
 <span class="w-2.5 h-2.5 rounded-full bg-[#DFE3E8]"></span>
-<span class="text-on-surface-variant">Other</span>
+<span class="text-on-surface-variant">Nước</span>
 </div>
 <span class="font-semibold text-on-surface">10%</span>
 </div>
-</div>
-</div>
+</div></div>
 </section>
 </main>
 </div>

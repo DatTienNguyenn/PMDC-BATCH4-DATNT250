@@ -43,7 +43,7 @@ Toàn bộ **26 màn hình & modal** định nghĩa trong Kiến trúc Thông ti
 
 | Screen ID | Tên Màn hình / Modal | Presentation | Route | Stitch Screen ID | File Ảnh & HTML |
 |:---|:---|:---:|:---|:---:|:---:|
-| **SCR-AUTH-01** | Đăng nhập & Đăng ký (Split View) | Full Page | `/auth/login`<br>`/auth/register` | `dbc64b212f8f4cd69036820ed230b8d5` | [Ảnh](screens/SCR-AUTH-01.png) • [HTML](html/SCR-AUTH-01.html) |
+| **SCR-AUTH-01** | Đăng nhập & Đăng ký (Split View) | Full Page | `/auth/login`<br>`/auth/register` | `9ef8659b4d9748dfa5587515713daafe` | [Ảnh](screens/SCR-AUTH-01.png) • [HTML](html/SCR-AUTH-01.html) |
 | **SCR-AUTH-02** | Quên & Đặt lại Mật khẩu | Full Page | `/auth/forgot-password` | `684ae3c9b2c74afc82dbf8d491bd583a` | [Ảnh](screens/SCR-AUTH-02.png) • [HTML](html/SCR-AUTH-02.html) |
 | **SCR-WS-01** | Chọn Không gian làm việc (Switcher) | Full Page | `/workspaces` | `f55ba06ee41249f4b4d4f06265c2f9eb` | [Ảnh](screens/SCR-WS-01.png) • [HTML](html/SCR-WS-01.html) |
 | **SCR-WS-MODAL-01** | Modal Khởi tạo Workspace mới | Modal | `/workspaces?modal=create` | `290a60528eb04155a29426b82156f317` | [Ảnh](screens/SCR-WS-MODAL-01.png) • [HTML](html/SCR-WS-MODAL-01.html) |
@@ -53,13 +53,13 @@ Toàn bộ **26 màn hình & modal** định nghĩa trong Kiến trúc Thông ti
 
 | Screen ID | Tên Màn hình / Modal | Presentation | Route | Stitch Screen ID | File Ảnh & HTML |
 |:---|:---|:---:|:---|:---:|:---:|
-| **SCR-DASH-01** | Dashboard Trung tâm & Giám sát Ngân sách | Full Page | `/workspace/[id]/dashboard` | `7d5729320607474f83c9b7d667a92388` | [Ảnh](screens/SCR-DASH-01.png) • [HTML](html/SCR-DASH-01.html) |
+| **SCR-DASH-01** | Dashboard Trung tâm & Giám sát Ngân sách | Full Page | `/workspace/[id]/dashboard` | `7ca260961a064a948720a0604454788e` | [Ảnh](screens/SCR-DASH-01.png) • [HTML](html/SCR-DASH-01.html) |
 | **SCR-LEDGER-01** | Sổ cái Phát thải & Xuất Excel | Full Page | `/workspace/[id]/ledger` | `05b823683de84cbfa60a486fa231cd7e` | [Ảnh](screens/SCR-LEDGER-01.png) • [HTML](html/SCR-LEDGER-01.html) |
 | **SCR-LEDGER-DETAIL-01** | Modal Xem Chi tiết Bản ghi & Vết duyệt | Modal | `/workspace/[id]/ledger?logId=[id]` | `b083b61eb86143c9a39bb6ae5af0b356` | [Ảnh](screens/SCR-LEDGER-DETAIL-01.png) • [HTML](html/SCR-LEDGER-DETAIL-01.html) |
 | **SCR-EMISSION-ADD-01** | Modal Thêm Phát thải Đa kênh (3 Tabs) | Modal | `/workspace/[id]/ledger?action=add` | `7dcf3782bad94cf99ecd5c7eeea3fe98` | [Ảnh](screens/SCR-EMISSION-ADD-01.png) • [HTML](html/SCR-EMISSION-ADD-01.html) |
 | **SCR-AI-PREVIEW-01** | Modal Kiểm chứng Dữ liệu AI Vision | Modal | `/workspace/[id]/ledger?action=ai-preview` | `f05faa4bf8864247bb89afe61480f41d` | [Ảnh](screens/SCR-AI-PREVIEW-01.png) • [HTML](html/SCR-AI-PREVIEW-01.html) |
 | **SCR-EXCEL-PREVIEW-01** | Modal Xem trước & Xác thực Nạp File Excel | Modal | `/workspace/[id]/ledger?action=excel-preview` | `aa51c4fc76e140aca8c162ba55a1179a` | [Ảnh](screens/SCR-EXCEL-PREVIEW-01.png) • [HTML](html/SCR-EXCEL-PREVIEW-01.html) |
-| **SCR-APPROVE-01** | Hàng đợi Kiểm duyệt Sổ cái | Full Page | `/workspace/[id]/approvals` | `dfe8d855b545448db760ef442225a337` | [Ảnh](screens/SCR-APPROVE-01.png) • [HTML](html/SCR-APPROVE-01.html) |
+| **SCR-APPROVE-01** | Hàng đợi Kiểm duyệt Sổ cái | Full Page | `/workspace/[id]/approvals` | `4c1debb05c284c47a733506c3dc8c4cc` | [Ảnh](screens/SCR-APPROVE-01.png) • [HTML](html/SCR-APPROVE-01.html) |
 | **SCR-APPROVE-REJECT-01** | Modal Nhập Lý do Từ chối Phát thải | Modal | `/workspace/[id]/approvals?reject=[id]` | `beb015a912234cdcbfc8c9e99905367d` | [Ảnh](screens/SCR-APPROVE-REJECT-01.png) • [HTML](html/SCR-APPROVE-REJECT-01.html) |
 | **SCR-INSIGHT-01** | Báo cáo AI Insight & Lộ trình Cắt giảm | Full Page | `/workspace/[id]/insights` | `2f1db39a09d0461784ee22159e017d86` | [Ảnh](screens/SCR-INSIGHT-01.png) • [HTML](html/SCR-INSIGHT-01.html) |
 | **SCR-SETTING-01** | Cài đặt Workspace (Thông số nền, Ngân sách, Thành viên) | Full Page | `/workspace/[id]/settings` | `cf93c51782714b909e9a344cb4d94807` | [Ảnh](screens/SCR-SETTING-01.png) • [HTML](html/SCR-SETTING-01.html) |

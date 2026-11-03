@@ -136,256 +136,29 @@
 </header>
 <!-- SideNavBar (Shared Component) -->
 <aside class="fixed left-0 top-16 bottom-0 w-52 flex flex-col py-6 px-3 bg-surface-container-lowest border-r border-outline-variant/30 z-30">
-<nav class="flex flex-col gap-1.5 w-full">
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
-<span class="material-symbols-outlined text-[20px]">dashboard</span>
-<span>Dashboard</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
-<span class="material-symbols-outlined text-[20px]">receipt_long</span>
-<span>Ledger</span>
-</a>
-<!-- Active Tab: Approvals -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary-container text-on-primary-container font-label-lg text-label-lg transition-all duration-150 ease-in-out shadow-sm" href="#">
-<span class="material-symbols-outlined text-[20px]">verified</span>
-<span>Approvals</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
-<span class="material-symbols-outlined text-[20px]">insights</span>
-<span>Insights</span>
-</a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
-<span class="material-symbols-outlined text-[20px]">settings</span>
-<span>Settings</span>
-</a>
-</nav>
+<nav class="flex flex-col gap-1.5 w-full"><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Tổng quan</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#"><span class="material-symbols-outlined text-[20px]">receipt_long</span><span>Sổ cái</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-secondary-fixed/40 text-primary font-semibold font-label-lg text-label-lg transition-all duration-150 ease-in-out shadow-sm" href="#"><span class="material-symbols-outlined text-[20px]">verified</span><span>Phê duyệt</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#"><span class="material-symbols-outlined text-[20px]">insights</span><span>Báo cáo &amp; Lộ trình</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#"><span class="material-symbols-outlined text-[20px]">settings</span><span>Cài đặt</span></a></nav>
 </aside>
 <!-- Main Content Canvas -->
 <main class="ml-52 pt-16 min-h-screen">
 <div class="max-w-[1440px] mx-auto p-6 lg:p-10 space-y-6">
 <!-- Page Header & Metrics Row -->
-<section class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-<div>
-<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Approvals</h1>
-</div>
-<!-- Status summary pills -->
-<div class="flex items-center gap-2.5 flex-wrap">
-<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed/40 text-on-tertiary-container font-label-md text-label-md border border-tertiary/20">
-<span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span>
-<span>Pending: 5</span>
-</div>
-<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed/40 text-on-secondary-fixed-variant font-label-md text-label-md border border-primary/20">
-<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
-<span>Approved today: 8</span>
-</div>
-<div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-error-container/60 text-error font-label-md text-label-md border border-error/20">
-<span class="w-1.5 h-1.5 rounded-full bg-error"></span>
-<span>Rejected today: 2</span>
-</div>
-</div>
-</section>
+<section class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"><div><h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight font-bold">Hàng đợi kiểm duyệt</h1></div><div class="flex items-center gap-2.5 flex-wrap"><div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed/40 text-on-tertiary-container font-label-md text-label-md border border-tertiary/20"><span class="w-1.5 h-1.5 rounded-full bg-tertiary-container"></span><span>Chờ duyệt: 5</span></div><div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-secondary-fixed/40 text-on-secondary-fixed-variant font-label-md text-label-md border border-primary/20"><span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span><span>Đã duyệt hôm nay: 8</span></div><div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-error-container/60 text-error font-label-md text-label-md border border-error/20"><span class="w-1.5 h-1.5 rounded-full bg-error"></span><span>Từ chối hôm nay: 2</span></div></div></section>
 <!-- Table Container with Bulk Action Toolbar -->
 <section class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] overflow-hidden">
 <!-- Bulk Action Toolbar -->
-<div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/20 bg-surface-container-lowest">
-<div class="flex items-center gap-3">
-<button class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg border border-primary-container text-primary font-label-lg text-label-lg hover:bg-secondary-fixed/20 transition-colors duration-150 focus:outline-none">
-<span class="material-symbols-outlined text-[18px]">done_all</span>
-<span>Approve All Selected (2 selected)</span>
-</button>
-</div>
-<div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
-<span class="material-symbols-outlined text-[16px] text-outline">info</span>
-<span>Showing 5 pending submissions</span>
-</div>
-</div>
+<div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant/20 bg-surface-container-lowest"><div class="flex items-center gap-3"><button class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-primary-container text-on-primary font-label-lg text-label-lg hover:bg-primary transition-colors duration-150 shadow-sm focus:outline-none"><span class="material-symbols-outlined text-[18px]">check</span><span>Duyệt các mục đã chọn (2)</span></button></div><div class="flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm"><span class="material-symbols-outlined text-[16px] text-outline">info</span><span>Hiển thị 5 yêu cầu đang chờ xử lý</span></div></div>
 <!-- Approvals Table -->
 <div class="overflow-x-auto">
 <table class="w-full text-left border-collapse">
 <thead>
-<tr class="border-b border-outline-variant/20 bg-surface-container-low/50 text-on-surface-variant font-label-md text-label-md uppercase tracking-wider">
-<th class="w-12 px-6 py-3.5" scope="col">
-<input aria-label="Select all" checked="" class="w-4 h-4 rounded text-primary-container focus:ring-primary-container focus:ring-offset-0 border-outline-variant cursor-pointer transition-colors" type="checkbox"/>
-</th>
-<th class="px-6 py-3.5 font-label-md text-label-md" scope="col">Submitted by</th>
-<th class="px-6 py-3.5 font-label-md text-label-md" scope="col">Activity</th>
-<th class="px-6 py-3.5 font-label-md text-label-md" scope="col">Amount</th>
-<th class="px-6 py-3.5 font-label-md text-label-md" scope="col">Submitted</th>
-<th class="px-6 py-3.5 text-right font-label-md text-label-md" scope="col">Actions</th>
-</tr>
+<tr class="border-b border-outline-variant/20 bg-surface-container-low/50 text-on-surface-variant font-label-md text-label-md uppercase tracking-wider"><th class="w-12 px-6 py-3.5" scope="col"><input aria-label="Chọn tất cả" checked="" class="w-4 h-4 rounded text-primary-container focus:ring-primary-container focus:ring-offset-0 border-outline-variant cursor-pointer transition-colors" type="checkbox"/></th><th class="px-6 py-3.5 font-label-md text-label-md" scope="col">Người gửi</th><th class="px-6 py-3.5 font-label-md text-label-md" scope="col">Hoạt động</th><th class="px-6 py-3.5 font-label-md text-label-md" scope="col">Lượng phát thải</th><th class="px-6 py-3.5 font-label-md text-label-md" scope="col">Thời gian gửi</th><th class="px-6 py-3.5 text-right font-label-md text-label-md" scope="col">Thao tác</th></tr>
 </thead>
-<tbody class="divide-y divide-outline-variant/20 font-body-md text-body-md text-on-surface">
-<!-- Row 1: Checked -->
-<tr class="hover:bg-surface-container-low/40 transition-colors duration-100 bg-secondary-fixed/10">
-<td class="px-6 py-4">
-<input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-primary-container focus:ring-offset-0 border-outline-variant cursor-pointer transition-colors" type="checkbox"/>
-</td>
-<td class="px-6 py-4 whitespace-nowrap">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-label-md text-label-md text-on-surface font-semibold border border-outline-variant/30">
-                      NA
-                    </div>
-<span class="font-body-md text-body-md font-medium text-on-surface">Nguyen Van A</span>
-</div>
-</td>
-<td class="px-6 py-4 whitespace-nowrap text-on-surface-variant">
-                  Electricity Bill
-                </td>
-<td class="px-6 py-4 whitespace-nowrap font-medium text-on-surface">
-                  42.5 kg CO2e
-                </td>
-<td class="px-6 py-4 whitespace-nowrap text-on-surface-variant font-body-sm text-body-sm">
-                  2 hours ago
-                </td>
-<td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
-<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-secondary-fixed/30 text-on-secondary-fixed-variant hover:bg-secondary-fixed/50 font-label-md text-label-md transition-colors duration-150">
-<span class="material-symbols-outlined text-[16px]">check</span>
-<span>Accept</span>
-</button>
-<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-error-container/40 text-error hover:bg-error-container/70 font-label-md text-label-md transition-colors duration-150">
-<span class="material-symbols-outlined text-[16px]">close</span>
-<span>Reject</span>
-</button>
-</td>
-</tr>
-<!-- Row 2: Checked -->
-<tr class="hover:bg-surface-container-low/40 transition-colors duration-100 bg-secondary-fixed/10">
-<td class="px-6 py-4">
-<input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-primary-container focus:ring-offset-0 border-outline-variant cursor-pointer transition-colors" type="checkbox"/>
-</td>
-<td class="px-6 py-4 whitespace-nowrap">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-label-md text-label-md text-on-surface font-semibold border border-outline-variant/30">
-                      TB
-                    </div>
-<span class="font-body-md text-body-md font-medium text-on-surface">Tran Thi B</span>
-</div>
-</td>
-<td class="px-6 py-4 whitespace-nowrap text-on-surface-variant">
-                  Motorbike commute
-                </td>
-<td class="px-6 py-4 whitespace-nowrap font-medium text-on-surface">
-                  8.2 kg CO2e
-                </td>
-<td class="px-6 py-4 whitespace-nowrap text-on-surface-variant font-body-sm text-body-sm">
-                  3 hours ago
-                </td>
-<td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
-<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-secondary-fixed/30 text-on-secondary-fixed-variant hover:bg-secondary-fixed/50 font-label-md text-label-md transition-colors duration-150">
-<span class="material-symbols-outlined text-[16px]">check</span>
-<span>Accept</span>
-</button>
-<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-error-container/40 text-error hover:bg-error-container/70 font-label-md text-label-md transition-colors duration-150">
-<span class="material-symbols-outlined text-[16px]">close</span>
-<span>Reject</span>
-</button>
-</td>
-</tr>
-<!-- Row 3: Unchecked -->
-<tr class="hover:bg-surface-container-low/40 transition-colors duration-100">
-<td class="px-6 py-4">
-<input class="w-4 h-4 rounded text-primary-container focus:ring-primary-container focus:ring-offset-0 border-outline-variant cursor-pointer transition-colors" type="checkbox"/>
-</td>
-<td class="px-6 py-4 whitespace-nowrap">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-label-md text-label-md text-on-surface font-semibold border border-outline-variant/30">
-                      LC
-                    </div>
-<span class="font-body-md text-body-md font-medium text-on-surface">Le Van C</span>
-</div>
-</td>
-<td class="px-6 py-4 whitespace-nowrap text-on-surface-variant">
-                  Gas LPG
-                </td>
-<td class="px-6 py-4 whitespace-nowrap font-medium text-on-surface">
-                  12.1 kg CO2e
-                </td>
-<td class="px-6 py-4 whitespace-nowrap text-on-surface-variant font-body-sm text-body-sm">
-                  5 hours ago
-                </td>
-<td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
-<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-secondary-fixed/30 text-on-secondary-fixed-variant hover:bg-secondary-fixed/50 font-label-md text-label-md transition-colors duration-150">
-<span class="material-symbols-outlined text-[16px]">check</span>
-<span>Accept</span>
-</button>
-<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-error-container/40 text-error hover:bg-error-container/70 font-label-md text-label-md transition-colors duration-150">
-<span class="material-symbols-outlined text-[16px]">close</span>
-<span>Reject</span>
-</button>
-</td>
-</tr>
-<!-- Row 4: Unchecked -->
-<tr class="hover:bg-surface-container-low/40 transition-colors duration-100">
-<td class="px-6 py-4">
-<input class="w-4 h-4 rounded text-primary-container focus:ring-primary-container focus:ring-offset-0 border-outline-variant cursor-pointer transition-colors" type="checkbox"/>
-</td>
-<td class="px-6 py-4 whitespace-nowrap">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-label-md text-label-md text-on-surface font-semibold border border-outline-variant/30">
-                      NA
-                    </div>
-<span class="font-body-md text-body-md font-medium text-on-surface">Nguyen Van A</span>
-</div>
-</td>
-<td class="px-6 py-4 whitespace-nowrap text-on-surface-variant">
-                  Taxi ride
-                </td>
-<td class="px-6 py-4 whitespace-nowrap font-medium text-on-surface">
-                  5.6 kg CO2e
-                </td>
-<td class="px-6 py-4 whitespace-nowrap text-on-surface-variant font-body-sm text-body-sm">
-                  Yesterday
-                </td>
-<td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
-<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-secondary-fixed/30 text-on-secondary-fixed-variant hover:bg-secondary-fixed/50 font-label-md text-label-md transition-colors duration-150">
-<span class="material-symbols-outlined text-[16px]">check</span>
-<span>Accept</span>
-</button>
-<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-error-container/40 text-error hover:bg-error-container/70 font-label-md text-label-md transition-colors duration-150">
-<span class="material-symbols-outlined text-[16px]">close</span>
-<span>Reject</span>
-</button>
-</td>
-</tr>
-<!-- Row 5: Unchecked -->
-<tr class="hover:bg-surface-container-low/40 transition-colors duration-100">
-<td class="px-6 py-4">
-<input class="w-4 h-4 rounded text-primary-container focus:ring-primary-container focus:ring-offset-0 border-outline-variant cursor-pointer transition-colors" type="checkbox"/>
-</td>
-<td class="px-6 py-4 whitespace-nowrap">
-<div class="flex items-center gap-3">
-<div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-label-md text-label-md text-on-surface font-semibold border border-outline-variant/30">
-                      PD
-                    </div>
-<span class="font-body-md text-body-md font-medium text-on-surface">Pham Thi D</span>
-</div>
-</td>
-<td class="px-6 py-4 whitespace-nowrap text-on-surface-variant">
-                  Bus commute
-                </td>
-<td class="px-6 py-4 whitespace-nowrap font-medium text-on-surface">
-                  1.8 kg CO2e
-                </td>
-<td class="px-6 py-4 whitespace-nowrap text-on-surface-variant font-body-sm text-body-sm">
-                  Yesterday
-                </td>
-<td class="px-6 py-4 whitespace-nowrap text-right space-x-2">
-<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-secondary-fixed/30 text-on-secondary-fixed-variant hover:bg-secondary-fixed/50 font-label-md text-label-md transition-colors duration-150">
-<span class="material-symbols-outlined text-[16px]">check</span>
-<span>Accept</span>
-</button>
-<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-error-container/40 text-error hover:bg-error-container/70 font-label-md text-label-md transition-colors duration-150">
-<span class="material-symbols-outlined text-[16px]">close</span>
-<span>Reject</span>
-</button>
-</td>
-</tr>
-</tbody>
+<tbody class="divide-y divide-outline-variant/20 font-body-md text-body-md text-on-surface"><tr class="hover:bg-surface-container-low/40 transition-colors duration-100 bg-secondary-fixed/10"><td class="px-6 py-4"><input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-primary-container focus:ring-offset-0 border-outline-variant cursor-pointer transition-colors" type="checkbox"/></td><td class="px-6 py-4 whitespace-nowrap"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-label-md text-label-md text-on-surface font-semibold border border-outline-variant/30">NA</div><span class="font-body-md text-body-md font-medium text-on-surface">Nguyễn Văn A</span></div></td><td class="px-6 py-4 whitespace-nowrap text-on-surface-variant">Hóa đơn tiền điện (Electricity Bill)</td><td class="px-6 py-4 whitespace-nowrap font-medium text-on-surface">42.5 kg CO2e</td><td class="px-6 py-4 whitespace-nowrap text-on-surface-variant font-body-sm text-body-sm">2 giờ trước</td><td class="px-6 py-4 whitespace-nowrap text-right space-x-2"><button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-secondary-fixed/30 text-on-secondary-fixed-variant hover:bg-secondary-fixed/50 font-label-md text-label-md transition-colors duration-150"><span class="material-symbols-outlined text-[16px]">check</span><span>Duyệt</span></button><button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-error-container/40 text-error hover:bg-error-container/70 font-label-md text-label-md transition-colors duration-150"><span class="material-symbols-outlined text-[16px]">close</span><span>Từ chối</span></button></td></tr><tr class="hover:bg-surface-container-low/40 transition-colors duration-100 bg-secondary-fixed/10"><td class="px-6 py-4"><input checked="" class="w-4 h-4 rounded text-primary-container focus:ring-primary-container focus:ring-offset-0 border-outline-variant cursor-pointer transition-colors" type="checkbox"/></td><td class="px-6 py-4 whitespace-nowrap"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-label-md text-label-md text-on-surface font-semibold border border-outline-variant/30">TB</div><span class="font-body-md text-body-md font-medium text-on-surface">Trần Thị B</span></div></td><td class="px-6 py-4 whitespace-nowrap text-on-surface-variant">Đi lại bằng xe máy (Motorbike commute)</td><td class="px-6 py-4 whitespace-nowrap font-medium text-on-surface">8.2 kg CO2e</td><td class="px-6 py-4 whitespace-nowrap text-on-surface-variant font-body-sm text-body-sm">3 giờ trước</td><td class="px-6 py-4 whitespace-nowrap text-right space-x-2"><button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-secondary-fixed/30 text-on-secondary-fixed-variant hover:bg-secondary-fixed/50 font-label-md text-label-md transition-colors duration-150"><span class="material-symbols-outlined text-[16px]">check</span><span>Duyệt</span></button><button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-error-container/40 text-error hover:bg-error-container/70 font-label-md text-label-md transition-colors duration-150"><span class="material-symbols-outlined text-[16px]">close</span><span>Từ chối</span></button></td></tr><tr class="hover:bg-surface-container-low/40 transition-colors duration-100"><td class="px-6 py-4"><input class="w-4 h-4 rounded text-primary-container focus:ring-primary-container focus:ring-offset-0 border-outline-variant cursor-pointer transition-colors" type="checkbox"/></td><td class="px-6 py-4 whitespace-nowrap"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-label-md text-label-md text-on-surface font-semibold border border-outline-variant/30">LC</div><span class="font-body-md text-body-md font-medium text-on-surface">Lê Văn C</span></div></td><td class="px-6 py-4 whitespace-nowrap text-on-surface-variant">Bình gas đun nấu LPG (Gas LPG)</td><td class="px-6 py-4 whitespace-nowrap font-medium text-on-surface">12.1 kg CO2e</td><td class="px-6 py-4 whitespace-nowrap text-on-surface-variant font-body-sm text-body-sm">5 giờ trước</td><td class="px-6 py-4 whitespace-nowrap text-right space-x-2"><button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-secondary-fixed/30 text-on-secondary-fixed-variant hover:bg-secondary-fixed/50 font-label-md text-label-md transition-colors duration-150"><span class="material-symbols-outlined text-[16px]">check</span><span>Duyệt</span></button><button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-error-container/40 text-error hover:bg-error-container/70 font-label-md text-label-md transition-colors duration-150"><span class="material-symbols-outlined text-[16px]">close</span><span>Từ chối</span></button></td></tr><tr class="hover:bg-surface-container-low/40 transition-colors duration-100"><td class="px-6 py-4"><input class="w-4 h-4 rounded text-primary-container focus:ring-primary-container focus:ring-offset-0 border-outline-variant cursor-pointer transition-colors" type="checkbox"/></td><td class="px-6 py-4 whitespace-nowrap"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-label-md text-label-md text-on-surface font-semibold border border-outline-variant/30">NA</div><span class="font-body-md text-body-md font-medium text-on-surface">Nguyễn Văn A</span></div></td><td class="px-6 py-4 whitespace-nowrap text-on-surface-variant">Đi taxi công tác (Taxi ride)</td><td class="px-6 py-4 whitespace-nowrap font-medium text-on-surface">5.6 kg CO2e</td><td class="px-6 py-4 whitespace-nowrap text-on-surface-variant font-body-sm text-body-sm">Hôm qua</td><td class="px-6 py-4 whitespace-nowrap text-right space-x-2"><button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-secondary-fixed/30 text-on-secondary-fixed-variant hover:bg-secondary-fixed/50 font-label-md text-label-md transition-colors duration-150"><span class="material-symbols-outlined text-[16px]">check</span><span>Duyệt</span></button><button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-error-container/40 text-error hover:bg-error-container/70 font-label-md text-label-md transition-colors duration-150"><span class="material-symbols-outlined text-[16px]">close</span><span>Từ chối</span></button></td></tr><tr class="hover:bg-surface-container-low/40 transition-colors duration-100"><td class="px-6 py-4"><input class="w-4 h-4 rounded text-primary-container focus:ring-primary-container focus:ring-offset-0 border-outline-variant cursor-pointer transition-colors" type="checkbox"/></td><td class="px-6 py-4 whitespace-nowrap"><div class="flex items-center gap-3"><div class="w-8 h-8 rounded-full bg-surface-container-high flex items-center justify-center font-label-md text-label-md text-on-surface font-semibold border border-outline-variant/30">PD</div><span class="font-body-md text-body-md font-medium text-on-surface">Phạm Thị D</span></div></td><td class="px-6 py-4 whitespace-nowrap text-on-surface-variant">Xe buýt công cộng (Bus commute)</td><td class="px-6 py-4 whitespace-nowrap font-medium text-on-surface">1.8 kg CO2e</td><td class="px-6 py-4 whitespace-nowrap text-on-surface-variant font-body-sm text-body-sm">Hôm qua</td><td class="px-6 py-4 whitespace-nowrap text-right space-x-2"><button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-secondary-fixed/30 text-on-secondary-fixed-variant hover:bg-secondary-fixed/50 font-label-md text-label-md transition-colors duration-150"><span class="material-symbols-outlined text-[16px]">check</span><span>Duyệt</span></button><button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-lg bg-error-container/40 text-error hover:bg-error-container/70 font-label-md text-label-md transition-colors duration-150"><span class="material-symbols-outlined text-[16px]">close</span><span>Từ chối</span></button></td></tr></tbody>
 </table>
 </div>
 <!-- Table Footer / Pagination Notice -->
 <div class="flex items-center justify-between px-6 py-3.5 border-t border-outline-variant/20 bg-surface-container-lowest text-on-surface-variant font-body-sm text-body-sm">
-<span>5 of 5 entries</span>
+<span>5 trên 5 mục</span>
 <div class="flex items-center gap-1 text-outline">
 <button class="p-1 rounded hover:bg-surface-container-low text-on-surface-variant disabled:opacity-40" disabled="">
 <span class="material-symbols-outlined text-[18px]">chevron_left</span>
