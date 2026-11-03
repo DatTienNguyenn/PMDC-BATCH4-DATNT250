@@ -1,15 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
 <head>
   <meta charset="utf-8"/>
   <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-  <title>CarbonLedger - New Workspace</title>
+  <title>Khởi tạo không gian làm việc - CarbonLedger</title>
   <!-- Material Symbols Outlined -->
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
   <!-- Public Sans Font Family -->
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
-  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
   <script id="tailwind-config">
@@ -20,26 +20,12 @@
           colors: {
             "on-surface": "#121c27",
             "outline-variant": "#bccabf",
-            "surface-tint": "#006c46",
             "background": "#F9FAFB",
-            "surface-bright": "#f7f9ff",
             "primary": "#00a76f",
-            "primary-hover": "#009160",
-            "primary-dark": "#006c46",
-            "primary-light": "#00a76f14",
-            "outline": "#6d7a71",
-            "surface-container": "#f4f6f8",
-            "surface-container-low": "#f9fafb",
-            "surface-container-lowest": "#ffffff",
-            "surface": "#f7f9ff",
-            "on-surface-variant": "#637381",
+            "outline": "#6d7a71"
           },
           fontFamily: {
             sans: ["Public Sans", "sans-serif"],
-          },
-          borderRadius: {
-            "xl": "0.75rem",
-            "2xl": "1rem",
           }
         },
       },
@@ -48,13 +34,13 @@
 </head>
 <body class="bg-[#F9FAFB] text-[#212B36] antialiased font-sans min-h-screen relative overflow-hidden select-none">
 
-<!-- ==================== BACKGROUND APPLICATION CANVAS (Workspace Switcher SCR-WS-01) ==================== -->
+<!-- ==================== BACKGROUND APPLICATION CANVAS ==================== -->
 <div class="min-h-screen flex flex-col bg-[#F9FAFB] pointer-events-none select-none filter blur-[1.5px] scale-[0.999] transition-all">
   <!-- Top Navigation Bar -->
   <header class="flex justify-between items-center px-10 h-16 w-full border-b border-[#DFE3E8] bg-white sticky top-0 z-10">
     <div class="flex items-center gap-3">
       <div class="w-8 h-8 rounded-lg bg-[#00A76F]/15 text-[#00A76F] flex items-center justify-center">
-        <span class="material-symbols-outlined text-[20px]" data-icon="energy_savings_leaf">energy_savings_leaf</span>
+        <span class="material-symbols-outlined text-[20px]" data-icon="eco">eco</span>
       </div>
       <span class="text-[18px] font-bold text-[#212B36] tracking-tight">CarbonLedger</span>
     </div>
@@ -64,10 +50,12 @@
         <span class="w-2 h-2 rounded-full bg-[#00A76F] absolute top-2 right-2 ring-2 ring-white"></span>
       </button>
       <div class="flex items-center gap-3 pl-2 border-l border-[#DFE3E8]">
-        <img class="w-8 h-8 rounded-full object-cover ring-1 ring-[#DFE3E8]" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBQRM2HU7zRNGnyarhSp6STyO3dndWZTz-86VhYsmNpeBX8CZ5N7Mnl4NuCxPa9MWjxs7ugLOiQpMmxb-4hJimrgJQUiGXYFk0dCN_YnjOiPUMse0jcixFhjSLgSjQG5Ds1As9sQDRWqmR5jKX5VJw4w0S6p-6jXEDn8NDCrHdqqMZ3tzWOAyiqePyiiFQlFTHh2elH2WPVwhrxyI0TVm3E-KKpV8x6d9xrVQkOUZ_a5cr8Qgkxvze30XtNWzKjhebv9N5gsLuYw" alt="Sarah Chen"/>
+        <div class="w-8 h-8 rounded-full bg-[#00A76F] text-white flex items-center justify-center font-bold text-xs">
+          NA
+        </div>
         <div class="flex flex-col text-left">
-          <span class="text-[13px] font-semibold text-[#212B36] leading-tight">Sarah Chen</span>
-          <span class="text-[11px] text-[#919EAB]">sarah@carbonledger.io</span>
+          <span class="text-[13px] font-semibold text-[#212B36] leading-tight">Nguyễn Văn An</span>
+          <span class="text-[11px] text-[#919EAB]">nguyen@example.com</span>
         </div>
       </div>
     </div>
@@ -76,14 +64,14 @@
   <!-- Workspace Selection Area -->
   <main class="max-w-6xl w-full mx-auto px-8 py-12 flex-1">
     <div class="mb-8">
-      <span class="text-[11px] font-bold text-[#00A76F] uppercase tracking-wider">Account Portal</span>
-      <h1 class="text-[32px] font-bold text-[#212B36] tracking-tight mt-1">Workspaces</h1>
+      <span class="text-[11px] font-bold text-[#00A76F] uppercase tracking-wider">Cổng tài khoản</span>
+      <h1 class="text-[32px] font-bold text-[#212B36] tracking-tight mt-1">Không gian làm việc</h1>
       <div class="flex items-center justify-between mt-6">
         <div>
-          <h2 class="text-[18px] font-bold text-[#212B36]">Your Workspaces</h2>
-          <p class="text-[14px] text-[#637381] mt-0.5">Select an operational ledger or residential hub to begin monitoring emissions.</p>
+          <h2 class="text-[18px] font-bold text-[#212B36]">Không gian của bạn</h2>
+          <p class="text-[14px] text-[#637381] mt-0.5">Chọn không gian làm việc để bắt đầu theo dõi và quản lý phát thải.</p>
         </div>
-        <span class="px-3 py-1 bg-[#F4F6F8] text-[#637381] text-[12px] font-medium rounded-full">3 active entities</span>
+        <span class="px-3 py-1 bg-[#F4F6F8] text-[#637381] text-[12px] font-medium rounded-full">3 không gian hoạt động</span>
       </div>
     </div>
 
@@ -95,12 +83,12 @@
           <div class="w-10 h-10 rounded-xl bg-[#E8F8F2] text-[#00A76F] flex items-center justify-center">
             <span class="material-symbols-outlined text-[22px]" data-icon="home">home</span>
           </div>
-          <span class="px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-[#E8F8F2] text-[#00A76F]">Reviewer</span>
+          <span class="px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-[#E8F8F2] text-[#00A76F]">Người phê duyệt</span>
         </div>
-        <h3 class="text-[16px] font-bold text-[#212B36]">My Home</h3>
-        <p class="text-[13px] text-[#637381] mt-1">Primary residential scope &amp; utility ledger</p>
+        <h3 class="text-[16px] font-bold text-[#212B36]">Gia Đình Xanh</h3>
+        <p class="text-[13px] text-[#637381] mt-1">Không gian sinh hoạt gia đình chính</p>
         <div class="flex items-center justify-between pt-4 mt-6 border-t border-[#F4F6F8] text-[13px] text-[#637381]">
-          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">group</span> 4 members</span>
+          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">group</span> 4 thành viên</span>
           <span class="flex items-center gap-1.5 bg-[#F4F6F8] px-2.5 py-1 rounded-full text-[12px] font-medium text-[#212B36]"><span class="material-symbols-outlined text-[15px] text-[#00A76F]">cloud</span> 85.4 kg <span class="text-[10px] text-[#637381]">CO₂e</span></span>
         </div>
       </div>
@@ -111,12 +99,12 @@
           <div class="w-10 h-10 rounded-xl bg-[#F4F6F8] text-[#212B36] flex items-center justify-center">
             <span class="material-symbols-outlined text-[22px]" data-icon="apartment">apartment</span>
           </div>
-          <span class="px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-[#F4F6F8] text-[#637381]">Editor</span>
+          <span class="px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-[#F4F6F8] text-[#637381]">Thành viên</span>
         </div>
-        <h3 class="text-[16px] font-bold text-[#212B36]">Startup Office</h3>
-        <p class="text-[13px] text-[#637381] mt-1">HQ facility, hardware &amp; commuter tracking</p>
+        <h3 class="text-[16px] font-bold text-[#212B36]">Văn phòng Khởi nghiệp</h3>
+        <p class="text-[13px] text-[#637381] mt-1">Không gian làm việc nhóm, thiết bị & đi lại</p>
         <div class="flex items-center justify-between pt-4 mt-6 border-t border-[#F4F6F8] text-[13px] text-[#637381]">
-          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">group</span> 8 members</span>
+          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">group</span> 8 thành viên</span>
           <span class="flex items-center gap-1.5 bg-[#F4F6F8] px-2.5 py-1 rounded-full text-[12px] font-medium text-[#212B36]"><span class="material-symbols-outlined text-[15px] text-[#00A76F]">cloud</span> 210.2 kg <span class="text-[10px] text-[#637381]">CO₂e</span></span>
         </div>
       </div>
@@ -127,27 +115,15 @@
           <div class="w-10 h-10 rounded-xl bg-[#E8F8F2] text-[#00A76F] flex items-center justify-center">
             <span class="material-symbols-outlined text-[22px]" data-icon="home">home</span>
           </div>
-          <span class="px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-[#E8F8F2] text-[#00A76F]">Reviewer</span>
+          <span class="px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-[#E8F8F2] text-[#00A76F]">Người phê duyệt</span>
         </div>
-        <h3 class="text-[16px] font-bold text-[#212B36]">Parents Home</h3>
-        <p class="text-[13px] text-[#637381] mt-1">Secondary household grid &amp; gas sync</p>
+        <h3 class="text-[16px] font-bold text-[#212B36]">Nhà Bố Mẹ</h3>
+        <p class="text-[13px] text-[#637381] mt-1">Không gian sinh hoạt phụ & gia đình</p>
         <div class="flex items-center justify-between pt-4 mt-6 border-t border-[#F4F6F8] text-[13px] text-[#637381]">
-          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">group</span> 3 members</span>
+          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">group</span> 3 thành viên</span>
           <span class="flex items-center gap-1.5 bg-[#F4F6F8] px-2.5 py-1 rounded-full text-[12px] font-medium text-[#212B36]"><span class="material-symbols-outlined text-[15px] text-[#00A76F]">cloud</span> 62.1 kg <span class="text-[10px] text-[#637381]">CO₂e</span></span>
         </div>
       </div>
-    </div>
-
-    <!-- Action Buttons -->
-    <div class="flex items-center gap-3">
-      <button class="bg-[#00A76F] text-white px-5 py-2.5 rounded-xl font-semibold text-[14px] flex items-center gap-2">
-        <span class="material-symbols-outlined text-[18px]">add</span>
-        Create Workspace
-      </button>
-      <button class="bg-white border border-[#DFE3E8] text-[#212B36] px-5 py-2.5 rounded-xl font-semibold text-[14px] flex items-center gap-2">
-        <span class="material-symbols-outlined text-[18px]">tag</span>
-        Join with Code
-      </button>
     </div>
   </main>
 </div>
@@ -155,12 +131,12 @@
 <!-- ==================== MODAL OVERLAY & CONTAINER ==================== -->
 <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#212B36]/[0.48] backdrop-blur-[6px] transition-all" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <!-- Modal Card -->
-  <div class="w-full max-w-md bg-white rounded-2xl shadow-[0px_20px_40px_-4px_rgba(145,158,171,0.24),0px_0px_2px_0px_rgba(145,158,171,0.24)] border border-[#DFE3E8]/80 overflow-hidden transform transition-all flex flex-col animate-in fade-in zoom-in-95 duration-150">
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-[0px_20px_40px_-4px_rgba(145,158,171,0.24),0px_0px_2px_0px_rgba(145,158,171,0.24)] border border-[#DFE3E8]/80 overflow-hidden transform transition-all flex flex-col">
     
     <!-- Modal Header -->
     <div class="px-6 py-5 border-b border-[#F4F6F8] flex items-center justify-between bg-white">
-      <h2 id="modal-title" class="text-[18px] font-bold text-[#212B36] tracking-tight">New Workspace</h2>
-      <button type="button" aria-label="Close dialog" class="w-8 h-8 rounded-full flex items-center justify-center text-[#919EAB] hover:text-[#212B36] hover:bg-[#F4F6F8] transition-colors focus:outline-none">
+      <h2 id="modal-title" class="text-[18px] font-bold text-[#212B36] tracking-tight">Khởi tạo Không gian mới</h2>
+      <button type="button" aria-label="Đóng" class="w-8 h-8 rounded-full flex items-center justify-center text-[#919EAB] hover:text-[#212B36] hover:bg-[#F4F6F8] transition-colors focus:outline-none">
         <span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
       </button>
     </div>
@@ -171,14 +147,14 @@
       <!-- Field 1: Workspace Name -->
       <div class="space-y-1.5">
         <label for="workspace-name" class="block text-[13px] font-semibold text-[#212B36]">
-          Workspace Name
+          Tên không gian làm việc
         </label>
         <div class="relative">
           <input 
             type="text" 
             id="workspace-name" 
             name="workspace-name" 
-            placeholder="e.g. My Home, Office Team" 
+            placeholder="Ví dụ: Gia Đình Xanh, Văn phòng Công ty..." 
             class="w-full h-11 px-3.5 py-2.5 rounded-xl border border-[#DFE3E8] bg-white text-[#212B36] text-[14px] placeholder-[#919EAB] focus:outline-none focus:border-[#00A76F] focus:ring-1 focus:ring-[#00A76F] transition-all"
             value=""
           />
@@ -188,7 +164,7 @@
       <!-- Field 2: Type (2 Radio Cards Side by Side) -->
       <div class="space-y-1.5">
         <label class="block text-[13px] font-semibold text-[#212B36]">
-          Type
+          Loại hình
         </label>
         <div class="grid grid-cols-2 gap-3" role="radiogroup">
           <!-- Household (Selected) -->
@@ -198,7 +174,7 @@
               <span class="material-symbols-outlined text-[20px]" data-icon="home">home</span>
             </div>
             <div class="flex-1 min-w-0">
-              <span class="block text-[14px] font-semibold text-[#212B36] truncate leading-tight">Household</span>
+              <span class="block text-[14px] font-semibold text-[#212B36] truncate leading-tight">Hộ gia đình</span>
             </div>
             <div class="w-4 h-4 rounded-full border-2 border-[#00A76F] flex items-center justify-center shrink-0">
               <div class="w-2 h-2 rounded-full bg-[#00A76F]"></div>
@@ -212,7 +188,7 @@
               <span class="material-symbols-outlined text-[20px]" data-icon="apartment">apartment</span>
             </div>
             <div class="flex-1 min-w-0">
-              <span class="block text-[14px] font-medium text-[#637381] truncate leading-tight">Small Office</span>
+              <span class="block text-[14px] font-medium text-[#637381] truncate leading-tight">Văn phòng nhỏ</span>
             </div>
             <div class="w-4 h-4 rounded-full border border-[#DFE3E8] bg-white shrink-0"></div>
           </label>
@@ -222,7 +198,7 @@
       <!-- Field 3: Floor Area -->
       <div class="space-y-1.5">
         <label for="floor-area" class="block text-[13px] font-semibold text-[#212B36]">
-          Floor Area
+          Diện tích sàn
         </label>
         <div class="relative flex items-center">
           <input 
@@ -243,12 +219,12 @@
       <!-- Field 4: Number of People (Stepper +/-) -->
       <div class="space-y-1.5">
         <label for="people-count" class="block text-[13px] font-semibold text-[#212B36]">
-          Number of People
+          Số lượng thành viên
         </label>
         <div class="flex items-center rounded-xl border border-[#DFE3E8] bg-white h-11 overflow-hidden focus-within:border-[#00A76F] focus-within:ring-1 focus-within:ring-[#00A76F] transition-all">
           <button 
             type="button" 
-            aria-label="Decrease count" 
+            aria-label="Giảm" 
             class="w-11 h-full flex items-center justify-center text-[#637381] hover:bg-[#F4F6F8] active:bg-[#DFE3E8]/60 transition-colors border-r border-[#DFE3E8]"
             onclick="const el = document.getElementById('people-count'); if(el.value > 1) el.value = parseInt(el.value) - 1;"
           >
@@ -264,7 +240,7 @@
           />
           <button 
             type="button" 
-            aria-label="Increase count" 
+            aria-label="Tăng" 
             class="w-11 h-full flex items-center justify-center text-[#637381] hover:bg-[#F4F6F8] active:bg-[#DFE3E8]/60 transition-colors border-l border-[#DFE3E8]"
             onclick="const el = document.getElementById('people-count'); el.value = parseInt(el.value || 0) + 1;"
           >
@@ -279,7 +255,7 @@
           type="submit" 
           class="w-full h-11 bg-[#00A76F] hover:bg-[#009160] active:bg-[#007D53] text-white font-semibold text-[14px] rounded-xl shadow-[0px_8px_16px_0px_rgba(0,167,111,0.24)] transition-all flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#00A76F] focus:ring-offset-2"
         >
-          Create Workspace
+          Khởi tạo không gian
         </button>
       </div>
 

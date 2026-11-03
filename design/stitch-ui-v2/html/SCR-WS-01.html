@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
+<html lang="vi"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Workspaces - CarbonLedger</title>
+<title>Không gian làm việc - CarbonLedger</title>
 <!-- Material Symbols Outlined -->
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Public Sans Font -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -19,98 +18,20 @@
       theme: {
         extend: {
           "colors": {
-            "surface-tint": "#006c46",
             "surface-variant": "#d9e3f2",
-            "surface-dim": "#d1dbea",
             "outline": "#6d7a71",
-            "on-tertiary-fixed": "#2a1700",
-            "on-background": "#121c27",
-            "on-primary-fixed": "#002112",
             "secondary": "#006b5c",
-            "on-primary-container": "#00321f",
-            "on-error": "#ffffff",
-            "tertiary-fixed-dim": "#ffb95e",
             "secondary-fixed": "#97f4de",
-            "on-error-container": "#93000a",
-            "inverse-surface": "#27313c",
-            "primary-fixed-dim": "#5adda0",
-            "on-primary-fixed-variant": "#005234",
-            "inverse-on-surface": "#e9f1ff",
-            "on-tertiary": "#ffffff",
-            "surface-container-highest": "#d9e3f2",
-            "outline-variant": "#bccabf",
-            "secondary-fixed-dim": "#7bd7c2",
-            "tertiary-container": "#cc8200",
-            "surface": "#f7f9ff",
             "primary-container": "#00a76f",
-            "primary-fixed": "#79fabb",
-            "background": "#f7f9ff",
-            "surface-container-low": "#eef4ff",
-            "surface-container-high": "#dfe9f8",
+            "background": "#F9FAFB",
             "primary": "#006c46",
-            "on-tertiary-container": "#3f2500",
             "on-surface": "#121c27",
-            "secondary-container": "#97f4de",
-            "tertiary": "#855400",
-            "on-secondary-fixed-variant": "#005145",
-            "on-secondary-container": "#007261",
-            "on-primary": "#ffffff",
-            "surface-container": "#e4effe",
-            "surface-container-lowest": "#ffffff",
-            "on-surface-variant": "#3d4a41",
-            "on-secondary": "#ffffff",
-            "tertiary-fixed": "#ffddb7",
-            "surface-bright": "#f7f9ff",
-            "on-tertiary-fixed-variant": "#653e00",
-            "on-secondary-fixed": "#00201a",
-            "error-container": "#ffdad6",
-            "error": "#ba1a1a",
-            "inverse-primary": "#5adda0"
-          },
-          "borderRadius": {
-            "DEFAULT": "0.25rem",
-            "lg": "0.5rem",
-            "xl": "0.75rem",
-            "full": "9999px"
-          },
-          "spacing": {
-            "space-sm": "0.5rem",
-            "space-xs": "0.25rem",
-            "space-xl": "2rem",
-            "gutter-sm": "1rem",
-            "gutter": "1.5rem",
-            "space-lg": "1.5rem",
-            "space-md": "1rem",
-            "margin": "2.5rem",
-            "margin-mobile": "1rem"
+            "outline-variant": "#bccabf",
+            "surface-container-lowest": "#ffffff"
           },
           "fontFamily": {
-            "label-sm": ["Public Sans"],
-            "label-md": ["Public Sans"],
-            "headline-lg-mobile": ["Public Sans"],
-            "label-lg": ["Public Sans"],
-            "body-sm": ["Public Sans"],
-            "headline-sm": ["Public Sans"],
-            "display": ["Public Sans"],
             "body-md": ["Public Sans"],
-            "title": ["Public Sans"],
-            "headline-md": ["Public Sans"],
-            "headline-lg": ["Public Sans"],
-            "body-lg": ["Public Sans"]
-          },
-          "fontSize": {
-            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }],
-            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
-            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
-            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
-            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
-            "display": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
-            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
-            "title": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
-            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-            "headline-lg": ["32px", { "lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+            "title": ["Public Sans"]
           }
         }
       }
@@ -125,32 +46,32 @@
     }
   </style>
 </head>
-<body class="bg-background text-on-surface min-h-screen flex flex-col font-body-md text-body-md antialiased selection:bg-secondary-container selection:text-on-secondary-container">
-<!-- TopNavBar (Shared Component: Account-level view, sidebar suppressed per Semantic Shell rules) -->
-<header class="h-16 w-full bg-surface-container-lowest border-b border-outline-variant/30 flex items-center justify-between px-6 sticky top-0 z-30 shadow-sm transition-colors duration-150">
+<body class="bg-[#F9FAFB] text-on-surface min-h-screen flex flex-col font-body-md antialiased selection:bg-[#00A76F]/20 selection:text-[#006c46]">
+<!-- TopNavBar -->
+<header class="h-16 w-full bg-white border-b border-outline-variant/30 flex items-center justify-between px-6 sticky top-0 z-30 shadow-sm transition-colors duration-150">
 <!-- Brand Logo Anchor -->
-<a class="flex items-center gap-2.5 group focus:outline-none" href="/workspaces">
-<div class="w-9 h-9 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary group-hover:bg-primary-container/20 transition-colors">
+<a class="flex items-center gap-2.5 group focus:outline-none" href="#">
+<div class="w-9 h-9 rounded-xl bg-[#00A76F]/10 flex items-center justify-center text-[#00A76F] group-hover:bg-[#00A76F]/20 transition-colors">
 <span class="material-symbols-outlined text-[22px]" data-icon="eco" style="font-variation-settings: 'FILL' 1;">eco</span>
 </div>
-<span class="font-title text-title font-bold text-on-surface tracking-tight">CarbonLedger</span>
+<span class="text-lg font-bold text-on-surface tracking-tight">CarbonLedger</span>
 </a>
 <!-- Right User Meta / Actions -->
 <div class="flex items-center gap-3">
 <!-- Notification Icon Button -->
-<button aria-label="Notifications" class="w-9 h-9 rounded-xl flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low hover:text-primary transition-colors duration-150 relative focus:outline-none" type="button">
+<button aria-label="Thông báo" class="w-9 h-9 rounded-xl flex items-center justify-center text-gray-500 hover:bg-gray-100 hover:text-primary transition-colors duration-150 relative focus:outline-none" type="button">
 <span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
-<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#00A76F]"></span>
 </button>
 <div class="h-5 w-px bg-outline-variant/40 mx-1"></div>
 <!-- User Profile -->
 <div class="flex items-center gap-2.5 pl-1 cursor-pointer group">
-<div class="w-9 h-9 rounded-full ring-2 ring-primary/20 p-0.5 overflow-hidden group-hover:ring-primary transition-all">
-<img alt="User profile photo" class="w-full h-full object-cover rounded-full" data-alt="A polished studio portrait of a corporate sustainability officer in contemporary business attire, softly illuminated against a bright, airy architectural background with emerald green tones and refined modern lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCi5bigEfefT0Yhkzc7RkfgTff1zq36NVP4WsiIdXER2zaQ7_6CPXAL9SXZA2ymRlVR7qd6VFcJvzLhg7jT8DmvnqhrHszinTvWgATdQYuAkbm-TjzVV9xpyaoSYLdyWE60doLD8y4OOPqYgESparnzP6iYllC6VQJjfpt1Wdb1mRlgQEjK1INGAZSR_uBShnfgPHICALK8MJ4aWZbOOCa1h9JYkx1rda2patmg83DWIW7PA6KxWRZfUB1TDijvYjPRUcZOFhaoag"/>
+<div class="w-9 h-9 rounded-full bg-[#00A76F] text-white flex items-center justify-center font-bold text-[13px] shadow-sm">
+  NA
 </div>
 <div class="hidden sm:flex flex-col text-left">
-<span class="font-label-md text-label-md text-on-surface leading-tight">Sarah Chen</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant leading-tight">sarah@carbonledger.io</span>
+<span class="text-sm font-semibold text-on-surface leading-tight">Nguyễn Văn An</span>
+<span class="text-xs text-gray-500 leading-tight">nguyen@example.com</span>
 </div>
 </div>
 </div>
@@ -160,133 +81,133 @@
 <!-- Page Header -->
 <div class="mb-8">
 <div class="flex items-center gap-2 mb-1">
-<span class="font-label-sm text-label-sm text-primary uppercase tracking-wider">Account Portal</span>
+<span class="text-[11px] font-bold text-[#00A76F] uppercase tracking-wider">Cổng tài khoản</span>
 </div>
-<h1 class="font-headline-lg text-headline-lg text-on-surface">Workspaces</h1>
+<h1 class="text-3xl font-bold text-on-surface tracking-tight">Không gian làm việc</h1>
 </div>
 <!-- Section Header & Active Filter Bar -->
 <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-2 border-b border-outline-variant/20">
 <div>
-<h2 class="font-headline-sm text-headline-sm text-on-surface">Your Workspaces</h2>
-<p class="font-body-sm text-body-sm text-on-surface-variant mt-0.5">Select an operational ledger or residential hub to begin monitoring emissions.</p>
+<h2 class="text-xl font-bold text-on-surface">Không gian của bạn</h2>
+<p class="text-sm text-gray-500 mt-0.5">Chọn không gian làm việc để bắt đầu theo dõi và quản lý phát thải.</p>
 </div>
 <div class="flex items-center gap-2">
-<span class="font-label-md text-label-md text-on-surface-variant bg-surface-container-high px-2.5 py-1 rounded-full">3 active entities</span>
+<span class="text-xs font-semibold text-gray-600 bg-gray-100 px-2.5 py-1 rounded-full">3 không gian hoạt động</span>
 </div>
 </div>
 <!-- Workspace Cards Grid (Responsive 3-Column) -->
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
 <!-- Workspace Card 1: My Home -->
-<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 hover:border-primary/40 shadow-sm hover:shadow-md transition-all duration-200 p-6 flex flex-col justify-between cursor-pointer group hover:-translate-y-0.5">
+<div class="bg-white rounded-2xl border border-outline-variant/30 hover:border-[#00A76F]/50 shadow-sm hover:shadow-md transition-all duration-200 p-6 flex flex-col justify-between cursor-pointer group hover:-translate-y-0.5">
 <div>
 <!-- Top Row: Icon + Role Badge -->
 <div class="flex items-center justify-between gap-3 mb-5">
-<div class="w-12 h-12 rounded-xl bg-primary-container/15 text-primary flex items-center justify-center transition-transform group-hover:scale-105 duration-200">
+<div class="w-12 h-12 rounded-xl bg-[#00A76F]/10 text-[#00A76F] flex items-center justify-center transition-transform group-hover:scale-105 duration-200">
 <span class="material-symbols-outlined text-[24px]" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
 </div>
 <!-- Role Badge: Reviewer -->
-<span class="inline-flex items-center px-2.5 py-1 rounded-full font-label-md text-label-md bg-secondary-container/30 text-secondary border border-secondary/20">
-              Reviewer
-            </span>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#00A76F]/10 text-[#00A76F] border border-[#00A76F]/20">
+  Người phê duyệt
+</span>
 </div>
 <!-- Middle: Name & Status -->
 <div class="space-y-1 mb-6">
 <div class="flex items-center justify-between">
-<h3 class="font-title text-title font-semibold text-on-surface group-hover:text-primary transition-colors">My Home</h3>
-<span class="material-symbols-outlined text-outline-variant group-hover:text-primary group-hover:translate-x-0.5 transition-all text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+<h3 class="text-base font-bold text-on-surface group-hover:text-[#00A76F] transition-colors">Gia Đình Xanh</h3>
+<span class="material-symbols-outlined text-gray-400 group-hover:text-[#00A76F] group-hover:translate-x-0.5 transition-all text-[20px]" data-icon="arrow_forward">arrow_forward</span>
 </div>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Primary residential scope &amp; utility ledger</p>
+<p class="text-sm text-gray-500">Không gian sinh hoạt gia đình chính</p>
 </div>
 </div>
 <!-- Bottom Row: Meta Stats -->
-<div class="pt-4 border-t border-surface-variant/40 flex items-center justify-between">
+<div class="pt-4 border-t border-gray-100 flex items-center justify-between">
 <!-- Members -->
-<div class="flex items-center gap-1.5 text-on-surface-variant">
-<span class="material-symbols-outlined text-[18px] text-outline" data-icon="group">group</span>
-<span class="font-label-md text-label-md text-on-surface">4</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">members</span>
+<div class="flex items-center gap-1.5 text-gray-600">
+<span class="material-symbols-outlined text-[18px] text-gray-400" data-icon="group">group</span>
+<span class="text-sm font-semibold text-on-surface">4</span>
+<span class="text-xs text-gray-500">thành viên</span>
 </div>
 <!-- Emissions Metric -->
-<div class="flex items-center gap-1.5 bg-surface-container-low px-2.5 py-1 rounded-lg">
-<span class="material-symbols-outlined text-[18px] text-primary" data-icon="cloud" style="font-variation-settings: 'FILL' 1;">cloud</span>
-<span class="font-label-md text-label-md text-on-surface font-semibold">85.4 kg</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant font-normal">CO₂e</span>
+<div class="flex items-center gap-1.5 bg-gray-50 px-2.5 py-1 rounded-lg">
+<span class="material-symbols-outlined text-[18px] text-[#00A76F]" data-icon="cloud" style="font-variation-settings: 'FILL' 1;">cloud</span>
+<span class="text-xs font-bold text-on-surface">85.4 kg</span>
+<span class="text-[11px] text-gray-500">CO₂e</span>
 </div>
 </div>
 </div>
 <!-- Workspace Card 2: Startup Office -->
-<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 hover:border-primary/40 shadow-sm hover:shadow-md transition-all duration-200 p-6 flex flex-col justify-between cursor-pointer group hover:-translate-y-0.5">
+<div class="bg-white rounded-2xl border border-outline-variant/30 hover:border-[#00A76F]/50 shadow-sm hover:shadow-md transition-all duration-200 p-6 flex flex-col justify-between cursor-pointer group hover:-translate-y-0.5">
 <div>
 <!-- Top Row: Icon + Role Badge -->
 <div class="flex items-center justify-between gap-3 mb-5">
-<div class="w-12 h-12 rounded-xl bg-surface-container-high text-on-surface-variant flex items-center justify-center transition-transform group-hover:scale-105 duration-200">
+<div class="w-12 h-12 rounded-xl bg-gray-100 text-gray-600 flex items-center justify-center transition-transform group-hover:scale-105 duration-200">
 <span class="material-symbols-outlined text-[24px]" data-icon="apartment" style="font-variation-settings: 'FILL' 1;">apartment</span>
 </div>
 <!-- Role Badge: Editor -->
-<span class="inline-flex items-center px-2.5 py-1 rounded-full font-label-md text-label-md bg-surface-container text-on-surface-variant border border-outline-variant/40">
-              Editor
-            </span>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-gray-100 text-gray-600 border border-gray-200">
+  Thành viên
+</span>
 </div>
 <!-- Middle: Name & Status -->
 <div class="space-y-1 mb-6">
 <div class="flex items-center justify-between">
-<h3 class="font-title text-title font-semibold text-on-surface group-hover:text-primary transition-colors">Startup Office</h3>
-<span class="material-symbols-outlined text-outline-variant group-hover:text-primary group-hover:translate-x-0.5 transition-all text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+<h3 class="text-base font-bold text-on-surface group-hover:text-[#00A76F] transition-colors">Văn phòng Khởi nghiệp</h3>
+<span class="material-symbols-outlined text-gray-400 group-hover:text-[#00A76F] group-hover:translate-x-0.5 transition-all text-[20px]" data-icon="arrow_forward">arrow_forward</span>
 </div>
-<p class="font-body-sm text-body-sm text-on-surface-variant">HQ facility, hardware &amp; commuter tracking</p>
+<p class="text-sm text-gray-500">Không gian làm việc nhóm, thiết bị & đi lại</p>
 </div>
 </div>
 <!-- Bottom Row: Meta Stats -->
-<div class="pt-4 border-t border-surface-variant/40 flex items-center justify-between">
+<div class="pt-4 border-t border-gray-100 flex items-center justify-between">
 <!-- Members -->
-<div class="flex items-center gap-1.5 text-on-surface-variant">
-<span class="material-symbols-outlined text-[18px] text-outline" data-icon="group">group</span>
-<span class="font-label-md text-label-md text-on-surface">8</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">members</span>
+<div class="flex items-center gap-1.5 text-gray-600">
+<span class="material-symbols-outlined text-[18px] text-gray-400" data-icon="group">group</span>
+<span class="text-sm font-semibold text-on-surface">8</span>
+<span class="text-xs text-gray-500">thành viên</span>
 </div>
 <!-- Emissions Metric -->
-<div class="flex items-center gap-1.5 bg-surface-container-low px-2.5 py-1 rounded-lg">
-<span class="material-symbols-outlined text-[18px] text-primary" data-icon="cloud" style="font-variation-settings: 'FILL' 1;">cloud</span>
-<span class="font-label-md text-label-md text-on-surface font-semibold">210.2 kg</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant font-normal">CO₂e</span>
+<div class="flex items-center gap-1.5 bg-gray-50 px-2.5 py-1 rounded-lg">
+<span class="material-symbols-outlined text-[18px] text-[#00A76F]" data-icon="cloud" style="font-variation-settings: 'FILL' 1;">cloud</span>
+<span class="text-xs font-bold text-on-surface">210.2 kg</span>
+<span class="text-[11px] text-gray-500">CO₂e</span>
 </div>
 </div>
 </div>
 <!-- Workspace Card 3: Parents Home -->
-<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/30 hover:border-primary/40 shadow-sm hover:shadow-md transition-all duration-200 p-6 flex flex-col justify-between cursor-pointer group hover:-translate-y-0.5">
+<div class="bg-white rounded-2xl border border-outline-variant/30 hover:border-[#00A76F]/50 shadow-sm hover:shadow-md transition-all duration-200 p-6 flex flex-col justify-between cursor-pointer group hover:-translate-y-0.5">
 <div>
 <!-- Top Row: Icon + Role Badge -->
 <div class="flex items-center justify-between gap-3 mb-5">
-<div class="w-12 h-12 rounded-xl bg-primary-container/15 text-primary flex items-center justify-center transition-transform group-hover:scale-105 duration-200">
+<div class="w-12 h-12 rounded-xl bg-[#00A76F]/10 text-[#00A76F] flex items-center justify-center transition-transform group-hover:scale-105 duration-200">
 <span class="material-symbols-outlined text-[24px]" data-icon="home" style="font-variation-settings: 'FILL' 1;">home</span>
 </div>
 <!-- Role Badge: Reviewer -->
-<span class="inline-flex items-center px-2.5 py-1 rounded-full font-label-md text-label-md bg-secondary-container/30 text-secondary border border-secondary/20">
-              Reviewer
-            </span>
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#00A76F]/10 text-[#00A76F] border border-[#00A76F]/20">
+  Người phê duyệt
+</span>
 </div>
 <!-- Middle: Name & Status -->
 <div class="space-y-1 mb-6">
 <div class="flex items-center justify-between">
-<h3 class="font-title text-title font-semibold text-on-surface group-hover:text-primary transition-colors">Parents Home</h3>
-<span class="material-symbols-outlined text-outline-variant group-hover:text-primary group-hover:translate-x-0.5 transition-all text-[20px]" data-icon="arrow_forward">arrow_forward</span>
+<h3 class="text-base font-bold text-on-surface group-hover:text-[#00A76F] transition-colors">Nhà Bố Mẹ</h3>
+<span class="material-symbols-outlined text-gray-400 group-hover:text-[#00A76F] group-hover:translate-x-0.5 transition-all text-[20px]" data-icon="arrow_forward">arrow_forward</span>
 </div>
-<p class="font-body-sm text-body-sm text-on-surface-variant">Secondary household grid &amp; gas sync</p>
+<p class="text-sm text-gray-500">Không gian sinh hoạt phụ & gia đình</p>
 </div>
 </div>
 <!-- Bottom Row: Meta Stats -->
-<div class="pt-4 border-t border-surface-variant/40 flex items-center justify-between">
+<div class="pt-4 border-t border-gray-100 flex items-center justify-between">
 <!-- Members -->
-<div class="flex items-center gap-1.5 text-on-surface-variant">
-<span class="material-symbols-outlined text-[18px] text-outline" data-icon="group">group</span>
-<span class="font-label-md text-label-md text-on-surface">3</span>
-<span class="font-body-sm text-body-sm text-on-surface-variant">members</span>
+<div class="flex items-center gap-1.5 text-gray-600">
+<span class="material-symbols-outlined text-[18px] text-gray-400" data-icon="group">group</span>
+<span class="text-sm font-semibold text-on-surface">3</span>
+<span class="text-xs text-gray-500">thành viên</span>
 </div>
 <!-- Emissions Metric -->
-<div class="flex items-center gap-1.5 bg-surface-container-low px-2.5 py-1 rounded-lg">
-<span class="material-symbols-outlined text-[18px] text-primary" data-icon="cloud" style="font-variation-settings: 'FILL' 1;">cloud</span>
-<span class="font-label-md text-label-md text-on-surface font-semibold">62.1 kg</span>
-<span class="font-label-sm text-label-sm text-on-surface-variant font-normal">CO₂e</span>
+<div class="flex items-center gap-1.5 bg-gray-50 px-2.5 py-1 rounded-lg">
+<span class="material-symbols-outlined text-[18px] text-[#00A76F]" data-icon="cloud" style="font-variation-settings: 'FILL' 1;">cloud</span>
+<span class="text-xs font-bold text-on-surface">62.1 kg</span>
+<span class="text-[11px] text-gray-500">CO₂e</span>
 </div>
 </div>
 </div>
@@ -294,36 +215,27 @@
 <!-- Action Buttons Row -->
 <div class="mt-8 pt-4 flex flex-wrap items-center gap-4">
 <!-- Primary: + Create Workspace -->
-<button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-lg text-label-lg shadow-sm hover:bg-[#009160] transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-primary-container focus:ring-offset-2" type="button">
+<button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#00A76F] text-white text-sm font-semibold shadow-sm hover:bg-[#009160] transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-[#00A76F] focus:ring-offset-2" type="button">
 <span class="material-symbols-outlined text-[20px]" data-icon="add">add</span>
-<span>Create Workspace</span>
+<span>Tạo không gian mới</span>
 </button>
 <!-- Secondary: Join with Code -->
-<button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-outline-variant text-on-surface hover:bg-surface-container-low font-label-lg text-label-lg transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-outline-variant focus:ring-offset-2 bg-surface-container-lowest" type="button">
-<span class="material-symbols-outlined text-[20px] text-on-surface-variant" data-icon="tag">tag</span>
-<span>Join with Code</span>
+<button class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-gray-300 text-on-surface hover:bg-gray-50 text-sm font-semibold transition-colors duration-150 focus:outline-none focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 bg-white" type="button">
+<span class="material-symbols-outlined text-[20px] text-gray-500" data-icon="tag">tag</span>
+<span>Gia nhập bằng mã</span>
 </button>
 </div>
 <!-- Quick Help / Support Notice Footnote -->
-<div class="mt-16 pt-6 border-t border-outline-variant/20 flex flex-col sm:flex-row items-center justify-between text-on-surface-variant font-body-sm text-body-sm gap-2">
+<div class="mt-16 pt-6 border-t border-outline-variant/20 flex flex-col sm:flex-row items-center justify-between text-gray-500 text-xs gap-2">
 <div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px] text-primary" data-icon="verified_user">verified_user</span>
-<span>All calculations compliant with GHG Protocol Corporate Standard.</span>
+<span class="material-symbols-outlined text-[18px] text-[#00A76F]" data-icon="verified_user">verified_user</span>
+<span>Tính toán tuân thủ theo tiêu chuẩn GHG Protocol.</span>
 </div>
 <div class="flex items-center gap-4">
-<a class="hover:text-primary transition-colors" href="#help">Documentation</a>
+<a class="hover:text-[#00A76F] transition-colors" href="#">Tài liệu hướng dẫn</a>
 <span>•</span>
-<a class="hover:text-primary transition-colors" href="#support">Need Enterprise Support?</a>
+<a class="hover:text-[#00A76F] transition-colors" href="#">Hỗ trợ doanh nghiệp</a>
 </div>
 </div>
 </main>
-<script>
-    // Lightweight micro-interaction feedback
-    document.querySelectorAll('.group.cursor-pointer').forEach(card => {
-      card.addEventListener('click', () => {
-        const title = card.querySelector('h3').textContent;
-        console.log(`Navigating to workspace: ${title}`);
-      });
-    });
-  </script>
 </body></html>

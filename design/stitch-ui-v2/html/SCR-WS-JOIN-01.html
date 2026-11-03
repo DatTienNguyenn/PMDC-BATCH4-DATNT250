@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
+<html lang="vi"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>Join a Workspace - CarbonLedger</title>
+<title>Gia nhập Không gian làm việc - CarbonLedger</title>
 <!-- Google Fonts: Public Sans -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
 <!-- Material Symbols Outlined -->
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Tailwind CSS -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<!-- Tailwind Configuration with Design System Tokens -->
 <script id="tailwind-config">
     tailwind.config = {
       darkMode: "class",
@@ -21,98 +19,16 @@
         extend: {
           "colors": {
             "surface-bright": "#f7f9ff",
-            "on-tertiary-container": "#3f2500",
-            "error-container": "#ffdad6",
-            "surface-container": "#e4effe",
-            "on-secondary-fixed-variant": "#005145",
-            "primary-fixed-dim": "#5adda0",
-            "on-background": "#121c27",
-            "inverse-primary": "#5adda0",
-            "surface": "#f7f9ff",
-            "primary-fixed": "#79fabb",
-            "on-error-container": "#93000a",
-            "on-secondary-fixed": "#00201a",
-            "secondary-container": "#97f4de",
-            "on-secondary-container": "#007261",
-            "inverse-surface": "#27313c",
-            "surface-dim": "#d1dbea",
-            "secondary": "#006b5c",
-            "surface-container-lowest": "#ffffff",
-            "on-primary-fixed": "#002112",
-            "on-error": "#ffffff",
-            "tertiary-fixed": "#ffddb7",
-            "tertiary-container": "#cc8200",
-            "on-surface-variant": "#3d4a41",
-            "secondary-fixed-dim": "#7bd7c2",
-            "secondary-fixed": "#97f4de",
-            "inverse-on-surface": "#e9f1ff",
-            "surface-container-low": "#eef4ff",
-            "surface-container-high": "#dfe9f8",
-            "surface-variant": "#d9e3f2",
-            "on-tertiary-fixed-variant": "#653e00",
-            "surface-container-highest": "#d9e3f2",
-            "error": "#ba1a1a",
-            "on-primary-container": "#00321f",
             "primary-container": "#00a76f",
-            "on-primary-fixed-variant": "#005234",
-            "surface-tint": "#006c46",
-            "on-surface": "#121c27",
-            "tertiary": "#855400",
-            "on-secondary": "#ffffff",
             "outline-variant": "#bccabf",
             "outline": "#6d7a71",
-            "on-tertiary": "#ffffff",
-            "on-tertiary-fixed": "#2a1700",
-            "on-primary": "#ffffff",
-            "background": "#f7f9ff",
-            "tertiary-fixed-dim": "#ffb95e",
-            "primary": "#006c46"
-          },
-          "borderRadius": {
-            "DEFAULT": "0.25rem",
-            "lg": "0.5rem",
-            "xl": "0.75rem",
-            "2xl": "1rem",
-            "full": "9999px"
-          },
-          "spacing": {
-            "margin-mobile": "1rem",
-            "margin": "2.5rem",
-            "space-sm": "0.5rem",
-            "space-xl": "2rem",
-            "gutter": "1.5rem",
-            "space-lg": "1.5rem",
-            "space-md": "1rem",
-            "space-xs": "0.25rem",
-            "gutter-sm": "1rem"
+            "primary": "#006c46",
+            "on-surface": "#121c27",
+            "surface-container-lowest": "#ffffff"
           },
           "fontFamily": {
             "body-md": ["Public Sans"],
-            "headline-lg-mobile": ["Public Sans"],
-            "body-lg": ["Public Sans"],
-            "display": ["Public Sans"],
-            "headline-lg": ["Public Sans"],
-            "body-sm": ["Public Sans"],
-            "label-sm": ["Public Sans"],
-            "headline-sm": ["Public Sans"],
-            "headline-md": ["Public Sans"],
-            "label-md": ["Public Sans"],
-            "label-lg": ["Public Sans"],
             "title": ["Public Sans"]
-          },
-          "fontSize": {
-            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
-            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
-            "display": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
-            "headline-lg": ["32px", { "lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
-            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }],
-            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
-            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
-            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
-            "title": ["18px", { "lineHeight": "26px", "fontWeight": "600" }]
           }
         }
       }
@@ -127,106 +43,101 @@
     }
   </style>
 </head>
-<body class="bg-surface-bright text-on-surface font-body-md min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-on-primary">
-<!-- Top Navigation Bar (Shared Component: TopNavBar adapted without sidebar context) -->
+<body class="bg-[#F9FAFB] text-on-surface font-body-md min-h-screen flex flex-col antialiased selection:bg-primary-container selection:text-white">
+<!-- Top Navigation Bar -->
 <header class="h-16 w-full border-b border-outline-variant/30 bg-surface-container-lowest flex justify-between items-center px-6 sticky top-0 z-20 shadow-sm">
 <!-- Brand Logo Anchor -->
 <div class="flex items-center gap-2">
-<div class="w-8 h-8 rounded-lg bg-primary-container text-on-primary flex items-center justify-center shadow-sm">
+<div class="w-8 h-8 rounded-lg bg-primary-container text-white flex items-center justify-center shadow-sm" style="background-color: #00A76F;">
 <span class="material-symbols-outlined text-[20px]" data-icon="eco" style="font-variation-settings: 'FILL' 1;">eco</span>
 </div>
-<span class="text-title font-title font-bold text-on-surface tracking-tight">CarbonLedger</span>
-<span class="hidden sm:inline-block ml-2 px-1.5 py-0.5 rounded text-[10px] font-label-sm uppercase tracking-wider bg-surface-container text-on-surface-variant border border-outline-variant/30">v2.0</span>
+<span class="text-lg font-bold text-on-surface tracking-tight">CarbonLedger</span>
 </div>
 <!-- Right-hand User Profile -->
 <div class="flex items-center gap-4">
 <div class="flex items-center gap-3 pl-2">
-<div class="text-right hidden sm:block">
-<p class="text-label-md font-label-lg text-on-surface leading-tight">Sarah Chen</p>
-<p class="text-body-sm font-body-sm text-outline leading-tight">Climate Auditor</p>
+<div class="w-9 h-9 rounded-full bg-[#00A76F] text-white flex items-center justify-center font-bold text-xs shadow-sm">
+  NA
 </div>
-<div class="w-9 h-9 rounded-full bg-surface-container text-on-surface flex items-center justify-center font-title font-semibold text-body-sm border border-outline-variant/40 shadow-xs ring-2 ring-primary-container/20 cursor-pointer hover:bg-surface-container-high transition-colors duration-150">
-          SC
-        </div>
 </div>
 </div>
 </header>
-<!-- Centered Content Area (No sidebar, task-focused flow) -->
+<!-- Centered Content Area -->
 <main class="flex-1 flex items-center justify-center px-4 py-12 md:py-16">
-<div class="w-full max-w-md bg-surface-container-lowest rounded-2xl border border-outline-variant/30 p-8 shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] flex flex-col transition-all duration-200 hover:shadow-[0px_12px_24px_-4px_rgba(145,158,171,0.12),0px_0px_2px_0px_rgba(145,158,171,0.20)]">
+<div class="w-full max-w-md bg-white rounded-2xl border border-outline-variant/30 p-8 shadow-sm flex flex-col transition-all duration-200">
 <!-- Card Title & Description -->
 <div class="mb-6 text-center">
-<div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-primary-container/10 text-primary-container flex items-center justify-center">
+<div class="w-12 h-12 mx-auto mb-3 rounded-xl bg-[#00A76F]/10 text-[#00A76F] flex items-center justify-center">
 <span class="material-symbols-outlined text-[26px]" data-icon="vpn_key" style="font-variation-settings: 'FILL' 1;">vpn_key</span>
 </div>
-<h2 class="text-headline-md font-headline-md text-on-surface tracking-tight">Join a Workspace</h2>
-<p class="text-body-md font-body-md text-outline mt-1.5">Enter the 6-character invite code.</p>
+<h2 class="text-2xl font-bold text-on-surface tracking-tight">Gia nhập Không gian làm việc</h2>
+<p class="text-sm text-outline mt-1.5">Nhập mã mời gồm 6 ký tự để tiếp tục.</p>
 </div>
 <!-- 6-Character OTP Input Cluster -->
 <div class="mb-6">
 <div class="flex items-center justify-between gap-2.5">
 <!-- Char 1 -->
-<div class="w-12 h-14 rounded-xl border-2 border-primary-container bg-surface-container-lowest flex items-center justify-center shadow-xs transition-transform duration-100 focus-within:ring-2 focus-within:ring-primary-container/20">
-<span class="text-headline-sm font-headline-md text-on-surface font-mono tracking-wider font-bold">A</span>
+<div class="w-12 h-14 rounded-xl border-2 border-[#00A76F] bg-white flex items-center justify-center shadow-xs">
+<span class="text-xl font-bold text-on-surface font-mono tracking-wider">A</span>
 </div>
 <!-- Char 2 -->
-<div class="w-12 h-14 rounded-xl border-2 border-primary-container bg-surface-container-lowest flex items-center justify-center shadow-xs transition-transform duration-100 focus-within:ring-2 focus-within:ring-primary-container/20">
-<span class="text-headline-sm font-headline-md text-on-surface font-mono tracking-wider font-bold">B</span>
+<div class="w-12 h-14 rounded-xl border-2 border-[#00A76F] bg-white flex items-center justify-center shadow-xs">
+<span class="text-xl font-bold text-on-surface font-mono tracking-wider">B</span>
 </div>
 <!-- Char 3 -->
-<div class="w-12 h-14 rounded-xl border-2 border-primary-container bg-surface-container-lowest flex items-center justify-center shadow-xs transition-transform duration-100 focus-within:ring-2 focus-within:ring-primary-container/20">
-<span class="text-headline-sm font-headline-md text-on-surface font-mono tracking-wider font-bold">3</span>
+<div class="w-12 h-14 rounded-xl border-2 border-[#00A76F] bg-white flex items-center justify-center shadow-xs">
+<span class="text-xl font-bold text-on-surface font-mono tracking-wider">3</span>
 </div>
 <!-- Char 4 -->
-<div class="w-12 h-14 rounded-xl border-2 border-primary-container bg-surface-container-lowest flex items-center justify-center shadow-xs transition-transform duration-100 focus-within:ring-2 focus-within:ring-primary-container/20">
-<span class="text-headline-sm font-headline-md text-on-surface font-mono tracking-wider font-bold">X</span>
+<div class="w-12 h-14 rounded-xl border-2 border-[#00A76F] bg-white flex items-center justify-center shadow-xs">
+<span class="text-xl font-bold text-on-surface font-mono tracking-wider">X</span>
 </div>
 <!-- Char 5 -->
-<div class="w-12 h-14 rounded-xl border-2 border-primary-container bg-surface-container-lowest flex items-center justify-center shadow-xs transition-transform duration-100 focus-within:ring-2 focus-within:ring-primary-container/20">
-<span class="text-headline-sm font-headline-md text-on-surface font-mono tracking-wider font-bold">9</span>
+<div class="w-12 h-14 rounded-xl border-2 border-[#00A76F] bg-white flex items-center justify-center shadow-xs">
+<span class="text-xl font-bold text-on-surface font-mono tracking-wider">9</span>
 </div>
 <!-- Char 6 -->
-<div class="w-12 h-14 rounded-xl border-2 border-primary-container bg-surface-container-lowest flex items-center justify-center shadow-xs transition-transform duration-100 focus-within:ring-2 focus-within:ring-primary-container/20">
-<span class="text-headline-sm font-headline-md text-on-surface font-mono tracking-wider font-bold">K</span>
+<div class="w-12 h-14 rounded-xl border-2 border-[#00A76F] bg-white flex items-center justify-center shadow-xs">
+<span class="text-xl font-bold text-on-surface font-mono tracking-wider">K</span>
 </div>
 </div>
 </div>
 <!-- Live Matched Workspace Preview Area -->
-<div class="mb-6 p-4 rounded-xl border border-primary-container/30 bg-primary-container/[0.04] flex flex-col gap-2 relative overflow-hidden">
+<div class="mb-6 p-4 rounded-xl border border-[#00A76F]/30 bg-[#00A76F]/[0.04] flex flex-col gap-2 relative overflow-hidden">
 <div class="flex items-center justify-between">
 <div class="flex items-center gap-2">
-<span aria-label="home" class="text-body-lg" role="img">🏠</span>
-<span class="text-title font-title font-semibold text-on-surface tracking-tight">My Home</span>
+<span aria-label="home" class="text-base" role="img">🏠</span>
+<span class="text-base font-bold text-on-surface tracking-tight">Gia Đình Xanh</span>
 </div>
 <!-- Verification Badge -->
-<div class="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-primary-container/15 text-primary text-[12px] font-label-md font-bold">
+<div class="flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#00A76F]/15 text-[#006c46] text-xs font-bold">
 <span class="material-symbols-outlined text-[14px]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span>Code verified</span>
+<span>Mã hợp lệ</span>
 </div>
 </div>
-<div class="flex items-center gap-1.5 text-body-sm font-body-sm text-outline pl-0.5">
+<div class="flex items-center gap-1.5 text-xs text-outline pl-0.5">
 <span class="material-symbols-outlined text-[15px] text-outline" data-icon="person">person</span>
-<span>Reviewer: <strong class="text-on-surface font-label-md font-medium">Nguyen Van A</strong></span>
+<span>Người phê duyệt: <strong class="text-on-surface font-semibold">Nguyễn Văn An</strong></span>
 <span class="text-outline-variant">•</span>
-<span>4 members</span>
+<span>4 thành viên</span>
 </div>
 </div>
 <!-- Action Button -->
-<button class="w-full h-12 bg-primary-container text-on-primary font-label-lg font-semibold rounded-xl flex items-center justify-center gap-2 shadow-[0px_8px_16px_0px_rgba(0,167,111,0.24)] hover:bg-[#007867] hover:shadow-[0px_10px_20px_0px_rgba(0,167,111,0.32)] active:scale-[0.99] transition-all duration-150" type="button">
-<span>Send Join Request</span>
+<button class="w-full h-12 bg-[#00A76F] text-white text-sm font-semibold rounded-xl flex items-center justify-center gap-2 shadow-[0px_8px_16px_0px_rgba(0,167,111,0.24)] hover:bg-[#007867] active:scale-[0.99] transition-all duration-150" type="button">
+<span>Gửi yêu cầu gia nhập</span>
 <span class="material-symbols-outlined text-[18px]" data-icon="arrow_forward">arrow_forward</span>
 </button>
 <!-- Return Link -->
 <div class="mt-4 text-center">
-<a class="inline-flex items-center gap-1 text-body-sm font-body-sm text-outline hover:text-on-surface transition-colors duration-150" href="#workspaces">
+<a class="inline-flex items-center gap-1 text-xs text-outline hover:text-on-surface transition-colors duration-150" href="#">
 <span class="material-symbols-outlined text-[16px]" data-icon="arrow_back">arrow_back</span>
-<span>Back to workspaces</span>
+<span>Quay lại danh sách không gian</span>
 </a>
 </div>
 </div>
 </main>
 <!-- Subtle Minimal Footer -->
-<footer class="py-4 text-center text-body-sm font-body-sm text-outline/70">
-<p>© 2025 CarbonLedger Technologies Inc. All rights reserved.</p>
+<footer class="py-4 text-center text-xs text-outline/70">
+<p>© 2025 CarbonLedger Technologies Inc. Bảo lưu mọi quyền.</p>
 </footer>
 </body></html>

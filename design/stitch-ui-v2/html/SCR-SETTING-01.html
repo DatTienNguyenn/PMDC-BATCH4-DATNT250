@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 
-<html lang="en"><head>
+<html lang="vi"><head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<title>CarbonLedger - Workspace Settings</title>
+<title>Cài đặt không gian - CarbonLedger</title>
 <!-- Material Symbols Outlined font -->
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Public Sans Google Font -->
 <link href="https://fonts.googleapis.com" rel="preconnect"/>
 <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
 <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <!-- Tailwind CSS Play CDN with forms & container-queries -->
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <script id="tailwind-config">
@@ -19,184 +18,114 @@
       theme: {
         extend: {
           "colors": {
-            "on-secondary-fixed": "#00201a",
-            "surface-container-highest": "#d9e3f2",
             "surface-container-low": "#eef4ff",
-            "on-error": "#ffffff",
             "surface-variant": "#d9e3f2",
-            "secondary-fixed": "#97f4de",
-            "tertiary-fixed-dim": "#ffb95e",
-            "secondary-fixed-dim": "#7bd7c2",
-            "on-tertiary-fixed": "#2a1700",
-            "on-primary-container": "#00321f",
-            "error-container": "#ffdad6",
             "surface-container": "#e4effe",
-            "secondary-container": "#97f4de",
-            "error": "#ba1a1a",
-            "tertiary": "#855400",
-            "secondary": "#006b5c",
             "primary-container": "#00a76f",
-            "on-tertiary": "#ffffff",
-            "surface-dim": "#d1dbea",
-            "on-primary": "#ffffff",
-            "on-secondary": "#ffffff",
-            "surface-container-high": "#dfe9f8",
-            "on-tertiary-fixed-variant": "#653e00",
-            "on-surface-variant": "#3d4a41",
-            "on-error-container": "#93000a",
-            "tertiary-container": "#cc8200",
-            "on-secondary-fixed-variant": "#005145",
-            "surface-bright": "#f7f9ff",
-            "on-secondary-container": "#007261",
             "outline-variant": "#bccabf",
-            "on-background": "#121c27",
-            "primary-fixed": "#79fabb",
             "surface-container-lowest": "#ffffff",
             "primary": "#006c46",
-            "inverse-primary": "#5adda0",
             "on-surface": "#121c27",
             "outline": "#6d7a71",
-            "background": "#f7f9ff",
-            "on-primary-fixed": "#002112",
-            "inverse-surface": "#27313c",
-            "inverse-on-surface": "#e9f1ff",
-            "surface-tint": "#006c46",
-            "on-tertiary-container": "#3f2500",
-            "on-primary-fixed-variant": "#005234",
-            "surface": "#f7f9ff",
-            "primary-fixed-dim": "#5adda0",
-            "tertiary-fixed": "#ffddb7"
-          },
-          "borderRadius": {
-            "DEFAULT": "0.25rem",
-            "lg": "0.5rem",
-            "xl": "0.75rem",
-            "full": "9999px"
-          },
-          "spacing": {
-            "margin": "2.5rem",
-            "space-lg": "1.5rem",
-            "space-md": "1rem",
-            "gutter": "1.5rem",
-            "space-xs": "0.25rem",
-            "space-sm": "0.5rem",
-            "gutter-sm": "1rem",
-            "space-xl": "2rem",
-            "margin-mobile": "1rem"
+            "background": "#F9FAFB"
           },
           "fontFamily": {
-            "headline-lg-mobile": ["Public Sans"],
             "body-md": ["Public Sans"],
-            "headline-sm": ["Public Sans"],
-            "label-sm": ["Public Sans"],
-            "headline-md": ["Public Sans"],
-            "headline-lg": ["Public Sans"],
-            "body-lg": ["Public Sans"],
-            "title": ["Public Sans"],
-            "label-lg": ["Public Sans"],
-            "label-md": ["Public Sans"],
-            "display": ["Public Sans"],
-            "body-sm": ["Public Sans"]
-          },
-          "fontSize": {
-            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
-            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
-            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }],
-            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-            "headline-lg": ["32px", { "lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
-            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
-            "title": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
-            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
-            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
-            "display": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
-            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }]
+            "title": ["Public Sans"]
           }
         },
       },
     }
   </script>
 </head>
-<body class="bg-background text-on-surface antialiased min-h-screen flex flex-col font-body-md selection:bg-primary-container selection:text-on-primary">
+<body class="bg-[#F9FAFB] text-on-surface antialiased min-h-screen flex flex-col font-body-md selection:bg-primary-container selection:text-white">
 <!-- TopNavBar (Web Header) -->
 <header class="fixed top-0 left-0 right-0 z-40 flex justify-between items-center px-6 h-16 w-full border-b border-outline-variant/30 bg-surface-container-lowest shadow-sm">
-<!-- Brand Anchor Logo -->
-<div class="text-title font-title font-bold text-on-surface flex items-center gap-2">
-<span class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary shadow-sm" style="background-color: #00A76F;">
-<span class="material-symbols-outlined text-[20px]" data-icon="eco" style="font-variation-settings: 'FILL' 1;">eco</span>
-</span>
-<span class="tracking-tight text-on-surface">CarbonLedger</span>
+<!-- Brand Anchor Logo & Breadcrumb -->
+<div class="flex items-center gap-4">
+  <div class="text-title font-title font-bold text-on-surface flex items-center gap-2">
+    <span class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-white shadow-sm" style="background-color: #00A76F;">
+      <span class="material-symbols-outlined text-[20px]" data-icon="eco" style="font-variation-settings: 'FILL' 1;">eco</span>
+    </span>
+    <span class="tracking-tight text-on-surface font-bold">CarbonLedger</span>
+  </div>
+  <div class="h-4 w-px bg-outline-variant/40 hidden sm:block"></div>
+  <div class="hidden sm:flex items-center text-[13px] font-medium text-outline">
+    <span class="hover:text-on-surface cursor-pointer">Gia Đình Xanh</span>
+    <span class="mx-2 text-outline-variant">/</span>
+    <span class="text-on-surface font-semibold">Cài đặt</span>
+  </div>
 </div>
 <!-- Trailing Actions: Notifications & Avatar -->
 <div class="flex items-center gap-4">
-<button aria-label="Notifications" class="relative p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors duration-150" type="button">
+<button aria-label="Thông báo" class="relative p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors duration-150" type="button">
 <span class="material-symbols-outlined text-[22px]" data-icon="notifications">notifications</span>
 <!-- Notification indicator badge -->
-<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500 ring-2 ring-surface-container-lowest"></span>
 </button>
 <div class="flex items-center gap-3 pl-2 border-l border-outline-variant/30">
-<div class="w-9 h-9 rounded-full ring-2 ring-outline-variant/20 overflow-hidden flex items-center justify-center bg-surface-container">
-<img class="w-full h-full object-cover" data-alt="A refined, modern professional headshot of a corporate sustainability officer in soft diffused daylight wearing minimalist dark-toned modern clothing, centered against an uncluttered, bright architectural white background reflecting a crisp clean aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBV5HMcf_hoSwLvxLcuL4JUoeKFa_hkf0lYGi5t2EFtyzNAMQXHNl9B1rqkDwqqqhveSGsTX6FR-BHSPvk6RA6sBARoNTAmx33HFvVG7a_N9kjwRvbv3sVbDmZTHzrwV-vqBGPliq1kuh6geQtjkYN9cvl4ffTy_QjrNHpcLoK37zrMRDdLOC3YJ0KU7bZjetf9Z0hUyd6et00m9va3KSeJIkGjy9Kk6TD6ibNmGtaplvKIRDhpZHXPaSXmRDOwYkEBKQV8n5YPGw"/>
+<div class="w-9 h-9 rounded-full bg-[#00A76F] text-white flex items-center justify-center font-bold text-[13px] shadow-sm">
+  NA
 </div>
 </div>
 </div>
 </header>
 <div class="flex pt-16 min-h-screen">
 <!-- SideNavBar (Vertical Navigation) -->
-<aside class="fixed left-0 top-16 bottom-0 w-52 flex flex-col py-6 px-3 bg-surface-container-lowest border-r border-outline-variant/30 z-30">
-<nav class="space-y-1.5 flex-1">
+<aside class="fixed left-0 top-16 bottom-0 w-56 flex flex-col py-6 px-3 bg-surface-container-lowest border-r border-outline-variant/30 z-30">
+<nav class="space-y-1 flex-1">
 <!-- 1. Dashboard -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm hover:bg-gray-100 transition-all duration-150 ease-in-out" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
-<span>Dashboard</span>
+<span>Tổng quan</span>
 </a>
 <!-- 2. Ledger -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm hover:bg-gray-100 transition-all duration-150 ease-in-out" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="receipt_long">receipt_long</span>
-<span>Ledger</span>
+<span>Sổ cái</span>
 </a>
 <!-- 3. Approvals -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm hover:bg-gray-100 transition-all duration-150 ease-in-out" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="verified">verified</span>
-<span>Approvals</span>
+<span>Phê duyệt</span>
 </a>
 <!-- 4. Insights -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm hover:bg-gray-100 transition-all duration-150 ease-in-out" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="insights">insights</span>
-<span>Insights</span>
+<span>Báo cáo & Lộ trình</span>
 </a>
 <!-- 5. Settings (ACTIVE TAB) -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-lg shadow-sm" href="#" style="background-color: #00A76F;">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00A76F] text-white font-semibold text-sm shadow-sm" href="#">
 <span class="material-symbols-outlined text-[20px]" data-icon="settings" style="font-variation-settings: 'FILL' 1;">settings</span>
-<span class="text-white">Settings</span>
+<span>Cài đặt</span>
 </a>
 </nav>
 <!-- Bottom metadata tag -->
-<div class="px-3 pt-4 border-t border-outline-variant/20 flex items-center justify-between text-body-sm font-body-sm text-outline">
+<div class="px-3 pt-4 border-t border-outline-variant/20 flex items-center justify-between text-xs text-outline">
 <span>v2.4.0</span>
-<span class="w-2 h-2 rounded-full bg-primary-container" style="background-color: #00A76F;"></span>
+<span class="w-2 h-2 rounded-full bg-[#00A76F]"></span>
 </div>
 </aside>
 <!-- Main Content Canvas -->
-<main class="flex-1 ml-52 p-8 md:p-10 max-w-7xl">
+<main class="flex-1 ml-56 p-8 md:p-10 max-w-7xl">
 <div class="max-w-3xl space-y-6">
-<!-- Header Section: Clean, bold h1, strictly no subtitle or explanatory text -->
+<!-- Header Section -->
 <div class="space-y-4">
-<h1 class="text-headline-lg font-headline-lg text-on-surface tracking-tight">Settings</h1>
+<h1 class="text-2xl font-bold text-on-surface tracking-tight">Cài đặt</h1>
 <!-- Tab Pills -->
 <div class="flex items-center gap-2">
 <!-- Active Tab: Workspace -->
-<button class="px-4 py-1.5 rounded-xl font-label-lg text-label-lg text-white shadow-sm transition-all duration-150" style="background-color: #00A76F;" type="button">
-              Workspace
-            </button>
+<button class="px-4 py-1.5 rounded-xl text-sm font-semibold text-white shadow-sm transition-all duration-150 bg-[#00A76F]" type="button">
+  Không gian
+</button>
 <!-- Inactive Tab: Budget -->
-<button class="px-4 py-1.5 rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface bg-surface-container-lowest border border-outline-variant/30 hover:border-outline-variant transition-all duration-150" type="button">
-              Budget
-            </button>
+<button class="px-4 py-1.5 rounded-xl text-sm font-medium text-gray-600 hover:text-gray-900 bg-white border border-outline-variant/30 hover:border-outline-variant transition-all duration-150" type="button">
+  Ngân sách
+</button>
 <!-- Inactive Tab: Members -->
-<button class="px-4 py-1.5 rounded-xl font-label-lg text-label-lg text-on-surface-variant hover:text-on-surface bg-surface-container-lowest border border-outline-variant/30 hover:border-outline-variant transition-all duration-150" type="button">
-              Members
-            </button>
+<button class="px-4 py-1.5 rounded-xl text-sm font-medium text-gray-600 hover:text-gray-900 bg-white border border-outline-variant/30 hover:border-outline-variant transition-all duration-150" type="button">
+  Thành viên
+</button>
 </div>
 </div>
 <!-- TAB: Workspace Form Card -->
@@ -204,33 +133,33 @@
 <form class="space-y-6" id="workspace-form" onsubmit="event.preventDefault();">
 <!-- 1. Workspace Name -->
 <div class="space-y-2">
-<label class="block font-label-lg text-label-lg text-on-surface" for="workspace-name">
-                Workspace Name
-              </label>
+<label class="block text-sm font-semibold text-on-surface" for="workspace-name">
+  Tên không gian làm việc
+</label>
 <div class="relative">
-<input class="w-full h-12 px-3.5 bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-lg border border-outline-variant/40 focus:outline-none focus:border-[#00A76F] focus:ring-2 focus:ring-[#00A76F]/20 transition-all duration-150" id="workspace-name" name="workspace-name" required="" type="text" value="My Home"/>
+<input class="w-full h-12 px-3.5 bg-surface-container-lowest text-on-surface text-sm rounded-lg border border-outline-variant/40 focus:outline-none focus:border-[#00A76F] focus:ring-2 focus:ring-[#00A76F]/20 transition-all duration-150" id="workspace-name" name="workspace-name" required="" type="text" value="Gia Đình Xanh"/>
 </div>
 </div>
 <!-- 2. Type: Radio Selection -->
 <div class="space-y-2.5">
-<label class="block font-label-lg text-label-lg text-on-surface">
-                Type
-              </label>
+<label class="block text-sm font-semibold text-on-surface">
+  Loại hình
+</label>
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
 <!-- Household Option (Checked) -->
-<label class="relative flex items-center p-3.5 rounded-xl border border-[#00A76F] bg-surface-container-low/40 cursor-pointer transition-all duration-150 select-none">
+<label class="relative flex items-center p-3.5 rounded-xl border border-[#00A76F] bg-[#00A76F]/[0.04] cursor-pointer transition-all duration-150 select-none">
 <input checked="" class="w-4 h-4 text-[#00A76F] border-outline-variant focus:ring-[#00A76F] focus:ring-offset-0 transition-colors" name="workspace-type" type="radio" value="household"/>
 <div class="ml-3 flex items-center gap-2">
 <span class="material-symbols-outlined text-[18px] text-on-surface" data-icon="home">home</span>
-<span class="font-label-lg text-label-lg text-on-surface">Household</span>
+<span class="text-sm font-semibold text-on-surface">Hộ gia đình</span>
 </div>
 </label>
 <!-- Small Office Option -->
 <label class="relative flex items-center p-3.5 rounded-xl border border-outline-variant/30 hover:border-outline-variant bg-surface-container-lowest cursor-pointer transition-all duration-150 select-none">
 <input class="w-4 h-4 text-[#00A76F] border-outline-variant focus:ring-[#00A76F] focus:ring-offset-0 transition-colors" name="workspace-type" type="radio" value="small_office"/>
 <div class="ml-3 flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px] text-on-surface-variant" data-icon="corporate_fare">corporate_fare</span>
-<span class="font-label-lg text-label-lg text-on-surface-variant">Small Office</span>
+<span class="material-symbols-outlined text-[18px] text-gray-500" data-icon="corporate_fare">corporate_fare</span>
+<span class="text-sm font-medium text-gray-600">Văn phòng nhỏ</span>
 </div>
 </label>
 </div>
@@ -239,23 +168,23 @@
 <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
 <!-- 3. Floor Area (with m² suffix badge) -->
 <div class="space-y-2">
-<label class="block font-label-lg text-label-lg text-on-surface" for="floor-area">
-                  Floor Area
-                </label>
+<label class="block text-sm font-semibold text-on-surface" for="floor-area">
+  Diện tích sàn
+</label>
 <div class="relative flex items-center">
-<input class="w-full h-12 pl-3.5 pr-14 bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-lg border border-outline-variant/40 focus:outline-none focus:border-[#00A76F] focus:ring-2 focus:ring-[#00A76F]/20 transition-all duration-150" id="floor-area" min="1" name="floor-area" type="number" value="75"/>
-<div class="absolute right-2.5 px-2.5 py-1 rounded bg-surface-container-low text-on-surface-variant font-label-md text-label-md select-none border border-outline-variant/30">
-                    m²
-                  </div>
+<input class="w-full h-12 pl-3.5 pr-14 bg-surface-container-lowest text-on-surface text-sm rounded-lg border border-outline-variant/40 focus:outline-none focus:border-[#00A76F] focus:ring-2 focus:ring-[#00A76F]/20 transition-all duration-150" id="floor-area" min="1" name="floor-area" type="number" value="85"/>
+<div class="absolute right-2.5 px-2.5 py-1 rounded bg-gray-100 text-gray-600 text-xs font-semibold select-none border border-outline-variant/30">
+  m²
+</div>
 </div>
 </div>
 <!-- 4. Members Count -->
 <div class="space-y-2">
-<label class="block font-label-lg text-label-lg text-on-surface" for="members-count">
-                  Members Count
-                </label>
+<label class="block text-sm font-semibold text-on-surface" for="members-count">
+  Số lượng thành viên
+</label>
 <div class="relative">
-<input class="w-full h-12 px-3.5 bg-surface-container-lowest text-on-surface font-body-md text-body-md rounded-lg border border-outline-variant/40 focus:outline-none focus:border-[#00A76F] focus:ring-2 focus:ring-[#00A76F]/20 transition-all duration-150" id="members-count" min="1" name="members-count" type="number" value="4"/>
+<input class="w-full h-12 px-3.5 bg-surface-container-lowest text-on-surface text-sm rounded-lg border border-outline-variant/40 focus:outline-none focus:border-[#00A76F] focus:ring-2 focus:ring-[#00A76F]/20 transition-all duration-150" id="members-count" min="1" name="members-count" type="number" value="4"/>
 </div>
 </div>
 </div>
@@ -263,8 +192,8 @@
 <div class="pt-2 border-t border-outline-variant/20"></div>
 <!-- 5. Action Button (Right-aligned Save Changes) -->
 <div class="flex justify-end items-center pt-1">
-<button class="px-6 py-2.5 rounded-xl font-label-lg text-label-lg text-white font-medium shadow-sm hover:shadow transition-all duration-150 active:scale-[0.99] flex items-center gap-2" style="background-color: #00A76F;" type="submit">
-<span>Save Changes</span>
+<button class="px-6 py-2.5 rounded-xl text-sm text-white font-semibold shadow-sm hover:shadow transition-all duration-150 active:scale-[0.99] flex items-center gap-2 bg-[#00A76F] hover:bg-[#009160]" type="submit">
+<span>Lưu thay đổi</span>
 </button>
 </div>
 </form>
@@ -275,7 +204,6 @@
 <!-- Micro-interaction script for dynamic form feedback -->
 <script>
     document.addEventListener('DOMContentLoaded', () => {
-      const form = document.getElementById('workspace-form');
       const radioLabels = document.querySelectorAll('input[name="workspace-type"]');
 
       radioLabels.forEach(radio => {
@@ -285,19 +213,19 @@
             const icon = parentLabel.querySelector('.material-symbols-outlined');
             const labelText = parentLabel.querySelector('span:last-child');
             if (r.checked) {
-              parentLabel.classList.add('border-[#00A76F]', 'bg-surface-container-low/40');
+              parentLabel.classList.add('border-[#00A76F]', 'bg-[#00A76F]/[0.04]');
               parentLabel.classList.remove('border-outline-variant/30', 'bg-surface-container-lowest');
-              icon.classList.remove('text-on-surface-variant');
+              icon.classList.remove('text-gray-500');
               icon.classList.add('text-on-surface');
-              labelText.classList.remove('text-on-surface-variant');
-              labelText.classList.add('text-on-surface');
+              labelText.classList.remove('text-gray-600', 'font-medium');
+              labelText.classList.add('text-on-surface', 'font-semibold');
             } else {
-              parentLabel.classList.remove('border-[#00A76F]', 'bg-surface-container-low/40');
+              parentLabel.classList.remove('border-[#00A76F]', 'bg-[#00A76F]/[0.04]');
               parentLabel.classList.add('border-outline-variant/30', 'bg-surface-container-lowest');
-              icon.classList.add('text-on-surface-variant');
+              icon.classList.add('text-gray-500');
               icon.classList.remove('text-on-surface');
-              labelText.classList.add('text-on-surface-variant');
-              labelText.classList.remove('text-on-surface');
+              labelText.classList.add('text-gray-600', 'font-medium');
+              labelText.classList.remove('text-on-surface', 'font-semibold');
             }
           });
         });
