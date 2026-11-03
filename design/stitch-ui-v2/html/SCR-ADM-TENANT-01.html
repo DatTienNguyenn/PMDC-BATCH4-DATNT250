@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CarbonLedger Enterprise - Workspaces</title>
+<!-- Material Symbols Outlined Font -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Public Sans Typography -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-bright": "#f7f9ff",
+            "on-tertiary": "#ffffff",
+            "on-error": "#ffffff",
+            "secondary-container": "#97f4de",
+            "surface-container-highest": "#d9e3f2",
+            "on-error-container": "#93000a",
+            "surface-container-lowest": "#ffffff",
+            "surface": "#f7f9ff",
+            "secondary-fixed": "#97f4de",
+            "surface-tint": "#006c46",
+            "on-surface": "#121c27",
+            "on-background": "#121c27",
+            "error-container": "#ffdad6",
+            "on-secondary-container": "#007261",
+            "surface-variant": "#d9e3f2",
+            "secondary": "#006b5c",
+            "outline": "#6d7a71",
+            "on-secondary-fixed-variant": "#005145",
+            "on-tertiary-fixed": "#2a1700",
+            "tertiary": "#855400",
+            "inverse-on-surface": "#e9f1ff",
+            "on-surface-variant": "#3d4a41",
+            "on-primary": "#ffffff",
+            "background": "#f7f9ff",
+            "on-tertiary-fixed-variant": "#653e00",
+            "surface-container": "#e4effe",
+            "tertiary-fixed": "#ffddb7",
+            "surface-container-high": "#dfe9f8",
+            "on-primary-fixed-variant": "#005234",
+            "inverse-surface": "#27313c",
+            "primary": "#006c46",
+            "error": "#ba1a1a",
+            "tertiary-container": "#cc8200",
+            "primary-fixed-dim": "#5adda0",
+            "primary-fixed": "#79fabb",
+            "on-secondary-fixed": "#00201a",
+            "inverse-primary": "#5adda0",
+            "surface-dim": "#d1dbea",
+            "on-primary-container": "#00321f",
+            "on-primary-fixed": "#002112",
+            "on-tertiary-container": "#3f2500",
+            "outline-variant": "#bccabf",
+            "secondary-fixed-dim": "#7bd7c2",
+            "primary-container": "#00a76f",
+            "on-secondary": "#ffffff",
+            "surface-container-low": "#eef4ff",
+            "tertiary-fixed-dim": "#ffb95e"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "gutter": "1.5rem",
+            "margin": "2.5rem",
+            "gutter-sm": "1rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "space-sm": "0.5rem"
+          },
+          "fontFamily": {
+            "title": ["Public Sans"],
+            "display": ["Public Sans"],
+            "body-sm": ["Public Sans"],
+            "label-lg": ["Public Sans"],
+            "label-md": ["Public Sans"],
+            "headline-lg": ["Public Sans"],
+            "label-sm": ["Public Sans"],
+            "headline-sm": ["Public Sans"],
+            "headline-md": ["Public Sans"],
+            "headline-lg-mobile": ["Public Sans"],
+            "body-lg": ["Public Sans"],
+            "body-md": ["Public Sans"]
+          },
+          "fontSize": {
+            "title": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+            "display": ["40px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+            "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}],
+            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+            "headline-lg": ["32px", {"lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700"}],
+            "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "headline-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      vertical-align: middle;
+      line-height: 1;
+    }
+    body {
+      background-color: #F9FAFB;
+      font-family: 'Public Sans', sans-serif;
+    }
+  </style>
+</head>
+<body class="min-h-screen text-on-surface antialiased bg-[#F9FAFB] flex flex-col">
+<!-- ==================== SIDE NAVIGATION (SHARED COMPONENT) ==================== -->
+<aside class="fixed top-0 left-0 h-screen w-64 border-r border-outline-variant/20 bg-inverse-surface z-50 flex flex-col justify-between p-4">
+<!-- Header: Brand Identity -->
+<div>
+<div class="flex items-center gap-3 px-2 py-3 mb-6">
+<div class="h-10 w-10 rounded-xl bg-primary-container/20 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-2xl" data-icon="eco">eco</span>
+</div>
+<div class="flex flex-col">
+<span class="text-title font-title font-bold text-surface-container-lowest">CarbonLedger</span>
+<span class="text-label-sm font-label-sm text-outline-variant/80 tracking-wide">Enterprise v2.0</span>
+</div>
+</div>
+<!-- Main Navigation Links -->
+<nav aria-label="Main Administration" class="space-y-1.5">
+<!-- Overview (Inactive) -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest font-body-md transition-colors hover:bg-surface-variant/10" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="dashboard">dashboard</span>
+<span>Overview</span>
+</a>
+<!-- Emission Factors (Inactive) -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest font-body-md transition-colors hover:bg-surface-variant/10" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="co2">co2</span>
+<span>Emission Factors</span>
+</a>
+<!-- Workspaces (ACTIVE TAB per destination match) -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary-container/15 text-primary-container font-label-md transition-colors shadow-sm" href="#">
+<span class="material-symbols-outlined text-xl text-primary-container" data-icon="corporate_fare" data-weight="fill" style="font-variation-settings: 'FILL' 1;">corporate_fare</span>
+<span class="font-semibold text-surface-container-lowest">Workspaces</span>
+<span class="ml-auto bg-primary-container/20 text-primary-container text-label-sm font-label-sm px-2 py-0.5 rounded-full font-bold">24</span>
+</a>
+<!-- Audit Log (Inactive) -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest font-body-md transition-colors hover:bg-surface-variant/10" href="#">
+<span class="material-symbols-outlined text-xl" data-icon="history_edu">history_edu</span>
+<span>Audit Log</span>
+</a>
+</nav>
+</div>
+<!-- Secondary Utilities & User Profile Anchor -->
+<div class="space-y-4 pt-4 border-t border-outline-variant/20">
+<div class="px-2">
+<button class="w-full flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-surface-variant/10 text-surface-container-lowest hover:bg-surface-variant/20 text-label-md font-label-md transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="file_download">file_download</span>
+<span>Export Report</span>
+</button>
+</div>
+<nav aria-label="Support Navigation" class="space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest font-body-md transition-colors hover:bg-surface-variant/10" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+<span class="text-body-sm font-body-sm">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest font-body-md transition-colors hover:bg-surface-variant/10" href="#">
+<span class="material-symbols-outlined text-lg" data-icon="help_outline">help_outline</span>
+<span class="text-body-sm font-body-sm">Documentation</span>
+</a>
+</nav>
+<!-- User Admin Profile Card -->
+<div class="flex items-center gap-3 p-2 rounded-xl bg-surface-variant/5 border border-outline-variant/10">
+<div class="relative">
+<img class="w-10 h-10 rounded-full object-cover border border-outline-variant/30" data-alt="Portrait photo of Alex Mercer, SecOps System Administrator, professional headshot in modern lighting against a clean corporate tech studio backdrop with soft emerald green ambient lighting." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCgrBL-Zr4B7MyohhJy8FbjN8E8nRZe6uQRbkAMctXzzootc07-QW-TU0eEfs_NGlbfNYzNsEI8-mZ2y724TymsQjCFnIzzrm2CaGGHX847cyu4RQANuOHR_sPZXxH1bXIr5u9uZH7tFYPIzpktmM5BPnat3iD9MoT7Q3bhJK9mff9lvW2R0EDLAGPhFLyuBnCnjNZS5ImiUVGBbfUm83b0SFOl3qj9SY0_QXie26AHIQK5VpbkGrXzoVzxqUmpal-xLhZl8708rQ"/>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-primary-container ring-2 ring-inverse-surface"></span>
+</div>
+<div class="flex flex-col min-w-0">
+<span class="text-label-md font-label-md text-surface-container-lowest truncate">Alex Mercer</span>
+<span class="text-label-sm font-label-sm text-outline-variant/80 truncate">SecOps / SysAdmin</span>
+</div>
+<button class="ml-auto text-inverse-on-surface/50 hover:text-surface-container-lowest p-1" title="Account context menu">
+<span class="material-symbols-outlined text-base" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</div>
+</aside>
+<!-- ==================== TOP NAVIGATION BAR (SHARED COMPONENT) ==================== -->
+<header class="docked full-width top-0 sticky z-40 border-b border-surface-container-high/60 bg-surface-container-lowest/80 backdrop-blur-md flex justify-between items-center h-16 px-6 ml-64 w-[calc(100%-16rem)]">
+<!-- Breadcrumb & Search Telemetry -->
+<div class="flex items-center gap-6">
+<nav aria-label="Breadcrumb" class="flex items-center gap-2 text-label-md font-label-md text-outline">
+<span class="hover:text-on-surface transition-colors">Admin</span>
+<span class="text-outline-variant">/</span>
+<span class="text-primary font-semibold">Workspaces</span>
+</nav>
+<!-- Global Filter/Search bar -->
+<div class="relative hidden lg:block w-72">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline-variant text-lg" data-icon="search">search</span>
+<input class="w-full h-9 pl-9 pr-3 text-body-sm font-body-sm bg-surface-container-low/50 border border-outline-variant/40 rounded-lg focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container placeholder:text-outline/70" placeholder="Telemetry ID or quick query..." type="text"/>
+</div>
+</div>
+<!-- Right Controls -->
+<div class="flex items-center gap-3">
+<!-- Notification Icon Button -->
+<button class="relative p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" title="Notifications">
+<span class="material-symbols-outlined text-xl" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 bg-error rounded-full ring-2 ring-surface-container-lowest"></span>
+</button>
+<!-- Theme Switcher -->
+<button class="p-2 rounded-lg text-on-surface-variant hover:bg-surface-container-high transition-colors" title="Toggle theme contrast">
+<span class="material-symbols-outlined text-xl" data-icon="contrast">contrast</span>
+</button>
+<div class="h-5 w-px bg-surface-container-high mx-1"></div>
+<!-- Gray Pill Badge for Role -->
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant border border-outline-variant/30 text-label-sm font-label-sm font-bold">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+<span>System Admin</span>
+</div>
+<!-- Quick Avatar -->
+<div class="flex items-center gap-2 pl-2">
+<img class="w-8 h-8 rounded-full border border-primary-container/40 object-cover" data-alt="System Administrator profile avatar thumbnail of Alex Mercer wearing professional minimalist tech apparel with crisp neutral lighting and soft focus studio setup." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBF_x2TQJfjuPvAeCuQAW2U-tKUzTgfOyPh5LcSIJfB1-Hq_8BGoKVb7h2TNYz2VMUdEg6ey7Bd01KGn-NWFrCG5tHbgLgcqW6qwcgPnnxtGOw99SPoJqjlWlcpfxg-WigqAG-a0bQy5jkC8GwjOMJ4rAKAIh36nHOg9boyLbVahIIub4NG6ULzaeSmNxZdJjB8q87NAHVqU7d9vGwdToOU4dB6yHZhEXzPdKOihEQP4fLypxGc0pBU_D6DfdiXL45aAh6y_TciTA"/>
+</div>
+</div>
+</header>
+<!-- ==================== MAIN CONTENT CANVAS ==================== -->
+<main class="ml-64 w-[calc(100%-16rem)] p-8 flex-1 flex flex-col gap-6">
+<!-- PAGE HEADER -->
+<section class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<div>
+<h1 class="text-headline-lg font-headline-lg text-[#1C252E] tracking-tight">Workspaces</h1>
+<p class="text-body-md font-body-md text-outline mt-1 max-w-3xl">
+          Manage tenant organizations, monitor organizational footprints, and manage workspace access controls.
+        </p>
+</div>
+<!-- Top Action Buttons -->
+<div class="flex items-center gap-3 shrink-0">
+<button class="h-10 px-4 rounded-lg border border-outline-variant/60 bg-surface-container-lowest text-on-surface hover:bg-surface-container-low hover:border-primary-container text-label-md font-label-md flex items-center gap-2 transition-all shadow-sm">
+<span class="material-symbols-outlined text-lg" data-icon="download">download</span>
+<span>Export CSV</span>
+</button>
+<button class="h-10 px-4 rounded-lg bg-primary-container text-on-primary hover:bg-[#007867] text-label-md font-label-md flex items-center gap-2 transition-all shadow-[0px_8px_16px_0px_rgba(0,167,111,0.24)]">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+<span>+ New Workspace</span>
+</button>
+</div>
+</section>
+<!-- METRIC SUMMARY CARDS (MUI Minimal Stat Grid) -->
+<section class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+<!-- Stat 1: Total Workspaces -->
+<div class="bg-surface-container-lowest border border-[#F3F4F6] rounded-2xl p-6 shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] hover:shadow-[0px_12px_24px_-4px_rgba(145,158,171,0.12),0px_0px_2px_0px_rgba(145,158,171,0.20)] transition-shadow">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-outline">Total Workspaces</span>
+<div class="w-10 h-10 rounded-xl bg-surface-container-low flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-xl" data-icon="domain">domain</span>
+</div>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-display font-display text-[#1C252E]">24</span>
+</div>
+<div class="mt-2 flex items-center gap-1.5 text-label-sm font-label-sm">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-primary-container/15 text-[#007867] font-bold">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+            +3
+          </span>
+<span class="text-outline">added this month</span>
+</div>
+</div>
+<!-- Stat 2: Active Workspaces -->
+<div class="bg-surface-container-lowest border border-[#F3F4F6] rounded-2xl p-6 shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] hover:shadow-[0px_12px_24px_-4px_rgba(145,158,171,0.12),0px_0px_2px_0px_rgba(145,158,171,0.20)] transition-shadow">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-outline">Active Workspaces</span>
+<div class="w-10 h-10 rounded-xl bg-primary-container/10 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined text-xl" data-icon="check_circle">check_circle</span>
+</div>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-display font-display text-[#1C252E]">21</span>
+</div>
+<div class="mt-2 flex items-center gap-2">
+<div class="flex-1 bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 87.5%"></div>
+</div>
+<span class="text-label-sm font-label-sm font-bold text-[#007867]">87.5%</span>
+</div>
+</div>
+<!-- Stat 3: Suspended Workspaces -->
+<div class="bg-surface-container-lowest border border-[#F3F4F6] rounded-2xl p-6 shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] hover:shadow-[0px_12px_24px_-4px_rgba(145,158,171,0.12),0px_0px_2px_0px_rgba(145,158,171,0.20)] transition-shadow">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-outline">Suspended</span>
+<div class="w-10 h-10 rounded-xl bg-tertiary-container/15 flex items-center justify-center text-[#B76E00]">
+<span class="material-symbols-outlined text-xl" data-icon="pause_circle">pause_circle</span>
+</div>
+</div>
+<div class="mt-4 flex items-baseline gap-2">
+<span class="text-display font-display text-[#1C252E]">3</span>
+</div>
+<div class="mt-2 flex items-center gap-1.5 text-label-sm font-label-sm">
+<span class="inline-flex items-center px-1.5 py-0.5 rounded-full bg-tertiary-container/15 text-[#B76E00] font-bold">
+            12.5%
+          </span>
+<span class="text-outline">of total fleet</span>
+</div>
+</div>
+<!-- Stat 4: Managed Emissions -->
+<div class="bg-surface-container-lowest border border-[#F3F4F6] rounded-2xl p-6 shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] hover:shadow-[0px_12px_24px_-4px_rgba(145,158,171,0.12),0px_0px_2px_0px_rgba(145,158,171,0.20)] transition-shadow">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-outline">Managed Emissions</span>
+<div class="w-10 h-10 rounded-xl bg-secondary-fixed/50 flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-xl" data-icon="cloud">cloud</span>
+</div>
+</div>
+<div class="mt-4 flex items-baseline gap-1">
+<span class="text-display font-display text-[#1C252E]">12,450</span>
+<span class="text-body-sm font-body-sm text-outline font-semibold">kg CO2e</span>
+</div>
+<div class="mt-2 flex items-center gap-1.5 text-label-sm font-label-sm text-[#007867]">
+<span class="material-symbols-outlined text-sm" data-icon="verified">verified</span>
+<span>Telemetry updated 4m ago</span>
+</div>
+</div>
+</section>
+<!-- FILTER AND SEARCH BAR COMPONENT -->
+<section class="bg-surface-container-lowest rounded-2xl p-4 border border-[#F3F4F6] shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div class="flex flex-1 flex-col sm:flex-row items-stretch sm:items-center gap-3">
+<!-- Search Input -->
+<div class="relative flex-1">
+<span class="material-symbols-outlined absolute left-3.5 top-1/2 -translate-y-1/2 text-outline-variant text-xl" data-icon="search">search</span>
+<input class="w-full h-11 pl-10 pr-4 rounded-lg border border-outline-variant/30 text-body-md font-body-md text-[#212B36] placeholder:text-outline focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 focus:outline-none transition-all" placeholder="Search workspace name or owner email..." type="text"/>
+</div>
+<!-- Filter Dropdown: Type -->
+<div class="relative w-full sm:w-44">
+<select class="w-full h-11 pl-3.5 pr-8 rounded-lg border border-outline-variant/30 text-body-md font-body-md text-[#212B36] bg-surface-container-lowest appearance-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 focus:outline-none transition-all cursor-pointer">
+<option value="all">Type: All</option>
+<option value="household">Household</option>
+<option value="office">Small Office</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-outline-variant text-lg" data-icon="expand_more">expand_more</span>
+</div>
+<!-- Filter Dropdown: Status -->
+<div class="relative w-full sm:w-40">
+<select class="w-full h-11 pl-3.5 pr-8 rounded-lg border border-outline-variant/30 text-body-md font-body-md text-[#212B36] bg-surface-container-lowest appearance-none focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 focus:outline-none transition-all cursor-pointer">
+<option value="all">Status: All</option>
+<option value="active">Active</option>
+<option value="suspended">Suspended</option>
+</select>
+<span class="material-symbols-outlined absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-outline-variant text-lg" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<!-- Quick Utilities -->
+<div class="flex items-center gap-2 self-end sm:self-auto shrink-0 border-t sm:border-t-0 pt-3 sm:pt-0 border-outline-variant/20">
+<button class="p-2.5 rounded-lg border border-outline-variant/30 text-outline hover:text-on-surface hover:bg-surface-container-low transition-colors" title="Refresh Table">
+<span class="material-symbols-outlined text-xl" data-icon="refresh">refresh</span>
+</button>
+<button class="p-2.5 rounded-lg border border-outline-variant/30 bg-surface-container-low text-primary-container" title="Table View">
+<span class="material-symbols-outlined text-xl" data-icon="table_rows">table_rows</span>
+</button>
+<button class="p-2.5 rounded-lg border border-outline-variant/30 text-outline hover:text-on-surface hover:bg-surface-container-low transition-colors" title="Grid View">
+<span class="material-symbols-outlined text-xl" data-icon="grid_view">grid_view</span>
+</button>
+</div>
+</section>
+<!-- DATA TABLE CONTAINER -->
+<section class="bg-surface-container-lowest rounded-2xl border border-[#F3F4F6] shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] overflow-hidden">
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low/60 border-b border-[#F3F4F6] text-label-md font-label-md text-outline">
+<th class="py-3.5 px-6 font-semibold" scope="col">Workspace</th>
+<th class="py-3.5 px-6 font-semibold" scope="col">Owner</th>
+<th class="py-3.5 px-6 font-semibold" scope="col">Type</th>
+<th class="py-3.5 px-6 font-semibold" scope="col">Members</th>
+<th class="py-3.5 px-6 font-semibold" scope="col">Total Emissions</th>
+<th class="py-3.5 px-6 font-semibold" scope="col">Status</th>
+<th class="py-3.5 px-6 font-semibold text-right" scope="col">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#F3F4F6]">
+<!-- ROW 1 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="home">home</span>
+</div>
+<div>
+<div class="text-label-lg font-label-lg text-[#212B36] font-semibold">My Home</div>
+<div class="text-body-sm font-body-sm text-outline">ws-01824-us</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-body-md font-body-md text-[#212B36]">
+                nguyen@example.com
+              </td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-[#F3F4F6] text-[#637381]">
+                  Household
+                </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-1.5 text-body-md font-body-md text-[#212B36]">
+<span class="material-symbols-outlined text-base text-outline" data-icon="group">group</span>
+<span>4 members</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="text-label-lg font-label-lg text-[#212B36] font-semibold">892 kg CO2e</span>
+<div class="w-24 bg-surface-container-high h-1.5 rounded-full mt-1.5 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 28%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-primary-container/15 text-[#007867]">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                  Active
+                </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-error/30 text-error hover:bg-error-container/20 text-label-sm font-label-sm font-semibold transition-colors" title="Suspend Workspace">
+<span class="material-symbols-outlined text-base" data-icon="lock">lock</span>
+<span>Lock</span>
+</button>
+</td>
+</tr>
+<!-- ROW 2 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="apartment">apartment</span>
+</div>
+<div>
+<div class="text-label-lg font-label-lg text-[#212B36] font-semibold">Startup Office</div>
+<div class="text-body-sm font-body-sm text-outline">ws-01825-us</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-body-md font-body-md text-[#212B36]">
+                tran@example.com
+              </td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-[#E4EFFE] text-[#006B5C]">
+                  Small Office
+                </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-1.5 text-body-md font-body-md text-[#212B36]">
+<span class="material-symbols-outlined text-base text-outline" data-icon="group">group</span>
+<span>8 members</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="text-label-lg font-label-lg text-[#212B36] font-semibold">2,450 kg CO2e</span>
+<div class="w-24 bg-surface-container-high h-1.5 rounded-full mt-1.5 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 72%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-primary-container/15 text-[#007867]">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                  Active
+                </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-error/30 text-error hover:bg-error-container/20 text-label-sm font-label-sm font-semibold transition-colors" title="Suspend Workspace">
+<span class="material-symbols-outlined text-base" data-icon="lock">lock</span>
+<span>Lock</span>
+</button>
+</td>
+</tr>
+<!-- ROW 3 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="home">home</span>
+</div>
+<div>
+<div class="text-label-lg font-label-lg text-[#212B36] font-semibold">Parent Home</div>
+<div class="text-body-sm font-body-sm text-outline">ws-01826-us</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-body-md font-body-md text-[#212B36]">
+                le@example.com
+              </td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-[#F3F4F6] text-[#637381]">
+                  Household
+                </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-1.5 text-body-md font-body-md text-[#212B36]">
+<span class="material-symbols-outlined text-base text-outline" data-icon="group">group</span>
+<span>3 members</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="text-label-lg font-label-lg text-[#212B36] font-semibold">341 kg CO2e</span>
+<div class="w-24 bg-surface-container-high h-1.5 rounded-full mt-1.5 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 14%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-primary-container/15 text-[#007867]">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                  Active
+                </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-error/30 text-error hover:bg-error-container/20 text-label-sm font-label-sm font-semibold transition-colors" title="Suspend Workspace">
+<span class="material-symbols-outlined text-base" data-icon="lock">lock</span>
+<span>Lock</span>
+</button>
+</td>
+</tr>
+<!-- ROW 4 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="store">store</span>
+</div>
+<div>
+<div class="text-label-lg font-label-lg text-[#212B36] font-semibold">Old Team</div>
+<div class="text-body-sm font-body-sm text-outline">ws-01827-us</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-body-md font-body-md text-[#212B36]">
+                pham@example.com
+              </td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-[#E4EFFE] text-[#006B5C]">
+                  Small Office
+                </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-1.5 text-body-md font-body-md text-[#212B36]">
+<span class="material-symbols-outlined text-base text-outline" data-icon="group">group</span>
+<span>2 members</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="text-label-lg font-label-lg text-[#212B36] font-semibold">180 kg CO2e</span>
+<div class="w-24 bg-surface-container-high h-1.5 rounded-full mt-1.5 overflow-hidden">
+<div class="bg-[#B76E00] h-full rounded-full" style="width: 8%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-tertiary-container/15 text-[#B76E00]">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B76E00]"></span>
+                  Suspended
+                </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-primary-container text-primary-container hover:bg-primary-container/10 text-label-sm font-label-sm font-semibold transition-colors" title="Activate Workspace">
+<span class="material-symbols-outlined text-base" data-icon="lock_open">lock_open</span>
+<span>Unlock</span>
+</button>
+</td>
+</tr>
+<!-- ROW 5 -->
+<tr class="hover:bg-surface-container-low/30 transition-colors">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-lg bg-surface-container flex items-center justify-center text-outline">
+<span class="material-symbols-outlined text-lg" data-icon="apartment">apartment</span>
+</div>
+<div>
+<div class="text-label-lg font-label-lg text-[#212B36] font-semibold">New Startup</div>
+<div class="text-body-sm font-body-sm text-outline">ws-01828-us</div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 text-body-md font-body-md text-[#212B36]">
+                bui@example.com
+              </td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-[#E4EFFE] text-[#006B5C]">
+                  Small Office
+                </span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-1.5 text-body-md font-body-md text-[#212B36]">
+<span class="material-symbols-outlined text-base text-outline" data-icon="group">group</span>
+<span>5 members</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<div class="flex flex-col">
+<span class="text-label-lg font-label-lg text-[#212B36] font-semibold">1,200 kg CO2e</span>
+<div class="w-24 bg-surface-container-high h-1.5 rounded-full mt-1.5 overflow-hidden">
+<div class="bg-primary-container h-full rounded-full" style="width: 44%"></div>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-primary-container/15 text-[#007867]">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+                  Active
+                </span>
+</td>
+<td class="py-4 px-6 text-right">
+<button class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-error/30 text-error hover:bg-error-container/20 text-label-sm font-label-sm font-semibold transition-colors" title="Suspend Workspace">
+<span class="material-symbols-outlined text-base" data-icon="lock">lock</span>
+<span>Lock</span>
+</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- PAGINATION BAR -->
+<div class="p-4 bg-surface-container-lowest border-t border-[#F3F4F6] flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="flex items-center gap-4 text-body-sm font-body-sm text-outline">
+<span>Showing <strong class="text-[#212B36] font-semibold">1-5</strong> of <strong class="text-[#212B36] font-semibold">24</strong> workspaces</span>
+<div class="flex items-center gap-2">
+<span>Rows per page:</span>
+<select class="h-8 px-2 py-0 border border-outline-variant/30 rounded-md bg-surface-container-lowest text-body-sm font-body-sm text-[#212B36] focus:border-primary-container focus:outline-none">
+<option selected="" value="5">5</option>
+<option value="10">10</option>
+<option value="25">25</option>
+</select>
+</div>
+</div>
+<!-- Controls -->
+<div class="flex items-center gap-2">
+<span class="text-body-sm font-body-sm text-outline mr-2">Page 1 of 5</span>
+<button class="p-1.5 rounded-lg border border-outline-variant/30 text-outline-variant cursor-not-allowed" disabled="" title="Previous Page">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="p-1.5 rounded-lg border border-outline-variant/30 text-outline hover:text-on-surface hover:bg-surface-container-low transition-colors" title="Next Page">
+<span class="material-symbols-outlined text-lg" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</section>
+<!-- BOTTOM COMPLIANCE FOOTER -->
+<footer class="mt-auto pt-4 pb-2 border-t border-surface-container-high/70 flex flex-col md:flex-row items-center justify-between gap-2 text-label-sm font-label-sm text-outline">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-base text-primary-container" data-icon="security">security</span>
+<span>Verified cryptographic tenant isolation</span>
+<span class="text-outline-variant">•</span>
+<span>GHG Protocol Corporate Standard compliant</span>
+</div>
+<div class="flex items-center gap-2 text-outline-variant/90">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span>Audit log hash synchronized (SHA-256)</span>
+</div>
+</footer>
+</main>
+</body></html>

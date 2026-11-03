@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CarbonLedger - Verify AI Extraction</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Google Fonts: Public Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "outline": "#6d7a71",
+            "secondary-container": "#97f4de",
+            "inverse-on-surface": "#e9f1ff",
+            "inverse-surface": "#27313c",
+            "on-primary": "#ffffff",
+            "on-primary-fixed-variant": "#005234",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#3d4a41",
+            "on-secondary-container": "#007261",
+            "on-secondary-fixed-variant": "#005145",
+            "secondary-fixed": "#97f4de",
+            "on-error": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-background": "#121c27",
+            "surface-bright": "#f7f9ff",
+            "surface-tint": "#006c46",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed": "#002112",
+            "secondary": "#006b5c",
+            "surface-dim": "#d1dbea",
+            "surface-container": "#e4effe",
+            "tertiary-container": "#cc8200",
+            "on-error-container": "#93000a",
+            "background": "#f7f9ff",
+            "tertiary": "#855400",
+            "error": "#ba1a1a",
+            "surface-container-highest": "#d9e3f2",
+            "surface-container-high": "#dfe9f8",
+            "primary-container": "#00a76f",
+            "surface": "#f7f9ff",
+            "on-primary-container": "#00321f",
+            "inverse-primary": "#5adda0",
+            "on-tertiary-fixed-variant": "#653e00",
+            "surface-container-low": "#eef4ff",
+            "on-surface": "#121c27",
+            "on-secondary-fixed": "#00201a",
+            "on-tertiary-container": "#3f2500",
+            "secondary-fixed-dim": "#7bd7c2",
+            "error-container": "#ffdad6",
+            "tertiary-fixed": "#ffddb7",
+            "surface-variant": "#d9e3f2",
+            "primary": "#006c46",
+            "outline-variant": "#bccabf",
+            "primary-fixed-dim": "#5adda0",
+            "primary-fixed": "#79fabb",
+            "on-tertiary-fixed": "#2a1700",
+            "tertiary-fixed-dim": "#ffb95e"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xl": "2rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "margin": "2.5rem",
+            "gutter-sm": "1rem",
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "gutter": "1.5rem",
+            "margin-mobile": "1rem"
+          },
+          "fontFamily": {
+            "title": ["Public Sans"],
+            "label-md": ["Public Sans"],
+            "headline-lg-mobile": ["Public Sans"],
+            "headline-lg": ["Public Sans"],
+            "headline-md": ["Public Sans"],
+            "label-lg": ["Public Sans"],
+            "headline-sm": ["Public Sans"],
+            "display": ["Public Sans"],
+            "body-lg": ["Public Sans"],
+            "body-sm": ["Public Sans"],
+            "label-sm": ["Public Sans"],
+            "body-md": ["Public Sans"]
+          },
+          "fontSize": {
+            "title": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-lg": ["32px", { "lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "display": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen overflow-x-hidden selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- ========================================================================= -->
+<!-- 1. TOP APP BAR (Shared Components: TopNavBar)                            -->
+<!-- ========================================================================= -->
+<header class="fixed top-0 left-0 right-0 z-20 flex justify-between items-center px-6 h-16 w-full border-b border-outline-variant/30 bg-surface-container-lowest shadow-sm">
+<div class="flex items-center gap-6">
+<div class="text-title font-title font-bold text-on-surface flex items-center gap-2 tracking-tight">
+<span class="w-8 h-8 rounded-xl bg-primary-container flex items-center justify-center text-on-primary shadow-sm shadow-primary-container/30">
+<span class="material-symbols-outlined text-[20px]" data-icon="eco">eco</span>
+</span>
+        CarbonLedger
+      </div>
+<div class="hidden lg:flex items-center gap-1.5 ml-4 text-body-sm font-body-sm text-on-surface-variant">
+<span class="px-2 py-0.5 rounded-full bg-surface-container-low text-on-surface-variant font-label-sm text-label-sm border border-outline-variant/20">Enterprise Tier</span>
+<span class="text-outline-variant">/</span>
+<span class="font-label-md text-label-md text-on-surface">Global Operations Scope 1-3</span>
+</div>
+</div>
+<!-- Header Actions -->
+<div class="flex items-center gap-3">
+<div class="relative hidden sm:flex items-center">
+<span class="material-symbols-outlined absolute left-3 text-outline text-[18px]" data-icon="search">search</span>
+<input class="pl-9 pr-3 py-1.5 h-9 rounded-lg border border-outline-variant/40 bg-surface-bright text-body-sm font-body-sm focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all w-56 placeholder:text-outline/70" placeholder="Search entries, invoices..." type="text"/>
+</div>
+<button class="relative w-9 h-9 rounded-lg hover:bg-surface-container-low flex items-center justify-center text-on-surface-variant transition-colors duration-150">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container ring-2 ring-surface-container-lowest"></span>
+</button>
+<button class="w-9 h-9 rounded-lg hover:bg-surface-container-low flex items-center justify-center text-on-surface-variant transition-colors duration-150">
+<span class="material-symbols-outlined text-[20px]" data-icon="help">help</span>
+</button>
+<div class="h-5 w-px bg-outline-variant/40 mx-1"></div>
+<div class="flex items-center gap-2 pl-1 cursor-pointer">
+<div class="w-8 h-8 rounded-full bg-secondary-fixed flex items-center justify-center text-on-secondary-container font-label-md text-label-md font-bold ring-2 ring-outline-variant/30 overflow-hidden">
+<img class="w-full h-full object-cover" data-alt="A professional headshot of a corporate environmental compliance director in modern business attire with high-key studio lighting, neutral minimal background, and soft warm highlights." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAG33wz0LQXBSrFRXp0OcotgGIjlXWZ9oBm3fKbDEm7U_k2Thdub5JIfFMCi_9-HCyIIZGH6V8xTriIzBEBbDbj2h2LhEbyXmER2F0pyXjJcFiwWfJfCpdkaBAI_Hj8TdKsKrHZL8_uV5-iV9XroBt-aglIBbKekUSYnfV8RELzF3TszJPer1kRlUrbiFJ4MiIQHbo4vtsyHLg0UXLBbgtedS07pMP0XHbiwmBvQn1X4-I8Ii6ERe018LncNoKQ0DmXLe2Wo6iFzQ"/>
+</div>
+<div class="hidden xl:flex flex-col text-left">
+<span class="font-label-md text-label-md text-on-surface leading-tight">Elena Vance</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant text-[11px] leading-tight">Chief ESG Auditor</span>
+</div>
+</div>
+</div>
+</header>
+<!-- ========================================================================= -->
+<!-- 2. VERTICAL SIDE NAV (Shared Components: SideNavBar - Ledger Active)       -->
+<!-- ========================================================================= -->
+<aside class="fixed left-0 top-16 bottom-0 w-52 flex flex-col py-6 px-3 bg-surface-container-lowest border-r border-outline-variant/30 z-20">
+<div class="text-[11px] font-label-sm text-outline px-3 mb-2 tracking-wider">WORKSPACE</div>
+<nav class="flex flex-col gap-1">
+<!-- 1. Dashboard -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- 2. Ledger (ACTIVE: Context matches Ledger Activity Screen) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary-container text-on-primary-container font-label-lg text-label-lg shadow-sm shadow-primary-container/20" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="receipt_long" data-weight="fill">receipt_long</span>
+<span>Ledger</span>
+</a>
+<!-- 3. Approvals -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="verified">verified</span>
+<span>Approvals</span>
+<span class="ml-auto text-[10px] font-label-sm px-1.5 py-0.5 rounded-full bg-error-container text-on-error-container">3</span>
+</a>
+<!-- 4. Insights -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="insights">insights</span>
+<span>Insights</span>
+</a>
+<!-- 5. Settings -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg text-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<!-- Side Nav Footer Badge -->
+<div class="mt-auto p-3.5 rounded-xl bg-surface-container-low border border-outline-variant/30 flex flex-col gap-2">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container text-[18px]" data-icon="cloud_done">cloud_done</span>
+<span class="font-label-sm text-label-sm text-on-surface">GHG Protocol Verified</span>
+</div>
+<div class="w-full bg-surface-variant h-1 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-[84%]"></div>
+</div>
+<span class="text-[11px] font-body-sm text-on-surface-variant">Q4 Sync: 84% Certified</span>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- 3. UNDERLYING DESKTOP ACTIVITY LEDGER SCREEN (Blurred & Dimmed)           -->
+<!-- ========================================================================= -->
+<main class="ml-52 mt-16 p-8 min-h-[calc(100vh-4rem)] filter blur-[2px] opacity-75 select-none pointer-events-none transition-all">
+<!-- Top Action Breadcrumbs & Header -->
+<div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
+<div>
+<div class="flex items-center gap-2 text-outline text-label-md font-label-md mb-1">
+<span>CarbonLedger</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface">Activity Ledger</span>
+</div>
+<h1 class="font-headline-md text-headline-md text-on-surface tracking-tight">Scope 1 &amp; Scope 2 Activity Ledger</h1>
+</div>
+<div class="flex items-center gap-3">
+<button class="px-4 py-2 border border-outline-variant/60 rounded-xl bg-surface-container-lowest font-label-lg text-label-lg text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="file_download">file_download</span>
+          Export Audit Log
+        </button>
+<button class="px-4 py-2 bg-primary-container text-on-primary font-label-lg text-label-lg rounded-xl flex items-center gap-2 shadow-sm">
+<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+          Record Emission
+        </button>
+</div>
+</div>
+<!-- Quick Ledger Stats Summary Bento Row -->
+<div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-5 shadow-sm">
+<div class="text-outline text-label-md font-label-md">Total Emissions Recorded</div>
+<div class="font-headline-lg text-headline-lg text-on-surface mt-1">1,482.6 <span class="font-label-md text-label-md text-on-surface-variant">tCO2e</span></div>
+<div class="mt-2 inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[14px]" data-icon="trending_down">trending_down</span>
+          -14.2% vs target
+        </div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-5 shadow-sm">
+<div class="text-outline text-label-md font-label-md">Active Utility Accounts</div>
+<div class="font-headline-lg text-headline-lg text-on-surface mt-1">48 <span class="font-label-md text-label-md text-on-surface-variant">meters</span></div>
+<div class="mt-2 text-label-sm font-label-sm text-outline">Across 6 regional hubs</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-5 shadow-sm">
+<div class="text-outline text-label-md font-label-md">AI Auto-Extraction Accuracy</div>
+<div class="font-headline-lg text-headline-lg text-primary-container mt-1">98.4%</div>
+<div class="mt-2 text-label-sm font-label-sm text-outline">124 invoices verified this month</div>
+</div>
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl p-5 shadow-sm">
+<div class="text-outline text-label-md font-label-md">Pending Manual Review</div>
+<div class="font-headline-lg text-headline-lg text-tertiary-container mt-1">1 <span class="font-label-md text-label-md text-outline">queued</span></div>
+<div class="mt-2 text-label-sm font-label-sm text-tertiary">Requires human sign-off</div>
+</div>
+</div>
+<!-- Underlying Table Mock -->
+<div class="bg-surface-container-lowest border border-outline-variant/30 rounded-2xl overflow-hidden shadow-sm">
+<div class="px-6 py-4 border-b border-outline-variant/20 flex items-center justify-between">
+<div class="font-title text-title text-on-surface">Recent Ledger Entries</div>
+<div class="flex items-center gap-2">
+<span class="text-label-sm font-label-sm text-outline">Filtered by: Scope 2 Electricity</span>
+</div>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface-container-low text-outline text-label-sm font-label-sm border-b border-outline-variant/20">
+<th class="py-3 px-6">Entry ID</th>
+<th class="py-3 px-6">Activity Type</th>
+<th class="py-3 px-6">Source / Invoice</th>
+<th class="py-3 px-6">Quantity</th>
+<th class="py-3 px-6">Emissions (tCO2e)</th>
+<th class="py-3 px-6">Status</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20 text-body-md font-body-md">
+<tr>
+<td class="py-3.5 px-6 font-mono text-body-sm font-body-sm text-on-surface-variant">#TX-9902</td>
+<td class="py-3.5 px-6 font-label-md text-label-md text-on-surface">District Heat Network</td>
+<td class="py-3.5 px-6 text-on-surface-variant">Apex Central Plant</td>
+<td class="py-3.5 px-6">14,200 kWh</td>
+<td class="py-3.5 px-6 font-semibold">2.41 tCO2e</td>
+<td class="py-3.5 px-6"><span class="px-2.5 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container text-label-sm font-label-sm">Verified</span></td>
+</tr>
+<tr>
+<td class="py-3.5 px-6 font-mono text-body-sm font-body-sm text-on-surface-variant">#TX-9901</td>
+<td class="py-3.5 px-6 font-label-md text-label-md text-on-surface">Fleet Diesel Consumption</td>
+<td class="py-3.5 px-6 text-on-surface-variant">Shell Fuel Card #401</td>
+<td class="py-3.5 px-6">380 Liters</td>
+<td class="py-3.5 px-6 font-semibold">1.02 tCO2e</td>
+<td class="py-3.5 px-6"><span class="px-2.5 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container text-label-sm font-label-sm">Verified</span></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+<!-- ========================================================================= -->
+<!-- 4. DARK TRANSLUCENT MODAL BACKDROP OVERLAY                                 -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-40 bg-slate-900/40 backdrop-blur-sm transition-opacity flex items-center justify-center p-4 overflow-y-auto">
+<!-- ======================================================================= -->
+<!-- 5. FOREGROUND MODAL DIALOG (Centered, max-w-2xl, MUI Minimal Luxury)    -->
+<!-- ======================================================================= -->
+<div class="relative w-full max-w-2xl bg-surface-container-lowest rounded-2xl shadow-2xl border border-outline-variant/30 overflow-hidden my-auto animate-in fade-in zoom-in duration-200">
+<!-- Top Modal Header -->
+<div class="flex items-center justify-between px-6 pt-5 pb-4 border-b border-outline-variant/20 bg-surface-container-lowest">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-xl bg-surface-container-low flex items-center justify-center text-primary-container border border-outline-variant/20">
+<span class="material-symbols-outlined text-[18px]" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface leading-tight flex items-center gap-2">
+              Verify AI Extraction
+              <span class="text-[11px] font-label-sm px-2 py-0.5 rounded-full bg-surface-container-low text-primary-container border border-primary-container/20">OCR v3.2</span>
+</h2>
+</div>
+</div>
+<button class="w-8 h-8 rounded-lg text-outline hover:text-on-surface hover:bg-surface-container-low flex items-center justify-center transition-colors">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Modal Body Content -->
+<div class="p-6">
+<!-- Info Alert Banner -->
+<div class="bg-amber-50 border border-amber-200/60 rounded-xl p-3 flex items-center gap-2.5 text-xs text-amber-800 font-medium mb-5 shadow-xs">
+<span class="material-symbols-outlined text-amber-600 text-[18px] shrink-0" data-icon="warning">warning</span>
+<span>AI extracted these values. Please verify before confirming.</span>
+</div>
+<!-- 2-Column Responsive Bento Layout inside Modal -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-stretch">
+<!-- LEFT COLUMN (45% -> 5 cols on 12-col grid) -->
+<div class="md:col-span-5 flex flex-col">
+<div class="text-[11px] font-label-sm font-semibold text-outline uppercase tracking-wider mb-2">
+              Uploaded invoice
+            </div>
+<!-- Invoice Preview Card -->
+<div class="rounded-xl border border-outline-variant/30 bg-surface-bright p-4 flex flex-col justify-between flex-1 min-h-[340px] relative shadow-sm overflow-hidden group">
+<!-- Subtle decorative invoice watermark stamp -->
+<div class="absolute -right-6 -bottom-6 text-outline-variant/10 select-none pointer-events-none">
+<span class="material-symbols-outlined text-[140px]" data-icon="receipt">receipt</span>
+</div>
+<!-- Top: Document badge / receipt header -->
+<div class="relative z-10">
+<div class="flex items-start justify-between border-b border-outline-variant/30 pb-3 mb-3">
+<div>
+<div class="font-label-sm text-label-sm text-outline tracking-wider uppercase">Utility Invoice</div>
+<div class="font-title text-label-lg font-bold text-on-surface leading-snug">POWER CORP UTILITY</div>
+</div>
+<span class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant font-mono text-[10px] tracking-tight">
+                    #INV-8841-092
+                  </span>
+</div>
+<!-- Clean simulated bill layout -->
+<div class="space-y-2.5 text-body-sm font-body-sm">
+<div class="flex justify-between items-center text-[12px]">
+<span class="text-outline">Issue Date:</span>
+<span class="font-label-md text-label-md text-on-surface">01/11/2026</span>
+</div>
+<div class="flex justify-between items-center text-[12px]">
+<span class="text-outline">Meter ID:</span>
+<span class="font-mono text-on-surface-variant text-[11px]">MTR-BER-9081</span>
+</div>
+<div class="flex justify-between items-center text-[12px]">
+<span class="text-outline">Billing Period:</span>
+<span class="text-on-surface">Oct 01 - Oct 31</span>
+</div>
+<!-- Highlighted AI Box on Document -->
+<div class="mt-3 p-2.5 rounded-lg border-2 border-dashed border-primary-container/60 bg-primary-container/5 relative">
+<div class="flex items-center justify-between">
+<span class="text-[11px] font-label-md text-primary-container uppercase tracking-wide flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]" data-icon="search_insights">search_insights</span>
+                        Detected Metered
+                      </span>
+<span class="px-1.5 py-0.2 rounded bg-primary-container text-white text-[9px] font-label-sm">BBOX 99%</span>
+</div>
+<div class="mt-1 flex items-baseline justify-between">
+<span class="text-[12px] text-on-surface-variant">Consumption:</span>
+<span class="font-headline-sm text-headline-sm text-on-primary-container font-bold">250 kWh</span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-2 text-[12px] border-t border-outline-variant/20">
+<span class="text-outline">Amount Due:</span>
+<span class="font-bold text-on-surface font-label-lg">$48.50 USD</span>
+</div>
+</div>
+</div>
+<!-- Bottom: Quick Action Bar -->
+<div class="relative z-10 mt-4 pt-3 border-t border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-2 overflow-hidden">
+<span class="material-symbols-outlined text-error text-[18px] shrink-0" data-icon="picture_as_pdf">picture_as_pdf</span>
+<div class="truncate text-[11px] font-body-sm text-on-surface-variant">
+<span class="font-medium text-on-surface block truncate">invoice_nov2026.pdf</span>
+<span class="text-outline text-[10px]">1.2 MB · Scanned</span>
+</div>
+</div>
+<button class="w-7 h-7 rounded-lg border border-outline-variant/40 hover:bg-surface-container-low flex items-center justify-center text-outline hover:text-on-surface transition-colors shrink-0" title="Zoom invoice">
+<span class="material-symbols-outlined text-[16px]" data-icon="zoom_in">zoom_in</span>
+</button>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN (55% -> 7 cols on 12-col grid) -->
+<div class="md:col-span-7 flex flex-col justify-between">
+<div class="text-[11px] font-label-sm font-semibold text-outline uppercase tracking-wider mb-2">
+              Verified entry parameters
+            </div>
+<!-- Extracted Form Fields -->
+<form class="space-y-3.5">
+<!-- Field 1: Activity Type -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1">
+                  Activity Type
+                </label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-amber-500 text-[18px]" data-icon="bolt">bolt</span>
+<select class="w-full pl-9 pr-8 py-2.5 h-11 rounded-lg border border-outline-variant/50 bg-surface-container-lowest text-body-md font-body-md text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all">
+<option selected="">Electricity (Scope 2)</option>
+<option>Natural Gas (Scope 1)</option>
+<option>District Heating</option>
+<option>Fleet Fuel - Diesel</option>
+</select>
+</div>
+</div>
+<!-- Field 2: Amount / Quantity -->
+<div>
+<div class="flex items-center justify-between mb-1">
+<label class="text-label-md font-label-md text-on-surface">
+                    Amount / Quantity
+                  </label>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-secondary-container/40 text-on-secondary-container text-label-sm font-label-sm">
+<span class="material-symbols-outlined text-[12px]" data-icon="check_circle">check_circle</span>
+                    99% confidence
+                  </span>
+</div>
+<div class="relative">
+<input class="w-full px-3 py-2.5 h-11 rounded-lg border-2 border-primary-container/70 bg-surface-container-lowest text-body-md font-body-md text-on-surface font-semibold focus:border-primary-container focus:ring-2 focus:ring-primary-container/20 outline-none transition-all pr-12" type="text" value="250 kWh"/>
+<span class="absolute right-3 top-1/2 -translate-y-1/2 text-outline text-label-sm font-label-sm">MTR</span>
+</div>
+</div>
+<!-- Field 3: Calculated Emission Card / Banner -->
+<div class="rounded-xl border border-primary-container/30 bg-primary-container/10 p-3.5 flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-sm font-label-sm text-on-primary-container font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-primary-container text-[16px]" data-icon="co2">co2</span>
+                    Estimated Carbon Impact
+                  </span>
+<span class="px-2 py-0.5 rounded text-[10px] font-label-sm bg-surface-container-lowest text-on-primary-container border border-primary-container/20">Auto-computed</span>
+</div>
+<div class="my-1.5 flex items-baseline gap-2">
+<span class="font-headline-md text-headline-md font-bold text-primary-container tracking-tight">≈ 42.5 kg CO2e</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant font-medium">(0.042 tCO2e)</span>
+</div>
+<div class="text-[11px] font-body-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px] text-outline" data-icon="info">info</span>
+                  Factor: <strong class="text-on-surface">0.17 kg CO2e/kWh</strong> (National Grid Average)
+                </div>
+</div>
+<!-- Field 4: Activity Date -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1">
+                  Activity Date
+                </label>
+<div class="relative">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 material-symbols-outlined text-outline text-[18px]" data-icon="calendar_today">calendar_today</span>
+<input class="w-full pl-9 pr-3 py-2.5 h-11 rounded-lg border border-outline-variant/50 bg-surface-container-lowest text-body-md font-body-md text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all" type="text" value="01 Nov 2026"/>
+</div>
+</div>
+<!-- Field 5: Note -->
+<div>
+<label class="block text-label-md font-label-md text-on-surface mb-1 flex items-center justify-between">
+<span>Note</span>
+<span class="text-[11px] text-outline font-normal">Optional</span>
+</label>
+<textarea class="w-full px-3 py-2 rounded-lg border border-outline-variant/50 bg-surface-container-lowest text-body-sm font-body-sm text-on-surface focus:border-primary-container focus:ring-1 focus:ring-primary-container outline-none transition-all resize-none placeholder:text-outline/60" placeholder="Add optional notes or verification memo..." rows="2"></textarea>
+</div>
+</form>
+</div>
+</div>
+</div>
+<!-- Footer Actions -->
+<div class="px-6 py-4 bg-surface-bright border-t border-outline-variant/20 flex items-center justify-between">
+<div class="flex items-center gap-1.5 text-outline text-[12px] font-body-sm">
+<span class="material-symbols-outlined text-[16px] text-primary-container" data-icon="verified_user">verified_user</span>
+<span>Ready for audit log commit</span>
+</div>
+<div class="flex items-center gap-3">
+<!-- Cancel Button -->
+<button class="text-on-surface-variant hover:text-on-surface font-label-lg text-label-lg px-4 py-2.5 rounded-xl hover:bg-surface-container-low transition-colors duration-150" type="button">
+            Cancel
+          </button>
+<!-- Confirm & Submit Button -->
+<button class="bg-primary-container hover:bg-[#009562] text-on-primary font-label-lg text-label-lg px-6 py-2.5 rounded-xl shadow-sm hover:shadow transition-all duration-150 flex items-center gap-2" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="check">check</span>
+            Confirm &amp; Submit
+          </button>
+</div>
+</div>
+</div>
+</div>
+</body></html>

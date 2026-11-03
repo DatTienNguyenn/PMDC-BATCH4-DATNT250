@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CarbonLedger - Reject Request</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "tertiary": "#855400",
+            "on-tertiary-fixed": "#2a1700",
+            "on-tertiary": "#ffffff",
+            "surface-container-low": "#eef4ff",
+            "surface-container-lowest": "#ffffff",
+            "secondary": "#006b5c",
+            "on-surface": "#121c27",
+            "on-secondary-container": "#007261",
+            "secondary-fixed-dim": "#7bd7c2",
+            "on-primary": "#ffffff",
+            "background": "#f7f9ff",
+            "inverse-surface": "#27313c",
+            "surface": "#f7f9ff",
+            "primary-container": "#00a76f",
+            "on-primary-fixed": "#002112",
+            "error": "#ba1a1a",
+            "surface-tint": "#006c46",
+            "on-primary-container": "#00321f",
+            "on-error-container": "#93000a",
+            "error-container": "#ffdad6",
+            "on-secondary": "#ffffff",
+            "surface-container-highest": "#d9e3f2",
+            "on-secondary-fixed": "#00201a",
+            "inverse-primary": "#5adda0",
+            "tertiary-fixed": "#ffddb7",
+            "on-tertiary-fixed-variant": "#653e00",
+            "on-tertiary-container": "#3f2500",
+            "primary": "#006c46",
+            "surface-dim": "#d1dbea",
+            "outline": "#6d7a71",
+            "on-primary-fixed-variant": "#005234",
+            "on-error": "#ffffff",
+            "tertiary-container": "#cc8200",
+            "primary-fixed": "#79fabb",
+            "on-surface-variant": "#3d4a41",
+            "outline-variant": "#bccabf",
+            "on-secondary-fixed-variant": "#005145",
+            "inverse-on-surface": "#e9f1ff",
+            "primary-fixed-dim": "#5adda0",
+            "tertiary-fixed-dim": "#ffb95e",
+            "secondary-fixed": "#97f4de",
+            "surface-container-high": "#dfe9f8",
+            "surface-container": "#e4effe",
+            "on-background": "#121c27",
+            "surface-variant": "#d9e3f2",
+            "surface-bright": "#f7f9ff",
+            "secondary-container": "#97f4de"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.25rem",
+            "space-sm": "0.5rem",
+            "margin": "2.5rem",
+            "gutter-sm": "1rem",
+            "space-xl": "2rem",
+            "gutter": "1.5rem"
+          },
+          "fontFamily": {
+            "label-md": ["Public Sans"],
+            "headline-sm": ["Public Sans"],
+            "headline-md": ["Public Sans"],
+            "label-lg": ["Public Sans"],
+            "headline-lg": ["Public Sans"],
+            "body-lg": ["Public Sans"],
+            "display": ["Public Sans"],
+            "label-sm": ["Public Sans"],
+            "headline-lg-mobile": ["Public Sans"],
+            "body-md": ["Public Sans"],
+            "title": ["Public Sans"],
+            "body-sm": ["Public Sans"]
+          },
+          "fontSize": {
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "display": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "title": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md text-body-md min-h-screen overflow-hidden selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- ================= BACKGROUND CANVAS (Settings > Members Tab) ================= -->
+<div class="min-h-screen flex flex-col pointer-events-none select-none filter blur-[1px]">
+<!-- Shared Component: TopNavBar -->
+<header class="flex justify-between items-center px-6 h-16 w-full border-b border-outline-variant/30 bg-surface-container-lowest shadow-sm z-10 shrink-0">
+<div class="flex items-center gap-8">
+<div class="text-title font-title font-bold text-on-surface flex items-center gap-2">
+<div class="w-8 h-8 rounded-xl bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[20px]" data-icon="eco">eco</span>
+</div>
+<span>CarbonLedger</span>
+</div>
+<div class="hidden md:flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-surface-container-low text-on-surface-variant font-label-md text-label-md">
+<span class="material-symbols-outlined text-[16px] text-primary" data-icon="corporate_fare">corporate_fare</span>
+<span class="font-medium text-on-surface">My Home</span>
+<span class="material-symbols-outlined text-[14px]" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<button class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors duration-150 relative">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
+</button>
+<div class="h-6 w-[1px] bg-outline-variant/30"></div>
+<div class="flex items-center gap-2.5">
+<img class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant/30" data-alt="A polished headshot of an executive sustainability officer dressed in high-grade eco-fabric dark business casual attire set against a pristine, soft-focus minimalist architectural background with balanced daylight illumination." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA1wknxqSP7iXZmgCzXOaLBLNsJ8yhzlaJYJslPnrwgdpY1yIGHttRGPsXKH70uYvtyfCh3UP0AxHssC_xm0TaSQ7m5HyTM-7GPd9wtfWl5zpzg__CnceNkSw0TkCtinN6kr1HGtEaXbA2U7zBsEGdA_J7Z7wLutAe-MH3rpnZeubpWnlMxQMxWLOzhZFDL4a9BuP3zVbIPRNi4AUhxW-PGiGBNuAJors0_RMQezR3oKRSXyFD72gvUH1CSjgDvULtqKeZzGMTReg"/>
+<div class="hidden lg:flex flex-col text-left">
+<span class="text-label-md font-label-md text-on-surface leading-none">Sarah Jenkins</span>
+<span class="text-label-sm font-label-sm text-on-surface-variant">Workspace Admin</span>
+</div>
+</div>
+</div>
+</header>
+<div class="flex flex-1 overflow-hidden">
+<!-- Shared Component: SideNavBar -->
+<aside class="fixed left-0 top-16 bottom-0 w-52 flex flex-col py-6 px-3 bg-surface-container-lowest border-r border-outline-variant/30 shrink-0">
+<div class="space-y-1.5">
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150">
+<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150">
+<span class="material-symbols-outlined text-[20px]" data-icon="receipt_long">receipt_long</span>
+<span>Ledger</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150">
+<span class="material-symbols-outlined text-[20px]" data-icon="verified">verified</span>
+<span>Approvals</span>
+</div>
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150">
+<span class="material-symbols-outlined text-[20px]" data-icon="insights">insights</span>
+<span>Insights</span>
+</div>
+<!-- Active Settings item -->
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary-container text-on-primary-container font-label-lg">
+<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
+<span>Settings</span>
+</div>
+</div>
+<div class="mt-auto px-2 py-3 bg-surface-container-low rounded-xl border border-outline-variant/20">
+<div class="flex items-center justify-between text-label-sm font-label-sm text-on-surface-variant mb-1">
+<span>Workspace Tier</span>
+<span class="text-primary font-bold">Pro ESG</span>
+</div>
+<div class="w-full bg-surface-container-highest h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary-container h-full w-3/4 rounded-full"></div>
+</div>
+</div>
+</aside>
+<!-- Main Settings Content Underlay -->
+<main class="ml-52 flex-1 p-8 bg-surface overflow-y-auto">
+<div class="max-w-6xl mx-auto space-y-6">
+<!-- Page Header -->
+<div class="flex justify-between items-center pb-2">
+<div>
+<h1 class="text-headline-md font-headline-md text-on-surface">Workspace Settings</h1>
+<p class="text-body-md font-body-md text-on-surface-variant mt-0.5">Manage permissions, emission budgets, and team authorization.</p>
+</div>
+<button class="bg-primary-container text-on-primary font-label-lg text-label-lg px-4 py-2.5 rounded-xl shadow-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]" data-icon="person_add">person_add</span>
+<span>Invite Member</span>
+</button>
+</div>
+<!-- Settings Tab Bar -->
+<div class="flex items-center gap-8 border-b border-outline-variant/30 pb-0">
+<div class="pb-3 text-label-lg font-label-lg text-on-surface-variant">Workspace</div>
+<div class="pb-3 text-label-lg font-label-lg text-on-surface-variant">Budget</div>
+<div class="pb-3 text-label-lg font-label-lg text-primary border-b-2 border-primary font-bold">Members</div>
+</div>
+<!-- Pending Requests Section -->
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/20 shadow-sm p-6 space-y-4">
+<div class="flex justify-between items-center">
+<div class="flex items-center gap-2">
+<h2 class="text-title font-title text-on-surface">Pending Join Requests</h2>
+<span class="px-2 py-0.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed font-label-sm text-label-sm font-bold">1 Pending</span>
+</div>
+</div>
+<div class="rounded-xl border border-outline-variant/20 overflow-hidden divide-y divide-outline-variant/20">
+<div class="flex items-center justify-between p-4 bg-surface-container-low/40">
+<div class="flex items-center gap-3.5">
+<div class="w-10 h-10 rounded-full bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center font-bold text-label-lg">
+                    LC
+                  </div>
+<div>
+<div class="font-label-lg text-label-lg text-on-surface">Le Van C</div>
+<div class="text-body-sm font-body-sm text-on-surface-variant">levanc@ecosphere.org · Requested 2h ago</div>
+</div>
+</div>
+<div class="flex items-center gap-2">
+<button class="px-3 py-1.5 rounded-lg border border-outline-variant/30 text-error text-label-md font-label-md hover:bg-error-container/20">Reject</button>
+<button class="px-3 py-1.5 rounded-lg bg-primary-container text-on-primary text-label-md font-label-md">Approve</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Active Members Table Preview -->
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/20 shadow-sm overflow-hidden">
+<div class="px-6 py-4 border-b border-outline-variant/20 flex justify-between items-center">
+<span class="text-title font-title text-on-surface">Team Members (18)</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">Showing active seats</span>
+</div>
+<div class="p-6 space-y-3">
+<div class="flex items-center justify-between py-2 border-b border-outline-variant/10">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center text-xs font-bold">SJ</div>
+<div>
+<p class="text-label-md font-label-md text-on-surface">Sarah Jenkins (You)</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">sarah@carbonledger.io</p>
+</div>
+</div>
+<span class="text-label-sm font-label-sm px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant">Owner</span>
+</div>
+<div class="flex items-center justify-between py-2 border-b border-outline-variant/10">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-full bg-surface-container-highest text-on-surface flex items-center justify-center text-xs font-bold">MR</div>
+<div>
+<p class="text-label-md font-label-md text-on-surface">Marcus Rossi</p>
+<p class="text-body-sm font-body-sm text-on-surface-variant">m.rossi@energyaudit.com</p>
+</div>
+</div>
+<span class="text-label-sm font-label-sm px-2.5 py-0.5 rounded-full bg-surface-container text-on-surface-variant">Auditor</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+</div>
+</div>
+<!-- ================= FOREGROUND MODAL & FROSTED SCRIM ================= -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4">
+<!-- Scrim Backdrop with High-Fidelity Blur -->
+<div class="fixed inset-0 bg-neutral-900/40 backdrop-blur-sm transition-opacity animate-in fade-in duration-200"></div>
+<!-- Clean, Ultra-Minimal Focused Dialog Card -->
+<div class="relative w-full max-w-[400px] bg-white rounded-2xl shadow-2xl border border-neutral-100 p-6 z-10 transition-transform transform scale-100">
+<!-- Modal Header -->
+<div class="flex justify-between items-center mb-4">
+<h2 class="text-lg font-semibold text-neutral-900 tracking-tight font-headline-sm">Reject Request</h2>
+<button aria-label="Close dialog" class="rounded-full hover:bg-neutral-100 text-neutral-400 hover:text-neutral-700 p-1.5 transition-colors inline-flex items-center justify-center" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+</button>
+</div>
+<!-- Info Highlight Card -->
+<div class="bg-neutral-50 border border-neutral-150/60 rounded-xl p-3.5 mb-4 flex items-start gap-3">
+<!-- Subtle Avatar for Le Van C -->
+<div class="w-8 h-8 rounded-full bg-neutral-200/90 text-neutral-700 flex items-center justify-center font-bold text-xs shrink-0 ring-2 ring-white">
+          LC
+        </div>
+<p class="text-sm text-neutral-700 leading-relaxed font-body-md">
+<span class="font-semibold text-neutral-900">Le Van C</span> is requesting to join <span class="font-semibold text-neutral-900">My Home</span> workspace.
+        </p>
+</div>
+<!-- Textarea Input Field -->
+<div class="space-y-1.5">
+<label class="text-xs font-semibold uppercase tracking-wider text-neutral-500 block font-label-sm" for="reject-reason">
+          Reason (optional)
+        </label>
+<textarea class="w-full rounded-xl border border-neutral-200 text-sm p-3 text-neutral-900 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 resize-none transition-all font-body-md leading-normal bg-white" id="reject-reason" placeholder="Enter reason for rejection..." rows="2"></textarea>
+<div class="flex justify-end">
+<span class="text-[11px] text-neutral-400 font-label-sm">Max 250 characters</span>
+</div>
+</div>
+<!-- Modal Footer / Action Buttons -->
+<div class="flex items-center justify-end gap-3 mt-6 pt-2">
+<button class="text-sm font-medium text-neutral-500 hover:text-neutral-800 px-3 py-2 transition-colors cursor-pointer rounded-lg font-label-lg" type="button">
+          Cancel
+        </button>
+<button class="bg-[#EF4444] hover:bg-red-600 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-sm hover:shadow transition-all cursor-pointer flex items-center justify-center gap-1.5 font-label-lg" type="button">
+<span class="material-symbols-outlined text-[18px]" data-icon="cancel">cancel</span>
+<span>Confirm Reject</span>
+</button>
+</div>
+</div>
+</div>
+</body></html>

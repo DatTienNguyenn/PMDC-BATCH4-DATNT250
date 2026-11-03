@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CarbonLedger - Reject Entry Modal</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Public Sans Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-dim": "#d1dbea",
+            "on-surface": "#121c27",
+            "background": "#f7f9ff",
+            "on-error-container": "#93000a",
+            "on-secondary-fixed": "#00201a",
+            "surface-container-lowest": "#ffffff",
+            "secondary-container": "#97f4de",
+            "outline": "#6d7a71",
+            "on-secondary-fixed-variant": "#005145",
+            "inverse-surface": "#27313c",
+            "tertiary-container": "#cc8200",
+            "surface-container-high": "#dfe9f8",
+            "tertiary-fixed-dim": "#ffb95e",
+            "secondary-fixed": "#97f4de",
+            "surface-container": "#e4effe",
+            "primary-fixed-dim": "#5adda0",
+            "on-primary-container": "#00321f",
+            "on-error": "#ffffff",
+            "error": "#ba1a1a",
+            "tertiary": "#855400",
+            "surface-container-low": "#eef4ff",
+            "secondary": "#006b5c",
+            "on-secondary": "#ffffff",
+            "on-surface-variant": "#3d4a41",
+            "on-background": "#121c27",
+            "on-tertiary-container": "#3f2500",
+            "primary": "#006c46",
+            "on-secondary-container": "#007261",
+            "on-tertiary-fixed": "#2a1700",
+            "surface-variant": "#d9e3f2",
+            "error-container": "#ffdad6",
+            "surface-container-highest": "#d9e3f2",
+            "outline-variant": "#bccabf",
+            "surface-bright": "#f7f9ff",
+            "surface": "#f7f9ff",
+            "on-tertiary": "#ffffff",
+            "secondary-fixed-dim": "#7bd7c2",
+            "primary-fixed": "#79fabb",
+            "primary-container": "#00a76f",
+            "on-primary": "#ffffff",
+            "inverse-primary": "#5adda0",
+            "inverse-on-surface": "#e9f1ff",
+            "on-tertiary-fixed-variant": "#653e00",
+            "on-primary-fixed-variant": "#005234",
+            "surface-tint": "#006c46",
+            "tertiary-fixed": "#ffddb7",
+            "on-primary-fixed": "#002112"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-md": "1rem",
+            "space-lg": "1.5rem",
+            "gutter": "1.5rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "margin": "2.5rem",
+            "gutter-sm": "1rem",
+            "space-sm": "0.5rem",
+            "margin-mobile": "1rem"
+          },
+          "fontFamily": {
+            "label-lg": ["Public Sans"],
+            "display": ["Public Sans"],
+            "label-sm": ["Public Sans"],
+            "headline-md": ["Public Sans"],
+            "headline-lg": ["Public Sans"],
+            "headline-lg-mobile": ["Public Sans"],
+            "body-md": ["Public Sans"],
+            "title": ["Public Sans"],
+            "label-md": ["Public Sans"],
+            "headline-sm": ["Public Sans"],
+            "body-sm": ["Public Sans"],
+            "body-lg": ["Public Sans"]
+          },
+          "fontSize": {
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "display": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-lg": ["32px", { "lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "title": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md text-body-md overflow-hidden relative">
+<!-- ========================================================================= -->
+<!-- UNDERLYING PAGE CANVAS (CarbonLedger Approval Queue)                      -->
+<!-- ========================================================================= -->
+<!-- TopNavBar (Shared Component implementation) -->
+<header class="flex justify-between items-center px-6 h-16 w-full border-b border-outline-variant/30 bg-surface-container-lowest fixed top-0 left-0 right-0 z-10 shadow-sm">
+<div class="flex items-center gap-8">
+<div class="text-title font-title font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-container" style="font-variation-settings: 'FILL' 1;">eco</span>
+<span>CarbonLedger</span>
+</div>
+<div class="hidden md:flex items-center gap-2 bg-surface-container-low px-3 py-1.5 rounded-full border border-outline-variant/20">
+<span class="w-2 h-2 rounded-full bg-primary-container animate-pulse"></span>
+<span class="font-label-sm text-label-sm text-on-surface-variant font-medium">Enterprise Scope 1-3 Verifier</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="relative p-2 rounded-xl text-on-surface-variant hover:bg-surface-container-low hover:text-primary transition-colors duration-150">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-tertiary-container"></span>
+</button>
+<div class="h-8 w-[1px] bg-outline-variant/30"></div>
+<div class="flex items-center gap-3 pl-1">
+<div class="w-8 h-8 rounded-full bg-primary-fixed flex items-center justify-center text-on-primary-container font-label-lg font-bold border border-primary/20">
+          AL
+        </div>
+<div class="hidden sm:block text-left">
+<p class="font-label-lg text-label-lg text-on-surface leading-tight">Auditor Leah</p>
+<p class="font-label-sm text-label-sm text-on-surface-variant leading-tight">Compliance Lead</p>
+</div>
+</div>
+</div>
+</header>
+<div class="flex pt-16 h-screen">
+<!-- SideNavBar (Shared Component implementation) -->
+<aside class="fixed left-0 top-16 bottom-0 w-52 flex flex-col py-6 px-3 bg-surface-container-lowest border-r border-outline-variant/30 z-10">
+<nav class="space-y-1">
+<!-- Dashboard -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span>Dashboard</span>
+</a>
+<!-- Ledger -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="receipt_long">receipt_long</span>
+<span>Ledger</span>
+</a>
+<!-- Approvals (ACTIVE: Intent match for current page) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary-container text-on-primary-container font-label-lg transition-all duration-150 shadow-sm" href="#">
+<span class="material-symbols-outlined" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+<span>Approvals</span>
+</a>
+<!-- Insights -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span>Insights</span>
+</a>
+<!-- Settings -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="mt-auto p-3.5 bg-surface-container-low rounded-2xl border border-outline-variant/20">
+<div class="flex items-center justify-between text-on-surface-variant font-label-sm text-label-sm mb-1">
+<span>Weekly Target</span>
+<span class="font-bold text-primary">84%</span>
+</div>
+<div class="w-full bg-outline-variant/30 h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full w-[84%] rounded-full"></div>
+</div>
+</div>
+</aside>
+<!-- Underlying Main Canvas (Approval Queue Page) -->
+<main class="ml-52 flex-1 p-8 overflow-y-auto bg-background">
+<div class="max-w-6xl mx-auto space-y-6">
+<!-- Breadcrumb & Header -->
+<div class="flex items-center justify-between">
+<div>
+<div class="flex items-center gap-2 text-on-surface-variant font-label-sm text-label-sm mb-1">
+<span>Audit Queue</span>
+<span>/</span>
+<span class="text-primary font-semibold">Scope 3 Employee Travel</span>
+</div>
+<h1 class="font-headline-lg text-headline-lg text-on-surface tracking-tight">Pending Approvals</h1>
+</div>
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-1.5 px-3 py-1.5 bg-surface-container-lowest border border-outline-variant/30 rounded-xl text-on-surface font-label-md text-label-md">
+<span class="material-symbols-outlined text-outline text-base" data-icon="filter_list">filter_list</span>
+<span>Filter: Unverified (12)</span>
+</div>
+<button class="px-4 py-2 bg-primary-container text-white font-label-md text-label-md rounded-xl shadow-sm">
+              Batch Validate
+            </button>
+</div>
+</div>
+<!-- Metric Badges Row -->
+<div class="grid grid-cols-3 gap-4">
+<div class="bg-surface-container-lowest p-5 rounded-2xl border border-outline-variant/20 shadow-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Review Backlog</span>
+<div class="font-headline-md text-headline-md text-on-surface mt-1">28 entries</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-2xl border border-outline-variant/20 shadow-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Carbon Value Pending</span>
+<div class="font-headline-md text-headline-md text-on-surface mt-1">426.5 kg CO2e</div>
+</div>
+<div class="bg-surface-container-lowest p-5 rounded-2xl border border-outline-variant/20 shadow-sm">
+<span class="font-label-sm text-label-sm text-on-surface-variant">Verification Accuracy</span>
+<div class="font-headline-md text-headline-md text-primary mt-1">99.4%</div>
+</div>
+</div>
+<!-- Mock Submissions Table -->
+<div class="bg-surface-container-lowest rounded-2xl border border-outline-variant/20 overflow-hidden shadow-sm">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant/20 bg-surface-container-low/50">
+<th class="p-4 font-label-md text-label-md text-on-surface-variant">Submitter</th>
+<th class="p-4 font-label-md text-label-md text-on-surface-variant">Activity</th>
+<th class="p-4 font-label-md text-label-md text-on-surface-variant">Impact</th>
+<th class="p-4 font-label-md text-label-md text-on-surface-variant">Date</th>
+<th class="p-4 font-label-md text-label-md text-on-surface-variant text-right">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20 font-body-sm text-body-sm">
+<!-- Targeted Row that user clicked to reject -->
+<tr class="bg-surface-container-low/30">
+<td class="p-4 font-label-md text-label-md font-semibold text-on-surface">Nguyen Van A</td>
+<td class="p-4 text-on-surface">Motorbike commute (34 km)</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-primary/10 text-primary">
+                    8.2 kg CO2e
+                  </span>
+</td>
+<td class="p-4 text-on-surface-variant">Today, 08:45 AM</td>
+<td class="p-4 text-right">
+<span class="font-label-sm text-label-sm text-error font-medium">Rejection in progress...</span>
+</td>
+</tr>
+<tr>
+<td class="p-4 font-label-md text-label-md font-semibold text-on-surface">Sarah Jenkins</td>
+<td class="p-4 text-on-surface">High-speed Rail - London/Paris</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-primary/10 text-primary">
+                    12.4 kg CO2e
+                  </span>
+</td>
+<td class="p-4 text-on-surface-variant">Yesterday</td>
+<td class="p-4 text-right space-x-2">
+<button class="px-3 py-1 bg-surface-container-low text-on-surface rounded-lg font-label-sm text-label-sm">Review</button>
+</td>
+</tr>
+<tr>
+<td class="p-4 font-label-md text-label-md font-semibold text-on-surface">Elena Rostova</td>
+<td class="p-4 text-on-surface">EV Van Delivery Route 4B</td>
+<td class="p-4">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold bg-primary/10 text-primary">
+                    3.1 kg CO2e
+                  </span>
+</td>
+<td class="p-4 text-on-surface-variant">Oct 24, 2024</td>
+<td class="p-4 text-right space-x-2">
+<button class="px-3 py-1 bg-surface-container-low text-on-surface rounded-lg font-label-sm text-label-sm">Review</button>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</main>
+</div>
+<!-- ========================================================================= -->
+<!-- DIMMED BACKDROP OVERLAY & CENTERED MODAL DIALOG                          -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm transition-opacity duration-200">
+<!-- Centered Modal Card -->
+<div class="max-w-sm w-full mx-auto bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 z-50 transform transition-all duration-200 scale-100">
+<!-- Modal Header -->
+<div class="flex items-center justify-between pb-1">
+<div class="flex items-center gap-2.5">
+<div class="rounded-full bg-red-50 text-red-500 p-1.5 flex items-center justify-center">
+<span class="material-symbols-outlined text-lg leading-none" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<h2 class="font-title text-title font-bold text-gray-900 tracking-tight">Reject Entry</h2>
+</div>
+<button class="text-gray-400 hover:text-gray-600 rounded-lg p-1.5 hover:bg-gray-100 transition-colors inline-flex items-center justify-center">
+<span class="material-symbols-outlined text-lg leading-none" data-icon="close">close</span>
+</button>
+</div>
+<!-- Brief Entry Info Box -->
+<div class="bg-gray-50 border border-gray-100 rounded-xl p-3.5 space-y-1.5 my-4">
+<div class="flex items-center justify-between text-xs">
+<span class="text-gray-500 font-medium">Activity:</span>
+<span class="font-semibold text-gray-900 text-right">Motorbike commute</span>
+</div>
+<div class="flex items-center justify-between text-xs">
+<span class="text-gray-500 font-medium">Impact tag:</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[11px] font-bold bg-primary/10 text-primary border border-primary/15">
+<span class="w-1.5 h-1.5 rounded-full bg-primary"></span>
+            8.2 kg CO2e
+          </span>
+</div>
+<div class="flex items-center justify-between text-xs pt-0.5 border-t border-gray-200/60">
+<span class="text-gray-500 font-medium">Submitter:</span>
+<span class="font-medium text-gray-800">Nguyen Van A</span>
+</div>
+</div>
+<!-- Reason Textarea Form -->
+<div class="space-y-1.5 mb-5">
+<div class="flex items-center justify-between">
+<label class="font-semibold text-xs text-gray-700 uppercase tracking-wider" for="rejection-reason">
+            Reason <span class="text-red-500">*</span>
+</label>
+</div>
+<textarea class="border border-gray-200 rounded-xl focus:ring-2 focus:ring-red-500/20 focus:border-red-500 text-sm text-gray-800 p-3 w-full resize-none transition-all placeholder:text-gray-400 placeholder:text-xs font-normal" id="rejection-reason" placeholder="Enter rejection reason (min. 5 characters)..." rows="3"></textarea>
+<div class="flex justify-end">
+<span class="text-xs text-gray-400 font-normal" id="char-counter">0 / 200</span>
+</div>
+</div>
+<!-- Modal Footer / Action Buttons -->
+<div class="space-y-2">
+<button class="w-full py-2.5 px-4 bg-red-500 hover:bg-red-600 text-white font-medium rounded-xl text-sm shadow-sm transition-all duration-150 flex items-center justify-center gap-1.5" type="button">
+<span class="material-symbols-outlined text-base leading-none" data-icon="block">block</span>
+<span>Confirm Reject</span>
+</button>
+<button class="w-full py-2 text-center text-sm font-medium text-gray-500 hover:text-gray-700 transition-colors" type="button">
+          Cancel
+        </button>
+</div>
+</div>
+</div>
+<!-- Interactive script for character counter -->
+<script>
+    const textarea = document.getElementById('rejection-reason');
+    const counter = document.getElementById('char-counter');
+    if (textarea && counter) {
+      textarea.addEventListener('input', (e) => {
+        const length = e.target.value.length;
+        counter.textContent = `${length} / 200`;
+        if (length > 200) {
+          counter.classList.add('text-red-500');
+          counter.classList.remove('text-gray-400');
+        } else {
+          counter.classList.remove('text-red-500');
+          counter.classList.add('text-gray-400');
+        }
+      });
+    }
+  </script>
+</body></html>

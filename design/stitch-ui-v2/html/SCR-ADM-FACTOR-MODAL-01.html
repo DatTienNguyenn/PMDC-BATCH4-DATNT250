@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Edit Emission Factor - CarbonLedger Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: "#00a76f",
+              hover: "#007867",
+              light: "#00a76f14",
+              dark: "#004b3f",
+            },
+            surface: "#F9FAFB",
+            "sidebar-dark": "#161c24",
+            "sidebar-paper": "#212b36",
+            "neutral-subtle": "#919eab",
+            "border-subtle": "#e5e7eb",
+          },
+          fontFamily: {
+            sans: ['Public Sans', 'sans-serif'],
+          },
+          borderRadius: {
+            '2xl': '1rem',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+  </style>
+</head>
+<body class="bg-[#F9FAFB] text-[#212b36] font-sans antialiased min-h-screen relative overflow-hidden select-none">
+
+  <!-- ========================================================= -->
+  <!-- BACKGROUND: Emission Factors Admin Page (SCR-ADM-FACTOR-01) -->
+  <!-- ========================================================= -->
+  <div class="flex h-screen w-full filter blur-[3px] opacity-75 pointer-events-none select-none transition duration-200">
+    
+    <!-- Admin Sidebar (Dark Enterprise Theme like Screen 5) -->
+    <aside class="w-64 bg-[#161c24] flex flex-col justify-between p-5 border-r border-[#212b36] shrink-0">
+      <div class="space-y-6">
+        <!-- Logo -->
+        <div class="flex items-center gap-3 px-2">
+          <div class="w-9 h-9 rounded-xl bg-[#00a76f] flex items-center justify-center text-white shadow-md">
+            <span class="material-symbols-outlined text-[22px]">eco</span>
+          </div>
+          <div>
+            <span class="text-base font-bold tracking-tight text-white block">CarbonLedger</span>
+            <span class="text-[11px] font-medium text-[#919eab]">Enterprise v2.4</span>
+          </div>
+        </div>
+
+        <!-- Navigation Menu -->
+        <div class="space-y-1">
+          <div class="px-2 pb-1 text-[11px] font-bold text-[#637381] uppercase tracking-wider">Main Menu</div>
+          <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-[#919eab] font-medium text-sm">
+            <span class="material-symbols-outlined text-[20px]">dashboard</span>
+            Overview
+          </a>
+          <!-- Active Menu Item: Emission Factors -->
+          <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg bg-[#00a76f]/15 text-[#00a76f] font-semibold text-sm">
+            <span class="material-symbols-outlined text-[20px]">co2</span>
+            Emission Factors
+          </a>
+          <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-[#919eab] font-medium text-sm">
+            <span class="material-symbols-outlined text-[20px]">corporate_fare</span>
+            Workspaces
+          </a>
+          <a href="#" class="flex items-center gap-3 px-3.5 py-2.5 rounded-lg text-[#919eab] font-medium text-sm">
+            <span class="material-symbols-outlined text-[20px]">history_edu</span>
+            Audit Log
+          </a>
+        </div>
+      </div>
+
+      <!-- Footer Menu -->
+      <div class="space-y-4 pt-4 border-t border-[#212b36]">
+        <div class="space-y-1">
+          <a href="#" class="flex items-center gap-3 px-3.5 py-2 rounded-lg text-[#919eab] text-sm font-medium">
+            <span class="material-symbols-outlined text-[19px]">settings</span>
+            Settings
+          </a>
+          <a href="#" class="flex items-center gap-3 px-3.5 py-2 rounded-lg text-[#919eab] text-sm font-medium">
+            <span class="material-symbols-outlined text-[19px]">help_outline</span>
+            Documentation
+          </a>
+        </div>
+        <!-- Admin Profile -->
+        <div class="flex items-center gap-3 p-2 rounded-lg bg-[#212b36]/60">
+          <div class="w-8 h-8 rounded-full bg-[#00a76f] text-white flex items-center justify-center font-bold text-xs">
+            SA
+          </div>
+          <div class="overflow-hidden">
+            <div class="text-xs font-semibold text-white truncate">System Admin</div>
+            <div class="text-[10px] text-[#919eab] truncate">admin@carbonledger.io</div>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <!-- Main Content Area (Background) -->
+    <main class="flex-1 flex flex-col bg-[#F9FAFB] overflow-y-auto">
+      <!-- Top Bar -->
+      <header class="h-16 px-8 bg-white border-b border-[#e5e7eb] flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <span class="text-xs font-medium text-[#637381] bg-[#f4f6f8] px-2.5 py-1 rounded-md">SCR-ADM-FACTOR-01</span>
+          <span class="text-sm font-semibold text-[#212b36]">Global Emission Library</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <button class="w-8 h-8 rounded-full flex items-center justify-center text-[#637381] hover:bg-[#f4f6f8]">
+            <span class="material-symbols-outlined text-[20px]">notifications</span>
+          </button>
+          <div class="h-4 w-px bg-gray-200"></div>
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-full bg-[#00a76f] text-white flex items-center justify-center text-xs font-bold">SA</div>
+            <span class="text-xs font-semibold text-[#212b36]">Admin</span>
+          </div>
+        </div>
+      </header>
+
+      <!-- Page Content -->
+      <div class="p-8 space-y-6">
+        <div class="flex items-center justify-between">
+          <div>
+            <h1 class="text-2xl font-bold text-[#212b36] tracking-tight">Emission Factors</h1>
+            <p class="text-sm text-[#637381] mt-0.5">Manage enterprise carbon calculation coefficients and reference bases</p>
+          </div>
+          <button class="bg-[#00a76f] text-white text-sm font-semibold px-4 py-2.5 rounded-lg flex items-center gap-2 shadow-sm">
+            <span class="material-symbols-outlined text-[18px]">add</span>
+            Add New Factor
+          </button>
+        </div>
+
+        <!-- Factors Table Mock -->
+        <div class="bg-white rounded-xl border border-[#e5e7eb] overflow-hidden shadow-sm">
+          <div class="p-4 border-b border-[#e5e7eb] flex items-center justify-between">
+            <div class="flex items-center gap-3 w-72 bg-[#f4f6f8] px-3 py-1.5 rounded-lg text-sm text-[#919eab]">
+              <span class="material-symbols-outlined text-[18px]">search</span>
+              <span>Search factors, fuels, scopes...</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-semibold text-[#637381] bg-[#f4f6f8] px-2.5 py-1 rounded">24 Factors Active</span>
+            </div>
+          </div>
+          <table class="w-full text-left text-sm">
+            <thead class="bg-[#f4f6f8] text-[#637381] text-xs font-semibold uppercase tracking-wider border-b border-[#e5e7eb]">
+              <tr>
+                <th class="py-3 px-6">Activity / Factor Name</th>
+                <th class="py-3 px-6">Category</th>
+                <th class="py-3 px-6">Factor Value</th>
+                <th class="py-3 px-6">Unit</th>
+                <th class="py-3 px-6">Source Base</th>
+                <th class="py-3 px-6">Effective Date</th>
+                <th class="py-3 px-6 text-right">Actions</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-[#e5e7eb] text-[#212b36]">
+              <tr class="bg-[#00a76f]/5 font-medium">
+                <td class="py-3.5 px-6 font-semibold text-[#00a76f] flex items-center gap-2">
+                  <span class="w-2 h-2 rounded-full bg-[#00a76f]"></span>
+                  Grid Electricity
+                </td>
+                <td class="py-3.5 px-6"><span class="px-2 py-0.5 rounded text-xs bg-emerald-50 text-emerald-700 font-semibold">Electricity</span></td>
+                <td class="py-3.5 px-6 font-semibold">0.4536</td>
+                <td class="py-3.5 px-6 text-[#637381]">kg CO2e/kWh</td>
+                <td class="py-3.5 px-6 text-xs text-[#637381]">EVN 2026</td>
+                <td class="py-3.5 px-6 text-xs">01 Oct 2026</td>
+                <td class="py-3.5 px-6 text-right text-[#00a76f] font-semibold text-xs">Editing...</td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-6 font-medium">Gasoline / Petrol E5</td>
+                <td class="py-3.5 px-6"><span class="px-2 py-0.5 rounded text-xs bg-blue-50 text-blue-700 font-semibold">Transport</span></td>
+                <td class="py-3.5 px-6 font-semibold">2.3120</td>
+                <td class="py-3.5 px-6 text-[#637381]">kg CO2e/liter</td>
+                <td class="py-3.5 px-6 text-xs text-[#637381]">IPCC Tier 1</td>
+                <td class="py-3.5 px-6 text-xs">01 Jan 2026</td>
+                <td class="py-3.5 px-6 text-right text-gray-400">Edit</td>
+              </tr>
+              <tr>
+                <td class="py-3.5 px-6 font-medium">LPG Cooking Gas</td>
+                <td class="py-3.5 px-6"><span class="px-2 py-0.5 rounded text-xs bg-amber-50 text-amber-700 font-semibold">Stationary</span></td>
+                <td class="py-3.5 px-6 font-semibold">1.5120</td>
+                <td class="py-3.5 px-6 text-[#637381]">kg CO2e/kg</td>
+                <td class="py-3.5 px-6 text-xs text-[#637381]">DEFRA 2025</td>
+                <td class="py-3.5 px-6 text-xs">15 Jun 2025</td>
+                <td class="py-3.5 px-6 text-right text-gray-400">Edit</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <!-- ========================================================= -->
+  <!-- MODAL BACKDROP (Dimmed & Blurred Overlay)                   -->
+  <!-- ========================================================= -->
+  <div class="fixed inset-0 z-50 bg-[#161c24]/50 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    
+    <!-- Modal Card (max-w-md, white, rounded-2xl, shadow-xl) -->
+    <div class="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all duration-200 animate-in fade-in zoom-in-95">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between px-6 py-5 border-b border-gray-100">
+        <div>
+          <h2 class="text-[18px] font-bold text-[#212b36] tracking-tight leading-snug">Edit Emission Factor</h2>
+          <p class="text-xs text-[#637381] mt-0.5 font-medium">SCR-ADM-FACTOR-01 &bull; Global coefficient</p>
+        </div>
+        <button type="button" aria-label="Close modal" class="w-8 h-8 rounded-lg flex items-center justify-center text-[#919eab] hover:text-[#212b36] hover:bg-[#f4f6f8] transition-colors focus:outline-none">
+          <span class="material-symbols-outlined text-[20px]">close</span>
+        </button>
+      </div>
+
+      <!-- Modal Body Form -->
+      <form class="p-6 space-y-4" onsubmit="event.preventDefault();">
+        
+        <!-- Field 1: Activity Name -->
+        <div>
+          <label for="activityName" class="block text-xs font-semibold text-[#212b36] mb-1.5 uppercase tracking-wider">
+            Activity Name
+          </label>
+          <div class="relative">
+            <input 
+              type="text" 
+              id="activityName" 
+              name="activityName" 
+              value="Grid Electricity" 
+              class="w-full h-11 px-3.5 bg-white border border-[#dfe3e8] rounded-xl text-sm font-medium text-[#212b36] placeholder-[#919eab] focus:outline-none focus:border-[#00a76f] focus:ring-2 focus:ring-[#00a76f]/20 transition-all"
+              placeholder="e.g. Grid Electricity"
+              required
+            />
+            <span class="material-symbols-outlined absolute right-3 top-3 text-[18px] text-[#919eab] pointer-events-none">
+              bolt
+            </span>
+          </div>
+        </div>
+
+        <!-- Field 2: Category -->
+        <div>
+          <label for="category" class="block text-xs font-semibold text-[#212b36] mb-1.5 uppercase tracking-wider">
+            Category
+          </label>
+          <div class="relative">
+            <select 
+              id="category" 
+              name="category" 
+              class="w-full h-11 px-3.5 pr-10 bg-white border border-[#dfe3e8] rounded-xl text-sm font-medium text-[#212b36] focus:outline-none focus:border-[#00a76f] focus:ring-2 focus:ring-[#00a76f]/20 appearance-none transition-all cursor-pointer"
+            >
+              <option value="Electricity" selected>Electricity</option>
+              <option value="Transport">Transport (Vehicles & Commute)</option>
+              <option value="Stationary Combustion">Stationary Combustion (Gas/Fuel)</option>
+              <option value="Waste & Water">Waste & Water</option>
+              <option value="Supply Chain">Supply Chain / Upstream</option>
+            </select>
+            <span class="material-symbols-outlined absolute right-3 top-3 text-[20px] text-[#919eab] pointer-events-none">
+              expand_more
+            </span>
+          </div>
+        </div>
+
+        <!-- Dual column: Field 3 (Emission Factor) & Field 4 (Unit) -->
+        <div class="grid grid-cols-2 gap-3.5">
+          <!-- Field 3: Emission Factor -->
+          <div>
+            <label for="emissionFactor" class="block text-xs font-semibold text-[#212b36] mb-1.5 uppercase tracking-wider">
+              Emission Factor
+            </label>
+            <div class="relative">
+              <input 
+                type="number" 
+                step="0.0001" 
+                id="emissionFactor" 
+                name="emissionFactor" 
+                value="0.4536" 
+                class="w-full h-11 px-3.5 bg-white border border-[#dfe3e8] rounded-xl text-sm font-semibold text-[#212b36] font-mono focus:outline-none focus:border-[#00a76f] focus:ring-2 focus:ring-[#00a76f]/20 transition-all"
+                placeholder="0.0000"
+                required
+              />
+            </div>
+            <p class="text-[11px] text-[#919eab] mt-1 font-medium">Precision: 4 decimals</p>
+          </div>
+
+          <!-- Field 4: Unit -->
+          <div>
+            <label for="unit" class="block text-xs font-semibold text-[#212b36] mb-1.5 uppercase tracking-wider">
+              Unit
+            </label>
+            <div class="relative">
+              <select 
+                id="unit" 
+                name="unit" 
+                class="w-full h-11 px-3.5 pr-9 bg-white border border-[#dfe3e8] rounded-xl text-sm font-medium text-[#212b36] focus:outline-none focus:border-[#00a76f] focus:ring-2 focus:ring-[#00a76f]/20 appearance-none transition-all cursor-pointer"
+              >
+                <option value="kg CO2e/kWh" selected>kg CO2e/kWh</option>
+                <option value="kg CO2e/liter">kg CO2e/liter</option>
+                <option value="kg CO2e/kg">kg CO2e/kg</option>
+                <option value="kg CO2e/km">kg CO2e/km</option>
+                <option value="t CO2e/MWh">t CO2e/MWh</option>
+              </select>
+              <span class="material-symbols-outlined absolute right-2.5 top-3 text-[18px] text-[#919eab] pointer-events-none">
+                expand_more
+              </span>
+            </div>
+            <p class="text-[11px] text-[#919eab] mt-1 font-medium">CO2e equivalent</p>
+          </div>
+        </div>
+
+        <!-- Field 5: Source / Reference -->
+        <div>
+          <label for="sourceRef" class="block text-xs font-semibold text-[#212b36] mb-1.5 uppercase tracking-wider">
+            Source / Reference
+          </label>
+          <div class="relative">
+            <input 
+              type="text" 
+              id="sourceRef" 
+              name="sourceRef" 
+              value="EVN 2026" 
+              class="w-full h-11 px-3.5 bg-white border border-[#dfe3e8] rounded-xl text-sm font-medium text-[#212b36] placeholder-[#919eab] focus:outline-none focus:border-[#00a76f] focus:ring-2 focus:ring-[#00a76f]/20 transition-all"
+              placeholder="e.g. EVN 2026, IPCC, DEFRA"
+              required
+            />
+            <span class="material-symbols-outlined absolute right-3 top-3 text-[18px] text-[#919eab] pointer-events-none">
+              menu_book
+            </span>
+          </div>
+        </div>
+
+        <!-- Field 6: Effective Date -->
+        <div>
+          <label for="effectiveDate" class="block text-xs font-semibold text-[#212b36] mb-1.5 uppercase tracking-wider">
+            Effective Date
+          </label>
+          <div class="relative">
+            <input 
+              type="text" 
+              id="effectiveDate" 
+              name="effectiveDate" 
+              value="01 Oct 2026" 
+              class="w-full h-11 px-3.5 bg-white border border-[#dfe3e8] rounded-xl text-sm font-medium text-[#212b36] focus:outline-none focus:border-[#00a76f] focus:ring-2 focus:ring-[#00a76f]/20 transition-all"
+              placeholder="DD MMM YYYY"
+            />
+            <span class="material-symbols-outlined absolute right-3 top-3 text-[18px] text-[#919eab] pointer-events-none">
+              calendar_today
+            </span>
+          </div>
+        </div>
+
+        <!-- Warning Note (Subtle amber banner, 1 line) -->
+        <div class="rounded-xl bg-[#fff8e6] border border-[#ffe39f] px-3.5 py-2.5 flex items-center gap-2.5 text-xs text-[#b76e00]">
+          <span class="material-symbols-outlined text-[17px] text-[#b76e00] shrink-0 font-medium">warning</span>
+          <span class="font-medium tracking-tight">Changes apply to new entries only. Historical data is unaffected.</span>
+        </div>
+
+        <!-- Footer Actions -->
+        <div class="flex items-center justify-end gap-3 pt-3 border-t border-gray-100">
+          <button 
+            type="button" 
+            class="px-4 py-2.5 text-sm font-semibold text-[#637381] hover:text-[#212b36] hover:bg-[#f4f6f8] rounded-xl transition-colors focus:outline-none"
+          >
+            Cancel
+          </button>
+          <button 
+            type="submit" 
+            class="px-5 py-2.5 text-sm font-semibold text-white bg-[#00a76f] hover:bg-[#007867] active:scale-[0.98] rounded-xl shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#00a76f]/30 flex items-center gap-1.5"
+          >
+            <span class="material-symbols-outlined text-[18px]">check</span>
+            Save Factor
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+</body>
+</html>

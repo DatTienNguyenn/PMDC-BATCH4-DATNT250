@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CarbonLedger v2 - Emission Factors Management</title>
+<!-- Public Sans Font & Material Symbols -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Configuration verbatim -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "secondary": "#006b5c",
+            "primary-container": "#00a76f",
+            "on-secondary-fixed-variant": "#005145",
+            "on-tertiary-fixed-variant": "#653e00",
+            "tertiary-fixed-dim": "#ffb95e",
+            "on-surface-variant": "#3d4a41",
+            "on-secondary": "#ffffff",
+            "surface-container-highest": "#d9e3f2",
+            "on-tertiary": "#ffffff",
+            "surface-container": "#e4effe",
+            "inverse-primary": "#5adda0",
+            "on-secondary-fixed": "#00201a",
+            "on-primary-fixed-variant": "#005234",
+            "background": "#f7f9ff",
+            "on-secondary-container": "#007261",
+            "on-primary": "#ffffff",
+            "surface": "#f7f9ff",
+            "on-tertiary-fixed": "#2a1700",
+            "on-primary-container": "#00321f",
+            "on-error": "#ffffff",
+            "surface-tint": "#006c46",
+            "primary-fixed-dim": "#5adda0",
+            "error-container": "#ffdad6",
+            "secondary-fixed-dim": "#7bd7c2",
+            "surface-bright": "#f7f9ff",
+            "error": "#ba1a1a",
+            "tertiary-container": "#cc8200",
+            "surface-container-low": "#eef4ff",
+            "secondary-container": "#97f4de",
+            "on-surface": "#121c27",
+            "on-error-container": "#93000a",
+            "primary": "#006c46",
+            "on-background": "#121c27",
+            "outline-variant": "#bccabf",
+            "outline": "#6d7a71",
+            "tertiary-fixed": "#ffddb7",
+            "inverse-on-surface": "#e9f1ff",
+            "surface-variant": "#d9e3f2",
+            "secondary-fixed": "#97f4de",
+            "on-tertiary-container": "#3f2500",
+            "inverse-surface": "#27313c",
+            "surface-container-lowest": "#ffffff",
+            "tertiary": "#855400",
+            "surface-dim": "#d1dbea",
+            "surface-container-high": "#dfe9f8",
+            "primary-fixed": "#79fabb",
+            "on-primary-fixed": "#002112"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "space-lg": "1.5rem",
+            "gutter-sm": "1rem",
+            "margin": "2.5rem",
+            "space-md": "1rem",
+            "space-xl": "2rem",
+            "space-xs": "0.25rem",
+            "margin-mobile": "1rem",
+            "gutter": "1.5rem"
+          },
+          "fontFamily": {
+            "title": ["Public Sans"],
+            "headline-lg": ["Public Sans"],
+            "body-md": ["Public Sans"],
+            "label-lg": ["Public Sans"],
+            "label-md": ["Public Sans"],
+            "label-sm": ["Public Sans"],
+            "headline-lg-mobile": ["Public Sans"],
+            "display": ["Public Sans"],
+            "body-sm": ["Public Sans"],
+            "headline-md": ["Public Sans"],
+            "body-lg": ["Public Sans"],
+            "headline-sm": ["Public Sans"]
+          },
+          "fontSize": {
+            "title": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "headline-lg": ["32px", { "lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "display": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }]
+          }
+        },
+      },
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-size: 20px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    .custom-scrollbar::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+    }
+    .custom-scrollbar::-webkit-scrollbar-thumb {
+      background: rgba(188, 202, 191, 0.4);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface antialiased font-body-md text-body-md min-h-screen flex selection:bg-primary-container selection:text-surface-container-lowest">
+<!-- ========================================================================= -->
+<!-- SHARED COMPONENT: SideNavBar                                              -->
+<!-- ========================================================================= -->
+<aside class="fixed top-0 left-0 h-screen w-64 border-r border-outline-variant/20 bg-inverse-surface z-50 flex flex-col justify-between p-4 transition-all duration-150 ease-in-out">
+<!-- Top Area: Brand & Primary Navigation -->
+<div class="flex flex-col gap-6">
+<!-- Brand Logo / Product Info -->
+<div class="flex items-center gap-3 px-2 pt-2">
+<div class="w-10 h-10 rounded-xl bg-primary-container flex items-center justify-center text-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-2xl" data-icon="eco">eco</span>
+</div>
+<div class="flex flex-col">
+<span class="text-title font-title font-bold text-surface-container-lowest tracking-tight">CarbonLedger</span>
+<span class="text-label-sm font-label-sm text-outline-variant font-medium">Enterprise v2.0</span>
+</div>
+</div>
+<!-- Navigation Tabs Cluster -->
+<nav aria-label="Main Navigation" class="flex flex-col space-y-1.5">
+<!-- Overview (Inactive) -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest hover:bg-surface-variant/10 font-body-md transition-colors duration-150" href="#overview">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-body-md font-body-md">Overview</span>
+</a>
+<!-- Emission Factors (Active -> style_active_navigation applied) -->
+<a aria-current="page" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-primary-container/15 text-primary-container font-label-md transition-colors" href="#emission-factors">
+<span class="material-symbols-outlined" data-icon="co2" data-weight="fill" style="font-variation-settings: 'FILL' 1;">co2</span>
+<span class="text-label-md font-label-md font-semibold tracking-wide">Emission Factors</span>
+</a>
+<!-- Workspaces (Inactive) -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest hover:bg-surface-variant/10 font-body-md transition-colors duration-150" href="#workspaces">
+<span class="material-symbols-outlined" data-icon="corporate_fare">corporate_fare</span>
+<span class="text-body-md font-body-md">Workspaces</span>
+</a>
+<!-- Audit Log (Inactive) -->
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest hover:bg-surface-variant/10 font-body-md transition-colors duration-150" href="#audit-log">
+<span class="material-symbols-outlined" data-icon="history_edu">history_edu</span>
+<span class="text-body-md font-body-md">Audit Log</span>
+</a>
+</nav>
+</div>
+<!-- Bottom Cluster: Utility links, Admin Profile & CTA -->
+<div class="flex flex-col gap-3 pt-4 border-t border-outline-variant/10">
+<!-- Footer Nav Tabs -->
+<div class="flex flex-col space-y-1">
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest hover:bg-surface-variant/10 font-body-md transition-colors duration-150" href="#settings">
+<span class="material-symbols-outlined text-lg" data-icon="settings">settings</span>
+<span class="text-body-md font-body-md">Settings</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2.5 rounded-lg text-inverse-on-surface/70 hover:text-surface-container-lowest hover:bg-surface-variant/10 font-body-md transition-colors duration-150" href="#documentation">
+<span class="material-symbols-outlined text-lg" data-icon="help_outline">help_outline</span>
+<span class="text-body-md font-body-md">Documentation</span>
+</a>
+</div>
+<!-- Action Button: Export Report (cta from JSON) -->
+<button class="w-full mt-1 flex items-center justify-center gap-2 py-2.5 px-3 rounded-lg bg-surface-variant/15 text-surface-container-lowest hover:bg-surface-variant/25 transition-all text-label-md font-label-md border border-outline-variant/20">
+<span class="material-symbols-outlined text-base" data-icon="download">download</span>
+<span>Export Report</span>
+</button>
+<!-- Administrator Profile Badge -->
+<div class="mt-2 p-2.5 rounded-xl bg-surface-variant/10 flex items-center gap-3 border border-outline-variant/10">
+<img class="w-9 h-9 rounded-full object-cover border border-outline-variant/30" data-alt="Close up studio portrait of Alex Mercer, a clean-cut technical operations director wearing a minimal black collar shirt against a neutral cool-gray studio backdrop. Diffused high-key lighting casts subtle realistic highlights on his facial features, expressing confidence, intelligence, and modern executive composure with zero glare." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAnoRZG0fagvfQafHUX7H4kpbjN743l--5b-j-u9zxo67SLZ43kgRLCpHqP5M7ocmq08W6SE1AKoiNNPsHNT1uKzdTMzX07CBSUlri_o7Md4yq_aRHWVwPoCL11R_9HY8fOQqm4huGuGS-SQumONCdP7YKTo69oaKx4JZPVe_4Kr8ONs-XfB_NACZsk9_ZsJyhuWSqd6_Sbkqrgtsnk--dEbjAueW3WW6-iKgR4aYs9-67KaGEK6D-wWBlgMokCZUgh-0LlmnFcwQ"/>
+<div class="flex flex-col min-w-0">
+<span class="text-surface-container-lowest text-label-md font-label-md font-semibold truncate leading-tight">Alex Mercer</span>
+<span class="text-outline-variant text-label-sm font-label-sm truncate">SecOps Lead</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- MAIN CONTENT CANVAS CONTAINER                                            -->
+<!-- ========================================================================= -->
+<div class="ml-64 w-[calc(100%-16rem)] min-h-screen flex flex-col bg-background">
+<!-- ======================================================================= -->
+<!-- SHARED COMPONENT: TopNavBar                                             -->
+<!-- ======================================================================= -->
+<header class="docked full-width top-0 sticky z-40 border-b border-surface-container-high/80 bg-surface-container-lowest/80 backdrop-blur-md flex justify-between items-center h-16 px-8 shadow-sm">
+<!-- Left side: Breadcrumb & Search Bar -->
+<div class="flex items-center gap-6">
+<div class="flex items-center gap-2 text-label-md font-label-md text-outline">
+<span>Admin</span>
+<span class="material-symbols-outlined text-xs" data-icon="chevron_right">chevron_right</span>
+<span class="text-on-surface font-semibold">Emission Factors</span>
+</div>
+<div class="relative w-72">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg pointer-events-none" data-icon="search">search</span>
+<input class="w-full pl-9 pr-4 py-1.5 bg-surface rounded-lg text-body-sm font-body-sm text-on-surface placeholder:text-outline border border-outline-variant/40 focus:border-primary-container focus:ring-1 focus:ring-primary-container focus:outline-none transition-colors" placeholder="Search parameters, tags..." type="text"/>
+</div>
+</div>
+<!-- Right side: Notifications, Dark mode toggle, System Admin pill, Profile -->
+<div class="flex items-center gap-3">
+<!-- Notification Button -->
+<button aria-label="Notifications" class="w-9 h-9 rounded-lg flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors relative">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container"></span>
+</button>
+<!-- Theme Contrast Button -->
+<button aria-label="Contrast Toggle" class="w-9 h-9 rounded-lg flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container-high transition-colors">
+<span class="material-symbols-outlined" data-icon="contrast">contrast</span>
+</button>
+<div class="h-5 w-px bg-outline-variant/30 mx-1"></div>
+<!-- Trailing primary action tag: System Admin -->
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-label-sm font-label-sm font-semibold bg-surface-container-high text-on-surface-variant">
+<span class="w-1.5 h-1.5 rounded-full bg-primary-container"></span>
+          System Admin
+        </span>
+<!-- Profile Avatar Link -->
+<div class="flex items-center pl-1 cursor-pointer">
+<img class="w-9 h-9 rounded-full object-cover border border-outline-variant/50 ring-2 ring-transparent hover:ring-primary-container/40 transition-all" data-alt="Minimal modern avatar of a system administrator with neat styling against a quiet soft gray studio background. Perfectly balanced high-key light highlights the refined contours of the face, mirroring clean contemporary enterprise design conventions with exceptional photographic clarity." src="https://lh3.googleusercontent.com/aida-public/AB6AXuA00TjkrE_IjuZ3FZB6Z0qkhycJ0CfOI7tygl1EduDjVhhQzlf4B9KuUNbmS3fr-kLh-DyFclZapeitqABE1rNe-yU7tkqrGIv33sGChRXyjnX1K69c29NM5gnuC3sri-0hVRMSN_C9nsDPi18c6FRWxf_K0R3LCfGazAZorvF9cLy_m2owUpiN26-2b1tTqGe4sOnx-udGo1DQgdB0evgNuwWTJMRMuAw9LMjD9hSGRSJHMd1fWJbEiYuDosah9KFNoNc8SttNag"/>
+</div>
+</div>
+</header>
+<!-- ======================================================================= -->
+<!-- MAIN WORKSPACE VIEWPORT                                                 -->
+<!-- ======================================================================= -->
+<main class="flex-1 px-8 py-8 max-w-[1440px] w-full mx-auto space-y-6">
+<!-- PAGE HEADER -->
+<div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+<div>
+<h1 class="text-headline-md font-headline-md font-bold text-on-surface tracking-tight">Emission Factors</h1>
+<p class="text-body-md font-body-md text-outline mt-1 max-w-2xl">
+            Manage standardized GHG conversion coefficients and global emission factors across workspace ledgers.
+          </p>
+</div>
+<!-- Action Button Group -->
+<div class="flex items-center gap-3 self-start md:self-auto">
+<!-- Outlined Button -->
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg border border-outline-variant text-on-surface font-label-lg text-label-lg hover:border-primary hover:text-primary transition-colors duration-150 bg-surface-container-lowest shadow-sm">
+<span class="material-symbols-outlined text-lg" data-icon="sync">sync</span>
+<span>Sync Protocols</span>
+</button>
+<!-- Solid Primary Emerald Green (#00A76F) Button -->
+<button class="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary-container text-surface-container-lowest font-label-lg text-label-lg font-semibold hover:bg-secondary transition-all duration-150 shadow-[0px_8px_16px_0px_rgba(0,167,111,0.24)] active:scale-95">
+<span class="material-symbols-outlined text-lg" data-icon="add">add</span>
+<span>+ Add Factor</span>
+</button>
+</div>
+</div>
+<!-- METRIC HIGHLIGHT STRIP (Modular Bento Strip) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+<!-- Metric 1 -->
+<div class="p-5 rounded-2xl bg-surface-container-lowest border border-surface-container-high shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-outline font-medium">Standardized Factors</span>
+<span class="w-8 h-8 rounded-lg bg-primary-container/10 text-primary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-base" data-icon="analytics">analytics</span>
+</span>
+</div>
+<div class="mt-3">
+<div class="text-headline-md font-headline-md font-bold text-on-surface">1,482</div>
+<div class="flex items-center gap-1.5 mt-1 text-label-sm font-label-sm text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="trending_up">trending_up</span>
+<span>+12 verified this month</span>
+</div>
+</div>
+</div>
+<!-- Metric 2 -->
+<div class="p-5 rounded-2xl bg-surface-container-lowest border border-surface-container-high shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-outline font-medium">Primary Source Protocol</span>
+<span class="w-8 h-8 rounded-lg bg-secondary-container/30 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-base" data-icon="verified">verified</span>
+</span>
+</div>
+<div class="mt-3">
+<div class="text-headline-md font-headline-md font-bold text-on-surface">IPCC AR6</div>
+<div class="flex items-center gap-1.5 mt-1 text-label-sm font-label-sm text-outline">
+<span class="material-symbols-outlined text-sm" data-icon="schedule">schedule</span>
+<span>Updated 3 days ago</span>
+</div>
+</div>
+</div>
+<!-- Metric 3 -->
+<div class="p-5 rounded-2xl bg-surface-container-lowest border border-surface-container-high shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-outline font-medium">Active Regional Grids</span>
+<span class="w-8 h-8 rounded-lg bg-surface-container text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-base" data-icon="public">public</span>
+</span>
+</div>
+<div class="mt-3">
+<div class="text-headline-md font-headline-md font-bold text-on-surface">34 Zones</div>
+<div class="flex items-center gap-1.5 mt-1 text-label-sm font-label-sm text-primary">
+<span class="material-symbols-outlined text-sm" data-icon="check_circle">check_circle</span>
+<span>100% telemetry synced</span>
+</div>
+</div>
+</div>
+<!-- Metric 4 -->
+<div class="p-5 rounded-2xl bg-surface-container-lowest border border-surface-container-high shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-label-md font-label-md text-outline font-medium">Review Flags</span>
+<span class="w-8 h-8 rounded-lg bg-tertiary-fixed text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-base" data-icon="flag">flag</span>
+</span>
+</div>
+<div class="mt-3">
+<div class="text-headline-md font-headline-md font-bold text-on-surface">0 Pending</div>
+<div class="flex items-center gap-1.5 mt-1 text-label-sm font-label-sm text-outline">
+<span class="material-symbols-outlined text-sm" data-icon="task_alt">task_alt</span>
+<span>All factors validated</span>
+</div>
+</div>
+</div>
+</div>
+<!-- FILTER & TOOLBAR CARD -->
+<div class="p-4 bg-surface-container-lowest rounded-2xl border border-surface-container-high shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+<!-- Left Filter Elements -->
+<div class="flex flex-wrap items-center gap-3">
+<!-- Activity/Source Search -->
+<div class="relative min-w-[240px]">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-outline text-lg pointer-events-none" data-icon="search">search</span>
+<input class="w-full pl-9 pr-3 py-2 bg-surface rounded-lg text-body-sm font-body-sm text-on-surface placeholder:text-outline border border-outline-variant/30 focus:border-primary-container focus:ring-1 focus:ring-primary-container focus:outline-none" placeholder="Filter activities, sources..." type="text"/>
+</div>
+<!-- Category Select Dropdown -->
+<div class="relative">
+<select class="appearance-none pl-3 pr-8 py-2 bg-surface rounded-lg text-body-sm font-body-sm text-on-surface border border-outline-variant/30 focus:border-primary-container focus:ring-1 focus:ring-primary-container focus:outline-none cursor-pointer">
+<option value="all">Category: All</option>
+<option value="electricity">Electricity</option>
+<option value="transport">Transport</option>
+<option value="gas">Gas</option>
+<option value="water">Water</option>
+</select>
+<span class="material-symbols-outlined absolute right-2 top-1/2 -translate-y-1/2 text-outline text-base pointer-events-none" data-icon="expand_more">expand_more</span>
+</div>
+<!-- Source Quick Chips -->
+<div class="flex items-center gap-1.5 pl-1 overflow-x-auto">
+<button class="px-3 py-1.5 rounded-full text-label-sm font-label-sm font-semibold bg-primary-container text-surface-container-lowest shadow-sm transition-colors">
+              All Sources
+            </button>
+<button class="px-3 py-1.5 rounded-full text-label-sm font-label-sm font-semibold bg-surface-container-high text-on-surface-variant hover:bg-surface-variant/40 transition-colors">
+              IPCC 2023
+            </button>
+<button class="px-3 py-1.5 rounded-full text-label-sm font-label-sm font-semibold bg-surface-container-high text-on-surface-variant hover:bg-surface-variant/40 transition-colors">
+              EVN 2026
+            </button>
+<button class="px-3 py-1.5 rounded-full text-label-sm font-label-sm font-semibold bg-surface-container-high text-on-surface-variant hover:bg-surface-variant/40 transition-colors">
+              MONRE 2024
+            </button>
+</div>
+</div>
+<!-- Right Quick Actions -->
+<div class="flex items-center gap-2 self-end lg:self-auto">
+<button class="p-2 rounded-lg text-outline hover:text-on-surface hover:bg-surface transition-colors border border-outline-variant/20" title="Advanced Filters">
+<span class="material-symbols-outlined text-lg" data-icon="filter_list">filter_list</span>
+</button>
+<button class="p-2 rounded-lg text-outline hover:text-on-surface hover:bg-surface transition-colors border border-outline-variant/20" title="Export Dataset">
+<span class="material-symbols-outlined text-lg" data-icon="file_download">file_download</span>
+</button>
+<button class="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-primary-container text-surface-container-lowest font-label-sm text-label-sm font-semibold hover:bg-secondary transition-all shadow-sm">
+<span class="material-symbols-outlined text-base" data-icon="add">add</span>
+<span>+ Add Factor</span>
+</button>
+</div>
+</div>
+<!-- DATA TABLE CARD -->
+<div class="bg-surface-container-lowest rounded-2xl border border-surface-container-high shadow-[0px_1px_2px_0px_rgba(145,158,171,0.16)] overflow-hidden">
+<div class="overflow-x-auto custom-scrollbar">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-surface border-b border-surface-container-high text-label-sm font-label-sm text-outline tracking-wider uppercase">
+<th class="py-3.5 px-6 font-semibold" scope="col">Activity</th>
+<th class="py-3.5 px-6 font-semibold" scope="col">Category</th>
+<th class="py-3.5 px-6 font-semibold" scope="col">Factor</th>
+<th class="py-3.5 px-6 font-semibold" scope="col">Unit</th>
+<th class="py-3.5 px-6 font-semibold" scope="col">Source</th>
+<th class="py-3.5 px-6 font-semibold" scope="col">Last Updated</th>
+<th class="py-3.5 px-6 font-semibold text-right" scope="col">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-surface-container-high text-body-md font-body-md text-on-surface">
+<!-- ROW 1: Grid Electricity -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-primary-container/15 text-primary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="bolt">bolt</span>
+</div>
+<div>
+<span class="font-semibold text-on-surface block text-body-md font-body-md">Grid Electricity</span>
+<span class="text-outline text-body-sm font-body-sm">National power grid mix</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-secondary-container/40 text-on-secondary-container">
+                    Electricity
+                  </span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap font-mono font-semibold text-on-surface text-body-md font-body-md">
+                  0.4536
+                </td>
+<td class="py-4 px-6 whitespace-nowrap text-outline text-body-md font-body-md">
+                  kg CO2e/kWh
+                </td>
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-medium text-on-surface text-body-sm font-body-sm">EVN 2026</span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap text-outline text-body-sm font-body-sm">
+                  Oct 2026
+                </td>
+<td class="py-4 px-6 whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1.5 justify-end">
+<button class="px-2.5 py-1 text-label-sm font-label-sm font-semibold rounded-md border border-outline-variant/50 text-on-surface hover:border-primary-container hover:text-primary-container transition-colors">
+                      Edit
+                    </button>
+<button class="p-1 rounded-md text-outline hover:text-on-surface hover:bg-surface transition-colors" title="More options">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 2: Petrol (Car) -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="directions_car">directions_car</span>
+</div>
+<div>
+<span class="font-semibold text-on-surface block text-body-md font-body-md">Petrol (Car)</span>
+<span class="text-outline text-body-sm font-body-sm">Passenger vehicle gasoline</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-surface-container text-on-surface-variant">
+                    Transport
+                  </span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap font-mono font-semibold text-on-surface text-body-md font-body-md">
+                  2.3100
+                </td>
+<td class="py-4 px-6 whitespace-nowrap text-outline text-body-md font-body-md">
+                  kg CO2e/L
+                </td>
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-medium text-on-surface text-body-sm font-body-sm">IPCC 2023</span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap text-outline text-body-sm font-body-sm">
+                  Aug 2026
+                </td>
+<td class="py-4 px-6 whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1.5 justify-end">
+<button class="px-2.5 py-1 text-label-sm font-label-sm font-semibold rounded-md border border-outline-variant/50 text-on-surface hover:border-primary-container hover:text-primary-container transition-colors">
+                      Edit
+                    </button>
+<button class="p-1 rounded-md text-outline hover:text-on-surface hover:bg-surface transition-colors" title="More options">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 3: Petrol (Motorbike) -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="two_wheeler">two_wheeler</span>
+</div>
+<div>
+<span class="font-semibold text-on-surface block text-body-md font-body-md">Petrol (Motorbike)</span>
+<span class="text-outline text-body-sm font-body-sm">Two-wheeler standard fuel</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-surface-container text-on-surface-variant">
+                    Transport
+                  </span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap font-mono font-semibold text-on-surface text-body-md font-body-md">
+                  2.1900
+                </td>
+<td class="py-4 px-6 whitespace-nowrap text-outline text-body-md font-body-md">
+                  kg CO2e/L
+                </td>
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-medium text-on-surface text-body-sm font-body-sm">IPCC 2023</span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap text-outline text-body-sm font-body-sm">
+                  Aug 2026
+                </td>
+<td class="py-4 px-6 whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1.5 justify-end">
+<button class="px-2.5 py-1 text-label-sm font-label-sm font-semibold rounded-md border border-outline-variant/50 text-on-surface hover:border-primary-container hover:text-primary-container transition-colors">
+                      Edit
+                    </button>
+<button class="p-1 rounded-md text-outline hover:text-on-surface hover:bg-surface transition-colors" title="More options">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 4: LPG Gas -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-tertiary-fixed text-tertiary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="local_fire_department">local_fire_department</span>
+</div>
+<div>
+<span class="font-semibold text-on-surface block text-body-md font-body-md">LPG Gas</span>
+<span class="text-outline text-body-sm font-body-sm">Liquefied petroleum heating gas</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-tertiary-fixed/60 text-on-tertiary-container">
+                    Gas
+                  </span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap font-mono font-semibold text-on-surface text-body-md font-body-md">
+                  2.9830
+                </td>
+<td class="py-4 px-6 whitespace-nowrap text-outline text-body-md font-body-md">
+                  kg CO2e/kg
+                </td>
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-medium text-on-surface text-body-sm font-body-sm">IPCC 2023</span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap text-outline text-body-sm font-body-sm">
+                  Aug 2026
+                </td>
+<td class="py-4 px-6 whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1.5 justify-end">
+<button class="px-2.5 py-1 text-label-sm font-label-sm font-semibold rounded-md border border-outline-variant/50 text-on-surface hover:border-primary-container hover:text-primary-container transition-colors">
+                      Edit
+                    </button>
+<button class="p-1 rounded-md text-outline hover:text-on-surface hover:bg-surface transition-colors" title="More options">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 5: Water Supply -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-secondary-container/50 text-secondary flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="water_drop">water_drop</span>
+</div>
+<div>
+<span class="font-semibold text-on-surface block text-body-md font-body-md">Water Supply</span>
+<span class="text-outline text-body-sm font-body-sm">Municipal treated tap distribution</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-secondary-container/30 text-on-secondary-fixed-variant">
+                    Water
+                  </span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap font-mono font-semibold text-on-surface text-body-md font-body-md">
+                  0.3440
+                </td>
+<td class="py-4 px-6 whitespace-nowrap text-outline text-body-md font-body-md">
+                  kg CO2e/m³
+                </td>
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-medium text-on-surface text-body-sm font-body-sm">MONRE 2024</span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap text-outline text-body-sm font-body-sm">
+                  Sep 2026
+                </td>
+<td class="py-4 px-6 whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1.5 justify-end">
+<button class="px-2.5 py-1 text-label-sm font-label-sm font-semibold rounded-md border border-outline-variant/50 text-on-surface hover:border-primary-container hover:text-primary-container transition-colors">
+                      Edit
+                    </button>
+<button class="p-1 rounded-md text-outline hover:text-on-surface hover:bg-surface transition-colors" title="More options">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- ROW 6: Bus -->
+<tr class="hover:bg-surface/50 transition-colors">
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-full bg-surface-container text-on-surface-variant flex items-center justify-center">
+<span class="material-symbols-outlined text-lg" data-icon="directions_bus">directions_bus</span>
+</div>
+<div>
+<span class="font-semibold text-on-surface block text-body-md font-body-md">Bus</span>
+<span class="text-outline text-body-sm font-body-sm">Public transit per passenger-km</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap">
+<span class="inline-flex items-center px-2.5 py-0.5 rounded-full text-label-sm font-label-sm font-bold bg-surface-container text-on-surface-variant">
+                    Transport
+                  </span>
+</td>
+<td class="py-4 px-6 whitespace-nowrap font-mono font-semibold text-on-surface text-body-md font-body-md">
+                  0.0890
+                </td>
+<td class="py-4 px-6 whitespace-nowrap text-outline text-body-md font-body-md">
+                  kg CO2e/km
+                </td>
+<td class="py-4 px-6 whitespace-nowrap">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary-container"></span>
+<span class="font-medium text-on-surface text-body-sm font-body-sm">IPCC 2023</span>
+</div>
+</td>
+<td class="py-4 px-6 whitespace-nowrap text-outline text-body-sm font-body-sm">
+                  Aug 2026
+                </td>
+<td class="py-4 px-6 whitespace-nowrap text-right">
+<div class="inline-flex items-center gap-1.5 justify-end">
+<button class="px-2.5 py-1 text-label-sm font-label-sm font-semibold rounded-md border border-outline-variant/50 text-on-surface hover:border-primary-container hover:text-primary-container transition-colors">
+                      Edit
+                    </button>
+<button class="p-1 rounded-md text-outline hover:text-on-surface hover:bg-surface transition-colors" title="More options">
+<span class="material-symbols-outlined text-lg" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- TABLE PAGINATION FOOTER -->
+<div class="px-6 py-4 bg-surface-container-lowest border-t border-surface-container-high flex flex-col sm:flex-row sm:items-center justify-between gap-4 text-body-sm font-body-sm text-outline">
+<div class="flex items-center gap-4">
+<span>Showing <strong class="text-on-surface font-semibold">1-6</strong> of <strong class="text-on-surface font-semibold">18</strong> factors</span>
+<div class="h-4 w-px bg-outline-variant/30 hidden sm:block"></div>
+<div class="flex items-center gap-2">
+<span>Rows per page:</span>
+<select class="bg-surface border border-outline-variant/30 rounded py-1 px-2 text-on-surface text-label-sm font-label-sm focus:outline-none focus:border-primary-container cursor-pointer">
+<option value="6">6</option>
+<option value="10">10</option>
+<option value="25">25</option>
+</select>
+</div>
+</div>
+<!-- Page Navigation Controls -->
+<div class="flex items-center gap-2 self-end sm:self-auto">
+<button aria-label="Previous Page" class="p-1.5 rounded-lg border border-outline-variant/30 text-outline hover:text-on-surface hover:bg-surface disabled:opacity-40 disabled:cursor-not-allowed transition-colors" disabled="">
+<span class="material-symbols-outlined text-base" data-icon="chevron_left">chevron_left</span>
+</button>
+<span class="text-body-sm font-body-sm font-medium px-2">Page <strong class="text-on-surface font-semibold">1</strong> of 3</span>
+<button aria-label="Next Page" class="p-1.5 rounded-lg border border-outline-variant/30 text-outline hover:text-on-surface hover:bg-surface transition-colors">
+<span class="material-symbols-outlined text-base" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+<!-- FOOTER NOTE / AUDIT STATUS CALLOUT -->
+<div class="p-4 rounded-xl bg-surface-container-low/60 border border-surface-container flex items-center justify-between text-body-sm font-body-sm text-outline">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-base" data-icon="lock">lock</span>
+<span>Conversion values are cryptographically verified against ISO 14064-1 accounting principles.</span>
+</div>
+<a class="text-primary hover:underline font-label-sm font-label-sm font-semibold flex items-center gap-1" href="#audit-log">
+<span>View Ledger Proofs</span>
+<span class="material-symbols-outlined text-sm" data-icon="arrow_forward">arrow_forward</span>
+</a>
+</div>
+</main>
+</div>
+</body></html>
