@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CarbonLedger - Add Emission Entry</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-container-highest": "#d9e3f2",
+            "primary-container": "#00a76f",
+            "outline-variant": "#bccabf",
+            "tertiary-container": "#cc8200",
+            "background": "#f7f9ff",
+            "surface-tint": "#006c46",
+            "on-primary-fixed": "#002112",
+            "secondary-fixed-dim": "#7bd7c2",
+            "on-tertiary-container": "#3f2500",
+            "on-tertiary-fixed": "#2a1700",
+            "on-primary-fixed-variant": "#005234",
+            "inverse-on-surface": "#e9f1ff",
+            "surface-variant": "#d9e3f2",
+            "tertiary": "#855400",
+            "on-error-container": "#93000a",
+            "tertiary-fixed-dim": "#ffb95e",
+            "primary-fixed-dim": "#5adda0",
+            "secondary-fixed": "#97f4de",
+            "inverse-surface": "#27313c",
+            "on-secondary-container": "#007261",
+            "surface": "#f7f9ff",
+            "secondary": "#006b5c",
+            "on-primary": "#ffffff",
+            "error": "#ba1a1a",
+            "surface-container": "#e4effe",
+            "on-secondary-fixed-variant": "#005145",
+            "surface-dim": "#d1dbea",
+            "on-primary-container": "#00321f",
+            "on-secondary-fixed": "#00201a",
+            "primary": "#006c46",
+            "primary-fixed": "#79fabb",
+            "inverse-primary": "#5adda0",
+            "on-surface-variant": "#3d4a41",
+            "error-container": "#ffdad6",
+            "on-tertiary-fixed-variant": "#653e00",
+            "surface-container-lowest": "#ffffff",
+            "secondary-container": "#97f4de",
+            "on-background": "#121c27",
+            "surface-container-high": "#dfe9f8",
+            "on-surface": "#121c27",
+            "surface-container-low": "#eef4ff",
+            "tertiary-fixed": "#ffddb7",
+            "outline": "#6d7a71",
+            "on-tertiary": "#ffffff",
+            "surface-bright": "#f7f9ff",
+            "on-secondary": "#ffffff",
+            "on-error": "#ffffff"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "margin": "2.5rem",
+            "space-xs": "0.25rem",
+            "space-xl": "2rem",
+            "margin-mobile": "1rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem",
+            "space-md": "1rem",
+            "gutter-sm": "1rem"
+          },
+          "fontFamily": {
+            "title": ["Public Sans"],
+            "body-sm": ["Public Sans"],
+            "headline-lg-mobile": ["Public Sans"],
+            "headline-lg": ["Public Sans"],
+            "display": ["Public Sans"],
+            "body-md": ["Public Sans"],
+            "headline-md": ["Public Sans"],
+            "label-md": ["Public Sans"],
+            "label-sm": ["Public Sans"],
+            "headline-sm": ["Public Sans"],
+            "body-lg": ["Public Sans"],
+            "label-lg": ["Public Sans"]
+          },
+          "fontSize": {
+            "title": ["18px", {"lineHeight": "26px", "fontWeight": "600"}],
+            "body-sm": ["12px", {"lineHeight": "18px", "fontWeight": "400"}],
+            "headline-lg-mobile": ["26px", {"lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "headline-lg": ["32px", {"lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "display": ["40px", {"lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+            "body-md": ["14px", {"lineHeight": "22px", "fontWeight": "400"}],
+            "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+            "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600"}],
+            "label-sm": ["11px", {"lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700"}],
+            "headline-sm": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+            "body-lg": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+            "label-lg": ["14px", {"lineHeight": "20px", "fontWeight": "600"}]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface antialiased overflow-hidden min-h-screen font-body-md text-body-md select-none">
+<!-- TOP APP BAR -->
+<header class="fixed top-0 left-0 right-0 z-20 flex justify-between items-center px-6 h-16 w-full border-b border-outline-variant/30 dark:border-outline/20 bg-surface-container-lowest dark:bg-surface-container-low shadow-sm">
+<div class="flex items-center gap-3">
+<div class="text-title font-title font-bold text-on-surface dark:text-inverse-on-surface flex items-center gap-2">
+<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary">
+<span class="material-symbols-outlined text-[20px]" data-icon="energy_savings_leaf">energy_savings_leaf</span>
+</div>
+<span class="tracking-tight text-on-surface">CarbonLedger</span>
+</div>
+<span class="hidden md:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-label-sm bg-surface-container text-on-surface-variant font-medium ml-2">CarbonLedger / Gia Đình Xanh</span>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="Notifications" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors duration-150 relative" type="button">
+<span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-primary-container"></span>
+</button>
+<div class="h-6 w-[1px] bg-outline-variant/30"></div>
+<div class="flex items-center gap-3">
+<img alt="User profile photo" class="w-8 h-8 rounded-full object-cover border border-outline-variant/30" data-alt="Professional headshot of a corporate sustainability director against a clean neutral architectural background in warm natural light." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBOOX-Mb5GVWzQub88BCQFn0uleKNx4SV7Dizfl1hrcw8aH3UYyvN7mCLS10jnvsT0BiKSU2RJLACpSbm9bpIvJIsnkmf-GO2kimBepTCYx-qlEiKexUcyNHAMjkdDZ7t7uAQ9716A7MgKNkCY6IdXOR6ymmcqE8Mu4l76ADo3VMmTwjjZ_pYK6Oeq0GkHDuY3o0fZYRFPvl1ruO-XROM-jJuV6SV7YwEwPzsiIqaa_KMuCYeB256V_VQq1BBW8IfDvhEC0upIqRg"/>
+<div class="hidden sm:flex flex-col text-left">
+<span class="text-label-md font-label-md leading-none text-on-surface">Elena Rostova</span>
+<span class="text-body-sm font-body-sm text-outline leading-tight mt-0.5">ESG Lead</span>
+</div>
+</div>
+</div>
+</header>
+<!-- SIDEBAR NAVIGATION -->
+<aside class="fixed left-0 top-16 bottom-0 w-56 flex flex-col py-6 px-3 bg-white border-r border-gray-200 select-none z-10">
+<nav class="space-y-1.5 flex-1">
+<!-- 1. Tong quan -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span>Tổng quan</span>
+</a>
+<!-- 2. So cai (ACTIVE) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00A76F] text-white font-semibold text-sm shadow-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">receipt_long</span>
+<span>Sổ cái</span>
+</a>
+<!-- 3. Phe duyet -->
+<a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span>Phê duyệt</span>
+</div>
+<span class="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">5 chờ</span>
+</a>
+<!-- 4. Bao cao & Lo trinh -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">insights</span>
+<span>Báo cáo &amp; Lộ trình</span>
+</a>
+<!-- 5. Cai dat -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Cài đặt</span>
+</a>
+</nav>
+
+<!-- Sidebar Footer: Version & Status -->
+<div class="px-3 pt-4 border-t border-gray-200 flex items-center justify-between text-xs text-gray-400">
+<span>v2.4.0</span>
+<span class="w-2 h-2 rounded-full bg-[#00A76F]"></span>
+</div>
+</aside>
+<!-- UNDERLYING DESKTOP LEDGER CONTENT (BLURRED IN BACKGROUND) -->
+<main aria-hidden="true" class="ml-56 pt-16 min-h-screen bg-background p-8">
+<!-- Header row -->
+<div class="flex items-center justify-between pb-6"><div><h1 class="text-headline-md font-headline-md text-on-surface">Sổ cái phát thải</h1><p class="text-body-md font-body-md text-outline">Nhật ký kiểm toán thời gian thực về phát thải, hệ số phát thải và xác minh.</p></div><div class="flex items-center gap-3"><button class="px-4 py-2 border border-outline-variant/30 rounded-xl bg-surface-container-lowest text-on-surface text-label-md font-label-md shadow-sm">Xuất báo cáo</button><button class="px-4 py-2 rounded-xl bg-primary-container text-on-primary text-label-md font-label-md shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>Ghi nhận phát thải</button></div></div>
+<!-- Metric summary bar -->
+<div class="grid grid-cols-4 gap-4 mb-6"><div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm"><div class="text-body-sm font-body-sm text-outline">Tổng phát thải Q4</div><div class="text-headline-sm font-headline-sm text-on-surface mt-1">428.4 <span class="text-body-md font-body-md font-normal text-outline">t CO2e</span></div></div><div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm"><div class="text-body-sm font-body-sm text-outline">Điện lưới (Phạm vi 2)</div><div class="text-headline-sm font-headline-sm text-on-surface mt-1">194.2 <span class="text-body-md font-body-md font-normal text-outline">t CO2e</span></div></div><div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm"><div class="text-body-sm font-body-sm text-outline">Chờ phê duyệt</div><div class="text-headline-sm font-headline-sm text-on-surface mt-1">12 <span class="text-body-md font-body-md font-normal text-outline">bản ghi</span></div></div><div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm"><div class="text-body-sm font-body-sm text-outline">Giảm so với mục tiêu</div><div class="text-headline-sm font-headline-sm text-primary mt-1">-8.4%</div></div></div>
+<!-- Underlying Mock Table -->
+<div class="bg-surface-container-lowest border border-outline-variant/20 rounded-2xl overflow-hidden shadow-sm">
+<div class="p-4 border-b border-outline-variant/20 flex items-center justify-between bg-surface-container-lowest">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-outline text-[20px]" data-icon="filter_list">filter_list</span>
+<span class="text-label-md font-label-md text-on-surface">Tất cả hoạt động</span>
+</div>
+<span class="text-body-sm font-body-sm text-outline">Hiển thị 1-25 trên 1.420 mục</span>
+</div>
+<div class="divide-y divide-outline-variant/20 text-body-md font-body-md">
+<div class="p-4 grid grid-cols-6 gap-4 text-outline font-label-md text-label-md bg-surface-container-low/50">
+<div class="col-span-2">Mô tả</div>
+<div>Danh mục</div>
+<div>Sản lượng</div>
+<div>Phát thải CO₂e</div>
+<div>Trạng thái</div>
+</div>
+<div class="p-4 grid grid-cols-6 gap-4 text-on-surface items-center">
+<div class="col-span-2 font-medium">Điện sinh hoạt gia đình</div>
+<div>Điện</div>
+<div>14.200 kWh</div>
+<div>1.831,8 kg</div>
+<div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-primary-container/20 text-primary">Đã duyệt</span></div>
+</div>
+<div class="p-4 grid grid-cols-6 gap-4 text-on-surface items-center">
+<div class="col-span-2 font-medium">Đi lại bằng xe máy</div>
+<div>Giao thông</div>
+<div>840 km</div>
+<div>161,2 kg</div>
+<div><span class="px-2.5 py-1 rounded-full text-xs font-semibold bg-tertiary-container/20 text-tertiary">Chờ duyệt</span></div>
+</div>
+</div>
+</div>
+</main>
+<!-- MODAL BACKDROP OVERLAY -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#212B36]/50 backdrop-blur-sm transition-opacity">
+<!-- FOREGROUND MODAL DIALOG -->
+<div class="w-full max-w-[500px] bg-surface-container-lowest rounded-2xl border border-gray-100 shadow-2xl p-6 sm:p-7 relative z-50 animate-in fade-in zoom-in-95 duration-200"><!-- Modal Header --><div class="flex items-center justify-between pb-5"><h2 class="text-headline-sm font-headline-sm font-bold text-on-surface tracking-tight">Ghi nhận phát thải</h2><button aria-label="Đóng hộp thoại" class="w-8 h-8 rounded-full flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container transition-colors duration-150" type="button"><span class="material-symbols-outlined text-[20px]" data-icon="close">close</span></button></div><!-- Segmented Switch / Pill Tabs --><div class="p-1 rounded-xl bg-surface-container flex items-center gap-1 mb-6"><button class="flex-1 py-1.5 text-center text-label-md font-label-md rounded-lg text-outline hover:text-on-surface transition-all duration-150" type="button">Quét AI</button><button class="flex-1 py-1.5 text-center text-label-md font-label-md rounded-lg bg-surface-container-lowest text-on-surface shadow-sm font-semibold transition-all duration-150" type="button">Nhập thủ công</button><button class="flex-1 py-1.5 text-center text-label-md font-label-md rounded-lg text-outline hover:text-on-surface transition-all duration-150" type="button">Nhập file Excel</button></div><!-- Form Content --><form class="space-y-4" onsubmit="event.preventDefault();"><!-- Field 1: Loại hoạt động --><div><label class="block text-xs font-semibold text-outline uppercase tracking-wider mb-1.5" for="activity-type">Loại hoạt động</label><div class="relative"><select class="w-full h-11 px-3.5 pr-10 rounded-xl bg-surface-container-lowest border border-outline-variant/40 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors appearance-none cursor-pointer" id="activity-type"><option selected="" value="Điện sinh hoạt">Điện sinh hoạt</option><option value="Xe máy xăng">Xe máy xăng</option><option value="Nước sinh hoạt">Nước sinh hoạt</option><option value="Gas LPG">Gas LPG</option></select><div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-outline"><span class="material-symbols-outlined text-[20px]" data-icon="expand_more">expand_more</span></div></div></div><!-- Field 2: Mô tả --><div><label class="block text-xs font-semibold text-outline uppercase tracking-wider mb-1.5" for="emission-description">Mô tả</label><input class="w-full h-11 px-3.5 rounded-xl bg-surface-container-lowest border border-outline-variant/40 text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="emission-description" placeholder="Hóa đơn tiền điện tháng 11" type="text" value="Hóa đơn tiền điện tháng 11"/></div><!-- Field 3: Sản lượng tiêu thụ + Inline Unit Selector --><div><label class="block text-xs font-semibold text-outline uppercase tracking-wider mb-1.5" for="emission-amount">Sản lượng tiêu thụ</label><div class="flex items-center rounded-xl border border-outline-variant/40 focus-within:border-primary-container focus-within:ring-1 focus-within:ring-primary-container transition-colors bg-surface-container-lowest overflow-hidden"><input class="w-full h-11 px-3.5 border-0 text-body-md font-body-md text-on-surface focus:ring-0 focus:outline-none" id="emission-amount" step="any" type="number" value="120"/><div class="border-l border-outline-variant/40 bg-surface-container-low/40"><select class="h-11 px-3 pr-8 border-0 bg-transparent text-label-md font-label-md text-on-surface font-semibold focus:ring-0 focus:outline-none cursor-pointer"><option selected="" value="kWh">kWh</option><option value="km">km</option><option value="kg">kg</option><option value="m3">m³</option></select></div></div></div><!-- Live Preview Estimation Badge Row (Exactly ONE approximation sign ≈) --><div class="flex items-center justify-between px-3.5 py-3 rounded-xl bg-surface-container-low border border-primary-container/20"><div class="flex items-center gap-1.5 text-primary text-body-md font-semibold"><span class="material-symbols-outlined text-[20px] text-primary" data-icon="energy_savings_leaf">energy_savings_leaf</span><span>≈ 15.5 kg CO2e</span></div><span class="text-xs font-medium text-outline">Hệ số: 0.129 kg/kWh</span></div><!-- Field 4: Ngày phát sinh --><div><label class="block text-xs font-semibold text-outline uppercase tracking-wider mb-1.5" for="emission-date">Ngày phát sinh</label><div class="relative"><input class="w-full h-11 px-3.5 rounded-xl bg-surface-container-lowest border border-outline-variant/40 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors cursor-pointer" id="emission-date" type="date" value="2026-11-01"/></div></div><!-- Field 5: Ghi chú (tùy chọn) --><div><label class="block text-xs font-semibold text-outline uppercase tracking-wider mb-1.5" for="emission-note">Ghi chú (tùy chọn)</label><textarea class="w-full p-3 rounded-xl bg-surface-container-lowest border border-outline-variant/40 text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors resize-none" id="emission-note" placeholder="Nhập ghi chú thêm nếu có..." rows="2"></textarea></div><!-- Modal Footer --><div class="pt-2"><button class="w-full py-3 px-5 rounded-xl bg-primary-container text-on-primary text-label-lg font-semibold shadow-sm hover:bg-[#008f5d] transition-all flex items-center justify-center gap-2 cursor-pointer" type="submit"><span>Lưu bản ghi</span></button><button class="w-full mt-2.5 text-center text-body-md font-medium text-outline hover:text-on-surface transition-colors py-1.5 cursor-pointer block" type="button">Hủy bỏ</button></div></form></div>
+</div>
+</body></html>

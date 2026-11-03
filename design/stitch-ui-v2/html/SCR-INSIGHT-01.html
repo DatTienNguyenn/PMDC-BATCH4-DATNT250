@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CarbonLedger - Insights</title>
+<!-- Google Fonts: Public Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-bright": "#f7f9ff",
+            "surface-container-highest": "#d9e3f2",
+            "primary-fixed-dim": "#5adda0",
+            "error": "#ba1a1a",
+            "surface-container-low": "#eef4ff",
+            "tertiary-container": "#cc8200",
+            "surface-tint": "#006c46",
+            "surface-dim": "#d1dbea",
+            "surface-container-high": "#dfe9f8",
+            "primary": "#006c46",
+            "on-secondary-container": "#007261",
+            "surface-container": "#e4effe",
+            "tertiary-fixed": "#ffddb7",
+            "primary-fixed": "#79fabb",
+            "on-secondary": "#ffffff",
+            "on-tertiary": "#ffffff",
+            "on-background": "#121c27",
+            "on-secondary-fixed": "#00201a",
+            "tertiary": "#855400",
+            "error-container": "#ffdad6",
+            "tertiary-fixed-dim": "#ffb95e",
+            "outline": "#6d7a71",
+            "on-primary-fixed": "#002112",
+            "on-primary-fixed-variant": "#005234",
+            "secondary-fixed-dim": "#7bd7c2",
+            "surface": "#f7f9ff",
+            "on-secondary-fixed-variant": "#005145",
+            "on-error-container": "#93000a",
+            "inverse-surface": "#27313c",
+            "inverse-primary": "#5adda0",
+            "secondary": "#006b5c",
+            "on-tertiary-fixed": "#2a1700",
+            "primary-container": "#00a76f",
+            "on-surface": "#121c27",
+            "on-tertiary-container": "#3f2500",
+            "on-error": "#ffffff",
+            "on-primary": "#ffffff",
+            "outline-variant": "#bccabf",
+            "surface-variant": "#d9e3f2",
+            "secondary-container": "#97f4de",
+            "on-surface-variant": "#3d4a41",
+            "surface-container-lowest": "#ffffff",
+            "secondary-fixed": "#97f4de",
+            "on-primary-container": "#00321f",
+            "inverse-on-surface": "#e9f1ff",
+            "background": "#f7f9ff",
+            "on-tertiary-fixed-variant": "#653e00"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-sm": "0.5rem",
+            "margin": "2.5rem",
+            "space-lg": "1.5rem",
+            "space-xl": "2rem",
+            "gutter-sm": "1rem",
+            "space-xs": "0.25rem",
+            "space-md": "1rem",
+            "gutter": "1.5rem",
+            "margin-mobile": "1rem"
+          },
+          "fontFamily": {
+            "label-lg": ["Public Sans"],
+            "body-sm": ["Public Sans"],
+            "display": ["Public Sans"],
+            "body-lg": ["Public Sans"],
+            "label-md": ["Public Sans"],
+            "label-sm": ["Public Sans"],
+            "headline-sm": ["Public Sans"],
+            "headline-md": ["Public Sans"],
+            "headline-lg": ["Public Sans"],
+            "headline-lg-mobile": ["Public Sans"],
+            "title": ["Public Sans"],
+            "body-md": ["Public Sans"]
+          },
+          "fontSize": {
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "display": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-lg": ["32px", { "lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "title": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }]
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen">
+<!-- TopNavBar (Shared Component JSON Blueprint) -->
+<header class="flex justify-between items-center px-6 h-16 w-full border-b border-outline-variant/30 dark:border-outline/20 bg-surface-container-lowest dark:bg-surface-container-low fixed top-0 left-0 right-0 z-50 shadow-sm"><div class="flex items-center gap-4">
+<div class="flex items-center gap-2 text-title font-title font-bold text-on-surface dark:text-inverse-on-surface">
+<div class="w-8 h-8 rounded-lg bg-[#00A76F] flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+</div>
+<span class="tracking-tight font-bold text-lg">CarbonLedger</span>
+</div>
+<div class="hidden md:flex items-center gap-2 pl-4 border-l border-gray-200 text-sm font-medium text-gray-500">
+<span>Gia Đình Xanh</span>
+<span class="text-gray-400">/</span>
+<span class="text-gray-900 font-semibold">Báo cáo &amp; Lộ trình</span>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button aria-label="Thông báo" class="relative p-2 rounded-full text-gray-500 hover:bg-gray-100 transition-colors duration-150">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500 ring-2 ring-white"></span>
+</button>
+<div class="flex items-center gap-3 pl-2 border-l border-outline-variant/30">
+<img alt="User profile photo" class="w-8 h-8 rounded-full object-cover ring-1 ring-outline-variant/30" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDc_hL1VzA_m-NnaMRJ6p7amp8HNRSca2KtwljmJLPIlp4ooltK-ZeVf3gEuEOKbo5xOQRGYWi95G2I9M8y18-1VMDw6VRi55ELkndpmoETD5F3WPTQ14mS86X1YXEfJlBMH_1_UuU-Y9GdTokr4U30czO2ii5pgUozNkJcHTdb50RuQei-rgOcI_4JLIHDvN6HJbv5wOjPJtpGF2SNOVU_kPX9sX9Gv4nGji2CDeqb4z7cdAN_agyq9d3mjJrETsPlOtvCbLAzHQ"/>
+</div>
+</div></header>
+<!-- SideNavBar (Shared Component JSON Blueprint) -->
+<aside class="fixed left-0 top-16 bottom-0 w-56 flex flex-col py-6 px-3 bg-white border-r border-gray-200 select-none z-30">
+<nav class="space-y-1.5 flex-1">
+<!-- 1. Tong quan -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
+<span>Tổng quan</span>
+</a>
+<!-- 2. So cai -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span>Sổ cái</span>
+</a>
+<!-- 3. Phe duyet -->
+<a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span>Phê duyệt</span>
+</div>
+<span class="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">5 chờ</span>
+</a>
+<!-- 4. Bao cao & Lo trinh (ACTIVE) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00A76F] text-white font-semibold text-sm shadow-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">insights</span>
+<span>Báo cáo &amp; Lộ trình</span>
+</a>
+<!-- 5. Cai dat -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Cài đặt</span>
+</a>
+</nav>
+
+<!-- Sidebar Footer: Version & Status -->
+<div class="px-3 pt-4 border-t border-gray-200 flex items-center justify-between text-xs text-gray-400">
+<span>v2.4.0</span>
+<span class="w-2 h-2 rounded-full bg-[#00A76F]"></span>
+</div>
+</aside>
+<!-- Main Canvas -->
+<main class="ml-56 pt-16 min-h-screen"><div class="max-w-[1440px] mx-auto p-6 md:p-10 space-y-8">
+<!-- Page Header -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-2">
+<div>
+<h1 class="text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight">Báo cáo AI &amp; Kế hoạch Cắt giảm Xanh</h1>
+</div>
+<div class="flex items-center gap-3 shrink-0">
+<button class="px-4 py-2 border border-[#00A76F] text-[#00A76F] hover:bg-[#00A76F]/10 rounded-xl font-semibold text-sm flex items-center gap-2 transition-colors duration-150">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+<span>Kích hoạt Phân tích Lại</span>
+</button>
+<button class="px-4 py-2 bg-[#00A76F] hover:bg-[#008f5d] text-white rounded-xl font-semibold text-sm flex items-center gap-2 shadow-sm transition-colors duration-150">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+<span>Xuất Báo cáo PDF</span>
+</button>
+</div>
+</div>
+<!-- Section 1: Executive AI Summary Card -->
+<section class="bg-white rounded-2xl p-6 border border-gray-200/80 shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-gray-100 gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-[#00A76F]/10 text-[#00A76F] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<div>
+<h2 class="text-lg font-bold text-gray-900">Nhận định Chuyên sâu Tháng 10/2026</h2>
+</div>
+</div>
+<div class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#00A76F]/10 text-[#00A76F] rounded-full text-xs font-bold self-start sm:self-auto">
+<span class="w-2 h-2 rounded-full bg-[#00A76F] animate-pulse"></span>
+<span>Gemini AI</span>
+</div>
+</div>
+<div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Metric Card A -->
+<div class="p-4 rounded-xl bg-gray-50 border border-gray-100 flex items-start gap-3.5">
+<div class="w-9 h-9 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</div>
+<div>
+<span class="text-xs uppercase font-bold text-gray-500 tracking-wider">Tiêu thụ điện</span>
+<p class="text-sm font-semibold text-gray-900 mt-0.5">Tăng 18% vào cuối tuần do thời tiết nắng nóng</p>
+</div>
+</div>
+<!-- Metric Card B -->
+<div class="p-4 rounded-xl bg-gray-50 border border-gray-100 flex items-start gap-3.5">
+<div class="w-9 h-9 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">directions_bike</span>
+</div>
+<div>
+<span class="text-xs uppercase font-bold text-gray-500 tracking-wider">Di chuyển cá nhân</span>
+<p class="text-sm font-semibold text-gray-900 mt-0.5">Xe máy cá nhân chiếm 28% tổng phát thải toàn hộ</p>
+</div>
+</div>
+<!-- Metric Card C -->
+<div class="p-4 rounded-xl bg-[#00A76F]/10 border border-[#00A76F]/30 flex items-start gap-3.5">
+<div class="w-9 h-9 rounded-lg bg-[#00A76F] text-white flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+</div>
+<div>
+<span class="text-xs uppercase font-bold text-[#00A76F] tracking-wider">Mục tiêu tháng tới</span>
+<p class="text-sm font-bold text-gray-900 mt-0.5">Giảm tối thiểu -15 kg CO2e</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Quick Wins Action Cards -->
+<section class="space-y-4">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<h2 class="text-xl font-bold text-gray-900">Hành động Cắt giảm Nhanh</h2>
+</div>
+<a class="text-sm font-semibold text-[#00A76F] hover:underline inline-flex items-center gap-1 self-start sm:self-auto" href="#">
+<span>Xem tất cả gợi ý</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<!-- Card 1 -->
+<div class="bg-white rounded-2xl p-5 border border-gray-200/80 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow duration-150">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[#00A76F]/10 text-[#00A76F] font-bold text-xs">
+              -22.50 kg CO2e/tháng
+            </span>
+<span class="material-symbols-outlined text-gray-400 text-[20px]">ac_unit</span>
+</div>
+<h3 class="text-base font-bold text-gray-900 mb-6">Tăng nhiệt độ điều hòa lên 26°C kèm quạt gió</h3>
+</div>
+<button class="w-full py-2.5 rounded-xl bg-[#00A76F] hover:bg-[#008f5d] text-white font-semibold text-xs tracking-wide transition-colors duration-150 text-center">
+          Áp dụng ngay
+        </button>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded-2xl p-5 border border-gray-200/80 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow duration-150">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[#00A76F]/10 text-[#00A76F] font-bold text-xs">
+              -18.00 kg CO2e/tháng
+            </span>
+<span class="material-symbols-outlined text-gray-400 text-[20px]">directions_bus</span>
+</div>
+<h3 class="text-base font-bold text-gray-900 mb-6">Chuyển sang đi xe bus / metro 3 ngày/tuần</h3>
+</div>
+<button class="w-full py-2.5 rounded-xl border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold text-xs tracking-wide transition-colors duration-150 text-center">
+          Lên lịch di chuyển
+        </button>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded-2xl p-5 border border-gray-200/80 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow duration-150">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[#00A76F]/10 text-[#00A76F] font-bold text-xs">
+              -3.20 kg CO2e/tháng
+            </span>
+<span class="material-symbols-outlined text-gray-400 text-[20px]">power_settings_new</span>
+</div>
+<h3 class="text-base font-bold text-gray-900 mb-6">Tắt hoàn toàn nguồn standby tivi và máy tính</h3>
+</div>
+<button class="w-full py-2.5 rounded-xl bg-[#00A76F]/10 text-[#00A76F] border border-[#00A76F]/30 font-semibold text-xs tracking-wide flex items-center justify-center gap-1.5 cursor-default">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Đã hoàn thành</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Section 3: Personalized Reduction Roadmap Timeline -->
+<section class="bg-white rounded-2xl p-6 border border-gray-200/80 shadow-sm space-y-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-gray-100 gap-3">
+<div>
+<h2 class="text-lg font-bold text-gray-900">Lộ trình Cắt giảm 3 Tháng Tới</h2>
+</div>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-gray-200 text-gray-700 text-xs font-semibold hover:border-[#00A76F] hover:text-[#00A76F] transition-colors duration-150 self-start sm:self-auto">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>Tùy chỉnh mục tiêu</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<!-- Milestone 1 -->
+<div class="p-5 rounded-xl bg-gray-50 border border-gray-200/60 relative space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold text-gray-900">Tháng 11/2026</span>
+<span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">Đang triển khai</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-extrabold text-gray-900 tracking-tight">85.00</span>
+<span class="text-xs text-gray-500">kg CO2e</span>
+<span class="ml-auto text-xs font-bold text-[#00A76F] bg-[#00A76F]/10 px-2 py-0.5 rounded-md">-15%</span>
+</div>
+<p class="text-xs text-gray-600 leading-relaxed min-h-[36px]"><strong class="text-gray-800">Hành động trọng tâm:</strong> Tối ưu máy lạnh và rút phích cắm thiết bị chờ.</p>
+<div class="space-y-1.5 pt-2 border-t border-gray-200/50">
+<div class="flex justify-between text-xs font-semibold">
+<span class="text-gray-500">Tiến độ</span>
+<span class="text-[#00A76F]">35%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-gray-200 overflow-hidden">
+<div class="h-full bg-[#00A76F] rounded-full" style="width: 35%;"></div>
+</div>
+</div>
+</div>
+<!-- Milestone 2 -->
+<div class="p-5 rounded-xl bg-gray-50 border border-gray-200/60 relative space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold text-gray-900">Tháng 12/2026</span>
+<span class="px-2.5 py-0.5 rounded-full bg-gray-200 text-gray-700 text-[11px] font-bold">Kế hoạch</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-extrabold text-gray-900 tracking-tight">75.00</span>
+<span class="text-xs text-gray-500">kg CO2e</span>
+<span class="ml-auto text-xs font-bold text-[#00A76F] bg-[#00A76F]/10 px-2 py-0.5 rounded-md">-25%</span>
+</div>
+<p class="text-xs text-gray-600 leading-relaxed min-h-[36px]"><strong class="text-gray-800">Hành động trọng tâm:</strong> Đi chung xe và phương tiện công cộng 3 buổi/tuần.</p>
+<div class="space-y-1.5 pt-2 border-t border-gray-200/50">
+<div class="flex justify-between text-xs font-semibold">
+<span class="text-gray-500">Tiến độ</span>
+<span class="text-gray-500">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-gray-200 overflow-hidden">
+<div class="h-full bg-gray-300 rounded-full" style="width: 0%;"></div>
+</div>
+</div>
+</div>
+<!-- Milestone 3 -->
+<div class="p-5 rounded-xl bg-gray-50 border border-gray-200/60 relative space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold text-gray-900">Tháng 01/2027</span>
+<span class="px-2.5 py-0.5 rounded-full bg-gray-200 text-gray-700 text-[11px] font-bold">Kế hoạch</span>
+</div>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-extrabold text-gray-900 tracking-tight">68.00</span>
+<span class="text-xs text-gray-500">kg CO2e</span>
+<span class="ml-auto text-xs font-bold text-[#00A76F] bg-[#00A76F]/10 px-2 py-0.5 rounded-md">-32%</span>
+</div>
+<p class="text-xs text-gray-600 leading-relaxed min-h-[36px]"><strong class="text-gray-800">Hành động trọng tâm:</strong> Tối ưu nước nóng và bóng đèn LED tiết kiệm điện.</p>
+<div class="space-y-1.5 pt-2 border-t border-gray-200/50">
+<div class="flex justify-between text-xs font-semibold">
+<span class="text-gray-500">Tiến độ</span>
+<span class="text-gray-500">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-gray-200 overflow-hidden">
+<div class="h-full bg-gray-300 rounded-full" style="width: 0%;"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Bottom Action -->
+<div class="flex justify-end pt-2">
+<button class="px-4 py-2 bg-[#00A76F] hover:bg-[#008f5d] text-white rounded-xl font-semibold text-xs flex items-center gap-2 shadow-sm transition-colors duration-150">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+<span>Xuất PDF Báo cáo</span>
+</button>
+</div>
+</section>
+</div></main>
+</body></html>

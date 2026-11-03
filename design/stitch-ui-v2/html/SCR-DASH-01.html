@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+
+<html lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CarbonLedger - Dashboard</title>
+<!-- Google Fonts: Public Sans -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 with Plugins -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Theme Configuration -->
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "surface-bright": "#f7f9ff",
+            "inverse-surface": "#27313c",
+            "tertiary-fixed-dim": "#ffb95e",
+            "tertiary-container": "#cc8200",
+            "surface-dim": "#d1dbea",
+            "secondary-container": "#97f4de",
+            "on-secondary-fixed-variant": "#005145",
+            "secondary": "#006b5c",
+            "inverse-primary": "#5adda0",
+            "surface-container-low": "#eef4ff",
+            "surface-tint": "#006c46",
+            "on-secondary-container": "#007261",
+            "inverse-on-surface": "#e9f1ff",
+            "on-primary": "#ffffff",
+            "on-error-container": "#93000a",
+            "on-error": "#ffffff",
+            "on-secondary-fixed": "#00201a",
+            "surface": "#f7f9ff",
+            "outline": "#6d7a71",
+            "primary-fixed-dim": "#5adda0",
+            "on-secondary": "#ffffff",
+            "primary-fixed": "#79fabb",
+            "on-tertiary-fixed-variant": "#653e00",
+            "surface-container-highest": "#d9e3f2",
+            "on-primary-fixed": "#002112",
+            "secondary-fixed-dim": "#7bd7c2",
+            "background": "#f7f9ff",
+            "error": "#ba1a1a",
+            "on-tertiary": "#ffffff",
+            "primary-container": "#00a76f",
+            "on-primary-container": "#00321f",
+            "primary": "#006c46",
+            "tertiary-fixed": "#ffddb7",
+            "surface-container-high": "#dfe9f8",
+            "tertiary": "#855400",
+            "on-tertiary-fixed": "#2a1700",
+            "secondary-fixed": "#97f4de",
+            "surface-variant": "#d9e3f2",
+            "error-container": "#ffdad6",
+            "on-background": "#121c27",
+            "on-surface": "#121c27",
+            "surface-container-lowest": "#ffffff",
+            "on-primary-fixed-variant": "#005234",
+            "on-tertiary-container": "#3f2500",
+            "on-surface-variant": "#3d4a41",
+            "outline-variant": "#bccabf",
+            "surface-container": "#e4effe"
+          },
+          "borderRadius": {
+            "DEFAULT": "0.25rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px"
+          },
+          "spacing": {
+            "space-xs": "0.25rem",
+            "gutter-sm": "1rem",
+            "margin-mobile": "1rem",
+            "space-xl": "2rem",
+            "space-sm": "0.5rem",
+            "gutter": "1.5rem",
+            "space-lg": "1.5rem",
+            "margin": "2.5rem",
+            "space-md": "1rem"
+          },
+          "fontFamily": {
+            "body-sm": ["Public Sans"],
+            "body-md": ["Public Sans"],
+            "headline-md": ["Public Sans"],
+            "headline-sm": ["Public Sans"],
+            "headline-lg-mobile": ["Public Sans"],
+            "headline-lg": ["Public Sans"],
+            "label-sm": ["Public Sans"],
+            "title": ["Public Sans"],
+            "body-lg": ["Public Sans"],
+            "label-md": ["Public Sans"],
+            "label-lg": ["Public Sans"],
+            "display": ["Public Sans"]
+          },
+          "fontSize": {
+            "body-sm": ["12px", { "lineHeight": "18px", "fontWeight": "400" }],
+            "body-md": ["14px", { "lineHeight": "22px", "fontWeight": "400" }],
+            "headline-md": ["24px", { "lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }],
+            "headline-lg-mobile": ["26px", { "lineHeight": "34px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "headline-lg": ["32px", { "lineHeight": "42px", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+            "label-sm": ["11px", { "lineHeight": "14px", "letterSpacing": "0.04em", "fontWeight": "700" }],
+            "title": ["18px", { "lineHeight": "26px", "fontWeight": "600" }],
+            "body-lg": ["16px", { "lineHeight": "24px", "fontWeight": "400" }],
+            "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.02em", "fontWeight": "600" }],
+            "label-lg": ["14px", { "lineHeight": "20px", "fontWeight": "600" }],
+            "display": ["40px", { "lineHeight": "52px", "letterSpacing": "-0.02em", "fontWeight": "800" }]
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-surface text-on-surface antialiased font-body-md min-h-screen flex flex-col selection:bg-primary-fixed selection:text-on-primary-fixed">
+<!-- TOP NAV BAR (Shared Component: TopNavBar execution) -->
+<header class="fixed top-0 left-0 right-0 z-40 h-16 w-full flex justify-between items-center px-6 bg-surface-container-lowest border-b border-outline-variant/30 shadow-sm transition-colors duration-150 ease-in-out">
+<!-- Brand / Logo Anchor -->
+<div class="flex items-center gap-4 select-none"><a class="text-title font-title font-bold text-on-surface flex items-center gap-2 tracking-tight" href="#"><div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary shadow-sm shadow-primary/20"><span class="material-symbols-outlined text-[20px] text-on-primary" data-icon="eco" style="font-variation-settings: 'FILL' 1;">eco</span></div><span class="text-on-surface font-title text-title font-bold tracking-tight">CarbonLedger</span></a><div class="h-4 w-[1px] bg-outline-variant/40"></div><div class="flex items-center gap-1.5 text-body-sm text-on-surface-variant font-medium"><span class="text-on-surface-variant/80 hover:text-on-surface transition-colors cursor-pointer">Gia Đình Xanh</span><span class="text-outline-variant text-[11px]">/</span><span class="text-primary font-semibold">Dashboard</span></div></div>
+<!-- Trailing Actions: Notification & Clean User Avatar -->
+<div class="flex items-center gap-3">
+<button aria-label="Notifications" class="relative p-2 rounded-xl text-on-surface-variant hover:bg-surface-container-low hover:text-primary transition-colors duration-150 ease-in-out flex items-center justify-center">
+<span class="material-symbols-outlined text-[22px]" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
+</button>
+<div class="w-9 h-9 rounded-full ring-2 ring-surface-container-high overflow-hidden cursor-pointer select-none bg-surface-container-low flex items-center justify-center">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="A refined professional corporate portrait of an executive climate director looking forward in a sleek modern architectural setting. Soft natural ambient lighting with an immaculate light mode aesthetic and minimal high-contrast details." src="https://lh3.googleusercontent.com/aida-public/AB6AXuB4TJrHmvKGhG1jRmFB6KiBPEOhVmAMRzOnl4VO436fj7hzYB-RJXbMlBagswpEoUnMIzpbw0BtNUoTM2DbEDa04FGdIY-MTgrH8fAuFddioVvPwRBXrfeg2FFZUpz9vfFbV0Y7B6I36O5VFEP43su2BKZyLDySc5ias7nBM7sem3b-agA5pF9NfBXnwj0-hDxDy96Vih1e8EBSrywf-TFZAYyFtmIBD7daZN4snI_QX2IMkNBLeyM0PApMKX8-9bwFrqHo4ifkhg"/>
+</div>
+</div>
+</header>
+<!-- BODY SHELL WRAPPER -->
+<div class="flex pt-16 min-h-[calc(100vh-4rem)] w-full">
+<!-- LEFT SIDEBAR (Shared Component: SideNavBar execution) -->
+<aside class="fixed left-0 top-16 bottom-0 w-56 flex flex-col py-6 px-3 bg-white border-r border-gray-200 select-none z-30">
+<nav class="space-y-1.5 flex-1">
+<!-- 1. Tong quan (ACTIVE) -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00A76F] text-white font-semibold text-sm shadow-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span>Tổng quan</span>
+</a>
+<!-- 2. So cai -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span>Sổ cái</span>
+</a>
+<!-- 3. Phe duyet -->
+<a class="flex items-center justify-between px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span>Phê duyệt</span>
+</div>
+<span class="px-2 py-0.5 rounded-full text-xs font-bold bg-amber-50 text-amber-700 border border-amber-200">5 chờ</span>
+</a>
+<!-- 4. Bao cao & Lo trinh -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">insights</span>
+<span>Báo cáo &amp; Lộ trình</span>
+</a>
+<!-- 5. Cai dat -->
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Cài đặt</span>
+</a>
+</nav>
+
+<!-- Sidebar Footer: Version & Status -->
+<div class="px-3 pt-4 border-t border-gray-200 flex items-center justify-between text-xs text-gray-400">
+<span>v2.4.0</span>
+<span class="w-2 h-2 rounded-full bg-[#00A76F]"></span>
+</div>
+</aside>
+<!-- MAIN CONTENT CANVAS -->
+<main class="ml-56 flex-1 p-8 max-w-7xl">
+<!-- Page Header: Pure Minimal Title -->
+<div class="mb-8">
+<h1 class="text-headline-md font-headline-md text-on-surface tracking-tight">Dashboard</h1>
+</div>
+<!-- 3 KPI Cards Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+<!-- KPI 1: Total Emissions -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm hover:border-outline-variant/60 transition-all duration-200"><div class="flex items-center justify-between mb-3">
+<span class="text-body-md font-body-md text-on-surface-variant font-medium">Tổng phát thải</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-[#00A76F]/10 text-primary font-semibold">
+<span class="material-symbols-outlined text-[14px]" data-icon="arrow_downward">arrow_downward</span>
+-12% so với tháng trước
+</span>
+</div>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="text-display font-display text-on-surface tracking-tight leading-none">85.4</span>
+<span class="text-body-lg font-body-lg text-on-surface-variant font-medium">kg CO2e</span>
+</div></div>
+<!-- KPI 2: Budget Used -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm hover:border-outline-variant/60 transition-all duration-200 flex flex-col justify-between"><div>
+<div class="flex items-center justify-between mb-3">
+<span class="text-body-md font-body-md text-on-surface-variant font-medium">Ngân sách tháng</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant font-medium">85.4 / 125 kg</span>
+</div>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="text-display font-display text-on-surface tracking-tight leading-none">68%</span>
+</div>
+</div>
+<div class="mt-4 pt-1">
+<div class="w-full h-2 bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary-container rounded-full" style="width: 68%;"></div>
+</div>
+</div></div>
+<!-- KPI 3: Per Person -->
+<div class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm hover:border-outline-variant/60 transition-all duration-200"><div class="flex items-center justify-between mb-3">
+<span class="text-body-md font-body-md text-on-surface-variant font-medium">Bình quân người</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-label-sm font-label-sm bg-surface-container-low text-on-surface-variant font-semibold">
+4 thành viên
+</span>
+</div>
+<div class="flex items-baseline gap-1 mt-1">
+<span class="text-display font-display text-on-surface tracking-tight leading-none">21.4</span>
+<span class="text-body-lg font-body-lg text-on-surface-variant font-medium">kg CO2e</span>
+</div></div>
+</section>
+<!-- 2 Analytics / Chart Cards Layout -->
+<section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Card A: Emission Trend (7 Cols) -->
+<div class="lg:col-span-7 bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-6"><h2 class="text-title font-title text-on-surface font-semibold">Xu hướng phát thải</h2>
+<div class="relative"><select aria-label="Chọn năm" class="appearance-none bg-surface-container-low border border-outline-variant/30 hover:border-outline-variant/60 rounded-xl px-3 py-1.5 pr-8 text-label-md font-semibold text-on-surface cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary/20 transition-all"><option selected="" value="2026">Năm 2026</option><option value="2025">Năm 2025</option><option value="2024">Năm 2024</option></select><span class="material-symbols-outlined text-[16px] text-on-surface-variant absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none">expand_more</span></div></div>
+<!-- Minimalist Area/Line SVG Chart -->
+<div class="w-full h-64 flex flex-col justify-end">
+<div class="relative w-full h-48">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 500 160">
+<defs>
+<lineargradient id="emeraldGradient" x1="0" x2="0" y1="0" y2="1">
+<stop offset="0%" stop-color="#00A76F" stop-opacity="0.22"></stop>
+<stop offset="100%" stop-color="#00A76F" stop-opacity="0.00"></stop>
+</lineargradient>
+</defs>
+<!-- Subtle Grid lines -->
+<line stroke="#bccabf" stroke-dasharray="3 3" stroke-opacity="0.25" x1="0" x2="500" y1="40" y2="40"></line>
+<line stroke="#bccabf" stroke-dasharray="3 3" stroke-opacity="0.25" x1="0" x2="500" y1="80" y2="80"></line>
+<line stroke="#bccabf" stroke-dasharray="3 3" stroke-opacity="0.25" x1="0" x2="500" y1="120" y2="120"></line>
+<!-- Filled Smooth Area Curve -->
+<path d="M 0,110 C 60,115 80,75 140,85 C 200,95 240,45 300,55 C 360,65 400,20 500,30 L 500,160 L 0,160 Z" fill="url(#emeraldGradient)"></path>
+<!-- Stroke Line -->
+<path d="M 0,110 C 60,115 80,75 140,85 C 200,95 240,45 300,55 C 360,65 400,20 500,30" fill="none" stroke="#00A76F" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"></path>
+<!-- Data point pins -->
+<circle cx="140" cy="85" fill="#00A76F" r="3.5" stroke="#FFFFFF" stroke-width="2"></circle>
+<circle cx="300" cy="55" fill="#00A76F" r="3.5" stroke="#FFFFFF" stroke-width="2"></circle>
+<circle cx="500" cy="30" fill="#00A76F" r="3.5" stroke="#FFFFFF" stroke-width="2"></circle>
+</svg>
+</div>
+<!-- Crisp X-Axis Labels -->
+<div class="flex justify-between items-center pt-4 border-t border-outline-variant/20 text-body-sm font-body-sm text-on-surface-variant">
+<span>Nov</span>
+<span>Dec</span>
+<span>Jan</span>
+<span>Feb</span>
+<span>Mar</span>
+<span>Apr</span>
+</div>
+</div>
+</div>
+<!-- Card B: By Category (5 Cols) -->
+<div class="lg:col-span-5 bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm flex flex-col justify-between"><div class="flex items-center justify-between mb-4">
+<h2 class="text-title font-title text-on-surface font-semibold">Cơ cấu nguồn phát</h2>
+</div>
+<div class="flex flex-col items-center justify-center my-auto py-2">
+<div class="relative w-44 h-44 flex items-center justify-center">
+<svg class="w-full h-full -rotate-90 transform" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#F3F4F6" stroke-width="12"></circle>
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#00A76F" stroke-dasharray="107.44 238.76" stroke-dashoffset="0" stroke-linecap="round" stroke-width="12"></circle>
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#00B8D9" stroke-dasharray="59.69 238.76" stroke-dashoffset="-107.44" stroke-width="12"></circle>
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#FFAB00" stroke-dasharray="47.75 238.76" stroke-dashoffset="-167.13" stroke-width="12"></circle>
+<circle cx="50" cy="50" fill="transparent" r="38" stroke="#919EAB" stroke-dasharray="23.88 238.76" stroke-dashoffset="-214.88" stroke-width="12"></circle>
+</svg>
+<div class="absolute inset-0 flex flex-col items-center justify-center pointer-events-none">
+<span class="text-body-sm font-body-sm text-on-surface-variant font-medium">Tổng</span>
+<span class="text-title font-title text-on-surface font-bold leading-tight">85.4 kg</span>
+</div>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-3 pt-4 border-t border-outline-variant/20">
+<div class="flex items-center justify-between text-body-sm font-body-sm pr-2">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#00A76F]"></span>
+<span class="text-on-surface-variant">Điện</span>
+</div>
+<span class="font-semibold text-on-surface">45%</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm pl-2">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#00B8D9]"></span>
+<span class="text-on-surface-variant">Di chuyển</span>
+</div>
+<span class="font-semibold text-on-surface">25%</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm pr-2">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#FFAB00]"></span>
+<span class="text-on-surface-variant">Gas</span>
+</div>
+<span class="font-semibold text-on-surface">20%</span>
+</div>
+<div class="flex items-center justify-between text-body-sm font-body-sm pl-2">
+<div class="flex items-center gap-2">
+<span class="w-2.5 h-2.5 rounded-full bg-[#DFE3E8]"></span>
+<span class="text-on-surface-variant">Nước</span>
+</div>
+<span class="font-semibold text-on-surface">10%</span>
+</div>
+</div></div>
+</section><div class="mt-8 bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm"><div class="flex items-center justify-between mb-5"><div class="flex items-center gap-2"><h2 class="text-title font-title text-on-surface font-bold tracking-tight">Hoạt động đã duyệt gần đây</h2><span class="px-2 py-0.5 rounded-full text-[12px] bg-[#00A76F]/10 text-primary font-semibold">5 mục mới nhất</span></div><a class="text-body-sm font-semibold text-primary hover:underline inline-flex items-center gap-1 transition-colors" href="#">Xem tất cả sổ cái <span class="material-symbols-outlined text-[16px]">chevron_right</span></a></div><div class="overflow-x-auto"><table class="w-full text-left border-collapse"><thead class="bg-surface-container-low/60 rounded-xl text-on-surface-variant text-[12px] font-semibold tracking-wider uppercase border-b border-outline-variant/20"><tr><th class="py-3.5 px-4 font-semibold rounded-l-xl">Ngày</th><th class="py-3.5 px-4 font-semibold">Hoạt động</th><th class="py-3.5 px-4 font-semibold text-right">Lượng phát thải</th><th class="py-3.5 px-4 font-semibold">Người nạp</th><th class="py-3.5 px-4 font-semibold rounded-r-xl text-center">Trạng thái</th></tr></thead><tbody class="divide-y divide-outline-variant/15 text-body-sm"><tr class="hover:bg-surface-container-low/40 transition-colors"><td class="py-3.5 px-4 font-medium text-on-surface-variant">01/11/2026</td><td class="py-3.5 px-4"><div class="flex items-center gap-2.5"><div class="w-7 h-7 rounded-lg bg-[#00A76F]/10 flex items-center justify-center text-primary flex-shrink-0"><span class="material-symbols-outlined text-[16px]">bolt</span></div><span class="font-medium text-on-surface">Hóa đơn tiền điện</span></div></td><td class="py-3.5 px-4 text-right font-bold text-on-surface">42.5 <span class="text-[12px] font-normal text-on-surface-variant">kg CO2e</span></td><td class="py-3.5 px-4"><div class="flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center text-[11px] font-semibold text-on-surface-variant">A</span><span class="text-on-surface font-medium">Nguyễn Văn A</span></div></td><td class="py-3.5 px-4 text-center"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[12px] font-semibold bg-[#00A76F]/10 text-primary"><span class="material-symbols-outlined text-[13px]">check</span> Đã duyệt</span></td></tr><tr class="hover:bg-surface-container-low/40 transition-colors"><td class="py-3.5 px-4 font-medium text-on-surface-variant">02/11/2026</td><td class="py-3.5 px-4"><div class="flex items-center gap-2.5"><div class="w-7 h-7 rounded-lg bg-[#00B8D9]/10 flex items-center justify-center text-[#00B8D9] flex-shrink-0"><span class="material-symbols-outlined text-[16px]">two_wheeler</span></div><span class="font-medium text-on-surface">Đi xe máy đi làm</span></div></td><td class="py-3.5 px-4 text-right font-bold text-on-surface">8.2 <span class="text-[12px] font-normal text-on-surface-variant">kg CO2e</span></td><td class="py-3.5 px-4"><div class="flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center text-[11px] font-semibold text-on-surface-variant">B</span><span class="text-on-surface font-medium">Trần Thị B</span></div></td><td class="py-3.5 px-4 text-center"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[12px] font-semibold bg-[#00A76F]/10 text-primary"><span class="material-symbols-outlined text-[13px]">check</span> Đã duyệt</span></td></tr><tr class="hover:bg-surface-container-low/40 transition-colors"><td class="py-3.5 px-4 font-medium text-on-surface-variant">03/11/2026</td><td class="py-3.5 px-4"><div class="flex items-center gap-2.5"><div class="w-7 h-7 rounded-lg bg-[#FFAB00]/15 flex items-center justify-center text-[#B76E00] flex-shrink-0"><span class="material-symbols-outlined text-[16px]">local_fire_department</span></div><span class="font-medium text-on-surface">Nấu ăn bằng bình gas</span></div></td><td class="py-3.5 px-4 text-right font-bold text-on-surface">12.1 <span class="text-[12px] font-normal text-on-surface-variant">kg CO2e</span></td><td class="py-3.5 px-4"><div class="flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center text-[11px] font-semibold text-on-surface-variant">C</span><span class="text-on-surface font-medium">Lê Văn C</span></div></td><td class="py-3.5 px-4 text-center"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[12px] font-semibold bg-[#00A76F]/10 text-primary"><span class="material-symbols-outlined text-[13px]">check</span> Đã duyệt</span></td></tr><tr class="hover:bg-surface-container-low/40 transition-colors"><td class="py-3.5 px-4 font-medium text-on-surface-variant">04/11/2026</td><td class="py-3.5 px-4"><div class="flex items-center gap-2.5"><div class="w-7 h-7 rounded-lg bg-[#919EAB]/15 flex items-center justify-center text-on-surface-variant flex-shrink-0"><span class="material-symbols-outlined text-[16px]">water_drop</span></div><span class="font-medium text-on-surface">Tiền nước sinh hoạt</span></div></td><td class="py-3.5 px-4 text-right font-bold text-on-surface">2.3 <span class="text-[12px] font-normal text-on-surface-variant">kg CO2e</span></td><td class="py-3.5 px-4"><div class="flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center text-[11px] font-semibold text-on-surface-variant">D</span><span class="text-on-surface font-medium">Phạm Thị D</span></div></td><td class="py-3.5 px-4 text-center"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[12px] font-semibold bg-[#00A76F]/10 text-primary"><span class="material-symbols-outlined text-[13px]">check</span> Đã duyệt</span></td></tr><tr class="hover:bg-surface-container-low/40 transition-colors"><td class="py-3.5 px-4 font-medium text-on-surface-variant">05/11/2026</td><td class="py-3.5 px-4"><div class="flex items-center gap-2.5"><div class="w-7 h-7 rounded-lg bg-[#00B8D9]/10 flex items-center justify-center text-[#00B8D9] flex-shrink-0"><span class="material-symbols-outlined text-[16px]">local_taxi</span></div><span class="font-medium text-on-surface">Đi lại bằng taxi công tác</span></div></td><td class="py-3.5 px-4 text-right font-bold text-on-surface">5.6 <span class="text-[12px] font-normal text-on-surface-variant">kg CO2e</span></td><td class="py-3.5 px-4"><div class="flex items-center gap-2"><span class="w-6 h-6 rounded-full bg-surface-container flex items-center justify-center text-[11px] font-semibold text-on-surface-variant">A</span><span class="text-on-surface font-medium">Nguyễn Văn A</span></div></td><td class="py-3.5 px-4 text-center"><span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full text-[12px] font-semibold bg-[#00A76F]/10 text-primary"><span class="material-symbols-outlined text-[13px]">check</span> Đã duyệt</span></td></tr></tbody></table></div></div>
+</main>
+</div>
+</body></html>
