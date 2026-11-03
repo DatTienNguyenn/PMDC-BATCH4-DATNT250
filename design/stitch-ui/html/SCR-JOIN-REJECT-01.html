@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CarbonLedger - Từ chối yêu cầu gia nhập</title>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Public Sans Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          "colors": {
+            "primary": "#006c46",
+            "primary-container": "#00a76f",
+            "background": "#F9FAFB",
+            "surface-container-lowest": "#ffffff"
+          },
+          "fontFamily": {
+            "body-md": ["Public Sans"],
+            "title": ["Public Sans"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-[#F9FAFB] text-neutral-900 antialiased font-body-md overflow-hidden relative">
+<!-- ========================================================================= -->
+<!-- UNDERLYING BACKGROUND CANVAS                                              -->
+<!-- ========================================================================= -->
+<div aria-hidden="true" class="min-h-screen flex flex-col bg-[#F9FAFB] filter blur-[2px] opacity-70 pointer-events-none select-none">
+<!-- TopNavBar -->
+<header class="h-16 w-full border-b border-gray-200 bg-white flex justify-between items-center px-6 sticky top-0 z-20 shadow-sm">
+<div class="flex items-center gap-3">
+  <div class="w-8 h-8 rounded-lg bg-[#00A76F]/10 flex items-center justify-center text-[#00A76F]">
+    <span class="material-symbols-outlined text-[20px]">eco</span>
+  </div>
+  <span class="text-lg font-bold text-gray-900 tracking-tight">CarbonLedger</span>
+</div>
+<div class="flex items-center gap-4">
+  <span class="material-symbols-outlined text-gray-500 text-[20px]">notifications</span>
+  <div class="w-8 h-8 rounded-full bg-[#00A76F] text-white flex items-center justify-center font-bold text-xs shadow-sm">
+    NA
+  </div>
+</div>
+</header>
+<div class="flex flex-1">
+<!-- SideNavBar -->
+<aside class="w-56 flex flex-col py-6 px-3 bg-white border-r border-gray-200 shrink-0">
+<nav class="space-y-1">
+  <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm hover:bg-gray-100 transition-all" href="#">
+    <span class="material-symbols-outlined text-[20px]">dashboard</span>
+    <span>Tổng quan</span>
+  </a>
+  <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm hover:bg-gray-100 transition-all" href="#">
+    <span class="material-symbols-outlined text-[20px]">receipt_long</span>
+    <span>Sổ cái</span>
+  </a>
+  <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm hover:bg-gray-100 transition-all" href="#">
+    <span class="material-symbols-outlined text-[20px]">verified</span>
+    <span>Phê duyệt</span>
+  </a>
+  <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm hover:bg-gray-100 transition-all" href="#">
+    <span class="material-symbols-outlined text-[20px]">insights</span>
+    <span>Báo cáo &amp; Lộ trình</span>
+  </a>
+  <a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00A76F] text-white font-semibold text-sm shadow-sm transition-all" href="#">
+    <span class="material-symbols-outlined text-[20px]">settings</span>
+    <span>Cài đặt</span>
+  </a>
+</nav>
+</aside>
+<!-- Workspace Settings Layout -->
+<main class="flex-1 p-8 md:p-10 max-w-5xl space-y-6">
+<div class="flex items-center justify-between">
+  <div>
+    <h1 class="text-2xl font-bold text-gray-900">Cài đặt Không gian làm việc</h1>
+  </div>
+  <button class="bg-[#00A76F] text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-sm flex items-center gap-2">
+    <span class="material-symbols-outlined text-[18px]">person_add</span>
+    <span>Mời thành viên</span>
+  </button>
+</div>
+<!-- Settings Tab Bar -->
+<div class="flex items-center gap-6 border-b border-gray-200 pb-2 text-sm font-medium text-gray-500">
+  <span class="hover:text-gray-900 cursor-pointer">Không gian</span>
+  <span class="hover:text-gray-900 cursor-pointer">Ngân sách &amp; Mục tiêu</span>
+  <span class="text-[#00A76F] font-semibold border-b-2 border-[#00A76F] pb-2">Thành viên &amp; Quyền truy cập</span>
+</div>
+</main>
+</div>
+</div>
+<!-- ========================================================================= -->
+<!-- MODAL OVERLAY & CARD                                                      -->
+<!-- ========================================================================= -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/40 backdrop-blur-sm transition-opacity duration-200">
+<div class="relative w-full max-w-[400px] bg-white rounded-2xl shadow-2xl border border-gray-100 p-6 z-10">
+<!-- Modal Header -->
+<div class="flex justify-between items-center mb-4">
+  <h2 class="text-base font-bold text-gray-900 tracking-tight">Từ chối yêu cầu gia nhập</h2>
+  <button aria-label="Đóng" class="rounded-lg hover:bg-gray-100 text-gray-400 hover:text-gray-700 p-1.5 transition-colors inline-flex items-center justify-center" type="button">
+    <span class="material-symbols-outlined text-[20px]">close</span>
+  </button>
+</div>
+<!-- Info Highlight Card -->
+<div class="bg-gray-50 border border-gray-100 rounded-xl p-3.5 mb-4 flex items-start gap-3">
+  <div class="w-8 h-8 rounded-full bg-gray-200 text-gray-700 flex items-center justify-center font-bold text-xs shrink-0 ring-2 ring-white">
+    LC
+  </div>
+  <p class="text-xs text-gray-700 leading-relaxed">
+    <span class="font-bold text-gray-900">Lê Văn C</span> yêu cầu gia nhập không gian làm việc <span class="font-bold text-gray-900">Gia Đình Xanh</span>.
+  </p>
+</div>
+<!-- Textarea Input Field -->
+<div class="space-y-1.5">
+  <label class="text-xs font-semibold text-gray-700 block" for="reject-reason">
+    Lý do từ chối (tùy chọn)
+  </label>
+  <textarea class="w-full rounded-xl border border-gray-200 text-sm p-3 text-gray-900 placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-red-500/20 focus:border-red-500 resize-none transition-all leading-normal bg-white" id="reject-reason" placeholder="Nhập lý do từ chối..." rows="2"></textarea>
+  <div class="flex justify-end">
+    <span class="text-[11px] text-gray-400">Tối đa 250 ký tự</span>
+  </div>
+</div>
+<!-- Modal Footer / Action Buttons -->
+<div class="flex items-center justify-end gap-3 mt-6 pt-2">
+  <button class="text-sm font-semibold text-gray-500 hover:text-gray-800 px-3 py-2 transition-colors cursor-pointer rounded-lg" type="button">
+    Hủy bỏ
+  </button>
+  <button class="bg-red-500 hover:bg-red-600 text-white text-sm font-semibold px-4 py-2.5 rounded-xl shadow-sm hover:shadow transition-all flex items-center justify-center gap-1.5" type="button">
+    <span class="material-symbols-outlined text-[18px]">cancel</span>
+    <span>Xác nhận từ chối</span>
+  </button>
+</div>
+</div>
+</div>
+</body></html>

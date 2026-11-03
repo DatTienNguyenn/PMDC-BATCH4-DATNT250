@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+
+<html lang="vi"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>CarbonLedger - Cổng Quản trị Hệ thống</title>
+<!-- Public Sans Font -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols Outlined -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS v3 -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              lighter: "#EBF8F2",
+              light: "#5ADDA0",
+              DEFAULT: "#00A76F",
+              dark: "#007B55",
+              darker: "#005234"
+            },
+            surface: "#F4F6F8",
+            "card-bg": "#FFFFFF",
+            neutral: {
+              900: "#212B36",
+              800: "#333E48",
+              600: "#637381",
+              500: "#919EAB",
+              300: "#C4CDD5",
+              200: "#DFE3E8",
+              100: "#F4F6F8",
+              50: "#F9FAFB"
+            }
+          },
+          borderRadius: {
+            "xl": "0.75rem",
+            "2xl": "1rem",
+            "3xl": "1.25rem"
+          },
+          fontFamily: {
+            sans: ["Public Sans", "sans-serif"]
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    body {
+      font-family: 'Public Sans', sans-serif;
+      background-color: #F4F6F8;
+      color: #212B36;
+      margin: 0;
+      padding: 0;
+    }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      font-size: 20px;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+    }
+  </style>
+</head>
+<body class="bg-[#F4F6F8] text-[#212B36] antialiased flex min-h-screen">
+<!-- ==================== SIDEBAR TRẮNG SÁNG (MUI MINIMAL STYLE) ==================== -->
+<aside class="fixed top-0 left-0 h-screen w-64 border-r border-[#919EAB]/20 bg-[#FFFFFF] z-50 transition-all duration-150 ease-in-out flex flex-col justify-between p-4 shadow-sm">
+<!-- Top Branding & Navigation Area -->
+<div class="flex flex-col gap-6">
+<!-- Brand Header -->
+<div class="flex items-center gap-3 px-3 pt-2">
+<div class="w-10 h-10 rounded-xl bg-[#00A76F]/10 flex items-center justify-center text-[#00A76F]">
+<span class="material-symbols-outlined text-[#00A76F] text-2xl" data-icon="eco">eco</span>
+</div>
+<div>
+<h1 class="text-base font-bold text-[#212B36] leading-tight tracking-tight">CarbonLedger</h1>
+<span class="inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold bg-[#00A76F]/10 text-[#00A76F] mt-0.5">Admin Portal</span>
+</div>
+</div>
+<!-- Navigation Links: 3 Mục điều hướng chính -->
+<nav class="flex flex-col gap-1.5 pt-3">
+<!-- 1. Tổng quan (Active) -->
+<a class="flex items-center gap-3 px-3.5 py-3 rounded-xl bg-[#00A76F]/10 text-[#00A76F] font-semibold text-sm transition-all group" href="#">
+<span class="material-symbols-outlined text-[#00A76F]" data-icon="dashboard">dashboard</span>
+<span class="flex-1">Tổng quan</span>
+</a>
+<!-- 2. Hệ số phát thải -->
+<a class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] font-medium text-sm transition-all group" href="#">
+<span class="material-symbols-outlined text-[#637381] group-hover:text-[#212B36] transition-colors" data-icon="co2">co2</span>
+<span>Hệ số phát thải</span>
+</a>
+<!-- 3. Không gian làm việc -->
+<a class="flex items-center gap-3 px-3.5 py-3 rounded-xl text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] font-medium text-sm transition-all group" href="#">
+<span class="material-symbols-outlined text-[#637381] group-hover:text-[#212B36] transition-colors" data-icon="corporate_fare">corporate_fare</span>
+<span>Không gian làm việc</span>
+</a>
+</nav>
+</div>
+<!-- Bottom Menu / Settings & Account Info -->
+<div class="flex flex-col gap-3 pt-4 border-t border-[#919EAB]/15">
+<div class="flex flex-col gap-1">
+<a class="flex items-center gap-3 px-3 py-2 rounded-lg text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] text-xs font-medium transition-colors" href="#">
+<span class="material-symbols-outlined text-base" data-icon="settings">settings</span>
+<span>Cài đặt hệ thống</span>
+</a>
+<div class="px-3 py-1 text-[11px] text-[#919EAB]">
+        Phiên bản v2.4.0 (Enterprise)
+      </div>
+</div>
+<!-- User Card Footer -->
+<div class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#F9FAFB] border border-[#919EAB]/15">
+<img class="w-9 h-9 rounded-full object-cover border border-[#919EAB]/25" data-alt="Ảnh đại diện quản trị viên" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjcZ52PYl7sJKrI9tAoPN5YfQVWaTuiDxc1VB8gKUqNkDL_unocqL99fBNo-3sfgJj20ZxAilY65b8VID6Uc7qGV6KPCv7oMR9WrcRarhnmge1e66Cwrx-zQjawK0oBpbvGI44fzlrWNyQ-EfuPHVUSLcMDvDRBl-TSByqCkoumtCtKKCR_zZLt9vQJpJ7KEhJ2Bk050qCAkPhk55A4uZZjVThV4sQpR22DFf4RtcPqhsJk2jp45bWtV8P9O0jXgS0q0RDucmARA"/>
+<div class="flex flex-col flex-1 min-w-0">
+<span class="text-xs font-semibold text-[#212B36] truncate">Alex Mercer</span>
+<span class="text-[11px] text-[#919EAB] truncate">Quản trị cấp cao</span>
+</div>
+</div>
+</div>
+</aside>
+<!-- ==================== MAIN CONTENT WRAPPER ==================== -->
+<div class="flex-1 ml-64 flex flex-col min-h-screen bg-[#F4F6F8]">
+<!-- ==================== TOP NAVIGATION BAR ==================== -->
+<header class="sticky top-0 z-40 h-16 border-b border-[#919EAB]/15 bg-[#FFFFFF]/90 backdrop-blur-md flex justify-between items-center px-8 shadow-sm">
+<!-- Left: Logo & Breadcrumb / Admin Badge -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#00A76F]" data-icon="energy_savings_leaf">energy_savings_leaf</span>
+<span class="font-bold text-[#212B36] text-base tracking-tight">CarbonLedger</span>
+</div>
+<span class="text-[#919EAB]">/</span>
+<div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#00A76F]/10 border border-[#00A76F]/20 text-[#00A76F] text-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
+<span>Quản trị hệ thống</span>
+</div>
+</div>
+<!-- Right: Actions & User Avatar -->
+<div class="flex items-center gap-3">
+<!-- Quick Search -->
+<div class="relative w-64 hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#919EAB] text-base pointer-events-none" data-icon="search">search</span>
+<input class="w-full h-9 pl-9 pr-3 py-1.5 bg-[#F9FAFB] rounded-lg border border-[#919EAB]/25 text-[#212B36] placeholder:text-[#919EAB] text-xs focus:outline-none focus:border-[#00A76F] focus:ring-1 focus:ring-[#00A76F] transition-all" placeholder="Tìm kiếm dữ liệu..." type="text"/>
+</div>
+<!-- Notification Bell -->
+<button class="relative p-2 rounded-lg text-[#637381] hover:bg-[#F4F6F8] hover:text-[#212B36] transition-colors" title="Thông báo">
+<span class="material-symbols-outlined text-xl" data-icon="notifications">notifications</span>
+<span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#00A76F] ring-2 ring-white"></span>
+</button>
+<!-- Divider -->
+<div class="h-6 w-[1px] bg-[#919EAB]/20 mx-1"></div>
+<!-- Admin User Profile Trigger -->
+<div class="flex items-center gap-2 cursor-pointer p-1 rounded-lg hover:bg-[#F4F6F8] transition-colors">
+<img class="w-8 h-8 rounded-full object-cover border border-[#919EAB]/30" data-alt="Ảnh hồ sơ cá nhân" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBPgi6ker4oTxLTQPRcolHWNG_xiiM174N_yo9gngD-AdXH1bZcFI00hIARMmjcZexAgJT0f8kdXeVl28lUgHVadYef8pI95YOzQ1I6Kn8ALhbrVhWD4AUealScgjsYf1ifa6mrDMsGVXvwID_f6doKwDcmodB2Buzs9Pt8owEBMde0IStdnqo80_Li4_riwjMsWGxUOY-iVhx8IXLpVmruEDx5itLzaOAPV3GY6GGgacqGCAc43W_oX43l-XHG083nP16Rxk-2Q"/>
+<span class="material-symbols-outlined text-[#637381] text-base" data-icon="expand_more">expand_more</span>
+</div>
+</div>
+</header>
+<!-- ==================== MAIN PAGE BODY ==================== -->
+<main class="flex-1 p-8 space-y-6 max-w-[1440px] w-full mx-auto">
+<!-- Page Header: Tiêu đề trang (KHÔNG subtitle) & Bộ lọc thời gian -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+<h1 class="text-2xl font-bold text-[#212B36] tracking-tight">Tổng quan hệ thống</h1>
+<!-- Date Range Filter Tabs -->
+<div class="inline-flex p-1 bg-[#FFFFFF] rounded-xl border border-[#919EAB]/20 self-start sm:self-auto shadow-sm">
+<button class="px-3.5 py-1.5 rounded-lg text-[#00A76F] bg-[#00A76F]/10 font-semibold text-xs shadow-sm transition-all">6 tháng qua</button>
+<button class="px-3.5 py-1.5 rounded-lg text-[#637381] hover:text-[#212B36] font-medium text-xs transition-all">Từ đầu năm</button>
+<button class="px-3.5 py-1.5 rounded-lg text-[#637381] hover:text-[#212B36] font-medium text-xs transition-all">Toàn bộ</button>
+</div>
+</div>
+<!-- ==================== 4 KPI CARDS ==================== -->
+<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-5">
+<!-- KPI 1: Tổng không gian làm việc -->
+<div class="bg-[#FFFFFF] rounded-2xl p-6 border border-[#919EAB]/20 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-[#637381] uppercase tracking-wider">Tổng không gian làm việc</span>
+<div class="w-10 h-10 rounded-xl bg-[#00A76F]/10 flex items-center justify-center text-[#00A76F]">
+<span class="material-symbols-outlined text-[#00A76F]" data-icon="corporate_fare">corporate_fare</span>
+</div>
+</div>
+<div class="mt-4">
+<div class="flex items-baseline justify-between">
+<span class="text-3xl font-extrabold text-[#212B36]">24</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#00A76F]/15 text-[#00A76F] text-xs font-bold">
+<span class="material-symbols-outlined text-xs" data-icon="arrow_upward">arrow_upward</span>
+              ↑ 3 tháng này
+            </span>
+</div>
+<div class="mt-3 flex items-center gap-2">
+<div class="w-full bg-[#F4F6F8] rounded-full h-1.5">
+<div class="bg-[#00A76F] h-1.5 rounded-full" style="width: 78%"></div>
+</div>
+<span class="text-[11px] font-medium text-[#919EAB] whitespace-nowrap">78% hạn mức</span>
+</div>
+</div>
+</div>
+<!-- KPI 2: Tổng người dùng -->
+<div class="bg-[#FFFFFF] rounded-2xl p-6 border border-[#919EAB]/20 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-[#637381] uppercase tracking-wider">Tổng người dùng</span>
+<div class="w-10 h-10 rounded-xl bg-[#00A76F]/10 flex items-center justify-center text-[#00A76F]">
+<span class="material-symbols-outlined text-[#00A76F]" data-icon="group">group</span>
+</div>
+</div>
+<div class="mt-4">
+<div class="flex items-baseline justify-between">
+<span class="text-3xl font-extrabold text-[#212B36]">87</span>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-[#00A76F]/10 text-[#00A76F] text-xs font-medium">
+              Đang hoạt động
+            </span>
+</div>
+<div class="mt-3 flex items-center gap-2">
+<div class="w-full bg-[#F4F6F8] rounded-full h-1.5">
+<div class="bg-[#00A76F] h-1.5 rounded-full" style="width: 65%"></div>
+</div>
+<span class="text-[11px] font-medium text-[#919EAB] whitespace-nowrap">Tài khoản xác thực</span>
+</div>
+</div>
+</div>
+<!-- KPI 3: Tổng phát thải toàn hệ thống -->
+<div class="bg-[#FFFFFF] rounded-2xl p-6 border border-[#919EAB]/20 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-[#637381] uppercase tracking-wider">Tổng phát thải toàn hệ thống</span>
+<div class="w-10 h-10 rounded-xl bg-[#00A76F]/10 flex items-center justify-center text-[#00A76F]">
+<span class="material-symbols-outlined text-[#00A76F]" data-icon="eco">eco</span>
+</div>
+</div>
+<div class="mt-4">
+<div class="flex items-baseline gap-2">
+<span class="text-3xl font-extrabold text-[#212B36]">12,450</span>
+<span class="text-xs text-[#637381] font-semibold">kg CO2e</span>
+</div>
+<div class="flex items-center justify-between mt-3">
+<span class="text-xs text-[#919EAB]">tất cả không gian</span>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-[#00A76F]/15 text-[#00A76F] text-xs font-bold">
+              -18% mục tiêu
+            </span>
+</div>
+</div>
+</div>
+<!-- KPI 4: Lượt gọi AI API -->
+<div class="bg-[#FFFFFF] rounded-2xl p-6 border border-[#919EAB]/20 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between">
+<div class="flex items-center justify-between">
+<span class="text-xs font-semibold text-[#637381] uppercase tracking-wider">Lượt gọi AI API</span>
+<div class="w-10 h-10 rounded-xl bg-[#00A76F]/10 flex items-center justify-center text-[#00A76F]">
+<span class="material-symbols-outlined text-[#00A76F]" data-icon="neurology">neurology</span>
+</div>
+</div>
+<div class="mt-4">
+<div class="flex items-baseline justify-between">
+<span class="text-3xl font-extrabold text-[#212B36]">1,284</span>
+<span class="text-xs text-[#919EAB]">tháng này</span>
+</div>
+<div class="mt-3 flex items-center justify-between pt-1 border-t border-[#919EAB]/15">
+<span class="text-xs text-[#637381]">Độ trễ trung bình</span>
+<span class="inline-flex items-center gap-1.5 text-xs font-bold text-[#212B36]">
+<span class="w-2 h-2 rounded-full bg-[#00A76F]"></span>
+              142ms
+            </span>
+</div>
+</div>
+</div>
+</div>
+<!-- ==================== BIỂU ĐỒ ĐƯỜNG: TĂNG TRƯỞNG KHÔNG GIAN LÀM VIỆC ==================== -->
+<div class="bg-[#FFFFFF] rounded-2xl p-6 md:p-8 border border-[#919EAB]/20 shadow-sm">
+<!-- Chart Header -->
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+<div>
+<div class="flex items-center gap-3">
+<h2 class="text-lg font-bold text-[#212B36]">Tăng trưởng không gian làm việc</h2>
+<span class="px-2.5 py-0.5 rounded-full bg-[#00A76F]/15 text-[#00A76F] text-xs font-bold">+33.3% Ròng</span>
+</div>
+<p class="text-xs text-[#637381] mt-1">Số lượng không gian làm việc hoạt động mới qua 6 tháng gần nhất</p>
+</div>
+<!-- Chart Controls / Legend -->
+<div class="flex items-center gap-4">
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#00A76F]"></span>
+<span class="text-xs font-medium text-[#212B36]">Không gian mới</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="w-3 h-3 rounded-full bg-[#DFE3E8]"></span>
+<span class="text-xs font-medium text-[#637381]">Mục tiêu cơ sở</span>
+</div>
+</div>
+</div>
+<!-- SVG Vector Chart Component with Emerald Curve & Gradient Area -->
+<div class="relative w-full h-72">
+<svg class="w-full h-full overflow-visible" preserveaspectratio="none" viewbox="0 0 1000 280">
+<defs>
+<!-- Primary Emerald Area Gradient -->
+<lineargradient id="emeraldGrowthFill" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#00A76F" stop-opacity="0.25"></stop>
+<stop offset="70%" stop-color="#00A76F" stop-opacity="0.04"></stop>
+<stop offset="100%" stop-color="#00A76F" stop-opacity="0.00"></stop>
+</lineargradient>
+</defs>
+<!-- Background Grid Lines -->
+<line stroke="#F4F6F8" stroke-dasharray="4,4" stroke-width="1.5" x1="40" x2="960" y1="20" y2="20"></line>
+<line stroke="#F4F6F8" stroke-dasharray="4,4" stroke-width="1.5" x1="40" x2="960" y1="85" y2="85"></line>
+<line stroke="#F4F6F8" stroke-dasharray="4,4" stroke-width="1.5" x1="40" x2="960" y1="150" y2="150"></line>
+<line stroke="#F4F6F8" stroke-dasharray="4,4" stroke-width="1.5" x1="40" x2="960" y1="215" y2="215"></line>
+<!-- Baseline Target Line -->
+<path d="M 80 200 L 240 185 L 400 160 L 560 145 L 720 120 L 880 105" fill="none" stroke="#DFE3E8" stroke-dasharray="6 6" stroke-width="1.5"></path>
+<!-- Shaded Gradient Fill Underneath the Curve -->
+<path d="M 80 220 
+                   C 160 215, 200 195, 240 180 
+                   C 280 165, 340 160, 400 140 
+                   C 460 120, 520 110, 560 90 
+                   C 620 70, 680 75, 720 60 
+                   C 780 45, 840 40, 880 25 
+                   L 880 240 L 80 240 Z" fill="url(#emeraldGrowthFill)"></path>
+<!-- Primary Emerald Trend Line -->
+<path d="M 80 220 
+                   C 160 215, 200 195, 240 180 
+                   C 280 165, 340 160, 400 140 
+                   C 460 120, 520 110, 560 90 
+                   C 620 70, 680 75, 720 60 
+                   C 780 45, 840 40, 880 25" fill="none" stroke="#00A76F" stroke-linecap="round" stroke-width="3.5"></path>
+<!-- Data Point Markers (Nov - Apr) -->
+<circle cx="80" cy="220" fill="#FFFFFF" r="4.5" stroke="#00A76F" stroke-width="2.5"></circle>
+<circle cx="240" cy="180" fill="#FFFFFF" r="4.5" stroke="#00A76F" stroke-width="2.5"></circle>
+<circle cx="400" cy="140" fill="#FFFFFF" r="4.5" stroke="#00A76F" stroke-width="2.5"></circle>
+<circle cx="560" cy="90" fill="#FFFFFF" r="4.5" stroke="#00A76F" stroke-width="2.5"></circle>
+<circle cx="720" cy="60" fill="#FFFFFF" r="4.5" stroke="#00A76F" stroke-width="2.5"></circle>
+<!-- Current Point Marker -->
+<circle cx="880" cy="25" fill="#00A76F" fill-opacity="0.2" r="7"></circle>
+<circle cx="880" cy="25" fill="#FFFFFF" r="5" stroke="#00A76F" stroke-width="3"></circle>
+<!-- Tooltip Pill -->
+<g transform="translate(820, -12)">
+<rect fill="#212B36" height="28" rx="6" width="120" x="0" y="0"></rect>
+<text fill="#FFFFFF" font-family="Public Sans" font-size="11" font-weight="700" text-anchor="middle" x="60" y="18">Hiện tại: 24</text>
+</g>
+</svg>
+</div>
+<!-- Chart X-Axis Labels -->
+<div class="flex justify-between items-center px-12 mt-2 pt-2 border-t border-[#919EAB]/15 text-[#919EAB] text-xs font-semibold">
+<span>Tháng 11/2024</span>
+<span>Tháng 12/2024</span>
+<span>Tháng 01/2025</span>
+<span>Tháng 02/2025</span>
+<span>Tháng 03/2025</span>
+<span class="text-[#00A76F] font-bold">Tháng 04/2025 (Hiện tại)</span>
+</div>
+</div>
+<!-- ==================== DATA TABLE CARD: KHÔNG GIAN LÀM VIỆC GẦN ĐÂY ==================== -->
+<div class="bg-[#FFFFFF] rounded-2xl border border-[#919EAB]/20 shadow-sm overflow-hidden">
+<!-- Table Toolbar -->
+<div class="p-6 flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#919EAB]/15">
+<div>
+<h3 class="text-lg font-bold text-[#212B36]">Không gian làm việc gần đây</h3>
+<p class="text-xs text-[#637381] mt-0.5">Quản trị các tổ chức và chi nhánh đang hoạt động trên hệ thống</p>
+</div>
+<div class="flex items-center gap-3">
+<!-- Filter Search -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-[#919EAB] text-sm pointer-events-none" data-icon="search">search</span>
+<input class="h-9 pl-9 pr-3 py-1.5 bg-[#F9FAFB] rounded-lg border border-[#919EAB]/20 text-[#212B36] placeholder:text-[#919EAB] text-xs focus:outline-none focus:border-[#00A76F] focus:ring-1 focus:ring-[#00A76F]" placeholder="Tìm không gian..." type="text"/>
+</div>
+<!-- Button Tạo không gian mới -->
+<button class="flex items-center gap-2 h-9 px-4 rounded-lg bg-[#00A76F] hover:bg-[#007B55] text-[#FFFFFF] font-semibold text-xs transition-all shadow-sm active:scale-95 duration-150">
+<span class="material-symbols-outlined text-sm" data-icon="add">add</span>
+              Tạo không gian mới
+            </button>
+</div>
+</div>
+<!-- Table Data -->
+<div class="overflow-x-auto">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="bg-[#F9FAFB] border-b border-[#919EAB]/15">
+<th class="py-3.5 px-6 text-xs font-semibold text-[#637381] uppercase tracking-wider">Tên không gian</th>
+<th class="py-3.5 px-6 text-xs font-semibold text-[#637381] uppercase tracking-wider">Phân loại</th>
+<th class="py-3.5 px-6 text-xs font-semibold text-[#637381] uppercase tracking-wider">Số thành viên</th>
+<th class="py-3.5 px-6 text-xs font-semibold text-[#637381] uppercase tracking-wider">Trạng thái</th>
+<th class="py-3.5 px-6 text-xs font-semibold text-[#637381] uppercase tracking-wider text-right">Thao tác</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-[#919EAB]/15 text-sm">
+<!-- Row 1: My Home -->
+<tr class="hover:bg-[#F9FAFB] transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-[#00A76F]/10 text-[#00A76F] flex items-center justify-center font-bold text-xs">
+                      MH
+                    </div>
+<div>
+<span class="text-sm font-semibold text-[#212B36] block">My Home</span>
+<span class="text-[11px] text-[#919EAB]">Mã: WS-0912-VN</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-[#637381]">Hộ gia đình</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#919EAB] text-base" data-icon="group">group</span>
+<span class="text-sm text-[#212B36]">4 thành viên</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#00A76F]/10 text-[#00A76F] text-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
+                    Hoạt động
+                  </span>
+</td>
+<td class="py-4 px-6 text-right">
+<div class="inline-flex items-center gap-1 text-[#919EAB]">
+<button class="p-1 hover:text-[#00A76F] hover:bg-[#F4F6F8] rounded transition-colors" title="Chỉnh sửa">
+<span class="material-symbols-outlined text-base" data-icon="edit">edit</span>
+</button>
+<button class="p-1 hover:text-[#212B36] hover:bg-[#F4F6F8] rounded transition-colors" title="Thao tác khác">
+<span class="material-symbols-outlined text-base" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2: TechLabs Office -->
+<tr class="hover:bg-[#F9FAFB] transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-[#00A76F]/10 text-[#00A76F] flex items-center justify-center font-bold text-xs">
+                      TL
+                    </div>
+<div>
+<span class="text-sm font-semibold text-[#212B36] block">TechLabs Office</span>
+<span class="text-[11px] text-[#919EAB]">Mã: WS-4418-VN</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-[#637381]">Văn phòng nhỏ</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#919EAB] text-base" data-icon="group">group</span>
+<span class="text-sm text-[#212B36]">8 thành viên</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#00A76F]/10 text-[#00A76F] text-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
+                    Hoạt động
+                  </span>
+</td>
+<td class="py-4 px-6 text-right">
+<div class="inline-flex items-center gap-1 text-[#919EAB]">
+<button class="p-1 hover:text-[#00A76F] hover:bg-[#F4F6F8] rounded transition-colors" title="Chỉnh sửa">
+<span class="material-symbols-outlined text-base" data-icon="edit">edit</span>
+</button>
+<button class="p-1 hover:text-[#212B36] hover:bg-[#F4F6F8] rounded transition-colors" title="Thao tác khác">
+<span class="material-symbols-outlined text-base" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3: Nhà Vườn Đà Lạt -->
+<tr class="hover:bg-[#F9FAFB] transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-[#00A76F]/10 text-[#00A76F] flex items-center justify-center font-bold text-xs">
+                      NV
+                    </div>
+<div>
+<span class="text-sm font-semibold text-[#212B36] block">Nhà Vườn Đà Lạt</span>
+<span class="text-[11px] text-[#919EAB]">Mã: WS-1082-VN</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-[#637381]">Hộ gia đình</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#919EAB] text-base" data-icon="group">group</span>
+<span class="text-sm text-[#212B36]">3 thành viên</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#00A76F]/10 text-[#00A76F] text-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#00A76F]"></span>
+                    Hoạt động
+                  </span>
+</td>
+<td class="py-4 px-6 text-right">
+<div class="inline-flex items-center gap-1 text-[#919EAB]">
+<button class="p-1 hover:text-[#00A76F] hover:bg-[#F4F6F8] rounded transition-colors" title="Chỉnh sửa">
+<span class="material-symbols-outlined text-base" data-icon="edit">edit</span>
+</button>
+<button class="p-1 hover:text-[#212B36] hover:bg-[#F4F6F8] rounded transition-colors" title="Thao tác khác">
+<span class="material-symbols-outlined text-base" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4: Căn Hộ Sài Gòn -->
+<tr class="hover:bg-[#F9FAFB] transition-colors group">
+<td class="py-4 px-6">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-[#DFE3E8]/40 text-[#637381] flex items-center justify-center font-bold text-xs">
+                      CH
+                    </div>
+<div>
+<span class="text-sm font-semibold text-[#212B36] block">Căn Hộ Sài Gòn</span>
+<span class="text-[11px] text-[#919EAB]">Mã: WS-0051-VN</span>
+</div>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="text-sm text-[#637381]">Văn phòng nhỏ</span>
+</td>
+<td class="py-4 px-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-[#919EAB] text-base" data-icon="group">group</span>
+<span class="text-sm text-[#212B36]">2 thành viên</span>
+</div>
+</td>
+<td class="py-4 px-6">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-[#FFF5CC] text-[#B76E00] text-xs font-semibold">
+<span class="w-1.5 h-1.5 rounded-full bg-[#B76E00]"></span>
+                    Tạm dừng
+                  </span>
+</td>
+<td class="py-4 px-6 text-right">
+<div class="inline-flex items-center gap-1 text-[#919EAB]">
+<button class="p-1 hover:text-[#00A76F] hover:bg-[#F4F6F8] rounded transition-colors" title="Kích hoạt lại">
+<span class="material-symbols-outlined text-base" data-icon="refresh">refresh</span>
+</button>
+<button class="p-1 hover:text-[#212B36] hover:bg-[#F4F6F8] rounded transition-colors" title="Thao tác khác">
+<span class="material-symbols-outlined text-base" data-icon="more_vert">more_vert</span>
+</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Table Footer / Pagination -->
+<div class="p-4 px-6 border-t border-[#919EAB]/15 flex flex-col sm:flex-row items-center justify-between gap-4">
+<div class="text-xs text-[#637381]">
+          Hiển thị <span class="font-semibold text-[#212B36]">1</span> đến <span class="font-semibold text-[#212B36]">4</span> trong số <span class="font-semibold text-[#212B36]">24</span> không gian làm việc
+        </div>
+<div class="inline-flex items-center gap-1">
+<button class="p-2 rounded-lg text-[#919EAB] hover:text-[#212B36] hover:bg-[#F4F6F8] disabled:opacity-40" disabled="">
+<span class="material-symbols-outlined text-base" data-icon="chevron_left">chevron_left</span>
+</button>
+<button class="w-8 h-8 rounded-lg bg-[#00A76F] text-white font-semibold text-xs flex items-center justify-center shadow-sm">1</button>
+<button class="w-8 h-8 rounded-lg text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] font-semibold text-xs flex items-center justify-center">2</button>
+<button class="w-8 h-8 rounded-lg text-[#637381] hover:text-[#212B36] hover:bg-[#F4F6F8] font-semibold text-xs flex items-center justify-center">3</button>
+<button class="p-2 rounded-lg text-[#919EAB] hover:text-[#212B36] hover:bg-[#F4F6F8]">
+<span class="material-symbols-outlined text-base" data-icon="chevron_right">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</main>
+</div>
+</body></html>

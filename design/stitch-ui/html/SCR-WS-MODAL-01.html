@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>Khởi tạo không gian làm việc - CarbonLedger</title>
+  <!-- Material Symbols Outlined -->
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+  <!-- Public Sans Font Family -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+  <link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "on-surface": "#121c27",
+            "outline-variant": "#bccabf",
+            "background": "#F9FAFB",
+            "primary": "#00a76f",
+            "outline": "#6d7a71"
+          },
+          fontFamily: {
+            sans: ["Public Sans", "sans-serif"],
+          }
+        },
+      },
+    }
+  </script>
+</head>
+<body class="bg-[#F9FAFB] text-[#212B36] antialiased font-sans min-h-screen relative overflow-hidden select-none">
+
+<!-- ==================== BACKGROUND APPLICATION CANVAS ==================== -->
+<div class="min-h-screen flex flex-col bg-[#F9FAFB] pointer-events-none select-none filter blur-[1.5px] scale-[0.999] transition-all">
+  <!-- Top Navigation Bar -->
+  <header class="fixed top-0 left-0 right-0 z-10 h-16 w-full bg-white border-b border-gray-200 flex items-center justify-between px-6 shadow-sm">
+    <div class="flex items-center gap-6">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-[#00A76F]/10 flex items-center justify-center text-[#00A76F]">
+          <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+        </div>
+        <span class="text-lg font-bold text-gray-900 tracking-tight">CarbonLedger</span>
+      </div>
+      <div class="hidden sm:flex items-center gap-2 text-sm text-gray-500">
+        <span>/</span>
+        <span class="font-medium text-gray-700">Gia Đình Xanh</span>
+        <span>/</span>
+        <span class="font-semibold text-gray-900">Không gian làm việc</span>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="w-8 h-8 rounded-full bg-[#00A76F] text-white flex items-center justify-center font-bold text-xs shadow-sm">
+        NA
+      </div>
+    </div>
+  </header>
+
+  <!-- SideNavBar & Main Content Wrapper -->
+  <div class="flex pt-16 min-h-[calc(100vh-4rem)] w-full">
+    <!-- SideNavBar -->
+    <aside class="fixed left-0 top-16 bottom-0 w-56 flex flex-col py-6 px-3 bg-white border-r border-gray-200 z-10">
+      <nav class="space-y-1.5 flex-1">
+        <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
+          <span class="material-symbols-outlined text-[20px]">dashboard</span>
+          <span>Tổng quan</span>
+        </div>
+        <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
+          <span class="material-symbols-outlined text-[20px]">receipt_long</span>
+          <span>Sổ cái</span>
+        </div>
+        <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
+          <span class="material-symbols-outlined text-[20px]">verified</span>
+          <span>Phê duyệt</span>
+        </div>
+        <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
+          <span class="material-symbols-outlined text-[20px]">insights</span>
+          <span>Báo cáo &amp; Lộ trình</span>
+        </div>
+        <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
+          <span class="material-symbols-outlined text-[20px]">settings</span>
+          <span>Cài đặt</span>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Workspace Selection Area -->
+    <main class="ml-56 flex-1 p-8 md:p-10 max-w-7xl">
+      <div class="mb-8">
+        <span class="text-[11px] font-bold text-[#00A76F] uppercase tracking-wider">Cổng tài khoản</span>
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight mt-1">Không gian làm việc</h1>
+      </div>
+
+      <!-- Cards Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-7 space-y-4">
+          <!-- Card 1 -->
+          <div class="bg-white border-2 border-[#00A76F] rounded-2xl p-6 shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-xl bg-[#00A76F]/10 text-[#00A76F] flex items-center justify-center">
+                <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">home</span>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-[#00A76F]/10 text-[#00A76F]">Người phê duyệt</span>
+            </div>
+            <h3 class="text-base font-bold text-gray-900">Gia Đình Xanh</h3>
+            <p class="text-xs text-gray-500 mt-1">Không gian sinh hoạt gia đình chính</p>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-xl bg-gray-100 text-gray-700 flex items-center justify-center">
+                <span class="material-symbols-outlined text-[22px]">apartment</span>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-gray-100 text-gray-600">Thành viên</span>
+            </div>
+            <h3 class="text-base font-bold text-gray-900">Văn phòng Khởi nghiệp</h3>
+            <p class="text-xs text-gray-500 mt-1">Không gian làm việc nhóm, thiết bị &amp; đi lại</p>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+            <h2 class="text-lg font-bold text-gray-900 mb-2">Gia nhập bằng mã mời</h2>
+            <p class="text-xs text-gray-500">Nhập mã 6 ký tự để tham gia không gian mới.</p>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ==================== MODAL OVERLAY & CONTAINER ==================== -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#212B36]/[0.48] backdrop-blur-[6px] transition-all" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <!-- Modal Card -->
+  <div class="w-full max-w-md bg-white rounded-2xl shadow-[0px_20px_40px_-4px_rgba(145,158,171,0.24),0px_0px_2px_0px_rgba(145,158,171,0.24)] border border-[#DFE3E8]/80 overflow-hidden transform transition-all flex flex-col">
+    
+    <!-- Modal Header -->
+    <div class="px-6 py-5 border-b border-[#F4F6F8] flex items-center justify-between bg-white">
+      <h2 id="modal-title" class="text-[18px] font-bold text-[#212B36] tracking-tight">Khởi tạo Không gian mới</h2>
+      <button type="button" aria-label="Đóng" class="w-8 h-8 rounded-full flex items-center justify-center text-[#919EAB] hover:text-[#212B36] hover:bg-[#F4F6F8] transition-colors focus:outline-none">
+        <span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+      </button>
+    </div>
+
+    <!-- Modal Form Body -->
+    <form class="px-6 py-5 space-y-5" onsubmit="event.preventDefault();">
+      
+      <!-- Field 1: Workspace Name -->
+      <div class="space-y-1.5">
+        <label for="workspace-name" class="block text-[13px] font-semibold text-[#212B36]">
+          Tên không gian làm việc
+        </label>
+        <div class="relative">
+          <input 
+            type="text" 
+            id="workspace-name" 
+            name="workspace-name" 
+            placeholder="Ví dụ: Gia Đình Xanh, Văn phòng Công ty..." 
+            class="w-full h-11 px-3.5 py-2.5 rounded-xl border border-[#DFE3E8] bg-white text-[#212B36] text-[14px] placeholder-[#919EAB] focus:outline-none focus:border-[#00A76F] focus:ring-1 focus:ring-[#00A76F] transition-all"
+            value=""
+          />
+        </div>
+      </div>
+
+      <!-- Field 2: Type (2 Radio Cards Side by Side) -->
+      <div class="space-y-1.5">
+        <label class="block text-[13px] font-semibold text-[#212B36]">
+          Loại hình
+        </label>
+        <div class="grid grid-cols-2 gap-3" role="radiogroup">
+          <!-- Household (Selected) -->
+          <label class="relative flex items-center gap-3 p-3.5 rounded-xl border-2 border-[#00A76F] bg-[#00A76F]/[0.04] cursor-pointer shadow-sm transition-all select-none">
+            <input type="radio" name="workspace-type" value="household" class="sr-only" checked/>
+            <div class="w-8 h-8 rounded-lg bg-[#00A76F]/15 text-[#00A76F] flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[20px]" data-icon="home">home</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <span class="block text-[14px] font-semibold text-[#212B36] truncate leading-tight">Hộ gia đình</span>
+            </div>
+            <div class="w-4 h-4 rounded-full border-2 border-[#00A76F] flex items-center justify-center shrink-0">
+              <div class="w-2 h-2 rounded-full bg-[#00A76F]"></div>
+            </div>
+          </label>
+
+          <!-- Small Office -->
+          <label class="relative flex items-center gap-3 p-3.5 rounded-xl border border-[#DFE3E8] bg-white hover:border-[#B7C0C9] hover:bg-[#F9FAFB] cursor-pointer transition-all select-none">
+            <input type="radio" name="workspace-type" value="small_office" class="sr-only"/>
+            <div class="w-8 h-8 rounded-lg bg-[#F4F6F8] text-[#637381] flex items-center justify-center shrink-0">
+              <span class="material-symbols-outlined text-[20px]" data-icon="apartment">apartment</span>
+            </div>
+            <div class="flex-1 min-w-0">
+              <span class="block text-[14px] font-medium text-[#637381] truncate leading-tight">Văn phòng nhỏ</span>
+            </div>
+            <div class="w-4 h-4 rounded-full border border-[#DFE3E8] bg-white shrink-0"></div>
+          </label>
+        </div>
+      </div>
+
+      <!-- Field 3: Floor Area -->
+      <div class="space-y-1.5">
+        <label for="floor-area" class="block text-[13px] font-semibold text-[#212B36]">
+          Diện tích sàn
+        </label>
+        <div class="relative flex items-center">
+          <input 
+            type="number" 
+            id="floor-area" 
+            name="floor-area" 
+            placeholder="0" 
+            min="0"
+            class="w-full h-11 pl-3.5 pr-14 py-2.5 rounded-xl border border-[#DFE3E8] bg-white text-[#212B36] text-[14px] placeholder-[#919EAB] focus:outline-none focus:border-[#00A76F] focus:ring-1 focus:ring-[#00A76F] transition-all"
+            value="85"
+          />
+          <span class="absolute right-3.5 text-[13px] font-semibold text-[#637381] bg-[#F4F6F8] px-2 py-0.5 rounded-md border border-[#DFE3E8]/60 pointer-events-none">
+            m²
+          </span>
+        </div>
+      </div>
+
+      <!-- Field 4: Number of People (Stepper +/-) -->
+      <div class="space-y-1.5">
+        <label for="people-count" class="block text-[13px] font-semibold text-[#212B36]">
+          Số lượng thành viên
+        </label>
+        <div class="flex items-center rounded-xl border border-[#DFE3E8] bg-white h-11 overflow-hidden focus-within:border-[#00A76F] focus-within:ring-1 focus-within:ring-[#00A76F] transition-all">
+          <button 
+            type="button" 
+            aria-label="Giảm" 
+            class="w-11 h-full flex items-center justify-center text-[#637381] hover:bg-[#F4F6F8] active:bg-[#DFE3E8]/60 transition-colors border-r border-[#DFE3E8]"
+            onclick="const el = document.getElementById('people-count'); if(el.value > 1) el.value = parseInt(el.value) - 1;"
+          >
+            <span class="material-symbols-outlined text-[18px]" data-icon="remove">remove</span>
+          </button>
+          <input 
+            type="number" 
+            id="people-count" 
+            name="people-count" 
+            value="4" 
+            min="1"
+            class="flex-1 h-full text-center border-0 bg-transparent text-[#212B36] font-semibold text-[14px] focus:ring-0 focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+          />
+          <button 
+            type="button" 
+            aria-label="Tăng" 
+            class="w-11 h-full flex items-center justify-center text-[#637381] hover:bg-[#F4F6F8] active:bg-[#DFE3E8]/60 transition-colors border-l border-[#DFE3E8]"
+            onclick="const el = document.getElementById('people-count'); el.value = parseInt(el.value || 0) + 1;"
+          >
+            <span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Footer Action -->
+      <div class="pt-2">
+        <button 
+          type="submit" 
+          class="w-full h-11 bg-[#00A76F] hover:bg-[#009160] active:bg-[#007D53] text-white font-semibold text-[14px] rounded-xl shadow-[0px_8px_16px_0px_rgba(0,167,111,0.24)] transition-all flex items-center justify-center gap-2 focus:outline-none focus:ring-2 focus:ring-[#00A76F] focus:ring-offset-2"
+        >
+          Khởi tạo không gian
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>
+
+</body>
+</html>

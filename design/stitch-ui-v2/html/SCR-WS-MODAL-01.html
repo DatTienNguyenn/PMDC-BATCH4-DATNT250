@@ -37,95 +37,100 @@
 <!-- ==================== BACKGROUND APPLICATION CANVAS ==================== -->
 <div class="min-h-screen flex flex-col bg-[#F9FAFB] pointer-events-none select-none filter blur-[1.5px] scale-[0.999] transition-all">
   <!-- Top Navigation Bar -->
-  <header class="flex justify-between items-center px-10 h-16 w-full border-b border-[#DFE3E8] bg-white sticky top-0 z-10">
-    <div class="flex items-center gap-3">
-      <div class="w-8 h-8 rounded-lg bg-[#00A76F]/15 text-[#00A76F] flex items-center justify-center">
-        <span class="material-symbols-outlined text-[20px]" data-icon="eco">eco</span>
+  <header class="fixed top-0 left-0 right-0 z-10 h-16 w-full bg-white border-b border-gray-200 flex items-center justify-between px-6 shadow-sm">
+    <div class="flex items-center gap-6">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-[#00A76F]/10 flex items-center justify-center text-[#00A76F]">
+          <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">eco</span>
+        </div>
+        <span class="text-lg font-bold text-gray-900 tracking-tight">CarbonLedger</span>
       </div>
-      <span class="text-[18px] font-bold text-[#212B36] tracking-tight">CarbonLedger</span>
+      <div class="hidden sm:flex items-center gap-2 text-sm text-gray-500">
+        <span>/</span>
+        <span class="font-medium text-gray-700">Gia Đình Xanh</span>
+        <span>/</span>
+        <span class="font-semibold text-gray-900">Không gian làm việc</span>
+      </div>
     </div>
     <div class="flex items-center gap-4">
-      <button class="w-9 h-9 rounded-full flex items-center justify-center text-[#637381] relative">
-        <span class="material-symbols-outlined text-[20px]" data-icon="notifications">notifications</span>
-        <span class="w-2 h-2 rounded-full bg-[#00A76F] absolute top-2 right-2 ring-2 ring-white"></span>
-      </button>
-      <div class="flex items-center gap-3 pl-2 border-l border-[#DFE3E8]">
-        <div class="w-8 h-8 rounded-full bg-[#00A76F] text-white flex items-center justify-center font-bold text-xs">
-          NA
-        </div>
-        <div class="flex flex-col text-left">
-          <span class="text-[13px] font-semibold text-[#212B36] leading-tight">Nguyễn Văn An</span>
-          <span class="text-[11px] text-[#919EAB]">nguyen@example.com</span>
-        </div>
+      <div class="w-8 h-8 rounded-full bg-[#00A76F] text-white flex items-center justify-center font-bold text-xs shadow-sm">
+        NA
       </div>
     </div>
   </header>
 
-  <!-- Workspace Selection Area -->
-  <main class="max-w-6xl w-full mx-auto px-8 py-12 flex-1">
-    <div class="mb-8">
-      <span class="text-[11px] font-bold text-[#00A76F] uppercase tracking-wider">Cổng tài khoản</span>
-      <h1 class="text-[32px] font-bold text-[#212B36] tracking-tight mt-1">Không gian làm việc</h1>
-      <div class="flex items-center justify-between mt-6">
-        <div>
-          <h2 class="text-[18px] font-bold text-[#212B36]">Không gian của bạn</h2>
-          <p class="text-[14px] text-[#637381] mt-0.5">Chọn không gian làm việc để bắt đầu theo dõi và quản lý phát thải.</p>
+  <!-- SideNavBar & Main Content Wrapper -->
+  <div class="flex pt-16 min-h-[calc(100vh-4rem)] w-full">
+    <!-- SideNavBar -->
+    <aside class="fixed left-0 top-16 bottom-0 w-56 flex flex-col py-6 px-3 bg-white border-r border-gray-200 z-10">
+      <nav class="space-y-1.5 flex-1">
+        <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
+          <span class="material-symbols-outlined text-[20px]">dashboard</span>
+          <span>Tổng quan</span>
         </div>
-        <span class="px-3 py-1 bg-[#F4F6F8] text-[#637381] text-[12px] font-medium rounded-full">3 không gian hoạt động</span>
-      </div>
-    </div>
+        <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
+          <span class="material-symbols-outlined text-[20px]">receipt_long</span>
+          <span>Sổ cái</span>
+        </div>
+        <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
+          <span class="material-symbols-outlined text-[20px]">verified</span>
+          <span>Phê duyệt</span>
+        </div>
+        <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
+          <span class="material-symbols-outlined text-[20px]">insights</span>
+          <span>Báo cáo &amp; Lộ trình</span>
+        </div>
+        <div class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 font-medium text-sm">
+          <span class="material-symbols-outlined text-[20px]">settings</span>
+          <span>Cài đặt</span>
+        </div>
+      </nav>
+    </aside>
 
-    <!-- Cards Grid -->
-    <div class="grid grid-cols-3 gap-6 mb-8">
-      <!-- Card 1 -->
-      <div class="bg-white border border-[#DFE3E8] rounded-2xl p-6 shadow-sm">
-        <div class="flex items-center justify-between mb-4">
-          <div class="w-10 h-10 rounded-xl bg-[#E8F8F2] text-[#00A76F] flex items-center justify-center">
-            <span class="material-symbols-outlined text-[22px]" data-icon="home">home</span>
-          </div>
-          <span class="px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-[#E8F8F2] text-[#00A76F]">Người phê duyệt</span>
-        </div>
-        <h3 class="text-[16px] font-bold text-[#212B36]">Gia Đình Xanh</h3>
-        <p class="text-[13px] text-[#637381] mt-1">Không gian sinh hoạt gia đình chính</p>
-        <div class="flex items-center justify-between pt-4 mt-6 border-t border-[#F4F6F8] text-[13px] text-[#637381]">
-          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">group</span> 4 thành viên</span>
-          <span class="flex items-center gap-1.5 bg-[#F4F6F8] px-2.5 py-1 rounded-full text-[12px] font-medium text-[#212B36]"><span class="material-symbols-outlined text-[15px] text-[#00A76F]">cloud</span> 85.4 kg <span class="text-[10px] text-[#637381]">CO₂e</span></span>
-        </div>
-      </div>
-
-      <!-- Card 2 -->
-      <div class="bg-white border border-[#DFE3E8] rounded-2xl p-6 shadow-sm">
-        <div class="flex items-center justify-between mb-4">
-          <div class="w-10 h-10 rounded-xl bg-[#F4F6F8] text-[#212B36] flex items-center justify-center">
-            <span class="material-symbols-outlined text-[22px]" data-icon="apartment">apartment</span>
-          </div>
-          <span class="px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-[#F4F6F8] text-[#637381]">Thành viên</span>
-        </div>
-        <h3 class="text-[16px] font-bold text-[#212B36]">Văn phòng Khởi nghiệp</h3>
-        <p class="text-[13px] text-[#637381] mt-1">Không gian làm việc nhóm, thiết bị & đi lại</p>
-        <div class="flex items-center justify-between pt-4 mt-6 border-t border-[#F4F6F8] text-[13px] text-[#637381]">
-          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">group</span> 8 thành viên</span>
-          <span class="flex items-center gap-1.5 bg-[#F4F6F8] px-2.5 py-1 rounded-full text-[12px] font-medium text-[#212B36]"><span class="material-symbols-outlined text-[15px] text-[#00A76F]">cloud</span> 210.2 kg <span class="text-[10px] text-[#637381]">CO₂e</span></span>
-        </div>
+    <!-- Workspace Selection Area -->
+    <main class="ml-56 flex-1 p-8 md:p-10 max-w-7xl">
+      <div class="mb-8">
+        <span class="text-[11px] font-bold text-[#00A76F] uppercase tracking-wider">Cổng tài khoản</span>
+        <h1 class="text-2xl md:text-3xl font-bold text-gray-900 tracking-tight mt-1">Không gian làm việc</h1>
       </div>
 
-      <!-- Card 3 -->
-      <div class="bg-white border border-[#DFE3E8] rounded-2xl p-6 shadow-sm">
-        <div class="flex items-center justify-between mb-4">
-          <div class="w-10 h-10 rounded-xl bg-[#E8F8F2] text-[#00A76F] flex items-center justify-center">
-            <span class="material-symbols-outlined text-[22px]" data-icon="home">home</span>
+      <!-- Cards Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-7 space-y-4">
+          <!-- Card 1 -->
+          <div class="bg-white border-2 border-[#00A76F] rounded-2xl p-6 shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-xl bg-[#00A76F]/10 text-[#00A76F] flex items-center justify-center">
+                <span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">home</span>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-[#00A76F]/10 text-[#00A76F]">Người phê duyệt</span>
+            </div>
+            <h3 class="text-base font-bold text-gray-900">Gia Đình Xanh</h3>
+            <p class="text-xs text-gray-500 mt-1">Không gian sinh hoạt gia đình chính</p>
           </div>
-          <span class="px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-[#E8F8F2] text-[#00A76F]">Người phê duyệt</span>
+
+          <!-- Card 2 -->
+          <div class="bg-white border border-gray-200 rounded-2xl p-6 shadow-sm">
+            <div class="flex items-center justify-between mb-4">
+              <div class="w-10 h-10 rounded-xl bg-gray-100 text-gray-700 flex items-center justify-center">
+                <span class="material-symbols-outlined text-[22px]">apartment</span>
+              </div>
+              <span class="px-2.5 py-0.5 rounded-full text-[12px] font-medium bg-gray-100 text-gray-600">Thành viên</span>
+            </div>
+            <h3 class="text-base font-bold text-gray-900">Văn phòng Khởi nghiệp</h3>
+            <p class="text-xs text-gray-500 mt-1">Không gian làm việc nhóm, thiết bị &amp; đi lại</p>
+          </div>
         </div>
-        <h3 class="text-[16px] font-bold text-[#212B36]">Nhà Bố Mẹ</h3>
-        <p class="text-[13px] text-[#637381] mt-1">Không gian sinh hoạt phụ & gia đình</p>
-        <div class="flex items-center justify-between pt-4 mt-6 border-t border-[#F4F6F8] text-[13px] text-[#637381]">
-          <span class="flex items-center gap-1.5"><span class="material-symbols-outlined text-[16px]">group</span> 3 thành viên</span>
-          <span class="flex items-center gap-1.5 bg-[#F4F6F8] px-2.5 py-1 rounded-full text-[12px] font-medium text-[#212B36]"><span class="material-symbols-outlined text-[15px] text-[#00A76F]">cloud</span> 62.1 kg <span class="text-[10px] text-[#637381]">CO₂e</span></span>
+
+        <div class="lg:col-span-5">
+          <div class="bg-white rounded-2xl border border-gray-200 p-6 shadow-sm">
+            <h2 class="text-lg font-bold text-gray-900 mb-2">Gia nhập bằng mã mời</h2>
+            <p class="text-xs text-gray-500">Nhập mã 6 ký tự để tham gia không gian mới.</p>
+          </div>
         </div>
       </div>
-    </div>
-  </main>
+    </main>
+  </div>
 </div>
 
 <!-- ==================== MODAL OVERLAY & CONTAINER ==================== -->

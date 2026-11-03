@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Cập nhật Hệ số phát thải - CarbonLedger Admin</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: "#00a76f",
+              hover: "#007867",
+              light: "#00a76f14",
+              dark: "#004b3f",
+            },
+            surface: "#F9FAFB",
+            "sidebar-dark": "#161c24",
+            "sidebar-paper": "#212b36",
+            "neutral-subtle": "#919eab",
+            "border-subtle": "#e5e7eb",
+          },
+          fontFamily: {
+            sans: ['Public Sans', 'sans-serif'],
+          },
+          borderRadius: {
+            '2xl': '1rem',
+          }
+        }
+      }
+    }
+  </script>
+<style>
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+    .material-symbols-outlined.fill {
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+    }
+  </style>
+</head>
+<body class="bg-[#F9FAFB] text-[#212b36] font-sans antialiased min-h-screen relative overflow-hidden select-none">
+<!-- ========================================================= -->
+<!-- BACKGROUND: Emission Factors Admin Page (SCR-ADM-FACTOR-01) -->
+<!-- ========================================================= -->
+<div class="flex h-screen w-full filter blur-[3px] opacity-75 pointer-events-none select-none transition duration-200">
+<!-- Admin Sidebar (Dark Enterprise Theme like Screen 5) -->
+<aside class="w-64 bg-white flex flex-col justify-between p-4 border-r border-gray-200 shrink-0"><div class="flex flex-col gap-6"><div class="flex items-center gap-3 px-2 pt-2"><div class="w-10 h-10 rounded-xl bg-[#00a76f] flex items-center justify-center text-white shadow-sm"><span class="material-symbols-outlined text-2xl">eco</span></div><div class="flex flex-col"><span class="text-base font-bold text-[#212b36] tracking-tight">CarbonLedger</span><span class="text-[11px] text-[#919eab] font-medium">Enterprise v2.0</span></div></div><nav class="flex flex-col space-y-1.5"><a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[#637381] hover:text-[#212b36] hover:bg-[#f4f6f8] text-sm font-medium transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">dashboard</span><span>Tổng quan</span></a><a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl bg-[#00a76f]/15 text-[#00a76f] font-semibold text-sm transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">co2</span><span>Hệ số phát thải</span></a><a class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-[#637381] hover:text-[#212b36] hover:bg-[#f4f6f8] text-sm font-medium transition-colors" href="#"><span class="material-symbols-outlined text-[20px]">corporate_fare</span><span>Không gian làm việc</span></a></nav></div><div class="pt-4 border-t border-gray-100"><div class="p-2.5 rounded-xl bg-[#f4f6f8] flex items-center justify-between border border-gray-200"><div class="flex items-center gap-3 min-w-0"><div class="w-9 h-9 rounded-full bg-[#00a76f] text-white flex items-center justify-center font-bold text-xs shrink-0">AM</div><div class="flex flex-col min-w-0"><span class="text-[#212b36] text-xs font-semibold truncate">Alex Mercer</span><span class="text-[#919eab] text-[11px] truncate">Quản trị cấp cao</span></div></div><button class="p-1 rounded-lg text-[#919eab] hover:text-[#212b36] transition-colors"><span class="material-symbols-outlined text-base">settings</span></button></div></div></aside>
+<!-- Main Content Area (Background) -->
+<main class="flex-1 flex flex-col bg-[#F9FAFB] overflow-y-auto">
+<!-- Top Bar -->
+<header class="h-16 px-8 bg-white border-b border-gray-200 flex items-center justify-between"><div class="flex items-center gap-4"><div class="flex items-center gap-2"><span class="material-symbols-outlined text-[#00a76f] text-xl">eco</span><span class="text-sm font-bold text-[#212b36] tracking-tight">CarbonLedger</span><span class="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-semibold bg-[#00a76f]/15 text-[#00a76f]"><span class="w-1.5 h-1.5 rounded-full bg-[#00a76f]"></span>Quản trị hệ thống</span></div><div class="h-4 w-px bg-gray-200"></div><div class="relative w-72"><span class="material-symbols-outlined absolute left-3 top-2 text-[#919eab] text-lg pointer-events-none">search</span><input class="w-full pl-9 pr-3 py-1.5 bg-[#f4f6f8] rounded-lg text-xs text-[#212b36] placeholder-[#919eab] border border-transparent focus:outline-none" placeholder="Tìm kiếm hệ số, hoạt động..." readonly="" type="text"/></div></div><div class="flex items-center gap-3"><button class="w-9 h-9 rounded-lg flex items-center justify-center text-[#637381] hover:bg-[#f4f6f8] relative"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-2 right-2 w-2 h-2 rounded-full bg-[#00a76f]"></span></button><div class="h-4 w-px bg-gray-200"></div><div class="w-8 h-8 rounded-full bg-[#00a76f] text-white flex items-center justify-center text-xs font-bold">AM</div></div></header>
+<!-- Page Content -->
+<div class="p-8 space-y-6"><div class="flex items-center justify-between"><div><h1 class="text-2xl font-bold text-[#212b36] tracking-tight">Hệ số phát thải quy chuẩn</h1><p class="text-sm text-[#637381] mt-0.5">Quản lý hệ số tính toán lượng phát thải và căn cứ tham chiếu</p></div><button class="bg-[#00a76f] text-white text-sm font-semibold px-4 py-2 rounded-xl flex items-center gap-2 shadow-sm"><span class="material-symbols-outlined text-[18px]">add</span>Thêm hệ số mới</button></div><div class="bg-white rounded-xl border border-gray-200 overflow-hidden shadow-sm"><table class="w-full text-left text-sm"><thead class="bg-[#f4f6f8] text-[#919eab] text-xs font-semibold uppercase tracking-wider border-b border-gray-200"><tr><th class="py-3 px-6">HOẠT ĐỘNG</th><th class="py-3 px-6">DANH MỤC</th><th class="py-3 px-6">HỆ SỐ QUY CHUẨN</th><th class="py-3 px-6">ĐƠN VỊ</th><th class="py-3 px-6">NGUỒN THAM CHIẾU</th><th class="py-3 px-6">NGÀY CẬP NHẬT</th><th class="py-3 px-6 text-right">THAO TÁC</th></tr></thead><tbody class="divide-y divide-[#e5e7eb] text-[#212b36]"><tr class="bg-[#00a76f]/5 font-medium"><td class="py-3.5 px-6 font-semibold text-[#00a76f] flex items-center gap-2"><span class="w-2 h-2 rounded-full bg-[#00a76f]"></span>Điện lưới quốc gia (EVN)</td><td class="py-3.5 px-6"><span class="px-2 py-0.5 rounded text-xs bg-emerald-50 text-emerald-700 font-semibold">Điện sinh hoạt</span></td><td class="py-3.5 px-6 font-semibold font-mono">0.4536</td><td class="py-3.5 px-6 text-[#637381]">kg CO2e/kWh</td><td class="py-3.5 px-6 text-xs text-[#637381]">EVN 2026</td><td class="py-3.5 px-6 text-xs">10/2026</td><td class="py-3.5 px-6 text-right text-[#00a76f] font-semibold text-xs">Đang sửa...</td></tr><tr><td class="py-3.5 px-6 font-medium">Xăng sinh học (Ô tô)</td><td class="py-3.5 px-6"><span class="px-2 py-0.5 rounded text-xs bg-blue-50 text-blue-700 font-semibold">Giao thông</span></td><td class="py-3.5 px-6 font-semibold font-mono">2.3100</td><td class="py-3.5 px-6 text-[#637381]">kg CO2e/lít</td><td class="py-3.5 px-6 text-xs text-[#637381]">IPCC 2023</td><td class="py-3.5 px-6 text-xs">08/2026</td><td class="py-3.5 px-6 text-right text-[#919eab]">Sửa</td></tr></tbody></table></div></div>
+</main>
+</div>
+<!-- ========================================================= -->
+<!-- MODAL BACKDROP (Dimmed & Blurred Overlay)                   -->
+<!-- ========================================================= -->
+<div class="fixed inset-0 z-50 bg-[#212b36]/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto"><div class="relative w-full max-w-md bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden transform transition-all duration-200 animate-in fade-in zoom-in-95"><div class="flex items-center justify-between px-6 py-5 border-b border-gray-100"><div><h2 class="text-[18px] font-bold text-[#212b36] tracking-tight leading-snug">Sửa hệ số phát thải</h2></div><button aria-label="Đóng modal" class="w-8 h-8 rounded-lg flex items-center justify-center text-[#919eab] hover:text-[#212b36] hover:bg-[#f4f6f8] transition-colors focus:outline-none" type="button"><span class="material-symbols-outlined text-[20px]">close</span></button></div><form class="p-6 space-y-4" onsubmit="event.preventDefault();"><div><label class="block text-xs font-semibold text-[#212b36] mb-1.5 uppercase tracking-wider" for="activityName">Tên hoạt động</label><div class="relative"><input class="w-full h-11 px-3.5 bg-white border border-[#dfe3e8] rounded-xl text-sm font-medium text-[#212b36] placeholder-[#919eab] focus:outline-none focus:border-[#00a76f] focus:ring-2 focus:ring-[#00a76f]/20 transition-all" id="activityName" name="activityName" placeholder="Nhập tên hoạt động..." required="" type="text" value="Điện lưới quốc gia"/></div></div><div><label class="block text-xs font-semibold text-[#212b36] mb-1.5 uppercase tracking-wider" for="category">Danh mục</label><div class="relative"><select class="w-full h-11 px-3.5 pr-10 bg-white border border-[#dfe3e8] rounded-xl text-sm font-medium text-[#212b36] focus:outline-none focus:border-[#00a76f] focus:ring-2 focus:ring-[#00a76f]/20 appearance-none transition-all cursor-pointer" id="category" name="category"><option selected="" value="Điện sinh hoạt">Điện sinh hoạt</option><option value="Điện">Điện</option><option value="Giao thông">Giao thông</option><option value="Chất đốt &amp; Gas">Chất đốt &amp; Gas</option><option value="Cấp nước">Cấp nước</option><option value="Khác">Khác</option></select><span class="material-symbols-outlined absolute right-3 top-3 text-[20px] text-[#919eab] pointer-events-none">expand_more</span></div></div><div class="grid grid-cols-2 gap-3.5"><div><label class="block text-xs font-semibold text-[#212b36] mb-1.5 uppercase tracking-wider" for="emissionFactor">Hệ số phát thải</label><div class="relative"><input class="w-full h-11 px-3.5 bg-white border border-[#dfe3e8] rounded-xl text-sm font-semibold text-[#212b36] font-mono focus:outline-none focus:border-[#00a76f] focus:ring-2 focus:ring-[#00a76f]/20 transition-all" id="emissionFactor" name="emissionFactor" placeholder="0.0000" required="" step="0.0001" type="number" value="0.4536"/></div><p class="text-[11px] text-[#919eab] mt-1 font-medium">Độ chính xác: 4 số thập phân</p></div><div><label class="block text-xs font-semibold text-[#212b36] mb-1.5 uppercase tracking-wider" for="unit">Đơn vị</label><div class="relative"><select class="w-full h-11 px-3.5 pr-9 bg-white border border-[#dfe3e8] rounded-xl text-sm font-medium text-[#212b36] focus:outline-none focus:border-[#00a76f] focus:ring-2 focus:ring-[#00a76f]/20 appearance-none transition-all cursor-pointer" id="unit" name="unit"><option selected="" value="kg CO2e/kWh">kg CO2e/kWh</option><option value="kg CO2e/lít">kg CO2e/lít</option><option value="kg CO2e/kg">kg CO2e/kg</option><option value="kg CO2e/km">kg CO2e/km</option><option value="kg CO2e/m³">kg CO2e/m³</option><option value="t CO2e/MWh">t CO2e/MWh</option></select><span class="material-symbols-outlined absolute right-2.5 top-3 text-[18px] text-[#919eab] pointer-events-none">expand_more</span></div></div></div><div><label class="block text-xs font-semibold text-[#212b36] mb-1.5 uppercase tracking-wider" for="sourceRef">Nguồn tham chiếu</label><div class="relative"><input class="w-full h-11 px-3.5 bg-white border border-[#dfe3e8] rounded-xl text-sm font-medium text-[#212b36] placeholder-[#919eab] focus:outline-none focus:border-[#00a76f] focus:ring-2 focus:ring-[#00a76f]/20 transition-all" id="sourceRef" name="sourceRef" placeholder="VD: EVN 2026, IPCC 2023, Bộ TN&amp;MT" required="" type="text" value="EVN 2026"/></div></div><div><label class="block text-xs font-semibold text-[#212b36] mb-1.5 uppercase tracking-wider" for="effectiveDate">Ngày hiệu lực</label><div class="relative"><input class="w-full h-11 px-3.5 bg-white border border-[#dfe3e8] rounded-xl text-sm font-medium text-[#212b36] focus:outline-none focus:border-[#00a76f] focus:ring-2 focus:ring-[#00a76f]/20 transition-all" id="effectiveDate" name="effectiveDate" placeholder="DD/MM/YYYY" type="text" value="01/10/2026"/><span class="material-symbols-outlined absolute right-3 top-3 text-[18px] text-[#919eab] pointer-events-none">calendar_today</span></div></div><div class="rounded-xl bg-amber-50 border border-amber-200/60 p-3 flex items-center gap-2.5 text-xs text-amber-700"><span class="material-symbols-outlined text-[18px] text-amber-700 shrink-0 font-medium">warning</span><span class="font-medium tracking-tight">Thay đổi chỉ áp dụng cho các bản ghi phát sinh mới. Dữ liệu lịch sử không bị ảnh hưởng.</span></div><div class="flex items-center justify-end gap-3 pt-3 border-t border-gray-100"><button class="px-4 py-2.5 text-sm font-semibold text-[#637381] hover:text-[#212b36] hover:bg-[#f4f6f8] rounded-xl transition-colors focus:outline-none" type="button">Hủy bỏ</button><button class="px-6 py-2.5 text-sm font-medium text-white bg-[#00a76f] hover:bg-[#007867] active:scale-[0.98] rounded-xl shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-[#00a76f]/30 flex items-center gap-1.5" type="submit">Lưu thay đổi</button></div></form></div></div>
+</body>
+</html>
