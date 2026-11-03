@@ -124,9 +124,7 @@
 </div>
 <span class="tracking-tight text-on-surface">CarbonLedger</span>
 </div>
-<span class="hidden md:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-label-sm bg-surface-container text-on-surface-variant font-medium ml-2">
-        Enterprise Workspace
-      </span>
+<span class="hidden md:inline-flex items-center px-2 py-0.5 rounded-full text-[11px] font-label-sm bg-surface-container text-on-surface-variant font-medium ml-2">CarbonLedger / Gia Đình Xanh</span>
 </div>
 <div class="flex items-center gap-4">
 <button aria-label="Notifications" class="w-9 h-9 rounded-full flex items-center justify-center text-on-surface-variant hover:bg-surface-container-low transition-colors duration-150 relative" type="button">
@@ -145,82 +143,16 @@
 </header>
 <!-- SIDEBAR NAVIGATION -->
 <aside class="fixed left-0 top-16 bottom-0 w-52 flex flex-col py-6 px-3 bg-surface-container-lowest dark:bg-surface-container-low border-r border-outline-variant/30 dark:border-outline/20 z-10">
-<div class="space-y-1 w-full">
-<!-- Dashboard -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant dark:text-outline-variant font-label-lg hover:bg-surface-container-low dark:hover:bg-surface-container hover:text-on-surface transition-all duration-150" href="#">
-<span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span>
-<span>Dashboard</span>
-</a>
-<!-- Ledger (ACTIVE ITEM) -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary-container text-on-primary-container font-label-lg transition-all duration-150 shadow-sm" href="#">
-<span class="material-symbols-outlined text-[20px]" data-icon="receipt_long">receipt_long</span>
-<span>Ledger</span>
-</a>
-<!-- Approvals -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant dark:text-outline-variant font-label-lg hover:bg-surface-container-low dark:hover:bg-surface-container hover:text-on-surface transition-all duration-150" href="#">
-<span class="material-symbols-outlined text-[20px]" data-icon="verified">verified</span>
-<span>Approvals</span>
-</a>
-<!-- Insights -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant dark:text-outline-variant font-label-lg hover:bg-surface-container-low dark:hover:bg-surface-container hover:text-on-surface transition-all duration-150" href="#">
-<span class="material-symbols-outlined text-[20px]" data-icon="insights">insights</span>
-<span>Insights</span>
-</a>
-<!-- Settings -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant dark:text-outline-variant font-label-lg hover:bg-surface-container-low dark:hover:bg-surface-container hover:text-on-surface transition-all duration-150" href="#">
-<span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span>
-<span>Settings</span>
-</a>
-</div>
+<div class="space-y-1 w-full"><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#"><span class="material-symbols-outlined text-[20px]" data-icon="dashboard">dashboard</span><span>Tổng quan</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary-container text-on-primary font-label-lg transition-all duration-150 shadow-sm" href="#"><span class="material-symbols-outlined text-[20px]" data-icon="receipt_long">receipt_long</span><span>Sổ cái</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#"><span class="material-symbols-outlined text-[20px]" data-icon="verified">verified</span><span>Phê duyệt</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#"><span class="material-symbols-outlined text-[20px]" data-icon="insights">insights</span><span>Báo cáo &amp; Lộ trình</span></a><a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150" href="#"><span class="material-symbols-outlined text-[20px]" data-icon="settings">settings</span><span>Cài đặt</span></a></div>
 <!-- Storage quota micro badge -->
-<div class="mt-auto p-3 rounded-xl bg-surface-container border border-outline-variant/20">
-<div class="flex items-center justify-between text-body-sm font-body-sm text-outline mb-1.5">
-<span>Ledger Quota</span>
-<span class="font-medium text-on-surface">82%</span>
-</div>
-<div class="w-full bg-surface-variant rounded-full h-1.5 overflow-hidden">
-<div class="bg-primary-container h-1.5 rounded-full w-4/5"></div>
-</div>
-<p class="text-[11px] font-label-sm text-outline mt-2">FY2026 Audit Ready</p>
-</div>
+<div class="mt-auto p-3 rounded-xl bg-surface-container border border-outline-variant/20"><div class="flex items-center justify-between text-body-sm font-body-sm text-outline mb-1.5"><span>Hạn mức lưu trữ</span><span class="font-medium text-on-surface">82%</span></div><div class="w-full bg-surface-variant rounded-full h-1.5 overflow-hidden"><div class="bg-primary-container h-1.5 rounded-full w-4/5"></div></div><p class="text-[11px] font-label-sm text-outline mt-2">Sẵn sàng kiểm toán 2026</p></div>
 </aside>
 <!-- UNDERLYING DESKTOP LEDGER CONTENT (BLURRED IN BACKGROUND) -->
 <main aria-hidden="true" class="ml-52 pt-16 min-h-screen bg-background p-8">
 <!-- Header row -->
-<div class="flex items-center justify-between pb-6">
-<div>
-<h1 class="text-headline-md font-headline-md text-on-surface">Emission Ledger</h1>
-<p class="text-body-md font-body-md text-outline">Real-time audit log of corporate emissions, activity factors, and verifications.</p>
-</div>
-<div class="flex items-center gap-3">
-<button class="px-4 py-2 border border-outline-variant/30 rounded-xl bg-surface-container-lowest text-on-surface text-label-md font-label-md shadow-sm">
-          Export Report
-        </button>
-<button class="px-4 py-2 rounded-xl bg-primary-container text-on-primary text-label-md font-label-md shadow-sm flex items-center gap-2">
-<span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>
-          Add Emission
-        </button>
-</div>
-</div>
+<div class="flex items-center justify-between pb-6"><div><h1 class="text-headline-md font-headline-md text-on-surface">Sổ cái phát thải</h1><p class="text-body-md font-body-md text-outline">Nhật ký kiểm toán thời gian thực về phát thải, hệ số phát thải và xác minh.</p></div><div class="flex items-center gap-3"><button class="px-4 py-2 border border-outline-variant/30 rounded-xl bg-surface-container-lowest text-on-surface text-label-md font-label-md shadow-sm">Xuất báo cáo</button><button class="px-4 py-2 rounded-xl bg-primary-container text-on-primary text-label-md font-label-md shadow-sm flex items-center gap-2"><span class="material-symbols-outlined text-[18px]" data-icon="add">add</span>Ghi nhận phát thải</button></div></div>
 <!-- Metric summary bar -->
-<div class="grid grid-cols-4 gap-4 mb-6">
-<div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm">
-<div class="text-body-sm font-body-sm text-outline">Total Q4 Emissions</div>
-<div class="text-headline-sm font-headline-sm text-on-surface mt-1">428.4 <span class="text-body-md font-body-md font-normal text-outline">t CO2e</span></div>
-</div>
-<div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm">
-<div class="text-body-sm font-body-sm text-outline">Electricity (Scope 2)</div>
-<div class="text-headline-sm font-headline-sm text-on-surface mt-1">194.2 <span class="text-body-md font-body-md font-normal text-outline">t CO2e</span></div>
-</div>
-<div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm">
-<div class="text-body-sm font-body-sm text-outline">Pending Verification</div>
-<div class="text-headline-sm font-headline-sm text-on-surface mt-1">12 <span class="text-body-md font-body-md font-normal text-outline">entries</span></div>
-</div>
-<div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm">
-<div class="text-body-sm font-body-sm text-outline">Reduction vs Target</div>
-<div class="text-headline-sm font-headline-sm text-primary mt-1">-8.4%</div>
-</div>
-</div>
+<div class="grid grid-cols-4 gap-4 mb-6"><div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm"><div class="text-body-sm font-body-sm text-outline">Tổng phát thải Q4</div><div class="text-headline-sm font-headline-sm text-on-surface mt-1">428.4 <span class="text-body-md font-body-md font-normal text-outline">t CO2e</span></div></div><div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm"><div class="text-body-sm font-body-sm text-outline">Điện lưới (Phạm vi 2)</div><div class="text-headline-sm font-headline-sm text-on-surface mt-1">194.2 <span class="text-body-md font-body-md font-normal text-outline">t CO2e</span></div></div><div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm"><div class="text-body-sm font-body-sm text-outline">Chờ phê duyệt</div><div class="text-headline-sm font-headline-sm text-on-surface mt-1">12 <span class="text-body-md font-body-md font-normal text-outline">bản ghi</span></div></div><div class="p-5 rounded-2xl bg-surface-container-lowest border border-outline-variant/20 shadow-sm"><div class="text-body-sm font-body-sm text-outline">Giảm so với mục tiêu</div><div class="text-headline-sm font-headline-sm text-primary mt-1">-8.4%</div></div></div>
 <!-- Underlying Mock Table -->
 <div class="bg-surface-container-lowest border border-outline-variant/20 rounded-2xl overflow-hidden shadow-sm">
 <div class="p-4 border-b border-outline-variant/20 flex items-center justify-between bg-surface-container-lowest">
@@ -258,104 +190,6 @@
 <!-- MODAL BACKDROP OVERLAY -->
 <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#212B36]/50 backdrop-blur-sm transition-opacity">
 <!-- FOREGROUND MODAL DIALOG -->
-<div class="w-full max-w-[500px] bg-surface-container-lowest rounded-2xl border border-gray-100 shadow-2xl p-6 sm:p-7 relative z-50 animate-in fade-in zoom-in-95 duration-200">
-<!-- Modal Header -->
-<div class="flex items-center justify-between pb-5">
-<h2 class="text-headline-sm font-headline-sm font-bold text-on-surface tracking-tight">Add Emission</h2>
-<button aria-label="Close dialog" class="w-8 h-8 rounded-full flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container transition-colors duration-150" type="button">
-<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
-</button>
-</div>
-<!-- Segmented Switch / Pill Tabs -->
-<div class="p-1 rounded-xl bg-surface-container flex items-center gap-1 mb-6">
-<button class="flex-1 py-1.5 text-center text-label-md font-label-md rounded-lg text-outline hover:text-on-surface transition-all duration-150" type="button">
-          AI Scan
-        </button>
-<button class="flex-1 py-1.5 text-center text-label-md font-label-md rounded-lg bg-surface-container-lowest text-on-surface shadow-sm font-bold transition-all duration-150" type="button">
-          Manual Entry
-        </button>
-<button class="flex-1 py-1.5 text-center text-label-md font-label-md rounded-lg text-outline hover:text-on-surface transition-all duration-150" type="button">
-          Excel Import
-        </button>
-</div>
-<!-- Form Content -->
-<form class="space-y-4" onsubmit="event.preventDefault();">
-<!-- Field 1: Activity Type -->
-<div>
-<label class="block text-label-md font-label-md text-on-surface mb-1.5" for="activity-type">
-            Activity Type
-          </label>
-<div class="relative">
-<select class="w-full h-11 px-3.5 pr-10 rounded-lg bg-surface-container-lowest border border-outline-variant/40 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors appearance-none cursor-pointer" id="activity-type">
-<option selected="" value="Electricity">Electricity</option>
-<option value="Natural Gas">Natural Gas</option>
-<option value="Transport">Transport (Fleet / Travel)</option>
-<option value="Water">Water Consumption</option>
-<option value="Waste">Waste Disposal</option>
-</select>
-<div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-outline">
-<span class="material-symbols-outlined text-[20px]" data-icon="expand_more">expand_more</span>
-</div>
-</div>
-</div>
-<!-- Field 2: Description -->
-<div>
-<label class="block text-label-md font-label-md text-on-surface mb-1.5" for="emission-description">
-            Description
-          </label>
-<input class="w-full h-11 px-3.5 rounded-lg bg-surface-container-lowest border border-outline-variant/40 text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="emission-description" placeholder="e.g. Monthly electricity bill" type="text" value="Monthly electricity bill"/>
-</div>
-<!-- Field 3: Amount / Quantity + Inline Unit Selector -->
-<div>
-<label class="block text-label-md font-label-md text-on-surface mb-1.5" for="emission-amount">
-            Amount / Quantity
-          </label>
-<div class="flex items-center rounded-lg border border-outline-variant/40 focus-within:border-primary-container focus-within:ring-1 focus-within:ring-primary-container transition-colors bg-surface-container-lowest overflow-hidden">
-<input class="w-full h-11 px-3.5 border-0 text-body-md font-body-md text-on-surface focus:ring-0 focus:outline-none" id="emission-amount" step="any" type="number" value="120"/>
-<div class="border-l border-outline-variant/40 bg-surface-container-low/40">
-<select class="h-11 px-3 pr-8 border-0 bg-transparent text-label-md font-label-md text-on-surface font-semibold focus:ring-0 focus:outline-none cursor-pointer">
-<option selected="" value="kWh">kWh</option>
-<option value="km">km</option>
-<option value="kg">kg</option>
-<option value="m3">m³</option>
-</select>
-</div>
-</div>
-</div>
-<!-- Live Preview Badge Row -->
-<div class="flex items-center justify-between px-3 py-2 rounded-lg bg-surface-container-low border border-primary-container/20">
-<div class="flex items-center gap-1.5 text-primary text-body-sm font-body-sm font-semibold">
-<span class="material-symbols-outlined text-[18px] text-primary" data-icon="energy_savings_leaf">energy_savings_leaf</span>
-<span>= ≈ 15.5 kg CO2e</span>
-</div>
-<span class="text-[11px] font-label-sm text-outline">Emission factor: 0.129 kg/kWh</span>
-</div>
-<!-- Field 4: Date -->
-<div>
-<label class="block text-label-md font-label-md text-on-surface mb-1.5" for="emission-date">
-            Date
-          </label>
-<div class="relative">
-<input class="w-full h-11 px-3.5 rounded-lg bg-surface-container-lowest border border-outline-variant/40 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors cursor-pointer" id="emission-date" type="date" value="2026-11-10"/>
-</div>
-</div>
-<!-- Field 5: Note (Optional) -->
-<div>
-<label class="block text-label-md font-label-md text-on-surface mb-1.5" for="emission-note">
-            Note (Optional)
-          </label>
-<textarea class="w-full p-3 rounded-lg bg-surface-container-lowest border border-outline-variant/40 text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors resize-none" id="emission-note" placeholder="Optional note..." rows="2"></textarea>
-</div>
-<!-- Action Footer -->
-<div class="pt-2">
-<button class="w-full py-3 px-4 rounded-xl bg-primary-container text-on-primary text-label-lg font-label-lg font-medium shadow-sm hover:bg-[#008f5d] transition-all flex items-center justify-center gap-2" type="submit">
-<span>Submit Entry</span>
-</button>
-<button class="w-full mt-3 text-center text-body-md font-body-md text-outline hover:text-on-surface transition-colors py-1" type="button">
-            Cancel
-          </button>
-</div>
-</form>
-</div>
+<div class="w-full max-w-[500px] bg-surface-container-lowest rounded-2xl border border-gray-100 shadow-2xl p-6 sm:p-7 relative z-50 animate-in fade-in zoom-in-95 duration-200"><!-- Modal Header --><div class="flex items-center justify-between pb-5"><h2 class="text-headline-sm font-headline-sm font-bold text-on-surface tracking-tight">Ghi nhận phát thải</h2><button aria-label="Đóng hộp thoại" class="w-8 h-8 rounded-full flex items-center justify-center text-outline hover:text-on-surface hover:bg-surface-container transition-colors duration-150" type="button"><span class="material-symbols-outlined text-[20px]" data-icon="close">close</span></button></div><!-- Segmented Switch / Pill Tabs --><div class="p-1 rounded-xl bg-surface-container flex items-center gap-1 mb-6"><button class="flex-1 py-1.5 text-center text-label-md font-label-md rounded-lg text-outline hover:text-on-surface transition-all duration-150" type="button">Quét AI</button><button class="flex-1 py-1.5 text-center text-label-md font-label-md rounded-lg bg-surface-container-lowest text-on-surface shadow-sm font-semibold transition-all duration-150" type="button">Nhập thủ công</button><button class="flex-1 py-1.5 text-center text-label-md font-label-md rounded-lg text-outline hover:text-on-surface transition-all duration-150" type="button">Nhập file Excel</button></div><!-- Form Content --><form class="space-y-4" onsubmit="event.preventDefault();"><!-- Field 1: Loại hoạt động --><div><label class="block text-xs font-semibold text-outline uppercase tracking-wider mb-1.5" for="activity-type">Loại hoạt động</label><div class="relative"><select class="w-full h-11 px-3.5 pr-10 rounded-xl bg-surface-container-lowest border border-outline-variant/40 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors appearance-none cursor-pointer" id="activity-type"><option selected="" value="Điện sinh hoạt">Điện sinh hoạt</option><option value="Xe máy xăng">Xe máy xăng</option><option value="Nước sinh hoạt">Nước sinh hoạt</option><option value="Gas LPG">Gas LPG</option></select><div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-outline"><span class="material-symbols-outlined text-[20px]" data-icon="expand_more">expand_more</span></div></div></div><!-- Field 2: Mô tả --><div><label class="block text-xs font-semibold text-outline uppercase tracking-wider mb-1.5" for="emission-description">Mô tả</label><input class="w-full h-11 px-3.5 rounded-xl bg-surface-container-lowest border border-outline-variant/40 text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors" id="emission-description" placeholder="Hóa đơn tiền điện tháng 11" type="text" value="Hóa đơn tiền điện tháng 11"/></div><!-- Field 3: Sản lượng tiêu thụ + Inline Unit Selector --><div><label class="block text-xs font-semibold text-outline uppercase tracking-wider mb-1.5" for="emission-amount">Sản lượng tiêu thụ</label><div class="flex items-center rounded-xl border border-outline-variant/40 focus-within:border-primary-container focus-within:ring-1 focus-within:ring-primary-container transition-colors bg-surface-container-lowest overflow-hidden"><input class="w-full h-11 px-3.5 border-0 text-body-md font-body-md text-on-surface focus:ring-0 focus:outline-none" id="emission-amount" step="any" type="number" value="120"/><div class="border-l border-outline-variant/40 bg-surface-container-low/40"><select class="h-11 px-3 pr-8 border-0 bg-transparent text-label-md font-label-md text-on-surface font-semibold focus:ring-0 focus:outline-none cursor-pointer"><option selected="" value="kWh">kWh</option><option value="km">km</option><option value="kg">kg</option><option value="m3">m³</option></select></div></div></div><!-- Live Preview Estimation Badge Row (Exactly ONE approximation sign ≈) --><div class="flex items-center justify-between px-3.5 py-3 rounded-xl bg-surface-container-low border border-primary-container/20"><div class="flex items-center gap-1.5 text-primary text-body-md font-semibold"><span class="material-symbols-outlined text-[20px] text-primary" data-icon="energy_savings_leaf">energy_savings_leaf</span><span>≈ 15.5 kg CO2e</span></div><span class="text-xs font-medium text-outline">Hệ số: 0.129 kg/kWh</span></div><!-- Field 4: Ngày phát sinh --><div><label class="block text-xs font-semibold text-outline uppercase tracking-wider mb-1.5" for="emission-date">Ngày phát sinh</label><div class="relative"><input class="w-full h-11 px-3.5 rounded-xl bg-surface-container-lowest border border-outline-variant/40 text-body-md font-body-md text-on-surface focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors cursor-pointer" id="emission-date" type="date" value="2026-11-01"/></div></div><!-- Field 5: Ghi chú (tùy chọn) --><div><label class="block text-xs font-semibold text-outline uppercase tracking-wider mb-1.5" for="emission-note">Ghi chú (tùy chọn)</label><textarea class="w-full p-3 rounded-xl bg-surface-container-lowest border border-outline-variant/40 text-body-md font-body-md text-on-surface placeholder:text-outline focus:outline-none focus:border-primary-container focus:ring-1 focus:ring-primary-container transition-colors resize-none" id="emission-note" placeholder="Nhập ghi chú thêm nếu có..." rows="2"></textarea></div><!-- Modal Footer --><div class="pt-2"><button class="w-full py-3 px-5 rounded-xl bg-primary-container text-on-primary text-label-lg font-semibold shadow-sm hover:bg-[#008f5d] transition-all flex items-center justify-center gap-2 cursor-pointer" type="submit"><span>Lưu bản ghi</span></button><button class="w-full mt-2.5 text-center text-body-md font-medium text-outline hover:text-on-surface transition-colors py-1.5 cursor-pointer block" type="button">Hủy bỏ</button></div></form></div>
 </div>
 </body></html>

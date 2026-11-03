@@ -37,6 +37,17 @@ Phiên bản UI v2 được tinh chỉnh sâu sắc theo các phản hồi nghi�
 5. **Nâng cấp Dashboard Trung tâm (`SCR-DASH-01`):**
    * Bổ sung **Hộp chọn Năm (Year Selector)** ngay trong thẻ Biểu đồ Xu hướng phát thải (VD: `Năm 2026 [▼]`).
    * Bổ sung **Bảng danh sách các hoạt động vừa được duyệt gần đây** (Recent Approved Activities) vào phía dưới biểu đồ để người dùng nắm bắt dòng sự kiện mà không cần chuyển trang.
+   * Đồng bộ Breadcrumb nhận biết không gian làm việc (`Gia Đình Xanh / Dashboard`).
+
+6. **Chuẩn hóa Ước tính Phát thải & Bỏ badge Tự động sinh (`SCR-EMISSION-ADD-01` & `SCR-AI-PREVIEW-01`):**
+   * `SCR-EMISSION-ADD-01`: Chuẩn hóa dấu ước tính hiển thị duy nhất một ký tự (`≈ 15.5 kg CO2e`), loại bỏ lỗi hiển thị trùng lặp `= ≈`.
+   * `SCR-AI-PREVIEW-01`: Loại bỏ badge "Tự động sinh" / "Tự động tính", giữ khung kết quả phát thải trực quan và thuần túy.
+
+7. **Khôi phục toàn diện Báo cáo AI & Lộ trình Giảm phát thải (`SCR-INSIGHT-01`):**
+   * Tham chiếu đầy đủ từ ver1 và nâng cấp lên ngôn ngữ MUI Minimal tinh gọn:
+     1. **Nhận định Chuyên sâu:** Biểu tượng Gemini AI pulse, 3 thẻ phân tích mẫu hình tiêu thụ điện, di chuyển và mục tiêu tháng.
+     2. **Hành động Cắt giảm Nhanh (Quick Wins):** Lưới 3 thẻ hành động định lượng kèm chỉ số giảm cụ thể (-22.50 kg, -18.00 kg, -3.20 kg CO2e) và nút tương tác trực tiếp.
+     3. **Lộ trình Cắt giảm 3 Tháng Tới:** Mốc thời gian 3 giai đoạn (T11/2026, T12/2026, T01/2027) với hạn ngạch định lượng và thanh tiến độ thực thi.
 
 ---
 
@@ -59,12 +70,12 @@ Phiên bản UI v2 được tinh chỉnh sâu sắc theo các phản hồi nghi�
 | **SCR-DASH-01** | Dashboard Trung tâm, Bộ chọn Năm & Hoạt động duyệt | Full Page | `/workspace/[id]/dashboard` | `1dca330964a14b5cbd0c0b71ce831efa` | [Ảnh](screens/SCR-DASH-01.png) • [HTML](html/SCR-DASH-01.html) |
 | **SCR-LEDGER-01** | Sổ cái Phát thải & Xuất Excel | Full Page | `/workspace/[id]/ledger` | `05b823683de84cbfa60a486fa231cd7e` | [Ảnh](screens/SCR-LEDGER-01.png) • [HTML](html/SCR-LEDGER-01.html) |
 | **SCR-LEDGER-DETAIL-01** | Modal Xem Chi tiết Bản ghi & Vết duyệt | Modal | `/workspace/[id]/ledger?logId=[id]` | `b083b61eb86143c9a39bb6ae5af0b356` | [Ảnh](screens/SCR-LEDGER-DETAIL-01.png) • [HTML](html/SCR-LEDGER-DETAIL-01.html) |
-| **SCR-EMISSION-ADD-01** | Modal Thêm Phát thải Đa kênh (3 Tabs) | Modal | `/workspace/[id]/ledger?action=add` | `7dcf3782bad94cf99ecd5c7eeea3fe98` | [Ảnh](screens/SCR-EMISSION-ADD-01.png) • [HTML](html/SCR-EMISSION-ADD-01.html) |
-| **SCR-AI-PREVIEW-01** | Modal Kiểm chứng Dữ liệu AI Vision (Minimal Card) | Modal | `/workspace/[id]/ledger?action=ai-preview` | `96238bcd0d6c4e9cbaff658886a04c4e` | [Ảnh](screens/SCR-AI-PREVIEW-01.png) • [HTML](html/SCR-AI-PREVIEW-01.html) |
+| **SCR-EMISSION-ADD-01** | Modal Thêm Phát thải Đa kênh (3 Tabs) | Modal | `/workspace/[id]/ledger?action=add` | `fdf4c5392a564b79a20ca79a8d1228a6` | [Ảnh](screens/SCR-EMISSION-ADD-01.png) • [HTML](html/SCR-EMISSION-ADD-01.html) |
+| **SCR-AI-PREVIEW-01** | Modal Kiểm chứng Dữ liệu AI Vision (Minimal Card) | Modal | `/workspace/[id]/ledger?action=ai-preview` | `ab7672a0e7f6414396dd3c290abbf196` | [Ảnh](screens/SCR-AI-PREVIEW-01.png) • [HTML](html/SCR-AI-PREVIEW-01.html) |
 | **SCR-EXCEL-PREVIEW-01** | Modal Xem trước & Xác thực Nạp File Excel | Modal | `/workspace/[id]/ledger?action=excel-preview` | `aa51c4fc76e140aca8c162ba55a1179a` | [Ảnh](screens/SCR-EXCEL-PREVIEW-01.png) • [HTML](html/SCR-EXCEL-PREVIEW-01.html) |
-| **SCR-APPROVE-01** | Hàng đợi Kiểm duyệt Sổ cái (Có Breadcrumb) | Full Page | `/workspace/[id]/approvals` | `eef4a8270bd6424eb82f804b177a42df` | [Ảnh](screens/SCR-APPROVE-01.png) • [HTML](html/SCR-APPROVE-01.html) |
+| **SCR-APPROVE-01** | Hàng đợi Kiểm duyệt Sổ cái (Có Breadcrumb) | Full Page | `/workspace/[id]/approvals` | `e034952efad1425abc484e4c94b53bb7` | [Ảnh](screens/SCR-APPROVE-01.png) • [HTML](html/SCR-APPROVE-01.html) |
 | **SCR-APPROVE-REJECT-01** | Modal Nhập Lý do Từ chối Phát thải | Modal | `/workspace/[id]/approvals?reject=[id]` | `beb015a912234cdcbfc8c9e99905367d` | [Ảnh](screens/SCR-APPROVE-REJECT-01.png) • [HTML](html/SCR-APPROVE-REJECT-01.html) |
-| **SCR-INSIGHT-01** | Báo cáo AI Insight & Lộ trình Cắt giảm | Full Page | `/workspace/[id]/insights` | `2f1db39a09d0461784ee22159e017d86` | [Ảnh](screens/SCR-INSIGHT-01.png) • [HTML](html/SCR-INSIGHT-01.html) |
+| **SCR-INSIGHT-01** | Báo cáo AI Insight & Lộ trình Cắt giảm | Full Page | `/workspace/[id]/insights` | `81544e5c6af6492f9021dfda373aa683` | [Ảnh](screens/SCR-INSIGHT-01.png) • [HTML](html/SCR-INSIGHT-01.html) |
 | **SCR-SETTING-01** | Cài đặt Workspace (Thông số nền, Ngân sách, Thành viên) | Full Page | `/workspace/[id]/settings` | `cf93c51782714b909e9a344cb4d94807` | [Ảnh](screens/SCR-SETTING-01.png) • [HTML](html/SCR-SETTING-01.html) |
 | **SCR-INVITE-MODAL-01** | Modal Tạo & Quản lý Mã mời Gia nhập | Modal | `/workspace/[id]/settings?modal=invite` | `2028e6fbc92d43a880e4857fd92da18b` | [Ảnh](screens/SCR-INVITE-MODAL-01.png) • [HTML](html/SCR-INVITE-MODAL-01.html) |
 | **SCR-JOIN-REJECT-01** | Modal Từ chối Đơn xin Gia nhập | Modal | `/workspace/[id]/settings?rejectJoin=[id]` | `2cefb1810c984f1a8e76264598582f0e` | [Ảnh](screens/SCR-JOIN-REJECT-01.png) • [HTML](html/SCR-JOIN-REJECT-01.html) |

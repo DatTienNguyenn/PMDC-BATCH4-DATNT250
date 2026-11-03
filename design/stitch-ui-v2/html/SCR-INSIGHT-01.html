@@ -119,267 +119,286 @@
 </head>
 <body class="bg-background text-on-surface font-body-md text-body-md antialiased min-h-screen">
 <!-- TopNavBar (Shared Component JSON Blueprint) -->
-<header class="flex justify-between items-center px-6 h-16 w-full border-b border-outline-variant/30 dark:border-outline/20 bg-surface-container-lowest dark:bg-surface-container-low fixed top-0 left-0 right-0 z-50 shadow-sm">
+<header class="flex justify-between items-center px-6 h-16 w-full border-b border-outline-variant/30 dark:border-outline/20 bg-surface-container-lowest dark:bg-surface-container-low fixed top-0 left-0 right-0 z-50 shadow-sm"><div class="flex items-center gap-4">
 <div class="flex items-center gap-2 text-title font-title font-bold text-on-surface dark:text-inverse-on-surface">
-<div class="w-8 h-8 rounded-lg bg-primary-container flex items-center justify-center text-on-primary">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">eco</span>
+<div class="w-8 h-8 rounded-lg bg-[#00A76F] flex items-center justify-center text-white shadow-sm">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">eco</span>
 </div>
-<span>CarbonLedger</span>
+<span class="tracking-tight font-bold text-lg">CarbonLedger</span>
+</div>
+<div class="hidden md:flex items-center gap-2 pl-4 border-l border-gray-200 text-sm font-medium text-gray-500">
+<span>Gia Đình Xanh</span>
+<span class="text-gray-400">/</span>
+<span class="text-gray-900 font-semibold">Báo cáo &amp; Lộ trình</span>
+</div>
 </div>
 <div class="flex items-center gap-4">
-<button aria-label="Notifications" class="relative p-2 rounded-full text-on-surface-variant hover:bg-surface-container-low transition-colors duration-150">
-<span class="material-symbols-outlined">notifications</span>
-<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary-container"></span>
+<button aria-label="Thông báo" class="relative p-2 rounded-full text-gray-500 hover:bg-gray-100 transition-colors duration-150">
+<span class="material-symbols-outlined text-[22px]">notifications</span>
+<span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-red-500 ring-2 ring-white"></span>
 </button>
-<div class="flex items-center gap-3 pl-2 border-l border-outline-variant/30">
-<img class="w-8 h-8 rounded-full object-cover ring-2 ring-primary-container/20" data-alt="Professional headshot of a corporate sustainability officer in business attire against a neutral soft-lit studio background in a modern enterprise design palette." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDc_hL1VzA_m-NnaMRJ6p7amp8HNRSca2KtwljmJLPIlp4ooltK-ZeVf3gEuEOKbo5xOQRGYWi95G2I9M8y18-1VMDw6VRi55ELkndpmoETD5F3WPTQ14mS86X1YXEfJlBMH_1_UuU-Y9GdTokr4U30czO2ii5pgUozNkJcHTdb50RuQei-rgOcI_4JLIHDvN6HJbv5wOjPJtpGF2SNOVU_kPX9sX9Gv4nGji2CDeqb4z7cdAN_agyq9d3mjJrETsPlOtvCbLAzHQ"/>
+<div class="flex items-center gap-3 pl-2 border-l border-gray-200">
+<img alt="Sarah Chen" class="w-8 h-8 rounded-full object-cover ring-2 ring-[#00A76F]/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDc_hL1VzA_m-NnaMRJ6p7amp8HNRSca2KtwljmJLPIlp4ooltK-ZeVf3gEuEOKbo5xOQRGYWi95G2I9M8y18-1VMDw6VRi55ELkndpmoETD5F3WPTQ14mS86X1YXEfJlBMH_1_UuU-Y9GdTokr4U30czO2ii5pgUozNkJcHTdb50RuQei-rgOcI_4JLIHDvN6HJbv5wOjPJtpGF2SNOVU_kPX9sX9Gv4nGji2CDeqb4z7cdAN_agyq9d3mjJrETsPlOtvCbLAzHQ"/>
+<div class="hidden sm:flex flex-col text-left">
+<span class="text-xs font-bold text-gray-900 leading-tight">Sarah Chen</span>
+<span class="text-[11px] text-gray-500 leading-tight">Chuyên viên</span>
 </div>
 </div>
-</header>
+</div></header>
 <!-- SideNavBar (Shared Component JSON Blueprint) -->
-<aside class="fixed left-0 top-16 bottom-0 w-52 flex flex-col py-6 px-3 bg-surface-container-lowest dark:bg-surface-container-low border-r border-outline-variant/30 dark:border-outline/20 z-40">
-<nav class="flex flex-col gap-1 w-full">
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
-<span class="material-symbols-outlined">dashboard</span>
+<aside class="fixed left-0 top-16 bottom-0 w-52 flex flex-col py-6 px-3 bg-surface-container-lowest dark:bg-surface-container-low border-r border-outline-variant/30 dark:border-outline/20 z-40"><nav class="flex flex-col gap-1 w-full flex-1">
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">dashboard</span>
 <span>Dashboard</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
-<span class="material-symbols-outlined">receipt_long</span>
-<span>Ledger</span>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">receipt_long</span>
+<span>Sổ cái phát thải</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
-<span class="material-symbols-outlined">verified</span>
-<span>Approvals</span>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">bar_chart</span>
+<span>Phân tích</span>
 </a>
-<!-- Active Navigation Tab: Insights -->
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-primary-container text-on-primary-container font-label-lg shadow-sm transition-all duration-150 ease-in-out" href="#">
-<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">insights</span>
-<span>Insights</span>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl bg-[#00A76F]/10 text-[#00A76F] font-semibold text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span>Báo cáo &amp; AI</span>
 </a>
-<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-on-surface-variant font-label-lg hover:bg-surface-container-low hover:text-on-surface transition-all duration-150 ease-in-out" href="#">
-<span class="material-symbols-outlined">settings</span>
-<span>Settings</span>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">verified</span>
+<span>Hàng đợi kiểm duyệt</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 rounded-xl text-gray-600 hover:text-gray-900 hover:bg-gray-100 font-medium text-sm transition-all duration-150" href="#">
+<span class="material-symbols-outlined text-[20px]">settings</span>
+<span>Cài đặt</span>
 </a>
 </nav>
-</aside>
+<div class="p-3 mt-auto bg-gray-50 border border-gray-100 rounded-xl flex items-center gap-2.5">
+<span class="w-2 h-2 rounded-full bg-[#00A76F] shrink-0"></span>
+<div class="text-xs text-gray-600">
+<p class="font-semibold text-gray-900">Hộ gia đình Xanh</p>
+<p class="text-[11px] text-gray-400">Gói Tiêu chuẩn v2.4</p>
+</div>
+</div></aside>
 <!-- Main Canvas -->
-<main class="ml-52 pt-16 min-h-screen">
-<div class="max-w-[1440px] mx-auto p-6 md:p-10 space-y-8">
+<main class="ml-52 pt-16 min-h-screen"><div class="max-w-[1440px] mx-auto p-6 md:p-10 space-y-8">
 <!-- Page Header -->
-<div class="flex items-center justify-between">
-<h1 class="text-headline-lg font-headline-lg text-on-surface tracking-tight">Insights</h1>
-</div>
-<!-- 2-Column Grid Layout (~60% left, ~40% right) -->
-<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-<!-- LEFT COLUMN (7 cols) -->
-<div class="lg:col-span-7 space-y-8">
-<!-- 1. Reduction Plan Card -->
-<section class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm transition-all duration-150 hover:shadow-md">
-<!-- Card Header -->
-<div class="flex items-center justify-between pb-6 border-b border-surface-container">
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-2">
 <div>
-<h2 class="text-headline-sm font-headline-sm text-on-surface">Reduction Plan</h2>
+<h1 class="text-2xl lg:text-3xl font-bold text-gray-900 tracking-tight">Báo cáo AI &amp; Kế hoạch Cắt giảm Xanh</h1>
+<p class="text-gray-500 text-sm mt-1">Trí tuệ nhân tạo phân tích mẫu hình tiêu thụ năng lượng và xây dựng lộ trình giảm thiểu dấu chân carbon.</p>
 </div>
-<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-outline-variant/50 text-on-surface font-label-md text-label-md hover:border-primary-container hover:text-primary transition-colors duration-150">
-<span class="material-symbols-outlined text-[18px]">download</span>
-<span>Export PDF</span>
+<div class="flex items-center gap-3 shrink-0">
+<button class="px-4 py-2 border border-[#00A76F] text-[#00A76F] hover:bg-[#00A76F]/10 rounded-xl font-semibold text-sm flex items-center gap-2 transition-colors duration-150">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+<span>Kích hoạt Phân tích Lại</span>
+</button>
+<button class="px-4 py-2 bg-[#00A76F] hover:bg-[#008f5d] text-white rounded-xl font-semibold text-sm flex items-center gap-2 shadow-sm transition-colors duration-150">
+<span class="material-symbols-outlined text-[18px]">picture_as_pdf</span>
+<span>Xuất Báo cáo PDF</span>
 </button>
 </div>
-<!-- Target Metric Block -->
-<div class="mt-6 p-4 rounded-xl bg-surface-container-low border border-outline-variant/20 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+</div>
+<!-- Section 1: Executive AI Summary Card -->
+<section class="bg-white rounded-2xl p-6 border border-gray-200/80 shadow-sm">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-gray-100 gap-3">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl bg-[#00A76F]/10 text-[#00A76F] flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-[22px]" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
 <div>
-<span class="text-label-sm font-label-sm text-on-surface-variant uppercase tracking-wider">Overall Milestone</span>
-<p class="text-title font-title font-bold text-on-surface mt-0.5">Target: -20% by March 2027</p>
-</div>
-<div class="flex items-center gap-2">
-<div class="w-32 h-2 rounded-full bg-surface-container overflow-hidden">
-<div class="h-full bg-primary-container rounded-full" style="width: 65%;"></div>
-</div>
-<span class="text-label-md font-label-md text-primary font-bold">65% on track</span>
+<h2 class="text-lg font-bold text-gray-900">Nhận định Chuyên sâu Tháng 10/2026</h2>
+<p class="text-xs text-gray-500">Phân tích tự động từ mô hình tiêu thụ năng lượng cá nhân hóa</p>
 </div>
 </div>
-<!-- Roadmap / Timeline List -->
-<div class="mt-8 space-y-0 relative">
+<div class="inline-flex items-center gap-1.5 px-3 py-1 bg-[#00A76F]/10 text-[#00A76F] rounded-full text-xs font-bold self-start sm:self-auto">
+<span class="w-2 h-2 rounded-full bg-[#00A76F] animate-pulse"></span>
+<span>Gemini AI</span>
+</div>
+</div>
+<div class="mt-5 grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Metric Card A -->
+<div class="p-4 rounded-xl bg-gray-50 border border-gray-100 flex items-start gap-3.5">
+<div class="w-9 h-9 rounded-lg bg-amber-100 text-amber-700 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">bolt</span>
+</div>
+<div>
+<span class="text-xs uppercase font-bold text-gray-500 tracking-wider">Tiêu thụ điện</span>
+<p class="text-sm font-semibold text-gray-900 mt-0.5">Tăng 18% vào cuối tuần do thời tiết nắng nóng</p>
+</div>
+</div>
+<!-- Metric Card B -->
+<div class="p-4 rounded-xl bg-gray-50 border border-gray-100 flex items-start gap-3.5">
+<div class="w-9 h-9 rounded-lg bg-blue-100 text-blue-700 flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">directions_bike</span>
+</div>
+<div>
+<span class="text-xs uppercase font-bold text-gray-500 tracking-wider">Di chuyển cá nhân</span>
+<p class="text-sm font-semibold text-gray-900 mt-0.5">Xe máy cá nhân chiếm 28% tổng phát thải toàn hộ</p>
+</div>
+</div>
+<!-- Metric Card C -->
+<div class="p-4 rounded-xl bg-[#00A76F]/10 border border-[#00A76F]/30 flex items-start gap-3.5">
+<div class="w-9 h-9 rounded-lg bg-[#00A76F] text-white flex items-center justify-center shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">flag</span>
+</div>
+<div>
+<span class="text-xs uppercase font-bold text-[#00A76F] tracking-wider">Mục tiêu tháng tới</span>
+<p class="text-sm font-bold text-gray-900 mt-0.5">Giảm tối thiểu -15 kg CO2e</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Section 2: Quick Wins Action Cards -->
+<section class="space-y-4">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+<div>
+<h2 class="text-xl font-bold text-gray-900">Hành động Cắt giảm Nhanh (Quick Wins)</h2>
+<p class="text-xs text-gray-500 mt-0.5">Tiềm năng giảm -43.70 kg CO2e/tháng không làm xáo trộn sinh hoạt gia đình</p>
+</div>
+<a class="text-sm font-semibold text-[#00A76F] hover:underline inline-flex items-center gap-1 self-start sm:self-auto" href="#">
+<span>Xem tất cả gợi ý</span>
+<span class="material-symbols-outlined text-[16px]">arrow_forward</span>
+</a>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+<!-- Card 1 -->
+<div class="bg-white rounded-2xl p-5 border border-gray-200/80 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow duration-150">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[#00A76F]/10 text-[#00A76F] font-bold text-xs">
+              -22.50 kg CO2e/tháng
+            </span>
+<span class="material-symbols-outlined text-gray-400 text-[20px]">ac_unit</span>
+</div>
+<h3 class="text-base font-bold text-gray-900 mb-2">Tăng nhiệt độ điều hòa lên 26°C kèm quạt gió</h3>
+<p class="text-xs text-gray-600 leading-relaxed mb-6">Nâng nhiệt độ trưa và bật thêm quạt đối lưu để duy trì mát mẻ tối ưu điện năng.</p>
+</div>
+<button class="w-full py-2.5 rounded-xl bg-[#00A76F] hover:bg-[#008f5d] text-white font-semibold text-xs tracking-wide transition-colors duration-150 text-center">
+          Áp dụng ngay
+        </button>
+</div>
+<!-- Card 2 -->
+<div class="bg-white rounded-2xl p-5 border border-gray-200/80 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow duration-150">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[#00A76F]/10 text-[#00A76F] font-bold text-xs">
+              -18.00 kg CO2e/tháng
+            </span>
+<span class="material-symbols-outlined text-gray-400 text-[20px]">directions_bus</span>
+</div>
+<h3 class="text-base font-bold text-gray-900 mb-2">Chuyển sang đi xe bus / metro 3 ngày/tuần</h3>
+<p class="text-xs text-gray-600 leading-relaxed mb-6">Sử dụng tuyến metro hoặc bus điện công cộng cho hành trình đi làm ban ngày.</p>
+</div>
+<button class="w-full py-2.5 rounded-xl border border-gray-300 hover:bg-gray-50 text-gray-700 font-semibold text-xs tracking-wide transition-colors duration-150 text-center">
+          Lên lịch di chuyển
+        </button>
+</div>
+<!-- Card 3 -->
+<div class="bg-white rounded-2xl p-5 border border-gray-200/80 shadow-sm flex flex-col justify-between hover:shadow-md transition-shadow duration-150">
+<div>
+<div class="flex items-center justify-between mb-3">
+<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-[#00A76F]/10 text-[#00A76F] font-bold text-xs">
+              -3.20 kg CO2e/tháng
+            </span>
+<span class="material-symbols-outlined text-gray-400 text-[20px]">power_settings_new</span>
+</div>
+<h3 class="text-base font-bold text-gray-900 mb-2">Tắt hoàn toàn nguồn standby tivi và máy tính</h3>
+<p class="text-xs text-gray-600 leading-relaxed mb-6">Ngắt nguồn ổ cắm các thiết bị nghe nhìn và màn hình làm việc qua đêm.</p>
+</div>
+<button class="w-full py-2.5 rounded-xl bg-[#00A76F]/10 text-[#00A76F] border border-[#00A76F]/30 font-semibold text-xs tracking-wide flex items-center justify-center gap-1.5 cursor-default">
+<span class="material-symbols-outlined text-[16px]">check_circle</span>
+<span>Đã hoàn thành</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Section 3: Personalized Reduction Roadmap Timeline -->
+<section class="bg-white rounded-2xl p-6 border border-gray-200/80 shadow-sm space-y-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between pb-5 border-b border-gray-100 gap-3">
+<div>
+<h2 class="text-lg font-bold text-gray-900">Lộ trình Cắt giảm 3 Tháng Tới</h2>
+<p class="text-xs text-gray-500 mt-0.5">Mục tiêu hạn ngạch và hành động trọng tâm theo từng giai đoạn</p>
+</div>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-gray-200 text-gray-700 text-xs font-semibold hover:border-[#00A76F] hover:text-[#00A76F] transition-colors duration-150 self-start sm:self-auto">
+<span class="material-symbols-outlined text-[18px]">tune</span>
+<span>Tùy chỉnh mục tiêu</span>
+</button>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-5">
 <!-- Milestone 1 -->
-<div class="flex items-start gap-4 pb-8 relative group">
-<div class="absolute left-[15px] top-6 bottom-0 w-[2px] bg-surface-container group-last:hidden"></div>
-<div class="w-8 h-8 rounded-full bg-primary-container/15 flex items-center justify-center shrink-0 z-10 border-2 border-surface-container-lowest">
-<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<div class="p-5 rounded-xl bg-gray-50 border border-gray-200/60 relative space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold text-gray-900">Tháng 11/2026</span>
+<span class="px-2.5 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[11px] font-bold">Đang triển khai</span>
 </div>
-<div class="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-0.5">
-<div>
-<span class="text-label-sm font-label-sm text-on-surface-variant">Nov 2026</span>
-<h3 class="text-body-lg font-body-lg font-bold text-on-surface">Cut electricity 10%</h3>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-extrabold text-gray-900 tracking-tight">85.00</span>
+<span class="text-xs text-gray-500">kg CO2e</span>
+<span class="ml-auto text-xs font-bold text-[#00A76F] bg-[#00A76F]/10 px-2 py-0.5 rounded-md">-15%</span>
 </div>
-<div class="self-start sm:self-auto">
-<span class="inline-flex items-center px-3 py-1 rounded-full bg-primary-container/15 text-primary text-label-md font-label-md font-bold">
-                      -12.5 kg CO2e
-                    </span>
+<p class="text-xs text-gray-600 leading-relaxed min-h-[36px]"><strong class="text-gray-800">Hành động trọng tâm:</strong> Tối ưu máy lạnh và rút phích cắm thiết bị chờ.</p>
+<div class="space-y-1.5 pt-2 border-t border-gray-200/50">
+<div class="flex justify-between text-xs font-semibold">
+<span class="text-gray-500">Tiến độ</span>
+<span class="text-[#00A76F]">35%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-gray-200 overflow-hidden">
+<div class="h-full bg-[#00A76F] rounded-full" style="width: 35%;"></div>
 </div>
 </div>
 </div>
 <!-- Milestone 2 -->
-<div class="flex items-start gap-4 pb-8 relative group">
-<div class="absolute left-[15px] top-6 bottom-0 w-[2px] bg-surface-container group-last:hidden"></div>
-<div class="w-8 h-8 rounded-full bg-primary-container/15 flex items-center justify-center shrink-0 z-10 border-2 border-surface-container-lowest">
-<span class="w-2.5 h-2.5 rounded-full bg-primary-container"></span>
+<div class="p-5 rounded-xl bg-gray-50 border border-gray-200/60 relative space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold text-gray-900">Tháng 12/2026</span>
+<span class="px-2.5 py-0.5 rounded-full bg-gray-200 text-gray-700 text-[11px] font-bold">Kế hoạch</span>
 </div>
-<div class="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-0.5">
-<div>
-<span class="text-label-sm font-label-sm text-on-surface-variant">Dec 2026</span>
-<h3 class="text-body-lg font-body-lg font-bold text-on-surface">Reduce car trips</h3>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-extrabold text-gray-900 tracking-tight">75.00</span>
+<span class="text-xs text-gray-500">kg CO2e</span>
+<span class="ml-auto text-xs font-bold text-[#00A76F] bg-[#00A76F]/10 px-2 py-0.5 rounded-md">-25%</span>
 </div>
-<div class="self-start sm:self-auto">
-<span class="inline-flex items-center px-3 py-1 rounded-full bg-primary-container/15 text-primary text-label-md font-label-md font-bold">
-                      -8 kg CO2e
-                    </span>
+<p class="text-xs text-gray-600 leading-relaxed min-h-[36px]"><strong class="text-gray-800">Hành động trọng tâm:</strong> Đi chung xe và phương tiện công cộng 3 buổi/tuần.</p>
+<div class="space-y-1.5 pt-2 border-t border-gray-200/50">
+<div class="flex justify-between text-xs font-semibold">
+<span class="text-gray-500">Tiến độ</span>
+<span class="text-gray-500">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-gray-200 overflow-hidden">
+<div class="h-full bg-gray-300 rounded-full" style="width: 0%;"></div>
 </div>
 </div>
 </div>
 <!-- Milestone 3 -->
-<div class="flex items-start gap-4 relative group">
-<div class="w-8 h-8 rounded-full bg-surface-container flex items-center justify-center shrink-0 z-10 border-2 border-surface-container-lowest">
-<span class="w-2.5 h-2.5 rounded-full bg-outline"></span>
+<div class="p-5 rounded-xl bg-gray-50 border border-gray-200/60 relative space-y-4">
+<div class="flex items-center justify-between">
+<span class="text-sm font-bold text-gray-900">Tháng 01/2027</span>
+<span class="px-2.5 py-0.5 rounded-full bg-gray-200 text-gray-700 text-[11px] font-bold">Kế hoạch</span>
 </div>
-<div class="flex-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2 pt-0.5">
-<div>
-<span class="text-label-sm font-label-sm text-on-surface-variant">Jan 2027</span>
-<h3 class="text-body-lg font-body-lg font-bold text-on-surface">Switch to bus</h3>
+<div class="flex items-baseline gap-2">
+<span class="text-2xl font-extrabold text-gray-900 tracking-tight">68.00</span>
+<span class="text-xs text-gray-500">kg CO2e</span>
+<span class="ml-auto text-xs font-bold text-[#00A76F] bg-[#00A76F]/10 px-2 py-0.5 rounded-md">-32%</span>
 </div>
-<div class="self-start sm:self-auto">
-<span class="inline-flex items-center px-3 py-1 rounded-full bg-primary-container/15 text-primary text-label-md font-label-md font-bold">
-                      -5 kg CO2e
-                    </span>
+<p class="text-xs text-gray-600 leading-relaxed min-h-[36px]"><strong class="text-gray-800">Hành động trọng tâm:</strong> Tối ưu nước nóng và bóng đèn LED tiết kiệm điện.</p>
+<div class="space-y-1.5 pt-2 border-t border-gray-200/50">
+<div class="flex justify-between text-xs font-semibold">
+<span class="text-gray-500">Tiến độ</span>
+<span class="text-gray-500">0%</span>
 </div>
-</div>
-</div>
-</div>
-</section>
-<!-- 2. Recommendations Card -->
-<section class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm transition-all duration-150 hover:shadow-md">
-<div class="pb-5 border-b border-surface-container">
-<h2 class="text-headline-sm font-headline-sm text-on-surface">Recommendations</h2>
-</div>
-<div class="mt-6 space-y-4">
-<!-- Item 1 -->
-<div class="flex items-center justify-between p-4 rounded-xl border border-surface-container hover:border-outline-variant/50 transition-colors duration-150 bg-surface-container-lowest">
-<div class="flex items-center gap-3.5">
-<div class="w-10 h-10 rounded-full bg-primary-container/15 flex items-center justify-center text-primary shrink-0">
-<span class="material-symbols-outlined text-[20px]" style="font-variation-settings: 'FILL' 1;">eco</span>
-</div>
-<span class="text-body-md font-body-md font-bold text-on-surface">Switch off unused appliances</span>
-</div>
-<div class="shrink-0 pl-3">
-<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md">
-                    saves ~8 kg CO2e/month
-                  </span>
-</div>
-</div>
-<!-- Item 2 -->
-<div class="flex items-center justify-between p-4 rounded-xl border border-surface-container hover:border-outline-variant/50 transition-colors duration-150 bg-surface-container-lowest">
-<div class="flex items-center gap-3.5">
-<div class="w-10 h-10 rounded-full bg-secondary-fixed/50 flex items-center justify-center text-secondary shrink-0">
-<span class="material-symbols-outlined text-[20px]">directions_bus</span>
-</div>
-<span class="text-body-md font-body-md font-bold text-on-surface">Use public transport 3x/week</span>
-</div>
-<div class="shrink-0 pl-3">
-<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md">
-                    saves ~12 kg CO2e/month
-                  </span>
-</div>
-</div>
-<!-- Item 3 -->
-<div class="flex items-center justify-between p-4 rounded-xl border border-surface-container hover:border-outline-variant/50 transition-colors duration-150 bg-surface-container-lowest">
-<div class="flex items-center gap-3.5">
-<div class="w-10 h-10 rounded-full bg-tertiary-fixed/60 flex items-center justify-center text-tertiary shrink-0">
-<span class="material-symbols-outlined text-[20px]">bolt</span>
-</div>
-<span class="text-body-md font-body-md font-bold text-on-surface">Switch to LED lighting</span>
-</div>
-<div class="shrink-0 pl-3">
-<span class="inline-flex items-center px-2.5 py-1 rounded-full bg-surface-container text-on-surface-variant font-label-md text-label-md">
-                    saves ~3 kg CO2e/month
-                  </span>
+<div class="w-full h-2 rounded-full bg-gray-200 overflow-hidden">
+<div class="h-full bg-gray-300 rounded-full" style="width: 0%;"></div>
 </div>
 </div>
 </div>
-</section>
 </div>
-<!-- RIGHT COLUMN (5 cols) -->
-<div class="lg:col-span-5">
-<!-- Emission by Month Card -->
-<section class="bg-surface-container-lowest rounded-2xl p-6 border border-outline-variant/30 shadow-sm transition-all duration-150 hover:shadow-md">
-<!-- Header -->
-<div class="flex items-center justify-between pb-6 border-b border-surface-container">
-<h2 class="text-headline-sm font-headline-sm text-on-surface">Emission by Month</h2>
-<button class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-outline-variant/50 text-on-surface font-label-md text-label-md hover:border-primary-container hover:text-primary transition-colors duration-150">
-<span class="material-symbols-outlined text-[18px]">refresh</span>
-<span>Re-analyze</span>
+<!-- Bottom Action -->
+<div class="flex justify-end pt-2">
+<button class="px-4 py-2 bg-[#00A76F] hover:bg-[#008f5d] text-white rounded-xl font-semibold text-xs flex items-center gap-2 shadow-sm transition-colors duration-150">
+<span class="material-symbols-outlined text-[16px]">picture_as_pdf</span>
+<span>Xuất PDF Báo cáo</span>
 </button>
 </div>
-<!-- Vertical Bar Chart Container -->
-<div class="pt-8 pb-4">
-<!-- Chart Visual Canvas -->
-<div class="relative h-64 w-full flex items-end justify-between px-2 pt-6">
-<!-- Background Gridlines -->
-<div class="absolute inset-0 flex flex-col justify-between pointer-events-none pb-8 text-on-surface-variant/40">
-<div class="w-full border-b border-dashed border-surface-container flex items-center justify-end pr-1 text-label-sm font-label-sm">100</div>
-<div class="w-full border-b border-dashed border-surface-container flex items-center justify-end pr-1 text-label-sm font-label-sm">75</div>
-<div class="w-full border-b border-dashed border-surface-container flex items-center justify-end pr-1 text-label-sm font-label-sm">50</div>
-<div class="w-full border-b border-dashed border-surface-container flex items-center justify-end pr-1 text-label-sm font-label-sm">25</div>
-<div class="w-full border-b border-outline-variant/30"></div>
-</div>
-<!-- 6 Monthly Vertical Bars -->
-<!-- Nov: 94 kg (94%) -->
-<div class="relative z-10 flex flex-col items-center flex-1 h-full justify-end group">
-<span class="text-label-sm font-label-sm font-bold text-on-surface mb-2 opacity-90 group-hover:text-primary">94 kg</span>
-<div class="w-8 rounded-t-lg bg-primary-container transition-all duration-200 group-hover:brightness-105" style="height: 75%;"></div>
-<span class="text-label-md font-label-md text-on-surface-variant mt-3">Nov</span>
-</div>
-<!-- Dec: 88 kg (88%) -->
-<div class="relative z-10 flex flex-col items-center flex-1 h-full justify-end group">
-<span class="text-label-sm font-label-sm font-bold text-on-surface mb-2 opacity-90 group-hover:text-primary">88 kg</span>
-<div class="w-8 rounded-t-lg bg-primary-container transition-all duration-200 group-hover:brightness-105" style="height: 70%;"></div>
-<span class="text-label-md font-label-md text-on-surface-variant mt-3">Dec</span>
-</div>
-<!-- Jan: 76 kg (76%) -->
-<div class="relative z-10 flex flex-col items-center flex-1 h-full justify-end group">
-<span class="text-label-sm font-label-sm font-bold text-on-surface mb-2 opacity-90 group-hover:text-primary">76 kg</span>
-<div class="w-8 rounded-t-lg bg-primary-container transition-all duration-200 group-hover:brightness-105" style="height: 61%;"></div>
-<span class="text-label-md font-label-md text-on-surface-variant mt-3">Jan</span>
-</div>
-<!-- Feb: 71 kg (71%) -->
-<div class="relative z-10 flex flex-col items-center flex-1 h-full justify-end group">
-<span class="text-label-sm font-label-sm font-bold text-on-surface mb-2 opacity-90 group-hover:text-primary">71 kg</span>
-<div class="w-8 rounded-t-lg bg-primary-container transition-all duration-200 group-hover:brightness-105" style="height: 57%;"></div>
-<span class="text-label-md font-label-md text-on-surface-variant mt-3">Feb</span>
-</div>
-<!-- Mar: 65 kg (65%) -->
-<div class="relative z-10 flex flex-col items-center flex-1 h-full justify-end group">
-<span class="text-label-sm font-label-sm font-bold text-on-surface mb-2 opacity-90 group-hover:text-primary">65 kg</span>
-<div class="w-8 rounded-t-lg bg-primary-container transition-all duration-200 group-hover:brightness-105" style="height: 52%;"></div>
-<span class="text-label-md font-label-md text-on-surface-variant mt-3">Mar</span>
-</div>
-<!-- Apr: 58 kg (58%) -->
-<div class="relative z-10 flex flex-col items-center flex-1 h-full justify-end group">
-<span class="text-label-sm font-label-sm font-bold text-primary mb-2">58 kg</span>
-<div class="w-8 rounded-t-lg bg-primary-container transition-all duration-200 group-hover:brightness-105 ring-2 ring-primary-container/20" style="height: 46%;"></div>
-<span class="text-label-md font-label-md text-on-surface font-bold mt-3">Apr</span>
-</div>
-</div>
-</div>
-<!-- Downward Reduction Summary Caption -->
-<div class="mt-6 pt-5 border-t border-surface-container flex items-center justify-between">
-<div class="flex items-center gap-2">
-<span class="material-symbols-outlined text-primary text-[20px]" style="font-variation-settings: 'FILL' 1;">trending_down</span>
-<span class="text-body-md font-body-md font-bold text-primary">-38% total reduction</span>
-</div>
-<span class="text-label-sm font-label-sm text-on-surface-variant">Over 6 months</span>
-</div>
 </section>
-</div>
-</div>
-</div>
-</main>
+</div></main>
 </body></html>
