@@ -26,14 +26,25 @@ export const AppLayout: React.FC = () => {
   const [isNotifOpen, setIsNotifOpen] = useState(false);
   const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const [isWsMenuOpen, setIsWsMenuOpen] = useState(false);
+  const [isLedgerOpen, setIsLedgerOpen] = useState(true);
 
   const isReviewer = workspaceRole === 'REVIEWER';
+  const isLedgerPath = location.pathname.includes('/ledger');
+
+  React.useEffect(() => {
+    if (isLedgerPath) {
+      setIsLedgerOpen(true);
+    }
+  }, [isLedgerPath]);
 
   // Derive page name from route for Breadcrumbs
   const getPageTitle = () => {
     if (location.pathname.includes('/dashboard')) {
       return isReviewer ? 'Dashboard' : 'Dashboard Cá Nhân';
     }
+    if (location.pathname.includes('/ledger/pending')) return 'Sổ cái / Đang chờ duyệt';
+    if (location.pathname.includes('/ledger/approved')) return 'Sổ cái / Đã duyệt';
+    if (location.pathname.includes('/ledger/rejected')) return 'Sổ cái / Đã từ chối';
     if (location.pathname.includes('/ledger')) return 'Sổ cái';
     if (location.pathname.includes('/approvals')) return 'Hàng đợi kiểm duyệt';
     if (location.pathname.includes('/insights')) return 'Báo cáo & Lộ trình';
@@ -223,20 +234,100 @@ export const AppLayout: React.FC = () => {
               <span>{isReviewer ? 'Tổng quan' : 'Dashboard Cá Nhân'}</span>
             </NavLink>
 
-            {/* 2. Sổ cái (Cả Reviewer và Editor đều có quyền nạp và tra cứu) */}
-            <NavLink
-              to={`/workspace/${activeWorkspace.id}/ledger`}
-              className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2.5 rounded-xl font-medium text-sm transition-all duration-150 ${
-                  isActive
-                    ? 'bg-[#00A76F] text-white font-semibold shadow-sm'
+            {/* 2. Sổ cái (Có 3 mục con: Đang chờ duyệt / Đã duyệt / Đã từ chối) */}
+            <div>
+              <button
+                type="button"
+                onClick={() => {
+                  if (!isLedgerOpen && !isLedgerPath) {
+                    navigate(`/workspace/${activeWorkspace.id}/ledger/approved`);
+                  }
+                  setIsLedgerOpen(!isLedgerOpen);
+                }}
+                className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl font-medium text-sm transition-all duration-150 ${
+                  isLedgerPath
+                    ? 'bg-[#00A76F]/10 text-[#00A76F] font-bold'
                     : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
-                }`
-              }
-            >
-              <span className="material-symbols-outlined text-[20px]">receipt_long</span>
-              <span>Sổ cái</span>
-            </NavLink>
+                }`}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="material-symbols-outlined text-[20px]">receipt_long</span>
+                  <span>Sổ cái</span>
+                </div>
+                <ChevronDown
+                  className={`w-4 h-4 transition-transform duration-200 ${
+                    isLedgerOpen ? 'rotate-180 text-[#00A76F]' : 'text-gray-400'
+                  }`}
+                />
+              </button>
+
+              {/* 3 Sub-selections */}
+              {isLedgerOpen && (
+                <div className="mt-1 ml-4 pl-3 border-l-2 border-emerald-100 space-y-1 py-1">
+                  {/* Đang chờ duyệt */}
+                  <NavLink
+                    to={`/workspace/${activeWorkspace.id}/ledger/pending`}
+                    className={({ isActive }) =>
+                      `flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
+                        isActive
+                          ? 'bg-[#00A76F] text-white shadow-xs'
+                          : 'text-gray-600 hover:text-[#00A76F] hover:bg-emerald-50/60'
+                      }`
+                    }
+                  >
+                    <span>Đang chờ duyệt</span>
+                    {pendingLogsCount > 0 && (
+                      <span
+                        className={`px-1.5 py-0.5 rounded-full text-[10px] font-extrabold leading-none ${
+                          location.pathname.includes('/ledger/pending')
+                            ? 'bg-white text-[#00A76F]'
+                            : 'bg-amber-100 text-amber-800'
+                        }`}
+                      >
+                        {pendingLogsCount}
+                      </span>
+                    )}
+                  </NavLink>
+
+                  {/* Đã duyệt */}
+                  <NavLink
+                    to={`/workspace/${activeWorkspace.id}/ledger/approved`}
+                    className={({ isActive }) =>
+                      `flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
+                        isActive
+                          ? 'bg-[#00A76F] text-white shadow-xs'
+                          : 'text-gray-600 hover:text-[#00A76F] hover:bg-emerald-50/60'
+                      }`
+                    }
+                  >
+                    {({ isActive }) => (
+                      <>
+                        <span>Đã duyệt</span>
+                        <span
+                          className={`w-1.5 h-1.5 rounded-full ${
+                            isActive ? 'bg-white' : 'bg-emerald-500'
+                          }`}
+                        />
+                      </>
+                    )}
+                  </NavLink>
+
+                  {/* Đã từ chối */}
+                  <NavLink
+                    to={`/workspace/${activeWorkspace.id}/ledger/rejected`}
+                    className={({ isActive }) =>
+                      `flex items-center justify-between px-3 py-2 rounded-lg text-xs font-semibold transition-all ${
+                        isActive
+                          ? 'bg-[#00A76F] text-white shadow-xs'
+                          : 'text-gray-600 hover:text-[#00A76F] hover:bg-emerald-50/60'
+                      }`
+                    }
+                  >
+                    <span>Đã từ chối</span>
+                  </NavLink>
+                </div>
+              )}
+            </div>
 
             {/* 3, 4, 5. DÀNH RIÊNG CHO TRƯỞNG NHÓM (REVIEWER) - HOÀN TOÀN ẨN VỚI THÀNH VIÊN */}
             {isReviewer && (

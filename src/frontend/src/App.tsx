@@ -1,5 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import { ThemeProvider } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import { muiTheme } from './theme/theme';
 import { AuthProvider } from './context/AuthContext';
 import { WorkspaceProvider } from './context/WorkspaceContext';
 import { LedgerProvider } from './context/LedgerContext';
@@ -33,49 +36,53 @@ import { NotFoundPage } from './pages/error/NotFoundPage';
 
 export function App() {
   return (
-    <BrowserRouter>
-      <AuthProvider>
-        <WorkspaceProvider>
-          <LedgerProvider>
-            <Routes>
-              {/* Default Redirect */}
-              <Route path="/" element={<Navigate to="/workspace/ws-01/dashboard" replace />} />
+    <ThemeProvider theme={muiTheme}>
+      <CssBaseline />
+      <BrowserRouter>
+        <AuthProvider>
+          <WorkspaceProvider>
+            <LedgerProvider>
+              <Routes>
+                {/* Default Redirect */}
+                <Route path="/" element={<Navigate to="/workspace/ws-01/dashboard" replace />} />
 
-              {/* Auth Routes */}
-              <Route path="/auth/login" element={<LoginPage />} />
-              <Route path="/auth/register" element={<LoginPage />} />
-              <Route path="/auth/forgot-password" element={<ForgotPasswordPage />} />
+                {/* Auth Routes */}
+                <Route path="/auth/login" element={<LoginPage />} />
+                <Route path="/auth/register" element={<LoginPage />} />
+                <Route path="/auth/forgot-password" element={<ForgotPasswordPage />} />
 
-              {/* Workspace Selection & Join */}
-              <Route path="/workspaces" element={<WorkspaceListPage />} />
-              <Route path="/workspaces/join" element={<JoinWorkspacePage />} />
+                {/* Workspace Selection & Join */}
+                <Route path="/workspaces" element={<WorkspaceListPage />} />
+                <Route path="/workspaces/join" element={<JoinWorkspacePage />} />
 
-              {/* Core Workspace App with Navigation Layout */}
-              <Route element={<AppLayout />}>
-                <Route path="/workspace/:id/dashboard" element={<DashboardPage />} />
-                <Route path="/workspace/:id/ledger" element={<LedgerPage />} />
-                <Route path="/workspace/:id/approvals" element={<ApprovalQueuePage />} />
-                <Route path="/workspace/:id/insights" element={<AIInsightsPage />} />
-                <Route path="/workspace/:id/settings" element={<SettingsPage />} />
-                <Route path="/profile" element={<ProfilePage />} />
-              </Route>
+                {/* Core Workspace App with Navigation Layout */}
+                <Route element={<AppLayout />}>
+                  <Route path="/workspace/:id/dashboard" element={<DashboardPage />} />
+                  <Route path="/workspace/:id/ledger" element={<Navigate to="approved" replace />} />
+                  <Route path="/workspace/:id/ledger/:status" element={<LedgerPage />} />
+                  <Route path="/workspace/:id/approvals" element={<ApprovalQueuePage />} />
+                  <Route path="/workspace/:id/insights" element={<AIInsightsPage />} />
+                  <Route path="/workspace/:id/settings" element={<SettingsPage />} />
+                  <Route path="/profile" element={<ProfilePage />} />
+                </Route>
 
-              {/* System Admin Backoffice Layout */}
-              <Route element={<AdminLayout />}>
-                <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
-                <Route path="/admin/emission-factors" element={<AdminFactorsPage />} />
-                <Route path="/admin/workspaces" element={<AdminTenantsPage />} />
-              </Route>
+                {/* System Admin Backoffice Layout */}
+                <Route element={<AdminLayout />}>
+                  <Route path="/admin/dashboard" element={<AdminDashboardPage />} />
+                  <Route path="/admin/emission-factors" element={<AdminFactorsPage />} />
+                  <Route path="/admin/workspaces" element={<AdminTenantsPage />} />
+                </Route>
 
-              {/* Error Views */}
-              <Route path="/403" element={<ForbiddenPage />} />
-              <Route path="/404" element={<NotFoundPage />} />
-              <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-          </LedgerProvider>
-        </WorkspaceProvider>
-      </AuthProvider>
-    </BrowserRouter>
+                {/* Error Views */}
+                <Route path="/403" element={<ForbiddenPage />} />
+                <Route path="/404" element={<NotFoundPage />} />
+                <Route path="*" element={<NotFoundPage />} />
+              </Routes>
+            </LedgerProvider>
+          </WorkspaceProvider>
+        </AuthProvider>
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

@@ -2,17 +2,14 @@ import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import { useWorkspace } from '../../context/WorkspaceContext';
 import { useLedger } from '../../context/LedgerContext';
+import ReactApexChart from 'react-apexcharts';
+const Chart = ReactApexChart as any;
+import { ApexOptions } from 'apexcharts';
 import {
-  AreaChart,
-  Area,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-  PieChart,
-  Pie,
-  Cell,
-} from 'recharts';
+  Chip,
+  Button,
+  Tooltip as MuiTooltip,
+} from '@mui/material';
 import {
   ArrowDown,
   TrendingUp,
@@ -21,7 +18,6 @@ import {
   AlertTriangle,
   Info,
   ChevronDown,
-  UserCheck,
   Plus,
   Clock,
   CheckCircle2,
@@ -53,41 +49,157 @@ export const DashboardPage: React.FC = () => {
   const is85Warning = budgetRatio >= 85 && budgetRatio < 100;
   const is100Danger = budgetRatio >= 100;
 
-  // Workspace-wide trend data
-  const trendDataWorkspace = [
-    { month: 'Tháng 6', emissions: 110.5 },
-    { month: 'Tháng 7', emissions: 125.0 },
-    { month: 'Tháng 8', emissions: 118.2 },
-    { month: 'Tháng 9', emissions: 98.4 },
-    { month: 'Tháng 10', emissions: 97.2 },
-    { month: 'Tháng 11', emissions: 85.4 },
+  // ==========================================
+  // APEX CHARTS CONFIGURATIONS (Vite + React-ApexCharts)
+  // ==========================================
+
+  // 1. Workspace Emission Trend (Area Chart)
+  const trendCategories = ['Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11'];
+  const trendSeriesWorkspace = [
+    {
+      name: 'Phát thải Không gian',
+      data: [110.5, 125.0, 118.2, 98.4, 97.2, 85.4],
+    },
   ];
 
-  // Personal Member trend data (for Editor - Trần Thị Bình)
-  const trendDataPersonal = [
-    { month: 'Tháng 6', emissions: 34.0 },
-    { month: 'Tháng 7', emissions: 38.5 },
-    { month: 'Tháng 8', emissions: 32.0 },
-    { month: 'Tháng 9', emissions: 29.5 },
-    { month: 'Tháng 10', emissions: 31.0 },
-    { month: 'Tháng 11', emissions: 28.4 },
+  const trendOptionsWorkspace: ApexOptions = {
+    chart: {
+      type: 'area',
+      toolbar: { show: false },
+      fontFamily: '"Public Sans", sans-serif',
+    },
+    colors: ['#00A76F'],
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 1,
+        opacityFrom: 0.45,
+        opacityTo: 0.05,
+        stops: [0, 95, 100],
+      },
+    },
+    stroke: {
+      curve: 'smooth',
+      width: 2.5,
+    },
+    xaxis: {
+      categories: trendCategories,
+      labels: { style: { colors: '#9ca3af', fontSize: '11px' } },
+      axisBorder: { show: false },
+      axisTicks: { show: false },
+    },
+    yaxis: {
+      labels: {
+        style: { colors: '#9ca3af', fontSize: '11px' },
+        formatter: (val) => `${val} kg`,
+      },
+    },
+    tooltip: {
+      theme: 'light',
+      y: { formatter: (val) => `${val} kg CO2e` },
+    },
+    dataLabels: { enabled: false },
+    grid: {
+      strokeDashArray: 3,
+      borderColor: '#f1f5f9',
+    },
+  };
+
+  // 2. Personal Member Trend (Area Chart)
+  const trendSeriesPersonal = [
+    {
+      name: 'Phát thải Cá nhân',
+      data: [34.0, 38.5, 32.0, 29.5, 31.0, 28.4],
+    },
   ];
 
-  // Workspace Category Breakdown
-  const categoryDataWorkspace = [
-    { name: 'Điện lưới EVN', value: 46.94, color: '#00A76F' },
-    { name: 'Xăng xe máy', value: 12.71, color: '#2563eb' },
-    { name: 'Khí gas LPG', value: 11.93, color: '#f59e0b' },
-    { name: 'Rác sinh hoạt', value: 9.09, color: '#8b5cf6' },
-    { name: 'Nước sạch', value: 4.74, color: '#06b6d4' },
-  ];
+  const trendOptionsPersonal: ApexOptions = {
+    ...trendOptionsWorkspace,
+    colors: ['#2563eb'],
+    fill: {
+      type: 'gradient',
+      gradient: {
+        shadeIntensity: 1,
+        opacityFrom: 0.45,
+        opacityTo: 0.05,
+        stops: [0, 95, 100],
+      },
+    },
+  };
 
-  // Personal Category Breakdown (for Editor)
-  const categoryDataPersonal = [
-    { name: 'Xăng xe máy Lead', value: 12.71, color: '#2563eb' },
-    { name: 'Khí gas LPG nấu ăn', value: 11.93, color: '#f59e0b' },
-    { name: 'Sạc xe điện VinFast', value: 8.67, color: '#00A76F' },
-  ];
+  // 3. Workspace Category Breakdown (Donut Chart)
+  const donutSeriesWorkspace = [46.94, 12.71, 11.93, 9.09, 4.74];
+  const donutLabelsWorkspace = ['Điện lưới EVN', 'Xăng xe máy', 'Khí gas LPG', 'Rác sinh hoạt', 'Nước sạch'];
+  const donutColorsWorkspace = ['#00A76F', '#2563eb', '#f59e0b', '#8b5cf6', '#06b6d4'];
+
+  const donutOptionsWorkspace: ApexOptions = {
+    chart: {
+      type: 'donut',
+      fontFamily: '"Public Sans", sans-serif',
+    },
+    colors: donutColorsWorkspace,
+    labels: donutLabelsWorkspace,
+    legend: { show: false },
+    dataLabels: { enabled: false },
+    plotOptions: {
+      pie: {
+        donut: {
+          size: '72%',
+          labels: {
+            show: true,
+            total: {
+              show: true,
+              label: 'Tổng phát thải',
+              fontSize: '11px',
+              color: '#64748b',
+              formatter: () => '85.4 kg',
+            },
+          },
+        },
+      },
+    },
+    tooltip: {
+      theme: 'light',
+      y: { formatter: (val) => `${val} kg CO2e` },
+    },
+  };
+
+  // 4. Personal Category Breakdown (Donut Chart)
+  const donutSeriesPersonal = [12.71, 11.93, 8.67];
+  const donutLabelsPersonal = ['Xăng xe máy Lead', 'Khí gas LPG nấu ăn', 'Sạc xe điện VinFast'];
+  const donutColorsPersonal = ['#2563eb', '#f59e0b', '#00A76F'];
+
+  const donutOptionsPersonal: ApexOptions = {
+    chart: {
+      type: 'donut',
+      fontFamily: '"Public Sans", sans-serif',
+    },
+    colors: donutColorsPersonal,
+    labels: donutLabelsPersonal,
+    legend: { show: false },
+    dataLabels: { enabled: false },
+    plotOptions: {
+      pie: {
+        donut: {
+          size: '72%',
+          labels: {
+            show: true,
+            total: {
+              show: true,
+              label: 'Cá nhân nạp',
+              fontSize: '11px',
+              color: '#64748b',
+              formatter: () => '33.3 kg',
+            },
+          },
+        },
+      },
+    },
+    tooltip: {
+      theme: 'light',
+      y: { formatter: (val) => `${val} kg CO2e` },
+    },
+  };
 
   // Filter logs for Editor vs Reviewer
   const memberLogs = logs.filter(
@@ -116,12 +228,12 @@ export const DashboardPage: React.FC = () => {
             <div className="flex items-center gap-3">
               <Info className="w-5 h-5 text-blue-600 flex-shrink-0" />
               <div>
-                <span className="font-bold">Dashboard Phân tích Cá nhân (Member Dashboard):</span>{' '}
-                Theo quy chuẩn ma trận RBAC, Thành viên chỉ theo dõi chỉ số phát thải cá nhân và các hoạt động do bạn nạp vào hệ thống.
+                <span className="font-bold">Dashboard Phân tích Cá nhân:</span>{' '}
+                Theo quy chuẩn phân quyền, Thành viên chỉ theo dõi chỉ số phát thải cá nhân và các hoạt động do bạn nạp vào hệ thống.
               </div>
             </div>
             <Link
-              to={`/workspace/${activeWorkspace.id}/ledger`}
+              to={`/workspace/${activeWorkspace.id}/ledger/pending`}
               className="px-3 py-1.5 rounded-xl bg-blue-600 text-white font-semibold hover:bg-blue-700 transition-colors flex items-center gap-1 flex-shrink-0"
             >
               <Plus className="w-3.5 h-3.5" />
@@ -192,7 +304,7 @@ export const DashboardPage: React.FC = () => {
                 </span>
               </div>
               <div className="mt-3 pt-2 border-t border-gray-100 text-[11px] text-gray-400">
-                Gia đình gồm 4 nhân khẩu (Trung bình 25% / người)
+                Gia đình gồm 4 nhân khẩu (Bình quân 25% / người)
               </div>
             </div>
 
@@ -215,56 +327,33 @@ export const DashboardPage: React.FC = () => {
               <div className="text-[11px] text-gray-400 mt-3 pt-2 border-t border-gray-100 flex items-center justify-between">
                 <span>Đang đợi Trưởng nhóm phê duyệt</span>
                 <Link
-                  to={`/workspace/${activeWorkspace.id}/ledger`}
+                  to={`/workspace/${activeWorkspace.id}/ledger/pending`}
                   className="font-semibold text-[#00A76F] hover:underline"
                 >
-                  Xem sổ cái &rarr;
+                  Xem hàng chờ &rarr;
                 </Link>
               </div>
             </div>
           </section>
 
-          {/* Member Analytics Charts */}
+          {/* Member Analytics Charts with React ApexCharts */}
           <section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <div className="lg:col-span-7 bg-white rounded-2xl p-6 border border-gray-200/80 shadow-xs flex flex-col justify-between">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-2">
                 <div>
                   <h2 className="text-base font-bold text-gray-900">
                     Xu hướng tiêu dùng cá nhân (6 tháng)
                   </h2>
-                  <p className="text-xs text-gray-500">Số liệu phát thải do bạn tạo ra (kg CO2e)</p>
+                  <p className="text-xs text-gray-500">Phát thải qua React ApexCharts (kg CO2e)</p>
                 </div>
               </div>
-              <div className="w-full h-64 pt-2">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={trendDataPersonal} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                    <defs>
-                      <linearGradient id="colorBlue" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#2563eb" stopOpacity={0.25} />
-                        <stop offset="95%" stopColor="#2563eb" stopOpacity={0.0} />
-                      </linearGradient>
-                    </defs>
-                    <XAxis dataKey="month" stroke="#9ca3af" fontSize={11} tickLine={false} />
-                    <YAxis stroke="#9ca3af" fontSize={11} tickLine={false} />
-                    <Tooltip
-                      formatter={(val: number) => [`${val} kg CO2e`, 'Phát thải']}
-                      contentStyle={{
-                        backgroundColor: '#ffffff',
-                        borderRadius: '12px',
-                        border: '1px solid #e5e7eb',
-                        fontSize: '12px',
-                      }}
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="emissions"
-                      stroke="#2563eb"
-                      strokeWidth={2.5}
-                      fillOpacity={1}
-                      fill="url(#colorBlue)"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
+              <div className="w-full pt-1">
+                <Chart
+                  options={trendOptionsPersonal}
+                  series={trendSeriesPersonal}
+                  type="area"
+                  height={260}
+                />
               </div>
             </div>
 
@@ -273,42 +362,22 @@ export const DashboardPage: React.FC = () => {
                 <h2 className="text-base font-bold text-gray-900">Cơ cấu tiêu dùng của bạn</h2>
                 <p className="text-xs text-gray-500">Phân bố nguồn phát thải cá nhân</p>
               </div>
-              <div className="w-full h-44">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={categoryDataPersonal}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={45}
-                      outerRadius={70}
-                      paddingAngle={4}
-                      dataKey="value"
-                    >
-                      {categoryDataPersonal.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    <Tooltip
-                      formatter={(val: number) => [`${val} kg CO2e`, 'Phát thải']}
-                      contentStyle={{
-                        backgroundColor: '#ffffff',
-                        borderRadius: '12px',
-                        border: '1px solid #e5e7eb',
-                        fontSize: '12px',
-                      }}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
+              <div className="w-full flex justify-center py-2">
+                <Chart
+                  options={donutOptionsPersonal}
+                  series={donutSeriesPersonal}
+                  type="donut"
+                  height={220}
+                />
               </div>
-              <div className="space-y-1 text-xs pt-3 border-t border-gray-100">
-                {categoryDataPersonal.map((cat, i) => (
+              <div className="space-y-1.5 text-xs pt-3 border-t border-gray-100">
+                {donutLabelsPersonal.map((label, i) => (
                   <div key={i} className="flex items-center justify-between">
                     <div className="flex items-center gap-2">
-                      <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: cat.color }} />
-                      <span className="text-gray-600">{cat.name}</span>
+                      <span className="w-2.5 h-2.5 rounded-full" style={{ backgroundColor: donutColorsPersonal[i] }} />
+                      <span className="text-gray-600">{label}</span>
                     </div>
-                    <span className="font-bold text-gray-900">{cat.value} kg</span>
+                    <span className="font-bold text-gray-900">{donutSeriesPersonal[i]} kg</span>
                   </div>
                 ))}
               </div>
@@ -320,14 +389,14 @@ export const DashboardPage: React.FC = () => {
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h2 className="text-base font-bold text-gray-900">
-                  Hoạt động do bạn đã khai báo gần đây
+                  Hoạt động được ghi nhận gần đây
                 </h2>
                 <p className="text-xs text-gray-500">
                   Theo dõi trạng thái duyệt của Trưởng nhóm cho từng bản ghi của bạn
                 </p>
               </div>
               <Link
-                to={`/workspace/${activeWorkspace.id}/ledger`}
+                to={`/workspace/${activeWorkspace.id}/ledger/approved`}
                 className="text-xs font-semibold text-[#00A76F] hover:underline"
               >
                 Xem tất cả trong Sổ cái &rarr;
@@ -335,15 +404,14 @@ export const DashboardPage: React.FC = () => {
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
+              <table className="w-full text-xs">
                 <thead className="bg-gray-50 text-gray-500 uppercase font-semibold border-b border-gray-200">
                   <tr>
-                    <th className="py-2.5 px-3">Ngày</th>
-                    <th className="py-2.5 px-3">Hoạt động</th>
-                    <th className="py-2.5 px-3">Sản lượng</th>
-                    <th className="py-2.5 px-3 text-right">Quy đổi kg CO2e</th>
-                    <th className="py-2.5 px-3 text-center">Người duyệt</th>
-                    <th className="py-2.5 px-3 text-center">Trạng thái</th>
+                    <th className="py-2.5 px-4 text-center">Ngày</th>
+                    <th className="py-2.5 px-4 text-left">Hoạt động</th>
+                    <th className="py-2.5 px-4 text-center">Sản lượng</th>
+                    <th className="py-2.5 px-4 text-center">Phát thải (kg CO2e)</th>
+                    <th className="py-2.5 px-4 text-center">Trạng thái</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 font-medium">
@@ -353,38 +421,41 @@ export const DashboardPage: React.FC = () => {
 
                     return (
                       <tr key={log.id} className="hover:bg-gray-50/80">
-                        <td className="py-2.5 px-3 font-mono text-gray-600">{log.date}</td>
-                        <td className="py-2.5 px-3 text-gray-900 font-semibold">
+                        <td className="py-2.5 px-4 font-mono text-gray-600 text-center">{log.date}</td>
+                        <td className="py-2.5 px-4 text-gray-900 font-semibold text-left">
                           {log.activityName}
                         </td>
-                        <td className="py-2.5 px-3 text-gray-600">
+                        <td className="py-2.5 px-4 text-gray-600 text-center">
                           {log.quantity} {log.unit}
                         </td>
-                        <td className="py-2.5 px-3 text-right font-bold text-[#00A76F]">
+                        <td className="py-2.5 px-4 text-center font-bold text-[#00A76F]">
                           {log.co2e.toFixed(2)} kg
                         </td>
-                        <td className="py-2.5 px-3 text-center text-gray-700">
-                          {log.reviewerName ? (
-                            <span className="inline-flex items-center gap-1 font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">
-                              {log.reviewerName}
-                            </span>
-                          ) : (
-                            <span className="text-gray-400 italic">Đang chờ duyệt</span>
-                          )}
-                        </td>
-                        <td className="py-2.5 px-3 text-center">
+                        <td className="py-2.5 px-4 text-center">
                           {isApproved ? (
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-[#00A76F]">
-                              Đã duyệt
-                            </span>
+                            <Chip
+                              label="Đã duyệt"
+                              size="small"
+                              color="success"
+                              variant="outlined"
+                              sx={{ fontWeight: 700, fontSize: '10px' }}
+                            />
                           ) : isDraft ? (
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-amber-100 text-amber-800">
-                              Chờ duyệt
-                            </span>
+                            <Chip
+                              label="Chờ duyệt"
+                              size="small"
+                              color="warning"
+                              variant="outlined"
+                              sx={{ fontWeight: 700, fontSize: '10px' }}
+                            />
                           ) : (
-                            <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-red-100 text-red-700">
-                              Từ chối
-                            </span>
+                            <Chip
+                              label="Từ chối"
+                              size="small"
+                              color="error"
+                              variant="outlined"
+                              sx={{ fontWeight: 700, fontSize: '10px' }}
+                            />
                           )}
                         </td>
                       </tr>
@@ -411,9 +482,12 @@ export const DashboardPage: React.FC = () => {
                   <span className="font-bold">CẢNH BÁO TIẾN ĐỘ NGÂN SÁCH (≥ 85%):</span> Không gian đã tiêu thụ {currentEmissions} / {target} kg CO2e ({budgetRatio}%). Vui lòng cân nhắc cắt giảm tiêu thụ năng lượng!
                 </div>
               </div>
-              <span className="font-bold text-amber-700 bg-amber-100 px-2.5 py-1 rounded-lg">
-                Mức Cảnh Báo Sớm
-              </span>
+              <Chip
+                label="Mức Cảnh Báo Sớm"
+                size="small"
+                color="warning"
+                sx={{ fontWeight: 700 }}
+              />
             </div>
           )}
 
@@ -421,7 +495,7 @@ export const DashboardPage: React.FC = () => {
           <div className="flex items-center justify-between">
             <div>
               <h1 className="text-2xl font-bold text-gray-900 tracking-tight">
-                Dashboard Tổng quan Workspace
+                Dashboard Tổng quan Không gian
               </h1>
               <p className="text-xs text-gray-500 mt-0.5">
                 Quyền Trưởng nhóm (Reviewer) • Giám sát hạn ngạch, thành viên và dòng hoạt động phát thải
@@ -564,13 +638,13 @@ export const DashboardPage: React.FC = () => {
             </div>
           </section>
 
-          {/* Analytics Charts Grid */}
+          {/* Analytics Charts Grid using React ApexCharts */}
           <section className="grid grid-cols-1 lg:grid-cols-12 gap-6">
             <div className="lg:col-span-7 bg-white rounded-2xl p-6 border border-gray-200/80 shadow-xs flex flex-col justify-between">
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex items-center justify-between mb-2">
                 <div>
                   <h2 className="text-base font-bold text-gray-900">Xu hướng phát thải Không gian</h2>
-                  <p className="text-xs text-gray-500">6 tháng gần nhất (kg CO2e)</p>
+                  <p className="text-xs text-gray-500">6 tháng gần nhất qua React ApexCharts (kg CO2e)</p>
                 </div>
                 <div className="text-xs font-semibold text-[#00A76F] flex items-center gap-1">
                   <TrendingUp className="w-4 h-4" />
@@ -578,36 +652,13 @@ export const DashboardPage: React.FC = () => {
                 </div>
               </div>
 
-              <div className="w-full h-64 pt-2">
-                <ResponsiveContainer width="100%" height="100%">
-                  <AreaChart data={trendDataWorkspace} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                    <defs>
-                      <linearGradient id="colorEmerald" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="#00A76F" stopOpacity={0.25} />
-                        <stop offset="95%" stopColor="#00A76F" stopOpacity={0.0} />
-                      </linearGradient>
-                    </defs>
-                    <XAxis dataKey="month" stroke="#9ca3af" fontSize={11} tickLine={false} />
-                    <YAxis stroke="#9ca3af" fontSize={11} tickLine={false} />
-                    <Tooltip
-                      formatter={(val: number) => [`${val} kg CO2e`, 'Phát thải']}
-                      contentStyle={{
-                        backgroundColor: '#ffffff',
-                        borderRadius: '12px',
-                        border: '1px solid #e5e7eb',
-                        fontSize: '12px',
-                      }}
-                    />
-                    <Area
-                      type="monotone"
-                      dataKey="emissions"
-                      stroke="#00A76F"
-                      strokeWidth={2.5}
-                      fillOpacity={1}
-                      fill="url(#colorEmerald)"
-                    />
-                  </AreaChart>
-                </ResponsiveContainer>
+              <div className="w-full pt-1">
+                <Chart
+                  options={trendOptionsWorkspace}
+                  series={trendSeriesWorkspace}
+                  type="area"
+                  height={260}
+                />
               </div>
             </div>
 
@@ -617,60 +668,40 @@ export const DashboardPage: React.FC = () => {
                 <p className="text-xs text-gray-500">Tỷ trọng toàn Không gian làm việc</p>
               </div>
 
-              <div className="w-full h-44">
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart>
-                    <Pie
-                      data={categoryDataWorkspace}
-                      cx="50%"
-                      cy="50%"
-                      innerRadius={50}
-                      outerRadius={75}
-                      paddingAngle={4}
-                      dataKey="value"
-                    >
-                      {categoryDataWorkspace.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color} />
-                      ))}
-                    </Pie>
-                    <Tooltip
-                      formatter={(val: number) => [`${val} kg CO2e`, 'Phát thải']}
-                      contentStyle={{
-                        backgroundColor: '#ffffff',
-                        borderRadius: '12px',
-                        border: '1px solid #e5e7eb',
-                        fontSize: '12px',
-                      }}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
+              <div className="w-full flex justify-center py-2">
+                <Chart
+                  options={donutOptionsWorkspace}
+                  series={donutSeriesWorkspace}
+                  type="donut"
+                  height={220}
+                />
               </div>
 
               <div className="grid grid-cols-2 gap-2 text-xs pt-3 border-t border-gray-100">
-                {categoryDataWorkspace.map((cat, i) => (
+                {donutLabelsWorkspace.map((label, i) => (
                   <div key={i} className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: cat.color }} />
-                    <span className="text-gray-600 truncate">{cat.name}:</span>
-                    <span className="font-bold text-gray-900 ml-auto">{cat.value} kg</span>
+                    <span className="w-2.5 h-2.5 rounded-full flex-shrink-0" style={{ backgroundColor: donutColorsWorkspace[i] }} />
+                    <span className="text-gray-600 truncate">{label}:</span>
+                    <span className="font-bold text-gray-900 ml-auto">{donutSeriesWorkspace[i]} kg</span>
                   </div>
                 ))}
               </div>
             </div>
           </section>
 
-          {/* Recent Approved Activities Table (With Reviewer details) */}
+          {/* Recent Approved Activities Table (Title completely without English; Centered numbers, left-aligned names/activities, no reviewer column) */}
           <section className="bg-white rounded-2xl p-6 border border-gray-200/80 shadow-xs">
             <div className="flex items-center justify-between mb-4">
               <div>
                 <h2 className="text-base font-bold text-gray-900">
-                  Hoạt động vừa được phê duyệt gần đây (Recent Approved Activities)
+                  Hoạt động được ghi nhận gần đây
                 </h2>
                 <p className="text-xs text-gray-500">
-                  Bản ghi chính thức kèm thông tin định danh thành viên kiểm duyệt
+                  Bản ghi chính thức đã đối chiếu và ghi vào sổ cái
                 </p>
               </div>
               <Link
-                to={`/workspace/${activeWorkspace.id}/ledger`}
+                to={`/workspace/${activeWorkspace.id}/ledger/approved`}
                 className="text-xs font-semibold text-[#00A76F] hover:underline"
               >
                 Mở toàn bộ Sổ cái &rarr;
@@ -678,39 +709,39 @@ export const DashboardPage: React.FC = () => {
             </div>
 
             <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
+              <table className="w-full text-xs">
                 <thead className="bg-gray-50 text-gray-500 uppercase font-semibold border-b border-gray-200">
                   <tr>
-                    <th className="py-2.5 px-3">Ngày</th>
-                    <th className="py-2.5 px-3">Người nạp</th>
-                    <th className="py-2.5 px-3">Hoạt động</th>
-                    <th className="py-2.5 px-3">Sản lượng</th>
-                    <th className="py-2.5 px-3 text-right">Phát thải (kg CO2e)</th>
-                    <th className="py-2.5 px-3 text-center">Người phê duyệt</th>
-                    <th className="py-2.5 px-3 text-center">Trạng thái</th>
+                    <th className="py-2.5 px-4 text-center">Ngày</th>
+                    <th className="py-2.5 px-4 text-left">Người nạp</th>
+                    <th className="py-2.5 px-4 text-left">Hoạt động</th>
+                    <th className="py-2.5 px-4 text-center">Sản lượng</th>
+                    <th className="py-2.5 px-4 text-center">Phát thải (kg CO2e)</th>
+                    <th className="py-2.5 px-4 text-center">Trạng thái</th>
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100 font-medium">
                   {recentApprovedLogs.map((log) => (
                     <tr key={log.id} className="hover:bg-gray-50/80">
-                      <td className="py-2.5 px-3 font-mono text-gray-600">{log.date}</td>
-                      <td className="py-2.5 px-3 text-gray-800 font-semibold">{log.userName}</td>
-                      <td className="py-2.5 px-3 text-gray-900">{log.activityName}</td>
-                      <td className="py-2.5 px-3 text-gray-600">
+                      <td className="py-2.5 px-4 font-mono text-gray-600 text-center">{log.date}</td>
+                      <td className="py-2.5 px-4 text-gray-800 font-semibold text-left">
+                        {log.userName}
+                      </td>
+                      <td className="py-2.5 px-4 text-gray-900 text-left">{log.activityName}</td>
+                      <td className="py-2.5 px-4 text-gray-600 text-center">
                         {log.quantity} {log.unit}
                       </td>
-                      <td className="py-2.5 px-3 text-right font-bold text-[#00A76F]">
+                      <td className="py-2.5 px-4 text-center font-bold text-[#00A76F]">
                         {log.co2e.toFixed(2)} kg
                       </td>
-                      <td className="py-2.5 px-3 text-center">
-                        <span className="inline-flex items-center gap-1 font-semibold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded text-[11px]">
-                          {log.reviewerName || 'Nguyễn Văn An'}
-                        </span>
-                      </td>
-                      <td className="py-2.5 px-3 text-center">
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-bold bg-emerald-100 text-[#00A76F]">
-                          Đã ghi sổ
-                        </span>
+                      <td className="py-2.5 px-4 text-center">
+                        <Chip
+                          label="Đã ghi sổ"
+                          size="small"
+                          color="success"
+                          variant="outlined"
+                          sx={{ fontWeight: 700, fontSize: '10px' }}
+                        />
                       </td>
                     </tr>
                   ))}
