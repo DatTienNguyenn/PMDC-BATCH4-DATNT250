@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldAlert, ArrowLeft } from 'lucide-react';
+import { ShieldAlert, ArrowLeft, Users } from 'lucide-react';
 
 export const ForbiddenPage: React.FC = () => {
   return (
@@ -18,16 +18,24 @@ export const ForbiddenPage: React.FC = () => {
       </h1>
 
       <p className="text-sm text-gray-600 max-w-md mx-auto mb-8 leading-relaxed">
-        Tài khoản hiện tại của bạn không có đủ thẩm quyền để truy cập vào màn hình này (chức năng yêu cầu quyền Trưởng nhóm Reviewer hoặc System Admin).
+        Tài khoản hiện tại của bạn không có đủ thẩm quyền để truy cập vào màn hình này (chức năng yêu cầu quyền Trưởng nhóm Reviewer hoặc System Admin theo ma trận RBAC).
       </p>
 
-      <div className="flex items-center gap-3">
+      <div className="flex flex-col sm:flex-row items-center gap-3">
         <Link
           to="/workspace/ws-01/dashboard"
           className="px-5 py-2.5 text-xs font-bold text-white bg-[#00A76F] hover:bg-[#00925f] rounded-xl shadow-sm transition-all flex items-center gap-2"
         >
           <ArrowLeft className="w-4 h-4" />
-          <span>Quay lại Dashboard của bạn</span>
+          <span>Về Dashboard của bạn</span>
+        </Link>
+
+        <Link
+          to="/auth/login"
+          className="px-5 py-2.5 text-xs font-bold text-gray-700 bg-white border border-gray-200 hover:bg-gray-50 rounded-xl shadow-xs transition-all flex items-center gap-2"
+        >
+          <Users className="w-4 h-4 text-[#00A76F]" />
+          <span>Đăng nhập vai trò khác</span>
         </Link>
       </div>
     </div>

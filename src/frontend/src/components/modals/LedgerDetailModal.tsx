@@ -58,8 +58,18 @@ export const LedgerDetailModal: React.FC<LedgerDetailModalProps> = ({
                 {log.category} • {log.date}
               </div>
               <h4 className="text-lg font-bold text-gray-900">{log.activityName}</h4>
-              <div className="text-xs text-gray-500 mt-1">
-                Người ghi nhận: <span className="font-semibold text-gray-800">{log.userName}</span>
+              <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
+                <img
+                  src={
+                    log.userAvatar ||
+                    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'
+                  }
+                  alt=""
+                  className="w-5 h-5 rounded-full object-cover"
+                />
+                <span>
+                  Người nạp: <strong className="text-gray-800">{log.userName}</strong>
+                </span>
               </div>
             </div>
 
@@ -95,27 +105,28 @@ export const LedgerDetailModal: React.FC<LedgerDetailModalProps> = ({
               </span>
             </div>
             <div>
-              <span className="text-gray-400 block mb-0.5">Hệ số áp dụng:</span>
+              <span className="text-gray-400 block mb-0.5">Hệ số quy đổi áp dụng:</span>
               <span className="text-sm font-semibold text-gray-800">
                 {log.factorApplied} kg CO2e/{log.unit}
               </span>
             </div>
             <div className="col-span-2 pt-2 border-t border-gray-200 flex items-center justify-between">
-              <span className="text-gray-500 font-semibold">Tổng dấu chân Carbon:</span>
+              <span className="text-gray-500 font-semibold">Tổng dấu chân Carbon quy đổi:</span>
               <span className="text-base font-extrabold text-[#00A76F]">
                 ≈ {log.co2e.toFixed(2)} kg CO2e
               </span>
             </div>
           </div>
 
-          {/* Audit Trail & Approval Trace */}
-          <div className="space-y-2 border-t border-gray-100 pt-3 text-xs">
+          {/* Audit Trail & Approval Trace (Thông tin thành viên phê duyệt) */}
+          <div className="space-y-3 border-t border-gray-100 pt-3 text-xs">
             <h5 className="font-bold text-gray-900 flex items-center gap-1.5">
               <ShieldCheck className="w-4 h-4 text-[#00A76F]" />
-              Vết kiểm toán & Phê duyệt (Audit Trail)
+              Vết kiểm toán & Phê duyệt (Approval Trace)
             </h5>
-            <div className="space-y-1.5 text-gray-600">
-              <div className="flex justify-between">
+
+            <div className="p-3.5 rounded-xl bg-gray-50/80 border border-gray-200 space-y-2 text-gray-600">
+              <div className="flex justify-between items-center">
                 <span>Phương thức nạp:</span>
                 <span className="font-semibold text-gray-800">
                   {log.source === 'MANUAL'
@@ -125,29 +136,44 @@ export const LedgerDetailModal: React.FC<LedgerDetailModalProps> = ({
                     : 'Multimodal AI Vision'}
                 </span>
               </div>
+
+              {/* Reviewer signature */}
               {log.reviewerName && (
-                <div className="flex justify-between">
-                  <span>Người phê duyệt:</span>
-                  <span className="font-semibold text-gray-800">{log.reviewerName}</span>
+                <div className="flex justify-between items-center pt-1 border-t border-gray-100">
+                  <span>Thành viên phê duyệt:</span>
+                  <div className="flex items-center gap-1.5 font-bold text-emerald-800">
+                    <img
+                      src={
+                        log.reviewerAvatar ||
+                        'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'
+                      }
+                      alt=""
+                      className="w-5 h-5 rounded-full object-cover"
+                    />
+                    <span>{log.reviewerName}</span>
+                  </div>
                 </div>
               )}
+
               {log.reviewedAt && (
-                <div className="flex justify-between">
-                  <span>Thời điểm duyệt:</span>
+                <div className="flex justify-between items-center">
+                  <span>Thời điểm phê duyệt:</span>
                   <span className="font-mono text-gray-700">
                     {new Date(log.reviewedAt).toLocaleString('vi-VN')}
                   </span>
                 </div>
               )}
+
               {log.rejectReason && (
                 <div className="p-2.5 rounded-lg bg-red-50 text-red-700 border border-red-200 mt-2">
-                  <span className="font-bold block mb-0.5">Lý do từ chối:</span>
+                  <span className="font-bold block mb-0.5">Lý do từ chối của Trưởng nhóm:</span>
                   {log.rejectReason}
                 </div>
               )}
+
               {log.notes && (
-                <div className="p-2.5 rounded-lg bg-gray-50 text-gray-700 border border-gray-200 mt-1">
-                  <span className="font-semibold block mb-0.5 text-gray-500">Ghi chú:</span>
+                <div className="p-2.5 rounded-lg bg-white text-gray-700 border border-gray-200 mt-1">
+                  <span className="font-semibold block mb-0.5 text-gray-400">Ghi chú nạp liệu:</span>
                   {log.notes}
                 </div>
               )}

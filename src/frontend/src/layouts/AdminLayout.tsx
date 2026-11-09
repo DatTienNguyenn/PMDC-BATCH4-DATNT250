@@ -1,10 +1,15 @@
 import React from 'react';
-import { Outlet, NavLink, Link } from 'react-router-dom';
+import { Outlet, NavLink, Link, Navigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Shield, LayoutDashboard, Calculator, Building, ArrowLeft } from 'lucide-react';
 
 export const AdminLayout: React.FC = () => {
   const { currentUser } = useAuth();
+
+  // RBAC Guard: Only SYSTEM_ADMIN can access Admin Console
+  if (currentUser?.globalRole !== 'SYSTEM_ADMIN') {
+    return <Navigate to="/403" replace />;
+  }
 
   return (
     <div className="bg-[#f7f9ff] text-[#121c27] antialiased min-h-screen flex flex-col font-sans">
@@ -33,11 +38,11 @@ export const AdminLayout: React.FC = () => {
 
         <div className="flex items-center gap-4">
           <Link
-            to="/workspace/ws-01/dashboard"
+            to="/auth/login"
             className="flex items-center gap-1.5 text-xs font-semibold px-3 py-1.5 rounded-xl border border-gray-200 bg-white text-gray-700 hover:bg-gray-50 hover:text-[#00A76F] transition-all"
           >
             <ArrowLeft className="w-3.5 h-3.5" />
-            Quay lại Ứng dụng
+            Đổi Tài khoản
           </Link>
 
           <div className="flex items-center gap-2">

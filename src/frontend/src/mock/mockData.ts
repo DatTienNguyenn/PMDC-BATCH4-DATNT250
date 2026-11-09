@@ -9,41 +9,61 @@ import {
   NotificationItem,
 } from '../types';
 
+// ==========================================
+// 1. MOCK ACCOUNTS ĐẦY ĐỦ 3 ROLES CHO ĐĂNG NHẬP
+// ==========================================
 export const MOCK_USERS: User[] = [
   {
-    id: 'user-01',
-    name: 'Nguyễn Văn An (Reviewer)',
-    email: 'an.nguyen@carbonledger.vn',
+    id: 'user-ws-admin',
+    name: 'Nguyễn Văn An',
+    email: 'admin.workspace@carbonledger.vn',
+    password: 'password123',
     globalRole: 'USER',
+    workspaceRole: 'REVIEWER',
+    roleBadge: 'Workspace Admin (Reviewer)',
     avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
+    description: 'Trưởng nhóm gia đình / Văn phòng: Xem toàn bộ Dashboard tổng quan, kiểm duyệt Sổ cái, cấu hình Ngân sách 85% & Thông số nền, xem Báo cáo AI và Xuất PDF Kế hoạch.',
+    defaultPath: '/workspace/ws-01/dashboard',
   },
   {
-    id: 'user-02',
-    name: 'Trần Thị Bình (Member)',
-    email: 'binh.tran@carbonledger.vn',
+    id: 'user-ws-member',
+    name: 'Trần Thị Bình',
+    email: 'member@carbonledger.vn',
+    password: 'password123',
     globalRole: 'USER',
+    workspaceRole: 'EDITOR',
+    roleBadge: 'Workspace Member (Editor)',
     avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
+    description: 'Thành viên gia đình: Khai báo phát thải cá nhân (trạng thái Chờ duyệt Draft), xem Dashboard phân tích cá nhân của riêng mình. Bị chặn 403 các màn quản trị.',
+    defaultPath: '/workspace/ws-01/dashboard',
   },
   {
-    id: 'admin-01',
-    name: 'Vũ Quản Trị (SysAdmin)',
-    email: 'admin@carbonledger.vn',
+    id: 'user-sys-admin',
+    name: 'Vũ Quản Trị',
+    email: 'sysadmin@carbonledger.vn',
+    password: 'password123',
     globalRole: 'SYSTEM_ADMIN',
+    roleBadge: 'System Admin (Global)',
     avatarUrl: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80',
+    description: 'Quản trị viên Hệ thống: Quản lý danh mục Hệ số phát thải quốc gia (EVN, IPCC, Bộ TN&MT), giám sát Dashboard toàn hệ thống và Danh sách Workspace Tenants.',
+    defaultPath: '/admin/dashboard',
   },
 ];
 
+// ==========================================
+// 2. MOCK WORKSPACES (MULTI-TENANT)
+// ==========================================
 export const MOCK_WORKSPACES: Workspace[] = [
   {
     id: 'ws-01',
     name: 'Gia Đình Xanh',
     type: 'HOUSEHOLD',
-    ownerId: 'user-01',
+    ownerId: 'user-ws-admin',
     inviteCode: 'GRN888',
     memberCount: 4,
-    floorArea: 120,
-    monthlyTarget: 125.0,
-    currentEmissions: 85.4,
+    floorArea: 120, // m2
+    monthlyTarget: 125.0, // kg CO2e
+    currentEmissions: 85.4, // kg CO2e (68.3% hạn ngạch)
     status: 'ACTIVE',
     createdAt: '2026-01-15T08:00:00Z',
   },
@@ -51,39 +71,45 @@ export const MOCK_WORKSPACES: Workspace[] = [
     id: 'ws-02',
     name: 'Văn Phòng Công Nghệ Sáng Tạo',
     type: 'SMALL_OFFICE',
-    ownerId: 'user-01',
+    ownerId: 'user-ws-admin',
     inviteCode: 'OFF999',
     memberCount: 10,
-    floorArea: 250,
-    monthlyTarget: 2500.0,
-    currentEmissions: 2180.0, // 87.2% -> Vượt ngưỡng 85%!
+    floorArea: 250, // m2
+    monthlyTarget: 2500.0, // kg CO2e
+    currentEmissions: 2180.0, // 87.2% -> Kích hoạt Cảnh báo ngưỡng 85%!
     status: 'ACTIVE',
     createdAt: '2026-02-01T09:30:00Z',
   },
 ];
 
+// ==========================================
+// 3. MOCK THÀNH VIÊN & NGƯỜI PHÊ DUYỆT (MEMBERS)
+// ==========================================
 export const MOCK_MEMBERS: WorkspaceMember[] = [
   {
     id: 'mem-01',
     workspaceId: 'ws-01',
-    userId: 'user-01',
-    name: 'Nguyễn Văn An',
-    email: 'an.nguyen@carbonledger.vn',
+    userId: 'user-ws-admin',
+    name: 'Nguyễn Văn An (Trưởng nhóm)',
+    email: 'admin.workspace@carbonledger.vn',
     role: 'REVIEWER',
     joinedAt: '2026-01-15T08:00:00Z',
     avatarUrl: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
     monthlyEmissions: 32.5,
+    approvedCount: 14,
+    submittedCount: 8,
   },
   {
     id: 'mem-02',
     workspaceId: 'ws-01',
-    userId: 'user-02',
+    userId: 'user-ws-member',
     name: 'Trần Thị Bình',
-    email: 'binh.tran@carbonledger.vn',
+    email: 'member@carbonledger.vn',
     role: 'EDITOR',
     joinedAt: '2026-01-18T10:15:00Z',
     avatarUrl: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
     monthlyEmissions: 28.4,
+    submittedCount: 11,
   },
   {
     id: 'mem-03',
@@ -95,6 +121,7 @@ export const MOCK_MEMBERS: WorkspaceMember[] = [
     joinedAt: '2026-02-01T14:20:00Z',
     avatarUrl: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
     monthlyEmissions: 14.2,
+    submittedCount: 6,
   },
   {
     id: 'mem-04',
@@ -106,9 +133,13 @@ export const MOCK_MEMBERS: WorkspaceMember[] = [
     joinedAt: '2026-02-10T11:00:00Z',
     avatarUrl: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&auto=format&fit=crop&q=80',
     monthlyEmissions: 10.3,
+    submittedCount: 4,
   },
 ];
 
+// ==========================================
+// 4. MOCK ĐƠN XIN GIA NHẬP (JOIN REQUESTS)
+// ==========================================
 export const MOCK_JOIN_REQUESTS: JoinRequest[] = [
   {
     id: 'req-01',
@@ -128,11 +159,14 @@ export const MOCK_JOIN_REQUESTS: JoinRequest[] = [
     userName: 'Đỗ Thảo Vy',
     userEmail: 'vy.do@carbonledger.vn',
     status: 'REJECTED',
-    rejectReason: 'Không thuộc thành viên trong gia đình.',
+    rejectReason: 'Không đúng mã xác nhận nội bộ gia đình.',
     createdAt: '2026-11-05T15:30:00Z',
   },
 ];
 
+// ==========================================
+// 5. MASTER DATA HỆ SỐ QUY CHUẨN QUỐC GIA
+// ==========================================
 export const MOCK_FACTORS: StandardEmissionFactor[] = [
   {
     id: 'ef-01',
@@ -157,7 +191,7 @@ export const MOCK_FACTORS: StandardEmissionFactor[] = [
   {
     id: 'ef-03',
     category: 'TRANSPORT',
-    name: 'Dầu Diesel (Xe công vụ / Bus)',
+    name: 'Dầu Diesel (Xe bán tải / Bus)',
     factor: 2.68,
     unit: 'Lít',
     source: 'IPCC Guidelines',
@@ -177,12 +211,12 @@ export const MOCK_FACTORS: StandardEmissionFactor[] = [
   {
     id: 'ef-05',
     category: 'WATER',
-    name: 'Nước sạch sinh hoạt',
+    name: 'Nước sạch sinh hoạt đô thị',
     factor: 0.316,
     unit: 'm³',
-    source: 'Công ty Cấp nước Đô thị',
+    source: 'Công ty Cấp nước Hà Nội / SG',
     updatedAt: '2026-01-10',
-    description: 'Năng lượng khai thác, xử lý và phân phối nước sạch.',
+    description: 'Năng lượng xử lý và phân phối nước sạch qua đường ống.',
   },
   {
     id: 'ef-06',
@@ -192,17 +226,17 @@ export const MOCK_FACTORS: StandardEmissionFactor[] = [
     unit: 'kg',
     source: 'IPCC Waste Model',
     updatedAt: '2026-01-10',
-    description: 'Phân hủy kỵ khí sinh khí metan tại bãi chôn lấp.',
+    description: 'Phân hủy sinh khí metan tại các bãi chôn lấp tập trung.',
   },
   {
     id: 'ef-07',
     category: 'FUGITIVE',
-    name: 'Rò rỉ môi chất lạnh R32',
+    name: 'Rò rỉ môi chất lạnh R32 (Máy lạnh)',
     factor: 4.5,
     unit: 'lần bảo dưỡng',
     source: 'National Fugitive Benchmark',
     updatedAt: '2026-01-10',
-    description: 'Bảo dưỡng và nạp ga bổ sung máy lạnh inverter.',
+    description: 'Thất thoát gas lạnh điều hòa inverter trong sinh hoạt.',
   },
   {
     id: 'ef-08',
@@ -212,16 +246,20 @@ export const MOCK_FACTORS: StandardEmissionFactor[] = [
     unit: 'km',
     source: 'Metro Hanoi Environmental Report',
     updatedAt: '2026-01-10',
-    description: 'Giao thông công cộng xanh sử dụng điện năng tập trung.',
+    description: 'Phương tiện công cộng xanh sử dụng điện năng tập trung.',
   },
 ];
 
+// ==========================================
+// 6. MOCK CÁC HOẠT ĐỘNG PHÁT THẢI & VẾT DUYỆT CỦA THÀNH VIÊN
+// ==========================================
 export const MOCK_EMISSION_LOGS: EmissionLog[] = [
+  // --- BẢN GHI ĐÃ DUYỆT (APPROVED BY NGUYEN VAN AN) ---
   {
     id: 'log-01',
     workspaceId: 'ws-01',
-    userId: 'user-01',
-    userName: 'Nguyễn Văn An',
+    userId: 'user-ws-admin',
+    userName: 'Nguyễn Văn An (Trưởng nhóm)',
     userAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
     category: 'ELECTRICITY',
     activityName: 'Hóa đơn tiền điện EVN T10/2026',
@@ -233,19 +271,20 @@ export const MOCK_EMISSION_LOGS: EmissionLog[] = [
     date: '2026-11-02',
     source: 'AI_VISION',
     receiptUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&auto=format&fit=crop&q=80',
-    reviewedBy: 'user-01',
+    reviewedBy: 'user-ws-admin',
     reviewerName: 'Nguyễn Văn An (Tự duyệt)',
+    reviewerAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
     reviewedAt: '2026-11-02T10:00:00Z',
-    notes: 'Quét tự động từ hóa đơn điện lực EVN Hà Nội.',
+    notes: 'Quét tự động từ Hóa đơn Điện tử EVN số HĐ: 2609-8812.',
   },
   {
     id: 'log-02',
     workspaceId: 'ws-01',
-    userId: 'user-02',
+    userId: 'user-ws-member',
     userName: 'Trần Thị Bình',
     userAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
     category: 'TRANSPORT',
-    activityName: 'Đổ xăng xe máy đi làm cả tuần',
+    activityName: 'Đổ xăng xe máy Lead đi làm cả tuần',
     quantity: 5.5,
     unit: 'Lít',
     factorApplied: 2.31,
@@ -253,19 +292,20 @@ export const MOCK_EMISSION_LOGS: EmissionLog[] = [
     status: 'APPROVED',
     date: '2026-11-04',
     source: 'MANUAL',
-    reviewedBy: 'user-01',
-    reviewerName: 'Nguyễn Văn An',
+    reviewedBy: 'user-ws-admin',
+    reviewerName: 'Nguyễn Văn An (Trưởng nhóm)',
+    reviewerAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
     reviewedAt: '2026-11-04T18:30:00Z',
-    notes: 'Cây xăng Petrolimex số 3.',
+    notes: 'Đã đối chiếu hóa đơn cây xăng Petrolimex.',
   },
   {
     id: 'log-03',
     workspaceId: 'ws-01',
-    userId: 'user-02',
+    userId: 'user-ws-member',
     userName: 'Trần Thị Bình',
     userAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
     category: 'GAS',
-    activityName: 'Đổi bình gas PetroVietnam 12kg',
+    activityName: 'Đổi bình gas PetroVietnam 12kg nấu ăn',
     quantity: 4.0,
     unit: 'kg',
     factorApplied: 2.983,
@@ -273,10 +313,11 @@ export const MOCK_EMISSION_LOGS: EmissionLog[] = [
     status: 'APPROVED',
     date: '2026-11-05',
     source: 'MANUAL',
-    reviewedBy: 'user-01',
-    reviewerName: 'Nguyễn Văn An',
+    reviewedBy: 'user-ws-admin',
+    reviewerName: 'Nguyễn Văn An (Trưởng nhóm)',
+    reviewerAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
     reviewedAt: '2026-11-05T20:10:00Z',
-    notes: 'Chia sẻ lượng tiêu thụ theo tháng.',
+    notes: 'Phân bổ lượng gas tiêu thụ thực tế theo tháng.',
   },
   {
     id: 'log-04',
@@ -293,10 +334,11 @@ export const MOCK_EMISSION_LOGS: EmissionLog[] = [
     status: 'APPROVED',
     date: '2026-11-06',
     source: 'EXCEL',
-    reviewedBy: 'user-01',
-    reviewerName: 'Nguyễn Văn An',
+    reviewedBy: 'user-ws-admin',
+    reviewerName: 'Nguyễn Văn An (Trưởng nhóm)',
+    reviewerAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
     reviewedAt: '2026-11-06T14:00:00Z',
-    notes: 'Nạp hàng loạt qua file mẫu Excel.',
+    notes: 'Nạp hàng loạt qua file mẫu Excel template.',
   },
   {
     id: 'log-05',
@@ -305,7 +347,7 @@ export const MOCK_EMISSION_LOGS: EmissionLog[] = [
     userName: 'Phạm Ngọc Diệp',
     userAvatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&auto=format&fit=crop&q=80',
     category: 'WASTE',
-    activityName: 'Rác hữu cơ thực phẩm phân loại',
+    activityName: 'Rác hữu cơ thực phẩm phân loại ủ phân',
     quantity: 20.2,
     unit: 'kg',
     factorApplied: 0.45,
@@ -313,20 +355,22 @@ export const MOCK_EMISSION_LOGS: EmissionLog[] = [
     status: 'APPROVED',
     date: '2026-11-07',
     source: 'MANUAL',
-    reviewedBy: 'user-01',
-    reviewerName: 'Nguyễn Văn An',
+    reviewedBy: 'user-ws-admin',
+    reviewerName: 'Nguyễn Văn An (Trưởng nhóm)',
+    reviewerAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
     reviewedAt: '2026-11-07T08:45:00Z',
+    notes: 'Kê khai phân loại rác thải nhà bếp tuần 1.',
   },
 
-  // 5 PENDING APPROVAL REQUESTS (from Member Binh)
+  // --- 5 BẢN GHI ĐANG CHỜ DUYỆT (PENDING REVIEW / DRAFT CHO REVIEWER DUYỆT) ---
   {
     id: 'log-p01',
     workspaceId: 'ws-01',
-    userId: 'user-02',
+    userId: 'user-ws-member',
     userName: 'Trần Thị Bình',
     userAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
     category: 'TRANSPORT',
-    activityName: 'Đổ xăng ô tô gia đình đi dã ngoại',
+    activityName: 'Đổ xăng ô tô gia đình đi dã ngoại Ba Vì',
     quantity: 35.0,
     unit: 'Lít',
     factorApplied: 2.31,
@@ -335,16 +379,16 @@ export const MOCK_EMISSION_LOGS: EmissionLog[] = [
     date: '2026-11-08',
     source: 'AI_VISION',
     receiptUrl: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&auto=format&fit=crop&q=80',
-    notes: 'Hóa đơn cây xăng cao tốc Nội Bài - Lào Cai.',
+    notes: 'Quét hóa đơn xăng dầu Petrolimex trạm cao tốc.',
   },
   {
     id: 'log-p02',
     workspaceId: 'ws-01',
-    userId: 'user-02',
+    userId: 'user-ws-member',
     userName: 'Trần Thị Bình',
     userAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
     category: 'ELECTRICITY',
-    activityName: 'Điện sạc xe máy điện VinFast 3 ngày',
+    activityName: 'Điện sạc xe máy điện VinFast Feliz 3 ngày',
     quantity: 12.0,
     unit: 'kWh',
     factorApplied: 0.7221,
@@ -352,7 +396,7 @@ export const MOCK_EMISSION_LOGS: EmissionLog[] = [
     status: 'DRAFT',
     date: '2026-11-08',
     source: 'MANUAL',
-    notes: 'Đồng hồ công tơ phụ tầng 1.',
+    notes: 'Ghi chỉ số từ công tơ điện tử tầng 1.',
   },
   {
     id: 'log-p03',
@@ -361,7 +405,7 @@ export const MOCK_EMISSION_LOGS: EmissionLog[] = [
     userName: 'Lê Hoàng Cường',
     userAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
     category: 'TRANSPORT',
-    activityName: 'Đi lại xe ôm công nghệ Grab/Be',
+    activityName: 'Đi lại xe ôm công nghệ Grab/Be 4 chuyến',
     quantity: 4.2,
     unit: 'Lít',
     factorApplied: 2.31,
@@ -369,7 +413,7 @@ export const MOCK_EMISSION_LOGS: EmissionLog[] = [
     status: 'DRAFT',
     date: '2026-11-09',
     source: 'MANUAL',
-    notes: 'Ước lượng qua số km chuyến đi.',
+    notes: 'Ước lượng lượng xăng tiêu hao theo số km di chuyển.',
   },
   {
     id: 'log-p04',
@@ -378,7 +422,7 @@ export const MOCK_EMISSION_LOGS: EmissionLog[] = [
     userName: 'Phạm Ngọc Diệp',
     userAvatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&auto=format&fit=crop&q=80',
     category: 'WASTE',
-    activityName: 'Rác thải tái chế vỏ lon & nhựa',
+    activityName: 'Rác thải tái chế vỏ lon nhôm & hộp giấy',
     quantity: 15.0,
     unit: 'kg',
     factorApplied: 0.45,
@@ -386,16 +430,16 @@ export const MOCK_EMISSION_LOGS: EmissionLog[] = [
     status: 'DRAFT',
     date: '2026-11-09',
     source: 'EXCEL',
-    notes: 'Tổng kết tuần đầu tháng 11.',
+    notes: 'File tổng kết thu gom ve chai cuối tuần.',
   },
   {
     id: 'log-p05',
     workspaceId: 'ws-01',
-    userId: 'user-02',
+    userId: 'user-ws-member',
     userName: 'Trần Thị Bình',
     userAvatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80',
     category: 'FUGITIVE',
-    activityName: 'Bảo dưỡng định kỳ điều hòa Daikin phòng khách',
+    activityName: 'Bảo dưỡng định kỳ điều hòa Daikin phòng ngủ',
     quantity: 1.0,
     unit: 'lần bảo dưỡng',
     factorApplied: 4.5,
@@ -403,10 +447,10 @@ export const MOCK_EMISSION_LOGS: EmissionLog[] = [
     status: 'DRAFT',
     date: '2026-11-09',
     source: 'MANUAL',
-    notes: 'Thợ nạp thêm 200g ga R32.',
+    notes: 'Thợ điện lạnh kiểm tra rò rỉ và nạp bổ sung gas R32.',
   },
 
-  // 1 REJECTED LOG FOR AUDIT TRAIL
+  // --- BẢN GHI BỊ TỪ CHỐI (REJECTED VỚI LÝ DO RÕ RÀNG) ---
   {
     id: 'log-r01',
     workspaceId: 'ws-01',
@@ -414,7 +458,7 @@ export const MOCK_EMISSION_LOGS: EmissionLog[] = [
     userName: 'Lê Hoàng Cường',
     userAvatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80',
     category: 'TRANSPORT',
-    activityName: 'Đi công tác máy bay Hà Nội - TP.HCM',
+    activityName: 'Vé máy bay công tác Hà Nội - TP.HCM',
     quantity: 120.0,
     unit: 'Lít',
     factorApplied: 2.31,
@@ -422,14 +466,18 @@ export const MOCK_EMISSION_LOGS: EmissionLog[] = [
     status: 'REJECTED',
     date: '2026-11-01',
     source: 'MANUAL',
-    reviewedBy: 'user-01',
-    reviewerName: 'Nguyễn Văn An',
+    reviewedBy: 'user-ws-admin',
+    reviewerName: 'Nguyễn Văn An (Trưởng nhóm)',
+    reviewerAvatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80',
     reviewedAt: '2026-11-01T16:00:00Z',
-    rejectReason: 'Chi phí công tác đã được công ty kê khai Scope 3 riêng, không tính vào sổ cái gia đình.',
-    notes: 'Kê khai nhầm lẫn.',
+    rejectReason: 'Chi phí công tác thuộc Scope 3 của doanh nghiệp, không tính vào sổ cái sinh hoạt gia đình.',
+    notes: 'Thành viên kê khai nhầm phạm vi cá nhân.',
   },
 ];
 
+// ==========================================
+// 7. MOCK THÔNG BÁO HỆ THỐNG & CẢNH BÁO
+// ==========================================
 export const MOCK_NOTIFICATIONS: NotificationItem[] = [
   {
     id: 'notif-01',
@@ -473,6 +521,9 @@ export const MOCK_NOTIFICATIONS: NotificationItem[] = [
   },
 ];
 
+// ==========================================
+// 8. MOCK AI REPORT (GEMINI REASONING)
+// ==========================================
 export const MOCK_AI_REPORT: AIInsightReport = {
   id: 'rep-01',
   workspaceId: 'ws-01',

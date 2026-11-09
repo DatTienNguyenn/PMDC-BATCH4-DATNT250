@@ -8,29 +8,42 @@ interface AuthContextType {
   isSysAdmin: boolean;
   login: (user: User) => void;
   logout: () => void;
-  switchUser: (userId: string, role?: WorkspaceRole) => void;
-  setWorkspaceRole: (role: WorkspaceRole) => void;
+  switchUser: (userId: string) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Default to Reviewer An
-  const [currentUser, setCurrentUser] = useState<User | null>(MOCK_USERS[0]);
-  const [workspaceRole, setWorkspaceRole] = useState<WorkspaceRole>('REVIEWER');
+  // Default to Workspace Admin (Nguyen Van An) on first load
+  const [currentUser, setCurrentUser] = useState<User | null>(() => {
+    const savedId = localStorage.getItem('carbonledger_user_id');
+    const found = MOCK_USERS.find((u) => u.id === savedId);
+    return found || MOCK_USERS[0];
+  });
+
+  const [workspaceRole, setWorkspaceRole] = useState<WorkspaceRole>(() => {
+    return currentUser?.workspaceRole || 'REVIEWER';
+  });
 
   useEffect(() => {
-    if (currentUser?.globalRole === 'SYSTEM_ADMIN') {
-      setWorkspaceRole('REVIEWER');
+    if (currentUser) {
+      localStorage.setItem('carbonledger_user_id', currentUser.id);
+      if (currentUser.globalRole === 'SYSTEM_ADMIN') {
+        setWorkspaceRole('REVIEWER');
+      } else {
+        setWorkspaceRole(currentUser.workspaceRole || 'REVIEWER');
+      }
+    } else {
+      localStorage.removeItem('carbonledger_user_id');
     }
   }, [currentUser]);
 
   const login = (user: User) => {
     setCurrentUser(user);
-    if (user.id === 'user-02') {
-      setWorkspaceRole('EDITOR');
-    } else {
+    if (user.globalRole === 'SYSTEM_ADMIN') {
       setWorkspaceRole('REVIEWER');
+    } else {
+      setWorkspaceRole(user.workspaceRole || 'REVIEWER');
     }
   };
 
@@ -38,17 +51,10 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     setCurrentUser(null);
   };
 
-  const switchUser = (userId: string, targetRole?: WorkspaceRole) => {
+  const switchUser = (userId: string) => {
     const found = MOCK_USERS.find((u) => u.id === userId);
     if (found) {
-      setCurrentUser(found);
-      if (targetRole) {
-        setWorkspaceRole(targetRole);
-      } else if (found.id === 'user-02') {
-        setWorkspaceRole('EDITOR');
-      } else {
-        setWorkspaceRole('REVIEWER');
-      }
+      login(found);
     }
   };
 
@@ -61,7 +67,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         login,
         logout,
         switchUser,
-        setWorkspaceRole,
       }}
     >
       {children}

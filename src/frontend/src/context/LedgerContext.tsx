@@ -52,6 +52,7 @@ export const LedgerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       status: isReviewer ? 'APPROVED' : 'DRAFT',
       reviewedBy: isReviewer ? currentUser?.id : undefined,
       reviewerName: isReviewer ? `${currentUser?.name} (Tự duyệt)` : undefined,
+      reviewerAvatar: isReviewer ? currentUser?.avatarUrl : undefined,
       reviewedAt: isReviewer ? new Date().toISOString() : undefined,
     };
 
@@ -67,7 +68,8 @@ export const LedgerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
               ...log,
               status: 'APPROVED',
               reviewedBy: currentUser?.id,
-              reviewerName: currentUser?.name,
+              reviewerName: currentUser?.name || 'Nguyễn Văn An (Trưởng nhóm)',
+              reviewerAvatar: currentUser?.avatarUrl,
               reviewedAt: new Date().toISOString(),
             }
           : log
@@ -84,7 +86,8 @@ export const LedgerProvider: React.FC<{ children: React.ReactNode }> = ({ childr
               status: 'REJECTED',
               rejectReason: reason,
               reviewedBy: currentUser?.id,
-              reviewerName: currentUser?.name,
+              reviewerName: currentUser?.name || 'Nguyễn Văn An (Trưởng nhóm)',
+              reviewerAvatar: currentUser?.avatarUrl,
               reviewedAt: new Date().toISOString(),
             }
           : log

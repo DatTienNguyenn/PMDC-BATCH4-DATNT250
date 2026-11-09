@@ -5,8 +5,13 @@ export interface User {
   id: string;
   name: string;
   email: string;
+  password?: string;
   globalRole: GlobalRole;
+  workspaceRole?: WorkspaceRole;
   avatarUrl: string;
+  roleBadge: string;
+  description: string;
+  defaultPath: string;
 }
 
 export type WorkspaceType = 'HOUSEHOLD' | 'SMALL_OFFICE';
@@ -35,6 +40,8 @@ export interface WorkspaceMember {
   joinedAt: string;
   avatarUrl?: string;
   monthlyEmissions: number; // kg CO2e
+  approvedCount?: number;
+  submittedCount?: number;
 }
 
 export type JoinRequestStatus = 'PENDING' | 'ACCEPTED' | 'REJECTED';
@@ -80,6 +87,7 @@ export interface EmissionLog {
   receiptUrl?: string;
   reviewedBy?: string;
   reviewerName?: string;
+  reviewerAvatar?: string;
   reviewedAt?: string;
   rejectReason?: string;
   notes?: string;
@@ -106,7 +114,7 @@ export interface AIQuickWin {
 }
 
 export interface AIRoadmapPhase {
-  phase: string; // e.g. "Tháng 11/2026"
+  phase: string;
   title: string;
   targetKg: number;
   targetReduction: string;
