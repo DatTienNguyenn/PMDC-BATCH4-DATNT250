@@ -117,7 +117,7 @@ flowchart TD
 ```mermaid
 sequenceDiagram
     autonumber
-    participant Actor as Reviewer / Cron Scheduler
+    participant Reviewer as Reviewer / Cron Scheduler
     participant Controller as AIReportController
     participant Service as AIInsightService
     participant Aggregator as CarbonDataAggregator
@@ -126,10 +126,10 @@ sequenceDiagram
     participant UsageLog as AIUsageLogger
 
     alt Kích hoạt tự động định kỳ
-        Actor->>Service: triggerScheduledInsightJob()
-        Service->>DB: Query workspaces có ai_report_frequency != 'DISABLED' & khớp lịch
+        Reviewer->>Service: triggerScheduledInsightJob()
+        Service->>DB: Query workspaces có ai_report_frequency hợp lệ và khớp lịch
     else Kích hoạt bằng tay tức thời (On-demand)
-        Actor->>Controller: POST /api/v1/workspaces/{id}/ai-reports/generate-manual
+        Reviewer->>Controller: POST /api/v1/workspaces/:id/ai-reports/generate-manual
         Controller->>Service: generateManualReport(workspaceId, period)
     end
 
@@ -144,17 +144,17 @@ sequenceDiagram
     Service->>Gemini: POST /v1beta/models/gemini-1.5-flash:generateContent (Structured JSON)
     Note over Service,Gemini: Áp dụng Timeout 15s (Circuit Breaker)
     
-    alt Gemini phản hồi thành công trong ≤ 5s
+    alt Gemini phản hồi thành công trong vòng 5s
         Gemini-->>Service: JSON String Response (executive_summary, actions, breakdown)
         Service->>Service: Validate JSON Schema
         Service->>DB: INSERT INTO ai_reports (...)
         Service->>UsageLog: logAIUsage(prompt_tokens, completion_tokens, latency_ms)
         UsageLog->>DB: INSERT INTO ai_usage_logs (...)
-        Service-->>Actor: Trả về Báo cáo AI hoàn chỉnh (Status 200/201)
-    else Timeout > 15s hoặc lỗi kết nối (503/429)
+        Service-->>Reviewer: Trả về Báo cáo AI hoàn chỉnh (Status 200/201)
+    else Timeout trên 15s hoặc lỗi kết nối (503/429)
         Gemini-->>Service: Error / Timeout
         Service->>UsageLog: logAIError("AI_SERVICE_UNAVAILABLE")
-        Service-->>Actor: Fallback Response thân thiện: "Dịch vụ AI đang bận. Hệ thống sẽ tự động thử lại..."
+        Service-->>Reviewer: Fallback Response thông báo hệ thống bận
     end
 ```
 
@@ -175,10 +175,10 @@ sequenceDiagram
 | `workspace_info.floor_area_m2` | `workspace_baselines.floor_area_m2` | `DECIMAL` | Diện tích mặt sàn để đánh giá cường độ tiêu thụ điện/máy lạnh ($m^2$). |
 | `workspace_info.location` | `workspaces.name` / Meta | `VARCHAR` | Địa bàn (Hà Nội, TP.HCM...) để AI gợi ý phương tiện công cộng đặc thù (Metro, VinBus). |
 | `benchmark_reference.per_capita_kg` | `system_reference_benchmarks` | `DECIMAL` | Mức chuẩn quốc gia ($155.25\text{ kg}$ cho gia đình, $305.83\text{ kg}$ cho văn phòng). |
-| `benchmark_reference.workspace_total_kg` | Tính toán: $\text{per\_capita} \times N$ | `DECIMAL` | Tổng phát thải chuẩn trần của cả Workspace để AI đánh giá mức độ tiết kiệm. |
+| `benchmark_reference.workspace_total_kg` | Tính toán: $\text{Ref}_{\text{capita}} \times N$ | `DECIMAL` | Tổng phát thải chuẩn trần của cả Workspace để AI đánh giá mức độ tiết kiệm. |
 | `current_period.total_emissions_kg` | `SUM(emission_logs.total_co2e_kg)` | `DECIMAL` | Tổng lượng phát thải thực tế kỳ này của các bản ghi `APPROVED`. |
 | `current_period.breakdown` | Gom nhóm theo `category_code` | `OBJECT` | Phân bổ từng nhóm (`ELEC_GRID`, `MOBILITY`, `FUEL_LPG`, `WATER`...) kèm kg và %. |
-| `historical.variance_vs_last_period_pct` | $\frac{\text{Kỳ này} - \text{Kỳ trước}}{\text{Kỳ trước}} \times 100$ | `DECIMAL` | Tỷ lệ tăng giảm phát thải tổng thể kỳ này so với kỳ trước. |
+| `historical.variance_vs_last_period_pct` | `(Kỳ này - Kỳ trước) / Kỳ trước * 100` | `DECIMAL` | Tỷ lệ tăng giảm phát thải tổng thể kỳ này so với kỳ trước. |
 | `historical.category_variances` | So sánh delta từng danh mục | `OBJECT` | **Dữ liệu then chốt:** Tỷ lệ tăng/giảm của từng danh mục để AI phát hiện bất thường đột biến. |
 | `plan_request.target_pct` | Request Body | `DECIMAL` | Tỷ lệ cắt giảm mục tiêu (ví dụ: $15\%$) do Reviewer chỉ định khi lập Roadmap. |
 | `plan_request.time_horizon_months`| Request Body | `INT` | Số tháng cần chia chặng lộ trình (ví dụ: $3$ tháng). |
@@ -863,11 +863,11 @@ public class ScheduledInsightWorker {
   - **Kết luận:** Hoàn toàn thỏa mãn yêu cầu phi chức năng NFR-02 và NFR-04.
 
 ### 8.2. Ước tính Chi phí Token (Token Consumption & Pricing)
-Căn cứ theo biểu giá chính thức của Google Gemini 1.5 Flash ($0.075 / 1\text{M prompt tokens}$, $0.30 / 1\text{M completion tokens}$):
-- **Input Prompt:** $\sim 800\text{ tokens}$ ($\sim \$0.00006$).
-- **Output Completion:** $\sim 600\text{ tokens}$ ($\sim \$0.00018$).
-- **Tổng chi phí cho 1 báo cáo AI:** $\mathbf{\sim \$0.00024\text{ USD}}$ ($\approx 6\text{ VNĐ}$ cho một lần phân tích).
-- **Quy mô 10,000 Workspaces/tháng:** Chi phí AI chỉ vào khoảng $\sim \$2.4\text{ USD/tháng}$ ($\approx 60,000\text{ VNĐ/tháng}$), tối ưu ngân sách cực cao cho giai đoạn khởi động dự án.
+Căn cứ theo biểu giá chính thức của Google Gemini 1.5 Flash (0.075 USD / 1M prompt tokens, 0.30 USD / 1M completion tokens):
+- **Input Prompt:** ~800 tokens (~0.00006 USD).
+- **Output Completion:** ~600 tokens (~0.00018 USD).
+- **Tổng chi phí cho 1 báo cáo AI:** **~0.00024 USD** (~6 VNĐ cho một lần phân tích).
+- **Quy mô 10,000 Workspaces/tháng:** Chi phí AI chỉ vào khoảng **~2.4 USD/tháng** (~60,000 VNĐ/tháng), tối ưu ngân sách cực cao cho giai đoạn khởi động dự án.
 
 ---
 
