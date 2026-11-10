@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: carbonledger-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${DB_NAME:-carbon_ledger}
+      POSTGRES_USER: ${DB_USER:-carbon_admin}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-carbon_secret}
+      TZ: Asia/Ho_Chi_Minh
+    ports:
+      - "${DB_PORT:-5432}:5432"
+    volumes:
+      - ./01_schema.sql:/docker-entrypoint-initdb.d/01_schema.sql:ro
+      - ./02_seed.sql:/docker-entrypoint-initdb.d/02_seed.sql:ro
+      - carbon_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-carbon_admin} -d ${DB_NAME:-carbon_ledger}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  carbon_pgdata:
+    name: carbonledger_pgdata
