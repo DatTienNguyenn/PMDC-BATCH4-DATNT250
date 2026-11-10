@@ -34,6 +34,7 @@ Dưới đây là cấu trúc thư mục hiện tại của toàn bộ kho lưu 
     ├── 05-data-model.md               # Thiết kế Cơ sở Dữ liệu quan hệ PostgreSQL 16 & Data Model chi tiết (13 bảng, ERD)
     ├── 06-acceptance-criteria.md      # Bộ Tiêu chí Nghiệm thu chi tiết cho 15 User Stories (Gherkin Given-When-Then, 51 ACs)
     ├── 07-folder-structure.md         # Quy chuẩn Cấu trúc Thư mục & Quản trị Tài liệu Dự án (Tài liệu này)
+    ├── 08-ai-insight-specification.md # Đặc tả Thiết kế & Triển khai Phân hệ AI Insight, Prompts & Lộ trình Cắt giảm
     ├── 09-information-architecture.md # Kiến trúc Thông tin & Đặc tả 26 Màn hình (IA, Screen Hierarchy, UI State Contract)
     ├── activity-supported.md          # Danh mục 8 hoạt động phát thải & Hệ số phát thải quy chuẩn (Scope 1, 2, 3)
     ├── emission-reference-benchmark.md# Phương pháp luận Mức phát thải tham chiếu quốc gia (Household 50.8% vs Workplace 100%)
@@ -64,6 +65,7 @@ Dưới đây là cấu trúc thư mục hiện tại của toàn bộ kho lưu 
 | `05-` | `05-data-model.md` | Sơ đồ ERD, 13 bảng dữ liệu PostgreSQL, Kiểu dữ liệu, Index, Ràng buộc | Database Engineer, Backend Developers |
 | `06-` | `06-acceptance-criteria.md` | 51 Kịch bản Acceptance Criteria chuẩn Gherkin (`Given - When - Then`) | QA/QC, Automation Testers, Developers |
 | `07-` | `07-folder-structure.md` | Cấu trúc thư mục, quy tắc đặt tên, hướng dẫn liên kết tài liệu | Toàn bộ thành viên đội dự án |
+| `08-` | `08-ai-insight-specification.md` | Đặc tả AI Insight, Lộ trình Cắt giảm, Cấu hình Prompts & Đánh giá Thực nghiệm | AI/Backend Dev, BA, Tech Lead |
 | `09-` | `09-information-architecture.md` | Danh mục 26 màn hình, Screen Hierarchy 5 tầng, UI State Contract, RBAC | UI/UX Designers, Frontend Developers |
 | Chuyên biệt | `activity-supported.md` | Master Data 8 hoạt động, hệ số quy chuẩn, nguồn trích dẫn pháp lý | BA, Domain Expert, Backend Dev |
 | Chuyên biệt | `emission-reference-benchmark.md` | Phương pháp luận mức chuẩn quốc gia ($3.67\text{ tấn/người/năm}$) | Domain Expert, Data/AI Engineer, BA |
@@ -103,7 +105,11 @@ Dưới đây là cấu trúc thư mục hiện tại của toàn bộ kho lưu 
 - **Mục đích:** Bản đồ hướng dẫn cấu trúc thư mục, định danh vị trí các thành phần tài liệu và thiết lập các nguyên tắc chuẩn mực cho liên kết nội bộ.
 - **Nội dung:** Cây thư mục dự án, quy tắc đánh số thứ tự, hướng dẫn bảo trì tài nguyên và ma trận quan hệ tài liệu.
 
-### 3.8. `09-information-architecture.md` (Information Architecture & Screen Specs)
+### 3.8. `08-ai-insight-specification.md` (AI Insight & Emission Reduction Roadmap Specification)
+- **Mục đích:** Đặc tả kỹ thuật toàn diện cho việc thiết kế, tích hợp LLM (Google Gemini 1.5 Flash) và triển khai tính năng AI Insight và Lộ trình Cắt giảm Phát thải Cá nhân hóa.
+- **Nội dung:** Kiến trúc phân tầng dịch vụ, thiết kế Prompt Templates & Output Schemas chuẩn máy, cơ chế Sanitization context dữ liệu, kết quả kiểm thử thực nghiệm trên mô hình và đối chiếu đáp ứng các tiêu chí nghiệm thu (AC1 - AC5).
+
+### 3.9. `09-information-architecture.md` (Information Architecture & Screen Specs)
 - **Mục đích:** Cầu nối giữa yêu cầu nghiệp vụ và trải nghiệm giao diện người dùng (UI/UX).
 - **Nội dung:** Danh mục chuẩn hóa 26 màn hình tương tác (Full pages, Modals, Drawers), sơ đồ phân cấp 5 tầng (Screen Hierarchy), hợp đồng 5 cung bậc trạng thái UI (State Contract: Empty, Loading, Error, Success, Idle), và ma trận ánh xạ màn hình với API (Screen-to-API Mapping).
 
@@ -119,7 +125,9 @@ flowchart TD
     UC --> US["04-user-stories.md<br/>(15 User Stories)"]
     US --> AC["06-acceptance-criteria.md<br/>(51 Kịch bản Gherkin)"]
     PRD --> DM["05-data-model.md<br/>(13 Bảng CSDL & ERD)"]
+    PRD --> AI_DOC["08-ai-insight-specification.md<br/>(Đặc tả AI Insight & Prompts)"]
     PRD --> IA["09-information-architecture.md<br/>(26 Màn hình & UI States)"]
+    AI_DOC --> API
     IA --> API["api-schema/<br/>(RESTful API & OpenAPI)"]
     DM --> API
     API --> C4["c4-documentation/<br/>(Kiến trúc C4 Model)"]
