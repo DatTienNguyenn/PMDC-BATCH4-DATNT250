@@ -26,6 +26,16 @@ Dưới đây là cấu trúc thư mục hiện tại của toàn bộ kho lưu 
 .
 ├── README.md                          # Tài liệu tổng quan dự án, mục tiêu, kiến trúc vĩ mô và hướng dẫn tra cứu
 ├── spec.md                            # Đặc tả yêu cầu bài toán, phạm vi In/Out scope, 3 Roles, 4 Luồng & 12 Use Cases
+├── package.json                       # Quản lý script khởi chạy monorepo (dev, build, db:up, db:reset, etc.)
+├── database/                          # Phân hệ Cơ sở dữ liệu PostgreSQL 16 & Kịch bản Khởi tạo
+│   ├── 01_schema.sql                  # Toàn bộ DDL 14 bảng dữ liệu, ràng buộc CHECK, Partial Indexes, Triggers
+│   ├── 02_seed.sql                    # Master Data 8 hệ số quy chuẩn, benchmark quốc gia, tài khoản 3 roles, sổ cái mẫu
+│   ├── docker-compose.yml             # Cấu hình Docker Compose khởi chạy PostgreSQL 16 Alpine tự động nạp DB
+│   ├── init.sh                        # Bash script tiện ích khởi tạo, kiểm tra (verify), và reset database
+│   └── README.md                      # Hướng dẫn chi tiết thiết lập và tra cứu cơ sở dữ liệu
+├── src/                               # Thư mục mã nguồn ứng dụng
+│   ├── README.md                      # Hướng dẫn tổng quan mã nguồn
+│   └── frontend/                      # Ứng dụng Frontend Web & PWA (React 18 + Vite + TypeScript + TailwindCSS)
 └── docs/                              # Thư mục chứa toàn bộ tài liệu đặc tả chi tiết của dự án
     ├── 01-PRD.md                      # Tài liệu Yêu cầu Sản phẩm (Product Requirements Document)
     ├── 02-MVP.md                      # Kế hoạch triển khai & phát hành MVP 6 tuần (3 Sprints x 2 tuần)
