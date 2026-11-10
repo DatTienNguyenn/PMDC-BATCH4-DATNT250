@@ -7,7 +7,7 @@ Thư mục lưu trữ toàn bộ mã nguồn của dự án **Hệ thống Quả
 ```
 src/
 ├── frontend/             # Ứng dụng Frontend Web & PWA (React 18 + Vite + TypeScript + TailwindCSS)
-└── backend/              # Ứng dụng Backend API Core (Java 21 + Spring Boot 3.x - Sẽ khởi tạo sau)
+└── backend/              # Ứng dụng Backend API Core (Java 21 + Spring Boot 3.3.5 + PostgreSQL 16)
 ```
 
 ### 1. Phân hệ Frontend (`/src/frontend`)
@@ -28,4 +28,15 @@ src/
   ```
 
 ### 2. Phân hệ Backend (`/src/backend`)
-- *Kế hoạch triển khai sau:* Java 21, Spring Boot 3.x, Spring Security + JWT, Spring Data JPA, PostgreSQL 16.
+- **Tech Stack:** Java 21 LTS, Spring Boot 3.3.5, Spring Security 6.x (Stateless JWT + RBAC), Spring Data JPA, PostgreSQL 16.
+- **Cơ chế Multi-Tenancy:** Bộ lọc `TenantContextFilter` trích xuất `X-Workspace-Id`, kiểm soát cách ly theo discriminator column `workspace_id`.
+- **Độ chính xác tính toán:** `java.math.BigDecimal` với `RoundingMode.HALF_UP` cho toàn bộ công thức tính toán và lưu vết bất biến.
+- **Tích hợp mở rộng:** Apache POI Streaming kiểm chuẩn file Excel ($\le 5\text{s}$), OpenPDF xuất báo cáo ($\le 3-5\text{s}$), Google Gemini 1.5 Flash cho AI Carbon Insights.
+- **Khởi chạy Backend:**
+  ```bash
+  # Từ thư mục gốc dự án:
+  npm run backend:dev
+
+  # Hoặc từ thư mục /src/backend:
+  cd src/backend && ./mvnw spring-boot:run
+  ```
