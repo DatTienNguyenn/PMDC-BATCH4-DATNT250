@@ -1,0 +1,14 @@
+{
+  "name": "pmdc-batch4-datnt250",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Hệ thống Quản trị & Phân tích Dấu chân Carbon cho Gia đình/Văn phòng nhỏ (Personal & Micro-Office Carbon Ledger)",
+  "workspaces": [
+    "src/frontend"
+  ],
+  "scripts": {
+    "dev": "npm --prefix src/frontend run dev",
+    "build": "npm --prefix src/frontend run build",
+    "preview": "npm --prefix src/frontend run preview"
+  }
+}
