@@ -38,19 +38,19 @@ Phân hệ **AI Insight & Reduction Roadmap** giải quyết trọn vẹn bài t
 
 ```mermaid
 flowchart LR
-    RawLogs["Sổ cái Carbon (emission_logs)"] --> Aggregator["Bộ Gom nhóm Dữ liệu & So sánh Lịch sử"]
+    RawLogs["Sổ cái Carbon (emission_logs)"] --> Aggregator["Bộ Gom nhóm Dữ liệu và So sánh Lịch sử"]
     Baselines["Mức Chuẩn Quốc gia (workspace_baselines)"] --> Aggregator
-    Targets["Mục tiêu Reviewer (% giảm, số tháng)"] --> Aggregator
+    Targets["Mục tiêu Reviewer (phần trăm giảm, số tháng)"] --> Aggregator
     
-    Aggregator --> ContextPayload["Sanitized Context Payload (JSON)"]
+    Aggregator --> ContextPayload["Sanitized Context Payload JSON"]
     ContextPayload --> Gemini["Google Gemini 1.5 Flash API (Structured JSON Mode)"]
     
-    Gemini --> ReportOutput["1. Báo cáo Nhận định & Quick Wins (ai_reports)"]
+    Gemini --> ReportOutput["1. Báo cáo Nhận định và Quick Wins (ai_reports)"]
     Gemini --> RoadmapOutput["2. Lộ trình Cắt giảm Từng Tháng (emission_reduction_plans)"]
     
     ReportOutput --> UI["Giao diện SCR-INSIGHT-01"]
     RoadmapOutput --> UI
-    ReportOutput --> PDF["Xuất Báo cáo PDF (OpenPDF / iText ≤ 3-5s)"]
+    ReportOutput --> PDF["Xuất Báo cáo PDF dưới 3-5s"]
     RoadmapOutput --> PDF
 ```
 
@@ -63,31 +63,31 @@ flowchart LR
 ```mermaid
 flowchart TD
     subgraph TriggerTier["1. TẦNG KÍCH HOẠT (TRIGGER LAYER)"]
-        CronJob["Spring Boot @Scheduled Cronjob<br/>(Quét workspaces theo ai_report_frequency)"]
-        ManualTrigger["REST Controller POST /generate-manual<br/>(Reviewer bấm 'Kích hoạt Phân tích Lại')"]
-        RoadmapTrigger["REST Controller POST /reduction-plans/generate<br/>(Reviewer thiết lập Mục tiêu % & Tháng)"]
+        CronJob["Spring Boot Scheduled Cronjob<br/>Quét workspaces theo ai_report_frequency"]
+        ManualTrigger["REST Controller POST generate-manual<br/>Reviewer bấm nút Phân tích Lại"]
+        RoadmapTrigger["REST Controller POST reduction-plans-generate<br/>Reviewer thiết lập Mục tiêu phần trăm và Tháng"]
     end
 
     subgraph ServiceTier["2. TẦNG NGHIỆP VỤ (APPLICATION SERVICE LAYER)"]
-        AIInsightService["AIInsightService<br/>(Quản lý sinh Báo cáo kỳ & Bất thường)"]
-        AIRoadmapService["AIRoadmapService<br/>(Quản lý sinh Lộ trình Cắt giảm)"]
-        DataAggregator["CarbonDataAggregator<br/>(Tính tổng, per-capita, variance, % tỷ trọng)"]
-        ContextSanitizer["ContextSanitizer<br/>(Loại bỏ PII, format JSON Context chuẩn)"]
-        PromptRegistry["PromptRegistry & Config Cache<br/>(Đọc từ system_configurations)"]
+        AIInsightService["AIInsightService<br/>Quản lý sinh Báo cáo kỳ và Bất thường"]
+        AIRoadmapService["AIRoadmapService<br/>Quản lý sinh Lộ trình Cắt giảm"]
+        DataAggregator["CarbonDataAggregator<br/>Tính tổng, per-capita, variance, tỷ trọng"]
+        ContextSanitizer["ContextSanitizer<br/>Loại bỏ PII, format JSON Context chuẩn"]
+        PromptRegistry["PromptRegistry và Config Cache<br/>Đọc từ system_configurations"]
     end
 
-    subgraph IntegrationTier["3. TẦNG TÍCH HỢP AI (AI INTEGRATION & RESILIENCE)"]
-        GeminiClient["GeminiRestClient<br/>(HTTPS REST API / JSON Mode)"]
-        CircuitBreaker["Resilience4j Circuit Breaker & Timeout (15s)"]
-        SchemaValidator["JSON Schema Validator<br/>(Kiểm tra tính toàn vẹn cấu trúc phản hồi)"]
-        AIUsageLogger["AIUsageLogger<br/>(Ghi nhận tokens, latency, cost vào ai_usage_logs)"]
+    subgraph IntegrationTier["3. TẦNG TÍCH HỢP AI (AI INTEGRATION VÀ RESILIENCE)"]
+        GeminiClient["GeminiRestClient<br/>HTTPS REST API với JSON Mode"]
+        CircuitBreaker["Resilience4j Circuit Breaker và Timeout 15s"]
+        SchemaValidator["JSON Schema Validator<br/>Kiểm tra tính toàn vẹn cấu trúc phản hồi"]
+        AIUsageLogger["AIUsageLogger<br/>Ghi nhận tokens, latency, cost vào ai_usage_logs"]
     end
 
-    subgraph PersistenceTier["4. TẦNG LƯU TRỮ & XUẤT BÁO CÁO (PERSISTENCE & EXPORT)"]
-        DB_Reports[("Bảng ai_reports")]
-        DB_Plans[("Bảng emission_reduction_plans")]
-        DB_Logs[("Bảng ai_usage_logs")]
-        PdfService["PdfExportService<br/>(OpenPDF / iText kết xuất file PDF ≤ 3-5s)"]
+    subgraph PersistenceTier["4. TẦNG LƯU TRỮ VÀ XUẤT BÁO CÁO (PERSISTENCE VÀ EXPORT)"]
+        DB_Reports["Bảng ai_reports"]
+        DB_Plans["Bảng emission_reduction_plans"]
+        DB_Logs["Bảng ai_usage_logs"]
+        PdfService["PdfExportService<br/>OpenPDF hoặc iText kết xuất file PDF dưới 3-5s"]
     end
 
     CronJob --> AIInsightService
@@ -104,8 +104,8 @@ flowchart TD
     CircuitBreaker --> SchemaValidator
     SchemaValidator --> AIUsageLogger
     
-    SchemaValidator -->|Hợp lệ| DB_Reports
-    SchemaValidator -->|Hợp lệ| DB_Plans
+    SchemaValidator --> DB_Reports
+    SchemaValidator --> DB_Plans
     AIUsageLogger --> DB_Logs
     
     DB_Reports --> PdfService
@@ -117,43 +117,43 @@ flowchart TD
 ```mermaid
 sequenceDiagram
     autonumber
-    participant Reviewer as Reviewer / Cron Scheduler
+    participant Reviewer as Reviewer hoặc Cron Scheduler
     participant Controller as AIReportController
     participant Service as AIInsightService
     participant Aggregator as CarbonDataAggregator
     participant DB as PostgreSQL DB
-    participant Gemini as Google Gemini 1.5 Flash API
+    participant Gemini as Google Gemini API
     participant UsageLog as AIUsageLogger
 
-    alt Kích hoạt tự động định kỳ
-        Reviewer->>Service: triggerScheduledInsightJob()
-        Service->>DB: Query workspaces có ai_report_frequency hợp lệ và khớp lịch
-    else Kích hoạt bằng tay tức thời (On-demand)
-        Reviewer->>Controller: POST /api/v1/workspaces/:id/ai-reports/generate-manual
-        Controller->>Service: generateManualReport(workspaceId, period)
+    alt Luồng tự động định kỳ
+        Reviewer->>Service: triggerScheduledInsightJob
+        Service->>DB: Query workspaces hợp lệ và khớp lịch
+    else Luồng kích hoạt theo yêu cầu
+        Reviewer->>Controller: POST generate-manual
+        Controller->>Service: generateManualReport
     end
 
-    Service->>Aggregator: aggregateWorkspaceData(workspaceId, period)
-    Aggregator->>DB: Query emission_logs (kỳ này & kỳ trước), baselines, benchmarks
+    Service->>Aggregator: aggregateWorkspaceData
+    Aggregator->>DB: Query emission_logs, baselines, benchmarks
     DB-->>Aggregator: Raw records
-    Aggregator-->>Service: Aggregated Context Payload (kg, variance %, breakdown %)
+    Aggregator-->>Service: Aggregated Context Payload
 
-    Service->>DB: Lấy Prompt Template & Model Config từ system_configurations
-    DB-->>Service: Config (gemini-1.5-flash, temp=0.2, prompt_template)
+    Service->>DB: Lấy Prompt Template và Model Config
+    DB-->>Service: Config gemini-1.5-flash với temperature 0.2
 
-    Service->>Gemini: POST /v1beta/models/gemini-1.5-flash:generateContent (Structured JSON)
-    Note over Service,Gemini: Áp dụng Timeout 15s (Circuit Breaker)
+    Service->>Gemini: POST generateContent JSON Mode
+    Note over Service,Gemini: Áp dụng Timeout 15s Circuit Breaker
     
-    alt Gemini phản hồi thành công trong vòng 5s
-        Gemini-->>Service: JSON String Response (executive_summary, actions, breakdown)
+    alt Gemini phản hồi thành công trong 5s
+        Gemini-->>Service: JSON String Response
         Service->>Service: Validate JSON Schema
-        Service->>DB: INSERT INTO ai_reports (...)
-        Service->>UsageLog: logAIUsage(prompt_tokens, completion_tokens, latency_ms)
-        UsageLog->>DB: INSERT INTO ai_usage_logs (...)
-        Service-->>Reviewer: Trả về Báo cáo AI hoàn chỉnh (Status 200/201)
-    else Timeout trên 15s hoặc lỗi kết nối (503/429)
-        Gemini-->>Service: Error / Timeout
-        Service->>UsageLog: logAIError("AI_SERVICE_UNAVAILABLE")
+        Service->>DB: INSERT INTO ai_reports
+        Service->>UsageLog: logAIUsage
+        UsageLog->>DB: INSERT INTO ai_usage_logs
+        Service-->>Reviewer: Trả về Báo cáo AI hoàn chỉnh
+    else Timeout trên 15s hoặc lỗi kết nối
+        Gemini-->>Service: Error hoặc Timeout
+        Service->>UsageLog: logAIError
         Service-->>Reviewer: Fallback Response thông báo hệ thống bận
     end
 ```
@@ -319,6 +319,58 @@ Căn cứ theo [docs/activity-supported.md](activity-supported.md), mỗi danh m
 
 ---
 
+### 3.5. Quy chuẩn Quy đổi Chỉ tiêu Cắt giảm ra Con số Hoạt động Gốc (Activity Data Translation Framework)
+
+#### 1. Sự Cần thiết của Việc Quy đổi Chỉ tiêu ra Con số Gốc:
+Trong thực tế sinh hoạt và làm việc, người dùng (chủ hộ gia đình, nhân viên văn phòng) không thể hình dung cụ thể các con số phát thải trừu tượng dạng $\text{kg CO}_2\text{e}$ (ví dụ: *"giảm 15 kg CO2e nước sinh hoạt"* hay *"giảm 12 kg CO2e di chuyển"*). 
+
+Nếu hệ thống và AI chỉ dừng lại ở chỉ số phát thải, người dùng sẽ không biết phải điều chỉnh hành vi hàng ngày như thế nào. Do đó, **AI bắt buộc phải quy đổi trần phát thải mục tiêu và lượng cắt giảm của từng tháng ra Con số Hoạt động Gốc (Activity Data Quantities)** có thể đo lường trực tiếp qua đồng hồ đo đếm, hóa đơn hoặc công-tơ mét:
+- **Điện:** Quy đổi ra **Số điện tiêu thụ (kWh)** trên công tơ điện lực.
+- **Nước:** Quy đổi ra **Số khối nước ($m^3$)** trên đồng hồ nước sinh hoạt.
+- **Gas LPG:** Quy đổi ra **Số kg gas tiêu thụ** hoặc tỷ lệ phần trăm bình gas 12kg.
+- **Di chuyển (Mobility):** Giữ nguyên tổng nhu cầu đi lại thực tế của người dùng, phân tách rạch ròi:
+  - **Giới hạn số km đi xe máy xăng cá nhân.**
+  - **Số km bắt buộc chuyển đổi sang di chuyển xanh ít phát thải**, đồng thời phân rã cụ thể: bao nhiêu km đi bộ / xe đạp cho cự ly siêu ngắn ($< 1.5\text{ km}$), bao nhiêu km đi phương tiện công cộng (xe buýt điện, tàu điện metro) hoặc xe máy điện.
+- **Rác thải sinh hoạt:** Quy đổi ra **Khối lượng rác chôn lấp (kg)** sau khi phân loại rác tái chế.
+- **Giấy in văn phòng:** Quy đổi ra **Số ram giấy A4** tiêu thụ thực tế.
+
+#### 2. Cơ sở Tính toán & Hệ số Phát thải Chuẩn (Căn cứ [docs/activity-supported.md](activity-supported.md)):
+
+$$\text{Mức tiêu thụ Hoạt động Gốc Mục tiêu } (Q_{\text{target}}) = \frac{\text{Ngân sách Phát thải Mục tiêu } (E_{\text{target}}\text{ kg CO}_2\text{e})}{EF_{\text{quy chuẩn}}}$$
+
+$$\text{Mức Tiết giảm Hoạt động Gốc } (\Delta Q) = \frac{\text{Lượng Phát thải Cắt giảm } (\Delta E\text{ kg CO}_2\text{e})}{EF_{\text{quy chuẩn}}}$$
+
+| Danh mục Hoạt động | Mã Danh mục | Đơn vị Hoạt động Gốc | Hệ số Phát thải Chuẩn ($EF$) | Căn cứ Trích dẫn Quy chuẩn | Công thức Quy đổi Trực quan |
+|:---|:---:|:---:|:---:|:---|:---|
+| **Điện lưới sinh hoạt** | `ELEC_GRID` | **kWh** (Số điện) | **`0.6187`** $\text{kg CO}_2\text{e/kWh}$ | Công văn 1232/BNNMT-BĐKH (BCT) | $Q_{\text{kWh}} = \frac{E_{\text{elec}}}{0.6187}$ |
+| **Nước sinh hoạt & Xử lý nước thải** | `WATER_SUPPLY_TREAT` | **$m^3$** (Số khối nước) | **`0.19130`** $\text{kg CO}_2\text{e/}m^3$ | UK DEFRA 2026 / US EPA | $Q_{m^3} = \frac{E_{\text{water}}}{0.1913}$ |
+| **Đốt gas LPG nấu ăn** | `FUEL_LPG` | **kg LPG** (Bình 12kg $\approx 35.27\text{ kg CO}_2\text{e}$) | **`2.9394`** $\text{kg CO}_2\text{e/kg LPG}$ | UK DEFRA 2026 / 2006 IPCC | $Q_{\text{lpg}} = \frac{E_{\text{lpg}}}{2.9394}$ |
+| **Xe máy xăng cá nhân** | `MOBILITY` (`PETROL`) | **km** xe máy xăng | **`0.1200`** $\text{kg CO}_2\text{e/km}$ | UK DEFRA 2026 Motorbike Average | $D_{\text{petrol}} = \frac{E_{\text{mobility}}}{0.1200}$ |
+| **Di chuyển xanh: Đi bộ / Xe đạp** | `MOBILITY` (`ACTIVE`) | **km** đi bộ, đạp xe | **`0.0000`** $\text{kg CO}_2\text{e/km}$ | Chuẩn quốc tế (Zero Emission) | Tiết kiệm $100\%$ phát thải/km |
+| **Di chuyển xanh: Xe buýt điện / Metro** | `MOBILITY` (`TRANSIT_EV`) | **km** phương tiện công cộng điện | **`0.0300`** $\text{kg CO}_2\text{e/km}$ | VinBus / Tuyến Metro đô thị | Tiết kiệm $75\%$ phát thải so với xe máy xăng |
+| **Rác sinh hoạt chôn lấp** | `WASTE_LANDFILL` | **kg rác** | **`0.004465`** $\text{kg CO}_2\text{e/kg rác}$ | UK DEFRA 2026 / US EPA WARM | $Q_{\text{waste}} = \frac{E_{\text{waste}}}{0.004465}$ |
+| **Giấy in văn phòng A4** | `OFFICE_PAPER` | **Ram giấy A4** (70 gsm $\approx 2.18\text{ kg}$) | **`2.9300`** $\text{kg CO}_2\text{e/ram}$ ($1.3436\text{ kg/kg}$) | UK DEFRA 2026 / DESNZ | $Q_{\text{reams}} = \frac{E_{\text{paper}}}{2.9300}$ |
+
+#### 3. Thuật toán Phân tách & Quy đổi Quãng đường Di chuyển Xanh (Green Mobility Allocation Algorithm):
+
+Do người dùng có nhu cầu di chuyển thực tế cố định mỗi tháng ($D_{\text{total}}\text{ km}$), thuật toán hướng dẫn AI phân rã mục tiêu di chuyển như sau:
+1. **Xác định trần km xe máy xăng tối đa (`combustion_vehicle_km_limit`):**
+   $$D_{\text{petrol\_limit}} = \frac{E_{\text{target\_mobility}}}{0.1200}\text{ (km)}$$
+2. **Xác định quãng đường chuyển đổi xanh bắt buộc (`green_transition_km`):**
+   $$D_{\text{green\_transition}} = D_{\text{total}} - D_{\text{petrol\_limit}}\text{ (km)}$$
+3. **Phân rã chi tiết quãng đường xanh (`green_breakdown`):**
+   - **Đi bộ hoặc Xe đạp (`walking_biking_km`):** Ưu tiên phân bổ $20\% - 30\%$ quãng đường xanh cho các chặng mua sắm, thể dục, chợ dân sinh cự ly siêu ngắn ($< 1.5\text{ km}$). Phát thải đạt $0\text{ kg CO}_2\text{e}$.
+   - **Phương tiện công cộng hoặc Xe máy điện (`public_transit_ev_km`):** Phân bổ $70\% - 80\%$ quãng đường xanh còn lại cho các chuyến đi làm, đi học cự ly trung bình - dài ($> 2 - 7\text{ km}$) nếu thuận tiện trục giao thông công cộng. Mức phát thải trung bình chỉ $\sim 0.030\text{ kg CO}_2\text{e/km}$.
+
+*Ví dụ minh họa:* Người dùng có tổng quãng đường di chuyển kỳ trước là $936.7\text{ km}$ bằng xe máy xăng ($112.40\text{ kg CO}_2\text{e}$). Trong Tháng 1, mục tiêu phát thải MOBILITY là $100.40\text{ kg CO}_2\text{e}$ (giảm $12.00\text{ kg}$):
+- Trần xe máy xăng: $100.40 / 0.1200 = \mathbf{836.7\text{ km}}$ (giảm $100.0\text{ km}$ xe máy xăng).
+- Quãng đường chuyển đổi xanh: $\mathbf{100.0\text{ km}}$, bao gồm:
+  + Đi bộ / Xe đạp: $\mathbf{20.0\text{ km}}$ (~ $700\text{ m/ngày}$).
+  + Xe buýt điện VinBus / Metro Cát Linh (nếu tiện tuyến): $\mathbf{80.0\text{ km}}$ (~ $20\text{ km/tuần}$, tương đương 2 ngày đi làm bằng phương tiện công cộng).
+- Phát thải kiểm chứng: $836.7 \times 0.12 + 20.0 \times 0.00 + 80.0 \times 0.03 = 100.40 + 2.40 = 102.80\text{ kg CO}_2\text{e}$ (nếu tính cả phát thải xe buýt), hoặc tiết kiệm trọn vẹn $12.00\text{ kg}$ nếu đi xe buýt điện / metro giờ thấp điểm.
+
+---
+
 ## ⚙️ 4. ĐẶC TẢ THIẾT KẾ PROMPT & CẤU HÌNH HỆ THỐNG
 
 ### 4.1. So sánh Toàn diện Các Model Gemini cho Phân hệ AI Insight & Roadmap
@@ -332,8 +384,8 @@ Căn cứ theo [docs/activity-supported.md](activity-supported.md), mỗi danh m
 | **Tuân thủ Định dạng JSON (JSON Mode Strictness)** | Khá (Thỉnh thoảng thiếu trường khi schema lồng sâu) | **Rất tốt** (Tuân thủ 100% JSON Schema không lỗi) | **Hoàn hảo** (Xử lý các object lồng nhau phức tạp tuyệt đối) | **Hoàn hảo** (Native structured output thế hệ mới) |
 | **Cửa sổ Ngữ cảnh (Context Window)** | 1,000,000 tokens | 1,000,000 tokens | 2,000,000 tokens | 1,000,000 tokens |
 | **Độ trễ Phản hồi Trung bình (Latency)** | **< 1.0 giây** | **1.5 - 2.5 giây** | 3.5 - 5.0 giây | **1.0 - 1.8 giây** |
-| **Chi phí Vận hành (Input / Output trên 1M tokens)** | $0.0375 / $0.15 | **$0.075 / $0.30** | $1.25 / $5.00 | $0.10 / $0.40 |
-| **Chi phí ước tính / 1,000 báo cáo** | ~$0.12 USD | **~$0.24 USD** (~6,000 VNĐ) | ~$4.00 USD (~100,000 VNĐ) | ~$0.32 USD |
+| **Chi phí Vận hành (Input / Output trên 1M tokens)** | 0.0375 / 0.15 USD | **0.075 / 0.30 USD** | 1.25 / 5.00 USD | 0.10 / 0.40 USD |
+| **Chi phí ước tính / 1,000 báo cáo** | ~0.12 USD | **~0.24 USD** (~6,000 VNĐ) | ~4.00 USD (~100,000 VNĐ) | ~0.32 USD |
 | **Vai trò Khuyến nghị trong Hệ thống** | Chỉ dùng cho tác vụ OCR hóa đơn cực nhẹ | **Lựa chọn Mặc định (Production Default):** Tối ưu toàn diện cho Cronjob hàng loạt & On-demand | **Chế độ Chuyên sâu (Enterprise Pro):** Dùng cho lập lộ trình dài hạn 12-36 tháng phức tạp | **Mô hình Kế thừa:** Sẵn sàng chuyển giao khi Google phát hành bản ổn định |
 
 > [!TIP]
@@ -361,15 +413,15 @@ Nếu Prompt không được thiết kế chặt chẽ, AI sẽ tự đưa ra c�
 
 ```mermaid
 flowchart TD
-    RawMobility["Dữ liệu Di chuyển thô: distance_km & loại xe (Không có lộ trình A -> B)"] --> AI_Heuristics{"Bộ Lọc Quy tắc Prompt Thông minh"}
+    RawMobility["Dữ liệu Di chuyển thô: distance_km và loại xe (Khuyết điểm đi và điểm đến)"] --> AI_Heuristics{"Bộ Lọc Quy tắc Prompt Thông minh"}
 
     AI_Heuristics --> TierA["Tầng 1: Phân tầng theo Cự ly Chuyến đi (Distance-Bracketed)"]
-    AI_Heuristics --> TierB["Tầng 2: Đề xuất có Điều kiện & Đa phương án (Conditional Options)"]
+    AI_Heuristics --> TierB["Tầng 2: Đề xuất có Điều kiện và Đa phương án (Conditional Options)"]
     AI_Heuristics --> TierC["Tầng 3: Tận dụng Metadata Vĩ mô Địa bàn (workspace.location)"]
 
-    TierA --> RuleA["• Cự ly < 1.5 km: Đi bộ / Xe đạp sinh hoạt<br/>• Cự ly 2 - 7 km: Gom chuyến mua sắm (Trip Chaining) / Xe máy điện<br/>• Cự ly > 7 km: Phương tiện công cộng trục chính / Đi chung xe"]
-    TierB --> RuleB["• Không áp đặt tên ga/tuyến cố định<br/>• Đưa mẫu câu: 'Nếu thuận tiện tuyến... hãy chuyển sang...'<br/>• Gợi ý tối ưu hành trình: Giảm 15-20% km phát sinh nhờ gộp lịch trình"]
-    TierC --> RuleC["• Hà Nội: Xe buýt điện VinBus, Metro Nhổn / Cát Linh nếu tiện tuyến<br/>• TP.HCM: Tuyến Metro Bến Thành - Suối Tiên, xe buýt điện, xe buýt sông<br/>• Khác: Xe buýt đô thị, xe máy điện, tối ưu cung đường"]
+    TierA --> RuleA["- Cự ly dưới 1.5 km: Đi bộ hoặc Xe đạp sinh hoạt<br/>- Cự ly 2 đến 7 km: Gom chuyến mua sắm hoặc Xe máy điện<br/>- Cự ly trên 7 km: Phương tiện công cộng trục chính hoặc Đi chung xe"]
+    TierB --> RuleB["- Không áp đặt tên ga hoặc tuyến cố định<br/>- Đưa mẫu câu: Nếu thuận tiện tuyến, hãy chuyển sang...<br/>- Gợi ý tối ưu hành trình: Giảm 15-20% km phát sinh nhờ gộp lịch trình"]
+    TierC --> RuleC["- Hà Nội: Xe buýt điện VinBus, Metro Nhổn hoặc Cát Linh nếu tiện tuyến<br/>- TP.HCM: Tuyến Metro Bến Thành - Suối Tiên, xe buýt điện<br/>- Khác: Xe buýt đô thị, xe máy điện, tối ưu cung đường"]
 ```
 
 1. **Phân tầng Hành động theo Cự ly Ước tính (Distance-Bracketed Heuristics):**
@@ -518,7 +570,21 @@ QUY TẮC TÍNH TOÁN & PHÂN RÃ THEO DANH MỤC:
 4. ĐỊNH LƯỢNG HÀNH ĐỘNG CỤ THỂ:
    - Mỗi hành động (action) trong từng tháng phải có id ('act-01', 'act-02'...), title, category_code ('MOBILITY', 'ELEC_GRID', 'FUEL_LPG'...), description chi tiết gắn với thực tế Việt Nam, priority ('HIGH', 'MEDIUM', 'LOW') và estimated_co2e_saving_kg.
    - Tổng lượng kg CO2e tiết kiệm từ các hành động trong từng tháng phải khớp với mức giảm phân rã của các danh mục.
-5. ĐỊNH DẠNG ĐẦU RA:
+5. QUY CHUẨN QUY ĐỔI RA CON SỐ HOẠT ĐỘNG GỐC (Activity Data Translation):
+   - Bên cạnh trần phát thải (target_emissions_by_category), trong mỗi tháng bạn BẮT BUỘC phải quy đổi mục tiêu sang các CON SỐ HOẠT ĐỘNG GỐC TRỰC QUAN (target_activity_quantities) dựa trên các Hệ số phát thải chuẩn (EF) tại Việt Nam:
+     + electricity_kwh = target_emissions(ELEC_GRID) / 0.6187 (Số kWh điện tối đa).
+     + water_m3 = target_emissions(WATER_SUPPLY_TREAT) / 0.1913 (Số m3 nước sạch tối đa).
+     + lpg_kg = target_emissions(FUEL_LPG) / 2.9394 (Số kg gas LPG đun nấu tối đa).
+     + mobility_km: Dựa trên tổng quãng đường đi lại baseline (giữ nguyên tổng nhu cầu di chuyển):
+       * total_travel_km: Tổng số km di chuyển thực tế kỳ trước.
+       * combustion_vehicle_km_limit = target_emissions(MOBILITY) / 0.12 (Giới hạn tối đa km xe máy xăng).
+       * green_transition_km = total_travel_km - combustion_vehicle_km_limit (Số km BẮT BUỘC chuyển đổi sang di chuyển xanh).
+       * green_breakdown: Phân rã green_transition_km thành:
+         - walking_biking_km: Cự ly siêu ngắn < 1.5 km (chiếm ~20% - 30% km xanh).
+         - public_transit_ev_km: Cự ly trung bình/dài đi xe buýt điện / metro / EV (chiếm ~70% - 80% km xanh).
+     + waste_kg = target_emissions(WASTE_LANDFILL) / 0.004465 (Số kg rác thải chôn lấp tối đa).
+     + paper_reams = target_emissions(OFFICE_PAPER) / 2.93 (Số ram giấy in A4 70gsm tối đa).
+6. ĐỊNH DẠNG ĐẦU RA:
    - Trả về DUY NHẤT một chuỗi JSON hợp lệ tuân thủ chính xác Schema. Không kèm bất kỳ văn bản giải thích nào ngoài JSON.
 ```
 
@@ -553,6 +619,7 @@ QUY TẮC TÍNH TOÁN & PHÂN RÃ THEO DANH MỤC:
           "target_emissions_kg",
           "cumulative_reduction_pct",
           "target_emissions_by_category",
+          "target_activity_quantities",
           "category_reduction_breakdown",
           "actions"
         ],
@@ -565,6 +632,34 @@ QUY TẮC TÍNH TOÁN & PHÂN RÃ THEO DANH MỤC:
           "target_emissions_by_category": {
             "type": "object",
             "additionalProperties": {"type": "number"}
+          },
+          "target_activity_quantities": {
+            "type": "object",
+            "required": ["electricity_kwh", "water_m3", "lpg_kg", "mobility_km"],
+            "properties": {
+              "electricity_kwh": {"type": "number", "description": "Số điện tiêu thụ tối đa mục tiêu trong tháng (kWh)"},
+              "water_m3": {"type": "number", "description": "Số khối nước sinh hoạt tối đa mục tiêu (m3)"},
+              "lpg_kg": {"type": "number", "description": "Số kg gas LPG tối đa mục tiêu trong tháng (kg)"},
+              "mobility_km": {
+                "type": "object",
+                "required": ["total_travel_km", "combustion_vehicle_km_limit", "green_transition_km", "green_breakdown"],
+                "properties": {
+                  "total_travel_km": {"type": "number", "description": "Tổng nhu cầu di chuyển trong tháng (km)"},
+                  "combustion_vehicle_km_limit": {"type": "number", "description": "Trần quãng đường đi xe máy xăng tối đa (km)"},
+                  "green_transition_km": {"type": "number", "description": "Số km cần chuyển đổi sang di chuyển xanh ít phát thải (km)"},
+                  "green_breakdown": {
+                    "type": "object",
+                    "required": ["walking_biking_km", "public_transit_ev_km"],
+                    "properties": {
+                      "walking_biking_km": {"type": "number", "description": "Số km đi bộ hoặc xe đạp cho cự ly siêu ngắn < 1.5 km (km)"},
+                      "public_transit_ev_km": {"type": "number", "description": "Số km đi xe buýt điện, tàu điện metro hoặc xe máy điện (km)"}
+                    }
+                  }
+                }
+              },
+              "waste_kg": {"type": "number", "description": "Khối lượng rác thải chôn lấp tối đa mục tiêu (kg)"},
+              "paper_reams": {"type": "number", "description": "Số ram giấy in A4 tối đa mục tiêu (ram)"}
+            }
           },
           "category_reduction_breakdown": {
             "type": "object",
@@ -706,6 +801,22 @@ QUY TẮC TÍNH TOÁN & PHÂN RÃ THEO DANH MỤC:
         "FUEL_LPG": 40.50,
         "WATER_SUPPLY_TREAT": 15.07
       },
+      "target_activity_quantities": {
+        "electricity_kwh": 283.0,
+        "water_m3": 78.8,
+        "lpg_kg": 13.8,
+        "mobility_km": {
+          "total_travel_km": 936.7,
+          "combustion_vehicle_km_limit": 836.7,
+          "green_transition_km": 100.0,
+          "green_breakdown": {
+            "walking_biking_km": 20.0,
+            "public_transit_ev_km": 80.0
+          }
+        },
+        "waste_kg": 0.0,
+        "paper_reams": 0.0
+      },
       "category_reduction_breakdown": {
         "ELEC_GRID": {"reduced_kg": 5.42, "pct_reduction": 3.00, "elasticity_tier": "HIGH"},
         "MOBILITY": {"reduced_kg": 12.00, "pct_reduction": 10.68, "elasticity_tier": "HIGH"},
@@ -743,6 +854,22 @@ QUY TẮC TÍNH TOÁN & PHÂN RÃ THEO DANH MỤC:
         "FUEL_LPG": 40.50,
         "WATER_SUPPLY_TREAT": 15.07
       },
+      "target_activity_quantities": {
+        "electricity_kwh": 261.3,
+        "water_m3": 78.8,
+        "lpg_kg": 13.8,
+        "mobility_km": {
+          "total_travel_km": 936.7,
+          "combustion_vehicle_km_limit": 803.3,
+          "green_transition_km": 133.4,
+          "green_breakdown": {
+            "walking_biking_km": 53.4,
+            "public_transit_ev_km": 80.0
+          }
+        },
+        "waste_kg": 0.0,
+        "paper_reams": 0.0
+      },
       "category_reduction_breakdown": {
         "ELEC_GRID": {"reduced_kg": 13.43, "pct_reduction": 7.67, "elasticity_tier": "HIGH"},
         "MOBILITY": {"reduced_kg": 4.00, "pct_reduction": 3.98, "elasticity_tier": "HIGH"},
@@ -779,6 +906,22 @@ QUY TẮC TÍNH TOÁN & PHÂN RÃ THEO DANH MỤC:
         "MOBILITY": 96.40,
         "FUEL_LPG": 30.00,
         "WATER_SUPPLY_TREAT": 13.57
+      },
+      "target_activity_quantities": {
+        "electricity_kwh": 252.6,
+        "water_m3": 70.9,
+        "lpg_kg": 10.2,
+        "mobility_km": {
+          "total_travel_km": 936.7,
+          "combustion_vehicle_km_limit": 803.3,
+          "green_transition_km": 133.4,
+          "green_breakdown": {
+            "walking_biking_km": 53.4,
+            "public_transit_ev_km": 80.0
+          }
+        },
+        "waste_kg": 0.0,
+        "paper_reams": 0.0
       },
       "category_reduction_breakdown": {
         "ELEC_GRID": {"reduced_kg": 5.42, "pct_reduction": 3.35, "elasticity_tier": "HIGH"},
@@ -823,6 +966,14 @@ QUY TẮC TÍNH TOÁN & PHÂN RÃ THEO DANH MỤC:
   - **Tháng 2:** $161.68\text{ (Điện)} + 96.40\text{ (Xe máy)} + 40.50\text{ (Gas)} + 15.07\text{ (Nước)} = \mathbf{313.65\text{ kg CO}_2\text{e}}$ (Mục tiêu giảm lũy kế $10\%$).
   - **Tháng 3:** $156.26\text{ (Điện)} + 96.40\text{ (Xe máy)} + 30.00\text{ (Gas)} + 13.57\text{ (Nước)} = \mathbf{296.23\text{ kg CO}_2\text{e}}$ (Mục tiêu giảm lũy kế $15\%$).
   - **Tính nhất quán số học tuyệt đối:** Tổng ngân sách các danh mục trong từng tháng khớp $100\%$ với mục tiêu tháng và tổng mức giảm lũy kế sau 3 tháng đúng bằng $52.27\text{ kg CO}_2\text{e}$ ($348.50 - 296.23 = 52.27\text{ kg}$).
+- ✅ **Quy đổi Toàn diện ra Con số Hoạt động Gốc Trực quan (`target_activity_quantities`):**
+  - **Số điện sinh hoạt (kWh):** Tháng 1 khống chế $\le 283.0\text{ kWh}$ (tiết kiệm $8.8\text{ số điện}$); Tháng 2 khống chế $\le 261.3\text{ kWh}$ (tiết kiệm thêm $21.7\text{ số điện}$); Tháng 3 khống chế $\le 252.6\text{ kWh}$ (tiết kiệm thêm $8.7\text{ số điện}$).
+  - **Số khối nước sinh hoạt ($m^3$):** Tháng 1 và 2 giữ ổn định $78.8\text{ }m^3$; Tháng 3 giảm xuống $\le 70.9\text{ }m^3$ (tiết kiệm $7.9\text{ khối nước}$ qua vòi sen tăng áp và chống rò rỉ).
+  - **Khí gas LPG đun nấu (kg):** Tháng 1 và 2 duy trì $13.8\text{ kg LPG}$; Tháng 3 giảm xuống $\le 10.2\text{ kg LPG}$ (tiết kiệm $3.6\text{ kg gas}$, khoảng $30\%$ bình gas 12kg nhờ chuyển món ninh/hầm sang nồi áp suất).
+  - **Phân rã Di chuyển Xanh thông minh:** Tổng nhu cầu đi lại vẫn đảm bảo $936.7\text{ km/tháng}$, nhưng cơ cấu phương tiện được chuyển dịch:
+    - *Tháng 1:* Xe máy xăng tối đa $836.7\text{ km}$; Chuyển đổi xanh $100.0\text{ km}$ ($20\text{ km}$ đi bộ/xe đạp $+ 80\text{ km}$ xe buýt điện/metro nếu tiện tuyến).
+    - *Tháng 2 & 3:* Xe máy xăng tối đa $803.3\text{ km}$; Chuyển đổi xanh $133.4\text{ km}$ ($53.4\text{ km}$ đi bộ/xe đạp $+ 80\text{ km}$ xe buýt điện/metro).
+  - **Khớp chuẩn 100% với Hệ số EF:** Từng con số hoạt động khi nhân với hệ số EF tương ứng trong [docs/activity-supported.md](activity-supported.md) đều cho ra chính xác ngân sách phát thải của tháng.
 - ✅ **Tuân thủ Chiến lược Độ Co giãn Danh mục (Elasticity-Driven Strategy):**
   - Trong Tháng 1, toàn bộ $17.42\text{ kg}$ cắt giảm được giao cho các danh mục Tier 1 dễ giảm (Xe máy $-12.00\text{ kg}$, Điện phụ tải $-5.42\text{ kg}$). Gas và Nước được giữ nguyên $100\%$ để tránh gây xáo trộn sinh hoạt.
   - Sang Tháng 2 và Tháng 3, khi thói quen đã định hình, AI mới bắt đầu phân bổ cắt giảm sang Gas LPG ($-10.50\text{ kg}$) và Nước sạch ($-1.50\text{ kg}$) thông qua các giải pháp cụ thể (nồi áp suất, vòi sen tăng áp).
@@ -852,19 +1003,19 @@ QUY TẮC TÍNH TOÁN & PHÂN RÃ THEO DANH MỤC:
 Giao diện [design/stitch-ui-v2/html/SCR-INSIGHT-01.html](../design/stitch-ui-v2/html/SCR-INSIGHT-01.html) đã được kiểm chứng tương thích 100% với dữ liệu trả về từ phân hệ AI:
 
 ```mermaid
-graph TD
+flowchart TD
     subgraph UIComponents["Giao diện SCR-INSIGHT-01"]
-        Header["Page Header: Nút 'Kích hoạt Phân tích Lại' & 'Xuất Báo cáo PDF'"]
-        CardExecutive["Section 1: Executive AI Summary Card<br/>- Nhận định chuyên sâu<br/>- 3 Metric Cards (Điện, Di chuyển, Mục tiêu)"]
-        CardQuickWins["Section 2: Quick Wins Action Cards<br/>- 3 thẻ hành động kèm badge -kg CO2e<br/>- Nút 'Áp dụng ngay' / 'Đã hoàn thành'"]
-        CardRoadmap["Section 3: Personalized Reduction Roadmap Timeline<br/>- 3 cột mốc tháng (Tháng 11, 12, 01)<br/>- Thanh tiến độ % & kg CO2e mục tiêu"]
+        Header["Page Header: Nút Kích hoạt Phân tích Lại và Xuất Báo cáo PDF"]
+        CardExecutive["Section 1: Executive AI Summary Card<br/>- Nhận định chuyên sâu<br/>- 3 Metric Cards: Điện, Di chuyển, Mục tiêu"]
+        CardQuickWins["Section 2: Quick Wins Action Cards<br/>- 3 thẻ hành động kèm badge kg CO2e<br/>- Nút Áp dụng ngay hoặc Đã hoàn thành"]
+        CardRoadmap["Section 3: Personalized Reduction Roadmap Timeline<br/>- 3 cột mốc tháng: Tháng 11, 12, 01<br/>- Thanh tiến độ phần trăm và kg CO2e mục tiêu"]
     end
 
     subgraph DataFields["Dữ liệu từ API Backend"]
-        F_Executive["executive_summary & variance_vs_last_period"]
+        F_Executive["executive_summary và variance_vs_last_period"]
         F_Breakdown["breakdown_by_category"]
-        F_Actions["actionable_reduction_plan (id, title, estimated_saving_kg_co2e)"]
-        F_Roadmap["monthly_roadmap (target_emissions_kg, cumulative_reduction_pct, actions)"]
+        F_Actions["actionable_reduction_plan với id, title, estimated_saving_kg_co2e"]
+        F_Roadmap["monthly_roadmap với target_emissions_kg, target_activity_quantities"]
     end
 
     F_Executive --> CardExecutive
